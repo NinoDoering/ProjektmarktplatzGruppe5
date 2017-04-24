@@ -22,11 +22,26 @@ int z = 27;
 float y = 1.34f;
 
 
- String test1 = "Hallo Welt"; 
-
+String test1 = "Hallo Welt"; 
+ 
+String a1 = "Hallo";
+ 
  String commit = "Test";
+ 
+ int zz = 1996; 
+ 
+ 
+ 
+ 
+String ab = "Hallo";
+ 
 
- String test2 = "Test für Tony";
 
+ String test4 = "Test fï¿½r Tony";
+ 
+ String test2 = "Hallo Welt"; 
+ 
+ String test3 = "Verbindung zwischen Branches testen.";
+ 
  String testaberhallo = "Mein Versuch";
 }
