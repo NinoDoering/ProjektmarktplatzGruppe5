@@ -17,6 +17,7 @@ public class test {
  int e = 12;
 
 int f = 13;
+int g = 23;
 
  String test1 = "Hallo Welt"; 
  
