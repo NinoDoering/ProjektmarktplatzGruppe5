@@ -24,7 +24,19 @@ float y = 1.34f;
 
 String test1 = "Hallo Welt"; 
  
+<<<<<<< HEAD
+String a1 = "Hallo";
+ 
+ String commit = "Test";
+ 
+ int zz = 1996; 
+ 
+ 
+ 
+ 
+=======
 String ab = "Hallo";
+>>>>>>> branch 'master' of https://github.com/NinoDoering/ProjektmarktplatzGruppe5.git
  
 
  String commit = "Test";
