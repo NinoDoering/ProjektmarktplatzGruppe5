@@ -25,9 +25,12 @@ float y = 1.34f;
 
  String test1 = "Hallo Welt"; 
  
-String a = "Hallo";
+String a1 = "Hallo";
  
  String commit = "Test";
+ 
+ int zz = 1996; 
+ 
  
  
  
