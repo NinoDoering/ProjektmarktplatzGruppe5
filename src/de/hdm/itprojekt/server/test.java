@@ -35,6 +35,5 @@ String ab = "Hallo";
  
  String test = "Verbindung zwischen Branches testen.";
  
-
  String testaberhallo = "Mein Versuch";
 }
