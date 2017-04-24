@@ -10,6 +10,6 @@ public class test {
 	int b = 22;
 	
 	int c = 23;
-	
+	int abc = 187; 
 	int e = 27;
 }
