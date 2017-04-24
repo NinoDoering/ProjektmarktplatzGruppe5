@@ -14,4 +14,13 @@ public class test {
 	int d = 11;
 	
  int test = 123456; 
+ 
+ String test = "Hallo Welt"; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 }
