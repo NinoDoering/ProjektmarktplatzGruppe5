@@ -15,6 +15,7 @@ public class test {
 	
  int test = 123456; 
  
+
  String test = "Hallo Welt"; 
  
  
@@ -23,4 +24,6 @@ public class test {
  
  
  
+
+ String testaberhallo = "Mein Versuch";
 }
