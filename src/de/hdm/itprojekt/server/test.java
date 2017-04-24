@@ -18,6 +18,11 @@ public class test {
 
 int f = 13;
 
+
+int z = 27;
+
+float y = 1.34f;
+
  String test1 = "Hallo Welt"; 
  
  
