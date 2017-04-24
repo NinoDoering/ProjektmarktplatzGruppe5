@@ -27,10 +27,14 @@ String test1 = "Hallo Welt";
 String ab = "Hallo";
  
 
-
  String commit = "Test";
 
  String test2 = "Test f�r Tony";
+ 
+ String test = "Hallo Welt"; 
+ 
+ String test = "Verbindung zwischen Branches testen.";
+ 
 
  String testaberhallo = "Mein Versuch";
 }
