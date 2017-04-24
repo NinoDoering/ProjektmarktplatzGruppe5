@@ -24,16 +24,24 @@ float y = 1.34f;
 
 String test1 = "Hallo Welt"; 
  
+String a1 = "Hallo";
+ 
+ String commit = "Test";
+ 
+ int zz = 1996; 
+ 
+ 
+ 
+ 
 String ab = "Hallo";
  
 
- String commit = "Test";
 
- String test2 = "Test f�r Tony";
+ String test4 = "Test f�r Tony";
  
- String test = "Hallo Welt"; 
+ String test2 = "Hallo Welt"; 
  
- String test = "Verbindung zwischen Branches testen.";
+ String test3 = "Verbindung zwischen Branches testen.";
  
  String testaberhallo = "Mein Versuch";
 }
