@@ -18,11 +18,7 @@ public class test {
 
  String test = "Hallo Welt"; 
  
- 
- 
- 
- 
- 
+ String test = "Verbindung zwischen Branches testen.";
  
 
  String testaberhallo = "Mein Versuch";
