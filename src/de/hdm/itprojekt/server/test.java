@@ -19,10 +19,13 @@ public class test {
 int f = 13;
 int g = 23;
 
+
+int z = 27;
+
+float y = 1.34f;
  String test1 = "Hallo Welt"; 
- 
- 
- 
+  
+ String commit = "Test";
  
  
  
