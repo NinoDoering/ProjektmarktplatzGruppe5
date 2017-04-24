@@ -25,7 +25,7 @@ public class DBConnection {
      * professionellen Applikation würde diese Zeichenkette aus einer
      * Konfigurationsdatei eingelesen oder über einen Parameter von außen
      * mitgegeben, um bei einer Veränderung dieser URL nicht die gesamte
-     * Software neu komilieren zu müssen.
+     * Software neu komilieren zu müssen. HI
      */
     
     private static String googleUrl = "jdbc:google:mysql://it-projektgruppe5:itprojektgruppe5?user=demo&password=demo";
