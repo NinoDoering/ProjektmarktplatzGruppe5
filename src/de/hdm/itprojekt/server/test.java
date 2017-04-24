@@ -16,7 +16,7 @@ public class test {
  int test = 123456; 
  
 
- String test = "Hallo Welt"; 
+ String test1 = "Hallo Welt"; 
  
  
  
