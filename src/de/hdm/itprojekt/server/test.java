@@ -19,13 +19,6 @@ public class test {
 int f = 13;
 
  String test1 = "Hallo Welt"; 
- 
- 
- 
- 
- 
- 
- 
-
+ String test2 = "Test für Tony";
  String testaberhallo = "Mein Versuch";
 }
