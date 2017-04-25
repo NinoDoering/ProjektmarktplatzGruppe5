@@ -11,7 +11,7 @@ public class Projekt {
 
 	private Date startDatum;
 	private Date endDatum;
-	private Organisationseinheit projektleiter;
+	private Person projektleiter;
 
 	public int getId() {
 		return id;
@@ -53,11 +53,13 @@ public class Projekt {
 		this.endDatum = endDatum;
 	}
 
-	public Organisationseinheit getProjektleiter() {
+	public Person getProjektleiter() {
 		return projektleiter;
 	}
 
-	public void setProjektleiter(Organisationseinheit projektleiter) {
+	public void setProjektleiter(Person projektleiter) {
 		this.projektleiter = projektleiter;
 	}
+	
+	// toString vervollständing 
 }
