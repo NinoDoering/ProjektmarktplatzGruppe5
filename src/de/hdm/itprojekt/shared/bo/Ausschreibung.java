@@ -1,7 +1,7 @@
 package de.hdm.itprojekt.shared.bo;
 
 import java.util.*;
-
+//test
 /** erzeugen der Klasse Ausschreibung */
 
 public class Ausschreibung extends BusinessObject  {

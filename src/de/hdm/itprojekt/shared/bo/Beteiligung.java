@@ -1,10 +1,10 @@
 package de.hdm.itprojekt.shared.bo;
 
-
+//test
 
 public class Beteiligung extends BusinessObject {
 	
-	private static final long serialVersionIUD = 1L; 
+	private static final long serialVersionIUD = 1L;
 	
 	private int id; 
 	

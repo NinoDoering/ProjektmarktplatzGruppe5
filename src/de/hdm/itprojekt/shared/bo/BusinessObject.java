@@ -1,7 +1,7 @@
 package de.hdm.itprojekt.shared.bo;
 
 import java.io.Serializable;
-
+//test
 /** Erzeugung der Superklasse BusinessObjects, vererbt 
 * an alle anderen BO Klassen,  */ 
 
