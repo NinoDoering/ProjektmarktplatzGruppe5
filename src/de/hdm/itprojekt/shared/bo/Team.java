@@ -23,4 +23,6 @@ public class Team extends Organisationseinheit {
 		return super.toString()	
 				+ this.teamName +" "
 				+ this.mitgliederAnzahl; 
+		
+		//Test
 }}
