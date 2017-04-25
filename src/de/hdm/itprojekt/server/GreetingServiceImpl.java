@@ -3,7 +3,7 @@ package de.hdm.itprojekt.server;
 import de.hdm.itprojekt.client.GreetingService;
 import de.hdm.itprojekt.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
+//Rueckgaengig
 /**
  * The server-side implementation of the RPC service.
  */
