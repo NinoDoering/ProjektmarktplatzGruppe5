@@ -1,3 +1,4 @@
+
 package de.hdm.itprojekt.shared.bo;
 
 //test
@@ -42,3 +43,4 @@ public class Beteiligung extends BusinessObject {
 	}
 	
 }
+
