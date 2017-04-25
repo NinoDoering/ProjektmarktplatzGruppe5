@@ -12,6 +12,6 @@ public class Unternehmen extends Organisationseinheit {
 		this.firmenName = firmenName;
 	}
 	
-	//Test
+	//Test2
 	
 }

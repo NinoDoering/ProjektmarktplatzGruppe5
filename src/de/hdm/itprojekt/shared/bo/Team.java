@@ -24,5 +24,5 @@ public class Team extends Organisationseinheit {
 				+ this.teamName +" "
 				+ this.mitgliederAnzahl; 
 		
-		//Test
+		//Test2
 }}
