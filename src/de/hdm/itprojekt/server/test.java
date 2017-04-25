@@ -15,5 +15,8 @@ public class test {
 	int e = 188992;
 
 	double abc = 121.55854;
+	
+	String blabla = "test zum 1000 mal"; 
+	
 
 }
