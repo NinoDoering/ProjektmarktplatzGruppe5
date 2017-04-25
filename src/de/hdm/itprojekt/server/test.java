@@ -44,4 +44,12 @@ String ab = "Hallo";
  String test3 = "Verbindung zwischen Branches testen.";
  
  String testaberhallo = "Mein Versuch";
+ 
+ 
+ double abc = 1.54; 
+ 
+ 
+ 
+ 
+ 
 }
