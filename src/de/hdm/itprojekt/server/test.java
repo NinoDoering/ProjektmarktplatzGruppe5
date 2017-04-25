@@ -16,7 +16,7 @@ public class test {
 
 	double abc = 121.55854;
 	
-	String blabla = "test zum 1000 mal"; 
+	String blabla = "test zum 1000000 mal"; 
 	
 
 }
