@@ -2,7 +2,10 @@ package de.hdm.itprojekt.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
 //Rueckgaengig
+//zweiterVersuch
+
 /**
  * The client-side stub for the RPC service.
  */
