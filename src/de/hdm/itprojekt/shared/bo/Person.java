@@ -33,8 +33,9 @@ public class Person extends BusinessObject{
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
 	}
-	// muss vervollständigt werden
+
 	public String toString(){
-		return super.toString() + this.id; 
+		return super.toString() + this.id + " " + this.geschlecht + " " +  this.vorname + 
+				" " + this.nachname;
 	
 }}
