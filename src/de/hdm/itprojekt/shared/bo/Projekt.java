@@ -61,12 +61,13 @@ public class Projekt {
 		this.projektleiter = projektleiter;
 	}
 
-	@Override
 	public String toString() {
-		return "Projekt [id=" + id + ", bezeichnung=" + bezeichnung + ", beschreibung=" + beschreibung + ", startDatum="
-				+ startDatum + ", endDatum=" + endDatum + ", projektleiter=" + projektleiter + "]";
+		return super.toString() + this.id + " " + this.bezeichnung + " " + this.beschreibung + " " + this.startDatum
+				+ " " + this.endDatum + " " + this.projektleiter;
 	}
+
 	
 	// toString vervollstaending 
 	
+
 }
