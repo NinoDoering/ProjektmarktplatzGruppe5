@@ -33,4 +33,5 @@ public class Projektmarktplatz implements EntryPoint {
 		});
 		RootPanel.get("dieter").add(b);
 	}
+	// erneut wichtig!!!
 }
