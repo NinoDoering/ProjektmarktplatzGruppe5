@@ -65,4 +65,9 @@ public class Projekt {
 		return super.toString() + this.id + " " + this.bezeichnung + " " + this.beschreibung + " " + this.startDatum
 				+ " " + this.endDatum + " " + this.projektleiter;
 	}
+
+	
+	// toString vervollstaending 
+	
+
 }

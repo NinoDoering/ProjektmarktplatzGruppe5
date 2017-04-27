@@ -21,7 +21,6 @@ public class Projektmarktplatz {
 	public void setGeschaeftsgebiet(String geschaeftsgebiet) {
 		this.geschaeftsgebiet = geschaeftsgebiet;
 	}
-	
 
 	public Projekt getProjekt() {
 		return projekt;
@@ -30,7 +29,7 @@ public class Projektmarktplatz {
 	public void setProjekt(Projekt projekt) {
 		this.projekt = projekt;
 	}
-	
+
 	public String toString(){
 		return super.toString()	
 				+ this.id +" "
