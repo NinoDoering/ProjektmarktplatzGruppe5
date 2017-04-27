@@ -6,7 +6,7 @@ public class Projektmarktplatz {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String geschäftsgebiet;
+	private String geschaeftsgebiet;
 	
 	private Projekt projekt;
 
@@ -14,19 +14,14 @@ public class Projektmarktplatz {
 		return id;
 	}
 
-	public String getGeschäftsgebiet() {
-		return geschäftsgebiet;
+	public String getGeschaeftsgebiet() {
+		return geschaeftsgebiet;
 	}
 
-	public void setGeschäftsgebiet(String geschäftsgebiet) {
-		this.geschäftsgebiet = geschäftsgebiet;
+	public void setGeschaeftsgebiet(String geschaeftsgebiet) {
+		this.geschaeftsgebiet = geschaeftsgebiet;
 	}
 	
-	public String toString(){
-		return super.toString()	
-				+ this.id +" "
-				+ this.geschäftsgebiet; 
-	}
 
 	public Projekt getProjekt() {
 		return projekt;
@@ -36,6 +31,10 @@ public class Projektmarktplatz {
 		this.projekt = projekt;
 	}
 	
-		//Test2
+	public String toString(){
+		return super.toString()	
+				+ this.id +" "
+				+ this.geschaeftsgebiet + " " + this.projekt; 
+	}
 	
 }
