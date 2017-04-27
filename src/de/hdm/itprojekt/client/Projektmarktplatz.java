@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Projektmarktplatz implements EntryPoint {
-	Label l = new Label("Hallo meine Freunde der Sonne. Der Nino ist der obercoolste!");
+	Label l = new Label("Hallo meine Freunde der Sonne. Der Nino ist der coolste!");
 	public void onModuleLoad() {
 		RootPanel.get().add(l);
 		
