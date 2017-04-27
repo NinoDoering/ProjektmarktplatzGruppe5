@@ -67,6 +67,6 @@ public class Projekt {
 				+ startDatum + ", endDatum=" + endDatum + ", projektleiter=" + projektleiter + "]";
 	}
 	
-	// toString vervollständing 
+	// toString vervollstaending 
 	
 }
