@@ -43,5 +43,5 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	}
 	
-	//wichtig
+	//wichtig!
 }

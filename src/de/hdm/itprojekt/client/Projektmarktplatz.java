@@ -28,7 +28,7 @@ public class Projektmarktplatz implements EntryPoint {
 		Button b = new Button("klick mich hart");
 		b.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				l.setText("nein mois, Wahid is der Coolste");
+				l.setText("nein mois, Dani is der Coolste");
 			}
 		});
 		RootPanel.get("dieter").add(b);
