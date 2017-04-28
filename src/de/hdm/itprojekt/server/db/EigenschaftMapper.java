@@ -159,7 +159,7 @@ public class EigenschaftMapper {
 
 		  public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
 		    
-		    return PersonMapper.personMapper().findByOwner(eig);
+		    return PersonMapper.personMapper().findByKey(eig);
 		  }
 		
 	
