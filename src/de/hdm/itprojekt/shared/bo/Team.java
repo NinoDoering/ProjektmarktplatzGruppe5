@@ -2,9 +2,18 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Team extends Organisationseinheit {
 
+	private int id;
 	private String teamName;
-	private int mitgliederAnzahl=0;
+	private int mitgliederAnzahl=0;  // ? 
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getTeamName() {
 		return teamName;
