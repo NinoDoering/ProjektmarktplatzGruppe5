@@ -5,71 +5,100 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
 
-
 public class UnternehmenMapper {
 
 	private static UnternehmenMapper unternehmenMapper = null;
-	
+
 	protected UnternehmenMapper() {
-	  }
-	
+	}
+
 	public static UnternehmenMapper unternehmenMapper() {
-	    if (unternehmenMapper == null) {
-	      unternehmenMapper = new UnternehmenMapper();
-	    }
+		if (unternehmenMapper == null) {
+			unternehmenMapper = new UnternehmenMapper();
+		}
 
-	    return unternehmenMapper;
-	  }
-	
-	//FindByFirmenName		--		Was ist mit Id??
+		return unternehmenMapper;
+	}
+
+	// FindByFirmenName -- Was ist mit Id??
 	public Unternehmen findByFirmenName(String firmenName) {
-	    Connection con = DBConnection.connection();
+		Connection con = DBConnection.connection();
 
-	    try {
-	      Statement stmt = con.createStatement();
-	      
-	      ResultSet rs = stmt
-	          .executeQuery("SELECT firmenName FROM customers "
-	              + "WHERE firmenName=" + firmenName);
+		try {
+			Statement stmt = con.createStatement();
 
-	      if (rs.next()) {
-	        Unternehmen u = new Unternehmen();
-	        u.setFirmenName(rs.getString("firmenName"));
+			ResultSet rs = stmt.executeQuery("SELECT firmenName FROM customers "
+								+ "WHERE firmenName=" + firmenName);
 
-	        return u;
-	      }
-	    }
-	    catch (SQLException e) {
-	      e.printStackTrace();
-	      return null;
-	    }
+			if (rs.next()) {
+				Unternehmen u = new Unternehmen();
+				u.setFirmenName(rs.getString("firmenName"));
 
-	    return null;
-	  }
-	
-	//INSERT (unfertig)
+				return u;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return null;
+	}
+
+	// INSERT (unfertig)
 	public Unternehmen insert(Unternehmen u) {
-	    Connection con = DBConnection.connection();
+		Connection con = DBConnection.connection();
 
-	    try {
-	      Statement stmt = con.createStatement();
+		try {
+			Statement stmt = con.createStatement();
 
+			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM unternehmen "); 
+			// Id wird womöglich benötigt!
 
-	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM unternehmen "); //Id wir womöglich benötigt!
+			if (rs.next()) {
 
-	      if (rs.next()) {
+				u.setId(rs.getInt("maxid") + 1);
 
-	        u.setId(rs.getInt("maxid") + 1);
+				stmt = con.createStatement();
 
-	        stmt = con.createStatement();
+				stmt.executeUpdate("INSERT INTO unternehmen (firmenName) " 
+							+ "VALUES (" + u.getFirmenName() + "')");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return u;	
+	}
+	
+	 public Unternehmen update(Unternehmen u) {
+		    Connection con = DBConnection.connection();
 
-	        stmt.executeUpdate("INSERT INTO unternehmen (firmenName) "
-	            + "VALUES (" + u.getFirmenName()")");
-	      }
-	    }
-	    catch (SQLException e) {
-	      e.printStackTrace();
-	    }
+		    try {
+		      Statement stmt = con.createStatement();
 
-	}}
+		      stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\"" 
+		    		  + "\" " + "WHERE id=" + u.getId());
+
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+
+		    return u;
+		  }
+	 
+	 //DELETE
+	 public void delete(Unternehmen u) {
+		    Connection con = DBConnection.connection();
+
+		    try {
+		      Statement stmt = con.createStatement();
+		      //Schon wieder wird id verwendet --> sollten Id als Attribut hinzufügen
+		      stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE id=" + u.getId());
+		    }
+		    catch (SQLException e3) {
+		      e3.printStackTrace();
+		    }
+		  }
+}
