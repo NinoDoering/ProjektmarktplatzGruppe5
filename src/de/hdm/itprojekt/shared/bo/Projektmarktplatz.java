@@ -7,11 +7,23 @@ public class Projektmarktplatz {
 	private static final long serialVersionUID = 1L;
 	
 	private String geschaeftsgebiet;
-	
+	private String bezeichnung;
+	public String getBezeichnung() {
+		return bezeichnung;
+	}
+
+	public void setBezeichnung(String bezeichnung) {
+		this.bezeichnung = bezeichnung;
+	}
+
 	private Projekt projekt;
 
 	public int getIdProjektmarktplatz() {
 		return idProjektmarktplatz;
+	}
+
+	public void setIdProjektmarktplatz(int idProjektmarktplatz) {
+		this.idProjektmarktplatz = idProjektmarktplatz;
 	}
 
 	public String getGeschaeftsgebiet() {
