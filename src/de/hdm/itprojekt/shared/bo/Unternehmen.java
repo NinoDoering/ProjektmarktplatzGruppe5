@@ -3,6 +3,14 @@ package de.hdm.itprojekt.shared.bo;
 public class Unternehmen extends Organisationseinheit {
 
 	private String firmenName;
+	private int idUnternehmen;
+	public int getIdUnternehmen() {
+		return idUnternehmen;
+	}
+
+	public void setIdUnternehmen(int idUnternehmen) {
+		this.idUnternehmen = idUnternehmen;
+	}
 
 	public String getFirmenName() {
 		return firmenName;

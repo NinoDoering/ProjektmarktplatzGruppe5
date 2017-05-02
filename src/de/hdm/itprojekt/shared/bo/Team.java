@@ -2,15 +2,21 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Team extends Organisationseinheit {
 
-	private String teamName;
+	private String idTeam;
 	private int mitgliederAnzahl=0;
-	
+	private String teamName;
 	
 	public String getTeamName() {
 		return teamName;
 	}
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
+	}
+	public String getIdTeamName() {
+		return idTeam;
+	}
+	public void setTeam(String idTeam) {
+		this.idTeam = idTeam;
 	}
 	public int getMitgliederAnzahl() {
 		return mitgliederAnzahl;
@@ -21,7 +27,7 @@ public class Team extends Organisationseinheit {
 	
 	public String toString(){
 		return super.toString()	
-				+ this.teamName +" "
+				+ this.idTeam +" "
 				+ this.mitgliederAnzahl; 
 		
 		//Test2
