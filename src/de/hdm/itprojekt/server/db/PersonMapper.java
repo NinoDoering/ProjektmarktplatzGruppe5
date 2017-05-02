@@ -173,5 +173,4 @@ public class PersonMapper {
 
 		    return PersonMapper.personMapper().findByKey(id); //FALSCH, WARUM?
 		  }
-	 
 }
