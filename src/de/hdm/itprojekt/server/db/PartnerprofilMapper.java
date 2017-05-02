@@ -82,7 +82,7 @@ public class PartnerprofilMapper {
 		      
 		      //FREMDSCHLÜSSEL ÜBERPRÜFUEN!!
 		      ResultSet rs = stmt.executeQuery("SELECT id FROM partnerprofil "
-		          + "WHERE ausschreibung=" + ausschreibungID + " ORDER BY id");
+		          + "WHERE ausschreibung=" + AusschreibungID + " ORDER BY id");  //?? 
 
 		      while (rs.next()) {
 		        Partnerprofil p = new Partnerprofil();

@@ -3,7 +3,8 @@ package de.hdm.itprojekt.server.db;
 import java.sql.*;
 import java.util.Vector;
 
-import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.*;
+
 
 public class ProjektmarktplatzMapper {
 	
@@ -32,7 +33,7 @@ public class ProjektmarktplatzMapper {
 	   if (rs.next()) { 
 		   
 		  
-	        p.setId(rs.getInt("maxid") + 1);
+	        p.setId(rs.getInt("maxid")+1);
 
 	        stmt = con.createStatement();
 	   
