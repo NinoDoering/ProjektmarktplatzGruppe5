@@ -28,7 +28,7 @@ public class BusinessObjectMapper {
 			Statement stmt = con.createStatement(); 
 		
 		ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM businessObject ");
+	          + "FROM businessObject");
 	 
 	   if (rs.next()) { 
 		   
@@ -39,7 +39,7 @@ public class BusinessObjectMapper {
 	   
 	
 	        stmt.executeUpdate(" INSERT INTO projekt (id)"
-	        		+ " VALUES (" + bo.getId()); 
+	        		+ " VALUES (" + bo.getIdBusinessObject() + ")"); 
 	
 	   }
 	   }
@@ -48,7 +48,7 @@ public class BusinessObjectMapper {
  }
 		return bo;
 }
-	public BusinessObject findByKey (int id) {
+	public BusinessObject findByKey (int idBusinessObject) {
 		
 		Connection con = DBConnection.connection();
 		
@@ -56,13 +56,13 @@ public class BusinessObjectMapper {
 	try	{
 		Statement stmt = con.createStatement(); 
 		
-		ResultSet rs = stmt.executeQuery("SELECT id"
-				+ "WHERE id=" + id + "ORDER BY id");
+		ResultSet rs = stmt.executeQuery("SELECT idBusinessObject"
+				+ "WHERE idBusinessObject=" + idBusinessObject + "ORDER BY idBusinessObject");
 		
 		
 		if (rs.next()) {
 			BusinessObject bo = new BusinessObject();
-			bo.setId(rs.getInt("id"));
+			bo.setIdBusinessObject(rs.getInt("idBusinessObject"));
 			/// Fehler beheben 
 			
 			return bo; 
@@ -81,11 +81,10 @@ public class BusinessObjectMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM businessObject " + "WHERE id=" + bo.getId());
+	      stmt.executeUpdate("DELETE FROM businessObject " + "WHERE idBusinessObject=" + bo.getIdBusinessObject());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 	  }
-	
 }
