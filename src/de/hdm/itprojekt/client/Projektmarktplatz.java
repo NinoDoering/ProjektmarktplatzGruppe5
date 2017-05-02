@@ -26,12 +26,14 @@ public class Projektmarktplatz implements EntryPoint {
 	Label l = new Label("Hallo meine Freunde der Sonne. Der  ist der coolste!");
 	Label l1 = new Label(" Unser Projektmarktplatz von der Gruppe 5");
 	
+	
 	public void onModuleLoad() {
 		RootPanel.get().add(l);
 		RootPanel.get().add(l1);
+		;
 		
 		
-		Button b = new Button("klick mich hart");
+		Button b = new Button("klick mich ");
 		b.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				l.setText("nein ,  is der Coolste");
