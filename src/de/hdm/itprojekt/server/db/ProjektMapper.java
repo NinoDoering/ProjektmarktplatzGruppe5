@@ -69,7 +69,7 @@ public class ProjektMapper {
 			p.setBeschreibung(rs.getString("beschreibung"));
 			p.setStartDatum(rs.getDate("startDatum"));
 			p.setEndDatum(rs.getDate("endDatum"));
-			p.setProjektleiter(rs.getPerson)("projektleiter")); /// Fehler beheben 
+			p.setProjektleiter(rs.getPerson("projektleiter")); /// Fehler beheben 
 			
 			return p; 
 		}

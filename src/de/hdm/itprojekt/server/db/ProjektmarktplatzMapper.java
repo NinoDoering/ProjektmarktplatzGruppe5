@@ -36,11 +36,9 @@ public class ProjektmarktplatzMapper {
 	   if (rs.next()) { 
 		   
 		  
-<<<<<<< HEAD
 	        p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
-=======
+
 	        p.setId(rs.getInt("maxid")+1);
->>>>>>> branch 'master' of https://github.com/NinoDoering/ProjektmarktplatzGruppe5.git
 
 	        stmt = con.createStatement();
 	   
