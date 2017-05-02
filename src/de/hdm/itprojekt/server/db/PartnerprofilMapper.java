@@ -20,7 +20,7 @@ public class PartnerprofilMapper {
 	    return partnerprofilMapper;
 	  }
 	
-	//findbyKey
+	//findByKey
 	public Partnerprofil findByKey(int id){
 		Connection con = DBConnection.connection();
 	
@@ -73,7 +73,7 @@ public class PartnerprofilMapper {
 		  }
 	 
 	//findByAusschreibung
-	 public Vector<Partnerprofil> findByAusschreibung(int AusschreibungID) {
+	 public Vector<Partnerprofil> findByAusschreibung(int idAusschreibung) {
 		 //prüfen wegen Fremdschlüssel von Ausschreibung: gegebenenfalls korrigieren!!
 		    Connection con = DBConnection.connection();
 		    Vector<Partnerprofil> result = new Vector<Partnerprofil>();
@@ -83,12 +83,13 @@ public class PartnerprofilMapper {
 		      
 		      //FREMDSCHLÜSSEL ÜBERPRÜFUEN!!
 		      ResultSet rs = stmt.executeQuery("SELECT id FROM partnerprofil "
-		          + "WHERE ausschreibung=" + AusschreibungID + " ORDER BY id");  //?? 
+		          + "WHERE ausschreibung=" + idAusschreibung + "INNER JOIN ausschreibung ON "
+		          		+ "partnerprofil.idAusschreibung = ausschreibung.idAusschreibung ORDER BY id" );//?? 
 
 		      while (rs.next()) {
 		        Partnerprofil p = new Partnerprofil();
 		        p.setId(rs.getInt("id"));
-		        p.setAusschreibungID(rs.getInt("ausschreibung"));
+		        p.setIdAusschreibung(rs.getInt("ausschreibung"));
 
 		        result.addElement(p);
 		      }

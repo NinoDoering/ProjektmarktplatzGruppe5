@@ -88,7 +88,6 @@ public class EigenschaftMapper {
 	
 	public Vector<Eigenschaft> findAll() {
 		Connection con = DBConnection.connection();
-	    // Ergebnisvektor vorbereiten
 	    Vector<Eigenschaft> vec = new Vector<Eigenschaft>();
 
 	    try {
@@ -97,8 +96,6 @@ public class EigenschaftMapper {
 	      ResultSet rs = stmt.executeQuery("SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus "
 	          + "FROM eigenschaft " + "ORDER BY id");
 
-	      // Für jeden Eintrag im Suchergebnis wird nun eine Eigenschaft-Objekt
-	      // erstellt.
 	      while (rs.next()) {
 	        Eigenschaft eig = new Eigenschaft();
 			eig.setId(rs.getInt("id"));
@@ -139,7 +136,6 @@ public class EigenschaftMapper {
 		      e.printStackTrace();
 		    }
 
-		    // Um Analogie zu insert(Eigenschaft eig) zu wahren, geben wir eig zurück
 		    return eig;
 		  }
 	  
@@ -161,6 +157,4 @@ public class EigenschaftMapper {
 		    
 		    return PersonMapper.personMapper().findByKey(eig);
 		  }
-		
-	
 }

@@ -19,7 +19,7 @@ public class TeamMapper {
 			return teamMapper;
 		}
 		
-		public Team inser (Team t){
+		public Team insert (Team t){
 			Connection con = DBConnection.connection(); 
 			
 			try {
@@ -155,10 +155,5 @@ public class TeamMapper {
 			catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		
-		}
-
-	
-
-
+		}	
+}

@@ -28,7 +28,7 @@ public class BusinessObjectMapper {
 			Statement stmt = con.createStatement(); 
 		
 		ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM businessObject "); 
+	          + "FROM businessObject ");
 	 
 	   if (rs.next()) { 
 		   
