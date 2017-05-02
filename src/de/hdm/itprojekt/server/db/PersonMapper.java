@@ -171,6 +171,6 @@ public class PersonMapper {
 	 //FAN-IN-FAN-OUT-Analyse -->RICHTIG??
 	 public Vector<Person> getPersonOf(Person p) {
 
-		    return PersonMapper.personMapper().findByKey(id); //FALSCH, WARUM?
+		    return PersonMapper.personMapper().findByKey(p); //FALSCH, WARUM?
 		  }
 }
