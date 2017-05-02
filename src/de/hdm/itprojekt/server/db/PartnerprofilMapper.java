@@ -21,7 +21,7 @@ public class PartnerprofilMapper {
 	  }
 	
 	//findByKey
-	public Partnerprofil findByKey(int id){
+	public Partnerprofil findByKey(int idPartnerprofil){
 		Connection con = DBConnection.connection();
 	
 	
@@ -29,12 +29,11 @@ public class PartnerprofilMapper {
 	      Statement stmt = con.createStatement();
 
 	      ResultSet rs = stmt
-	          .executeQuery("SELECT id FROM partnerprofil "
-	              + "WHERE id=" + id);
+	          .executeQuery("SELECT id FROM partnerprofil " + "WHERE idPartnerprofil=" + idPartnerprofil);
 
 	      if (rs.next()) {    
 	          Partnerprofil p = new Partnerprofil();
-	          p.setId(rs.getInt("id"));
+	          p.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 
 	          return p;
 	        }
@@ -55,12 +54,12 @@ public class PartnerprofilMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id "
+		      ResultSet rs = stmt.executeQuery("SELECT idPartnerprofil "
 		          + "FROM partnerprofil ");
 
 		      while (rs.next()) {
 		        Partnerprofil p = new Partnerprofil();
-		        p.setId(rs.getInt("id"));
+		        p.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 
 		        result.addElement(p);
 		      }
@@ -71,35 +70,7 @@ public class PartnerprofilMapper {
 
 		    return result;
 		  }
-	 
-	//findByAusschreibung
-	 public Vector<Partnerprofil> findByAusschreibung(int idAusschreibung) {
-		 //prüfen wegen Fremdschlüssel von Ausschreibung: gegebenenfalls korrigieren!!
-		    Connection con = DBConnection.connection();
-		    Vector<Partnerprofil> result = new Vector<Partnerprofil>();
 
-		    try {
-		      Statement stmt = con.createStatement();
-		      
-		      //FREMDSCHLÜSSEL ÜBERPRÜFUEN!!
-		      ResultSet rs = stmt.executeQuery("SELECT id FROM partnerprofil "
-		          + "WHERE ausschreibung=" + idAusschreibung + "INNER JOIN ausschreibung ON "
-		          		+ "partnerprofil.idAusschreibung = ausschreibung.idAusschreibung ORDER BY id" );//?? 
-
-		      while (rs.next()) {
-		        Partnerprofil p = new Partnerprofil();
-		        p.setId(rs.getInt("id"));
-		        p.setIdAusschreibung(rs.getInt("ausschreibung"));
-
-		        result.addElement(p);
-		      }
-		    }
-		    catch (SQLException e2) {
-		      e2.printStackTrace();
-		    }
-
-		    return result;
-		  }
 	
 	 //INSERT INTO 
 	 public Partnerprofil insert(Partnerprofil p) {
@@ -113,12 +84,12 @@ public class PartnerprofilMapper {
 
 		      if (rs.next()) {
 
-		        p.setId(rs.getInt("maxid") + 1);
+		        p.setIdPartnerprofil(rs.getInt("maxid") + 1);
 
 		        stmt = con.createStatement();
 
 		        stmt.executeUpdate("INSERT INTO partnerprofil (id) "
-		            + "VALUES (" + p.getId());
+		            + "VALUES (" + p.getIdPartnerprofil() + ")");
 		      }
 		    }
 		    catch (SQLException e3) {
@@ -135,10 +106,10 @@ public class PartnerprofilMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      //WARUM SIND HIER SLASHES???
-		      stmt.executeUpdate("UPDATE partnerprofil " + "SET id=\""
-		          + p.getId() + "\", " + "lastName=\"" + p.getLastName() + "\" "
-		          + "WHERE id=" + p.getId());
+		      //FERTIGMACHEN!!!!
+		      stmt.executeUpdate("UPDATE partnerprofil " + "SET idPartnerprofil=\""
+		          + p.getIdPartnerprofil() + "\", " + "lastName=\"" + p.getLastName() + "\" "
+		          + "WHERE idPartnerprofil=" + p.getIdPartnerprofil());
 
 		    }
 		    catch (SQLException e4) {
@@ -155,7 +126,7 @@ public class PartnerprofilMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      stmt.executeUpdate("DELETE FROM partnerprofil " + "WHERE id=" + p.getId());
+		      stmt.executeUpdate("DELETE FROM partnerprofil " + "WHERE idPartnerprofil=" + p.getIdPartnerprofil());
 		    }
 		    catch (SQLException e5) {
 		      e5.printStackTrace();
@@ -167,7 +138,6 @@ public class PartnerprofilMapper {
 	  public Vector<Partnerprofil> getPartnerprofilOf(Partnerprofil p) {
 
 		 
-		  return PartnerprofilMapper.partnerprofilMapper().findbyKey(id);
-	    //return AccountMapper.accountMapper().findByOwner(c); richtig übersetzt?
+		  return PartnerprofilMapper.partnerprofilMapper().findByKey(idPartnerprofil);
 	  }
 	}
