@@ -3,7 +3,7 @@ package de.hdm.itprojekt.server.db;
 import java.sql.*;
 import java.util.Vector;
 
-import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.*;
 
 
 public class ProjektMapper {

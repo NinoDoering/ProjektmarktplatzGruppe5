@@ -4,6 +4,10 @@ import java.sql.*;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/NinoDoering/ProjektmarktplatzGruppe5.git
 
 public class ProjektmarktplatzMapper {
 	
@@ -32,7 +36,11 @@ public class ProjektmarktplatzMapper {
 	   if (rs.next()) { 
 		   
 		  
+<<<<<<< HEAD
 	        p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
+=======
+	        p.setId(rs.getInt("maxid")+1);
+>>>>>>> branch 'master' of https://github.com/NinoDoering/ProjektmarktplatzGruppe5.git
 
 	        stmt = con.createStatement();
 	   

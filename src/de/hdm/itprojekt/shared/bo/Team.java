@@ -2,9 +2,24 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Team extends Organisationseinheit {
 
+<<<<<<< HEAD
 	private String idTeam;
 	private int mitgliederAnzahl=0;
 	private String teamName;
+=======
+	private int id;
+	private String teamName;
+	private int mitgliederAnzahl=0;  // ?
+	
+>>>>>>> branch 'master' of https://github.com/NinoDoering/ProjektmarktplatzGruppe5.git
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getTeamName() {
 		return teamName;

@@ -20,7 +20,8 @@ public class PartnerprofilMapper {
 	    return partnerprofilMapper;
 	  }
 	
-	public Partnerprofil findbyKey(int id){
+	//findByKey
+	public Partnerprofil findByKey(int id){
 		Connection con = DBConnection.connection();
 	
 	
@@ -29,7 +30,7 @@ public class PartnerprofilMapper {
 
 	      ResultSet rs = stmt
 	          .executeQuery("SELECT id FROM partnerprofil "
-	              + "WHERE id=" + id); // " ORDER BY nachname) --> kommt nicht rein;
+	              + "WHERE id=" + id);
 
 	      if (rs.next()) {    
 	          Partnerprofil p = new Partnerprofil();
@@ -71,8 +72,8 @@ public class PartnerprofilMapper {
 		    return result;
 		  }
 	 
-	//n�chster Schritt: 
-	 public Vector<Partnerprofil> findByAusschreibung(int AusschreibungID) {
+	//findByAusschreibung
+	 public Vector<Partnerprofil> findByAusschreibung(int idAusschreibung) {
 		 //pr�fen wegen Fremdschl�ssel von Ausschreibung: gegebenenfalls korrigieren!!
 		    Connection con = DBConnection.connection();
 		    Vector<Partnerprofil> result = new Vector<Partnerprofil>();
@@ -82,14 +83,14 @@ public class PartnerprofilMapper {
 		      
 		      //FREMDSCHL�SSEL �BERPR�FUEN!!
 		      ResultSet rs = stmt.executeQuery("SELECT id FROM partnerprofil "
-		          + "WHERE ausschreibung=" + ausschreibungID + " ORDER BY id");
+		          + "WHERE ausschreibung=" + idAusschreibung + "INNER JOIN ausschreibung ON "
+		          		+ "partnerprofil.idAusschreibung = ausschreibung.idAusschreibung ORDER BY id" );//?? 
 
 		      while (rs.next()) {
 		        Partnerprofil p = new Partnerprofil();
 		        p.setId(rs.getInt("id"));
-		        p.setAusschreibungID(rs.getInt("ausschreibung"));
+		        p.setIdAusschreibung(rs.getInt("ausschreibung"));
 
-		        // Hinzufügen des neuen Objekts zum Ergebnisvektor
 		        result.addElement(p);
 		      }
 		    }
@@ -97,7 +98,6 @@ public class PartnerprofilMapper {
 		      e2.printStackTrace();
 		    }
 
-		    // Ergebnisvektor zurückgeben
 		    return result;
 		  }
 	
@@ -108,24 +108,15 @@ public class PartnerprofilMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      /*
-		       * Zunächst schauen wir nach, welches der momentan höchste
-		       * Primärschlüsselwert ist.
-		       */
 		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
 		          + "FROM partnerprofil ");
 
-		      // Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 		      if (rs.next()) {
-		        /*
-		         * c erhält den bisher maximalen, nun um 1 inkrementierten
-		         * Primärschlüssel.
-		         */
+
 		        p.setId(rs.getInt("maxid") + 1);
 
 		        stmt = con.createStatement();
 
-		        // Jetzt erst erfolgt die tatsächliche Einfuegeoperation
 		        stmt.executeUpdate("INSERT INTO partnerprofil (id) "
 		            + "VALUES (" + p.getId());
 		      }
@@ -134,15 +125,6 @@ public class PartnerprofilMapper {
 		      e3.printStackTrace();
 		    }
 
-		    /*
-		     * Rueckgabe, des evtl. korrigierten Customers.
-		     * 
-		     * HINWEIS: Da in Java nur Referenzen auf Objekte und keine physischen
-		     * Objekte uebergeben werden, wäre die Anpassung des Customer-Objekts auch
-		     * ohne diese explizite Rueckgabe au�erhalb dieser Methode sichtbar. Die
-		     * explizite Rückgabe von c ist eher ein Stilmittel, um zu signalisieren,
-		     * dass sich das Objekt evtl. im Laufe der Methode veraendert hat.
-		     */
 		    return p;
 		  }
 	 
@@ -163,7 +145,6 @@ public class PartnerprofilMapper {
 		      e4.printStackTrace();
 		    }
 
-		    // Um Analogie zu insert(Customer c) zu wahren, geben wir c zurück
 		    return p;
 		  }
 	 
@@ -183,19 +164,8 @@ public class PartnerprofilMapper {
 	 
 	 
 	 //FAN-IN-FAN-OUT-ANALYSE?
-	 /**
-	   * Auslesen der zugehörigen <code>Account</code>-Objekte zu einem gegebenen
-	   * Kunden.
-	   * 
-	   * @param c der Kunde, dessen Konten wir auslesen möchten
-	   * @return ein Vektor mit sömtlichen Konto-Objekten des Kunden
-	   */
 	  public Vector<Partnerprofil> getPartnerprofilOf(Partnerprofil p) {
-	    /*
-	     * Wir bedienen uns hier einfach des AccountMapper. Diesem geben wir einfach
-	     * den in dem Customer-Objekt enthaltenen Primärschlüssel.Der CustomerMapper
-	     * löst uns dann diese ID in eine Reihe von Konto-Objekten auf.
-	     */
+
 		 
 		  return PartnerprofilMapper.partnerprofilMapper().findbyKey(id);
 	    //return AccountMapper.accountMapper().findByOwner(c); richtig �bersetzt?
