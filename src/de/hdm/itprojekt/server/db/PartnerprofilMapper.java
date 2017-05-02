@@ -89,7 +89,6 @@ public class PartnerprofilMapper {
 		        p.setId(rs.getInt("id"));
 		        p.setAusschreibungID(rs.getInt("ausschreibung"));
 
-		        // Hinzufügen des neuen Objekts zum Ergebnisvektor
 		        result.addElement(p);
 		      }
 		    }
@@ -97,7 +96,6 @@ public class PartnerprofilMapper {
 		      e2.printStackTrace();
 		    }
 
-		    // Ergebnisvektor zurückgeben
 		    return result;
 		  }
 	
@@ -108,24 +106,15 @@ public class PartnerprofilMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      /*
-		       * Zunächst schauen wir nach, welches der momentan höchste
-		       * Primärschlüsselwert ist.
-		       */
 		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
 		          + "FROM partnerprofil ");
 
-		      // Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
 		      if (rs.next()) {
-		        /*
-		         * c erhält den bisher maximalen, nun um 1 inkrementierten
-		         * Primärschlüssel.
-		         */
+
 		        p.setId(rs.getInt("maxid") + 1);
 
 		        stmt = con.createStatement();
 
-		        // Jetzt erst erfolgt die tatsächliche Einfuegeoperation
 		        stmt.executeUpdate("INSERT INTO partnerprofil (id) "
 		            + "VALUES (" + p.getId());
 		      }
@@ -134,15 +123,6 @@ public class PartnerprofilMapper {
 		      e3.printStackTrace();
 		    }
 
-		    /*
-		     * Rueckgabe, des evtl. korrigierten Customers.
-		     * 
-		     * HINWEIS: Da in Java nur Referenzen auf Objekte und keine physischen
-		     * Objekte uebergeben werden, wäre die Anpassung des Customer-Objekts auch
-		     * ohne diese explizite Rueckgabe au�erhalb dieser Methode sichtbar. Die
-		     * explizite Rückgabe von c ist eher ein Stilmittel, um zu signalisieren,
-		     * dass sich das Objekt evtl. im Laufe der Methode veraendert hat.
-		     */
 		    return p;
 		  }
 	 
@@ -163,7 +143,6 @@ public class PartnerprofilMapper {
 		      e4.printStackTrace();
 		    }
 
-		    // Um Analogie zu insert(Customer c) zu wahren, geben wir c zurück
 		    return p;
 		  }
 	 
@@ -183,19 +162,8 @@ public class PartnerprofilMapper {
 	 
 	 
 	 //FAN-IN-FAN-OUT-ANALYSE?
-	 /**
-	   * Auslesen der zugehörigen <code>Account</code>-Objekte zu einem gegebenen
-	   * Kunden.
-	   * 
-	   * @param c der Kunde, dessen Konten wir auslesen möchten
-	   * @return ein Vektor mit sömtlichen Konto-Objekten des Kunden
-	   */
 	  public Vector<Partnerprofil> getPartnerprofilOf(Partnerprofil p) {
-	    /*
-	     * Wir bedienen uns hier einfach des AccountMapper. Diesem geben wir einfach
-	     * den in dem Customer-Objekt enthaltenen Primärschlüssel.Der CustomerMapper
-	     * löst uns dann diese ID in eine Reihe von Konto-Objekten auf.
-	     */
+
 		 
 		  return PartnerprofilMapper.partnerprofilMapper().findbyKey(id);
 	    //return AccountMapper.accountMapper().findByOwner(c); richtig �bersetzt?
