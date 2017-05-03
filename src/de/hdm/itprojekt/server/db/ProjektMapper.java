@@ -3,7 +3,7 @@ package de.hdm.itprojekt.server.db;
 import java.sql.*;
 import java.util.Vector;
 
-import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.*;
 
 
 public class ProjektMapper {
@@ -69,7 +69,7 @@ public class ProjektMapper {
 			p.setBeschreibung(rs.getString("beschreibung"));
 			p.setStartDatum(rs.getDate("startDatum"));
 			p.setEndDatum(rs.getDate("endDatum"));
-			p.setProjektleiter(rs.getPerson)("projektleiter")); /// Fehler beheben 
+			p.setProjektleiter(rs.getPerson("projektleiter")); /// Fehler beheben 
 			
 			return p; 
 		}

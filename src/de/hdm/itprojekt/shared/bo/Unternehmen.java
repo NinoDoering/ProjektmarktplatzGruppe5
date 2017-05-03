@@ -16,7 +16,11 @@ public class Unternehmen extends Organisationseinheit {
 	public int getIdUnternehmen() {
 		return idUnternehmen;
 	}
-	
+
+	public void setIdUnternehmen(int idUnternehmen) {
+		this.idUnternehmen = idUnternehmen;
+	}
+
 	public String getFirmenName() {
 		return firmenName;
 	}
