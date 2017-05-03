@@ -11,23 +11,24 @@ public abstract class BusinessObject implements Serializable {
 	
 	// eine eindeutige Id aller BO's 
 	
-	private int id = 0;
+	private int idBusinessObject = 0;
 	
 	
-	public int getId() {
-		return this.id; 
+	public int getIdBusinessObject() {
+		return this.idBusinessObject; 
 	}
 	
-	public void setId(int id) {
-		this.id= id; 
+	public void setId(int idBusinessObject) {
+		this.idBusinessObject= idBusinessObject; 
 	}
 	
 	/** eine Instanz dieser Klasse wird textuell dargestellt 
-	*  Die Ausgabe enthält den Klassennamen und die Id des Objektes */
+	*  Die Ausgabe enthï¿½lt den Klassennamen und die Id des Objektes */
 	
 	public String toString(){
 		
-		return this.getClass().getName() + " " + this.id; 
+		return this.getClass().getName() + " " 
+		+ this.idBusinessObject; 
 		
 	}
 	
@@ -41,25 +42,25 @@ public abstract class BusinessObject implements Serializable {
 	    if (o != null && o instanceof BusinessObject) {
 	      BusinessObject bo = (BusinessObject) o;
 	      try {
-	        if (bo.getId() == this.id)
+	        if (bo.getIdBusinessObject() == this.idBusinessObject)
 	          return true;
 	      }
 	      catch (IllegalArgumentException e) {
 	        /*
 	         * Wenn irgendetwas schief geht, dann geben wir sicherheitshalber false
-	         * zurück.
+	         * zurï¿½ck.
 	         */
 	        return false;
 	      }
 	    }
 	    /*
-	     * Wenn bislang keine Gleichheit bestimmt werden konnte, dann müssen
-	     * schließlich false zurückgeben.
+	     * Wenn bislang keine Gleichheit bestimmt werden konnte, dann mï¿½ssen
+	     * schlieï¿½lich false zurï¿½ckgeben.
 	     */
 	    return false;
 	  }
 	
 	public int hashCode() {
-		return this.id; 
+		return this.idBusinessObject; 
 	}
 }

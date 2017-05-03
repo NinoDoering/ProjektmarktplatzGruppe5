@@ -2,23 +2,34 @@ package de.hdm.itprojekt.shared.bo;
 
 import java.util.Date;
 
-public class Projekt {
+public class Projekt extends BusinessObject{
 
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int idProjekt;
 	private String bezeichnung;
 	private String beschreibung;
-
 	private Date startDatum;
 	private Date endDatum;
 	private Person projektleiter;
-
-	public int getId() {
-		return id;
+	
+	public int getIdAusschreibung(){
+		return getIdAusschreibung();
+	}
+	
+	public int getIdPerson(){
+		return getIdPerson();
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getIdBeteiligung(){
+		return getIdBeteiligung();	
+	}
+	
+	public int getIdProjekt() {
+		return idProjekt;
+	}
+
+	public void setIdProjekt(int idProjekt) {
+		this.idProjekt = idProjekt;
 	}
 
 	public String getBezeichnung() {
@@ -62,8 +73,13 @@ public class Projekt {
 	}
 
 	public String toString() {
-		return super.toString() + this.id + " " + this.bezeichnung + " " + this.beschreibung + " " + this.startDatum
-				+ " " + this.endDatum + " " + this.projektleiter;
+		return super.toString() +" "
+		+ this.idProjekt + " " 
+		+ this.bezeichnung + " " 
+		+ this.beschreibung + " " 
+		+ this.startDatum + " " 
+		+ this.endDatum + " " 
+		+ this.projektleiter;
 	}
 
 	

@@ -2,7 +2,7 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Eigenschaft extends BusinessObject {
 	
-	private int id = 0;
+	private int idEigenschaft = 0;
 	private String arbeitsgebiet;
 	private String ausbildung;
 	private float berufserfahrungsJahre;
@@ -11,14 +11,18 @@ public class Eigenschaft extends BusinessObject {
 	private String abschluss;
 	private static final long serialVersionUID = 1L;
 	
+	public int getIdPartnerprofil(){
+		return getIdPartnerprofil();
+	}
+	
 	public Eigenschaft(){
 		super();
 	}
-	public int getId() {
-		return id;
+	public int getIdEigenschaft() {
+		return idEigenschaft;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int idEigenschaft) {
+		this.idEigenschaft = idEigenschaft;
 	}
 	public String getArbeitsgebiet() {
 		return arbeitsgebiet;
@@ -62,7 +66,7 @@ public class Eigenschaft extends BusinessObject {
 	
 	public String toString(){
 		return super.toString()+" "+
-		this.id+ " "+
+		this.idEigenschaft+ " "+
 		this.arbeitsgebiet+ " "+
 		this.ausbildung+ " "+
 		this.abschluss+ " "+
