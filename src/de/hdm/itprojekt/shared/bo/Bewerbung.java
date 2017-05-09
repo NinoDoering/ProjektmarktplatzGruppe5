@@ -3,23 +3,35 @@ package de.hdm.itprojekt.shared.bo;
 import java.util.Date;
 import java.sql.*;
 
-public class Bewerber extends BusinessObject {
+public class Bewerbung extends BusinessObject {
 
-	private int id = 0;
+	private int idBewerbung = 0;
 	private String bewerber;
 	private String bewerbungsText;
 	private Date erstellDatum;
 	private static final long serialVersionUID = 1L;
 	
-	public Bewerber(){
+	public int getIdAusschreibung(){
+		return getIdAusschreibung();
+	}
+	
+	public int getIdBewertung(){
+		return getIdBewertung();
+	}
+	
+	public int getIdPartnerprofil(){
+		return getIdPartnerprofil();
+	}
+	
+	public Bewerbung(){
 		super();
 	}
 	
-	public int getId() {
-		return id;
+	public int getIdBewerber() {
+		return idBewerbung;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdBewerbung(int idBewerbung) {
+		this.idBewerbung = idBewerbung;
 	}
 	public String getBewerber() {
 		return bewerber;
@@ -45,7 +57,7 @@ public class Bewerber extends BusinessObject {
 	
 	public String toString(){
 			return super.toString()+ " "+
-			this.id+ " "+
+			this.idBewerbung+ " "+
 			this.bewerber+ " "+
 			this.bewerbungsText+ " "+
 			this.erstellDatum;

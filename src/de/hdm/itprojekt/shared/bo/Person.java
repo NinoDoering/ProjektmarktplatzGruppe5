@@ -3,16 +3,24 @@ package de.hdm.itprojekt.shared.bo;
 public class Person extends BusinessObject{
 
 	private static final long serialVersionUID = 1L;
-	private int id; //Setter zu ID lassen wir weg
+	private int idPerson; //Setter zu ID lassen wir weg
 	private char geschlecht;
 	private String vorname;
 	private String nachname;
 	
-	public int getId() {
-		return id;
+	public int getIdProjekt(){
+		return getIdProjekt();
 	}
-	public void setId(int id) {
-		this.id = id;
+	
+	public int getIdOrganisationseinheit(){
+		return getIdOrganisationseinheit();
+	}
+	
+	public int getIdPerson() {
+		return idPerson;
+	}
+	public void setIdPerson(int idPerson) {
+		this.idPerson = idPerson;
 	}
 	
 	public char getGeschlecht() {
@@ -35,7 +43,11 @@ public class Person extends BusinessObject{
 	}
 
 	public String toString(){
-		return super.toString() + this.id + " " + this.geschlecht + " " +  this.vorname + 
-				" " + this.nachname;
+		return super.toString() +" "
+		+ this.idPerson + " " 
+		+ this.geschlecht + " " 
+		+  this.vorname + " " 
+		+ this.nachname;
 	
-}}
+	}
+}

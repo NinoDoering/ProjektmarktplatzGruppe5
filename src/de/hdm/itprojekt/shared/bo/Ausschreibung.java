@@ -6,17 +6,24 @@ import java.util.*;
 
 public class Ausschreibung extends BusinessObject  {
 	
+	
 	private static final long serialVersionUID = 1L; 
-	
 	private String bezeichnung; 
-	
-	private int id = 0; 
-	
+	private int idAusschreibung = 0; 
 	private Date endDatum;
-	
 	private String beschreibung;
 
+	public int getIdProjekt(){
+		return getIdProjekt();
+	}
 	
+	public int getIdBewerbung(){
+		return getIdBewerbung();
+	}
+	
+	public int getIdPartnerprofil(){
+		return getIdPartnerprofil();
+	}
 	
 	public String getBezeichnung() {
 		return bezeichnung;
@@ -26,12 +33,12 @@ public class Ausschreibung extends BusinessObject  {
 		this.bezeichnung = bezeichnung;
 	}
 
-	public int getId() {
-		return id;
+	public int getIdAusschreibung() {
+		return idAusschreibung;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdAusschreibung(int idAusschreibung) {
+		this.idAusschreibung = idAusschreibung;
 	}
 
 	public Date getEndDatum() {
@@ -57,7 +64,11 @@ public class Ausschreibung extends BusinessObject  {
 	 */
 	
 	public String toString() { 
-		return super.toString() + " "+ this.bezeichnung + " "+ this.beschreibung+ " "+this.endDatum; 
+		return super.toString() + " "
+		+ this.idAusschreibung + " "
+		+ this.bezeichnung + " "
+		+ this.beschreibung+ " "
+		+this.endDatum; 
 	}
 	
 	

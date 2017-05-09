@@ -2,20 +2,28 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Bewertung extends BusinessObject {
 
-	private int id = 0;
+	private int idBewertung = 0;
 	private float fliessKommaBewertung;
 	private String textuelleBewertung;
 	private static final long serialVersionUID = 1L;
+	
+	public int getIdBewerbung(){
+		return getIdBewerbung();
+	}
+	
+	public int getIdBeteiligung(){
+		return getIdBeteiligung();
+	}
 	
 	public Bewertung(){
 		super();
 	}
 	
-	public int getId() {
-		return id;
+	public int getIdBewertung() {
+		return idBewertung;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdBewertung(int idBewertung) {
+		this.idBewertung = idBewertung;
 	}
 	public float getFliessKommaBewertung() {
 		return fliessKommaBewertung;
@@ -35,7 +43,7 @@ public class Bewertung extends BusinessObject {
 	
 	public String toString(){
 		return super.toString()+ " "+
-		this.id+ " "+
+		this.idBewertung+ " "+
 		this.fliessKommaBewertung+ " "+
 		this.textuelleBewertung;
 	}
