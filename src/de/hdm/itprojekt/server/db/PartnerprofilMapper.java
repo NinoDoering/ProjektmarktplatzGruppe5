@@ -74,7 +74,7 @@ public class PartnerprofilMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM partnerprofil ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idPartnerprofil) AS maxid " + "FROM partnerprofil ");
 
 			if (rs.next()) {
 
