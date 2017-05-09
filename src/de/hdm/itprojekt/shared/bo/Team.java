@@ -6,18 +6,7 @@ public class Team extends Organisationseinheit {
 	private int mitgliederAnzahl=0;
 	private String teamName;
 
-	private int id;
-	private String teamName;
-	private int mitgliederAnzahl=0;  // ?
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+				
 	public String getTeamName() {
 		return teamName;
 	}
@@ -39,8 +28,15 @@ public class Team extends Organisationseinheit {
 	
 	public String toString(){
 		return super.toString()	
-				+ this.idTeam +" "
-				+ this.mitgliederAnzahl; 
+				+ this.idTeam +", "
+				+ this.mitgliederAnzahl + ", "
+				+ this.teamName; 
 		
-		//Test2
-}}
+	
+}
+	public String getIdTeam() {
+		return idTeam;
+	}
+	public void setIdTeam(String idTeam) {
+		this.idTeam = idTeam;
+	}}

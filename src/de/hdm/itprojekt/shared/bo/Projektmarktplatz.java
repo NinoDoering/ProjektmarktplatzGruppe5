@@ -26,10 +26,6 @@ public class Projektmarktplatz {
 		this.idProjektmarktplatz = idProjektmarktplatz;
 	}
 	
-	public void setId(int id){
-		this.id=id; 
-	}
-
 	public String getGeschaeftsgebiet() {
 		return geschaeftsgebiet;
 	}
