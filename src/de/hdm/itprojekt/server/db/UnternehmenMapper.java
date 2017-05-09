@@ -27,8 +27,7 @@ public class UnternehmenMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT firmenName FROM customers "
-								+ "WHERE firmenName=" + firmenName);
+			ResultSet rs = stmt.executeQuery("SELECT firmenName FROM customers " + "WHERE firmenName=" + firmenName);
 
 			if (rs.next()) {
 				Unternehmen u = new Unternehmen();
@@ -51,7 +50,7 @@ public class UnternehmenMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM unternehmen "); 
+			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM unternehmen ");
 			// Id wird womöglich benötigt!
 
 			if (rs.next()) {
@@ -60,45 +59,41 @@ public class UnternehmenMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO unternehmen (firmenName) " 
-							+ "VALUES (" + u.getFirmenName() + "')");
+				stmt.executeUpdate("INSERT INTO unternehmen (firmenName) " + "VALUES (" + u.getFirmenName() + "')");
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return u;	
+
+		return u;
 	}
-	
-	 public Unternehmen update(Unternehmen u) {
-		    Connection con = DBConnection.connection();
 
-		    try {
-		      Statement stmt = con.createStatement();
+	public Unternehmen update(Unternehmen u) {
+		Connection con = DBConnection.connection();
 
-		      stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\"" 
-		    		  + "\" " + "WHERE id=" + u.getId());
+		try {
+			Statement stmt = con.createStatement();
 
-		    }
-		    catch (SQLException e2) {
-		      e2.printStackTrace();
-		    }
+			stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\"" + "\" " + "WHERE id=" + u.getId());
 
-		    return u;
-		  }
-	 
-	 //DELETE
-	 public void delete(Unternehmen u) {
-		    Connection con = DBConnection.connection();
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
 
-		    try {
-		      Statement stmt = con.createStatement();
-		      //Schon wieder wird id verwendet --> sollten Id als Attribut hinzufügen
-		      stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE id=" + u.getId());
-		    }
-		    catch (SQLException e3) {
-		      e3.printStackTrace();
-		    }
-		  }
+		return u;
+	}
+
+	// DELETE
+	public void delete(Unternehmen u) {
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+			// Schon wieder wird id verwendet --> sollten Id als Attribut
+			// hinzufügen
+			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE id=" + u.getId());
+		} catch (SQLException e3) {
+			e3.printStackTrace();
+		}
+	}
 }

@@ -5,156 +5,144 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 
-
 public class EigenschaftMapper {
-	
+
 	private static EigenschaftMapper eigenschaftMapper = null;
-	
-	protected EigenschaftMapper(){}; 
-	
-	public static EigenschaftMapper eigenschaftMapper(){
-		if (eigenschaftMapper == null){ 
+
+	protected EigenschaftMapper() {
+	};
+
+	public static EigenschaftMapper eigenschaftMapper() {
+		if (eigenschaftMapper == null) {
 			eigenschaftMapper = new EigenschaftMapper();
 		}
 		return eigenschaftMapper;
 	}
-	
-	
-	public Eigenschaft insert (Eigenschaft eig){
-		
-		Connection con = DBConnection.connection(); 
-	
-		try{ 
-			Statement stmt = con.createStatement(); 
-		
-		ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM eigenschaft "); 
-	 
-	   if (rs.next()) { 
-		   
-		  
-	        eig.setId(rs.getInt("maxid") + 1);
 
-	        stmt = con.createStatement();
-	   
-	
-	        stmt.executeUpdate(" INSERT INTO eigenschaft (id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
-	        		+ " VALUES (" + eig.getId()+ " ,'" 
-	        		+ eig.getAusbildung() + "','"
-	        		+ eig.getAbschluss()+ "','"
-	        		+ eig.getBerufserfahrungsJahre()+ "','"
-	        		+ eig.getArbeitsgebiet()+ "', '" 
-	        		+ eig.getSprachkenntnisse()+" ,'"
-	        		+ eig.getEmploymentStatus()); 
-	 
-	   }
-	   }
- catch (SQLException e) {
-	 e.printStackTrace();
- }
-		return eig;
-}
-	public Eigenschaft findByKey (int id) {
-		
+	public Eigenschaft insert(Eigenschaft eig) {
+
 		Connection con = DBConnection.connection();
-		
-		
-	try	{
-		Statement stmt = con.createStatement(); 
-		
-		ResultSet rs = stmt.executeQuery("SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft"
-				+ "WHERE id=" + id + "ORDER BY id");
-		// Eigenschaft sollen nach id angezeigt werden	
-		
-		if (rs.next()) {
-			Eigenschaft eig = new Eigenschaft ();
-			eig.setId(rs.getInt("id"));
-			eig.setAusbildung(rs.getString("ausbildung"));
-			eig.setAbschluss(rs.getString("abschluss"));
-			eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
-			eig.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
-			eig.setSprachkenntnisse(rs.getString("sprachkenntnisse")); 
-			eig.setEmploymentStatus(rs.getString("employmentStatus"));
-			
-			return eig; 
+
+		try {
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM eigenschaft ");
+
+			if (rs.next()) {
+
+				eig.setId(rs.getInt("maxid") + 1);
+
+				stmt = con.createStatement();
+
+				stmt.executeUpdate(
+						" INSERT INTO eigenschaft (id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
+								+ " VALUES (" + eig.getId() + " ,'" + eig.getAusbildung() + "','" + eig.getAbschluss()
+								+ "','" + eig.getBerufserfahrungsJahre() + "','" + eig.getArbeitsgebiet() + "', '"
+								+ eig.getSprachkenntnisse() + " ,'" + eig.getEmploymentStatus());
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return eig;
 	}
-	catch (SQLException e) {
-	      e.printStackTrace();
-	      return null;
+
+	public Eigenschaft findByKey(int id) {
+
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt.executeQuery(
+					"SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft"
+							+ "WHERE id=" + id + "ORDER BY id");
+			// Eigenschaft sollen nach id angezeigt werden
+
+			if (rs.next()) {
+				Eigenschaft eig = new Eigenschaft();
+				eig.setId(rs.getInt("id"));
+				eig.setAusbildung(rs.getString("ausbildung"));
+				eig.setAbschluss(rs.getString("abschluss"));
+				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
+				eig.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
+				eig.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
+				eig.setEmploymentStatus(rs.getString("employmentStatus"));
+
+				return eig;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
-	return null;
-}
-	
+
 	public Vector<Eigenschaft> findAll() {
 		Connection con = DBConnection.connection();
-	    Vector<Eigenschaft> vec = new Vector<Eigenschaft>();
+		Vector<Eigenschaft> vec = new Vector<Eigenschaft>();
 
-	    try {
-	      Statement stmt = con.createStatement();
+		try {
+			Statement stmt = con.createStatement();
 
-	      ResultSet rs = stmt.executeQuery("SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus "
-	          + "FROM eigenschaft " + "ORDER BY id");
+			ResultSet rs = stmt.executeQuery(
+					"SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus "
+							+ "FROM eigenschaft " + "ORDER BY id");
 
-	      while (rs.next()) {
-	        Eigenschaft eig = new Eigenschaft();
-			eig.setId(rs.getInt("id"));
-			eig.setAusbildung(rs.getString("ausbildung"));
-			eig.setAbschluss(rs.getString("abschluss"));
-			eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
-			eig.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
-			eig.setSprachkenntnisse(rs.getString("sprachkenntnisse")); 
-			eig.setEmploymentStatus(rs.getString("employmentStatus"));
+			while (rs.next()) {
+				Eigenschaft eig = new Eigenschaft();
+				eig.setId(rs.getInt("id"));
+				eig.setAusbildung(rs.getString("ausbildung"));
+				eig.setAbschluss(rs.getString("abschluss"));
+				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
+				eig.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
+				eig.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
+				eig.setEmploymentStatus(rs.getString("employmentStatus"));
 
-	        vec.addElement(eig);
-	      }
-	    }
-	    catch (SQLException e) {
-	      e.printStackTrace();
-	    }
+				vec.addElement(eig);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    return vec;
-	  }
-	
-	  public Eigenschaft update(Eigenschaft eig) {
-		    Connection con = DBConnection.connection();
+		return vec;
+	}
 
-		    try {
-		      Statement stmt = con.createStatement();
+	public Eigenschaft update(Eigenschaft eig) {
+		Connection con = DBConnection.connection();
 
-		      //Update Daten eingeben
-		      stmt.executeUpdate("UPDATE eigenschaft " + "SET ausbildung=\""
-		         + eig.getAusbildung() + "\", " + "abschluss=\"" + eig.getAbschluss() + "\" " 
-		         + "berufserfahrungsJahre=\"" + eig.getBerufserfahrungsJahre() + "\" "
-		         + "arbeitsgebiet=\"" + eig.getArbeitsgebiet() + "\" "
-		         + "sprachkenntnisse=\"" + eig.getSprachkenntnisse() + "\" "
-		         + "employmentStatus=\"" + eig.getEmploymentStatus() + "\" " 
-		         + "WHERE id=" + eig.getId());
+		try {
+			Statement stmt = con.createStatement();
 
-		    }
-		    catch (SQLException e) {
-		      e.printStackTrace();
-		    }
+			// Update Daten eingeben
+			stmt.executeUpdate("UPDATE eigenschaft " + "SET ausbildung=\"" + eig.getAusbildung() + "\", "
+					+ "abschluss=\"" + eig.getAbschluss() + "\" " + "berufserfahrungsJahre=\""
+					+ eig.getBerufserfahrungsJahre() + "\" " + "arbeitsgebiet=\"" + eig.getArbeitsgebiet() + "\" "
+					+ "sprachkenntnisse=\"" + eig.getSprachkenntnisse() + "\" " + "employmentStatus=\""
+					+ eig.getEmploymentStatus() + "\" " + "WHERE id=" + eig.getId());
 
-		    return eig;
-		  }
-	  
-	  public void delete(Eigenschaft eig) {
-		    
-		  	Connection con = DBConnection.connection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-		  	try {
-		      Statement stmt = con.createStatement();
+		return eig;
+	}
 
-		      stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE id=" + eig.getId());
-		   }
-		    catch (SQLException e) {
-		      e.printStackTrace();
-		    }
-		  }
+	public void delete(Eigenschaft eig) {
 
-		  public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
-		    
-		    return PersonMapper.personMapper().findByKey(eig);
-		  }
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE id=" + eig.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
+
+		return PersonMapper.personMapper().findByKey(eig);
+	}
 }
