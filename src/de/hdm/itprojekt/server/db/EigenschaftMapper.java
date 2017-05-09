@@ -36,7 +36,7 @@ public class EigenschaftMapper {
 
 				stmt.executeUpdate(
 						" INSERT INTO eigenschaft (id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
-								+ " VALUES (" + eig.getId() + " ,'" + eig.getAusbildung() + "','" + eig.getAbschluss()
+								+ " VALUES (" + eig.getIdEigenschaft() + " ,'" + eig.getAusbildung() + "','" + eig.getAbschluss()
 								+ "','" + eig.getBerufserfahrungsJahre() + "','" + eig.getArbeitsgebiet() + "', '"
 								+ eig.getSprachkenntnisse() + " ,'" + eig.getEmploymentStatus());
 
@@ -119,7 +119,7 @@ public class EigenschaftMapper {
 					+ "abschluss=\"" + eig.getAbschluss() + "\" " + "berufserfahrungsJahre=\""
 					+ eig.getBerufserfahrungsJahre() + "\" " + "arbeitsgebiet=\"" + eig.getArbeitsgebiet() + "\" "
 					+ "sprachkenntnisse=\"" + eig.getSprachkenntnisse() + "\" " + "employmentStatus=\""
-					+ eig.getEmploymentStatus() + "\" " + "WHERE id=" + eig.getId());
+					+ eig.getEmploymentStatus() + "\" " + "WHERE id=" + eig.getIdEigenschaft());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -135,7 +135,7 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE id=" + eig.getId());
+			stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE id=" + eig.getIdEigenschaft());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -143,6 +143,6 @@ public class EigenschaftMapper {
 
 	public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
 
-		return PersonMapper.personMapper().findByKey(eig);
+		return PersonMapper.personMapper().findByKey(int idPerson); //Wie wird das geregelt?
 	}
 }

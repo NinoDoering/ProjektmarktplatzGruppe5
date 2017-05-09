@@ -32,7 +32,7 @@ public class ProjektmarktplatzMapper {
 
 				p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
 
-				p.setId(rs.getInt("maxid") + 1);
+				p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
