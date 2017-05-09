@@ -60,6 +60,14 @@ public class Projekt {
 	public void setProjektleiter(Person projektleiter) {
 		this.projektleiter = projektleiter;
 	}
+
+	public String toString() {
+		return super.toString() + this.id + " " + this.bezeichnung + " " + this.beschreibung + " " + this.startDatum
+				+ " " + this.endDatum + " " + this.projektleiter;
+	}
+
 	
-	// toString vervollständing 
+	// toString vervollstaending 
+	
+
 }

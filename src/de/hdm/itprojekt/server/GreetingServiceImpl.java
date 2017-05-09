@@ -3,6 +3,8 @@ package de.hdm.itprojekt.server;
 import de.hdm.itprojekt.client.GreetingService;
 import de.hdm.itprojekt.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+//Rueckgaengig
+//ZweiterVersuch
 
 /**
  * The server-side implementation of the RPC service.
@@ -42,4 +44,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	}
+	
+	// erneut wichtig!!!!
 }

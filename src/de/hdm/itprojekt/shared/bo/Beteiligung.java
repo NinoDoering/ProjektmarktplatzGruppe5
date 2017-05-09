@@ -16,6 +16,8 @@ public class Beteiligung extends BusinessObject {
 	public int getId() {
 		return id;
 	}
+	
+  //neueÄnderung
 
 	public void setId(int id) {
 		this.id = id;
