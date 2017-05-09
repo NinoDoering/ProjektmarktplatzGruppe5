@@ -25,15 +25,15 @@ public class OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM organisationseinheit ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idOrganisationseinheit) AS maxid " + "FROM organisationseinheit ");
 
 			if (rs.next()) {
 
-				o.setId(rs.getInt("maxid") + 1);
+				o.setIdOrganisationseinheit(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO organisationseinheit (id)" + " VALUES (" + o.getId());
+				stmt.executeUpdate(" INSERT INTO organisationseinheit (idOrganisationseinheit)" + " VALUES (" + o.getIdOrganisationseinheit());
 
 			}
 		} catch (SQLException e) {
@@ -42,19 +42,19 @@ public class OrganisationseinheitMapper {
 		return o;
 	}
 
-	public Organisationseinheit findByKey(int id) {
+	public Organisationseinheit findByKey(int idOrganisationseinheit) {
 
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT id FROM organisationseinheit" + "WHERE id=" + id + "ORDER BY id");
+			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit FROM organisationseinheit" + "WHERE idOrganisationseinheit=" + idOrganisationseinheit + "ORDER BY idOrganisationseinheit");
 			// Organisationseinheit sollen nach id angezeigt werden
 
 			if (rs.next()) {
 				Organisationseinheit o = new Organisationseinheit();
-				o.setId(rs.getInt("id"));
+				o.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
 
 				return o;
 			}
@@ -71,7 +71,7 @@ public class OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM organisationseinheit " + "WHERE id=" + o.getId());
+			stmt.executeUpdate("DELETE FROM organisationseinheit " + "WHERE idOrganisationseinheit=" + o.getIdOrganisationseinheit());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

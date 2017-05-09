@@ -26,13 +26,13 @@ public class ProjektmarktplatzMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM projektmarktplatz ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idProjektmarktplatz) AS maxid " + "FROM projektmarktplatz ");
 
 			if (rs.next()) {
 
 				p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
 
-				p.setId(rs.getInt("maxid") + 1);
+				p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
@@ -48,7 +48,7 @@ public class ProjektmarktplatzMapper {
 		return p;
 	}
 
-	public Projektmarktplatz findByKey(int id) {
+	public Projektmarktplatz findByKey(int idProjektmarktplatz) {
 
 		Connection con = DBConnection.connection();
 
@@ -57,7 +57,7 @@ public class ProjektmarktplatzMapper {
 
 			ResultSet rs = stmt.executeQuery(
 					"SELECT idProjektmarktplatz, bezeichnung, geschaeftsgebiet, projekt FROM projektmarktplatz"
-							+ "WHERE idProjektmarktplatz=" + id + "ORDER BY bezeichnung");
+							+ "WHERE idProjektmarktplatz=" + idProjektmarktplatz + "ORDER BY bezeichnung");
 			// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung
 			// angezeigt werden
 

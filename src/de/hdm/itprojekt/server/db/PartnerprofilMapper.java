@@ -28,7 +28,7 @@ public class PartnerprofilMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT id FROM partnerprofil " + "WHERE idPartnerprofil=" + idPartnerprofil);
+					.executeQuery("SELECT idPartnerprofil FROM partnerprofil " + "WHERE idPartnerprofil=" + idPartnerprofil);
 
 			if (rs.next()) {
 				Partnerprofil p = new Partnerprofil();
@@ -82,7 +82,7 @@ public class PartnerprofilMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO partnerprofil (id) " + "VALUES (" + p.getIdPartnerprofil() + ")");
+				stmt.executeUpdate("INSERT INTO partnerprofil (idPartnerprofil) " + "VALUES (" + p.getIdPartnerprofil() + ")");
 			}
 		} catch (SQLException e3) {
 			e3.printStackTrace();

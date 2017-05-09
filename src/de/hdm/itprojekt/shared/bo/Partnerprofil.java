@@ -21,7 +21,7 @@ public class Partnerprofil extends BusinessObject {
 		return getIdOrganisationseinheit();
 	}
 
-	public int getIdPartnerporfil() {
+	public int getIdPartnerprofil() {
 		return idPartnerprofil;
 	}
 

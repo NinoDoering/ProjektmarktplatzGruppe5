@@ -26,7 +26,7 @@ public class TeamMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM projekt ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM projekt ");
 
 			if (rs.next()) {
 
@@ -34,7 +34,7 @@ public class TeamMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO Team (id, teamName, mitgliederAnzahl )" + "VALUES ( " + t.getId()
+				stmt.executeUpdate(" INSERT INTO Team (idTeam, teamName, mitgliederAnzahl )" + "VALUES ( " + t.getIdTeam()
 						+ " ,'" + t.getTeamName() + "','" + t.getMitgliederAnzahl() + "')");
 			}
 		}
@@ -46,18 +46,18 @@ public class TeamMapper {
 		return t;
 	}
 
-	public Team findbyKey(int id) {
+	public Team findbyKey(int idTeam) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 			// Teams sollen alphabetisch nach Team-Namen ausgegeben
 			ResultSet rs = stmt.executeQuery(
-					"SELECT id, teamName, mitgliederAnzahl FROM team" + "WHERE id=" + id + "ORDER by teamName");
+					"SELECT idTeam, teamName, mitgliederAnzahl FROM team" + "WHERE id=" + idTeam + "ORDER by teamName");
 
 			if (rs.next()) {
 				Team t = new Team();
-				t.setId(rs.getInt("id"));
+				t.setIdTeam(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
 				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 
@@ -79,11 +79,11 @@ public class TeamMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT id, teamName, mitgliederAnzahl" + "FROM team " + "ORDER BY teamName");
+					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl" + "FROM team " + "ORDER BY teamName");
 
 			while (rs.next()) {
 				Team t = new Team();
-				t.setId(rs.getInt("id"));
+				t.setIdTeam(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
 				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 
@@ -104,12 +104,12 @@ public class TeamMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT id, teamName, mitgliederAnzahl" + " FROM team "
+			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl" + " FROM team "
 					+ "WHERE bezeichnung LIKE '" + teamName + "' ORDER BY teamName ");
 
 			while (rs.next()) {
 				Team t = new Team();
-				t.setId(rs.getInt("id"));
+				t.setIdTeam(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
 				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 
@@ -130,7 +130,7 @@ public class TeamMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("UPDATE team " + "SET teamName=\"" + t.getTeamName() + "\", " + "mitgliederAnzahl=\""
-					+ t.getMitgliederAnzahl() + "\" " + "WHERE id" + t.getId());
+					+ t.getMitgliederAnzahl() + "\" " + "WHERE idTeam" + t.getIdTeam());
 		}
 
 		catch (SQLException e) {
@@ -144,7 +144,7 @@ public class TeamMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE from team" + "WHERE id = " + t.getId());
+			stmt.executeQuery("DELETE from team" + "WHERE idTeam = " + t.getIdTeam());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
