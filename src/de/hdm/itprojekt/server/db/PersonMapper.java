@@ -21,23 +21,20 @@ public class PersonMapper {
 	}
 
 	// FindByKey
-	public Person findByKey(int id) {
+	public Person findByKey(int idPerson) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT id, vorname, nachname, geschlecht FROM person " + "WHERE id=" + id + " ORDER BY nachname");
+					"SELECT idPerson, vorname, nachname, geschlecht FROM person " + "WHERE idPerson=" + idPerson + " ORDER BY nachname");
 
 			if (rs.next()) {
 				Person p = new Person();
-				p.setId(rs.getInt("id"));
+				p.setIdPerson(rs.getInt("idPerson"));
 				p.setVorname(rs.getString("vorname"));
 				p.setNachname(rs.getString("nachname"));
-				p.setGeschlecht(rs.getChar("geschlecht")); // Was tun hier?
-															// char undefined
-															// for rs.
 
 				return p;
 			}
@@ -57,11 +54,11 @@ public class PersonMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT id, vorname, nachname " + "FROM person " + "ORDER BY nachname");
+			ResultSet rs = stmt.executeQuery("SELECT idPerson, vorname, nachname " + "FROM person " + "ORDER BY nachname");
 
 			while (rs.next()) {
 				Person p = new Person();
-				p.setId(rs.getInt("id"));
+				p.setIdPerson(rs.getInt("idPerson"));
 				p.setVorname(rs.getString("vorname"));
 				p.setNachname(rs.getString("nachname"));
 
@@ -81,12 +78,12 @@ public class PersonMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT id, vorname, nachname " + "FROM person " + "WHERE nachname LIKE '"
+			ResultSet rs = stmt.executeQuery("SELECT idPerson, vorname, nachname " + "FROM person " + "WHERE nachname LIKE '"
 					+ nachname + "' ORDER BY nachname");
 
 			while (rs.next()) {
 				Person p = new Person();
-				p.setId(rs.getInt("id"));
+				p.setIdPerson(rs.getInt("idPerson"));
 				p.setVorname(rs.getString("vorname"));
 				p.setNachname(rs.getString("nachname"));
 
@@ -106,15 +103,15 @@ public class PersonMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM person ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idPerson) AS maxid " + "FROM person ");
 
 			if (rs.next()) {
 
-				p.setId(rs.getInt("maxid") + 1);
+				p.setIdPerson(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO person (id, vorname, nachname) " + "VALUES (" + p.getId() + ",'"
+				stmt.executeUpdate("INSERT INTO person (idPerson, vorname, nachname) " + "VALUES (" + p.getIdPerson() + ",'"
 						+ p.getVorname() + "','" + p.getNachname() + "')");
 			}
 		} catch (SQLException e4) {
@@ -132,7 +129,7 @@ public class PersonMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("UPDATE person " + "SET vorname=\"" + p.getVorname() + "\", " + "nachname=\""
-					+ p.getNachname() + "\" " + "WHERE id=" + p.getId());
+					+ p.getNachname() + "\" " + "WHERE idPerson=" + p.getIdPerson());
 
 		} catch (SQLException e5) {
 			e5.printStackTrace();
@@ -148,15 +145,16 @@ public class PersonMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM person " + "WHERE id=" + p.getId());
+			stmt.executeUpdate("DELETE FROM person " + "WHERE idPerson=" + p.getIdPerson());
 		} catch (SQLException e6) {
 			e6.printStackTrace();
 		}
 	}
 
 	// FAN-IN-FAN-OUT-Analyse -->RICHTIG??
-	public Vector<Person> getPersonOf(Person p) {
-
+	/*public Vector<Person> getPersonOf(Person p) {
+	
 		return PersonMapper.personMapper().findByKey(p); // FALSCH, WARUM?
 	}
+	*/
 }

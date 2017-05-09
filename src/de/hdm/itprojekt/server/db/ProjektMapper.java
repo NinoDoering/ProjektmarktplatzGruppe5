@@ -26,17 +26,17 @@ public class ProjektMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM projekt ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idProjekt) AS maxid " + "FROM projekt ");
 
 			if (rs.next()) {
 
-				p.setId(rs.getInt("maxid") + 1);
+				p.setIdProjekt(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						" INSERT INTO projekt (id, beschreibung, bezeichnung, projektleiter, startDatum, endDatum)"
-								+ " VALUES (" + p.getId() + " ,'" + p.getBeschreibung() + "','" + p.getBezeichnung()
+						" INSERT INTO projekt (idProjekt, beschreibung, bezeichnung, projektleiter, startDatum, endDatum)"
+								+ " VALUES (" + p.getIdProjekt() + " ,'" + p.getBeschreibung() + "','" + p.getBezeichnung()
 								+ "','" + p.getProjektleiter() + "','" + p.getStartDatum() + "', '" + p.getEndDatum()
 								+ "')");
 
@@ -48,7 +48,7 @@ public class ProjektMapper {
 		return p;
 	}
 
-	public Projekt findByKey (int id) {
+	public Projekt findByKey (int idProjekt) {
 		
 		Connection con = DBConnection.connection();
 		
@@ -56,13 +56,13 @@ public class ProjektMapper {
 	try	{
 		Statement stmt = con.createStatement(); 
 		
-		ResultSet rs = stmt.executeQuery("SELECT id, bezeichnung, beschreibung, startDatum, endDatum, projektleiter FROM projekt"
-				+ "WHERE id=" + id + "ORDER BY bezeichnung");
+		ResultSet rs = stmt.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, projektleiter FROM projekt"
+				+ "WHERE idProjekt=" + idProjekt + "ORDER BY bezeichnung");
 		// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung angezeigt werden	
 		
 		if (rs.next()) {
 			Projekt p = new Projekt ();
-			p.setId(rs.getInt("id"));
+			p.setIdProjekt(rs.getInt("idProjekt"));
 			p.setBezeichnung(rs.getString("bezeichnung"));
 			p.setBeschreibung(rs.getString("beschreibung"));
 			p.setStartDatum(rs.getDate("startDatum"));
@@ -91,11 +91,11 @@ public class ProjektMapper {
 			// bezeichnung
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT id, bezeichnung, beschreibung, startDatum, endDatum, projektleiter "
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, projektleiter "
 							+ "FROM projekt" + "ORDER BY bezeichnung");
 			while (rs.next()) {
 				Projekt p = new Projekt();
-				p.setId(rs.getInt("id"));
+				p.setIdProjekt(rs.getInt("idProjekt"));
 				p.setBezeichnung(rs.getString("bezeichnung"));
 				p.setBeschreibung(rs.getString("beschreibung"));
 				p.setStartDatum(rs.getDate("startDatum"));
@@ -122,12 +122,12 @@ public class ProjektMapper {
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
 			// Bezeichung enthält
 			ResultSet rs = stmt
-					.executeQuery("SELECT id, bezeichnung, beschreibung, startDatum, endDatum, projektleiter "
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, projektleiter "
 							+ " FROM projekt " + "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
-				p.setId(rs.getInt("id"));
+				p.setIdProjekt(rs.getInt("idProjekt"));
 				p.setBezeichnung(rs.getString("bezeichnung"));
 				p.setBeschreibung(rs.getString("beschreibung"));
 				p.setStartDatum(rs.getDate("startDatum"));
@@ -153,7 +153,7 @@ public class ProjektMapper {
 			stmt.executeUpdate("UPDATE projekt " + "SET bezeichnung=\"" + p.getBezeichnung() + "\", "
 					+ "beschreibung=\"" + p.getBeschreibung() + "\", " + "startDatum=\"" + p.getStartDatum() + "\","
 					+ "endDatum=\"" + p.getEndDatum() + "\"," + "projektleiter=\"" + p.getProjektleiter() + "\" "
-					+ "WHERE id" + p.getId());
+					+ "WHERE idProjekt" + p.getIdProjekt());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,7 +166,7 @@ public class ProjektMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE from projekt" + "WHERE id =" + p.getId());
+			stmt.executeQuery("DELETE from projekt" + "WHERE idProjekt =" + p.getIdProjekt());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

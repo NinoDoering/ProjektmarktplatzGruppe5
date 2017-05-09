@@ -34,8 +34,8 @@ public class EigenschaftMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(
-						" INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
+				stmt.executeUpdate(" INSERT INTO eigenschaft (id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
+
 								+ " VALUES (" + eig.getIdEigenschaft() + " ,'" + eig.getAusbildung() + "','" + eig.getAbschluss()
 								+ "','" + eig.getBerufserfahrungsJahre() + "','" + eig.getArbeitsgebiet() + "', '"
 								+ eig.getSprachkenntnisse() + " ,'" + eig.getEmploymentStatus());
@@ -135,14 +135,17 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE idEigenschaft=" + eig.getIdEigenschaft());
+			stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE id=" + eig.getIdEigenschaft());
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
+			}}}
+		
+	
 
 	//public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
 
+
 //		return PersonMapper.personMapper().findByKey(eig);
 	//}
-}
+
+	
