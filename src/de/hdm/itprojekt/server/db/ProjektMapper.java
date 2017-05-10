@@ -67,8 +67,12 @@ public class ProjektMapper {
 			p.setBeschreibung(rs.getString("beschreibung"));
 			p.setStartDatum(rs.getDate("startDatum"));
 			p.setEndDatum(rs.getDate("endDatum"));
-			p.setProjektleiter(rs.getPerson("projektleiter")); /// Fehler beheben 
-			
+			//p.setProjektleiter(rs.getPerson("projektleiter")); /// Fehler beheben 
+			Person pers;			
+
+			pers = new Person();
+			pers.setVorname(rs.getString("bezeichnung"));
+					p.setProjektleiter(pers);
 			return p; 
 		}
 	}
@@ -100,8 +104,12 @@ public class ProjektMapper {
 				p.setBeschreibung(rs.getString("beschreibung"));
 				p.setStartDatum(rs.getDate("startDatum"));
 				p.setEndDatum(rs.getDate("endDatum"));
-				p.setProjektleiter(rs.getPerson("projektleiter")); // fehler ??
+				//p.setProjektleiter(rs.getPerson("projektleiter")); // fehler ??
+				Person pers;			
 
+				pers = new Person();
+				pers.setVorname(rs.getString("bezeichnung"));
+						p.setProjektleiter(pers);
 				result.addElement(p);
 			}
 
@@ -123,7 +131,9 @@ public class ProjektMapper {
 			// Bezeichung enthält
 			ResultSet rs = stmt
 					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, projektleiter "
-							+ " FROM projekt " + "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
+							+ " FROM projekt "
+							+ "INNER JOIN Person on Projekt.projektleiter = Person.projektleiter " + 
+							"WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
@@ -132,9 +142,14 @@ public class ProjektMapper {
 				p.setBeschreibung(rs.getString("beschreibung"));
 				p.setStartDatum(rs.getDate("startDatum"));
 				p.setEndDatum(rs.getDate("endDatum"));
-				p.setProjektleiter(rs.getPerson("projektleiter")); // fehler ??
+				//p.setProjektleiter(rs.getPerson("projektleiter")); // fehler ??
+				Person pers;			
 
+				pers = new Person();
+				pers.setVorname(rs.getString("bezeichnung"));
+						p.setProjektleiter(pers);
 				result.addElement(p);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
