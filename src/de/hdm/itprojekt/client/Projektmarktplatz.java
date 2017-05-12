@@ -58,9 +58,7 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		SimplePanel simplePanel = new SimplePanel();
 		simplePanel.add(btn1);
-		RootPanel.get("PPlatzSuch").add(simplePanel);
-
-		
+		RootPanel.get("Projektmarktplatz suchen").add(simplePanel);
 
 			
 	
