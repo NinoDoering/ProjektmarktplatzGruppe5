@@ -28,6 +28,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 	}
 
+	//Initialisierung
 	public void init() throws IllegalArgumentException{
 		
 		//this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird gelöscht)
@@ -38,8 +39,38 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.prjktMapper = ProjektMapper.projektMapper();
 		this.pmpMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
 		this.teamMapper = TeamMapper.teamMapper();
-		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
-		
+		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();	
 	}
+	
+	//createEigenschaft
+		public Eigenschaft createEigenschaft(
+		/*int idEigenschaft,*/ 
+		String arbeitsgebiet,
+		String ausbildung,
+		float berufserfahrungsJahre,
+		String sprachkenntnisse,
+		String employmentStatus,
+		String abschluss
+		) throws IllegalArgumentException {
+			Eigenschaft eig = new Eigenschaft();
+			
+			/*eig.setIdEigenschaft(idEigenschaft);		Ist diese Methode richtig?*/
+			eig.setArbeitsgebiet(arbeitsgebiet);
+			eig.setAusbildung(ausbildung);
+			eig.setBerufserfahrungsJahre(berufserfahrungsJahre);
+			eig.setSprachkenntnisse(sprachkenntnisse);
+			eig.setEmploymentStatus(employmentStatus);
+			eig.setAbschluss(abschluss);
+			
+			return this.eigMapper.insert(eig);
+		}
+		
+		//getEigenschaftById
+		public Eigenschaft getEigenschaftById(int idEigenschaft) 
+				throws IllegalArgumentException{
+			return this.eigMapper.findByKey(idEigenschaft);
+		}
+		
+		
 	
 }

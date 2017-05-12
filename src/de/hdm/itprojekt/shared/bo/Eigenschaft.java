@@ -21,7 +21,7 @@ public class Eigenschaft extends BusinessObject {
 	public int getIdEigenschaft() {
 		return idEigenschaft;
 	}
-	public void setId(int idEigenschaft) {
+	public void setIdEigenschaft(int idEigenschaft) {
 		this.idEigenschaft = idEigenschaft;
 	}
 	public String getArbeitsgebiet() {
