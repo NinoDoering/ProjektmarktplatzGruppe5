@@ -26,20 +26,29 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class Projektmarktplatz implements EntryPoint {
 	
-	
+	HorizontalPanel hpMain;
+	ActivitySuchen hpActivitySuchen;
+	Button btn1;
+	Button btn2;
 	public void onModuleLoad() {
 
 		
-			
-		Button btn1 = new Button("Projektmarktplatz suchen"); 
+			//Buttons
+		 btn1 = new Button("Projektmarktplatz suchen"); 
 		
-		Button btn2 = new Button ("Projektmarktplatz erstellen");
-		
-		HorizontalPanel hpMain = new HorizontalPanel();
-		
+		btn2 = new Button ("Projektmarktplatz erstellen");
+		//Button Ende
+	//Panels
+		hpMain = new HorizontalPanel();
+		hpActivitySuchen = new ActivitySuchen();
+		//Panels Ende
+		//styling
 		btn1.setStyleName("btn1");
 		btn2.setStyleName("btn2");
+		//styling ende
 		
+		
+		//Baumstruktur
 		hpMain.add(btn1);
 		
 		hpMain.add(btn2);
@@ -47,8 +56,21 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		
 		RootPanel.get("PMarktSuch").add(hpMain);
+		//Baumstruktur ende
+		//ClickEvents
 		
+		btn1.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				//hpMain.removeFromParent();
+				hpMain.remove(btn1);
+				hpMain.remove(btn2);
+				hpMain.add(hpActivitySuchen);
+			}
+		});
 		
+		//Ende Clickevents
 		
 	}
 	// erneut wichtig!!!
