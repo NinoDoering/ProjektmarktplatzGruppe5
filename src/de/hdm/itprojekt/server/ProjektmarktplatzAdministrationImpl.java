@@ -13,7 +13,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		implements ProjektmarktplatzAdministration {
 
 
-	private BusinessObjectMapper boMapper = null;
+	//private BusinessObjectMapper boMapper = null;
 	private EigenschaftMapper eigMapper = null;
 	private OrganisationseinheitMapper orgaMapper = null; // Bleibt die Mapper bestehen?
 	private PartnerprofilMapper ppMapper = null;
@@ -71,6 +71,9 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return this.eigMapper.findByKey(idEigenschaft);
 		}
 		
-		
+		public Vector <Eigenschaft> getAll()
+				throws IllegalArgumentException{
+			return this.eigMapper.findAll();
+		}
 	
 }
