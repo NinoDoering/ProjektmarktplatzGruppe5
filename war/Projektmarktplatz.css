@@ -29,6 +29,46 @@ h1 {
 }
 
 /** Set ids using widget.getElement().setId("idOfElement") */
+
+#PMarktSuch {
+	margin: 277px 137px 156px 409px;
+}
+
 #closeButton {
   margin: 15px 6px 6px;
+}
+
+.btn2, .standardbutton, .btn1{  
+	 -moz-box-shadow:inset 0px 0px 15px 3px #23395e;
+	-webkit-box-shadow:inset 0px 0px 15px 3px #23395e;
+	box-shadow:inset 0px 0px 15px 3px #23395e;
+	background-color:transparent;
+	-moz-border-radius:17px;
+	-webkit-border-radius:17px;
+	border-radius:17px;
+	border:1px solid #1f2f47;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 13px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;}
+
+.btn2:active, .standardbutton:active, .btn1:active {
+	position:relative;
+	top:1px;
+}
+
+.btn2:hover, .btn1:hover,.standardbutton:hover {
+	background-color:transparent;
+}
+
+.btn2 {
+  margin-left: 50%;
+}
+
+.btn1 {
+  margin-left: 18%;
 }
