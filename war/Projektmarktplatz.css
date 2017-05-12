@@ -24,6 +24,15 @@ h1 {
   margin: 5px;
 }
 
+.hpmain{
+	-webkit-box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
+-moz-box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
+box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
+padding:10%
+
+
+}
+
 .serverResponseLabelError {
   color: red;
 }
@@ -39,13 +48,7 @@ h1 {
 }
 
 .btn2, .standardbutton, .btn1{  
-	 -moz-box-shadow:inset 0px 0px 15px 3px #23395e;
-	-webkit-box-shadow:inset 0px 0px 15px 3px #23395e;
-	box-shadow:inset 0px 0px 15px 3px #23395e;
-	background-color:transparent;
-	-moz-border-radius:17px;
-	-webkit-border-radius:17px;
-	border-radius:17px;
+	
 	border:1px solid #1f2f47;
 	display:inline-block;
 	cursor:pointer;
