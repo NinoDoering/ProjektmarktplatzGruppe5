@@ -12,9 +12,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		implements ProjektmarktplatzAdministration {
 
-	/*
-	 * public static final int DEFAULT_CASH_ACCOUNT_ID = 10000; ergibt keinen Sinn
-	 */
 
 	private BusinessObjectMapper boMapper = null;
 	private EigenschaftMapper eigMapper = null;
@@ -25,5 +22,24 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	private ProjektmarktplatzMapper pmpMapper = null;
 	private TeamMapper teamMapper = null;
 	private UnternehmenMapper unternehmenMapper = null;
+	
+	//No-Argument-Konstruktor
+	public ProjektmarktplatzAdministrationImpl() throws IllegalArgumentException{
+		
+	}
 
+	public void init() throws IllegalArgumentException{
+		
+		//this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird gelöscht)
+		this.eigMapper = EigenschaftMapper.eigenschaftMapper();
+		this.orgaMapper = OrganisationseinheitMapper.organisationseinheitMapper();
+		this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
+		this.persMapper = PersonMapper.personMapper();
+		this.prjktMapper = ProjektMapper.projektMapper();
+		this.pmpMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
+		this.teamMapper = TeamMapper.teamMapper();
+		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
+		
+	}
+	
 }
