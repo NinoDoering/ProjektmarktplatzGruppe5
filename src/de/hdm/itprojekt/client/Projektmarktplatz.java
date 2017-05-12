@@ -12,6 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -23,28 +24,24 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Projektmarktplatz implements EntryPoint {
-	Label l = new Label("Hallo meine Freunde der Sonne. Der  ist der coolste!");
-	Label l1 = new Label(" Unser Projektmarktplatz von der Gruppe 5");
 	
 	
 	public void onModuleLoad() {
-		RootPanel.get().add(l);
-		RootPanel.get().add(l1);
-		;
+
+		HorizontalPanel hPanel = new HorizontalPanel();
 		
+		VerticalPanel vPanel = new VerticalPanel();
+		Label myLbl = new Label("Projektmarktplatz");
 		
-		Button b = new Button("klick mich ");
-		b.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				l.setText("nein ,  is der Coolste");
-			}
+		vPanel.add(myLbl);
 			
+		Button btn1 = new Button("Projektmarktplatz suchen"); 
+		hPanel.add(btn1);
+		Button btn2 = new Button ("Projektmarktplatz erstellen");
+		hPanel.add(btn2);
 			
-			
-		});
-		RootPanel.get("dieter").add(b);
-		
-		
+		RootPanel.get().add(hPanel);
+		RootPanel.get().add(vPanel);
 		
 	}
 	// erneut wichtig!!!
