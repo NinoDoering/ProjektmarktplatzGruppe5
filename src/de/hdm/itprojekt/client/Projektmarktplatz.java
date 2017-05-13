@@ -45,6 +45,7 @@ public class Projektmarktplatz implements EntryPoint {
 		//styling
 		btn1.setStyleName("btn1");
 		btn2.setStyleName("btn2");
+		hpMain.setStyleName("hpmain");
 		//styling ende
 		
 		
