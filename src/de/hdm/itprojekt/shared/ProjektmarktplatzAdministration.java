@@ -42,16 +42,41 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	Vector getProjektByName(String bezeichnung) throws IllegalArgumentException;
 	*/
 	
-	//.......Erneuert.......
-	Object anlegenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt) throws IllegalArgumentException;
-
+	
+	//Projektmarktplatz pm
+	Object anlegenProjektmarktplatz(Object projektmarktplatz, String geschaeftsgebiet, String bezeichnung,
+			Object projekt)throws IllegalArgumentException;
 	Vector editierenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt) throws IllegalArgumentException;
-
-	void loeschenProjektmarktplatz(Object p) throws IllegalArgumentException;
-
+	void loeschenProjektmarktplatz(Object projekt, Object projektmarktplatz)throws IllegalArgumentException;
+	void save(Object pm);
+	
 	Vector getProjektmarktplatz(Object projekt) throws IllegalArgumentException;
+	
+	//Projekt p 
+	Object anlegenProjekt(Object projekt, String projektleiter, String beschreibung, Date startDatum, Date endDatum) throws IllegalArgumentException;
+	Vector editierenProjekt(String projektleiter, String beschreibung, Date startDatum, Date endDatum) throws IllegalArgumentException;
+	void loeschenProjekt(Object projekt) throws IllegalArgumentException;
+	
+	Vector getProjekt(Object projekt) throws IllegalArgumentException;
+	
+	//Ausschreibung a
+	Object anlegenAusschreibung(Object a, String bezeichnung, String beschreibung, Date endDatum) throws IllegalArgumentException;
+	Vector editierenAusschreibung(Object a, String bezeichnung, String beschreibung, Date endDatum) throws IllegalArgumentException;
+	void loeschenAusschreibung(Object a) throws IllegalArgumentException;
 
-	Object anlegenProjekt(String projektleiter, String beschreibung, Date startDatum, Date endDatum) throws IllegalArgumentException;
+	Vector getAusschreibung(Object ausschreibung, String bezeichnung) throws IllegalArgumentException;
+	
+	//Partnerprofil pp
+	Partnerprofil anlegenPartnerprofil(int idParnterprofil, Partnerprofil pp, String eigenschaft) throws IllegalArgumentException;
+	Vector<Partnerprofil> editierenPartnerprofil(Partnerprofil pp, String eigenschaft) throws IllegalArgumentException;
+	void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
+	
+	Vector<Partnerprofil> getPartnerprofil(int idPartnerprofil, Partnerprofil pp, String eigenschaften) throws IllegalArgumentException;
+	
+	//Bewerbung b
+
+
+	
 
 	
 
