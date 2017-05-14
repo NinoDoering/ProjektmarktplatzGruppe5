@@ -43,15 +43,15 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	*/
 	
 	//.......Erneuert.......
-	Object anlegenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt);
+	Object anlegenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt) throws IllegalArgumentException;
 
-	Vector editierenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt);
+	Vector editierenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt) throws IllegalArgumentException;
 
-	void loeschenProjektmarktplatz(Object p);
+	void loeschenProjektmarktplatz(Object p) throws IllegalArgumentException;
 
-	Vector getProjektmarktplatz(Object projekt);
+	Vector getProjektmarktplatz(Object projekt) throws IllegalArgumentException;
 
-	Object anlegenProjekt(String projektleiter, String beschreibung, Date startDatum, Date endDatum);
+	Object anlegenProjekt(String projektleiter, String beschreibung, Date startDatum, Date endDatum) throws IllegalArgumentException;
 
 	
 
