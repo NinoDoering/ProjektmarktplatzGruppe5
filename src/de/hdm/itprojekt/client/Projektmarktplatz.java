@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -25,24 +26,54 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class Projektmarktplatz implements EntryPoint {
 	
-	
+	HorizontalPanel hpMain;
+	ActivitySuchen hpActivitySuchen;
+	Button btn1;
+	Button btn2;
 	public void onModuleLoad() {
 
-		HorizontalPanel hPanel = new HorizontalPanel();
 		
-		VerticalPanel vPanel = new VerticalPanel();
-		Label myLbl = new Label("Projektmarktplatz");
+			//Buttons
+		 btn1 = new Button("Projektmarktplatz suchen"); 
 		
-		vPanel.add(myLbl);
+		btn2 = new Button ("Projektmarktplatz erstellen");
+		//Button Ende
+	//Panels
+		hpMain = new HorizontalPanel();
+		hpActivitySuchen = new ActivitySuchen();
+		//Panels Ende
+		//styling
+		btn1.setStyleName("btn1");
+		btn2.setStyleName("btn2");
+		hpMain.setStyleName("hpmain");
+		//styling ende
+		
+		
+		//Baumstruktur
+		hpMain.add(btn1);
+		
+		hpMain.add(btn2);
+
+		
+		
+		RootPanel.get("PMarktSuch").add(hpMain);
+		//Baumstruktur ende
+		//ClickEvents
+		
+		btn1.addClickHandler(new ClickHandler() {
 			
-		Button btn1 = new Button("Projektmarktplatz suchen"); 
-		hPanel.add(btn1);
-		Button btn2 = new Button ("Projektmarktplatz erstellen");
-		hPanel.add(btn2);
-			
-		RootPanel.get().add(hPanel);
-		RootPanel.get().add(vPanel);
+			@Override
+			public void onClick(ClickEvent event) {
+				//hpMain.removeFromParent();
+				hpMain.remove(btn1);
+				hpMain.remove(btn2);
+				hpMain.add(hpActivitySuchen);
+			}
+		});
+		
+		//Ende Clickevents
 		
 	}
 	// erneut wichtig!!!
+	// teeeeeeeeest
 }
