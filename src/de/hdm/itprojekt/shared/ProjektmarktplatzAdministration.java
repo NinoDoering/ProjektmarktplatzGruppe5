@@ -76,7 +76,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	Vector<Beteiligung> editierenBeteiligung(Beteiligung betiligung);
 	void loeschenBeteiligung(Beteiligung beteiligung);
 
-	Vector<Beteiligung> getBeteiligung(Beteiligung btg, int idOrganisationseinheit) throws IllegalArgumentException;
+	Vector<Beteiligung> getBeteiligung(Beteiligung beteiligung, int idOrganisationseinheit) throws IllegalArgumentException;
 
 	//Es folgt noch......
 }
