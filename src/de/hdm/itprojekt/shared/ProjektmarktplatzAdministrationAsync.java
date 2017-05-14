@@ -19,7 +19,6 @@ public interface ProjektmarktplatzAdministrationAsync <Person, Unternehmen, Team
 		    AsyncCallback <Projektmarktplatz> callback);	
 	void editierenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Projekt projekt, 
 			AsyncCallback <Vector<Projektmarktplatz>> callback);
-	//Überlegung einen speicher-Methode anzulegen? //Was sagt ihr dazu?
 	void loeschenProjektmarktplatz(Projekt p, Projektmarktplatz pm, 
 			AsyncCallback <Void> callback);
 	void save(Projektmarktplatz pm, AsyncCallback <Void> callback);
@@ -83,6 +82,19 @@ public interface ProjektmarktplatzAdministrationAsync <Person, Unternehmen, Team
 	
 	void getEigenschaft(Eigenschaft e, String arbeitsgebeit, float berufserfahrungsJahre, String employmentStatus,
 			AsyncCallback <Vector<Eigenschaft>> callback);
+	
+	//Bewertung bg
+		void anlegenBewertung(Bewertung bg, String textuelleBewertung, float fließKommaBewertung,  
+				AsyncCallback <Bewertung> callback);
+		void editierenBewertung(Bewertung bg, String textuelleBewertung, float fließKommaBewertung, 
+				AsyncCallback <Vector<Bewertung>> callback);
+		void loeschenBewertung(Bewertung bg, String textuelleBewertung, float fließKommaBewertung,
+				AsyncCallback <Void> callback);
+		
+		void getBewertung(Bewertung bg, float fließKommaBewertung,
+				AsyncCallback <Vector<Bewertung>> callback);
+		
+	//Beteiligung btg
 	
 	
 	

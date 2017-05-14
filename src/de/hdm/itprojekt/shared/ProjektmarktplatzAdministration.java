@@ -90,6 +90,16 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	Vector<Eigenschaft> getEigenschaft(Eigenschaft e, String arbeitsgebeit, float berufserfahrungsJahre,
 			String employmentStatus) throws IllegalArgumentException;
+
+	//Bewertung bg
+	Object anlegenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung) throws IllegalArgumentException;
+	Vector editierenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung) throws IllegalArgumentException;
+	void loeschenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung) throws IllegalArgumentException;
+
+	Vector getBewertung(Object bg, float fließKommaBewertung) throws IllegalArgumentException;
+	
+	//Beteiligung btg
+	
 	
 
 
