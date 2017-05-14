@@ -120,6 +120,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 			int idOrgansisationseinheit) throws IllegalArgumentException;
 	Vector getAllByidBewerbungen(Object b, int idBewerbung) throws IllegalArgumentException;
 	
+	
 
 	
 	
