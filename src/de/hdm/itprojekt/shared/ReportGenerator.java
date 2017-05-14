@@ -20,36 +20,36 @@ public interface ReportGenerator extends RemoteService {
 
 	AllProjektOfAllAusschreibung createAllProjektOfAllAusschreibungReport() throws IllegalArgumentException;
 
-	ReportSimple createReportSimpleAllAusschreibungen();
+	ReportSimple createReportSimpleAllAusschreibungen() throws IllegalArgumentException;
 
-	AllAuschreibungen getAllAusschreibungen();
+	AllAuschreibungen getAllAusschreibungen() throws IllegalArgumentException;
 
-	AllAusschreibungenFromPartnerprofil getAllAuschreibungenFromPartnerprofil();
+	AllAusschreibungenFromPartnerprofil getAllAuschreibungenFromPartnerprofil() throws IllegalArgumentException;
 
-	AllBewerbungenFromAusschreibung getAllBewerbungenFromAusschreibungen();
+	AllBewerbungenFromAusschreibung getAllBewerbungenFromAusschreibungen() throws IllegalArgumentException;
 
-	AllBewerbungenMitAusschreibungen getAllBewerbungenMitAusschreibungen();
+	AllBewerbungenMitAusschreibungen getAllBewerbungenMitAusschreibungen() throws IllegalArgumentException;
 
-	BeteiligungUndBewerbungen getBeteiligungAndBewerbungen();
+	BeteiligungUndBewerbungen getBeteiligungAndBewerbungen() throws IllegalArgumentException;
 
-	AnzahlBewerbungenUndAusschreibungen getAnzahlBewerbungenUndAusschreibungen();
+	AnzahlBewerbungenUndAusschreibungen getAnzahlBewerbungenUndAusschreibungen() throws IllegalArgumentException;
 
-	void setPerson(Person p);
+	void setPerson(Person p) throws IllegalArgumentException;
 
-	void setTeam(Team t);
+	void setTeam(Team t) throws IllegalArgumentException;
 
-	void setProjekt(Projekt p);
+	void setProjekt(Projekt p) throws IllegalArgumentException;
 
-	void setPartnerprofil(Partnerprofil pp);
+	void setPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
 
-	void setProjektmarktplatz(Projektmarktplatz pm);
+	void setProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException;
 
-	void setAusschreibung(Ausschreibung a);
+	void setAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 
-	void setBewertung(Bewertung btg);
+	void setBewertung(Bewertung btg) throws IllegalArgumentException;
 
-	void setBewerbung(Bewerbung b);
+	void setBewerbung(Bewerbung b) throws IllegalArgumentException;
 
-	void setBeteiligung(Beteiligung bg);
+	void setBeteiligung(Beteiligung bg) throws IllegalArgumentException;
 
 }
