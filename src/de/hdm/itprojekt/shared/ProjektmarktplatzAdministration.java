@@ -78,5 +78,52 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	Vector<Beteiligung> getBeteiligung(Beteiligung beteiligung, int idOrganisationseinheit) throws IllegalArgumentException;
 
-	//Es folgt noch......
+	//Organisationseinheit org
+	Organisationseinheit anlegenOrganisationseinheit(Organisationseinheit org, int idOrganisationseinheit) throws IllegalArgumentException;
+	Vector<Organisationseinheit> editierenOrganisationseinheit(Organisationseinheit org) throws IllegalArgumentException;
+	void loeschenOrgansationseinheit(Organisationseinheit org, int idOrganisationseinheit) throws IllegalArgumentException;
+
+	Vector<Organisationseinheit> getOrganisationseinheit(Organisationseinheit org, int idOrganisationseinheit) throws IllegalArgumentException;
+
+	//Person p
+	Object anlegenPerson(Object p, int idPerson, char geschlecht, String vorname, String nachname) throws IllegalArgumentException;
+	Vector editierenPerson(Object p, char geschlecht, String vorname, String nachname) throws IllegalArgumentException;
+	void loeschenPerson(Object p) throws IllegalArgumentException;
+
+	Vector getPerson(Object p, int idPerson, char geschlecht, String vorname, String nachname) throws IllegalArgumentException;
+
+	//Team t
+	Object anlegenTeam(Object t, int idTeam, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
+	Vector editierenTem(Object t, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
+	void loeschenTeam(Object t, int idTeam) throws IllegalArgumentException;
+	
+	Vector getTeam(Object t, int idTeam, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
+
+	//Unternehmen u
+	Object anlegenUnternehmen(Object u, int idUnternehmen, String firmenName)  throws IllegalArgumentException;
+	Vector editierenUnternehmen(Object u, String firmenName)  throws IllegalArgumentException;
+	void loeschenUnternehmen(Object u, int idUnternehmen, String firmenName)  throws IllegalArgumentException;
+
+	Vector getUnternehmen(Object u, int idUnternehmen, String firmenName)  throws IllegalArgumentException;
+
+	//Getter-By-All
+	Vector getBewertungById(int idBewertung, Object bg) throws IllegalArgumentException;
+	Vector getBewertungByBewerbungId(Object bg, int idBewertung, Object b, int idBewerbung) throws IllegalArgumentException;
+	Vector getAlleAusschreibung(Object a, int idAusschreibung) throws IllegalArgumentException;
+	Vector getAusschreibungByidPartnerprofil(Object a, int idAusschreibung, Partnerprofil pp, int idPartnerprofil) throws IllegalArgumentException;
+	Vector getAusschreibungByidBewerbung(Object a, int idAusschreibung, Object b, int idBewerbung) throws IllegalArgumentException;
+	Vector getBewerbungByidAusschreibung(Object b, int idBewerbung, int idAusschreibung) throws IllegalArgumentException;
+	Vector getBewerbungByidPartnerprofil(Object b, int idBewerbung, Partnerprofil pp, int idPartnerprofil) throws IllegalArgumentException;
+	Vector getBewerbungByidOrganisationseinheit(Object b, int idBewerbung, int idOrganisationseinheit) throws IllegalArgumentException;
+	Vector getBewertungenByidOrganisationseinheit(int idBewertung, int idOrganisationseinheit) throws IllegalArgumentException;
+	Vector<Beteiligung> getBeteiligungByidOrganisationseinheit(Beteiligung beteiligung, int idBeteiligung,
+			int idOrgansisationseinheit) throws IllegalArgumentException;
+	Vector getAllByidBewerbungen(Object b, int idBewerbung) throws IllegalArgumentException;
+	
+
+	
+	
+
+
+
 }
