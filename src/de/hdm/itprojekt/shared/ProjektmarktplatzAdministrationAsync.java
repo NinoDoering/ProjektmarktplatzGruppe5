@@ -12,6 +12,7 @@ import de.hdm.itprojekt.server.db.*;
 public interface ProjektmarktplatzAdministrationAsync <Person, Unternehmen, Team, Projekt, Ausschreibung, 
 														Projektmarktplatz, Bewertung, Bewerbung> {
 	
+	void init(AsyncCallback<Void> callback);
 	
 	//Projektmarktplatz pm
 	void anlegenProjektmarktplatz(Projektmarktplatz pm, String geschaeftsgebiet, String bezeichnung, Projekt projekt,
@@ -62,6 +63,29 @@ public interface ProjektmarktplatzAdministrationAsync <Person, Unternehmen, Team
 			AsyncCallback <Vector<Partnerprofil>> callback);
 	
 	//Bewerberung b
+	void anlegenBewerbung(Bewerbung b, String bewerber, String bewerbungstext, Date erstellDatum, 
+			AsyncCallback <Bewerbung> callback);
+	void editierenBewerbung(String beweber, String bewerbungstext, Date erstellDatum, 
+			AsyncCallback <Vector<Bewerbung>> callback);
+	void loeschenBewerbung(Bewerbung b, String bewerber,
+			AsyncCallback <Void> callback);
+	
+	void getBewerbung(Bewerbung b, String bewerber,
+			AsyncCallback <Vector<Bewerbung>> callback);
+	
+	//Eigenschaft e
+	void anlegenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus, String ausbildung, String sprachkenntnisse,  
+			AsyncCallback <Eigenschaft> callback);
+	void editierenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus, String ausbildung, String sprachkenntnisse, 
+			AsyncCallback <Vector<Eigenschaft>> callback);
+	void loeschenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus, String ausbildung, String sprachkenntnisse,
+			AsyncCallback <Void> callback);
+	
+	void getEigenschaft(Eigenschaft e, String arbeitsgebeit, float berufserfahrungsJahre, String employmentStatus,
+			AsyncCallback <Vector<Eigenschaft>> callback);
+	
+	
+	
 	
 	
 	

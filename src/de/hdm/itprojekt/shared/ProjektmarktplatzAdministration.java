@@ -12,9 +12,6 @@ import de.hdm.itprojekt.shared.bo.*;
 @RemoteServiceRelativePath("projektmarktplatzdministration")
 public interface ProjektmarktplatzAdministration extends RemoteService {
 
-	
-	//Diese Methode bei jeder Instantiierung verwenden, das heißt diese Methode init() 
-	//danach verwenden, dient der Überprüng der Instanz => "throws ILLEGALARGUMENTEXCEPTION" für Fehlermeldung zuständig
 	/*public void init() throws IllegalArgumentException;
 
 	Object createProjekt(String bezeichnung, String beschreibung, Object projektleiter) throws IllegalArgumentException;
@@ -42,13 +39,16 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	Vector getProjektByName(String bezeichnung) throws IllegalArgumentException;
 	*/
 	
+	//Diese Methode bei jeder Instantiierung verwenden, das heißt diese Methode init() 
+	//danach verwenden, dient der Überprüng der Instanz => "throws ILLEGALARGUMENTEXCEPTION" für Fehlermeldung zuständig
+	void init() throws IllegalArgumentException; 
 	
 	//Projektmarktplatz pm
 	Object anlegenProjektmarktplatz(Object projektmarktplatz, String geschaeftsgebiet, String bezeichnung,
 			Object projekt)throws IllegalArgumentException;
 	Vector editierenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt) throws IllegalArgumentException;
 	void loeschenProjektmarktplatz(Object projekt, Object projektmarktplatz)throws IllegalArgumentException;
-	void save(Object pm);
+	void save(Object pm) throws IllegalArgumentException;
 	
 	Vector getProjektmarktplatz(Object projekt) throws IllegalArgumentException;
 	
@@ -74,6 +74,23 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	Vector<Partnerprofil> getPartnerprofil(int idPartnerprofil, Partnerprofil pp, String eigenschaften) throws IllegalArgumentException;
 	
 	//Bewerbung b
+	Object anlegenBewerbung(Object b, String bewerber, String bewerbungstext, Date erstellDatum) throws IllegalArgumentException;
+	Vector editierenBewerbung(String beweber, String bewerbungstext, Date erstellDatum) throws IllegalArgumentException;
+	void loeschenBewerbung(Object b, String bewerber) throws IllegalArgumentException;
+	
+	Vector getBewerbung(Object b, String bewerber) throws IllegalArgumentException;
+	
+	//Eigenschaft e
+	Eigenschaft anlegenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre,
+			String employmentStatus, String ausbildung, String sprachkenntnisse) throws IllegalArgumentException;
+	Vector<Eigenschaft> editierenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre,
+			String employmentStatus, String ausbildung, String sprachkenntnisse) throws IllegalArgumentException;
+	void loeschenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus,
+			String ausbildung, String sprachkenntnisse) throws IllegalArgumentException;
+	
+	Vector<Eigenschaft> getEigenschaft(Eigenschaft e, String arbeitsgebeit, float berufserfahrungsJahre,
+			String employmentStatus) throws IllegalArgumentException;
+	
 
 
 	
