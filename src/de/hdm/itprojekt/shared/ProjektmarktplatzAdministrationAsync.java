@@ -21,7 +21,8 @@ public interface ProjektmarktplatzAdministrationAsync <Person, Unternehmen, Team
 			AsyncCallback <Vector<Projektmarktplatz>> callback);
 	void loeschenProjektmarktplatz(Projekt p, Projektmarktplatz pm, 
 			AsyncCallback <Void> callback);
-	void save(Projektmarktplatz pm, AsyncCallback <Void> callback);
+	void save(Projektmarktplatz pm, 
+			AsyncCallback <Void> callback);
 	
 	void getProjektmarktplatz(Projekt projekt, 
 			AsyncCallback <Vector<Projektmarktplatz>> callback);
@@ -84,65 +85,27 @@ public interface ProjektmarktplatzAdministrationAsync <Person, Unternehmen, Team
 			AsyncCallback <Vector<Eigenschaft>> callback);
 	
 	//Bewertung bg
-		void anlegenBewertung(Bewertung bg, String textuelleBewertung, float fließKommaBewertung,  
-				AsyncCallback <Bewertung> callback);
-		void editierenBewertung(Bewertung bg, String textuelleBewertung, float fließKommaBewertung, 
-				AsyncCallback <Vector<Bewertung>> callback);
-		void loeschenBewertung(Bewertung bg, String textuelleBewertung, float fließKommaBewertung,
-				AsyncCallback <Void> callback);
+		void anlegenBewertung(Bewertung bewertung, String textuelleBewertung, float fließKommaBewertung,  
+			AsyncCallback <Bewertung> callback);
+		void editierenBewertung(Bewertung bewertung, String textuelleBewertung, float fließKommaBewertung, 
+			AsyncCallback <Vector<Bewertung>> callback);
+		void loeschenBewertung(Bewertung bewertung, String textuelleBewertung, float fließKommaBewertung,
+			AsyncCallback <Void> callback);
 		
-		void getBewertung(Bewertung bg, float fließKommaBewertung,
-				AsyncCallback <Vector<Bewertung>> callback);
+		void getBewertung(Bewertung bewertung, float fließKommaBewertung,
+			AsyncCallback <Vector<Bewertung>> callback);
 		
-	//Beteiligung btg
+	//Beteiligung beteiligung
+		void anlegenBeteiligung(Beteiligung beteiligung, String name, int idBeteiligung, int idProjekt,
+			AsyncCallback<Beteiligung> callback);
+		void editierenBeteiligung(Beteiligung betiligung, 
+			AsyncCallback<Vector<Beteiligung>> callback);
+		void loeschenBeteiligung(Beteiligung beteiligung,
+			AsyncCallback <Void> callback);
+		
+		void getBeteiligung(Beteiligung beteiligung, int idOrganisationseinheit,
+			AsyncCallback <Vector<Beteiligung>> callback);
 	
-	
-	
-	
-	
-	
-	
-	
-	//......
-	
-	/*void createAccountFor(Person p, AsyncCallback <Account> callback);
-	
-	void save(Person p, AsyncCallback <Void> callback);
-	
-	void createUnternehmen(String firmenName,
-		      AsyncCallback <Unternehmen> callback);
-	
-	void createPerson(String vorname, String nachname,
-		      AsyncCallback <Person> callback);
-	
-	
-	
-	void createBewertung(String textuelleBewertung, float fließKommaBewertung,
-		      AsyncCallback <Bewertung> callback);
-	
-	void createBewerbung(String bewerber, float berwerbungsText,
-		      AsyncCallback <Bewerbung> callback);
-	
-	void createProjekt(String bezeichnung, String beschreibung, Person projektleiter, AsyncCallback<Projekt> callback);
-	
-	void createTeam(String teamName, AsyncCallback <Team> callback);
-	
-	void createAusschreibung(String bezeichnung, String beschreibung,
-		      AsyncCallback<Ausschreibung> callback);
-	
-	void getPartnerprofilOf(Person p, AsyncCallback <Vector<Account>> callback);
-	
-	void getPersonByName(String nachname,
-		      AsyncCallback <Vector<Person>> callback); 
-	
-	void getProjektByName(String bezeichnung, AsyncCallback <Vector<Projekt>> callback);
-	
-	
-	
-	
-	void init (AsyncCallback <Void> callback);
-	*/
-	
-	
+		//es folgt noch.........
 	
 }

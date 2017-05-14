@@ -11,33 +11,6 @@ import de.hdm.itprojekt.shared.bo.*;
 
 @RemoteServiceRelativePath("projektmarktplatzdministration")
 public interface ProjektmarktplatzAdministration extends RemoteService {
-
-	/*public void init() throws IllegalArgumentException;
-
-	Object createProjekt(String bezeichnung, String beschreibung, Object projektleiter) throws IllegalArgumentException;
-
-	Object createAccountFor(Object p) throws IllegalArgumentException;
-
-	void save(Object p) throws IllegalArgumentException;
-
-	Object createUnternehmen(String firmenName) throws IllegalArgumentException;
-
-	Object createPerson(String vorname, String nachname) throws IllegalArgumentException;
-
-	Object createBewertung(String textuelleBewertung, float fließKommaBewertung) throws IllegalArgumentException;
-
-	Object createBewerbung(String bewerber, float berwerbungsText) throws IllegalArgumentException;
-
-	Object createTeam(String teamName) throws IllegalArgumentException;
-
-	Object createAusschreibung(String bezeichnung, String beschreibung) throws IllegalArgumentException;
-
-	Vector getPartnerprofilOf(Object p) throws IllegalArgumentException;
-
-	Vector getPersonByName(String nachname) throws IllegalArgumentException;
-
-	Vector getProjektByName(String bezeichnung) throws IllegalArgumentException;
-	*/
 	
 	//Diese Methode bei jeder Instantiierung verwenden, das heißt diese Methode init() 
 	//danach verwenden, dient der Überprüng der Instanz => "throws ILLEGALARGUMENTEXCEPTION" für Fehlermeldung zuständig
@@ -92,23 +65,18 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 			String employmentStatus) throws IllegalArgumentException;
 
 	//Bewertung bg
-	Object anlegenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung) throws IllegalArgumentException;
+	Object anlegenBewertung(Object bewertung, String textuelleBewertung, float fließKommaBewertung);
 	Vector editierenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung) throws IllegalArgumentException;
 	void loeschenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung) throws IllegalArgumentException;
 
 	Vector getBewertung(Object bg, float fließKommaBewertung) throws IllegalArgumentException;
 	
-	//Beteiligung btg
-	
-	
+	//Beteiligung beteiligung
+	Beteiligung anlegenBeteiligung(Beteiligung beteiligung, String name, int idBeteiligung, int idProjekt);
+	Vector<Beteiligung> editierenBeteiligung(Beteiligung betiligung);
+	void loeschenBeteiligung(Beteiligung beteiligung);
 
+	Vector<Beteiligung> getBeteiligung(Beteiligung btg, int idOrganisationseinheit) throws IllegalArgumentException;
 
-	
-
-	
-
-	
-	
-	
-	
+	//Es folgt noch......
 }
