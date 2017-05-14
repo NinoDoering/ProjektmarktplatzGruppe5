@@ -72,9 +72,9 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	Vector getBewertung(Object bg, float fließKommaBewertung) throws IllegalArgumentException;
 	
 	//Beteiligung beteiligung
-	Beteiligung anlegenBeteiligung(Beteiligung beteiligung, String name, int idBeteiligung, int idProjekt);
-	Vector<Beteiligung> editierenBeteiligung(Beteiligung betiligung);
-	void loeschenBeteiligung(Beteiligung beteiligung);
+	Beteiligung anlegenBeteiligung(Beteiligung beteiligung, String name, int idBeteiligung, int idProjekt) throws IllegalArgumentException;
+	Vector<Beteiligung> editierenBeteiligung(Beteiligung betiligung) throws IllegalArgumentException;
+	void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException;
 
 	Vector<Beteiligung> getBeteiligung(Beteiligung beteiligung, int idOrganisationseinheit) throws IllegalArgumentException;
 
