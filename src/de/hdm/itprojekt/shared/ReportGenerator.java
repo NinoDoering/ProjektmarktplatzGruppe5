@@ -9,12 +9,12 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("reportgenerator")
 public interface ReportGenerator extends RemoteService {
 
-	
 	void init() throws IllegalArgumentException;
-	
+
 	void setUnternehmen(Unternehmen u) throws IllegalArgumentException;
 
-	AllProjektenmarktplatzOfPersonReport createAllProjektenmarktplatzOfPersonReport(Person p) throws IllegalArgumentException;
+	AllProjektenmarktplatzOfPersonReport createAllProjektenmarktplatzOfPersonReport(Person p)
+			throws IllegalArgumentException;
 
 	AllAusschreibungOfAllProjektReport createAllAusschreibungOfAllProjektReport() throws IllegalArgumentException;
 
