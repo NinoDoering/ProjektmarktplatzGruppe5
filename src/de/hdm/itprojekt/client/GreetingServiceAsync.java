@@ -11,5 +11,5 @@ public interface GreetingServiceAsync {
 
 	void findPersonbyKey(int key, AsyncCallback<String> callback);
 	
-	// erneut wichtig!!!!
+	// mm erneut wichtig!!!!
 }
