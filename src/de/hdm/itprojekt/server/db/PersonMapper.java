@@ -28,7 +28,7 @@ public class PersonMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idPerson, titel, vorname, nachname, FROM person " + "WHERE idPerson=" + idPerson );
+					"SELECT idPerson, titel, vorname, nachname FROM Person " + "WHERE idPerson =" + idPerson);
 
 			if (rs.next()) {
 				Person p = new Person();
