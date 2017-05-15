@@ -71,6 +71,16 @@ public class Projektmarktplatz implements EntryPoint {
 			}
 		});
 		
+		
+		btn2.addClickHandler(new ClickHandler() {
+			
+			public void onClick(ClickEvent event) {
+				hpMain.remove(btn1);
+				hpMain.remove(btn2);
+			}
+			
+		});
+		
 		//Ende Clickevents
 		
 	}
