@@ -14,6 +14,8 @@ public interface GreetingService extends RemoteService {
 	String greetServer(String name) throws IllegalArgumentException;
 	
 	String findPersonByKey(int key) throws IllegalArgumentException;
+
+
 	
 	// k erneut wichtig!!!!
 }
