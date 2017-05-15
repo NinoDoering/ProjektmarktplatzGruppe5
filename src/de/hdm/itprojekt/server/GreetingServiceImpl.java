@@ -45,7 +45,7 @@ public void init() throws IllegalArgumentException{
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br> Dildo"
+		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br> Java"
 				;
 	}
 
