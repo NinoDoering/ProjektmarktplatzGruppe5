@@ -64,12 +64,13 @@ public void init() throws IllegalArgumentException{
 	}
 
 	@Override
-	public String findPersonbyKey(int key) throws IllegalArgumentException {
+	public String findPersonByKey(int key) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		String sp = "person";
-		sp = sp + this.persMapper.findByKey(1).getVorname();
+		sp = sp + this.persMapper.findPersonByKey(1).getVorname();
 		return sp;
 	}
-	
+
+
 	// erneut wichtig!!!!
 }

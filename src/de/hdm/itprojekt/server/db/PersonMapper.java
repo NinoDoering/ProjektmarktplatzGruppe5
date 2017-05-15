@@ -21,7 +21,7 @@ public class PersonMapper {
 	}
 
 	// FindByKey
-	public Person findPersonbyKey(int idPerson) {
+	public Person findPersonByKey(int idPerson) {
 		Connection con = DBConnection.connection();
 
 		try {
