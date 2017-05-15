@@ -21,20 +21,23 @@ public class PersonMapper {
 	}
 
 	// FindByKey
-	public Person findByKey(int idPerson) {
+	public Person findPersonbyKey(int idPerson) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idPerson, vorname, nachname, geschlecht FROM person " + "WHERE idPerson=" + idPerson + " ORDER BY nachname");
+					"SELECT idPerson, titel, vorname, nachname, FROM person " + "WHERE idPerson=" + idPerson );
 
 			if (rs.next()) {
 				Person p = new Person();
 				p.setIdPerson(rs.getInt("idPerson"));
 				p.setVorname(rs.getString("vorname"));
 				p.setNachname(rs.getString("nachname"));
+				p.setTitel(rs.getString("titel"));
+				
+				
 
 				return p;
 			}
