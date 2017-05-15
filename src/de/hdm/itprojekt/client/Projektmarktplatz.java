@@ -12,8 +12,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -23,29 +25,65 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Projektmarktplatz implements EntryPoint {
-	Label l = new Label("Hallo meine Freunde der Sonne. Der  ist der coolste!");
-	Label l1 = new Label(" Unser Projektmarktplatz von der Gruppe 5");
 	
-	
+	HorizontalPanel hpMain;
+	ActivitySuchen hpActivitySuchen;
+	Button btn1;
+	Button btn2;
 	public void onModuleLoad() {
-		RootPanel.get().add(l);
-		RootPanel.get().add(l1);
-		;
+
+		
+			//Buttons
+		 btn1 = new Button("Projektmarktplatz suchen"); 
+		
+		btn2 = new Button ("Projektmarktplatz erstellen");
+		//Button Ende
+	//Panels
+		hpMain = new HorizontalPanel();
+		hpActivitySuchen = new ActivitySuchen();
+		//Panels Ende
+		//styling
+		btn1.setStyleName("btn1");
+		btn2.setStyleName("btn2");
+		hpMain.setStyleName("hpmain");
+		//styling ende
 		
 		
-		Button b = new Button("klick mich ");
-		b.addClickHandler(new ClickHandler() {
+		//Baumstruktur
+		hpMain.add(btn1);
+		
+		hpMain.add(btn2);
+
+		
+		
+		RootPanel.get("PMarktSuch").add(hpMain);
+		//Baumstruktur ende
+		//ClickEvents
+		
+		btn1.addClickHandler(new ClickHandler() {
+			
+			@Override
 			public void onClick(ClickEvent event) {
-				l.setText("nein ,  is der Coolste");
+				//hpMain.removeFromParent();
+				hpMain.remove(btn1);
+				hpMain.remove(btn2);
+				hpMain.add(hpActivitySuchen);
+			}
+		});
+		
+		
+		btn2.addClickHandler(new ClickHandler() {
+			
+			public void onClick(ClickEvent event) {
+				hpMain.remove(btn1);
+				hpMain.remove(btn2);
 			}
 			
-			
-			
 		});
-		RootPanel.get("dieter").add(b);
 		
-		
+		//Ende Clickevents
 		
 	}
 	// erneut wichtig!!!
+	// teeeeeeeeest
 }

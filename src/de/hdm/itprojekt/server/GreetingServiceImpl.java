@@ -1,6 +1,14 @@
 package de.hdm.itprojekt.server;
 
 import de.hdm.itprojekt.client.GreetingService;
+import de.hdm.itprojekt.server.db.EigenschaftMapper;
+import de.hdm.itprojekt.server.db.OrganisationseinheitMapper;
+import de.hdm.itprojekt.server.db.PartnerprofilMapper;
+import de.hdm.itprojekt.server.db.PersonMapper;
+import de.hdm.itprojekt.server.db.ProjektMapper;
+import de.hdm.itprojekt.server.db.ProjektmarktplatzMapper;
+import de.hdm.itprojekt.server.db.TeamMapper;
+import de.hdm.itprojekt.server.db.UnternehmenMapper;
 import de.hdm.itprojekt.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 //Rueckgaengig
@@ -12,6 +20,16 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
+public void init() throws IllegalArgumentException{
+		
+		//this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird gelöscht)
+	
+		this.persMapper = PersonMapper.personMapper();
+		
+	}
+	
+	private PersonMapper persMapper = null;
+	
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(input)) {
@@ -27,8 +45,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br>"
-				+ userAgent;
+		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br> Dildo"
+				;
 	}
 
 	/**
@@ -43,6 +61,14 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			return null;
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+	}
+
+	@Override
+	public String findPersonbyKey(int key) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		String sp = "person";
+		sp = sp + this.persMapper.findByKey(1).getVorname();
+		return sp;
 	}
 	
 	// erneut wichtig!!!!
