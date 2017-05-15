@@ -71,9 +71,19 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return this.eigMapper.findByKey(idEigenschaft);
 		}
 		
+		//getAll
 		public Vector <Eigenschaft> getAll()
 				throws IllegalArgumentException{
 			return this.eigMapper.findAll();
+		}
+		
+		//createEigenschaft
+		public Organisationseinheit createEigenschaft(int idOrganisationseinheit)
+				throws IllegalArgumentException {
+			Organisationseinheit orgaEinheit = new Organisationseinheit();
+			orgaEinheit.setIdOrganisationseinheit(idOrganisationseinheit);
+			
+			return this.orgaMapper.insert(orgaEinheit);
 		}
 	
 }
