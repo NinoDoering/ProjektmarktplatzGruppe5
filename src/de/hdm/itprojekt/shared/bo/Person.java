@@ -4,9 +4,9 @@ public class Person extends BusinessObject{
 
 	private static final long serialVersionUID = 1L;
 	private int idPerson; //Setter zu ID lassen wir weg
-	private char geschlecht;
 	private String vorname;
 	private String nachname;
+	private String titel;
 	
 	public int getIdProjekt(){
 		return getIdProjekt();
@@ -23,12 +23,6 @@ public class Person extends BusinessObject{
 		this.idPerson = idPerson;
 	}
 	
-	public char getGeschlecht() {
-		return geschlecht;
-	}
-	public void setGeschlecht(char geschlecht) {
-		this.geschlecht = geschlecht;
-	}
 	public String getVorname() {
 		return vorname;
 	}
@@ -45,9 +39,16 @@ public class Person extends BusinessObject{
 	public String toString(){
 		return super.toString() +" "
 		+ this.idPerson + " " 
-		+ this.geschlecht + " " 
-		+  this.vorname + " " 
+		+ this.vorname + " " 
 		+ this.nachname;
 	
+	}
+
+	public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
 	}
 }
