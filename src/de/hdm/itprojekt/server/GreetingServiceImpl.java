@@ -45,7 +45,7 @@ public void init() throws IllegalArgumentException{
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br> Dildo"
+		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br> Java"
 				;
 	}
 
@@ -64,12 +64,13 @@ public void init() throws IllegalArgumentException{
 	}
 
 	@Override
-	public String findPersonbyKey(int key) throws IllegalArgumentException {
+	public String findPersonByKey(int key) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		String sp = "person";
-		sp = sp + this.persMapper.findByKey(1).getVorname();
+		sp = sp + this.persMapper.findPersonByKey(1).getVorname();
 		return sp;
 	}
-	
+
+
 	// erneut wichtig!!!!
 }

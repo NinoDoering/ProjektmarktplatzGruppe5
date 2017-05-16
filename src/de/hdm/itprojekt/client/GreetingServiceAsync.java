@@ -9,7 +9,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface GreetingServiceAsync {
 	void greetServer(String input, AsyncCallback<String> callback) throws IllegalArgumentException;
 
-	void findPersonbyKey(int key, AsyncCallback<String> callback);
+	void findPersonByKey(int key, AsyncCallback<String> callback);
 	
 	// mm erneut wichtig!!!!
 }
