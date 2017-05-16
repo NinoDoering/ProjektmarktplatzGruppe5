@@ -54,14 +54,19 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
+			
 			ResultSet rs = stmt.executeQuery(
-					"SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft"
-							+ "WHERE idEigenschaft=" + idEigenschaft + "ORDER BY idEigenschaft");
-			// Eigenschaft sollen nach id angezeigt werden
+					"SELECT idEigenschaft, arbeitsgebiet, ausbildung, berufserfahrungsJahre, sprachkenntnisse, employmentStatus, abschluss" +" FROM eigenschaft " + "WHERE idEigenschaft=" + idEigenschaft );
+
+
+			
+			
+			
+			
 
 			if (rs.next()) {
 				Eigenschaft eig = new Eigenschaft();
-				eig.setId(rs.getInt("idEigenschaft"));
+				eig.setIdEigenschaft(rs.getInt("idEigenschaft"));
 				eig.setAusbildung(rs.getString("ausbildung"));
 				eig.setAbschluss(rs.getString("abschluss"));
 				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));

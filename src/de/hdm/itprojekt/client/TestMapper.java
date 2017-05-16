@@ -1,7 +1,7 @@
 package de.hdm.itprojekt.client;
 
-import de.hdm.itprojekt.server.db.PersonMapper;
-import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.server.db.*;
+import de.hdm.itprojekt.shared.bo.*;
 
 import java.*;		//Pakete, welche zum Ausführen benötigt werden.
 import javax.*;
@@ -16,7 +16,7 @@ public class TestMapper {
 		
 		//Person eins = PersonMapper.personMapper().findPersonByKey(8);
 		
-		//System.out.println(PersonMapper.personMapper().findPersonByKey(8));
+		
 		
 		
 		//System.out.println(eins.getTitel());
@@ -50,7 +50,7 @@ public class TestMapper {
 	p2.setNachname("Trottel");
 	
 	*/
-		Person p6 = new Person();
+		/*Person p6 = new Person();
 		
 		p6.setIdPerson(12);
 		p6.setTitel("DRMRK");
@@ -86,6 +86,18 @@ Person p8 = new Person();
 		PersonMapper.personMapper().insert(p8);
 		
 		System.out.println(p8.toString());
+		
+		*/
+		
+		System.out.println(PersonMapper.personMapper().findPersonByKey(8));
+		
+		System.out.println(EigenschaftMapper.eigenschaftMapper().findByKey(1));
+		
+		System.out.println(ProjektmarktplatzMapper.marktplatzMapper().findByKey(1));
+       
+		
+		
+	
 		
 	}
 

@@ -39,6 +39,7 @@ public class Person extends BusinessObject{
 	public String toString(){
 		return super.toString() +" "
 		+ this.idPerson + " " 
+		+ this.titel + " "
 		+ this.vorname + " " 
 		+ this.nachname;
 	
