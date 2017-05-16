@@ -39,7 +39,7 @@ public interface ReportGeneratorAsync {
 
 	void setPartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
 
-	void setProjektmarktplatz(Projektmarktplatz pm, AsyncCallback<Void> callback);
+	void setProjektmarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
 
 	void setAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 

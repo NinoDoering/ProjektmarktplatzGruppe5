@@ -7,39 +7,45 @@ import de.hdm.itprojekt.shared.bo.*;
 
 public class ProjektmarktplatzMapper {
 
-	private static ProjektmarktplatzMapper projektmarktplatzMapper = null;
+	private static ProjektmarktplatzMapper marktplatzMapper = null;
 
 	protected ProjektmarktplatzMapper() {
 	};
 
-	public static ProjektmarktplatzMapper projektmarktplatzMapper() {
-		if (projektmarktplatzMapper == null) {
-			projektmarktplatzMapper = new ProjektmarktplatzMapper();
+	public static ProjektmarktplatzMapper marktplatzMapper() {
+		if (marktplatzMapper == null) {
+			marktplatzMapper = new ProjektmarktplatzMapper();
 		}
-		return projektmarktplatzMapper;
+		return marktplatzMapper;
 	}
 
-	public Projektmarktplatz insert(Projektmarktplatz p) {
+	public Marktplatz insert(Marktplatz p) {
 
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idProjektmarktplatz) AS maxid " + "FROM projektmarktplatz ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idMarktplatz) AS maxid " + "FROM marktplatz ");
 
 			if (rs.next()) {
 
-				p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
+				p.setIdMarktplatz(rs.getInt("maxid") + 1);
 
-				p.setIdProjektmarktplatz(rs.getInt("maxid") + 1);
+		
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO projektmarktplatz (idProjektmarktplatz, geschaeftsgebiet, projekt)"
-						+ " VALUES (" + p.getIdProjektmarktplatz() + " ,'" + p.getGeschaeftsgebiet() + "','"
-						+ p.getProjekt() + "')");
-
+				
+				
+				
+				
+				stmt.executeUpdate(
+						"INSERT INTO person (idMarktplatz, geschaeftsgebiet, bezeichnung) " + "VALUES (" + p.getIdMarktplatz() + ",'"
+								+ p.getGeschaeftsgebiet() + "','" + p.getBezeichnung() + "')");
+				
+				
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -48,7 +54,7 @@ public class ProjektmarktplatzMapper {
 		return p;
 	}
 
-	public Projektmarktplatz findByKey(int idProjektmarktplatz) {
+	public Marktplatz findByKey(int idProjektmarktplatz) {
 
 		Connection con = DBConnection.connection();
 
@@ -56,17 +62,17 @@ public class ProjektmarktplatzMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idProjektmarktplatz, bezeichnung, geschaeftsgebiet, projekt FROM projektmarktplatz"
-							+ "WHERE idProjektmarktplatz=" + idProjektmarktplatz + "ORDER BY bezeichnung");
+					"SELECT idProjektmarktplatz, bezeichnung, geschaeftsgebiet FROM projektmarktplatz"
+							+ "WHERE idProjektmarktplatz=" + idProjektmarktplatz );
 			// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung
 			// angezeigt werden
 
 			if (rs.next()) {
-				Projektmarktplatz p = new Projektmarktplatz();
+				Marktplatz p = new Marktplatz();
 				p.setIdProjektmarktplatz(rs.getInt("idProjektmarktplatz"));
 				p.setBezeichnung(rs.getString("bezeichnung"));
 				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
-				p.setProjekt(rs.getProjekt("beschreibung")); // fehler beheben
+				//p.setProjekt(rs.getProjekt("beschreibung")); // fehler beheben
 
 				return p;
 			}
@@ -77,9 +83,9 @@ public class ProjektmarktplatzMapper {
 		return null;
 	}
 
-	public Vector<Projektmarktplatz> findAll() {
+	public Vector<Marktplatz> findAll() {
 		Connection con = DBConnection.connection();
-		Vector<Projektmarktplatz> result = new Vector<Projektmarktplatz>();
+		Vector<Marktplatz> result = new Vector<Marktplatz>();
 
 		try {
 			Statement stmt = con.createStatement();
@@ -90,7 +96,7 @@ public class ProjektmarktplatzMapper {
 			ResultSet rs = stmt.executeQuery("SELECT idProjektmarktplatz, bezeichnung, geschaeftsgebiet, projekt "
 					+ "FROM projektmarktplatz" + "ORDER BY bezeichnung");
 			while (rs.next()) {
-				Projektmarktplatz p = new Projektmarktplatz();
+				Marktplatz p = new Marktplatz();
 				p.setIdProjektmarktplatz(rs.getInt("idProjektmarktplatz"));
 				p.setBezeichnung(rs.getString("bezeichnung"));
 				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
@@ -106,9 +112,9 @@ public class ProjektmarktplatzMapper {
 		return result;
 	}
 
-	public Vector<Projektmarktplatz> findByBezeichnung(String bezeichnung) {
+	public Vector<Marktplatz> findByBezeichnung(String bezeichnung) {
 		Connection con = DBConnection.connection();
-		Vector<Projektmarktplatz> result = new Vector<Projektmarktplatz>();
+		Vector<Marktplatz> result = new Vector<Marktplatz>();
 
 		try {
 			Statement stmt = con.createStatement();
@@ -119,7 +125,7 @@ public class ProjektmarktplatzMapper {
 					+ " FROM projektmarktplatz " + "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
-				Projektmarktplatz p = new Projektmarktplatz();
+				Marktplatz p = new Marktplatz();
 				p.setIdProjektmarktplatz(rs.getInt("idProjektmarktplatz"));
 				p.setBezeichnung(rs.getString("bezeichnung"));
 				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
@@ -133,7 +139,7 @@ public class ProjektmarktplatzMapper {
 		return result;
 	}
 
-	public Projektmarktplatz update(Projektmarktplatz p) {
+	public Marktplatz update(Marktplatz p) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -152,7 +158,7 @@ public class ProjektmarktplatzMapper {
 		return p;
 	}
 
-	public void delete(Projektmarktplatz p) {
+	public void delete(Marktplatz p) {
 		Connection con = DBConnection.connection();
 
 		try {
