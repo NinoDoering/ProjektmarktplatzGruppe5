@@ -1,3 +1,5 @@
+//Clirim approved
+
 package de.hdm.itprojekt.shared.bo;
 
 public class Team extends Organisationseinheit {

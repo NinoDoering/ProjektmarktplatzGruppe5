@@ -1,3 +1,5 @@
+//Clirim approved
+
 package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
@@ -59,7 +61,8 @@ public class UnternehmenMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO unternehmen (firmenName) " + "VALUES (" + u.getFirmenName() + "')");
+				stmt.executeUpdate("INSERT INTO unternehmen (idUnternehmen, firmenName) " + "VALUES ( " + u.getIdUnternehmen()
+						+ " ,'" + u.getFirmenName() +  "')");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,7 +77,7 @@ public class UnternehmenMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\"" + "\" " + "WHERE idUnternehmen=" + u.getIdUnternehmen());
+			stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\""+ u.getFirmenName() + "\" " + "WHERE idUnternehmen=" + u.getIdUnternehmen());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -84,14 +87,14 @@ public class UnternehmenMapper {
 	}
 
 	// DELETE
-	public void delete(Unternehmen u) {
+	public void delete(int idUnternehmen) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 			// Schon wieder wird id verwendet --> sollten Id als Attribut
 			// hinzufügen
-			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE idUnternehmen=" + u.getIdUnternehmen());
+			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE idUnternehmen=" + idUnternehmen);
 		} catch (SQLException e3) {
 			e3.printStackTrace();
 		}

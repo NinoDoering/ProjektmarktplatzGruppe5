@@ -1,17 +1,15 @@
 package de.hdm.itprojekt.shared.bo;
 
-public class Unternehmen extends Organisationseinheit {
+public class Unternehmen extends BusinessObject {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String firmenName;
 	private int idUnternehmen = 0;
 	
-	public int getIdOrganisationseinheit(){
-		return getIdOrganisationseinheit();
-	}
+
+	//public int getIdOrganisationseinheit(){
+		//return getIdOrganisationseinheit();
+	//}
 	
 	public int getIdUnternehmen() {
 		return idUnternehmen;

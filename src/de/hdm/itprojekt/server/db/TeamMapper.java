@@ -26,7 +26,7 @@ public class TeamMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM projekt ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM team ");
 
 			if (rs.next()) {
 
@@ -139,12 +139,12 @@ public class TeamMapper {
 		return t;
 	}
 
-	public void delete(Team t) {
+	public void delete(int idTeam) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE from team" + "WHERE idTeam = " + t.getIdTeam());
+			stmt.executeQuery("DELETE from team" + "WHERE idTeam = " + idTeam);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
