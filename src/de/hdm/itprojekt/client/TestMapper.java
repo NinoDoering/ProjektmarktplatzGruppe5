@@ -14,18 +14,17 @@ public class TestMapper {
 
 	//	PersonMapper.personMapper().findPersonByKey(1);
 		
-		Person eins = PersonMapper.personMapper().findPersonByKey(2);
+		//Person eins = PersonMapper.personMapper().findPersonByKey(8);
 		
-		System.out.println(PersonMapper.personMapper().findPersonByKey(2));
+		//System.out.println(PersonMapper.personMapper().findPersonByKey(8));
 		
 		
-		System.out.println(eins.getTitel());
-		System.out.println(eins.getVorname());
-		System.out.println(eins.getNachname());
+		//System.out.println(eins.getTitel());
+	//	System.out.println(eins.getVorname());
+	//	System.out.println(eins.getNachname());
 		
 	
-		
-		Person p = new Person(); 
+	/*	Person p = new Person(); 
 		
 		p.setIdPerson(3);
 		p.setTitel("Dr");
@@ -33,7 +32,7 @@ public class TestMapper {
 		p.setNachname("Depp");
 		
 		 
-		// PersonMapper.personMapper().insert(p); 
+		 PersonMapper.personMapper().insert(p); 
 		
 		
 		
@@ -50,9 +49,43 @@ public class TestMapper {
 	p2.setIdBusinessObject(3); 
 	p2.setNachname("Trottel");
 	
+	*/
+		Person p6 = new Person();
+		
+		p6.setIdPerson(12);
+		p6.setTitel("DRMRK");
+		p6.setVorname("hallo");
+		p6.setNachname("NINO");
+		
+		PersonMapper.personMapper().insert(p6);
+		
+		System.out.println(p6.toString());
 		
 		
 		
+Person p7 = new Person();
+		
+		p7.setIdPerson(1);
+		p7.setTitel("DRMRK");
+		p7.setVorname("hallo");
+		p7.setNachname("NINhdhdhdO");
+		
+		PersonMapper.personMapper().insert(p7);
+		
+		System.out.println(p7.toString());
+		
+	
+		
+Person p8 = new Person();
+		
+		
+		p8.setTitel("DRMRK");
+		p8.setVorname("hallo");
+		p8.setNachname("NINO");
+		
+		PersonMapper.personMapper().insert(p8);
+		
+		System.out.println(p8.toString());
 		
 	}
 
