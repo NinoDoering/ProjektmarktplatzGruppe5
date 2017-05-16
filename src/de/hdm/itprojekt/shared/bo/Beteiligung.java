@@ -5,22 +5,30 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Beteiligung extends BusinessObject {
 	
+	/**
+	 * 
+	 */
+	
 	private static final long serialVersionIUD = 1L;
-	
-	private int id; 
-	
-	private int idProjekt; 
-	
+	private int idBeteiligung; 
+	private int idProjekt;
 	private int idPerson;
-
-	public int getId() {
-		return id;
+	
+	public int getIdBewertung(){
+		return getIdBewertung();
 	}
 	
-  //neueÄnderung
+	public int getIdOrganisationseinheit(){
+		return getIdOrganisationseinheit();
+	}
+	
+	public int getIdBeteiligung() {
+		return idBeteiligung;
+	}
+	
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdBeteiligung(int idBeteiligung) {
+		this.idBeteiligung = idBeteiligung;
 	}
 
 	public int getIdProjekt() {
@@ -41,7 +49,13 @@ public class Beteiligung extends BusinessObject {
 	
 
 	public String toString() { 
-		return super.toString() + " "+ this.idPerson + " "+ this.idProjekt ;
+		return super.toString() + " "
+		+ this.idPerson + " "
+		+ this.idProjekt ;
+	}
+
+	public static long getSerialversioniud() {
+		return serialVersionIUD;
 	}
 	
 }

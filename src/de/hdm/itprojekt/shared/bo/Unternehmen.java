@@ -2,8 +2,17 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Unternehmen extends Organisationseinheit {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String firmenName;
-	private int idUnternehmen;
+	private int idUnternehmen = 0;
+	
+	public int getIdOrganisationseinheit(){
+		return getIdOrganisationseinheit();
+	}
+	
 	public int getIdUnternehmen() {
 		return idUnternehmen;
 	}
@@ -20,7 +29,10 @@ public class Unternehmen extends Organisationseinheit {
 		this.firmenName = firmenName;
 	}
 	
-	//Test43
-	//Test2
+	public String toString(){
+		return super.toString()+" "
+				+ this.idUnternehmen +" "
+				+ this.firmenName;
 	
+}
 }
