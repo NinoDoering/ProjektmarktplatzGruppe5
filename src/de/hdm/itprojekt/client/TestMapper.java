@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client;
 
+import de.hdm.itprojekt.server.db.DBConnection;
 import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.Person;
 
@@ -86,7 +87,24 @@ Person p8 = new Person();
 		PersonMapper.personMapper().insert(p8);
 		
 		System.out.println(p8.toString());
+Person p9 = new Person();
 		
-	}
+		
+		p9.setTitel("DRMRK");
+		p9.setVorname("TONSKE");
+		p9.setNachname("OLA");
+		
+		PersonMapper.personMapper().insert(p9);
+		 
+		System.out.println(p9.toString());
+		
+// Update Test ausgeführt bei der erzeugten Person p9 und den Vornamen geändert in Motrip
+p9 = PersonMapper.personMapper().findPersonByKey(30);
+p9.setVorname("Motrip");
+PersonMapper.personMapper().update(p9);
 
-}
+		}
+	}
+	
+
+
