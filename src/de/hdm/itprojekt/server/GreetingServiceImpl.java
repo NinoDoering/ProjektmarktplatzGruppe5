@@ -67,7 +67,7 @@ public void init() throws IllegalArgumentException{
 	public String findPersonByKey(int key) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		String sp = "person";
-		sp = sp + this.persMapper.findPersonByKey(1).getVorname();
+		sp = sp + this.persMapper.findPersonByKey(8).getVorname();
 		return sp;
 	}
 

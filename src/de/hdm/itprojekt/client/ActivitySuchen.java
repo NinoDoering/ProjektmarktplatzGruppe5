@@ -49,7 +49,7 @@ public class ActivitySuchen extends HorizontalPanel {
 				 * });
 				 */
 
-				gwtproxy.findPersonByKey(1, new AsyncCallback<String>() {
+				gwtproxy.findPersonByKey(8, new AsyncCallback<String>() {
 
 					@Override
 					public void onSuccess(String result) {
