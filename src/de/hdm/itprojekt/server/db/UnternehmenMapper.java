@@ -50,12 +50,12 @@ public class UnternehmenMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM unternehmen ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idUnternehmen) AS maxid " + "FROM unternehmen ");
 			// Id wird womöglich benötigt!
 
 			if (rs.next()) {
 
-				u.setId(rs.getInt("maxid") + 1);
+				u.setIdUnternehmen(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
@@ -74,7 +74,7 @@ public class UnternehmenMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\"" + "\" " + "WHERE id=" + u.getId());
+			stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\"" + "\" " + "WHERE idUnternehmen=" + u.getIdUnternehmen());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -91,7 +91,7 @@ public class UnternehmenMapper {
 			Statement stmt = con.createStatement();
 			// Schon wieder wird id verwendet --> sollten Id als Attribut
 			// hinzufügen
-			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE id=" + u.getId());
+			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE idUnternehmen=" + u.getIdUnternehmen());
 		} catch (SQLException e3) {
 			e3.printStackTrace();
 		}

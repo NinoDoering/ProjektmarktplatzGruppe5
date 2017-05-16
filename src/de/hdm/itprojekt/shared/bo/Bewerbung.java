@@ -27,7 +27,7 @@ public class Bewerbung extends BusinessObject {
 		super();
 	}
 	
-	public int getIdBewerber() {
+	public int getIdBewerbung() {
 		return idBewerbung;
 	}
 	public void setIdBewerbung(int idBewerbung) {

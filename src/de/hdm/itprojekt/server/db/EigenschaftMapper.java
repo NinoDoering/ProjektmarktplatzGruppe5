@@ -26,7 +26,7 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM eigenschaft ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idEigenschaft) AS maxid " + "FROM eigenschaft ");
 
 			if (rs.next()) {
 
@@ -34,8 +34,8 @@ public class EigenschaftMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(
-						" INSERT INTO eigenschaft (id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
+				stmt.executeUpdate(" INSERT INTO eigenschaft (id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
+
 								+ " VALUES (" + eig.getIdEigenschaft() + " ,'" + eig.getAusbildung() + "','" + eig.getAbschluss()
 								+ "','" + eig.getBerufserfahrungsJahre() + "','" + eig.getArbeitsgebiet() + "', '"
 								+ eig.getSprachkenntnisse() + " ,'" + eig.getEmploymentStatus());
@@ -47,7 +47,7 @@ public class EigenschaftMapper {
 		return eig;
 	}
 
-	public Eigenschaft findByKey(int id) {
+	public Eigenschaft findByKey(int idEigenschaft) {
 
 		Connection con = DBConnection.connection();
 
@@ -56,12 +56,12 @@ public class EigenschaftMapper {
 
 			ResultSet rs = stmt.executeQuery(
 					"SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft"
-							+ "WHERE id=" + id + "ORDER BY id");
+							+ "WHERE idEigenschaft=" + idEigenschaft + "ORDER BY idEigenschaft");
 			// Eigenschaft sollen nach id angezeigt werden
 
 			if (rs.next()) {
 				Eigenschaft eig = new Eigenschaft();
-				eig.setId(rs.getInt("id"));
+				eig.setId(rs.getInt("idEigenschaft"));
 				eig.setAusbildung(rs.getString("ausbildung"));
 				eig.setAbschluss(rs.getString("abschluss"));
 				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
@@ -86,12 +86,12 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus "
-							+ "FROM eigenschaft " + "ORDER BY id");
+					"SELECT idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus "
+							+ "FROM eigenschaft " + "ORDER BY idEigenschaft");
 
 			while (rs.next()) {
 				Eigenschaft eig = new Eigenschaft();
-				eig.setId(rs.getInt("id"));
+				eig.setId(rs.getInt("idEigenschaft"));
 				eig.setAusbildung(rs.getString("ausbildung"));
 				eig.setAbschluss(rs.getString("abschluss"));
 				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
@@ -119,7 +119,7 @@ public class EigenschaftMapper {
 					+ "abschluss=\"" + eig.getAbschluss() + "\" " + "berufserfahrungsJahre=\""
 					+ eig.getBerufserfahrungsJahre() + "\" " + "arbeitsgebiet=\"" + eig.getArbeitsgebiet() + "\" "
 					+ "sprachkenntnisse=\"" + eig.getSprachkenntnisse() + "\" " + "employmentStatus=\""
-					+ eig.getEmploymentStatus() + "\" " + "WHERE id=" + eig.getIdEigenschaft());
+					+ eig.getEmploymentStatus() + "\" " + "WHERE idEigenschaft=" + eig.getIdEigenschaft());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -138,11 +138,14 @@ public class EigenschaftMapper {
 			stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE id=" + eig.getIdEigenschaft());
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
+			}}}
+		
+	
 
-	public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
+	//public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
 
-		return PersonMapper.personMapper().findByKey(int idPerson); //Wie wird das geregelt?
-	}
-}
+
+//		return PersonMapper.personMapper().findByKey(eig);
+	//}
+
+	
