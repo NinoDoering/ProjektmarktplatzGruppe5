@@ -49,6 +49,7 @@ public class Marktplatz extends BusinessObject {
 	public String toString(){
 		return super.toString()+ " "
 		+ this.idMarktplatz +" "
+		+ this.bezeichnung +" "
 		+ this.geschaeftsgebiet;
 		
 
