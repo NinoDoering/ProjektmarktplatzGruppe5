@@ -10,7 +10,7 @@ public class Projekt extends BusinessObject{
 	private String beschreibung;
 	private Date startDatum;
 	private Date endDatum;
-	private Person projektleiter;
+	private int idProjektleiter;
 	
 	public int getIdAusschreibung(){
 		return getIdAusschreibung();
@@ -64,12 +64,12 @@ public class Projekt extends BusinessObject{
 		this.endDatum = endDatum;
 	}
 
-	public Person getProjektleiter() {
-		return projektleiter;
+	public int getIdProjektleiter() {
+		return idProjektleiter;
 	}
 
-	public void setProjektleiter(Person projektleiter) {
-		this.projektleiter = projektleiter;
+	public void setIdProjektleiter(int idProjektleiter) {
+		this.idProjektleiter = idProjektleiter;
 	}
 
 	public String toString() {
@@ -79,7 +79,7 @@ public class Projekt extends BusinessObject{
 		+ this.beschreibung + " " 
 		+ this.startDatum + " " 
 		+ this.endDatum + " " 
-		+ this.projektleiter;
+		+ this.idProjektleiter;
 	}
 
 	
