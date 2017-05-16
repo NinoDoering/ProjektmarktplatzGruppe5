@@ -136,4 +136,58 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		ppMapper.update(pp);		
 	}
 	
+	// deletePartnerprofil
+	public void deletePartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
+		this.ppMapper.delete(idPartnerprofil);
+	}
+	
+	
+	
+	/*##########################################################
+	 * START PERSON
+	 #########################################################*/
+	
+	
+	// createPerson / insert
+	public Person createPerson(
+	int idPerson,
+	String vorname,
+	String nachname,
+	String titel) throws IllegalArgumentException {
+		Person pers = new Person();
+		
+		pers.setIdPerson(idPerson);
+		pers.setVorname(vorname);
+		pers.setNachname(nachname);
+		pers.setTitel(titel);
+		
+		return this.persMapper.insert(pers);
+	}
+	
+	// getPersonById
+	public Person getPersonById(int idPerson) throws IllegalArgumentException {
+		return this.persMapper.findPersonByKey(idPerson);
+	}
+	
+	
+	// getAllPersons
+	public Vector<Person> getAllPersons() throws IllegalArgumentException {
+		return this.persMapper.findAll();
+	}
+	
+	// getPersonByNachname
+	public Vector<Person> getPersonByNachname(String nachname) throws IllegalArgumentException {
+		return this.persMapper.findByNachname(nachname);
+	}
+	
+	// updatePerson
+	public void updatePerson(Person pers) throws IllegalArgumentException {
+		persMapper.update(pers);
+	}
+	
+	// deletePerson
+	public void deletePerson(int idPerson) throws IllegalArgumentException {
+		this.persMapper.delete(idPerson);
+		}
+	
 }
