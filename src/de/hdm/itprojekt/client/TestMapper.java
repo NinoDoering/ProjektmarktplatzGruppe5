@@ -3,7 +3,7 @@ package de.hdm.itprojekt.client;
 import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.Person;
 
-import java.*;		//Pakete, welche zum Ausführen benötigt werden.
+import java.*;		//Pakete, welche zum Ausfï¿½hren benï¿½tigt werden.
 import javax.*;
 import java.sql.*;
 
@@ -49,7 +49,7 @@ public class TestMapper {
 	p2.setIdBusinessObject(3); 
 	p2.setNachname("Trottel");
 	
-	*/
+	
 		Person p6 = new Person();
 		
 		p6.setIdPerson(12);
@@ -86,6 +86,18 @@ Person p8 = new Person();
 		PersonMapper.personMapper().insert(p8);
 		
 		System.out.println(p8.toString());
+		
+		
+*/
+		Person p9 = new Person();
+		
+		p9.setTitel("Doctor");
+		p9.setVorname("Hallo");
+		p9.setNachname("Wahid");
+		
+		PersonMapper.personMapper().insert(p9);
+		
+		System.out.println(p9.toString());		
 		
 	}
 
