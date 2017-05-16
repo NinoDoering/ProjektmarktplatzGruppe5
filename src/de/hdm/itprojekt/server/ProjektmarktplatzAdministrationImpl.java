@@ -77,8 +77,8 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	}
 	
 	// deleteEigenschaft
-	public void deleteEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
-		this.eigMapper.delete(eig);
+	public void deleteEigenschaft(int idEigenschaft) throws IllegalArgumentException {
+		this.eigMapper.delete(idEigenschaft);
 	}
 	
 	
@@ -103,8 +103,8 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 	
 	// deleteOrganisationseinheit
-	public void deleteOrganisationseinheit(Organisationseinheit orgaEinheit) throws IllegalArgumentException {
-		this.orgaMapper.delete(orgaEinheit);
+	public void deleteOrganisationseinheit(int idOrganisationseinheit) throws IllegalArgumentException {
+		this.orgaMapper.delete(idOrganisationseinheit);
 	}
 	
 	
@@ -190,4 +190,5 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.persMapper.delete(idPerson);
 		}
 	
+	// 
 }
