@@ -30,8 +30,9 @@ public class PersonMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery(
-					"SELECT idPerson, titel, vorname, nachname" + " FROM person " + "WHERE idPerson=" + idPerson);
+			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname" + " FROM person " + "WHERE idPerson=" + idPerson);
+
+
 
 			if (rs.next()) {
 				Person p = new Person();
