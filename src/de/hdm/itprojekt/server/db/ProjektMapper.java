@@ -67,12 +67,12 @@ public class ProjektMapper {
 			p.setBeschreibung(rs.getString("beschreibung"));
 			p.setStartDatum(rs.getDate("startDatum"));
 			p.setEndDatum(rs.getDate("endDatum"));
-			//p.setProjektleiter(rs.getPerson("projektleiter")); /// Fehler beheben 
+			//p.setProjektleiter(rs.getPerson("projektleiter")); /// Fehler weil in PersonMapper kein Projektleiter definiert wurde
 			Person pers;			
 
 			pers = new Person();
 			pers.setVorname(rs.getString("bezeichnung"));
-					p.setProjektleiter(pers);
+					//p.setProjektleiter(pers); //Fehler weil in PersonMapper kein Projektleiter definiert wurde
 			return p; 
 		}
 	}
