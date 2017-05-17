@@ -12,6 +12,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		implements ProjektmarktplatzAdministration {
 
+	//test 123
+	//Hallo
+	
+	
 	// private BusinessObjectMapper boMapper = null;
 	private EigenschaftMapper eigMapper = null;
 	private OrganisationseinheitMapper orgaMapper = null; // Bleibt die Mapper
