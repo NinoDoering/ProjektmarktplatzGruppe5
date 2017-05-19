@@ -1,12 +1,12 @@
 package de.hdm.itprojekt.shared.bo;
 
-public class Projektmarktplatz {
+public class Marktplatz {
 
-	private int idProjektmarktplatz = 0;
+	private int idMarktplatz = 0;
 	private static final long serialVersionUID = 1L;
 	private String geschaeftsgebiet;
 	private String bezeichnung;
-	private Projekt projekt;
+	private int idProjekt;
 	
 	public String getBezeichnung() {
 		return bezeichnung;
@@ -16,16 +16,12 @@ public class Projektmarktplatz {
 		this.bezeichnung = bezeichnung;
 	}
 	
-	public int getIdProjekt(){
-		return getIdProjekt();
+	public int getIdMarktplatz() {
+		return idMarktplatz;
 	}
 
-	public int getIdProjektmarktplatz() {
-		return idProjektmarktplatz;
-	}
-
-	public void setIdProjektmarktplatz(int idProjektmarktplatz) {
-		this.idProjektmarktplatz = idProjektmarktplatz;
+	public void setIdMarktplatz(int idMarktplatz) {
+		this.idMarktplatz = idMarktplatz;
 	}
 		
 	public String getGeschaeftsgebiet() {
@@ -36,19 +32,18 @@ public class Projektmarktplatz {
 		this.geschaeftsgebiet = geschaeftsgebiet;
 	}
 
-	public Projekt getProjekt() {
-		return projekt;
+	public int getIdProjekt() {
+		return idProjekt;
 	}
 
-	public void setProjekt(Projekt projekt) {
-		this.projekt = projekt;
+	public void setIdProjekt(int idProjekt) {
+		this.idProjekt = idProjekt;
 	}
 
 	public String toString(){
 		return super.toString()+ " "
-		+ this.idProjektmarktplatz +" "
-		+ this.geschaeftsgebiet + " " 
-		+ this.projekt; 
+		+ this.idMarktplatz +" "
+		+ this.geschaeftsgebiet; 
 
 	}
 	

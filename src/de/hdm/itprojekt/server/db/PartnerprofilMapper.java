@@ -28,7 +28,8 @@ public class PartnerprofilMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idPartnerprofil FROM partnerprofil " + "WHERE idPartnerprofil=" + idPartnerprofil);
+					.executeQuery("SELECT idPartnerprofil FROM partnerprofil " 
+			+ "WHERE idPartnerprofil=" + idPartnerprofil);
 
 			if (rs.next()) {
 				Partnerprofil p = new Partnerprofil();

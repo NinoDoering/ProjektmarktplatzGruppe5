@@ -1,3 +1,5 @@
+/*
+
 package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
@@ -164,3 +166,4 @@ public class ProjektmarktplatzMapper {
 		}
 	}
 }
+/*

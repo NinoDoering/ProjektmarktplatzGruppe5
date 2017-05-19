@@ -35,8 +35,11 @@ public class MarktplatzMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung) " + "VALUES ('"+p.getIdMarktplatz()+ "','"
-								+ p.getGeschaeftsgebiet() + "','" + p.getBezeichnung() + "')");
+						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung, idProjekt) " + "VALUES ('"
+				+p.getIdMarktplatz()+ "','"+ 
+				p.getGeschaeftsgebiet() + "','" + 
+				p.getBezeichnung() + "','" +
+				p.getIdProjekt() + "')");
 				
 			}
 		} catch (SQLException e) {
@@ -141,7 +144,7 @@ public class MarktplatzMapper {
 
 			stmt.executeUpdate("UPDATE marktplatz " + "SET bezeichnung=\"" + p.getBezeichnung() + "\", "
 					+ "geschaeftsgebiet=\"" + p.getGeschaeftsgebiet() + "\", " + 
-					"WHERE idProjektmarktplatz" + p.getIdMarktplatz());
+					"WHERE idMarktplatz" + p.getIdMarktplatz());
 
 		} catch (SQLException e) {
 			e.printStackTrace();

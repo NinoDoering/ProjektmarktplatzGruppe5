@@ -1,12 +1,14 @@
 package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
 
 public class ProjektMapper {
 
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	private static ProjektMapper projektMapper = null;
 
 	protected ProjektMapper() {
@@ -35,9 +37,14 @@ public class ProjektMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						" INSERT INTO projekt (idProjekt, beschreibung, bezeichnung, projektleiter, startDatum, endDatum)"
-								+ " VALUES (" + p.getIdProjekt() + " ,'" + p.getBeschreibung() + "','" + p.getBezeichnung()
-								+ "','" + p.getProjektleiter() + "','" + p.getStartDatum() + "', '" + p.getEndDatum()
+						" INSERT INTO projekt (idProjekt, beschreibung, bezeichnung, idPerson, startDatum, endDatum)"
+								+ " VALUES (" 
+								+ p.getIdProjekt() + " ,'" 
+								+ p.getBeschreibung() + "','" 
+								+ p.getBezeichnung()+ "','" 
+								+ p.getIdPerson() + "','" 
+								+ format.format(p.getStartDatum())  + "', '" 
+								+ format.format(p.getEndDatum())
 								+ "')");
 
 			}
