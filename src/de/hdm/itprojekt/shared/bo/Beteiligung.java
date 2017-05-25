@@ -1,7 +1,6 @@
 
 package de.hdm.itprojekt.shared.bo;
 
-//test
 
 public class Beteiligung extends BusinessObject {
 	
@@ -12,14 +11,16 @@ public class Beteiligung extends BusinessObject {
 	private static final long serialVersionIUD = 1L;
 	private int idBeteiligung; 
 	private int idProjekt;
-	private int idPerson;
+	private int idBewerbung;
+	private int idBewertung;
 	
-	public int getIdBewertung(){
-		return getIdBewertung();
+	
+	public void setIdBewertung(int idBewertung){
+		this.idBewertung=idBewertung;
 	}
 	
-	public int getIdOrganisationseinheit(){
-		return getIdOrganisationseinheit();
+	public int getIdBewertung(){
+		return idBewertung;
 	}
 	
 	public int getIdBeteiligung() {
@@ -39,18 +40,18 @@ public class Beteiligung extends BusinessObject {
 		this.idProjekt = idProjekt;
 	}
 
-	public int getIdPerson() {
-		return idPerson;
+	public int getIdBewerbung() {
+		return idBewerbung;
 	}
 
-	public void setIdPerson(int idPerson) {
-		this.idPerson = idPerson;
+	public void setIdBewerbung(int idBewerbung) {
+		this.idBewerbung = idBewerbung;
 	} 
 	
 
 	public String toString() { 
 		return super.toString() + " "
-		+ this.idPerson + " "
+		+ this.idBewerbung + " "
 		+ this.idProjekt ;
 	}
 

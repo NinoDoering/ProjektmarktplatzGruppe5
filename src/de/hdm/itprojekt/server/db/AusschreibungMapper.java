@@ -116,7 +116,7 @@ public class AusschreibungMapper {
 			Statement stmt = con.createStatement();
 			/// owner ?
 			stmt.executeUpdate("UPDATE ausschreibung" 
-					+ "SET bezeichnug=\"" + a.getBezeichnung() + "\" ,"
+					+ "SET bezeichnung=\"" + a.getBezeichnung() + "\" ,"
 					+ "endDatum=\"" + format.format(a.getEndDatum()) + "\"," 
 					+ "beschreibung=\"" + a.getBeschreibung() + "\","
 					+ "WHERE idAusschreibung=" + a.getIdAusschreibung());
