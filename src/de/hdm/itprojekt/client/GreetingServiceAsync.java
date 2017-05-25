@@ -9,9 +9,9 @@ import de.hdm.itprojekt.server.db.PersonMapper;
  * The async counterpart of <code>GreetingService</code>.
  */
 public interface GreetingServiceAsync {
-	void greetServer(String name, AsyncCallback<String> callback);
+	void greetServer(String input, AsyncCallback<String> callback);
 
-	void showPersonByKey(PersonMapper name, AsyncCallback<String> callback);
+	void showPersonByKey(PersonMapper input, AsyncCallback<String> callback);
 
 
 
