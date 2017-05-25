@@ -2,8 +2,11 @@ package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
 import java.util.Vector;
+import java.*;		//Pakete, welche zum Ausf�hren ben�tigt werden.
+import javax.*;
+import java.sql.*;
 
-import de.hdm.itprojekt.shared.bo.Eigenschaft;
+import de.hdm.itprojekt.shared.bo.*;
 
 public class EigenschaftMapper {
 
@@ -30,15 +33,19 @@ public class EigenschaftMapper {
 
 			if (rs.next()) {
 
-				eig.setId(rs.getInt("maxid") + 1);
+				eig.setIdEigenschaft(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(" INSERT INTO eigenschaft (id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
 
-								+ " VALUES (" + eig.getIdEigenschaft() + " ,'" + eig.getAusbildung() + "','" + eig.getAbschluss()
-								+ "','" + eig.getBerufserfahrungsJahre() + "','" + eig.getArbeitsgebiet() + "', '"
-								+ eig.getSprachkenntnisse() + " ,'" + eig.getEmploymentStatus());
+								+ " VALUES ('" + eig.getIdEigenschaft() + " ,'" 
+								+ eig.getAusbildung() + "','" 
+								+ eig.getAbschluss()+ "','" 
+								+ eig.getBerufserfahrungsJahre() + "','" 
+								+ eig.getArbeitsgebiet() + "','"
+								+ eig.getSprachkenntnisse() + "','" 
+								+ eig.getEmploymentStatus() + "')");
 
 			}
 		} catch (SQLException e) {
@@ -61,13 +68,13 @@ public class EigenschaftMapper {
 
 			if (rs.next()) {
 				Eigenschaft eig = new Eigenschaft();
-				eig.setId(rs.getInt("idEigenschaft"));
-				eig.setAusbildung(rs.getString("ausbildung"));
-				eig.setAbschluss(rs.getString("abschluss"));
-				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
-				eig.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
-				eig.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
-				eig.setEmploymentStatus(rs.getString("employmentStatus"));
+				eig.setIdEigenschaft(rs.getInt("'idEigenschaft'"));
+				eig.setAusbildung(rs.getString("'ausbildung'"));
+				eig.setAbschluss(rs.getString("'abschluss'"));
+				eig.setBerufserfahrungsJahre(rs.getFloat("'berufserfahrungsJahre'"));
+				eig.setArbeitsgebiet(rs.getString("'arbeitsgebiet'"));
+				eig.setSprachkenntnisse(rs.getString("'sprachkenntnisse'"));
+				eig.setEmploymentStatus(rs.getString("'employmentStatus'"));
 
 				return eig;
 			}
@@ -91,7 +98,7 @@ public class EigenschaftMapper {
 
 			while (rs.next()) {
 				Eigenschaft eig = new Eigenschaft();
-				eig.setId(rs.getInt("idEigenschaft"));
+				eig.setIdEigenschaft(rs.getInt("idEigenschaft"));
 				eig.setAusbildung(rs.getString("ausbildung"));
 				eig.setAbschluss(rs.getString("abschluss"));
 				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));

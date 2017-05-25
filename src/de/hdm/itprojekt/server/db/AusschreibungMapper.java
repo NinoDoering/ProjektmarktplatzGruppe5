@@ -1,17 +1,19 @@
 package de.hdm.itprojekt.server.db;
 
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-import de.hdm.itprojekt.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.shared.bo.Organisationseinheit;
+import de.hdm.itprojekt.shared.bo.*;
 
 public class AusschreibungMapper {
 	//neuerVersuch........
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
 	private static AusschreibungMapper ausschreibungmapper = null;
 
 	protected AusschreibungMapper() {
@@ -68,7 +70,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, owner FROM accounts " + "WHERE owner=" + idAusschreibung + " ORDER BY idAusschreibung");
+			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, owner FROM ausschreibung " + "WHERE owner=" + idAusschreibung + " ORDER BY idAusschreibung");
 			while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
 				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
@@ -100,8 +102,11 @@ public class AusschreibungMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO accounts (id, bezeichung, endDatum, beschreibung) " + "VALUES (" + a.getIdAusschreibung() + ","
-								+ "," + a.getBezeichnung() + "," + a.getEndDatum() + "," + a.getBeschreibung() + ")");
+						"INSERT INTO ausschreibung (id, bezeichnung, endDatum, beschreibung) " 
+				+ "VALUES (" + a.getIdAusschreibung() + "','" 
+								+ a.getBezeichnung() + "','" 
+				+ format.format(a.getEndDatum())+ "','" 
+								+ a.getBeschreibung() + "')");
 			}
 		} catch (SQLException e2) {
 			e2.printStackTrace();
