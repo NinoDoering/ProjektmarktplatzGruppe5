@@ -5,6 +5,8 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
 
+//Alle Mappermethoden in dieser Klasse funktionieren!
+
 public class UnternehmenMapper {
 
 	private static UnternehmenMapper unternehmenMapper = null;
@@ -48,7 +50,7 @@ public class UnternehmenMapper {
 		return null;
 	}
 
-	// INSERT (unfertig)
+	// INSERT 
 	public Unternehmen insert(Unternehmen u) {
 		Connection con = DBConnection.connection();
 
