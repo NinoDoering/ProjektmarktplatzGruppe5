@@ -11,7 +11,7 @@ import de.hdm.itprojekt.server.db.PersonMapper;
 public interface GreetingServiceAsync {
 	void greetServer(String input, AsyncCallback<String> callback) throws IllegalArgumentException;
 
-	void findPersonByKey(PersonMapper idPerson, AsyncCallback<String> callback);
+	void showPersonByKey(PersonMapper idPerson, AsyncCallback<String> callback);
 
 
 

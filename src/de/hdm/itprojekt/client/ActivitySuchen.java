@@ -43,7 +43,7 @@ public class ActivitySuchen extends HorizontalPanel implements ClickHandler {
 			
 			public void getPersonKeyFromServer() {
 		
-				PersonMapper PersonKeyFromServer = PersonMapper.personMapper().findPersonByKey(8);
+				PersonMapper PersonKeyFromDBServer = PersonMapper.personMapper().findPersonByKey(8);
 	
 				
 
@@ -64,7 +64,7 @@ public class ActivitySuchen extends HorizontalPanel implements ClickHandler {
 				 * });
 				 */
 
-				gwtproxy.findPersonByKey(PersonKeyFromServer,  new AsyncCallback<String>() {
+				gwtproxy.showPersonByKey(PersonKeyFromDBServer,  new AsyncCallback<String>() {
 
 					@Override
 					public void onSuccess(String result) {
