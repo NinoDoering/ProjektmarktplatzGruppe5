@@ -5,14 +5,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-import de.hdm.itprojekt.shared.bo.Organisationseinheit;
-import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.server.db.*;
 
 public class BewerbungMapper {
 //neuerVersuch
-	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
 	private static BewerbungMapper bewerbungMapper = null;
 
 	protected BewerbungMapper() {
@@ -31,7 +33,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 			// SQL STATEMENT
-			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, owner FROM bewerbung " + "WHERE idBewerbung=" + idBewerbung + " ORDER BY owner");
+			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, bewerber, bewerbungsText, erstellDatum FROM bewerbung " + "WHERE idBewerbung=" + idBewerbung + " ORDER BY idBewerbung");
 			if (rs.next()) {
 				Bewerbung bw = new Bewerbung();
 				bw.setIdBewerbung(rs.getInt("idBewerbung"));
@@ -50,7 +52,7 @@ public class BewerbungMapper {
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, owner FROM bewerbung " + " ORDER BY idBewerbung");
+			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, bewerber, bewerbungsText, erstellDatum FROM bewerbung " + " ORDER BY idBewerbung");
 			while (rs.next()) {
 				Bewerbung bw = new Bewerbung();
 				bw.setIdBewerbung(rs.getInt("idBewerbung"));
@@ -69,7 +71,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, owner FROM bewerber " + "WHERE owner=" + idBewerbung + " ORDER BY idBewerbung");
+			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, bewerber, bewerbungsText, erstellDatum FROM bewerber " + "WHERE idBewerbung=" + idBewerbung + " ORDER BY idBewerbung");
 			while (rs.next()) {
 				Bewerbung bw = new Bewerbung();
 				bw.setIdBewerbung(rs.getInt("idBewerbung"));
@@ -81,12 +83,6 @@ public class BewerbungMapper {
 
 		return result;
 	}
-/*
-	public Vector<Ausschreibung> findByOwner(Organisationseinheit owner) {
-
-		return findByOwner(owner.getId());
-	}
-	*/
 
 	public Bewerbung insert(Bewerbung bw) {
 		Connection con = DBConnection.connection();
@@ -94,18 +90,19 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM bewerbung ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idBewerbung) AS maxid " + "FROM bewerbung ");
 			if (rs.next()) {
 
 				bw.setIdBewerbung(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO accounts (idBewerbung, bewerber, bewerbungsText, erstelluDatum) " + "VALUES ("
-						+ "'" + bw.getIdBewerbung() + "," 
-						+ "," + bw.getBewerber() + "," 
-						+ "'" + bw.getBewerbungsText() + ","
-						+ "'" + bw.getErstellDatum() + ")");
+				stmt.executeUpdate("INSERT INTO bewerbung (idBewerbung, bewerber, bewerbungsText, erstellDatum) " 
+				+ "VALUES ('"
+						+ bw.getIdBewerbung() + "','" 
+						+ bw.getBewerber() + "','" 
+						+ bw.getBewerbungsText() + "','"
+						+ format.format(bw.getErstellDatum()) + "')");
 			}
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -118,11 +115,10 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 			/// owner ?
-			stmt.executeUpdate("UPDATE beteiligung" + "SET bewerber=\"" 
-					+ "'" + bw.getBewerber() +  "'" +"\" ," + "bewerbungsText=\""
-					+ bw.getBewerbungsText() + "\" ," + "erstellDatum=\"" 
-					+ bw.getErstellDatum() + "WHERE id="
-					+ "'" + bw.getIdBewerbung());
+			stmt.executeUpdate("UPDATE bewerbung" 
+					+ "SET bewerber=\"" + "'" + bw.getBewerber() +  "'" 
+					+ bw.getBewerbungsText() + "\" ," + "bewerbungsText=\""
+					+ bw.getErstellDatum() + "WHERE idBewerbung="+ "'" + bw.getIdBewerbung());
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
@@ -135,7 +131,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM bewerber" + "WHERE idBewerbung=" + bw.getIdBewerbung());
+			stmt.executeUpdate("DELETE FROM bewerbung" + "WHERE idBewerbung=" + bw.getIdBewerbung());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
