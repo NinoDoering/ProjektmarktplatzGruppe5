@@ -9,7 +9,9 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class ActivitySuchen extends HorizontalPanel {
+import de.hdm.itprojekt.server.db.PersonMapper;
+
+public class ActivitySuchen extends HorizontalPanel implements ClickHandler {
 	// proxy
 	private final GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 
@@ -18,6 +20,7 @@ public class ActivitySuchen extends HorizontalPanel {
 	Button btnButton;
 	TextBox tbBeispiel;
 	Label lblBeispiel;
+	Label PersonKeyFromServerLabel;
 
 	public ActivitySuchen() {
 		// Projektmarktplatz suchen Aktivität
@@ -26,14 +29,26 @@ public class ActivitySuchen extends HorizontalPanel {
 
 		tbBeispiel = new TextBox();
 		btnButton = new Button("Abschicken");
-		lblAnzeige = new Label("Heyo");
+		lblAnzeige = new Label("Testen der Datenbankverbindung");
+		final Label PersonKeyFromServerLabel = new Label();
 
 		btnButton.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				// lblAnzeige.setText(tbBeispiel.getText());
+				
+				getPersonKeyFromServer();
+				
+			}
+			
+			public void getPersonKeyFromServer() {
+		
+				PersonMapper PersonKeyFromServer = PersonMapper.personMapper().findPersonByKey(8);
+	
+				
+
+				lblAnzeige.setText(tbBeispiel.getText());
+				
 
 				/*
 				 * gwtproxy.greetServer(tbBeispiel.getText(), new
@@ -49,7 +64,7 @@ public class ActivitySuchen extends HorizontalPanel {
 				 * });
 				 */
 
-				gwtproxy.findPersonByKey(1, new AsyncCallback<String>() {
+				gwtproxy.findPersonByKey(PersonKeyFromServer,  new AsyncCallback<String>() {
 
 					@Override
 					public void onSuccess(String result) {
@@ -71,5 +86,14 @@ public class ActivitySuchen extends HorizontalPanel {
 		add(lblAnzeige);
 
 	}
+
+	@Override
+	public void onClick(ClickEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 
 }

@@ -1,6 +1,8 @@
 package de.hdm.itprojekt.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import de.hdm.itprojekt.server.db.PersonMapper;
 //Rueckgaengig
 //ZweiterVersuch!
 /**
@@ -9,7 +11,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface GreetingServiceAsync {
 	void greetServer(String input, AsyncCallback<String> callback) throws IllegalArgumentException;
 
-	void findPersonByKey(int key, AsyncCallback<String> callback);
+	void findPersonByKey(PersonMapper idPerson, AsyncCallback<String> callback);
+
+
+
+
 	
 	// mm erneut wichtig!!!!
 }
