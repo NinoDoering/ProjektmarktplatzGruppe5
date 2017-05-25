@@ -15,7 +15,7 @@ import de.hdm.itprojekt.server.db.PersonMapper;
 public interface GreetingService extends RemoteService  {
 	String greetServer(String name) throws IllegalArgumentException;
 	
-	String showPersonByKey(PersonMapper idPerson);
+	String showPersonByKey(PersonMapper name);
 
 
 	

@@ -9,9 +9,9 @@ import de.hdm.itprojekt.server.db.PersonMapper;
  * The async counterpart of <code>GreetingService</code>.
  */
 public interface GreetingServiceAsync {
-	void greetServer(String input, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void greetServer(String name, AsyncCallback<String> callback);
 
-	void showPersonByKey(PersonMapper idPerson, AsyncCallback<String> callback);
+	void showPersonByKey(PersonMapper name, AsyncCallback<String> callback);
 
 
 
