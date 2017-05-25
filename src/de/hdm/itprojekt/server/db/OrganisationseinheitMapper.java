@@ -1,8 +1,11 @@
 package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
-
-import de.hdm.itprojekt.shared.bo.Organisationseinheit;
+import java.*;		//Pakete, welche zum Ausf�hren ben�tigt werden.
+import javax.*;
+import java.sql.*;
+import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.server.db.*;
 
 public class OrganisationseinheitMapper {
 
@@ -33,7 +36,7 @@ public class OrganisationseinheitMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO organisationseinheit (idOrganisationseinheit)" + " VALUES (" + o.getIdOrganisationseinheit());
+				stmt.executeUpdate(" INSERT INTO organisationseinheit (idOrganisationseinheit)" + " VALUES ('" + o.getIdOrganisationseinheit()+ "')");
 
 			}
 		} catch (SQLException e) {
