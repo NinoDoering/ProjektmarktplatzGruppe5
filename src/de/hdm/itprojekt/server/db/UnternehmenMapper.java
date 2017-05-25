@@ -24,14 +24,19 @@ public class UnternehmenMapper {
 	public Unternehmen findByFirmenName(String firmenName) {
 		Connection con = DBConnection.connection();
 
+		//WICHTIG: In TestMapper muss abfrage folgendermaßen aussehen:
+		//System.out.println(UnternehmenMapper.unternehmenMapper().findByFirmenName("'StukkateurKosova'"));
+		//Sehr wichtig ist auf die Anführungszeichen zu achten!
+		
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT firmenName FROM customers " + "WHERE firmenName=" + firmenName);
+			ResultSet rs = stmt.executeQuery("SELECT idUnternehmen, firmenName" + " FROM unternehmen " + "WHERE firmenName=" + firmenName);
 
 			if (rs.next()) {
 				Unternehmen u = new Unternehmen();
 				u.setFirmenName(rs.getString("firmenName"));
+				u.setIdUnternehmen(rs.getInt("idUnternehmen"));
 
 				return u;
 			}
@@ -59,7 +64,7 @@ public class UnternehmenMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO unternehmen (firmenName) " + "VALUES (" + u.getFirmenName() + "')");
+				stmt.executeUpdate("INSERT INTO unternehmen (idUnternehmen, firmenName) " + "VALUES ('" + u.getIdUnternehmen() + "','" + u.getFirmenName() + "')");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,7 +79,9 @@ public class UnternehmenMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE unternehmen " + "SET firmenName=\"" + "\" " + "WHERE idUnternehmen=" + u.getIdUnternehmen());
+			stmt.executeUpdate("UPDATE unternehmen " 
+			+ "SET firmenName=\"" + u.getFirmenName()  
+			+ "\" " +" WHERE idUnternehmen= " + u.getIdUnternehmen());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
