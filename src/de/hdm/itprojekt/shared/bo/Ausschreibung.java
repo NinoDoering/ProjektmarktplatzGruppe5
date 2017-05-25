@@ -12,18 +12,16 @@ public class Ausschreibung extends BusinessObject  {
 	private int idAusschreibung = 0; 
 	private Date endDatum;
 	private String beschreibung;
+	private int idProjekt;
+
+	public void setIdProjekt(int idProjekt) {
+		this.idProjekt = idProjekt;
+	}
 
 	public int getIdProjekt(){
-		return getIdProjekt();
+		return idProjekt;
 	}
 	
-	public int getIdBewerbung(){
-		return getIdBewerbung();
-	}
-	
-	public int getIdPartnerprofil(){
-		return getIdPartnerprofil();
-	}
 	
 	public String getBezeichnung() {
 		return bezeichnung;

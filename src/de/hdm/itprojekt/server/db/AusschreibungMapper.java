@@ -94,7 +94,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM ausschreibung ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxid " + "FROM ausschreibung ");
 			if (rs.next()) {
 
 				a.setIdAusschreibung(rs.getInt("maxid") + 1);
@@ -102,10 +102,11 @@ public class AusschreibungMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO ausschreibung (id, bezeichnung, endDatum, beschreibung) " 
-				+ "VALUES (" + a.getIdAusschreibung() + "','" 
+						"INSERT INTO ausschreibung (idAusschreibung, bezeichnung, endDatum, idProjekt, beschreibung) " 
+				+ "VALUES ('" + a.getIdAusschreibung() + "','" 
 								+ a.getBezeichnung() + "','" 
 				+ format.format(a.getEndDatum())+ "','" 
+								+ a.getIdProjekt()+ "','"
 								+ a.getBeschreibung() + "')");
 			}
 		} catch (SQLException e2) {
