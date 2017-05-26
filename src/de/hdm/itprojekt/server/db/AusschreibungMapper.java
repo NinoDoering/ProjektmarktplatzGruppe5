@@ -27,12 +27,15 @@ public class AusschreibungMapper {
 		return ausschreibungmapper;
 	}
 
-	public Ausschreibung findByKey(int idAusschreibung) {
+	public Ausschreibung findById (int idAusschreibung) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idAusschreibung, beschreibung, bezeichung, idProjekt, endDatum FROM ausschreibung " + "WHERE idAusschreibung=" + idAusschreibung + " ORDER BY ausschreibung");
+					"SELECT idAusschreibung, beschreibung, bezeichung, idProjekt, endDatum FROM ausschreibung " 
+							+ "WHERE idAusschreibung=" + idAusschreibung 
+							+ " ORDER BY ausschreibung");
+			
 			if (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
 				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
@@ -46,12 +49,14 @@ public class AusschreibungMapper {
 		return null;
 	}
 
-	public Vector<Ausschreibung> findAll() {
+	public Vector <Ausschreibung> findAll() {
 		Connection con = DBConnection.connection();
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " + " ORDER BY idAusschreibung");
+			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
+											+ " ORDER BY idAusschreibung");
+			
 			while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
 				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
@@ -63,14 +68,17 @@ public class AusschreibungMapper {
 		return result;
 	}
 
-	public Vector<Ausschreibung> findByOwner(int idAusschreibung) {
+	public Vector<Ausschreibung> findByAusschreibung (int idAusschreibung) {
 		Connection con = DBConnection.connection();
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " + "WHERE owner=" + idAusschreibung + " ORDER BY idAusschreibung");
+			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
+											+ "WHERE idAusschreibung=" + idAusschreibung 
+											+ " ORDER BY idAusschreibung");
+			
 			while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
 				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
@@ -90,6 +98,7 @@ public class AusschreibungMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxid " + "FROM ausschreibung ");
+			
 			if (rs.next()) {
 
 				a.setIdAusschreibung(rs.getInt("maxid") + 1);
@@ -98,12 +107,13 @@ public class AusschreibungMapper {
 
 				stmt.executeUpdate(
 						"INSERT INTO ausschreibung (idAusschreibung, bezeichnung, endDatum, idProjekt, beschreibung) " 
-				+ "VALUES ('" + a.getIdAusschreibung() + "','" 
+								+ "VALUES ('" + a.getIdAusschreibung() + "','" 
 								+ a.getBezeichnung() + "','" 
-				+ format.format(a.getEndDatum())+ "','" 
+								+ format.format(a.getEndDatum())+ "','" 
 								+ a.getIdProjekt()+ "','"
 								+ a.getBeschreibung() + "')");
 			}
+			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
@@ -120,6 +130,7 @@ public class AusschreibungMapper {
 					+ "endDatum=\"" + format.format(a.getEndDatum()) + "\"," 
 					+ "beschreibung=\"" + a.getBeschreibung() + "\","
 					+ "WHERE idAusschreibung=" + a.getIdAusschreibung());
+			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
@@ -132,7 +143,8 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM ausschreibung " + "WHERE idAusschreibung=" + a.getIdAusschreibung());
+			stmt.executeUpdate("DELETE FROM ausschreibung " 
+								+ "WHERE idAusschreibung=" + a.getIdAusschreibung());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
