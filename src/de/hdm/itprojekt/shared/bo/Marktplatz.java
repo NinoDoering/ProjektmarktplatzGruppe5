@@ -43,8 +43,9 @@ public class Marktplatz {
 	public String toString(){
 		return super.toString()+ " "
 		+ this.idMarktplatz +" "
-		+ this.geschaeftsgebiet; 
-
+		+ this.geschaeftsgebiet + " "
+		+ this.bezeichnung; 
+		
 	}
 	
 }
