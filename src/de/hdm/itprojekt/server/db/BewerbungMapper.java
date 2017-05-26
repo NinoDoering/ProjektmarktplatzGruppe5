@@ -136,10 +136,12 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 			/// owner ?
-			stmt.executeUpdate("UPDATE bewerbung" 
-					+ "SET bewerber=\"" + "'" + bw.getBewerber() +  "'" 
-					+ bw.getBewerbungsText() + "\" ," + "bewerbungsText=\""
-					+ bw.getErstellDatum() + "WHERE idBewerbung="+ "'" + bw.getIdBewerbung());
+			stmt.executeUpdate("UPDATE bewerbung " 
+					+ "SET idBewerbung='" + bw.getIdBewerbung() + "' ,'" 
+					+ "bewerber='" + bw.getBewerber() + "' ,'" 
+					+ "bewerbungsText='" + bw.getBewerbungsText() + "' ,'" 
+					+ "erstellDatum='" + bw.getErstellDatum() + "' ,'" 
+					+ "WHERE idBewerbung ='"+ bw.getIdBewerbung());
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();

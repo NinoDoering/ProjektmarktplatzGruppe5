@@ -84,7 +84,24 @@ public class OrganisationseinheitMapper {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		
 		}
+	}
+	
+		public Organisationseinheit updateOrganisationseinheit (Organisationseinheit org){
+			Connection con = DBConnection.connection();
+			try {
+				Statement stmt = con.createStatement();
+				/// owner ?
+				stmt.executeUpdate("UPDATE organisationseinheit " 
+						+ "SET idOrganisationseinheit='" + org.getIdOrganisationseinheit() + "' ,'" 
+						+ "WHERE idOrganisationseinheit ='"+ org.getIdOrganisationseinheit());
+				
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+			return org;
+		
 	}
 
 }

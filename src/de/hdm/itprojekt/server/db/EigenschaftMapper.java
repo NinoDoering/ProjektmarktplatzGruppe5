@@ -120,12 +120,15 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			// Update Daten eingeben
-			stmt.executeUpdate("UPDATE eigenschaft " + "SET ausbildung=\"" + eig.getAusbildung() + "\", "
-					+ "abschluss=\"" + eig.getAbschluss() + "\" " + "berufserfahrungsJahre=\""
-					+ eig.getBerufserfahrungsJahre() + "\" " + "arbeitsgebiet=\"" + eig.getArbeitsgebiet() + "\" "
-					+ "sprachkenntnisse=\"" + eig.getSprachkenntnisse() + "\" " + "employmentStatus=\""
-					+ eig.getEmploymentStatus() + "\" " + "WHERE idEigenschaft=" + eig.getIdEigenschaft());
+					stmt.executeUpdate("UPDATE eigenschaft " 
+					+ "SET idEigenschaft='" + eig.getIdEigenschaft() + "' ,'" 
+					+ "ausbildung='" + eig.getAusbildung() + "' ,'" 
+					+ "abschluss='" + eig.getAbschluss() + "' ,'" 
+					+ "berufserfahrungsJahre='" + eig.getBerufserfahrungsJahre() + "' ,'" 
+					+ "arbeitsgebiet='" + eig.getArbeitsgebiet() + "' ,'" 
+					+ "sprachkenntnisse='" + eig.getSprachkenntnisse() + "' ,'" 		
+					+ "employmentStatus='" + eig.getEmploymentStatus() + "' ,'" 
+					+ "WHERE idEigenschaft ='"+ eig.getIdEigenschaft());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,7 +145,7 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM eigenschaft " 
-								+ "WHERE id=" + eig.getIdEigenschaft());
+								+ "WHERE idEigenschaft=" + eig.getIdEigenschaft());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
