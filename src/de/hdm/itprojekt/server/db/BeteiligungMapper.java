@@ -136,12 +136,12 @@ public class BeteiligungMapper {
 		try {
 			Statement stmt = con.createStatement();
 			/// owner ?
-			stmt.executeUpdate("UPDATE beteiligung" 
-			+ "SET idBeteiligung=\"" + b.getIdBeteiligung()  + "\" ,"
-			+ "idProjekt=\"" + b.getIdProjekt()  + "\" ,"
-			+ "idBewerbung=\"" + b.getIdBewerbung()  + "\" ,"
-			+ "WHERE idBeteiligung=" + b.getIdBeteiligung());
-			
+			stmt.executeUpdate("UPDATE beteiligung " 
+					+ "SET idBeteiligung='" + b.getIdBeteiligung() + "' ,'" 
+					+ "idBewerbung='" + b.getIdBewerbung() + "' ,'" 
+					+ "idProjekt='" + b.getIdProjekt() + "' ,'" 
+					+ "idBewertung'" + b.getIdBewertung() + "' ,'" 
+					+ "WHERE idBeteiligung ='"+ b.getIdBeteiligung());
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
