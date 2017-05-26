@@ -11,7 +11,7 @@ import java.util.Vector;
 import de.hdm.itprojekt.shared.bo.*;
 
 public class AusschreibungMapper {
-	//neuerVersuch........
+	
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 	private static AusschreibungMapper ausschreibungMapper = null;
@@ -32,13 +32,18 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idAusschreibung, beschreibung, bezeichung, idProjekt, endDatum FROM ausschreibung " 
+					"SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
 							+ "WHERE idAusschreibung=" + idAusschreibung 
-							+ " ORDER BY ausschreibung");
+							+ " ORDER BY idAusschreibung");
 			
 			if (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
 				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+				a.setBeschreibung(rs.getString("beschreibung"));
+				a.setBezeichnung(rs.getString("bezeichnung"));
+				a.setIdProjekt(rs.getInt("idProjekt"));
+				a.setEndDatum(rs.getDate("endDatum"));
+
 				return a;
 			}
 		} catch (SQLException e2) {
@@ -88,6 +93,11 @@ public class AusschreibungMapper {
 			while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
 				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+				a.setBeschreibung(rs.getString("beschreibung"));
+				a.setBezeichnung(rs.getString("bezeichnung"));
+				a.setIdProjekt(rs.getInt("idProjekt"));
+				a.setEndDatum(rs.getDate("endDatum"));
+				
 				result.addElement(a);
 			}
 		} catch (SQLException e2) {
@@ -126,21 +136,21 @@ public class AusschreibungMapper {
 		return a;
 	}
 
-	public Ausschreibung update(Ausschreibung a) {
+	public Ausschreibung update (Ausschreibung a) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			/// owner ?
-			stmt.executeUpdate("UPDATE ausschreibung" 
-					+ "SET bezeichnung=\"" + a.getBezeichnung() + "\" ,"
-					+ "endDatum=\"" + format.format(a.getEndDatum()) + "\"," 
-					+ "beschreibung=\"" + a.getBeschreibung() + "\","
-					+ "WHERE idAusschreibung=" + a.getIdAusschreibung());
+			stmt.executeUpdate("UPDATE ausschreibung " + "SET beschreibung=\"" + a.getBeschreibung() + "\", " + "bezeichnung=\""
+					+ a.getBezeichnung() + "\" " +"\", " + "endDatum=\""
+					+ a.getEndDatum() + "\" " + "WHERE idAusschreibung" + a.getIdAusschreibung());
+			
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
-		return a;
+			return a;
+		
 	}
 
 	public void delete(Ausschreibung a) {

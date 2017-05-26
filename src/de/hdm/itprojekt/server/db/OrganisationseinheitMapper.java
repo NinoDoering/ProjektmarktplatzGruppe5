@@ -21,7 +21,7 @@ public class OrganisationseinheitMapper {
 		return organisationseinheitMapper;
 	}
 
-	public Organisationseinheit insert(Organisationseinheit o) {
+	public Organisationseinheit insertOrganisationseinheit (Organisationseinheit o) {
 
 		Connection con = DBConnection.connection();
 
@@ -36,7 +36,9 @@ public class OrganisationseinheitMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO organisationseinheit (idOrganisationseinheit)" + " VALUES ('" + o.getIdOrganisationseinheit()+ "')");
+				stmt.executeUpdate("INSERT INTO organisationseinheit (idOrganisationseinheit)" 
+								+ " VALUES ('" 
+								+ o.getIdOrganisationseinheit()+ "')");
 
 			}
 		} catch (SQLException e) {
@@ -45,14 +47,17 @@ public class OrganisationseinheitMapper {
 		return o;
 	}
 
-	public Organisationseinheit findByKey(int idOrganisationseinheit) {
+	public Organisationseinheit findOrganisationseinheitById (int idOrganisationseinheit) {
 
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit FROM organisationseinheit" + "WHERE idOrganisationseinheit=" + idOrganisationseinheit + "ORDER BY idOrganisationseinheit");
+			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit FROM organisationseinheit" 
+											+ "WHERE idOrganisationseinheit=" + idOrganisationseinheit 
+											+ "ORDER BY idOrganisationseinheit");
+			
 			// Organisationseinheit sollen nach id angezeigt werden
 
 			if (rs.next()) {
@@ -68,13 +73,15 @@ public class OrganisationseinheitMapper {
 		return null;
 	}
 
-	public void delete(Organisationseinheit o) {
+	public void deleteOrganisationseinheit (Organisationseinheit o) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM organisationseinheit " + "WHERE idOrganisationseinheit=" + o.getIdOrganisationseinheit());
+			stmt.executeUpdate("DELETE FROM organisationseinheit " 
+							+ "WHERE idOrganisationseinheit=" + o.getIdOrganisationseinheit());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

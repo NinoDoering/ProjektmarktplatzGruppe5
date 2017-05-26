@@ -26,16 +26,23 @@ public class BeteiligungMapper {
 		return beteiligungMapper;
 	}
 
-	public Beteiligung findByKey(int idBeteiligung) {
+	public Beteiligung findBeteiligungById(int idBeteiligung) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			// SQL STATEMENT
 			ResultSet rs = stmt
-					.executeQuery("SELECT idBeteiligung,  FROM beteiligung " + "WHERE idBeteiligung=" + idBeteiligung + " ORDER BY idBeteilgung");
+					.executeQuery("SELECT idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
+								+ "WHERE idBeteiligung=" + idBeteiligung 
+								+ " ORDER BY idBeteilgung");
+			
 			if (rs.next()) {
 				Beteiligung b = new Beteiligung();
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				b.setIdBewerbung(rs.getInt("idBewerbung"));
+				b.setIdProjekt(rs.getInt("idProjekt"));
+				b.setIdBewertung(rs.getInt("idBewertung"));
+				
 				return b;
 			}
 		} catch (SQLException e2) {
@@ -46,15 +53,21 @@ public class BeteiligungMapper {
 		return null;
 	}
 
-	public Vector<Beteiligung> findAll() {
+	public Vector<Beteiligung> findAllBeteiligungen() {
 		Connection con = DBConnection.connection();
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " + " ORDER BY idBeteiligung");
+			ResultSet rs = stmt.executeQuery("SELECT idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
+											+ " ORDER BY idBeteiligung");
+			
 			while (rs.next()) {
 				Beteiligung b = new Beteiligung();
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				b.setIdBewerbung(rs.getInt("idBewerbung"));
+				b.setIdProjekt(rs.getInt("idProjekt"));
+				b.setIdBewertung(rs.getInt("idBewertung"));
+				
 				result.addElement(b);
 			}
 		} catch (SQLException e2) {
@@ -63,7 +76,7 @@ public class BeteiligungMapper {
 		return result;
 	}
 
-	public Vector<Beteiligung> findByOwner(int idBeteiligung) {
+	public Vector<Beteiligung> findBeteiligung (int idBeteiligung) {
 		Connection con = DBConnection.connection();
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
@@ -71,10 +84,17 @@ public class BeteiligungMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idBeteiligung, idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " + "WHERE idBeteiligung=" + idBeteiligung + " ORDER BY idBeteiligung");
+					.executeQuery("SELECT idBeteiligung, idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
+								+ "WHERE idBeteiligung=" + idBeteiligung 
+								+ " ORDER BY idBeteiligung");
+			
 			while (rs.next()) {
 				Beteiligung b = new Beteiligung();
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				b.setIdBewerbung(rs.getInt("idBewerbung"));
+				b.setIdProjekt(rs.getInt("idProjekt"));
+				b.setIdBewertung(rs.getInt("idBewertung"));
+				
 				result.addElement(b);
 			}
 		} catch (SQLException e2) {
@@ -84,7 +104,7 @@ public class BeteiligungMapper {
 		return result;
 	}
 
-	public Beteiligung insert(Beteiligung b) {
+	public Beteiligung insertBeteiligung (Beteiligung b) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -98,19 +118,20 @@ public class BeteiligungMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate("INSERT INTO beteiligung (idBeteiligung, idBewerbung, idProjekt, idBewertung) " 
-				+ "VALUES ('" 
-						+ b.getIdBeteiligung() + "','"
-						+ b.getIdBewertung() + "','"
-						+ b.getIdProjekt() + "','" 
-						+ b.getIdBewerbung() + "')");
+									+ "VALUES ('" 
+									+ b.getIdBeteiligung() + "','"
+									+ b.getIdBewertung() + "','"
+									+ b.getIdProjekt() + "','" 
+									+ b.getIdBewerbung() + "')");
 			}
+			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
 		return b;
 	}
 
-	public Beteiligung update(Beteiligung b) {
+	public Beteiligung updateBeteiligung (Beteiligung b) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
@@ -128,13 +149,14 @@ public class BeteiligungMapper {
 		return b;
 	}
 
-	public void delete(Beteiligung b) {
+	public void deleteBeteiligung (Beteiligung b) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM beteiligung " + "WHERE idBeteiligung=" + b.getIdBeteiligung());
+			stmt.executeUpdate("DELETE FROM beteiligung " 
+								+ "WHERE idBeteiligung=" + b.getIdBeteiligung());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();

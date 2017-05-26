@@ -22,7 +22,7 @@ public class EigenschaftMapper {
 		return eigenschaftMapper;
 	}
 
-	public Eigenschaft insert(Eigenschaft eig) {
+	public Eigenschaft insertEigenschaft (Eigenschaft eig) {
 
 		Connection con = DBConnection.connection();
 
@@ -38,14 +38,13 @@ public class EigenschaftMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(" INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
-
-								+ " VALUES ('" + eig.getIdEigenschaft() + "','" 
-								+ eig.getAusbildung() + "','" 
-								+ eig.getAbschluss()+ "','" 
-								+ eig.getBerufserfahrungsJahre() + "','" 
-								+ eig.getArbeitsgebiet() + "','"
-								+ eig.getSprachkenntnisse() + "','" 
-								+ eig.getEmploymentStatus() + "')");
+									+ " VALUES ('" + eig.getIdEigenschaft() + "','" 
+									+ eig.getAusbildung() + "','" 
+									+ eig.getAbschluss()+ "','" 
+									+ eig.getBerufserfahrungsJahre() + "','" 
+									+ eig.getArbeitsgebiet() + "','"
+									+ eig.getSprachkenntnisse() + "','" 
+									+ eig.getEmploymentStatus() + "')");
 
 			}
 		} catch (SQLException e) {
@@ -54,18 +53,18 @@ public class EigenschaftMapper {
 		return eig;
 	}
 
-	public Eigenschaft findByKey(int idEigenschaft) {
+	public Eigenschaft findEigenschaftById(int idEigenschaft) {
 
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery(
-					"SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft"
-							+ "WHERE idEigenschaft=" + idEigenschaft + "ORDER BY idEigenschaft");
+			ResultSet rs = stmt.executeQuery("SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft"
+											+ "WHERE idEigenschaft=" + idEigenschaft 
+											+ "ORDER BY idEigenschaft");
+			
 			// Eigenschaft sollen nach id angezeigt werden
-
 			if (rs.next()) {
 				Eigenschaft eig = new Eigenschaft();
 				eig.setIdEigenschaft(rs.getInt("'idEigenschaft'"));
@@ -85,7 +84,7 @@ public class EigenschaftMapper {
 		return null;
 	}
 
-	public Vector<Eigenschaft> findAll() {
+	public Vector<Eigenschaft> findAllEigenschaften () {
 		Connection con = DBConnection.connection();
 		Vector<Eigenschaft> vec = new Vector<Eigenschaft>();
 
@@ -115,7 +114,7 @@ public class EigenschaftMapper {
 		return vec;
 	}
 
-	public Eigenschaft update(Eigenschaft eig) {
+	public Eigenschaft updateEigenschaft (Eigenschaft eig) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -135,24 +134,20 @@ public class EigenschaftMapper {
 		return eig;
 	}
 
-	public void delete(Eigenschaft eig) {
+	public void deleteEigenschaft (Eigenschaft eig) {
 
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM eigenschaft " + "WHERE id=" + eig.getIdEigenschaft());
+			stmt.executeUpdate("DELETE FROM eigenschaft " 
+								+ "WHERE id=" + eig.getIdEigenschaft());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			}}}
+			}
+		}
+	}
 		
-	
-
-	//public Vector<Eigenschaft> getEigeschaftOf(Eigenschaft eig) {
-
-
-//		return PersonMapper.personMapper().findByKey(eig);
-	//}
-
 	
