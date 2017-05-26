@@ -135,16 +135,19 @@ public class AusschreibungMapper {
 		}
 		return a;
 	}
-
-	public Ausschreibung update (Ausschreibung a) {
+	
+	
+	public Ausschreibung updateAusschreibung (Ausschreibung a) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
-			/// owner ?
-			stmt.executeUpdate("UPDATE ausschreibung " + "SET beschreibung=\"" + a.getBeschreibung() + "\", " + "bezeichnung=\""
-					+ a.getBezeichnung() + "\" " +"\", " + "endDatum=\""
-					+ a.getEndDatum() + "\" " + "WHERE idAusschreibung" + a.getIdAusschreibung());
-			
+			stmt.executeUpdate("UPDATE ausschreibung " 
+					+ "SET idAusschreibung='" + a.getIdAusschreibung() + "' ,'" 
+					+ "bezeichnung='" + a.getBezeichnung() + "' ,'" 
+					+ "beschreibung='" + a.getBeschreibung() + "' ,'" 
+					+ "endDatum='" + a.getEndDatum() + "' ,'" 
+					+ "idProjekt='" + a.getIdProjekt() + "' ,'" 
+					+ "WHERE idAusschreibung ='"+ a.getIdAusschreibung());
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -153,9 +156,9 @@ public class AusschreibungMapper {
 		
 	}
 
-	public void delete(Ausschreibung a) {
+	public void deleteAusschreibung (Ausschreibung a) {
 		Connection con = DBConnection.connection();
-
+		
 		try {
 			Statement stmt = con.createStatement();
 
