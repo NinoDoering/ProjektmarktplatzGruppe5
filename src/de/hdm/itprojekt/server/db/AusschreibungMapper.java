@@ -14,20 +14,20 @@ public class AusschreibungMapper {
 	//neuerVersuch........
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-	private static AusschreibungMapper ausschreibungmapper = null;
+	private static AusschreibungMapper ausschreibungMapper = null;
 
 	protected AusschreibungMapper() {
 	}
 
-	public static AusschreibungMapper ausschreibungmapper() {
-		if (ausschreibungmapper == null) {
-			ausschreibungmapper = new AusschreibungMapper();
+	public static AusschreibungMapper ausschreibungMapper() {
+		if (ausschreibungMapper == null) {
+			ausschreibungMapper = new AusschreibungMapper();
 		}
 
-		return ausschreibungmapper;
+		return ausschreibungMapper;
 	}
 
-	public Ausschreibung findById (int idAusschreibung) {
+	public Ausschreibung findAusschreibungById (int idAusschreibung) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
@@ -49,17 +49,23 @@ public class AusschreibungMapper {
 		return null;
 	}
 
-	public Vector <Ausschreibung> findAll() {
+	public Vector <Ausschreibung> findAllAusschreibungen () {
 		Connection con = DBConnection.connection();
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 		try {
 			Statement stmt = con.createStatement();
+			
 			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
 											+ " ORDER BY idAusschreibung");
 			
 			while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
 				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+				a.setBeschreibung(rs.getString("beschreibung"));
+				a.setBezeichnung(rs.getString("bezeichnung"));
+				a.setIdProjekt(rs.getInt("idProjekt"));
+				a.setEndDatum(rs.getDate("endDatum"));
+
 				result.addElement(a);
 			}
 		} catch (SQLException e2) {
