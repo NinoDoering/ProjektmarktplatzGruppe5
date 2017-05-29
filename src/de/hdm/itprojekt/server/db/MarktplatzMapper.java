@@ -1,6 +1,9 @@
 package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
@@ -19,7 +22,7 @@ public class MarktplatzMapper {
 		return marktplatzMapper;
 	}
 
-	public Marktplatz insert(Marktplatz p) {
+	public Marktplatz insertMarktplatz (Marktplatz p) {
 
 		Connection con = DBConnection.connection();
 
@@ -49,7 +52,7 @@ public class MarktplatzMapper {
 		return p;
 	}
 
-	public Marktplatz findByKey(int idMarktplatz) {
+	public Marktplatz findMarktplatzById (int idMarktplatz) {
 
 		Connection con = DBConnection.connection();
 
@@ -67,7 +70,7 @@ public class MarktplatzMapper {
 				p.setIdMarktplatz(rs.getInt("idMarktplatz"));
 				p.setBezeichnung(rs.getString("bezeichnung"));
 				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
-				//p.setProjekt(rs.getProjekt("beschreibung")); // fehler beheben
+				p.setProjekt(rs.getString("beschreibung")); 
 
 				return p;
 			}
@@ -95,7 +98,7 @@ public class MarktplatzMapper {
 				p.setIdMarktplatz(rs.getInt("idMarktplatz"));
 				p.setBezeichnung(rs.getString("bezeichnung"));
 				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
-				p.setProjekt(rs.getProjekt("projektleiter")); // Grund kein Projektleiter definiert in Person
+				p.setProjekt(rs.getString("projektleiter")); 
 
 				result.addElement(p);
 			}
@@ -107,7 +110,7 @@ public class MarktplatzMapper {
 		return result;
 	}
 
-	public Vector<Marktplatz> findByBezeichnung(String bezeichnung) {
+	public Vector<Marktplatz> findMarktplatzByBezeichnung(String bezeichnung) {
 		Connection con = DBConnection.connection();
 		Vector<Marktplatz> result = new Vector<Marktplatz>();
 
@@ -115,7 +118,7 @@ public class MarktplatzMapper {
 			Statement stmt = con.createStatement();
 
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
-			// Bezeichung enthält
+			// Bezeichung enthï¿½lt
 			ResultSet rs = stmt.executeQuery("SELECT idMarktplatz, bezeichnung, geschaeftsgebiet, projekt "
 					+ " FROM marktplatz " + "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
 
@@ -134,7 +137,7 @@ public class MarktplatzMapper {
 		return result;
 	}
 
-	public Marktplatz update(Marktplatz p) {
+	public Marktplatz updateMarktplatz (Marktplatz p) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -152,7 +155,7 @@ public class MarktplatzMapper {
 		return p;
 	}
 
-	public void delete(Marktplatz p) {
+	public void deleteMarktplatz (Marktplatz p) {
 		Connection con = DBConnection.connection();
 
 		try {

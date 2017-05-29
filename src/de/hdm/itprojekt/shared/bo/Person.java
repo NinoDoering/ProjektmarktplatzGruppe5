@@ -7,6 +7,7 @@ public class Person extends BusinessObject{
 	private String vorname;
 	private String nachname;
 	private String titel;
+	private String projektleiter;
 	
 	public int getIdProjekt(){
 		return getIdProjekt();
@@ -41,6 +42,7 @@ public class Person extends BusinessObject{
 		+ this.idPerson + " " 
 		+ this.titel +" "
 		+ this.vorname + " " 
+		+ this.projektleiter + " " 
 		+ this.nachname;
 	
 	}
@@ -51,5 +53,13 @@ public class Person extends BusinessObject{
 
 	public void setTitel(String titel) {
 		this.titel = titel;
+	}
+
+	public String getProjektleiter() {
+		return projektleiter;
+	}
+
+	public void setProjektleiter(String projektleiter) {
+		this.projektleiter = projektleiter;
 	}
 }
