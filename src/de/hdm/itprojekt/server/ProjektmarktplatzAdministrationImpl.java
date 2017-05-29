@@ -24,7 +24,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	private PartnerprofilMapper ppMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektMapper prjktMapper = null;
-	private ProjektmarktplatzMapper pmpMapper = null;
+	private MarktplatzMapper pmpMapper = null;
 	private TeamMapper teamMapper = null;
 	private UnternehmenMapper unternehmenMapper = null;
 	private AusschreibungMapper ausschreibungMapper = null;
@@ -47,10 +47,10 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 		this.persMapper = PersonMapper.personMapper();
 		this.prjktMapper = ProjektMapper.projektMapper();
-		this.pmpMapper = ProjektmarktplatzMapper.projektmarktplatzMapper();
+		this.pmpMapper = MarktplatzMapper.marktplatzMapper();
 		this.teamMapper = TeamMapper.teamMapper();
 		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
-		this.ausschreibungMapper = AusschreibungMapper.ausschreibungmapper(); 
+		this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper(); 
 											//.ausschreibungMapper muss das heiﬂen auch in Mapperklasse
 		this.bewerbungMapper = BewerbungMapper.bewerbungmapper(); //gleicher Fehler!!!!!
 		}

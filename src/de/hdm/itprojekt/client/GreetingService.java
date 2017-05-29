@@ -1,9 +1,13 @@
 package de.hdm.itprojekt.client;
+import de.hdm.itprojekt.server.db.*;
+
+import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.server.db.PersonMapper;
+import de.hdm.itprojekt.shared.bo.Person;
 
 //Rueckgaengig
 //zweiterVersuch
@@ -13,11 +17,20 @@ import de.hdm.itprojekt.server.db.PersonMapper;
  */
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService  {
-	String greetServer(String name) throws IllegalArgumentException;
 	
-	String showPersonByKey(PersonMapper idPerson);
-
-
+	
+	 // String greetServer(String name) throws IllegalArgumentException;
+	
+//	Person showPersonByKey(int idPerson);
+//
+//	String showPersonByKey(Person personKeyFromDBServer);
+//	
+//	Vector<Projektmarktplatz> getProjektmarktplatzAll(); 
+	
+	
+	Person findPersonByKey(String key);
+	
+	// public Projektmarktplatz addProjektmarktplatz(String bezeichnung);
 	
 	// k erneut wichtig!!!!
 }

@@ -11,6 +11,11 @@
     <servlet-class>de.hdm.itprojekt.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
+  
+  
+  
+  
+  
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/projektmarktplatz/greet</url-pattern>

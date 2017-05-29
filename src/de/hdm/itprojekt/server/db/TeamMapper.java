@@ -53,7 +53,7 @@ public class TeamMapper {
 			Statement stmt = con.createStatement();
 			// Teams sollen alphabetisch nach Team-Namen ausgegeben
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idTeam, teamName, mitgliederAnzahl FROM team" + "WHERE id=" + idTeam + "ORDER by teamName");
+					"SELECT idTeam, teamName, mitgliederAnzahl" + "FROM  team" + "WHERE idTeam=" + idTeam );
 
 			if (rs.next()) {
 				Team t = new Team();

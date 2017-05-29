@@ -11,6 +11,7 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -30,7 +31,10 @@ public class Projektmarktplatz implements EntryPoint {
 	ActivitySuchen hpActivitySuchen;
 	Button btn1;
 	Button btn2;
+	
+	
 	public void onModuleLoad() {
+		
 
 		
 			//Buttons
@@ -39,6 +43,7 @@ public class Projektmarktplatz implements EntryPoint {
 		btn2 = new Button ("Projektmarktplatz erstellen");
 		//Button Ende
 	//Panels
+		
 		hpMain = new HorizontalPanel();
 		hpActivitySuchen = new ActivitySuchen();
 		//Panels Ende
@@ -53,7 +58,8 @@ public class Projektmarktplatz implements EntryPoint {
 		hpMain.add(btn1);
 		
 		hpMain.add(btn2);
-
+	
+		
 		
 		
 		RootPanel.get("PMarktSuch").add(hpMain);
@@ -68,6 +74,7 @@ public class Projektmarktplatz implements EntryPoint {
 				hpMain.remove(btn1);
 				hpMain.remove(btn2);
 				hpMain.add(hpActivitySuchen);
+			
 			}
 		});
 		

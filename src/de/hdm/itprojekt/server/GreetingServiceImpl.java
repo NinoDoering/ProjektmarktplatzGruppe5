@@ -1,15 +1,20 @@
 package de.hdm.itprojekt.server;
 
 import de.hdm.itprojekt.client.GreetingService;
+import de.hdm.itprojekt.client.Projektmarktplatz;
 import de.hdm.itprojekt.server.db.EigenschaftMapper;
 import de.hdm.itprojekt.server.db.OrganisationseinheitMapper;
 import de.hdm.itprojekt.server.db.PartnerprofilMapper;
 import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.server.db.ProjektMapper;
-import de.hdm.itprojekt.server.db.ProjektmarktplatzMapper;
+
 import de.hdm.itprojekt.server.db.TeamMapper;
 import de.hdm.itprojekt.server.db.UnternehmenMapper;
 import de.hdm.itprojekt.shared.FieldVerifier;
+import de.hdm.itprojekt.shared.bo.Person;
+
+import java.util.Vector;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 //Rueckgaengig
 //ZweiterVersuch
@@ -64,12 +69,38 @@ public void init() throws IllegalArgumentException{
 	}
 
 	@Override
-	public String findPersonByKey(int key) throws IllegalArgumentException {
+	public Person findPersonByKey(String key) 
+			
+			//throws IllegalArgumentException 
+	{
 		// TODO Auto-generated method stub
-		String sp = "person";
-		sp = sp + this.persMapper.findPersonByKey(1).getVorname();
-		return sp;
+		return this.persMapper.findPersonByKey(key);
+		
 	}
+
+//	@Override
+//	public String showPersonByKey(int idPerson) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+//	@Override
+//	public String showPersonByKey(Person personKeyFromDBServer) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Vector<Projektmarktplatz> getProjektmarktplatzAll() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Person showPersonByKey(String text) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 	// erneut wichtig!!!!
