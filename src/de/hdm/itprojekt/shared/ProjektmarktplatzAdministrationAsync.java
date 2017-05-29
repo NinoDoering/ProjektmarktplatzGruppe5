@@ -17,14 +17,14 @@ public interface ProjektmarktplatzAdministrationAsync<Person, Unternehmen, Team,
 	void anlegenProjektmarktplatz(Projektmarktplatz pm, String geschaeftsgebiet, String bezeichnung, Projekt projekt,
 			AsyncCallback<Projektmarktplatz> callback);
 
-	void editierenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Projekt projekt,
-			AsyncCallback<Vector<Projektmarktplatz>> callback);
+	void editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Projekt projekt,
+			AsyncCallback<Vector<Marktplatz>> callback);
 
-	void loeschenProjektmarktplatz(Projekt p, Projektmarktplatz pm, AsyncCallback<Void> callback);
+	void loeschenMarktplatz(Projekt p, Marktplatz pm, AsyncCallback<Void> callback);
 
-	void save(Projektmarktplatz pm, AsyncCallback<Void> callback);
+	void save(Marktplatz pm, AsyncCallback<Void> callback);
 
-	void getProjektmarktplatz(Projekt projekt, AsyncCallback<Vector<Projektmarktplatz>> callback);
+	void getMarktplatz(Projekt projekt, AsyncCallback<Vector<Marktplatz>> callback);
 
 	// Projekt p
 	void anlegenProjekt(Projekt p, String projektleiter, String beschreibung, Date startDatum, Date endDatum,

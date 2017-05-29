@@ -7,6 +7,9 @@ public class Marktplatz {
 	private String geschaeftsgebiet;
 	private String bezeichnung;
 	private int idProjekt;
+	private String projekt;
+	private String projektleiter;
+	
 	
 	public String getBezeichnung() {
 		return bezeichnung;
@@ -44,8 +47,25 @@ public class Marktplatz {
 		return super.toString()+ " "
 		+ this.idMarktplatz +" "
 		+ this.geschaeftsgebiet + " "
+		+ this.projekt + " "
 		+ this.bezeichnung; 
 		
+	}
+
+	public String getProjekt() {
+		return projekt;
+	}
+
+	public void setProjekt(String projekt) {
+		this.projekt = projekt;
+	}
+
+	public String getProjektleiter() {
+		return projektleiter;
+	}
+
+	public void setProjektleiter(String projektleiter) {
+		this.projektleiter = projektleiter;
 	}
 	
 }
