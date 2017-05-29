@@ -42,7 +42,7 @@ public interface ReportGenerator extends RemoteService {
 
 	void setPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
 
-	void setProjektmarktplatz(Projektmarktplatz pm) throws IllegalArgumentException;
+	void setProjektmarktplatz(Marktplatz pm) throws IllegalArgumentException;
 
 	void setAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 
