@@ -22,14 +22,12 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	Object anlegenProjektmarktplatz(Object projektmarktplatz, String geschaeftsgebiet, String bezeichnung,
 			Object projekt) throws IllegalArgumentException;
 
-	Vector editierenProjektmarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt)
+	Vector editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt)
 			throws IllegalArgumentException;
 
-	void loeschenProjektmarktplatz(Object projekt, Object projektmarktplatz) throws IllegalArgumentException;
 
-	void save(Object pm) throws IllegalArgumentException;
 
-	Vector getProjektmarktplatz(Object projekt) throws IllegalArgumentException;
+	Vector getMarktplatz(Object projekt) throws IllegalArgumentException;
 
 	// Projekt p
 	Object anlegenProjekt(Object projekt, String projektleiter, String beschreibung, Date startDatum, Date endDatum)
@@ -181,5 +179,9 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 			int idOrgansisationseinheit) throws IllegalArgumentException;
 
 	Vector getAllByidBewerbungen(Object b, int idBewerbung) throws IllegalArgumentException;
+
+	void loeschenMarktplatz(Object p, Marktplatz pm) throws IllegalArgumentException;
+
+	void save(Marktplatz pm) throws IllegalArgumentException;
 
 }
