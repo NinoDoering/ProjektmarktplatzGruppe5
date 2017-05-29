@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client;
 
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -14,7 +15,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import de.hdm.itprojekt.shared.bo.Person;
 
 
-public class ActivitySuchen extends HorizontalPanel {
+public class ActivitySuchen extends HorizontalPanel  {
 	
 	
 	
@@ -43,25 +44,7 @@ btnButton.addClickHandler(new ClickHandler() {
 	
 	@Override
 	public void onClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		//lblAnzeige.setText(tbBeispiel.getText());
-		
-		/*gwtproxy.greetServer(tbBeispiel.getText(), new AsyncCallback<String>() {
-			
-			@Override
-			public void onSuccess(String result) {
-				// TODO Auto-generated method stub
-				lblAnzeige.setText(result);
-				
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				lblAnzeige.setText(""+caught);
-			}
-		});
-		*/
+
 	doStuff();	
 		
 	}
@@ -82,22 +65,7 @@ add(projekttabelle);
 		if (gwtproxy == null){
 			gwtproxy = GWT.create(GreetingService.class);
 		}
-		
-//		gwtproxy.showPersonByKey(8, new AsyncCallback<String>() {
-//			
-//			@Override
-//			public void onSuccess(String result) {
-//				// TODO Auto-generated method stub
-//				lblAnzeige.setText(result);
-//			}
-//			
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				lblAnzeige.setText(""+caught);
-//			}
-//		});
-		
+
 		AsyncCallback<Person> callback = new AsyncCallback<Person>(){
 
 			@Override
@@ -117,4 +85,5 @@ add(projekttabelle);
 			gwtproxy.findPersonByKey(tbBeispiel.getText(), callback);
 	
 	}
+
 }
