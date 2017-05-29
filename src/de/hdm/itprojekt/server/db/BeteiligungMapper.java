@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import de.hdm.itprojekt.shared.bo.Organisationseinheit;
-import de.hdm.itprojekt.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.shared.bo.Beteiligung;
+import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.server.db.*;
+
 
 public class BeteiligungMapper {
 	//neuerVersuch
@@ -18,7 +18,7 @@ public class BeteiligungMapper {
 	protected BeteiligungMapper() {
 	}
 
-	public static BeteiligungMapper ausschreibungmapper() {
+	public static BeteiligungMapper beteiligungMapper() {
 		if (beteiligungMapper == null) {
 			beteiligungMapper = new BeteiligungMapper();
 		}
@@ -26,16 +26,23 @@ public class BeteiligungMapper {
 		return beteiligungMapper;
 	}
 
-	public Beteiligung findByKey(int idBeteiligung) {
+	public Beteiligung findBeteiligungById(int idBeteiligung) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			// SQL STATEMENT
 			ResultSet rs = stmt
-					.executeQuery("SELECT idBeteiligung, owner FROM beteiligung " + "WHERE id=" + idBeteiligung + " ORDER BY owner");
+					.executeQuery("SELECT idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
+								+ "WHERE idBeteiligung=" + idBeteiligung 
+								+ " ORDER BY idBeteilgung");
+			
 			if (rs.next()) {
 				Beteiligung b = new Beteiligung();
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				b.setIdBewerbung(rs.getInt("idBewerbung"));
+				b.setIdProjekt(rs.getInt("idProjekt"));
+				b.setIdBewertung(rs.getInt("idBewertung"));
+				
 				return b;
 			}
 		} catch (SQLException e2) {
@@ -46,15 +53,21 @@ public class BeteiligungMapper {
 		return null;
 	}
 
-	public Vector<Beteiligung> findAll() {
+	public Vector<Beteiligung> findAllBeteiligungen() {
 		Connection con = DBConnection.connection();
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT idBeteiligung, owner FROM beteiligung " + " ORDER BY idBeteiligung");
+			ResultSet rs = stmt.executeQuery("SELECT idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
+											+ " ORDER BY idBeteiligung");
+			
 			while (rs.next()) {
 				Beteiligung b = new Beteiligung();
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				b.setIdBewerbung(rs.getInt("idBewerbung"));
+				b.setIdProjekt(rs.getInt("idProjekt"));
+				b.setIdBewertung(rs.getInt("idBewertung"));
+				
 				result.addElement(b);
 			}
 		} catch (SQLException e2) {
@@ -63,7 +76,7 @@ public class BeteiligungMapper {
 		return result;
 	}
 
-	public Vector<Beteiligung> findByOwner(int idBeteiligung) {
+	public Vector<Beteiligung> findBeteiligung (int idBeteiligung) {
 		Connection con = DBConnection.connection();
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
@@ -71,10 +84,17 @@ public class BeteiligungMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idBeteiligung, owner FROM beteiligung " + "WHERE owner=" + idBeteiligung + " ORDER BY idBeteiligung");
+					.executeQuery("SELECT idBeteiligung, idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
+								+ "WHERE idBeteiligung=" + idBeteiligung 
+								+ " ORDER BY idBeteiligung");
+			
 			while (rs.next()) {
 				Beteiligung b = new Beteiligung();
 				b.setIdBeteiligung(rs.getInt("idBeteiligung"));
+				b.setIdBewerbung(rs.getInt("idBewerbung"));
+				b.setIdProjekt(rs.getInt("idProjekt"));
+				b.setIdBewertung(rs.getInt("idBewertung"));
+				
 				result.addElement(b);
 			}
 		} catch (SQLException e2) {
@@ -84,54 +104,59 @@ public class BeteiligungMapper {
 		return result;
 	}
 
-	/*
-	public Vector<Beteiligung> findByOwner(Organisationseinheit owner) {
-
-		return findByOwner(owner.getId());
-	}
-*/
-	public Beteiligung insert(Beteiligung b) {
+	public Beteiligung insertBeteiligung (Beteiligung b) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idBeteiligung) AS maxid " + "FROM ausschreibung ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idBeteiligung) AS maxid " + "FROM beteiligung ");
 			if (rs.next()) {
 
 				b.setIdBeteiligung(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO accounts (idBeteiligung, idProjekt, idPerson) " + "VALUES (" + b.getIdBeteiligung() + ","
-						+ b.getIdProjekt() + "," + b.getIdPerson() + "," + ")");
+				stmt.executeUpdate("INSERT INTO beteiligung (idBeteiligung, idBewerbung, idProjekt, idBewertung) " 
+									+ "VALUES ('" 
+									+ b.getIdBeteiligung() + "','"
+									+ b.getIdBewertung() + "','"
+									+ b.getIdProjekt() + "','" 
+									+ b.getIdBewerbung() + "')");
 			}
+			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
 		return b;
 	}
 
-	public Beteiligung update(Beteiligung b) {
+	public Beteiligung updateBeteiligung (Beteiligung b) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			/// owner ?
-			stmt.executeUpdate("UPDATE beteiligung" + "SET idProjekt=\"" + b.getIdProjekt() + "\" ," + "idPerson=\""
-					+ b.getIdPerson() + "WHERE idBeteiligung=" + b.getIdBeteiligung());
+			stmt.executeUpdate("UPDATE beteiligung " 
+					+ "SET idBeteiligung='" + b.getIdBeteiligung() + "' ,'" 
+					+ "idBewerbung='" + b.getIdBewerbung() + "' ,'" 
+					+ "idProjekt='" + b.getIdProjekt() + "' ,'" 
+					+ "idBewertung'" + b.getIdBewertung() + "' ,'" 
+					+ "WHERE idBeteiligung ='"+ b.getIdBeteiligung());
+			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
 		return b;
 	}
 
-	public void delete(Beteiligung b) {
+	public void deleteBeteiligung (Beteiligung b) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM beteiligung " + "WHERE idBeteiligung=" + b.getIdBeteiligung());
+			stmt.executeUpdate("DELETE FROM beteiligung " 
+								+ "WHERE idBeteiligung=" + b.getIdBeteiligung());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();

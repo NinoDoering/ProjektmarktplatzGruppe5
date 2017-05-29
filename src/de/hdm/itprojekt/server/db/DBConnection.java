@@ -46,15 +46,15 @@ public class DBConnection {
 	private static Connection con = null; 
 	private static String url = "jdbc:mysql://127.0.0.1:3306/projektmarktplatzgruppe5?user=root&password=";
   
-    //Anlegen eines „Connection“ Objekts, welches später die Verbindung
-    //zur Datenbank übernimmt
+    //Anlegen eines ï¿½Connectionï¿½ Objekts, welches spï¿½ter die Verbindung
+    //zur Datenbank ï¿½bernimmt
    ; 
     
-    //Statische Methode „establish“, welches jedes Mal aufgerufen wird, 
-    //wenn eine Datenbank Vebindung benötigt wird (z.B. bei SQL-
+    //Statische Methode ï¿½establishï¿½, welches jedes Mal aufgerufen wird, 
+    //wenn eine Datenbank Vebindung benï¿½tigt wird (z.B. bei SQL-
     //Statements. Da eine statische Methode, muss zum Methodenaufruf kein 
     //extra Objekt erstellt werden. Ein Methodenzugriff ist direkt durch 
-    //Klassenaufruf möglich. (Methode kann natürlich genannt werden, wie 
+    //Klassenaufruf mï¿½glich. (Methode kann natï¿½rlich genannt werden, wie 
     //man will)
 
     public static Connection connection(){
@@ -68,11 +68,11 @@ public class DBConnection {
     			 Class.forName("com.mysql.jdbc.Driver");
     			
 			
-				//Übergeben von Verbindungsinformationen
+				//ï¿½bergeben von Verbindungsinformationen
     			url = localUrl; 
     			
     			
-			//Rückgabe des fertig verbundenen Verbindungsobjekts
+			//Rï¿½ckgabe des fertig verbundenen Verbindungsobjekts
     			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/projektmarktplatzgruppe5?user=root&password="); 
     			
     			
@@ -80,7 +80,7 @@ public class DBConnection {
     		}catch(Exception e){
     			
     			con = null; 
-    			System.out.println(e+ " AMK");
+    			System.out.println(e+ " Fehler");
     		}
     	}
     	return con;

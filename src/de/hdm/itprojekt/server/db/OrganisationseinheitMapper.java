@@ -1,8 +1,11 @@
 package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
-
-import de.hdm.itprojekt.shared.bo.Organisationseinheit;
+import java.*;		//Pakete, welche zum Ausf�hren ben�tigt werden.
+import javax.*;
+import java.sql.*;
+import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.server.db.*;
 
 public class OrganisationseinheitMapper {
 
@@ -18,7 +21,7 @@ public class OrganisationseinheitMapper {
 		return organisationseinheitMapper;
 	}
 
-	public Organisationseinheit insert(Organisationseinheit o) {
+	public Organisationseinheit insertOrganisationseinheit (Organisationseinheit o) {
 
 		Connection con = DBConnection.connection();
 
@@ -33,7 +36,9 @@ public class OrganisationseinheitMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO organisationseinheit (idOrganisationseinheit)" + " VALUES (" + o.getIdOrganisationseinheit());
+				stmt.executeUpdate("INSERT INTO organisationseinheit (idOrganisationseinheit)" 
+								+ " VALUES ('" 
+								+ o.getIdOrganisationseinheit()+ "')");
 
 			}
 		} catch (SQLException e) {
@@ -42,14 +47,17 @@ public class OrganisationseinheitMapper {
 		return o;
 	}
 
-	public Organisationseinheit findByKey(int idOrganisationseinheit) {
+	public Organisationseinheit findOrganisationseinheitById (int idOrganisationseinheit) {
 
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit FROM organisationseinheit" + "WHERE idOrganisationseinheit=" + idOrganisationseinheit + "ORDER BY idOrganisationseinheit");
+			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit FROM organisationseinheit" 
+											+ "WHERE idOrganisationseinheit=" + idOrganisationseinheit 
+											+ "ORDER BY idOrganisationseinheit");
+			
 			// Organisationseinheit sollen nach id angezeigt werden
 
 			if (rs.next()) {
@@ -65,16 +73,35 @@ public class OrganisationseinheitMapper {
 		return null;
 	}
 
-	public void delete(Organisationseinheit o) {
+	public void deleteOrganisationseinheit (Organisationseinheit o) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM organisationseinheit " + "WHERE idOrganisationseinheit=" + o.getIdOrganisationseinheit());
+			stmt.executeUpdate("DELETE FROM organisationseinheit " 
+							+ "WHERE idOrganisationseinheit=" + o.getIdOrganisationseinheit());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		
 		}
+	}
+	
+		public Organisationseinheit updateOrganisationseinheit (Organisationseinheit org){
+			Connection con = DBConnection.connection();
+			try {
+				Statement stmt = con.createStatement();
+				/// owner ?
+				stmt.executeUpdate("UPDATE organisationseinheit " 
+						+ "SET idOrganisationseinheit='" + org.getIdOrganisationseinheit() + "' ,'" 
+						+ "WHERE idOrganisationseinheit ='"+ org.getIdOrganisationseinheit());
+				
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+			return org;
+		
 	}
 
 }
