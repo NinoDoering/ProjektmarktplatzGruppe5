@@ -9,7 +9,7 @@ public class Person extends BusinessObject{
 	private String titel;
 	private int idTeam;
 	private int idUnternehmen;
-	
+	 
 	public int getIdProjekt(){
 		return getIdProjekt();
 	}
