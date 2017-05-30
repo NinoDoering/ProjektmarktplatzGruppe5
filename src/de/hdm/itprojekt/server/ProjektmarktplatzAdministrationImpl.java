@@ -13,18 +13,15 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		implements ProjektmarktplatzAdministration {
 
-	//test 123
-	//Hallo
-	
-	
+
 	// private BusinessObjectMapper boMapper = null;
 	private EigenschaftMapper eigMapper = null;
-	private OrganisationseinheitMapper orgaMapper = null; // Bleibt die Mapper
+	private OrganisationseinheitMapper orgaMapper = null; // Bleibt die Mapper?
 	private MarktplatzMapper mpMapper = null;														// bestehen?
 	private PartnerprofilMapper ppMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektMapper prjktMapper = null;
-	private MarktplatzMapper pmpMapper = null;
+	//private MarktplatzMapper pmpMapper = null;
 	private TeamMapper teamMapper = null;
 	private UnternehmenMapper unternehmenMapper = null;
 	private AusschreibungMapper ausschreibungMapper = null;
@@ -47,7 +44,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 		this.persMapper = PersonMapper.personMapper();
 		this.prjktMapper = ProjektMapper.projektMapper();
-		this.pmpMapper = MarktplatzMapper.marktplatzMapper();
+		//this.pmpMapper = MarktplatzMapper.marktplatzMapper();
 		this.teamMapper = TeamMapper.teamMapper();
 		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
 		this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper(); 
@@ -58,12 +55,11 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	// createEigenschaft
 	public Eigenschaft createEigenschaft(
-			/* int idEigenschaft, */
-			String arbeitsgebiet, String ausbildung, float berufserfahrungsJahre, String sprachkenntnisse,
+			int idEigenschaft, String arbeitsgebiet, String ausbildung, float berufserfahrungsJahre, String sprachkenntnisse,
 			String employmentStatus, String abschluss) throws IllegalArgumentException {
 		Eigenschaft eig = new Eigenschaft();
 
-		/* eig.setIdEigenschaft(idEigenschaft); Ist diese Methode richtig? */
+		eig.setIdEigenschaft(idEigenschaft); 
 		eig.setArbeitsgebiet(arbeitsgebiet);
 		eig.setAusbildung(ausbildung);
 		eig.setBerufserfahrungsJahre(berufserfahrungsJahre);
@@ -71,27 +67,29 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		eig.setEmploymentStatus(employmentStatus);
 		eig.setAbschluss(abschluss);
 
-		return this.eigMapper.insert(eig);
+		return this.eigMapper.insertEigenschaft(eig);
 	}
 
 	// getEigenschaftById
 	public Eigenschaft getEigenschaftById(int idEigenschaft) throws IllegalArgumentException {
-		return this.eigMapper.findByKey(idEigenschaft);
+		return this.eigMapper.findEigenschaftById(idEigenschaft);
 	}
 
 	// getAll
 	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
-		return this.eigMapper.findAll();
+		return this.eigMapper.findAllEigenschaften();
 	}
 	
 	// updateEigenschaft
 	public void updateEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
-		eigMapper.update(eig);		
+		eigMapper.updateEigenschaft(eig);		
 	}
 	
 	// deleteEigenschaft
 	public void deleteEigenschaft(int idEigenschaft) throws IllegalArgumentException {
-		this.eigMapper.delete(idEigenschaft);
+		this.eigMapper.deleteEigenschaft(idEigenschaft); 
+		// in Mapper ist Eigenschaft eig. Wir sollen doch aber mit int idEigenschaft?
+											
 	}
 	
 	
@@ -103,21 +101,23 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		Organisationseinheit orgaEinheit = new Organisationseinheit();
 		orgaEinheit.setIdOrganisationseinheit(idOrganisationseinheit);
 
-		return this.orgaMapper.insert(orgaEinheit);
+		return this.orgaMapper.insertOrganisationseinheit(orgaEinheit);
 	}
 
 	// getOrganisationseinheitById
 	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) throws IllegalArgumentException {
-		return this.orgaMapper.findByKey(idOrganisationseinheit);
+		return this.orgaMapper.findOrganisationseinheitById(idOrganisationseinheit);
 	}
 	
-	// updateOrganisationseinheit    #############################################
-	//############################################################################
-	
+	// updateOrganisationseinheit
+	public void updateOrganisationseinheit(Organisationseinheit org) throws IllegalArgumentException {
+		orgaMapper.updateOrganisationseinheit(org);
+	}
 	
 	// deleteOrganisationseinheit
 	public void deleteOrganisationseinheit(int idOrganisationseinheit) throws IllegalArgumentException {
-		this.orgaMapper.delete(idOrganisationseinheit);
+		this.orgaMapper.deleteOrganisationseinheit(idOrganisationseinheit);
+		// gleicher Fehler wie oben --> Falscher Datentyp
 	}
 	
 	
@@ -152,6 +152,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	// deletePartnerprofil
 	public void deletePartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
 		this.ppMapper.delete(idPartnerprofil);
+		// Falscher Datentyp
 	}
 	
 	
@@ -180,6 +181,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	// getPersonById
 	public Person getPersonById(int idPerson) throws IllegalArgumentException {
 		return this.persMapper.findPersonByKey(idPerson);
+		// String in PersonMapper
 	}
 	
 	
@@ -214,7 +216,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			String beschreibung,
 			Date startDatum,
 			Date endDatum,
-			Person projektleiter
+			int idPerson
 			) throws IllegalArgumentException {
 		Projekt projekt = new Projekt();
 		
@@ -223,7 +225,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		projekt.setBeschreibung(beschreibung);
 		projekt.setStartDatum(startDatum);
 		projekt.setEndDatum(endDatum);
-		projekt.setProjektleiter(projektleiter);
+		projekt.setIdPerson(idPerson);
 		
 		return this.prjktMapper.insert(projekt);
 	}
@@ -251,6 +253,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	//deleteProjekt
 	public void deleteProjekt(int idProjekt) throws IllegalArgumentException {
 		this.prjktMapper.delete(idProjekt);
+		// gleicher Fehler
 		}
 	
 	/*##########################################################
@@ -258,8 +261,8 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	 #########################################################*/
 	
 	//createMarktplatz
-	public void createMarktplatz(
-			int idProjektmarktplatz,
+	public Marktplatz createMarktplatz(
+			int idMarktplatz,
 			String geschaeftsgebiet,
 			String bezeichnung
 			) throws IllegalArgumentException{
@@ -269,12 +272,12 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		marktplatz.setGeschaeftsgebiet(geschaeftsgebiet);
 		marktplatz.setBezeichnung(bezeichnung);
 		
-		return this.pmpMapper.insert(marktplatz);
+		return this.mpMapper.insertMarktplatz(marktplatz);
 	}
 	
 	// getMarktplatzById
 	public Marktplatz findByKey(int idMarktplatz) throws IllegalArgumentException {
-		return this.mpMapper.findByKey(idMarktplatz);
+		return this.mpMapper.findMarktplatzById(idMarktplatz);
 	}
 	
 	// getAllMarktplaetze
@@ -284,17 +287,18 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 	// getMarktplatzByBezeichnung
 	public Vector<Marktplatz> getMarktplatzByBezeichnung(String bezeichnung) throws IllegalArgumentException {
-		return this.mpMapper.findByBezeichnung(bezeichnung);
+		return this.mpMapper.findMarktplatzByBezeichnung(bezeichnung);
 	}
 	
 	// updateMarktplatz
 	public void updateMarktplatz(Marktplatz marktplatz) throws IllegalArgumentException {
-		mpMapper.update(marktplatz);
+		mpMapper.updateMarktplatz(marktplatz);
 	}
 	
 	// deleteMarktplatz
 	public void deleteMarktplatz(int idMarktplatz) throws IllegalArgumentException {
-		this.mpMapper.delete(idMarktplatz);
+		this.mpMapper.deleteMarktplatz(idMarktplatz);
+		// falscher Datentyp
 		}
 	
 	/*##########################################################
@@ -302,7 +306,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	 #########################################################*/
 	
 	// createTeam
-	public void createTeam(
+	public Team createTeam(
 			int idTeam,
 			String teamName,
 			int mitgliederAnzahl
@@ -340,6 +344,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	// deleteTeam
 		public void deleteTeam(int idTeam) throws IllegalArgumentException {
 			this.teamMapper.delete(idTeam);
+			// falscher Datentyp
 		}
 		
 		/*##########################################################
@@ -347,7 +352,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		 #########################################################*/	
 
 		// createUnternehmen
-		public void createUnternehmen(
+		public Unternehmen createUnternehmen(
 				String firmenName,
 				int idUnternehmen
 				) throws IllegalArgumentException {
@@ -364,7 +369,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		public Unternehmen getUnternehmenByFirmenName(String firmenName) 
 				throws IllegalArgumentException {
 			
-			return this.getUnternehmenByFirmenName(firmenName);
+			return this.unternehmenMapper.findByFirmenName(firmenName);
 		}
 		
 		// getUnternehmenById? ############################################
@@ -372,7 +377,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 		// updateUnternehmen
 		public void updateUnternehmen(Unternehmen unternehmen) throws IllegalArgumentException {
-			teamMapper.update(unternehmen);
+			unternehmenMapper.update(unternehmen);
 		}
 		
 		/* deleteUnternehmen ----- 
@@ -390,27 +395,30 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		public Beteiligung createBeteiligung(
 				int idBeteiligung,
 				int idProjekt,
-				int idPerson) throws IllegalArgumentException {
+				int idBewerbung,
+				int idBewertung) throws IllegalArgumentException {
 			
 			Beteiligung beteiligung = new Beteiligung();
 			
 			beteiligung.setIdBeteiligung(idBeteiligung);
 			beteiligung.setIdProjekt(idProjekt);
-			beteiligung.setIdPerson(idPerson);
+			beteiligung.setIdBewerbung(idBewerbung);
+			beteiligung.setIdBewertung(idBewertung);
 			
-			return this.beteiligungMapper.insert(beteiligung);
+			return this.beteiligungMapper.insertBeteiligung(beteiligung);
 		}
 		
 		// getBeteiligungById
 		public Beteiligung getBeteiligungById(int idBeteiligung) throws IllegalArgumentException {
-			return this.beteiligungMapper.findByKey(idBeteiligung);
+			return this.beteiligungMapper.findBeteiligungById(idBeteiligung);
 		}
 		
 		// getAllBeteiligungen
 		public Vector<Beteiligung> getAllBeteiligungen() throws IllegalArgumentException {
-			return this.beteiligungMapper.findAll();
+			return this.beteiligungMapper.findAllBeteiligungen();
 		}
 		
 		// falsch?
 		//public Vector<Beteiligung> findByOwner
+		
 }
