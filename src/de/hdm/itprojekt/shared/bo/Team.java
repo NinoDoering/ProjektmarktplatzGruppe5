@@ -8,7 +8,7 @@ public class Team extends Organisationseinheit {
 	private String teamName;
 	private int mitgliederAnzahl= 0;
 	private int idUnternehmen = 0;
-	
+	 
 	
 	public int getIdUnternehmen() {
 		return idUnternehmen;
