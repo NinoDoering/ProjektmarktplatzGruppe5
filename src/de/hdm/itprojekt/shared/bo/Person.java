@@ -13,7 +13,7 @@ public class Person extends BusinessObject{
 	public int getIdProjekt(){
 		return getIdProjekt();
 	}
-	
+	 
 
 	public String getVorname() {
 		return vorname;

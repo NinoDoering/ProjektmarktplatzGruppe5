@@ -13,7 +13,7 @@ public class Unternehmen extends Organisationseinheit {
 	public void setFirmenName(String firmenName) {
 		this.firmenName = firmenName;
 	}
-
+ 
 	@Override
 	public String toString() {
 		return "Unternehmen [firmenName=" + firmenName + "]";
