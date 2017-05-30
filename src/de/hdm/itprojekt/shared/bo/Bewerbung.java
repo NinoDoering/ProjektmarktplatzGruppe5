@@ -4,40 +4,19 @@ import java.util.Date;
 import java.sql.*;
 
 public class Bewerbung extends BusinessObject {
-
-	private int idBewerbung = 0;
-	private String bewerber;
+	
+	private static final long serialVersionUID = 1L;
+	private int idOrganisationseinheit;
 	private String bewerbungsText;
 	private Date erstellDatum;
-	private static final long serialVersionUID = 1L;
-	
-	public int getIdAusschreibung(){
-		return getIdAusschreibung();
+	private int idAusschreibung;
+	public enum Status {eingereicht, zusage, absage} ;
+	private Status bewerbungsstatus = Status.eingereicht;
+	public int getIdOrganisationseinheit() {
+		return idOrganisationseinheit;
 	}
-	
-	public int getIdBewertung(){
-		return getIdBewertung();
-	}
-	
-	public int getIdPartnerprofil(){
-		return getIdPartnerprofil();
-	}
-	
-	public Bewerbung(){
-		super();
-	}
-	
-	public int getIdBewerbung() {
-		return idBewerbung;
-	}
-	public void setIdBewerbung(int idBewerbung) {
-		this.idBewerbung = idBewerbung;
-	}
-	public String getBewerber() {
-		return bewerber;
-	}
-	public void setBewerber(String bewerber) {
-		this.bewerber = bewerber;
+	public void setIdOrganisationseinheit(int idOrganisationseinheit) {
+		this.idOrganisationseinheit = idOrganisationseinheit;
 	}
 	public String getBewerbungsText() {
 		return bewerbungsText;
@@ -51,17 +30,27 @@ public class Bewerbung extends BusinessObject {
 	public void setErstellDatum(Date erstellDatum) {
 		this.erstellDatum = erstellDatum;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public int getIdAusschreibung() {
+		return idAusschreibung;
+	}
+	public void setIdAusschreibung(int idAusschreibung) {
+		this.idAusschreibung = idAusschreibung;
+	}
+	public Status getBewerbungsstatus() {
+		return bewerbungsstatus;
+	}
+	public void setBewerbungsstatus(Status bewerbungsstatus) {
+		this.bewerbungsstatus = bewerbungsstatus;
 	}
 	
-	public String toString(){
-			return super.toString()+ " "+
-			this.idBewerbung+ " "+
-			this.bewerber+ " "+
-			this.bewerbungsText+ " "+
-			this.erstellDatum;
+	@Override
+	public String toString() {
+		return "Bewerbung [idOrganisationseinheit=" + idOrganisationseinheit + ", bewerbungsText=" + bewerbungsText
+				+ ", erstellDatum=" + erstellDatum + ", idAusschreibung=" + idAusschreibung + ", bewerbungsstatus="
+				+ bewerbungsstatus + "]";
 	}
 	
+	
+
 	
 }
