@@ -1,6 +1,6 @@
 package de.hdm.itprojekt.shared.bo;
 
-public class Person extends BusinessObject{
+public class Person extends Organisationseinheit{
 
 	private static final long serialVersionUID = 1L;
 	
