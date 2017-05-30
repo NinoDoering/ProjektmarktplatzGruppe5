@@ -4,60 +4,47 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Beteiligung extends BusinessObject {
 	
-	/**
-	 * 
-	 */
 	
 	private static final long serialVersionIUD = 1L;
-	private int idBeteiligung; 
+	private int beteiligungszeit = 0;
+	private int idBeteiligter;
 	private int idProjekt;
-	private int idBewerbung;
 	private int idBewertung;
 	
 	
-	public void setIdBewertung(int idBewertung){
-		this.idBewertung=idBewertung;
-	}
 	
-	public int getIdBewertung(){
-		return idBewertung;
+	public int getBeteiligungszeit() {
+		return beteiligungszeit;
 	}
-	
-	public int getIdBeteiligung() {
-		return idBeteiligung;
+	public void setBeteiligungszeit(int beteiligungszeit) {
+		this.beteiligungszeit = beteiligungszeit;
 	}
-	
-
-	public void setIdBeteiligung(int idBeteiligung) {
-		this.idBeteiligung = idBeteiligung;
+	public int getIdBeteiligter() {
+		return idBeteiligter;
 	}
-
+	public void setIdBeteiligter(int idBeteiligter) {
+		this.idBeteiligter = idBeteiligter;
+	}
 	public int getIdProjekt() {
 		return idProjekt;
 	}
-
 	public void setIdProjekt(int idProjekt) {
 		this.idProjekt = idProjekt;
 	}
-
-	public int getIdBewerbung() {
-		return idBewerbung;
+	public int getIdBewertung() {
+		return idBewertung;
 	}
-
-	public void setIdBewerbung(int idBewerbung) {
-		this.idBewerbung = idBewerbung;
-	} 
+	public void setIdBewertung(int idBewertung) {
+		this.idBewertung = idBewertung;
+	}
 	
-
-	public String toString() { 
-		return super.toString() + " "
-		+ this.idBewerbung + " "
-		+ this.idProjekt ;
+	@Override
+	public String toString() {
+		return "Beteiligung [beteiligungszeit=" + beteiligungszeit + ", idBeteiligter=" + idBeteiligter + ", idProjekt="
+				+ idProjekt + ", idBewertung=" + idBewertung + "]";
 	}
-
-	public static long getSerialversioniud() {
-		return serialVersionIUD;
-	}
+	
+	
 	
 }
 

@@ -3,7 +3,6 @@ package de.hdm.itprojekt.shared.bo;
 public class Partnerprofil extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L; //?
-	private int idPartnerprofil;
 	
 	public int getIdAusschreibung(){
 		return getIdAusschreibung();
@@ -21,16 +20,6 @@ public class Partnerprofil extends BusinessObject {
 		return getIdOrganisationseinheit();
 	}
 
-	public int getIdPartnerprofil() {
-		return idPartnerprofil;
-	}
-
-	public void setIdPartnerprofil(int idPartnerprofil) {
-		this.idPartnerprofil = idPartnerprofil;
-	}
-
-	public String toString(){
-		return super.toString() +" "
-		+ this.idPartnerprofil;
-	}
+	
+	
 }
