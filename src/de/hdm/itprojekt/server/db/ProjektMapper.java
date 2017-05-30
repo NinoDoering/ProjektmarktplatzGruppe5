@@ -63,8 +63,8 @@ public class ProjektMapper {
 	try	{
 		Statement stmt = con.createStatement(); 
 		
-		ResultSet rs = stmt.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, projektleiter FROM projekt"
-				+ "WHERE idProjekt=" + idProjekt + "ORDER BY bezeichnung");
+		ResultSet rs = stmt.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson FROM projekt"
+				+ " WHERE idProjekt= " + idProjekt + " ORDER BY bezeichnung");
 		// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung angezeigt werden	
 		
 		if (rs.next()) {
@@ -74,12 +74,8 @@ public class ProjektMapper {
 			p.setBeschreibung(rs.getString("beschreibung"));
 			p.setStartDatum(rs.getDate("startDatum"));
 			p.setEndDatum(rs.getDate("endDatum"));
-			//p.setProjektleiter(rs.getPerson("projektleiter")); /// Fehler weil in PersonMapper kein Projektleiter definiert wurde
-			Person pers;			
-
-			pers = new Person();
-			pers.setVorname(rs.getString("bezeichnung"));
-					//p.setProjektleiter(pers); //Fehler weil in PersonMapper kein Projektleiter definiert wurde
+			p.setIdPerson(rs.getInt("idPerson")); 
+			
 			return p; 
 		}
 	}
@@ -102,8 +98,8 @@ public class ProjektMapper {
 			// bezeichnung
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, projektleiter "
-							+ "FROM projekt" + "ORDER BY bezeichnung");
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson "
+							+ " FROM projekt" + " ORDER BY bezeichnung");
 			while (rs.next()) {
 				Projekt p = new Projekt();
 				p.setIdProjekt(rs.getInt("idProjekt"));
@@ -111,12 +107,8 @@ public class ProjektMapper {
 				p.setBeschreibung(rs.getString("beschreibung"));
 				p.setStartDatum(rs.getDate("startDatum"));
 				p.setEndDatum(rs.getDate("endDatum"));
-				//p.setProjektleiter(rs.getPerson("projektleiter")); // fehler ??
-				Person pers;			
-
-				pers = new Person();
-				pers.setVorname(rs.getString("bezeichnung"));
-						p.setProjektleiter(pers);
+				p.setIdPerson(rs.getInt("idPerson"));
+			
 				result.addElement(p);
 			}
 
@@ -137,10 +129,9 @@ public class ProjektMapper {
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
 			// Bezeichung enthält
 			ResultSet rs = stmt
-					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, projektleiter "
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson "
 							+ " FROM projekt "
-							+ "INNER JOIN Person on Projekt.projektleiter = Person.projektleiter " + 
-							"WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
+							+ "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
@@ -149,12 +140,8 @@ public class ProjektMapper {
 				p.setBeschreibung(rs.getString("beschreibung"));
 				p.setStartDatum(rs.getDate("startDatum"));
 				p.setEndDatum(rs.getDate("endDatum"));
-				//p.setProjektleiter(rs.getPerson("projektleiter")); // fehler ??
-				Person pers;			
-
-				pers = new Person();
-				pers.setVorname(rs.getString("bezeichnung"));
-						p.setProjektleiter(pers);
+				p.setIdPerson(rs.getInt("idPerson")); 
+				
 				result.addElement(p);
 				
 			}
@@ -173,8 +160,10 @@ public class ProjektMapper {
 			// SQL Statment, welches das Updaten von Projekte erlaubt
 
 			stmt.executeUpdate("UPDATE projekt " + "SET bezeichnung=\"" + p.getBezeichnung() + "\", "
-					+ "beschreibung=\"" + p.getBeschreibung() + "\", " + "startDatum=\"" + p.getStartDatum() + "\","
-					+ "endDatum=\"" + p.getEndDatum() + "\"," + "projektleiter=\"" + p.getProjektleiter() + "\" "
+				+ "beschreibung=\"" + p.getBeschreibung() + "\", " 
+					+ "startDatum=\"" + format.format(p.getStartDatum()) + "\","
+					+ "endDatum=\"" + format.format(p.getEndDatum()) + "\"," 
+					+ "idPerson=\"" + p.getIdPerson() + "\" "
 					+ "WHERE idProjekt" + p.getIdProjekt());
 
 		} catch (SQLException e) {
