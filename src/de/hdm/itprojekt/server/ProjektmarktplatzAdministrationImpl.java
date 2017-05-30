@@ -53,6 +53,11 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.beteiligungMapper = BeteiligungMapper.beteiligungMapper(); // gleicher Fall
 		}
 
+	
+	/*##########################################################
+	 * START EIGENSCHAFT
+	 #########################################################*/
+	
 	// createEigenschaft
 	public Eigenschaft createEigenschaft(
 			int idEigenschaft, String arbeitsgebiet, String ausbildung, float berufserfahrungsJahre, String sprachkenntnisse,
@@ -93,7 +98,9 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	}
 	
 	
-// START ORGANISATIONSEINHEIT____________________________________________
+	/*##########################################################
+	 * START ORGANISATIONSEINHEIT
+	 #########################################################*/
 	
 	
 	// createOrganisationseinheit
@@ -183,7 +190,6 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return this.persMapper.findPersonByKey(idPerson);
 		// String in PersonMapper
 	}
-	
 	
 	// getAllPersons
 	public Vector<Person> getAllPersons() throws IllegalArgumentException {
@@ -421,4 +427,114 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		// falsch?
 		//public Vector<Beteiligung> findByOwner
 		
+		// updateBeteiligung
+		public void updateBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
+			beteiligungMapper.updateBeteiligung(beteiligung);			
+		}
+		
+		// deleteBeteiligung
+		public void deleteBeteiligung(int idBeteiligung) throws IllegalArgumentException {
+			this.beteiligungMapper.deleteBeteiligung(idBeteiligung);
+			// falscher Datentyp
+		}
+		
+		
+		/*##########################################################
+		 * START AUSSCHREIBUNG
+		 #########################################################*/
+		
+		// createAusschreibung
+		public Ausschreibung createAusschreibung(
+				String bezeichnung, 
+				int idAusschreibung, 
+				Date endDatum,
+				String beschreibung,
+				int idProjekt) throws IllegalArgumentException {
+			
+			Ausschreibung ausschreibung = new Ausschreibung();
+			
+			ausschreibung.setBezeichnung(bezeichnung);
+			ausschreibung.setIdAusschreibung(idAusschreibung);
+			ausschreibung.setEndDatum(endDatum);
+			ausschreibung.setBeschreibung(beschreibung);
+			ausschreibung.setIdProjekt(idProjekt);
+			
+			return this.ausschreibungMapper.insert(ausschreibung);
+		}
+		
+		// getAusschreibungById
+		public Ausschreibung getAusschreibungById(int idAusschreibung) throws IllegalArgumentException {
+			return this.ausschreibungMapper.findAusschreibungById(idAusschreibung);
+		}
+		
+		// getAllAusschreibungen
+		public Vector <Ausschreibung> getAllAusschreibungen() throws IllegalArgumentException {
+			return this.ausschreibungMapper.findAllAusschreibungen();
+		}
+		
+		// findByAusschreibung???
+		
+		
+		// updateAusschreibung
+		public void updateAusschreibung(Ausschreibung ausschreibung) throws IllegalArgumentException {
+			ausschreibungMapper.updateAusschreibung(ausschreibung);			
+		}
+		
+		// deleteAusschreibung
+		public void deleteAusschreibung(int idAusschreibung) throws IllegalArgumentException {
+			this.ausschreibungMapper.deleteAusschreibung(idAusschreibung);
+			// falscher Datentyp
+		}
+				
+		
+		/*##########################################################
+		 * START BEWERBUNG
+		 #########################################################*/
+		
+		// createBewerbung
+		public Bewerbung createBewerbung(
+				int idBewerbung,
+				String bewerber,
+				String bewerbungsText,
+				Date erstellDatum
+				) throws IllegalArgumentException {
+			
+			Bewerbung bewerbung = new Bewerbung();
+			
+			bewerbung.setIdBewerbung(idBewerbung); // wird zu idBusinessObject?
+			bewerbung.setBewerber(bewerber);
+			bewerbung.setBewerbungsText(bewerbungsText);
+			bewerbung.setErstellDatum(erstellDatum);
+			
+			return this.bewerbungMapper.insertBewerbung(bewerbung);
+		}
+		
+		// getBewerbungById
+		public Bewerbung getBewerbungById(int idBewerbung) throws IllegalArgumentException {
+			return this.bewerbungMapper.findBewerbungById(idBewerbung);
+		}
+		
+		// getAllBewerbungen
+		public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
+			return this.bewerbungMapper.findAllBewerbungen();
+		}
+		
+		// Klaerungsbedarf
+		// getBewerbungByBewerber
+		public Vector <Bewerbung> getBewerbungByBewerber
+		(Person Bewerber /*richtig?*/) 
+				throws IllegalArgumentException {
+			return this.bewerbungMapper.findBewerbungByBewerber(Bewerber);
+		}
+		
+		// updateBewerbung
+		public void updateBewerbung(Bewerbung bewerbung) throws IllegalArgumentException {
+			bewerbungMapper.updateBewerbung(bewerbung);
+		}
+		
+		// deleteBewerbung
+		public void deleteBewerbung (int idBewerbung) throws IllegalArgumentException {
+			bewerbungMapper.deleteBewerbung(idBewerbung);
+			// falscher Datentyp
+		}
 }
