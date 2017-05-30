@@ -7,7 +7,7 @@ import java.util.Vector;
 import de.hdm.itprojekt.shared.bo.*;
 
 public class ProjektMapper {
-
+//Alle Mappermethoden in dieser Klasse funktionieren
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	private static ProjektMapper projektMapper = null;
 

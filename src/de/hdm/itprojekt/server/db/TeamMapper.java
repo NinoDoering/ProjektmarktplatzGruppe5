@@ -7,7 +7,7 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
 
 public class TeamMapper {
-
+//Alle Mappermethoden in dieser Klasse funktionieren
 	private static TeamMapper teamMapper = null;
 
 	protected TeamMapper() {
@@ -53,7 +53,7 @@ public class TeamMapper {
 			Statement stmt = con.createStatement();
 			// Teams sollen alphabetisch nach Team-Namen ausgegeben
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idTeam, teamName, mitgliederAnzahl" + "FROM  team" + "WHERE idTeam=" + idTeam );
+					"SELECT idTeam, teamName, mitgliederAnzahl" + " FROM  team" + " WHERE idTeam=" + idTeam );
 
 			if (rs.next()) {
 				Team t = new Team();
@@ -79,7 +79,7 @@ public class TeamMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl" + "FROM team " + "ORDER BY teamName");
+					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl " + "FROM team " + "ORDER BY teamName");
 
 			while (rs.next()) {
 				Team t = new Team();
@@ -105,7 +105,7 @@ public class TeamMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl" + " FROM team "
-					+ "WHERE bezeichnung LIKE '" + teamName + "' ORDER BY teamName ");
+					+ "WHERE teamName LIKE '" + teamName + "' ORDER BY teamName ");
 
 			while (rs.next()) {
 				Team t = new Team();

@@ -9,7 +9,7 @@ import javax.*;
 import java.sql.*;
 
 public class PersonMapper {
-
+//Alle Mappermethoden in dieser Klasse funktionieren
 	private static PersonMapper personMapper = null;
 
 	protected PersonMapper() {
@@ -24,13 +24,14 @@ public class PersonMapper {
 	}
 
 	// FindByKey
-	public Person findPersonByKey(String idPerson) {
+	public Person findPersonByKey(int idPerson) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname" + " FROM person " + "WHERE idPerson=" + idPerson);
+			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname" 
+			+ " FROM person " + "WHERE idPerson= " + idPerson);
 
 
 
@@ -60,7 +61,8 @@ public class PersonMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idPerson, vorname, nachname " + "FROM person " + "ORDER BY nachname");
+					.executeQuery("SELECT idPerson, vorname, nachname " 
+			+ "FROM person " + "ORDER BY nachname");
 
 			while (rs.next()) {
 				Person p = new Person();
@@ -117,8 +119,11 @@ public class PersonMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO person (idPerson, titel, vorname, nachname) " + "VALUES (" + p.getIdPerson() + ",'"
-								+ p.getTitel() + "','" + p.getVorname() + "','" + p.getNachname() + "')");
+						"INSERT INTO person (idPerson, titel, vorname, nachname) " 
+				+ "VALUES (" + p.getIdPerson() + ",'"
+								+ p.getTitel() + "','" 
+								+ p.getVorname() + "','" 
+								+ p.getNachname() + "')");
 			}
 		} catch (SQLException e4) {
 			e4.printStackTrace();
@@ -133,8 +138,9 @@ public class PersonMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE person " + "SET vorname=\"" + p.getVorname() + "\", " + "nachname=\""
-					+ p.getNachname() + "\" " + "WHERE idPerson=" + p.getIdPerson());
+			stmt.executeUpdate("UPDATE person " + "SET vorname=\"" + p.getVorname() + "\", " 
+					+ "nachname=\"" + p.getNachname() + "\" " 
+					+ "WHERE idPerson=" + p.getIdPerson());
 
 		} catch (SQLException e5) {
 			e5.printStackTrace();

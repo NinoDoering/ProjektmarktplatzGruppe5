@@ -22,6 +22,32 @@ public class UnternehmenMapper {
 		return unternehmenMapper;
 	}
 
+	public Unternehmen findByKey(int idUnternehmen) {
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt
+					.executeQuery("SELECT idUnternehmen, firmenName FROM unternehmen " 
+			+ "WHERE idUnternehmen= " + idUnternehmen);
+
+			if (rs.next()) {
+				Unternehmen u = new Unternehmen();
+				u.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				u.setFirmenName(rs.getString("firmenName"));
+
+				return u;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return null;
+	}
+	
+	
 	// FindByFirmenName -- Was ist mit Id??
 	public Unternehmen findByFirmenName(String firmenName) {
 		Connection con = DBConnection.connection();
