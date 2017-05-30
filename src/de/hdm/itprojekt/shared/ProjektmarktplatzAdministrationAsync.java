@@ -7,16 +7,17 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.server.db.*;
 import de.hdm.itprojekt.server.db.PersonMapper;
-import de.hdm.itprojekt.shared.bo.Person;
 
 /**
  * The async counterpart of <code>GreetingService</code>.
  */
 
-public interface ProjektmarktplatzAdministrationAsync<Person, Unternehmen, Team, Projekt, Ausschreibung, Marktplatz, Bewertung, Bewerbung> {
+public interface ProjektmarktplatzAdministrationAsync {
 
 	// Person anhand von Id ausgeben in der Gui , funktioniert 
-	void findPersonByKey(String key, AsyncCallback<Person> callback);
+	
+	
+	//void findPersonByKey(String key, AsyncCallback<Person> callback);
 	
 	
 	
@@ -28,17 +29,17 @@ public interface ProjektmarktplatzAdministrationAsync<Person, Unternehmen, Team,
 	void init(AsyncCallback<Void> callback);
 
 	// Projektmarktplatz pm
-	void anlegenProjektmarktplatz(Marktplatz pm, String geschaeftsgebiet, String bezeichnung, Projekt projekt,
+	void anlegenMarktplatz(Marktplatz pm, String geschaeftsgebiet, String bezeichnung, Projekt projekt,
 			AsyncCallback<Marktplatz> callback);
 
-	void editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Projekt projekt,
+	void editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt,
 			AsyncCallback<Vector<Marktplatz>> callback);
 
-	void loeschenMarktplatz(Projekt p, Marktplatz pm, AsyncCallback<Void> callback);
+	void loeschenMarktplatz(Object p, Marktplatz pm, AsyncCallback<Void> callback);
 
 	void save(Marktplatz pm, AsyncCallback<Void> callback);
 
-	void getMarktplatz(Projekt projekt, AsyncCallback<Vector<Marktplatz>> callback);
+	void getMarktplatz(Object projekt, AsyncCallback<Vector<Marktplatz>> callback);
 
 	// Projekt p
 	void anlegenProjekt(Projekt p, String projektleiter, String beschreibung, Date startDatum, Date endDatum,
@@ -58,7 +59,7 @@ public interface ProjektmarktplatzAdministrationAsync<Person, Unternehmen, Team,
 	void editierenAusschreibung(Ausschreibung a, String bezeichnung, String beschreibung, Date endDatum,
 			AsyncCallback<Vector<Ausschreibung>> callback);
 
-	void loeschenAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
+	void loeschenAusschreibung(Object a, AsyncCallback<Void> callback);
 
 	void getAusschreibung(Ausschreibung a, String bezeichnung, AsyncCallback<Vector<Ausschreibung>> callback);
 
@@ -193,4 +194,13 @@ public interface ProjektmarktplatzAdministrationAsync<Person, Unternehmen, Team,
 			AsyncCallback<Vector<Beteiligung>> callback);
 
 	void getAllByidBewerbungen(Bewerbung b, int idBewerbung, AsyncCallback<Vector<Bewerbung>> callback);
+
+
+
+
+
+
+
+
+	void findPersonByKey(String key, AsyncCallback<Person> callback);
 }
