@@ -6,35 +6,51 @@ public class Organisationseinheit extends BusinessObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int idOrganisationseinheit = 0;
+
+	private String adresse;
 	
-	public int getIdPartnerprofil(){
-		return getIdPartnerprofil();
-	}
+	private String Standort;
 	
-	public int getIdBeteiligung(){
-		return getIdBeteiligung();
-	}
 	
-	public int getIdPerson(){
-		return getIdPerson();
-	}
-	
-	public int getIdTeam(){
-		return getIdTeam();
-	}
-	
-	public int getIdUnternehmen(){
-		return getIdUnternehmen();
+	private int idPartnerprofil;
+
+
+	public String getAdresse() {
+		return adresse;
 	}
 
-	public int getIdOrganisationseinheit() {
-		return idOrganisationseinheit;
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	}
 
-	public void setIdOrganisationseinheit(int idOrganisationseinheit) {
-		this.idOrganisationseinheit = idOrganisationseinheit;
+
+	public String getStandort() {
+		return Standort;
 	}
+
+
+	public void setStandort(String standort) {
+		Standort = standort;
+	}
+
+
+	public int getIdPartnerprofil() {
+		return idPartnerprofil;
+	}
+
+
+	public void setIdPartnerprofil(int idPartnerprofil) {
+		this.idPartnerprofil = idPartnerprofil;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Organisationseinheit [adresse=" + adresse + ", Standort=" + Standort + ", idPartnerprofil="
+				+ idPartnerprofil + "]";
+	}
+
 	
-
+	
 }

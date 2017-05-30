@@ -13,7 +13,16 @@ public abstract class BusinessObject implements Serializable {
 	
 	private int idBusinessObject = 0;
 	
+	private int id = 0;
 	
+		public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 		public int getIdBusinessObject() {
 		return this.idBusinessObject; 
 	}
