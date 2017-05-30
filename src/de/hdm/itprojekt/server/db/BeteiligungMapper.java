@@ -33,7 +33,7 @@ public class BeteiligungMapper {
 			// SQL STATEMENT
 			ResultSet rs = stmt
 					.executeQuery("SELECT idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
-								+ "WHERE idBeteiligung=" + idBeteiligung 
+								+ " WHERE idBeteiligung= " + idBeteiligung 
 								+ " ORDER BY idBeteilgung");
 			
 			if (rs.next()) {
@@ -85,7 +85,7 @@ public class BeteiligungMapper {
 
 			ResultSet rs = stmt
 					.executeQuery("SELECT idBeteiligung, idBeteiligung, idBewerbung, idProjekt, idBewertung FROM beteiligung " 
-								+ "WHERE idBeteiligung=" + idBeteiligung 
+								+ " WHERE idBeteiligung= " + idBeteiligung 
 								+ " ORDER BY idBeteiligung");
 			
 			while (rs.next()) {
@@ -156,7 +156,7 @@ public class BeteiligungMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM beteiligung " 
-								+ "WHERE idBeteiligung=" + b.getIdBeteiligung());
+								+ " WHERE idBeteiligung= " + b.getIdBeteiligung());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();

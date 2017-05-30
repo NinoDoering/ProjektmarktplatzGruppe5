@@ -33,7 +33,7 @@ public class AusschreibungMapper {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(
 					"SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
-							+ "WHERE idAusschreibung=" + idAusschreibung 
+							+ " WHERE idAusschreibung= " + idAusschreibung 
 							+ " ORDER BY idAusschreibung");
 			
 			if (rs.next()) {
@@ -87,7 +87,7 @@ public class AusschreibungMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
-											+ "WHERE idAusschreibung=" + idAusschreibung 
+											+ " WHERE idAusschreibung= " + idAusschreibung 
 											+ " ORDER BY idAusschreibung");
 			
 			while (rs.next()) {
@@ -147,7 +147,7 @@ public class AusschreibungMapper {
 					+ "beschreibung='" + a.getBeschreibung() + "' ,'" 
 					+ "endDatum='" + a.getEndDatum() + "' ,'" 
 					+ "idProjekt='" + a.getIdProjekt() + "' ,'" 
-					+ "WHERE idAusschreibung ='"+ a.getIdAusschreibung());
+					+ " WHERE idAusschreibung= '"+ a.getIdAusschreibung());
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -163,7 +163,7 @@ public class AusschreibungMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM ausschreibung " 
-								+ "WHERE idAusschreibung=" + a.getIdAusschreibung());
+								+ " WHERE idAusschreibung= " + a.getIdAusschreibung());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();

@@ -37,7 +37,7 @@ public class EigenschaftMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
+				stmt.executeUpdate("INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
 									+ " VALUES ('" + eig.getIdEigenschaft() + "','" 
 									+ eig.getAusbildung() + "','" 
 									+ eig.getAbschluss()+ "','" 
@@ -60,9 +60,9 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT id, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft"
-											+ "WHERE idEigenschaft=" + idEigenschaft 
-											+ "ORDER BY idEigenschaft");
+			ResultSet rs = stmt.executeQuery("SELECT idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft "
+											+ " WHERE idEigenschaft= " + idEigenschaft 
+											+ " ORDER BY idEigenschaft");
 			
 			// Eigenschaft sollen nach id angezeigt werden
 			if (rs.next()) {
@@ -93,7 +93,7 @@ public class EigenschaftMapper {
 
 			ResultSet rs = stmt.executeQuery(
 					"SELECT idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus "
-							+ "FROM eigenschaft " + "ORDER BY idEigenschaft");
+							+ " FROM eigenschaft " + " ORDER BY idEigenschaft ");
 
 			while (rs.next()) {
 				Eigenschaft eig = new Eigenschaft();
@@ -145,7 +145,7 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM eigenschaft " 
-								+ "WHERE idEigenschaft=" + eig.getIdEigenschaft());
+								+ " WHERE idEigenschaft= " + eig.getIdEigenschaft());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

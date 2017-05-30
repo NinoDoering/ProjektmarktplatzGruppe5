@@ -52,7 +52,8 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
 		this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper(); 
 											//.ausschreibungMapper muss das heiﬂen auch in Mapperklasse
-		this.bewerbungMapper = BewerbungMapper.bewerbungmapper(); //gleicher Fehler!!!!!
+		this.bewerbungMapper = BewerbungMapper.bewerbungmapper();//gleicher Fehler!!!!!
+		this.beteiligungMapper = BeteiligungMapper.beteiligungMapper(); // gleicher Fall
 		}
 
 	// createEigenschaft
@@ -380,4 +381,36 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		public void deleteUnternehmen(int idUnternehmen) throws IllegalArgumentException {
 			this.unternehmenMapper.delete(idUnternehmen);
 		}
+		
+		/*##########################################################
+		 * START BETEILIGUNG
+		 #########################################################*/
+		
+		// createBeteiligung
+		public Beteiligung createBeteiligung(
+				int idBeteiligung,
+				int idProjekt,
+				int idPerson) throws IllegalArgumentException {
+			
+			Beteiligung beteiligung = new Beteiligung();
+			
+			beteiligung.setIdBeteiligung(idBeteiligung);
+			beteiligung.setIdProjekt(idProjekt);
+			beteiligung.setIdPerson(idPerson);
+			
+			return this.beteiligungMapper.insert(beteiligung);
+		}
+		
+		// getBeteiligungById
+		public Beteiligung getBeteiligungById(int idBeteiligung) throws IllegalArgumentException {
+			return this.beteiligungMapper.findByKey(idBeteiligung);
+		}
+		
+		// getAllBeteiligungen
+		public Vector<Beteiligung> getAllBeteiligungen() throws IllegalArgumentException {
+			return this.beteiligungMapper.findAll();
+		}
+		
+		// falsch?
+		//public Vector<Beteiligung> findByOwner
 }
