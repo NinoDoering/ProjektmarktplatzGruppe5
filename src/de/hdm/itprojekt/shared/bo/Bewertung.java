@@ -2,29 +2,12 @@ package de.hdm.itprojekt.shared.bo;
 
 public class Bewertung extends BusinessObject {
 
-	private int idBewertung = 0;
+	private static final long serialVersionUID = 1L;
 	private float fliessKommaBewertung;
 	private String textuelleBewertung;
-	private static final long serialVersionUID = 1L;
+	private int idBewerbung = 0;
 	
-	public int getIdBewerbung(){
-		return getIdBewerbung();
-	}
 	
-	public int getIdBeteiligung(){
-		return getIdBeteiligung();
-	}
-	
-	public Bewertung(){
-		super();
-	}
-	
-	public int getIdBewertung() {
-		return idBewertung;
-	}
-	public void setIdBewertung(int idBewertung) {
-		this.idBewertung = idBewertung;
-	}
 	public float getFliessKommaBewertung() {
 		return fliessKommaBewertung;
 	}
@@ -37,14 +20,21 @@ public class Bewertung extends BusinessObject {
 	public void setTextuelleBewertung(String textuelleBewertung) {
 		this.textuelleBewertung = textuelleBewertung;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public int getIdBewerbung() {
+		return idBewerbung;
+	}
+	public void setIdBewerbung(int idBewerbung) {
+		this.idBewerbung = idBewerbung;
 	}
 	
-	public String toString(){
-		return super.toString()+ " "+
-		this.idBewertung+ " "+
-		this.fliessKommaBewertung+ " "+
-		this.textuelleBewertung;
+	@Override
+	public String toString() {
+		return "Bewertung [fliessKommaBewertung=" + fliessKommaBewertung + ", textuelleBewertung=" + textuelleBewertung
+				+ ", idBewerbung=" + idBewerbung + "]";
 	}
+
+	
+	
+	
+	
 }
