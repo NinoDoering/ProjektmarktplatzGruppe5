@@ -36,7 +36,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	// Person anhand von Id ausgeben in der Gui , funktioniert 
 	
-	Person findPersonByKey(String key);
+	//Person findPersonByKey(String key);
 	
 	
 	
@@ -47,16 +47,24 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	void init() throws IllegalArgumentException;
 
+	
+	
 	// Projektmarktplatz pm
 	Object anlegenProjektmarktplatz(Object projektmarktplatz, String geschaeftsgebiet, String bezeichnung,
 			Object projekt) throws IllegalArgumentException;
 
-	Vector editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt)
+	Vector <Marktplatz> editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt)
 			throws IllegalArgumentException;
 
 
 
-	Vector getMarktplatz(Object projekt) throws IllegalArgumentException;
+	Vector <Marktplatz> getMarktplatz(Object projekt) throws IllegalArgumentException;
+	
+	
+	void loeschenMarktplatz(Object p, Object pm);
+
+	void save(Object pm);
+
 
 	// Projekt p
 	Object anlegenProjekt(Object projekt, String projektleiter, String beschreibung, Date startDatum, Date endDatum)
@@ -209,8 +217,5 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	Vector getAllByidBewerbungen(Object b, int idBewerbung) throws IllegalArgumentException;
 
-	void loeschenMarktplatz(Object p, Marktplatz pm) throws IllegalArgumentException;
-
-	void save(Marktplatz pm) throws IllegalArgumentException;
-
+	
 }
