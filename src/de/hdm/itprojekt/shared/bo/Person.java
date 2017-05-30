@@ -3,27 +3,18 @@ package de.hdm.itprojekt.shared.bo;
 public class Person extends BusinessObject{
 
 	private static final long serialVersionUID = 1L;
-	private int idPerson; //Setter zu ID lassen wir weg
+	
 	private String vorname;
 	private String nachname;
 	private String titel;
-	private String projektleiter;
+	private int idTeam;
+	private int idUnternehmen;
 	
 	public int getIdProjekt(){
 		return getIdProjekt();
 	}
 	
-	public int getIdOrganisationseinheit(){
-		return getIdOrganisationseinheit();
-	}
-	
-	public int getIdPerson() {
-		return idPerson;
-	}
-	public void setIdPerson(int idPerson) {
-		this.idPerson = idPerson;
-	}
-	
+
 	public String getVorname() {
 		return vorname;
 	}
@@ -37,15 +28,14 @@ public class Person extends BusinessObject{
 		this.nachname = nachname;
 	}
 
-	public String toString(){
-		return super.toString() +" "
-		+ this.idPerson + " " 
-		+ this.titel +" "
-		+ this.vorname + " " 
-		+ this.projektleiter + " " 
-		+ this.nachname;
 	
+
+	@Override
+	public String toString() {
+		return "Person [vorname=" + vorname + ", nachname=" + nachname + ", titel=" + titel + ", idTeam=" + idTeam
+				+ ", idUnternehmen=" + idUnternehmen + "]";
 	}
+
 
 	public String getTitel() {
 		return titel;
@@ -55,11 +45,24 @@ public class Person extends BusinessObject{
 		this.titel = titel;
 	}
 
-	public String getProjektleiter() {
-		return projektleiter;
+
+	public int getIdTeam() {
+		return idTeam;
 	}
 
-	public void setProjektleiter(String projektleiter) {
-		this.projektleiter = projektleiter;
+
+	public void setIdTeam(int idTeam) {
+		this.idTeam = idTeam;
 	}
+
+
+	public int getIdUnternehmen() {
+		return idUnternehmen;
+	}
+
+
+	public void setIdUnternehmen(int idUnternehmen) {
+		this.idUnternehmen = idUnternehmen;
+	}
+
 }
