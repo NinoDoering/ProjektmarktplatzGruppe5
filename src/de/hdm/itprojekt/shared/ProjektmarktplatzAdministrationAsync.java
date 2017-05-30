@@ -19,181 +19,169 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	//void findPersonByKey(String key, AsyncCallback<Person> callback);
 	
-	
-	
-	
-	
-	
-	
-	
 	void init(AsyncCallback<Void> callback);
+	
+	// Marktplatz Asynch
+	
 
-	// Projektmarktplatz pm
-	void anlegenMarktplatz(Marktplatz pm, String geschaeftsgebiet, String bezeichnung, Projekt projekt,
-			AsyncCallback<Marktplatz> callback);
+	void anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung, AsyncCallback<Marktplatz> callback);
+	
 
-	void editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt,
-			AsyncCallback<Vector<Marktplatz>> callback);
 
-	void loeschenMarktplatz(Object p, Marktplatz pm, AsyncCallback<Void> callback);
+	void loeschenMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
+	
+	void getMarktplatzById(int idMarktplatz, AsyncCallback<Marktplatz> callback);
 
-	void save(Marktplatz pm, AsyncCallback<Void> callback);
+	void saveMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
 
-	void getMarktplatz(Object projekt, AsyncCallback<Vector<Marktplatz>> callback);
 
-	// Projekt p
-	void anlegenProjekt(Projekt p, String projektleiter, String beschreibung, Date startDatum, Date endDatum,
+
+	
+	// Projekt Asynch
+	
+	void anlegenProjekt(int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum,
 			AsyncCallback<Projekt> callback);
 
-	void editierenProjekt(String projektleiter, String beschreibung, Date startDatum, Date endDatum,
-			AsyncCallback<Vector<Projekt>> callback);
 
 	void loeschenProjekt(Projekt p, AsyncCallback<Void> callback);
+	
+	void getProjektbyId(int idProjekt, AsyncCallback<Projekt> callback);
 
-	void getProjekt(Projekt p, AsyncCallback<Vector<Projekt>> callback);
+	void saveProjekt(Projekt p, AsyncCallback<Void> callback);
 
-	// Ausschreibung a
-	void anlegenAusschreibung(Ausschreibung a, String bezeichnung, String beschreibung, Date endDatum,
+	
+	// Ausschreibung Asynch
+	
+	void anlegenAusschreibung(int idProjekt, String bezeichnung, String beschreibung, Date endDatum,
 			AsyncCallback<Ausschreibung> callback);
 
-	void editierenAusschreibung(Ausschreibung a, String bezeichnung, String beschreibung, Date endDatum,
-			AsyncCallback<Vector<Ausschreibung>> callback);
 
-	void loeschenAusschreibung(Object a, AsyncCallback<Void> callback);
 
-	void getAusschreibung(Ausschreibung a, String bezeichnung, AsyncCallback<Vector<Ausschreibung>> callback);
+	void loeschenAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
+	
+	void getAusschreibungbyId(int idAusschreibung, AsyncCallback<Ausschreibung> callback);
 
-	// Partnerprofil pp
-	void anlegenPartnerprofil(int idParnterprofil, Partnerprofil pp, String eigenschaft,
-			AsyncCallback<Partnerprofil> callback);
+	void saveAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 
-	void editierenPartnerprofil(Partnerprofil pp, String eigenschaft, AsyncCallback<Vector<Partnerprofil>> callback);
+	
+	
+	// Partnerprofil Asynch
+	
+	void anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit, AsyncCallback<Partnerprofil> callback);
+
 
 	void loeschenPartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
 
-	void getPartnerprofil(int idPartnerprofil, Partnerprofil pp, String eigenschaften,
-			AsyncCallback<Vector<Partnerprofil>> callback);
+	void getPartnerprofilbyId(int idPartnerprofil, AsyncCallback<Partnerprofil> callback);
 
-	// Bewerberung b
-	void anlegenBewerbung(Bewerbung b, String bewerber, String bewerbungstext, Date erstellDatum,
+	void savePartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
+	
+
+	// Bewerbung Asynch
+	
+	void anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext, Date erstellDatum,
 			AsyncCallback<Bewerbung> callback);
 
-	void editierenBewerbung(String beweber, String bewerbungstext, Date erstellDatum,
-			AsyncCallback<Vector<Bewerbung>> callback);
+	void loeschenBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 
-	void loeschenBewerbung(Bewerbung b, String bewerber, AsyncCallback<Void> callback);
+	void getBewerbungbyId(int idBewerbung, AsyncCallback<Bewerbung> callback);
 
-	void getBewerbung(Bewerbung b, String bewerber, AsyncCallback<Vector<Bewerbung>> callback);
+	void saveBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 
-	// Eigenschaft e
-	void anlegenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus,
-			String ausbildung, String sprachkenntnisse, AsyncCallback<Eigenschaft> callback);
+	
+	
+	// Eigenschaft Asynch	
 
-	void editierenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus,
-			String ausbildung, String sprachkenntnisse, AsyncCallback<Vector<Eigenschaft>> callback);
+	void anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
+			String employmentStatus, String ausbildung, String sprachkenntnisse, AsyncCallback<Eigenschaft> callback);
 
-	void loeschenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus,
-			String ausbildung, String sprachkenntnisse, AsyncCallback<Void> callback);
 
-	void getEigenschaft(Eigenschaft e, String arbeitsgebeit, float berufserfahrungsJahre, String employmentStatus,
-			AsyncCallback<Vector<Eigenschaft>> callback);
+	void loeschenEigenschaft(Eigenschaft e, AsyncCallback<Void> callback);
 
-	// Bewertung bg
-	void anlegenBewertung(Bewertung bewertung, String textuelleBewertung, float fließKommaBewertung,
+	void getEigenschaftById(int idEigenschaft, AsyncCallback<Eigenschaft> callback);
+
+	void saveEigenschaft(Eigenschaft e, AsyncCallback<Void> callback);
+
+	
+	// Bewertung Asynch
+	
+	void anlegenBewertung(int idBewerbung, String textuelleBewertung, double fliessKommaBewertung,
 			AsyncCallback<Bewertung> callback);
 
-	void editierenBewertung(Bewertung bewertung, String textuelleBewertung, float fließKommaBewertung,
-			AsyncCallback<Vector<Bewertung>> callback);
 
-	void loeschenBewertung(Bewertung bewertung, String textuelleBewertung, float fließKommaBewertung,
-			AsyncCallback<Void> callback);
+	void loeschenBewertung(Bewertung bewertung, AsyncCallback<Void> callback);
 
-	void getBewertung(Bewertung bewertung, float fließKommaBewertung, AsyncCallback<Vector<Bewertung>> callback);
-
-	// Beteiligung beteiligung
-	void anlegenBeteiligung(Beteiligung beteiligung, String name, int idBeteiligung, int idProjekt,
+	void getBewertungById(int idBewertung, AsyncCallback<Bewertung> callback);
+	
+	void saveBewertung(Bewertung bewertung, AsyncCallback<Void> callback);
+	
+	
+		// Beteiligung Asynch
+	
+	
+	void anlegenBeteiligung(int idOrganisationseinheit, int idProjekt, int idBewertung,
 			AsyncCallback<Beteiligung> callback);
 
-	void editierenBeteiligung(Beteiligung betiligung, AsyncCallback<Vector<Beteiligung>> callback);
 
 	void loeschenBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);
 
-	void getBeteiligung(Beteiligung beteiligung, int idOrganisationseinheit,
-			AsyncCallback<Vector<Beteiligung>> callback);
+	void getBeteiligungById(int idBeteiligung, AsyncCallback<Beteiligung> callback);
+	
+	void saveBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);
 
-	// Organisationseinheit org
-	void anlegenOrganisationseinheit(Organisationseinheit org, int idOrganisationseinheit,
-			AsyncCallback<Organisationseinheit> callback);
 
-	void editierenOrganisationseinheit(Organisationseinheit org, AsyncCallback<Vector<Organisationseinheit>> callback);
+	// Person Asynch
+	void anlegenPerson(int idOrganisationseinheit, int idPartnerprofil, char geschlecht, String vorname,
+			String nachname, AsyncCallback<Person> callback);
 
-	void loeschenOrgansationseinheit(Organisationseinheit org, int idOrganisationseinheit,
-			AsyncCallback<Void> callback);
 
-	void getOrganisationseinheit(Organisationseinheit org, int idOrganisationseinheit,
-			AsyncCallback<Vector<Organisationseinheit>> callback);
 
-	// Person p
-	void anlegenPerson(Person p, int idPerson, char geschlecht, String vorname, String nachname,
-			AsyncCallback<Person> callback);
+	void loeschenPerson(Person pe, AsyncCallback<Void> callback);
+	
+	void getPersonById(int idPerson, AsyncCallback<Person> callback);
 
-	void editierenPerson(Person p, char geschlecht, String vorname, String nachname,
-			AsyncCallback<Vector<Person>> callback);
+	void savePerson(Person pe, AsyncCallback<Void> callback);
 
-	void loeschenPerson(Person p, AsyncCallback<Void> callback);
 
-	void getPerson(Person p, int idPerson, char geschlecht, String vorname, String nachname,
-			AsyncCallback<Vector<Person>> callback);
+	// Team Asynch
 
-	// Team t
-	void anlegenTeam(Team t, int idTeam, String teamName, int mitgliederAnzahl, AsyncCallback<Team> callback);
+	void anlegenTeam(int idOrganisationseinheit, int idPartnerprofil, String teamName, int mitgliederAnzahl,
+			AsyncCallback<Team> callback);
 
-	void editierenTem(Team t, String teamName, int mitgliederAnzahl, AsyncCallback<Vector<Team>> callback);
 
-	void loeschenTeam(Team t, int idTeam, AsyncCallback<Void> callback);
+	void loeschenTeam(Team t, AsyncCallback<Void> callback);
+	
+	void getTeamById(int idTeam, AsyncCallback<Team> callback);
 
-	void getTeam(Team t, int idTeam, String teamName, int mitgliederAnzahl, AsyncCallback<Vector<Team>> callback);
+	void saveTeam(Team t, AsyncCallback<Void> callback);
+
 
 	// Unternehmen u
-	void anlegenUnternehmen(Unternehmen u, int idUnternehmen, String firmenName, AsyncCallback<Unternehmen> callback);
+	
+	void anlegenUnternehmen(int idOrganisationseinheit, int idPartnerprofil, String firmenName, AsyncCallback<Unternehmen> callback);
 
-	void editierenUnternehmen(Unternehmen u, String firmenName, AsyncCallback<Vector<Unternehmen>> callback);
+	void loeschenUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
+	
+	void getUnternehmenById(int idUnternehmen, AsyncCallback<Unternehmen> callback);
 
-	void loeschenUnternehmen(Unternehmen u, int idUnternehmen, String firmenName, AsyncCallback<Void> callback);
+	void saveUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
 
-	void getUnternehmen(Unternehmen u, int idUnternehmen, String firmenName,
-			AsyncCallback<Vector<Unternehmen>> callback);
 
-	// Getter-By-All Option
-	void getBewertungById(int idBewertung, Bewertung bg, AsyncCallback<Vector<Bewertung>> callback);
 
-	void getBewertungByBewerbungId(Bewertung bg, int idBewertung, Bewerbung b, int idBewerbung,
-			AsyncCallback<Vector<Bewertung>> callback);
+	// Anforderungen und Aufrufe definieren mit Asynch 
 
-	void getAlleAusschreibung(Ausschreibung a, int idAusschreibung, AsyncCallback<Vector<Ausschreibung>> callback);
 
-	void getAusschreibungByidPartnerprofil(Ausschreibung a, int idAusschreibung, Partnerprofil pp, int idPartnerprofil,
+	void getAllAusschreibungenByOrganisationseinheit(Organisationseinheit o,
 			AsyncCallback<Vector<Ausschreibung>> callback);
 
-	void getAusschreibungByidBewerbung(Ausschreibung a, int idAusschreibung, Bewerbung b, int idBewerbung,
-			AsyncCallback<Vector<Ausschreibung>> callback);
+	void getAllAusschreibungByPartnerprofil(Partnerprofil pp, AsyncCallback<Vector<Ausschreibung>> callback);
 
-	void getBewerbungByidAusschreibung(Bewerbung b, int idBewerbung, int idAusschreibung,
-			AsyncCallback<Vector<Bewerbung>> callback);
+	void getAllBewerbungenByAusschreibung(Ausschreibung a, AsyncCallback<Vector<Bewerbung>> callback);
 
-	void getBewerbungByidPartnerprofil(Bewerbung b, int idBewerbung, Partnerprofil pp, int idPartnerprofil,
-			AsyncCallback<Vector<Bewerbung>> callback);
+	void getAllBewerbungenByOrganisationseinheut(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
 
-	void getBewerbungByidOrganisationseinheit(Bewerbung b, int idBewerbung, int idOrganisationseinheit,
-			AsyncCallback<Vector<Bewerbung>> callback);
-
-	void getBewertungenByidOrganisationseinheit(int idBewertung, int idOrganisationseinheit,
-			AsyncCallback<Vector<Bewertung>> callback);
-
-	void getBeteiligungByidOrganisationseinheit(Beteiligung beteiligung, int idBeteiligung, int idOrgansisationseinheit,
-			AsyncCallback<Vector<Beteiligung>> callback);
-
-	void getAllByidBewerbungen(Bewerbung b, int idBewerbung, AsyncCallback<Vector<Bewerbung>> callback);
+	void getAllBeteiligungenToProject(Projekt p, AsyncCallback<Vector<Beteiligung>> callback);
+	
 
 
 
@@ -202,5 +190,29 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 
 
-	void findPersonByKey(String key, AsyncCallback<Person> callback);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
