@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.client;
 import de.hdm.itprojekt.server.db.DBConnection;
-import de.hdm.itprojekt.server.db.PersonMapper;
+import de.hdm.itprojekt.server.db.*;
+
 import de.hdm.itprojekt.shared.bo.Person;
 import java.*;		//Pakete, welche zum Ausfï¿½hren benï¿½tigt werden.
 import javax.*;
@@ -90,7 +91,7 @@ Person p9 = new Person();
 		
 
 */
-		
+	/*	
 		Person p9 = new Person();
 		
 		p9.setTitel("Doctor");
@@ -102,12 +103,16 @@ Person p9 = new Person();
 		System.out.println(p9.toString());		
 		
 		// Update Test ausgeführt bei der erzeugten Person p9 und den Vornamen geändert in Motrip
-		Person p = new Person();
-		p = PersonMapper.personMapper().findPersonByKey(30);
-		p.setVorname("Anthony Nguyen");
-		PersonMapper.personMapper().update(p);
+	//	Person p = new Person();
+		//p = PersonMapper.personMapper().findPersonByKey(30);
+	//	p.setVorname("Anthony Nguyen");
+	//	PersonMapper.personMapper().update(p);
 
-
+*/
+		
+		
+		//System.out.println(TeamMapper.teamMapper().findbyKey(49));
+		System.out.println(PersonMapper.personMapper().findPersonByKey(11));
 
 		}
 	}

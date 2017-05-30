@@ -54,9 +54,9 @@ public class OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit FROM organisationseinheit" 
-											+ "WHERE idOrganisationseinheit=" + idOrganisationseinheit 
-											+ "ORDER BY idOrganisationseinheit");
+			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit FROM organisationseinheit " 
+											+ " WHERE idOrganisationseinheit= " + idOrganisationseinheit 
+											+ " ORDER BY idOrganisationseinheit ");
 			
 			// Organisationseinheit sollen nach id angezeigt werden
 
@@ -80,7 +80,7 @@ public class OrganisationseinheitMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM organisationseinheit " 
-							+ "WHERE idOrganisationseinheit=" + o.getIdOrganisationseinheit());
+							+ " WHERE idOrganisationseinheit= " + o.getIdOrganisationseinheit());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

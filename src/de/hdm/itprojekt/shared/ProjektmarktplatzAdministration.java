@@ -3,19 +3,48 @@ package de.hdm.itprojekt.shared;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+import de.hdm.itprojekt.server.db.*;
+
+
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+import de.hdm.itprojekt.server.db.PersonMapper;
+import de.hdm.itprojekt.shared.bo.Person;
+
 import de.hdm.itprojekt.shared.bo.*;
 
-@RemoteServiceRelativePath("projektmarktplatzdministration")
+
+
+
+/**
+ * The client-side stub for the RPC service.
+ */
+@RemoteServiceRelativePath("greet")
+
+
+
+
 public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Diese Methode bei jeder Instantiierung verwenden, das heißt diese Methode
 	// init()
 	// danach verwenden, dient der Überprüng der Instanz => "throws
 	// ILLEGALARGUMENTEXCEPTION" für Fehlermeldung zuständig
+	
+	
+	// Person anhand von Id ausgeben in der Gui , funktioniert 
+	
+	Person findPersonByKey(String key);
+	
+	
+	
+	
+	
+	
+	
+	
 	void init() throws IllegalArgumentException;
 
 	// Projektmarktplatz pm
