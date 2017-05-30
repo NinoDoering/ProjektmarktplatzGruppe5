@@ -4,218 +4,189 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import de.hdm.itprojekt.server.db.*;
-
-
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import de.hdm.itprojekt.server.db.PersonMapper;
-import de.hdm.itprojekt.shared.bo.Person;
-
 import de.hdm.itprojekt.shared.bo.*;
 
-
-
-
-/**
- * The client-side stub for the RPC service.
- */
-@RemoteServiceRelativePath("greet")
-
-
-
-
+@RemoteServiceRelativePath("projektmarktplatzdministration")
 public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Diese Methode bei jeder Instantiierung verwenden, das heißt diese Methode
 	// init()
 	// danach verwenden, dient der Überprüng der Instanz => "throws
 	// ILLEGALARGUMENTEXCEPTION" für Fehlermeldung zuständig
-	
-	
-	// Person anhand von Id ausgeben in der Gui , funktioniert 
-	
-	//Person findPersonByKey(String key);
-	
-	
-	
-	
-	
-	
-	
-	
-	void init() throws IllegalArgumentException;
+	public void init() throws IllegalArgumentException;
 
-	
 	
 	// Projektmarktplatz pm
-	Object anlegenProjektmarktplatz(Object projektmarktplatz, String geschaeftsgebiet, String bezeichnung,
-			Object projekt) throws IllegalArgumentException;
-
-	Vector <Marktplatz> editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Object projekt)
-			throws IllegalArgumentException;
-
-
-
-	Vector <Marktplatz> getMarktplatz(Object projekt) throws IllegalArgumentException;
 	
 	
-	void loeschenMarktplatz(Object p, Object pm);
+	
+	public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)throws IllegalArgumentException;;
 
-	void save(Object pm);
+
+	
+	public void loeschenMarktplatz(Marktplatz pm)throws IllegalArgumentException;;
+	
+	public Marktplatz getMarktplatzById (int idMarktplatz) throws IllegalArgumentException; 
+	
+	public void saveMarktplatz (Marktplatz pm) throws IllegalArgumentException;
+		
 
 
+	
 	// Projekt p
-	Object anlegenProjekt(Object projekt, String projektleiter, String beschreibung, Date startDatum, Date endDatum)
+	
+
+	public Projekt anlegenProjekt(/*idAusschreibender??*/ int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum)
 			throws IllegalArgumentException;
 
-	Vector editierenProjekt(String projektleiter, String beschreibung, Date startDatum, Date endDatum)
-			throws IllegalArgumentException;
 
-	void loeschenProjekt(Object projekt) throws IllegalArgumentException;
 
-	Vector getProjekt(Object projekt) throws IllegalArgumentException;
+	public void loeschenProjekt(Projekt p) throws IllegalArgumentException;
 
+	public Projekt getProjektbyId (int idProjekt) throws IllegalArgumentException;
+	
+	public void saveProjekt(Projekt p) throws IllegalArgumentException;
+
+	
+	
+	
 	// Ausschreibung a
-	Object anlegenAusschreibung(Object a, String bezeichnung, String beschreibung, Date endDatum)
+	
+	public Ausschreibung anlegenAusschreibung(int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
 			throws IllegalArgumentException;
 
-	Vector editierenAusschreibung(Object a, String bezeichnung, String beschreibung, Date endDatum)
-			throws IllegalArgumentException;
 
-	void loeschenAusschreibung(Object a) throws IllegalArgumentException;
 
-	Vector getAusschreibung(Object ausschreibung, String bezeichnung) throws IllegalArgumentException;
+	public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException;
+	
+	public Ausschreibung getAusschreibungbyId (int idAusschreibung) throws IllegalArgumentException;
+	
+	public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 
+	
 	// Partnerprofil pp
-	Partnerprofil anlegenPartnerprofil(int idParnterprofil, Partnerprofil pp, String eigenschaft)
+	
+	public Partnerprofil anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit)
 			throws IllegalArgumentException;
 
-	Vector<Partnerprofil> editierenPartnerprofil(Partnerprofil pp, String eigenschaft) throws IllegalArgumentException;
 
-	void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
+	public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
 
-	Vector<Partnerprofil> getPartnerprofil(int idPartnerprofil, Partnerprofil pp, String eigenschaften)
-			throws IllegalArgumentException;
+	public Partnerprofil getPartnerprofilbyId (int idPartnerprofil)throws IllegalArgumentException;
+	
+	public void savePartnerprofil(Partnerprofil pp)throws IllegalArgumentException;
 
+	
 	// Bewerbung b
-	Object anlegenBewerbung(Object b, String bewerber, String bewerbungstext, Date erstellDatum)
+	
+	public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung , String bewerbungstext, Date erstellDatum)
 			throws IllegalArgumentException;
 
-	Vector editierenBewerbung(String beweber, String bewerbungstext, Date erstellDatum) throws IllegalArgumentException;
 
-	void loeschenBewerbung(Object b, String bewerber) throws IllegalArgumentException;
 
-	Vector getBewerbung(Object b, String bewerber) throws IllegalArgumentException;
+	public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException;
 
+	public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException;
+	
+	public void saveBewerbung (Bewerbung b)throws IllegalArgumentException;
+
+	
 	// Eigenschaft e
-	Eigenschaft anlegenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre,
+	
+	public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
 			String employmentStatus, String ausbildung, String sprachkenntnisse) throws IllegalArgumentException;
 
-	Vector<Eigenschaft> editierenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre,
-			String employmentStatus, String ausbildung, String sprachkenntnisse) throws IllegalArgumentException;
 
-	void loeschenEigenschaft(Eigenschaft e, String arbeitsgebiet, float berufserfahrungsJahre, String employmentStatus,
-			String ausbildung, String sprachkenntnisse) throws IllegalArgumentException;
+	public void loeschenEigenschaft(Eigenschaft e) throws IllegalArgumentException;
 
-	Vector<Eigenschaft> getEigenschaft(Eigenschaft e, String arbeitsgebeit, float berufserfahrungsJahre,
-			String employmentStatus) throws IllegalArgumentException;
+	public Eigenschaft getEigenschaftById(int idEigenschaft) throws IllegalArgumentException;
+	
+	public void saveEigenschaft (Eigenschaft e)throws IllegalArgumentException;
+	
 
-	// Bewertung bg
-	Object anlegenBewertung(Object bewertung, String textuelleBewertung, float fließKommaBewertung);
+	// Bewertung bewertung
+	
+	public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, double fliessKommaBewertung);
 
-	Vector editierenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung)
-			throws IllegalArgumentException;
 
-	void loeschenBewertung(Object bg, String textuelleBewertung, float fließKommaBewertung)
-			throws IllegalArgumentException;
+	public void loeschenBewertung(Bewertung bewertung)throws IllegalArgumentException;
 
-	Vector getBewertung(Object bg, float fließKommaBewertung) throws IllegalArgumentException;
+	public Bewertung getBewertungById (int idBewertung) throws IllegalArgumentException;
+	
+	public void saveBewertung (Bewertung bewertung)throws IllegalArgumentException;
+	
 
 	// Beteiligung beteiligung
-	Beteiligung anlegenBeteiligung(Beteiligung beteiligung, String name, int idBeteiligung, int idProjekt)
+	
+	public Beteiligung anlegenBeteiligung(int idOrganisationseinheit, int idProjekt, int idBewertung)
 			throws IllegalArgumentException;
 
-	Vector<Beteiligung> editierenBeteiligung(Beteiligung betiligung) throws IllegalArgumentException;
 
-	void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException;
 
-	Vector<Beteiligung> getBeteiligung(Beteiligung beteiligung, int idOrganisationseinheit)
-			throws IllegalArgumentException;
+	public void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException;
 
-	// Organisationseinheit org
-	Organisationseinheit anlegenOrganisationseinheit(Organisationseinheit org, int idOrganisationseinheit)
-			throws IllegalArgumentException;
-
-	Vector<Organisationseinheit> editierenOrganisationseinheit(Organisationseinheit org)
-			throws IllegalArgumentException;
-
-	void loeschenOrgansationseinheit(Organisationseinheit org, int idOrganisationseinheit)
-			throws IllegalArgumentException;
-
-	Vector<Organisationseinheit> getOrganisationseinheit(Organisationseinheit org, int idOrganisationseinheit)
-			throws IllegalArgumentException;
-
-	// Person p
-	Object anlegenPerson(Object p, int idPerson, char geschlecht, String vorname, String nachname)
-			throws IllegalArgumentException;
-
-	Vector editierenPerson(Object p, char geschlecht, String vorname, String nachname) throws IllegalArgumentException;
-
-	void loeschenPerson(Object p) throws IllegalArgumentException;
-
-	Vector getPerson(Object p, int idPerson, char geschlecht, String vorname, String nachname)
-			throws IllegalArgumentException;
-
-	// Team t
-	Object anlegenTeam(Object t, int idTeam, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
-
-	Vector editierenTem(Object t, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
-
-	void loeschenTeam(Object t, int idTeam) throws IllegalArgumentException;
-
-	Vector getTeam(Object t, int idTeam, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
-
-	// Unternehmen u
-	Object anlegenUnternehmen(Object u, int idUnternehmen, String firmenName) throws IllegalArgumentException;
-
-	Vector editierenUnternehmen(Object u, String firmenName) throws IllegalArgumentException;
-
-	void loeschenUnternehmen(Object u, int idUnternehmen, String firmenName) throws IllegalArgumentException;
-
-	Vector getUnternehmen(Object u, int idUnternehmen, String firmenName) throws IllegalArgumentException;
-
-	// Getter-By-All
-	Vector getBewertungById(int idBewertung, Object bg) throws IllegalArgumentException;
-
-	Vector getBewertungByBewerbungId(Object bg, int idBewertung, Object b, int idBewerbung)
-			throws IllegalArgumentException;
-
-	Vector getAlleAusschreibung(Object a, int idAusschreibung) throws IllegalArgumentException;
-
-	Vector getAusschreibungByidPartnerprofil(Object a, int idAusschreibung, Partnerprofil pp, int idPartnerprofil)
-			throws IllegalArgumentException;
-
-	Vector getAusschreibungByidBewerbung(Object a, int idAusschreibung, Object b, int idBewerbung)
-			throws IllegalArgumentException;
-
-	Vector getBewerbungByidAusschreibung(Object b, int idBewerbung, int idAusschreibung)
-			throws IllegalArgumentException;
-
-	Vector getBewerbungByidPartnerprofil(Object b, int idBewerbung, Partnerprofil pp, int idPartnerprofil)
-			throws IllegalArgumentException;
-
-	Vector getBewerbungByidOrganisationseinheit(Object b, int idBewerbung, int idOrganisationseinheit)
-			throws IllegalArgumentException;
-
-	Vector getBewertungenByidOrganisationseinheit(int idBewertung, int idOrganisationseinheit)
-			throws IllegalArgumentException;
-
-	Vector<Beteiligung> getBeteiligungByidOrganisationseinheit(Beteiligung beteiligung, int idBeteiligung,
-			int idOrgansisationseinheit) throws IllegalArgumentException;
-
-	Vector getAllByidBewerbungen(Object b, int idBewerbung) throws IllegalArgumentException;
+	public Beteiligung getBeteiligungById (int idBeteiligung) throws IllegalArgumentException;
+	
+	public void saveBeteiligung (Beteiligung beteiligung) throws IllegalArgumentException;
 
 	
+
+	// Person pe
+	
+	public Person anlegenPerson(int idOrganisationseinheit, int idPartnerprofil, char geschlecht, String vorname, String nachname)
+			throws IllegalArgumentException;
+
+	public void loeschenPerson(Person pe) throws IllegalArgumentException;
+
+	public Person getPersonById(int idPerson) throws IllegalArgumentException;
+	
+	public void savePerson (Person pe)throws IllegalArgumentException;
+	
+
+	// Team t
+	
+	public Team anlegenTeam(int idOrganisationseinheit, int idPartnerprofil, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
+
+	public void loeschenTeam(Team t) throws IllegalArgumentException;
+
+	public Team getTeamById(int idTeam) throws IllegalArgumentException;
+	
+	public void saveTeam (Team t) throws IllegalArgumentException;
+
+	
+	// Unternehmen u
+	
+	public Unternehmen anlegenUnternehmen(int idOrganisationseinheit, int idPartnerprofil, String firmenName) throws IllegalArgumentException;
+
+	public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException;
+
+	public Unternehmen getUnternehmenById (int idUnternehmen);
+	
+	public void saveUnternehmen (Unternehmen u) throws IllegalArgumentException;
+	
+	
+
+	// Getter-By-All....Aufrufe und Anforderungen definieren 
+	
+	//Anforderung 3. Aufruf aller Ausschreibungen
+	public Vector<Ausschreibung> getAllAusschreibungenByOrganisationseinheit (Organisationseinheit o) throws IllegalArgumentException;
+
+	//4. Alle Ausschreibungen die zum Partnerprofil passen
+	public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp)throws IllegalArgumentException;
+
+	//5. und 7. Aufruf vom Projektleiter nach allen Bewerbungen auf die Ausschreibungen die er erstellt hat
+	public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
+	
+	//Aufruf der eigenen Bewerbungen als Bewerber und dazugeh�rigen Ausschreibungen
+
+	public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheut(Organisationseinheit o) throws IllegalArgumentException;
+	
+	// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
+	public Vector <Beteiligung> getAllBeteiligungenToProject(Projekt p)throws IllegalArgumentException;
+
+
+
 }
