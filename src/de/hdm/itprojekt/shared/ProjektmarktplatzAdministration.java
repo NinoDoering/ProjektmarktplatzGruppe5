@@ -180,13 +180,13 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	//5. und 7. Aufruf vom Projektleiter nach allen Bewerbungen auf die Ausschreibungen die er erstellt hat
 	public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	
-	//Aufruf der eigenen Bewerbungen als Bewerber und dazugehörigen Ausschreibungen
+	//Aufruf der eigenen Bewerbungen als Bewerber und dazugehï¿½rigen Ausschreibungen
 
 	public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheut(Organisationseinheit o) throws IllegalArgumentException;
 	
 	// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
 	public Vector <Beteiligung> getAllBeteiligungenToProject(Projekt p)throws IllegalArgumentException;
 
-
+//neu
 
 }

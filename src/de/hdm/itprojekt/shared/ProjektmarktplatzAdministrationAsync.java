@@ -11,7 +11,7 @@ import de.hdm.itprojekt.server.db.PersonMapper;
 /**
  * The async counterpart of <code>GreetingService</code>.
  */
-
+//
 public interface ProjektmarktplatzAdministrationAsync {
 
 	// Person anhand von Id ausgeben in der Gui , funktioniert 
