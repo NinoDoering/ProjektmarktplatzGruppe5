@@ -256,8 +256,33 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		prjktMapper.update(projekt);
 	}
 	
-	//deleteProjekt
+	//deleteProjekt (getAusschreibungenOfProjekt() muss noch hinzugefuegt werden
 	public void deleteProjekt(int idProjekt) throws IllegalArgumentException {
+		
+		// zugehoerige Ausschreibungen werden gelöscht
+		Vektor<Ausschreibung> ausschreibungen = this.getAusschreibungenOfProjekt(idProjekt);
+		
+		if (ausschreibungen != null) {
+			for (int idAusschreibung : ausschreibungen) {
+				this.deleteAusschreibung(idAusschreibung);
+			}
+		}
+		
+		/* zugehörige Partnerprofile werden gelöscht / die Ausschreibungsids werden benötigt
+		*und dann erst können die Partnerprofile gelöscht werden
+		*ich muss ausschreibung löschen irgendwo schon definieren
+		*/
+		
+		int idAusschreibung; // kann das richtig sein?
+		
+		Vektor<Partnerprofil> partnerprofile = this.getPartnerprofileOfAusschreibung(idAusschreibung);
+		
+		if (partnerprofile != null) {
+			for (int idPartnerprofil : partnerprofile){
+				this.deletePartnerprofil(idPartnerprofil);
+			}
+		}
+		
 		this.prjktMapper.delete(idProjekt);
 		// gleicher Fehler
 		}
