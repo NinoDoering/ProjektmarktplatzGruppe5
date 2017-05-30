@@ -6,7 +6,7 @@ import java.util.Vector;
 import de.hdm.itprojekt.shared.bo.*;
 
 public class PartnerprofilMapper {
-
+//Alle Mappermethoden in dieser Klasse funktionieren
 	private static PartnerprofilMapper partnerprofilMapper = null;
 
 	protected PartnerprofilMapper() {
@@ -29,7 +29,7 @@ public class PartnerprofilMapper {
 
 			ResultSet rs = stmt
 					.executeQuery("SELECT idPartnerprofil FROM partnerprofil " 
-			+ "WHERE idPartnerprofil=" + idPartnerprofil);
+			+ "WHERE idPartnerprofil= " + idPartnerprofil);
 
 			if (rs.next()) {
 				Partnerprofil p = new Partnerprofil();
@@ -92,14 +92,15 @@ public class PartnerprofilMapper {
 		return p;
 	}
 
-	// UPDATE
+	// UPDATE unnötig
 	public Partnerprofil update(Partnerprofil p) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE partnerprofil " + "SET idPartnerprofil=\"" + p.getIdPartnerprofil() + "\" "
+			stmt.executeUpdate("UPDATE partnerprofil " 
+			+ "SET idPartnerprofil=\"" + p.getIdPartnerprofil() + "\" "
 					+ "WHERE idPartnerprofil=" + p.getIdPartnerprofil());
 
 		} catch (SQLException e4) {
@@ -116,7 +117,8 @@ public class PartnerprofilMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM partnerprofil " + "WHERE idPartnerprofil=" + p.getIdPartnerprofil());
+			stmt.executeUpdate("DELETE FROM partnerprofil " 
+			+ "WHERE idPartnerprofil=" + p.getIdPartnerprofil());
 		} catch (SQLException e5) {
 			e5.printStackTrace();
 		}
