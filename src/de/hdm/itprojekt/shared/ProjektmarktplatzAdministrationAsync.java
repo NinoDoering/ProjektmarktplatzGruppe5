@@ -3,19 +3,33 @@ package de.hdm.itprojekt.shared;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
 import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.server.db.*;
+import de.hdm.itprojekt.server.db.PersonMapper;
+import de.hdm.itprojekt.shared.bo.Person;
 
-public interface ProjektmarktplatzAdministrationAsync<Person, Unternehmen, Team, Projekt, Ausschreibung, Projektmarktplatz, Bewertung, Bewerbung> {
+/**
+ * The async counterpart of <code>GreetingService</code>.
+ */
 
+public interface ProjektmarktplatzAdministrationAsync<Person, Unternehmen, Team, Projekt, Ausschreibung, Marktplatz, Bewertung, Bewerbung> {
+
+	// Person anhand von Id ausgeben in der Gui , funktioniert 
+	void findPersonByKey(String key, AsyncCallback<Person> callback);
+	
+	
+	
+	
+	
+	
+	
+	
 	void init(AsyncCallback<Void> callback);
 
 	// Projektmarktplatz pm
-	void anlegenProjektmarktplatz(Projektmarktplatz pm, String geschaeftsgebiet, String bezeichnung, Projekt projekt,
-			AsyncCallback<Projektmarktplatz> callback);
+	void anlegenProjektmarktplatz(Marktplatz pm, String geschaeftsgebiet, String bezeichnung, Projekt projekt,
+			AsyncCallback<Marktplatz> callback);
 
 	void editierenMarktplatz(String geschaeftsgebiet, String bezeichnung, Projekt projekt,
 			AsyncCallback<Vector<Marktplatz>> callback);

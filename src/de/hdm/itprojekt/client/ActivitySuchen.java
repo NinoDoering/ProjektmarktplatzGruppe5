@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client;
 
+import de.hdm.itprojekt.*;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -12,6 +13,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
+import de.hdm.itprojekt.shared.ProjektmarktplatzAdministration;
+import de.hdm.itprojekt.shared.ProjektmarktplatzAdministrationAsync;
 import de.hdm.itprojekt.shared.bo.Person;
 
 
@@ -20,7 +23,7 @@ public class ActivitySuchen extends HorizontalPanel  {
 	
 	
 	//proxy
-	private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
+	private  ProjektmarktplatzAdministrationAsync gwtproxy = GWT.create(ProjektmarktplatzAdministration.class);
 	
 	//deklarieren von gui variablen
 	Label lblAnzeige;
