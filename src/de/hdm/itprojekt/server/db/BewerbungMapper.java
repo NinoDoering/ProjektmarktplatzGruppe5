@@ -34,7 +34,7 @@ public class BewerbungMapper {
 			Statement stmt = con.createStatement();
 			// SQL STATEMENT
 			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, bewerber, bewerbungsText, erstellDatum FROM bewerbung " 
-											+ "WHERE idBewerbung=" + idBewerbung 
+											+ " WHERE idBewerbung= " + idBewerbung 
 											+ " ORDER BY idBewerbung");
 			
 			if (rs.next()) {
@@ -85,7 +85,7 @@ public class BewerbungMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT idBewerbung, bewerber, bewerbungsText, erstellDatum FROM bewerber " 
-											+ "WHERE idBewerbung=" + idBewerbung 
+											+ " WHERE idBewerbung= " + idBewerbung 
 											+ " ORDER BY idBewerbung");
 			
 			while (rs.next()) {
@@ -156,7 +156,7 @@ public class BewerbungMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM bewerbung" 
-								+ "WHERE idBewerbung=" + bw.getIdBewerbung());
+								+ " WHERE idBewerbung= " + bw.getIdBewerbung());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
