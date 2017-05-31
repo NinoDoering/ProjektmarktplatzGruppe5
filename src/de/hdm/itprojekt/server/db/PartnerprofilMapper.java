@@ -21,7 +21,7 @@ public class PartnerprofilMapper {
 	}
 
 	// findByKey
-	public Partnerprofil findByKey(int idPartnerprofil) {
+	public Partnerprofil findPartnerprofilByKey(int idPartnerprofil) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -32,10 +32,10 @@ public class PartnerprofilMapper {
 			+ "WHERE idPartnerprofil= " + idPartnerprofil);
 
 			if (rs.next()) {
-				Partnerprofil p = new Partnerprofil();
-				p.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				Partnerprofil pp = new Partnerprofil();
+				pp.setId(rs.getInt("idPartnerprofil"));
 
-				return p;
+				return pp;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,10 +56,10 @@ public class PartnerprofilMapper {
 			ResultSet rs = stmt.executeQuery("SELECT idPartnerprofil " + "FROM partnerprofil ");
 
 			while (rs.next()) {
-				Partnerprofil p = new Partnerprofil();
-				p.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				Partnerprofil pp = new Partnerprofil();
+				pp.setId(rs.getInt("idPartnerprofil"));
 
-				result.addElement(p);
+				result.addElement(pp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,9 +67,15 @@ public class PartnerprofilMapper {
 
 		return result;
 	}
+	
+	public Partnerprofil findByPartnerprofil(Partnerprofil pp){
+		 return this.findPartnerprofilByKey(pp.getId());
+		 
+	  }
+
 
 	// INSERT INTO
-	public Partnerprofil insert(Partnerprofil p) {
+	public Partnerprofil insert(Partnerprofil pp) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -79,48 +85,49 @@ public class PartnerprofilMapper {
 
 			if (rs.next()) {
 
-				p.setIdPartnerprofil(rs.getInt("maxid") + 1);
+				pp.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO partnerprofil (idPartnerprofil) " + "VALUES (" + p.getIdPartnerprofil() + ")");
+				stmt.executeUpdate("INSERT INTO partnerprofil (idPartnerprofil) " 
+				+ "VALUES (" + pp.getId() + ")");
 			}
-		} catch (SQLException e3) {
-			e3.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-		return p;
+		return pp;
 	}
 
-	// UPDATE unnötig
-	public Partnerprofil update(Partnerprofil p) {
+	// UPDATE unnï¿½tig
+	public Partnerprofil update(Partnerprofil pp) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("UPDATE partnerprofil " 
-			+ "SET idPartnerprofil=\"" + p.getIdPartnerprofil() + "\" "
-					+ "WHERE idPartnerprofil=" + p.getIdPartnerprofil());
+			+ "SET idPartnerprofil=\"" + pp.getId() + "\" "
+					+ "WHERE idPartnerprofil=" + pp.getId());
 
-		} catch (SQLException e4) {
-			e4.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-		return p;
+		return pp;
 	}
 
 	// DELETE
-	public void delete(Partnerprofil p) {
+	public void delete(Partnerprofil pp) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM partnerprofil " 
-			+ "WHERE idPartnerprofil=" + p.getIdPartnerprofil());
-		} catch (SQLException e5) {
-			e5.printStackTrace();
+			+ "WHERE idPartnerprofil=" + pp.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }
