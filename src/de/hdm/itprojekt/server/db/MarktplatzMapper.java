@@ -22,7 +22,7 @@ public class MarktplatzMapper {
 		return marktplatzMapper;
 	}
 
-	public Marktplatz insertMarktplatz (Marktplatz p) {
+	public Marktplatz insertMarktplatz (Marktplatz pm) {
 
 		Connection con = DBConnection.connection();
 
@@ -33,23 +33,23 @@ public class MarktplatzMapper {
 
 			if (rs.next()) {
 
-				p.setIdMarktplatz(rs.getInt("maxid") + 1);
+				pm.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
 						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung, idProjekt) " + "VALUES ('"
-				+p.getIdMarktplatz()+ "','"+ 
-				p.getGeschaeftsgebiet() + "','" + 
-				p.getBezeichnung() + "','" +
-				p.getIdProjekt() + "')");
+				+pm.getId()+ "','"+ 
+				pm.getGeschaeftsgebiet() + "','" + 
+				pm.getBezeichnung() + "')");
+				
 				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 
 		}
-		return p;
+		return pm;
 	}
 
 	public Marktplatz findMarktplatzById (int idMarktplatz) {
@@ -60,19 +60,18 @@ public class MarktplatzMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idMarktplatz, bezeichnung, geschaeftsgebiet FROM marktplatz"
+					"SELECT * FROM marktplatz"
 							+ "WHERE idMarktplatz=" + idMarktplatz );
 			// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung
 			// angezeigt werden
 
 			if (rs.next()) {
-				Marktplatz p = new Marktplatz();
-				p.setIdMarktplatz(rs.getInt("idMarktplatz"));
-				p.setBezeichnung(rs.getString("bezeichnung"));
-				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
-				p.setProjekt(rs.getString("beschreibung")); 
+				Marktplatz pm = new Marktplatz();
+				pm.setId(rs.getInt("idMarktplatz"));
+				pm.setBezeichnung(rs.getString("bezeichnung"));
+				pm.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
 
-				return p;
+				return pm;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -83,7 +82,7 @@ public class MarktplatzMapper {
 
 	public Vector<Marktplatz> findAll() {
 		Connection con = DBConnection.connection();
-		Vector<Marktplatz> result = new Vector<Marktplatz>();
+		Vector<Marktplatz> vector = new Vector<Marktplatz>();
 
 		try {
 			Statement stmt = con.createStatement();
@@ -91,28 +90,27 @@ public class MarktplatzMapper {
 			// Datenbankabfrage aller Projekte alphabetisch sortiert nach
 			// bezeichnung
 
-			ResultSet rs = stmt.executeQuery("SELECT idMarktplatz, bezeichnung, geschaeftsgebiet, projekt "
+			ResultSet rs = stmt.executeQuery("SELECT * "
 					+ "FROM marktplatz" + "ORDER BY bezeichnung");
 			while (rs.next()) {
-				Marktplatz p = new Marktplatz();
-				p.setIdMarktplatz(rs.getInt("idMarktplatz"));
-				p.setBezeichnung(rs.getString("bezeichnung"));
-				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
-				p.setProjekt(rs.getString("projektleiter")); 
+				Marktplatz pm = new Marktplatz();
+				pm.setId(rs.getInt("idMarktplatz"));
+				pm.setBezeichnung(rs.getString("bezeichnung"));
+				pm.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
 
-				result.addElement(p);
+				vector.addElement(pm);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return vector;
 	}
 
 	public Vector<Marktplatz> findMarktplatzByBezeichnung(String bezeichnung) {
 		Connection con = DBConnection.connection();
-		Vector<Marktplatz> result = new Vector<Marktplatz>();
+		Vector<Marktplatz> vector = new Vector<Marktplatz>();
 
 		try {
 			Statement stmt = con.createStatement();
@@ -123,21 +121,20 @@ public class MarktplatzMapper {
 					+ " FROM marktplatz " + "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
-				Marktplatz p = new Marktplatz();
-				p.setIdMarktplatz(rs.getInt("idProjektmarktplatz"));
-				p.setBezeichnung(rs.getString("bezeichnung"));
-				p.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
-				p.setProjekt(rs.getString("projektleiter")); // fehler ??
+				Marktplatz pm = new Marktplatz();
+				pm.setId(rs.getInt("idProjektmarktplatz"));
+				pm.setBezeichnung(rs.getString("bezeichnung"));
+				pm.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
 
-				result.addElement(p);
+				vector.addElement(pm);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return vector;
 	}
 
-	public Marktplatz updateMarktplatz (Marktplatz p) {
+	public Marktplatz updateMarktplatz (Marktplatz pm) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -145,23 +142,23 @@ public class MarktplatzMapper {
 
 			// SQL Statment, welches das Updaten von Projekte erlaubt
 
-			stmt.executeUpdate("UPDATE marktplatz " + "SET bezeichnung=\"" + p.getBezeichnung() + "\", "
-					+ "geschaeftsgebiet=\"" + p.getGeschaeftsgebiet() + "\", " + 
-					"WHERE idMarktplatz" + p.getIdMarktplatz());
+			stmt.executeUpdate("UPDATE marktplatz " + "SET bezeichnung=\"" + pm.getBezeichnung() + "\", "
+					+ "geschaeftsgebiet=\"" + pm.getGeschaeftsgebiet() + "\", " + 
+					"WHERE idMarktplatz" + pm.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return p;
+		return pm;
 	}
 
-	public void deleteMarktplatz (Marktplatz p) {
+	public void deleteMarktplatz (Marktplatz pm) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeQuery(
-					"DELETE * from marktplatz" + "WHERE idMarktplatz =" + p.getIdMarktplatz());
+					"DELETE * from marktplatz" + "WHERE idMarktplatz =" + pm.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
