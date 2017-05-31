@@ -10,8 +10,7 @@ import de.hdm.itprojekt.shared.bo.*;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
-		implements ProjektmarktplatzAdministration {
+public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet implements ProjektmarktplatzAdministration {
 
 
 	// private BusinessObjectMapper boMapper = null;
@@ -21,7 +20,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	private PartnerprofilMapper ppMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektMapper prjktMapper = null;
-	//private MarktplatzMapper pmpMapper = null;
+	private MarktplatzMapper pmpMapper = null;
 	private TeamMapper teamMapper = null;
 	private UnternehmenMapper unternehmenMapper = null;
 	private AusschreibungMapper ausschreibungMapper = null;
@@ -44,7 +43,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 		this.persMapper = PersonMapper.personMapper();
 		this.prjktMapper = ProjektMapper.projektMapper();
-		//this.pmpMapper = MarktplatzMapper.marktplatzMapper();
+		this.pmpMapper = MarktplatzMapper.marktplatzMapper();
 		this.teamMapper = TeamMapper.teamMapper();
 		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
 		this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper(); 
@@ -60,24 +59,25 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 	// createEigenschaft
 	public Eigenschaft createEigenschaft(
-			int idEigenschaft, String arbeitsgebiet, String ausbildung, float berufserfahrungsJahre, String sprachkenntnisse,
-			String employmentStatus, String abschluss) throws IllegalArgumentException {
-		Eigenschaft eig = new Eigenschaft();
+			int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
+			String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse) throws IllegalArgumentException {
+		Eigenschaft e = new Eigenschaft();
 
-		eig.setIdEigenschaft(idEigenschaft); 
-		eig.setArbeitsgebiet(arbeitsgebiet);
-		eig.setAusbildung(ausbildung);
-		eig.setBerufserfahrungsJahre(berufserfahrungsJahre);
-		eig.setSprachkenntnisse(sprachkenntnisse);
-		eig.setEmploymentStatus(employmentStatus);
-		eig.setAbschluss(abschluss);
+		e.setIdPartnerprofil(idPartnerprofil); 
+		e.setArbeitsgebiet(arbeitsgebiet);
+		e.setAusbildung(ausbildung);
+		e.setBerufserfahrungsJahre(berufserfahrungsJahre);
+		e.setSprachkenntnisse(sprachkenntnisse);
+		e.setEmploymentStatus(employmentStatus);
+		e.setAbschluss(abschluss);
 
-		return this.eigMapper.insertEigenschaft(eig);
+		e.setId(1);
+		return this.eigMapper.insertEigenschaft(e);
 	}
 
 	// getEigenschaftById
 	public Eigenschaft getEigenschaftById(int idEigenschaft) throws IllegalArgumentException {
-		return this.eigMapper.findEigenschaftById(idEigenschaft);
+		return this.eigMapper.findEigenschaftByKey(idEigenschaft);
 	}
 
 	// getAll
@@ -561,5 +561,290 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		public void deleteBewerbung (int idBewerbung) throws IllegalArgumentException {
 			bewerbungMapper.deleteBewerbung(idBewerbung);
 			// falscher Datentyp
+		}
+
+		// Aus der ProjektmarktplatzAdiministration implementierte Methoden
+		@Override
+		public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenMarktplatz(Marktplatz pm) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Marktplatz getMarktplatzById(int idMarktplatz) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void saveMarktplatz(Marktplatz pm) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Projekt anlegenProjekt(int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum,
+				Date endDatum) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenProjekt(Projekt p) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Projekt getProjektbyId(int idProjekt) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void saveProjekt(Projekt p) throws IllegalArgumentException {
+		
+			this.prjktMapper.update(p);// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Ausschreibung anlegenAusschreibung(int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Ausschreibung getAusschreibungbyId(int idAusschreibung) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Partnerprofil anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Partnerprofil getPartnerprofilbyId(int idPartnerprofil) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void savePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
+				Date erstellDatum) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void saveBewerbung(Bewerbung b) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
+				String employmentStatus, String ausbildung, String sprachkenntnisse) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenEigenschaft(Eigenschaft e) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void saveEigenschaft(Eigenschaft e) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, double fliessKommaBewertung) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenBewertung(Bewertung bewertung) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Bewertung getBewertungById(int idBewertung) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void saveBewertung(Bewertung bewertung) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Beteiligung anlegenBeteiligung(int idOrganisationseinheit, int idProjekt, int idBewertung)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void saveBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Person anlegenPerson(int idOrganisationseinheit, int idPartnerprofil, char geschlecht, String vorname,
+				String nachname) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenPerson(Person pe) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void savePerson(Person pe) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Team anlegenTeam(int idOrganisationseinheit, int idPartnerprofil, String teamName, int mitgliederAnzahl)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenTeam(Team t) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void saveTeam(Team t) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Unternehmen anlegenUnternehmen(int idOrganisationseinheit, int idPartnerprofil, String firmenName)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Unternehmen getUnternehmenById(int idUnternehmen) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void saveUnternehmen(Unternehmen u) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Vector<Ausschreibung> getAllAusschreibungenByOrganisationseinheit(Organisationseinheit o)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheut(Organisationseinheit o)
+				throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Vector<Beteiligung> getAllBeteiligungenToProject(Projekt p) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }
