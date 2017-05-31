@@ -52,7 +52,7 @@ public class MarktplatzMapper {
 		return pm;
 	}
 
-	public Marktplatz findMarktplatzById (int idMarktplatz) {
+	public Marktplatz findMarktplatzByKey (int idMarktplatz) {
 
 		Connection con = DBConnection.connection();
 

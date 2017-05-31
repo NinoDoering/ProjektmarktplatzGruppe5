@@ -56,8 +56,8 @@ public class BewerbungMapper {
 				
 				return b;
 			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 
@@ -83,8 +83,8 @@ public class BewerbungMapper {
 				
 				result.addElement(b);
 			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -111,8 +111,8 @@ public class BewerbungMapper {
 				
 				result.addElement(b);
 			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 		return result;
@@ -141,8 +141,8 @@ public class BewerbungMapper {
 									+ format.format(b.getErstellDatum()) + "')");
 			}
 			
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return b;
 	}
@@ -151,7 +151,6 @@ public class BewerbungMapper {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
-			/// owner ?
 			stmt.executeUpdate("UPDATE bewerbung " 
 					+ "SET idBewerbung='" + b.getId() + "' ,'" 
 					+ "idOrganisationseinheit='" + b.getIdOrganisationseinheit() + "' ,'" 
@@ -161,8 +160,8 @@ public class BewerbungMapper {
 					+ "bewerbungsstatus='" + b.getBewerbungsstatus() + "' ,'" 
 					+ "WHERE idBewerbung ='"+ b.getId());
 			
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return b;
 	}
@@ -176,8 +175,8 @@ public class BewerbungMapper {
 			stmt.executeUpdate("DELETE FROM bewerbung" 
 								+ " WHERE idBewerbung= " + b.getId());
 
-		} catch (SQLException e2) {
-			e2.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
