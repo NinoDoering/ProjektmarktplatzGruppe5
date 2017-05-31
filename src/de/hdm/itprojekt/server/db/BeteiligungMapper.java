@@ -82,7 +82,7 @@ public class BeteiligungMapper {
 	}
 	
 	
-	public Vector<Beteiligung> findByProjekt(int idProjekt){
+	public Vector<Beteiligung> findBeteiligungByProjekt(int idProjekt){
 		  
 		    Connection con = DBConnection.connection();
 		    Vector<Beteiligung> result = new Vector<Beteiligung>();
@@ -112,7 +112,7 @@ public class BeteiligungMapper {
 	  }
 
 
-	public Vector<Beteiligung> findByBewertung(int idBewertung){
+	public Vector<Beteiligung> findBeteiligungByBewertung(int idBewertung){
 		  
 	    Connection con = DBConnection.connection();
 	    Vector<Beteiligung> result = new Vector<Beteiligung>();
@@ -141,7 +141,7 @@ public class BeteiligungMapper {
 	  return result;
   }
 
-	public Vector<Beteiligung> findByBeteiligter(int idBeteiligter){
+	public Vector<Beteiligung> findBeteiligungByBeteiligter(int idBeteiligter){
 		  
 	    Connection con = DBConnection.connection();
 	    Vector<Beteiligung> result = new Vector<Beteiligung>();

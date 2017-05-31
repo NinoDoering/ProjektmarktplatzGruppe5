@@ -80,7 +80,7 @@ public class MarktplatzMapper {
 		return null;
 	}
 
-	public Vector<Marktplatz> findAll() {
+	public Vector<Marktplatz> findAllMarktplatz() {
 		Connection con = DBConnection.connection();
 		Vector<Marktplatz> vector = new Vector<Marktplatz>();
 

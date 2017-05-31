@@ -107,7 +107,7 @@ public class BewertungMapper {
 		return this.findBewertungByKey(bewertung.getId());
 	}
 	
-	public Bewertung findByBewerbung(int idBewerbung){
+	public Bewertung findBewertungByBewerbung(int idBewerbung){
 	    Connection con = DBConnection.connection();
 
 	    try {
