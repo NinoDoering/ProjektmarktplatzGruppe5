@@ -7,7 +7,7 @@ import de.hdm.itprojekt.shared.bo.*;
 
 //Alle Mappermethoden in dieser Klasse funktionieren!
 
-public class UnternehmenMapper {
+public class UnternehmenMapper extends OrganisationseinheitMapper {
 
 	private static UnternehmenMapper unternehmenMapper = null;
 
@@ -22,7 +22,7 @@ public class UnternehmenMapper {
 		return unternehmenMapper;
 	}
 
-	public Unternehmen findByKey(int idUnternehmen) {
+	public Unternehmen findUnternehmenByKey(int id) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -30,13 +30,16 @@ public class UnternehmenMapper {
 
 			ResultSet rs = stmt
 					.executeQuery("SELECT idUnternehmen, firmenName FROM unternehmen " 
-			+ "WHERE idUnternehmen= " + idUnternehmen);
+			+ "WHERE idUnternehmen= " + id);
 
 			if (rs.next()) {
 				Unternehmen u = new Unternehmen();
-				u.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				u.setId(rs.getInt("idUnternehmen"));
 				u.setFirmenName(rs.getString("firmenName"));
-
+				u.setAdresse(super.findOrganisationseinheitByKey(id).getAdresse());
+				u.setStandort(super.findOrganisationseinheitByKey(id).getStandort());
+				u.setIdPartnerprofil(super.findOrganisationseinheitByKey(id).getIdPartnerprofil());
+				
 				return u;
 			}
 		} catch (SQLException e) {
@@ -46,26 +49,29 @@ public class UnternehmenMapper {
 
 		return null;
 	}
-	
 	
 	// FindByFirmenName -- Was ist mit Id??
 	public Unternehmen findByFirmenName(String firmenName) {
 		Connection con = DBConnection.connection();
 
 		//WICHTIG: In TestMapper muss abfrage folgendermaßen aussehen:
-		//System.out.println(UnternehmenMapper.unternehmenMapper().findByFirmenName("'StukkateurKosova'"));
+		//System.out.println(UnternehmenMapper.unternehmenMapper().findByFirmenName("'Name'"));
 		//Sehr wichtig ist auf die Anführungszeichen zu achten!
 		
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idUnternehmen, firmenName" + " FROM unternehmen " + "WHERE firmenName=" + firmenName);
+			ResultSet rs = stmt.executeQuery("SELECT idUnternehmen, firmenName" + 
+			" FROM unternehmen " + "WHERE firmenName=" + firmenName);
 
 			if (rs.next()) {
 				Unternehmen u = new Unternehmen();
 				u.setFirmenName(rs.getString("firmenName"));
-				u.setIdUnternehmen(rs.getInt("idUnternehmen"));
-
+				u.setId(rs.getInt("idUnternehmen"));
+				u.setAdresse(super.findByOrganisationseinheit(u).getAdresse());
+				u.setStandort(super.findByOrganisationseinheit(u).getStandort());
+				u.setIdPartnerprofil(super.findByOrganisationseinheit(u).getIdPartnerprofil());
+				
 				return u;
 			}
 		} catch (SQLException e) {
@@ -75,9 +81,42 @@ public class UnternehmenMapper {
 
 		return null;
 	}
+	
+	public Unternehmen findByUnternehmen(Unternehmen u){
+		return this.findUnternehmenByKey(u.getId());}
 
+	public Vector<Unternehmen> findAll() {
+		Connection con = DBConnection.connection();
+		Vector<Unternehmen> result = new Vector<Unternehmen>();
+
+		try {
+			Statement stmt = con.createStatement();
+
+			ResultSet rs = stmt
+					.executeQuery("SELECT idUnternehmen, firmenName " 
+			+ "FROM unternehmen " 
+			+ " ORDER BY firmenName");
+
+			while (rs.next()) {
+				Unternehmen u = new Unternehmen();
+				u.setId(rs.getInt("idTeam"));
+				u.setFirmenName(rs.getString("FirmenName"));
+				u.setAdresse(super.findByOrganisationseinheit(u).getAdresse());
+				u.setStandort(super.findByOrganisationseinheit(u).getStandort());
+				u.setIdPartnerprofil(super.findByOrganisationseinheit(u).getIdPartnerprofil());
+
+				result.addElement(u);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
 	// INSERT 
-	public Unternehmen insert(Unternehmen u) {
+	public Unternehmen insertUnternehmen(Unternehmen u) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -88,11 +127,11 @@ public class UnternehmenMapper {
 
 			if (rs.next()) {
 
-				u.setIdUnternehmen(rs.getInt("maxid") + 1);
+				u.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO unternehmen (idUnternehmen, firmenName) " + "VALUES ('" + u.getIdUnternehmen() + "','" + u.getFirmenName() + "')");
+				stmt.executeUpdate("INSERT INTO unternehmen (idUnternehmen, firmenName) " + "VALUES ('" + u.getId() + "','" + u.getFirmenName() + "')");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,7 +140,7 @@ public class UnternehmenMapper {
 		return u;
 	}
 
-	public Unternehmen update(Unternehmen u) {
+	public Unternehmen updateUnternehmen(Unternehmen u) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -109,7 +148,7 @@ public class UnternehmenMapper {
 
 			stmt.executeUpdate("UPDATE unternehmen " 
 			+ "SET firmenName=\"" + u.getFirmenName()  
-			+ "\" " +" WHERE idUnternehmen= " + u.getIdUnternehmen());
+			+ "\" " +" WHERE idUnternehmen= " + u.getId());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -119,14 +158,14 @@ public class UnternehmenMapper {
 	}
 
 	// DELETE
-	public void delete(Unternehmen u) {
+	public void deleteUnternehmen(Unternehmen u) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 			// Schon wieder wird id verwendet --> sollten Id als Attribut
 			// hinzufügen
-			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE idUnternehmen=" + u.getIdUnternehmen());
+			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE idUnternehmen=" + u.getId());
 		} catch (SQLException e3) {
 			e3.printStackTrace();
 		}

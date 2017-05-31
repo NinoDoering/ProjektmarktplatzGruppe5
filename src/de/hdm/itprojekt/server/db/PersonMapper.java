@@ -24,7 +24,7 @@ public class PersonMapper extends OrganisationseinheitMapper{
 	}
 
 	// FindByKey
-	public Person findPersonById(int id) {
+	public Person findPersonByKey(int id) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -41,9 +41,9 @@ public class PersonMapper extends OrganisationseinheitMapper{
 				p.setTitel(rs.getString("titel"));
 				p.setIdUnternehmen(rs.getInt("idUnternehmen"));
 				p.setIdTeam(rs.getInt("idTeam"));
-				p.setAdresse(super.findOrganisationseinheitById(id).getAdresse());
-				p.setStandort(super.findOrganisationseinheitById(id).getStandort());
-				p.setIdPartnerprofil(super.findOrganisationseinheitById(id).getIdPartnerprofil());
+				p.setAdresse(super.findOrganisationseinheitByKey(id).getAdresse());
+				p.setStandort(super.findOrganisationseinheitByKey(id).getStandort());
+				p.setIdPartnerprofil(super.findOrganisationseinheitByKey(id).getIdPartnerprofil());
 				
 				return p;
 			}
@@ -106,9 +106,9 @@ public Vector<Person> findByTeam(int idTeam){
 				p.setNachname(rs.getString("nachname"));
 				p.setIdUnternehmen(rs.getInt("idUnternehmen"));
 				p.setIdTeam(rs.getInt("idTeam"));
-				p.setAdresse(super.findOrganisationseinheitById(idTeam).getAdresse());
-				p.setStandort(super.findOrganisationseinheitById(idTeam).getStandort());
-				p.setIdPartnerprofil(super.findOrganisationseinheitById(idTeam).getIdPartnerprofil());	
+				p.setAdresse(super.findOrganisationseinheitByKey(idTeam).getAdresse());
+				p.setStandort(super.findOrganisationseinheitByKey(idTeam).getStandort());
+				p.setIdPartnerprofil(super.findOrganisationseinheitByKey(idTeam).getIdPartnerprofil());	
 
 			
 				result.addElement(p);
@@ -122,7 +122,7 @@ public Vector<Person> findByTeam(int idTeam){
 	}
 	
 public Person findByPerson(Person p){
-	return this.findPersonById(p.getId());	
+	return this.findPersonByKey(p.getId());	
 }
 
 public Vector<Person> findByUnternehmen(int idUnternehmen){
@@ -143,9 +143,9 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 			p.setNachname(rs.getString("nachname"));
 			p.setIdUnternehmen(rs.getInt("idUnternehmen"));
 			p.setIdTeam(rs.getInt("idTeam"));
-			p.setAdresse(super.findOrganisationseinheitById(idUnternehmen).getAdresse());
-			p.setStandort(super.findOrganisationseinheitById(idUnternehmen).getStandort());
-			p.setIdPartnerprofil(super.findOrganisationseinheitById(idUnternehmen).getIdPartnerprofil());	
+			p.setAdresse(super.findOrganisationseinheitByKey(idUnternehmen).getAdresse());
+			p.setStandort(super.findOrganisationseinheitByKey(idUnternehmen).getStandort());
+			p.setIdPartnerprofil(super.findOrganisationseinheitByKey(idUnternehmen).getIdPartnerprofil());	
 
 		
 			result.addElement(p);

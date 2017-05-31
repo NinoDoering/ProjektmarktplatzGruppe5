@@ -6,7 +6,7 @@ import java.util.Vector;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
 
-public class TeamMapper {
+public class TeamMapper extends OrganisationseinheitMapper{
 //Alle Mappermethoden in dieser Klasse funktionieren
 	private static TeamMapper teamMapper = null;
 
@@ -20,7 +20,7 @@ public class TeamMapper {
 		return teamMapper;
 	}
 
-	public Team insert(Team t) {
+	public Team insertTeam(Team t) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -34,8 +34,8 @@ public class TeamMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO Team (idTeam, teamName, mitgliederAnzahl )" + "VALUES ( " + t.getIdTeam()
-						+ " ,'" + t.getTeamName() + "','" + t.getMitgliederAnzahl() + "')");
+				stmt.executeUpdate(" INSERT INTO team (idTeam, teamName, mitgliederAnzahl, idUnternehmen )" 
+				+ "VALUES ( " + t.getId() + " ,'" + t.getTeamName() + "','" + t.getMitgliederAnzahl() + "','" + t.getIdUnternehmen() +"')");
 			}
 		}
 
@@ -46,20 +46,24 @@ public class TeamMapper {
 		return t;
 	}
 
-	public Team findbyKey(int idTeam) {
+	public Team findTeamByKey(int id) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 			// Teams sollen alphabetisch nach Team-Namen ausgegeben
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idTeam, teamName, mitgliederAnzahl" + " FROM  team" + " WHERE idTeam=" + idTeam );
+					"SELECT idTeam, teamName, mitgliederAnzahl" + " FROM  team" + " WHERE idTeam= " + id );
 
 			if (rs.next()) {
 				Team t = new Team();
-				t.setIdTeam(rs.getInt("idTeam"));
+				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
 				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
+				t.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				t.setAdresse(super.findOrganisationseinheitByKey(id).getAdresse());
+				t.setStandort(super.findOrganisationseinheitByKey(id).getStandort());
+				t.setIdPartnerprofil(super.findOrganisationseinheitByKey(id).getIdPartnerprofil());
 
 				return t;
 			}
@@ -79,13 +83,19 @@ public class TeamMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl " + "FROM team " + "ORDER BY teamName");
+					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen " 
+			+ "FROM team " 
+			+ " ORDER BY teamName");
 
 			while (rs.next()) {
 				Team t = new Team();
-				t.setIdTeam(rs.getInt("idTeam"));
+				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
 				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
+				t.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				t.setAdresse(super.findByOrganisationseinheit(t).getAdresse());
+				t.setStandort(super.findByOrganisationseinheit(t).getStandort());
+				t.setIdPartnerprofil(super.findByOrganisationseinheit(t).getIdPartnerprofil());
 
 				result.addElement(t);
 			}
@@ -97,6 +107,11 @@ public class TeamMapper {
 		return result;
 	}
 
+	public Team findByTeam(Team t){
+			return this.findTeamByKey(t.getId());
+			  
+		  }
+	
 	public Vector<Team> findByTeamName(String teamName) {
 		Connection con = DBConnection.connection();
 		Vector<Team> result = new Vector<Team>();
@@ -104,15 +119,18 @@ public class TeamMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl" + " FROM team "
+			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen" + " FROM team "
 					+ "WHERE teamName LIKE '" + teamName + "' ORDER BY teamName ");
 
 			while (rs.next()) {
 				Team t = new Team();
-				t.setIdTeam(rs.getInt("idTeam"));
+				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
 				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
-
+				t.setAdresse(super.findByOrganisationseinheit(t).getAdresse());
+				t.setStandort(super.findByOrganisationseinheit(t).getStandort());
+				t.setIdPartnerprofil(super.findByOrganisationseinheit(t).getIdPartnerprofil());
+				
 				result.addElement(t);
 
 			}
@@ -123,14 +141,17 @@ public class TeamMapper {
 		return result;
 	}
 
-	public Team update(Team t) {
+	public Team updateTeam(Team t) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE team " + "SET teamName=\"" + t.getTeamName() + "\", " + "mitgliederAnzahl=\""
-					+ t.getMitgliederAnzahl() + "\" " + "WHERE idTeam" + t.getIdTeam());
+			stmt.executeUpdate("UPDATE team " 
+			+ "SET teamName=\"" + t.getTeamName() + "\", " 
+			+ "mitgliederAnzahl=\"" + t.getMitgliederAnzahl() + "\" " 
+			+ "idUnternehmen=\"" + t.getIdUnternehmen() + "\" "
+			+ "WHERE idTeam" + t.getId());
 		}
 
 		catch (SQLException e) {
@@ -139,12 +160,12 @@ public class TeamMapper {
 		return t;
 	}
 
-	public void delete(Team t) {
+	public void deleteTeam(Team t) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE from team" + "WHERE idTeam = " + t.getIdTeam());
+			stmt.executeQuery("DELETE from team" + "WHERE idTeam = " + t.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();

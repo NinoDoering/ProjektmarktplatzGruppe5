@@ -48,7 +48,7 @@ public class OrganisationseinheitMapper {
 		return id;
 	}
 
-	public Organisationseinheit findOrganisationseinheitById (int id) {
+	public Organisationseinheit findOrganisationseinheitByKey (int id) {
 
 		Connection con = DBConnection.connection();
 
@@ -103,7 +103,7 @@ public class OrganisationseinheitMapper {
 	}
 	
 	public Organisationseinheit findByOrganisationseinheit(Organisationseinheit o){
-		return this.findOrganisationseinheitById(o.getId());
+		return this.findOrganisationseinheitByKey(o.getId());
 		}
 	
 	public void deleteOrganisationseinheit (Organisationseinheit o) {
