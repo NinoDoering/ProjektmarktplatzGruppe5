@@ -10,8 +10,8 @@ public class Bewerbung extends BusinessObject {
 	private String bewerbungsText;
 	private Date erstellDatum;
 	private int idAusschreibung;
-	public enum Status {eingereicht, zusage, absage} ;
-	private Status bewerbungsstatus = Status.eingereicht;
+	public enum BewerbungsStatus {eingereicht, zusage, absage} ;
+	private BewerbungsStatus bewerbungsstatus = BewerbungsStatus.eingereicht;
 	public int getIdOrganisationseinheit() {
 		return idOrganisationseinheit;
 	}
@@ -36,10 +36,10 @@ public class Bewerbung extends BusinessObject {
 	public void setIdAusschreibung(int idAusschreibung) {
 		this.idAusschreibung = idAusschreibung;
 	}
-	public Status getBewerbungsstatus() {
+	public BewerbungsStatus getBewerbungsstatus() {
 		return bewerbungsstatus;
 	}
-	public void setBewerbungsstatus(Status bewerbungsstatus) {
+	public void setBewerbungsstatus(BewerbungsStatus bewerbungsstatus) {
 		this.bewerbungsstatus = bewerbungsstatus;
 	}
 	

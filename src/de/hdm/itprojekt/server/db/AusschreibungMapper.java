@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
+import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+
 
 public class AusschreibungMapper {
 	
@@ -27,22 +30,25 @@ public class AusschreibungMapper {
 		return ausschreibungMapper;
 	}
 
-	public Ausschreibung findAusschreibungById (int idAusschreibung) {
+	public Ausschreibung findAusschreibungByKey(int idAusschreibung) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
+					"SELECT * FROM ausschreibung " 
 							+ " WHERE idAusschreibung= " + idAusschreibung 
-							+ " ORDER BY idAusschreibung");
+							+ " ORDER BY bezeichnung");
 			
 			if (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
-				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+				a.setId(rs.getInt("idAusschreibung"));
 				a.setBeschreibung(rs.getString("beschreibung"));
 				a.setBezeichnung(rs.getString("bezeichnung"));
 				a.setIdProjekt(rs.getInt("idProjekt"));
 				a.setEndDatum(rs.getDate("endDatum"));
+				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
 
 				return a;
 			}
@@ -60,17 +66,20 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ausschreibung " 
 											+ " ORDER BY idAusschreibung");
 			
 			while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
-				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+				a.setId(rs.getInt("idAusschreibung"));
 				a.setBeschreibung(rs.getString("beschreibung"));
 				a.setBezeichnung(rs.getString("bezeichnung"));
 				a.setIdProjekt(rs.getInt("idProjekt"));
 				a.setEndDatum(rs.getDate("endDatum"));
-
+				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				
 				result.addElement(a);
 			}
 		} catch (SQLException e2) {
@@ -79,7 +88,40 @@ public class AusschreibungMapper {
 		return result;
 	}
 
-	public Vector<Ausschreibung> findByAusschreibung (int idAusschreibung) {
+	public Vector<Ausschreibung> findAusschreibungByProjekt(int idProjekt){
+		
+		  Connection con = DBConnection.connection();
+		  Vector<Ausschreibung> result = new Vector<Ausschreibung>();
+		  
+		  try {
+			
+			  Statement stmt = con.createStatement();
+			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
+			  		+ "beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  		+ "WHERE idProjekt=" + idProjekt + " ORDER BY bezeichnung");
+			  
+			  while (rs.next()) {
+				Ausschreibung a = new Ausschreibung();
+				
+				a.setId(rs.getInt("idAusschreibung"));
+				a.setBezeichnung(rs.getString("Bezeichnung"));
+				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
+				a.setBeschreibung(rs.getString("beschreibung"));
+				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				a.setEndDatum(rs.getDate("endDatum"));
+				a.setIdProjekt(rs.getInt("idProjekt"));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				
+				result.add(a);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		  return result;
+	  }
+	
+	public Vector<Ausschreibung> findByAusschreibung (Ausschreibung a) {
 		Connection con = DBConnection.connection();
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 
@@ -87,16 +129,18 @@ public class AusschreibungMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
-											+ " WHERE idAusschreibung= " + idAusschreibung 
+											+ " WHERE idAusschreibung= " + a.getId() 
 											+ " ORDER BY idAusschreibung");
 			
 			while (rs.next()) {
-				Ausschreibung a = new Ausschreibung();
-				a.setIdAusschreibung(rs.getInt("idAusschreibung"));
+				a.setId(rs.getInt("idAusschreibung"));
 				a.setBeschreibung(rs.getString("beschreibung"));
 				a.setBezeichnung(rs.getString("bezeichnung"));
 				a.setIdProjekt(rs.getInt("idProjekt"));
 				a.setEndDatum(rs.getDate("endDatum"));
+				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
 				
 				result.addElement(a);
 			}
@@ -107,7 +151,73 @@ public class AusschreibungMapper {
 		return result;
 	}
 	
-	public Ausschreibung insert(Ausschreibung a) {
+	public Vector<Ausschreibung> findAusschreibungByPartnerprofil(int idPartnerprofil){
+		
+		  Connection con = DBConnection.connection();
+		  Vector<Ausschreibung> result = new Vector<Ausschreibung>();
+		  
+		  try {
+			
+			  Statement stmt = con.createStatement();
+			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
+			  		+ "beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  		+ "WHERE idPartnerprofil= " + idPartnerprofil + " ORDER BY bezeichnung");
+			  
+			  while (rs.next()) {
+				Ausschreibung a = new Ausschreibung();
+				
+				a.setId(rs.getInt("idAusschreibung"));
+				a.setBezeichnung(rs.getString("Bezeichnung"));
+				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
+				a.setBeschreibung(rs.getString("beschreibung"));
+				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				a.setEndDatum(rs.getDate("endDatum"));
+				a.setIdProjekt(rs.getInt("idProjekt"));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				
+				result.add(a);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		  return result;
+	  }
+	
+	public Vector<Ausschreibung> findAusschreibungByAusschreibender(int idAusschreibender){
+		
+		  Connection con = DBConnection.connection();
+		  Vector<Ausschreibung> result = new Vector<Ausschreibung>();
+		  
+		  try {
+			
+			  Statement stmt = con.createStatement();
+			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
+			  		+ "beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  		+ "WHERE idAusschreibender= " + idAusschreibender + " ORDER BY bezeichnung");
+			  
+			  while (rs.next()) {
+				Ausschreibung a = new Ausschreibung();
+				
+				a.setId(rs.getInt("idAusschreibung"));
+				a.setBezeichnung(rs.getString("Bezeichnung"));
+				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
+				a.setBeschreibung(rs.getString("beschreibung"));
+				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				a.setEndDatum(rs.getDate("endDatum"));
+				a.setIdProjekt(rs.getInt("idProjekt"));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				
+				result.add(a);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		  return result;
+	  }
+	
+	public Ausschreibung insertAusschreibung(Ausschreibung a) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -117,17 +227,20 @@ public class AusschreibungMapper {
 			
 			if (rs.next()) {
 
-				a.setIdAusschreibung(rs.getInt("maxid") + 1);
+				a.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO ausschreibung (idAusschreibung, bezeichnung, endDatum, idProjekt, beschreibung) " 
-								+ "VALUES ('" + a.getIdAusschreibung() + "','" 
+						"INSERT INTO ausschreibung (idAusschreibung, bezeichnung, endDatum, idProjekt, beschreibung, idPartnerprofil, idAusschreibender, status) " 
+								+ "VALUES ('" + a.getId() + "','" 
 								+ a.getBezeichnung() + "','" 
 								+ format.format(a.getEndDatum())+ "','" 
 								+ a.getIdProjekt()+ "','"
-								+ a.getBeschreibung() + "')");
+								+ a.getBeschreibung()+ "','"
+								+ a.getIdPartnerprofil()+ "','"
+								+ a.getIdAusschreibender()+ "','"
+								+ a.getAusschreibungsstatus() + "')");
 			}
 			
 		} catch (SQLException e2) {
@@ -136,18 +249,19 @@ public class AusschreibungMapper {
 		return a;
 	}
 	
-	
 	public Ausschreibung updateAusschreibung (Ausschreibung a) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate("UPDATE ausschreibung " 
-					+ "SET idAusschreibung='" + a.getIdAusschreibung() + "' ,'" 
+					+ "SET idAusschreibung='" + a.getId() + "' ,'" 
 					+ "bezeichnung='" + a.getBezeichnung() + "' ,'" 
 					+ "beschreibung='" + a.getBeschreibung() + "' ,'" 
-					+ "endDatum='" + a.getEndDatum() + "' ,'" 
+					+ "idAusschreibender='" + a.getIdAusschreibender() + "' ,'"
+					+ "status='" + a.getAusschreibungsstatus() + "' ,'"
+					+ "endDatum='" + format.format(a.getEndDatum()) + "' ,'" 
 					+ "idProjekt='" + a.getIdProjekt() + "' ,'" 
-					+ " WHERE idAusschreibung= '"+ a.getIdAusschreibung());
+					+ " WHERE idAusschreibung= '"+ a.getId());
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -163,7 +277,7 @@ public class AusschreibungMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM ausschreibung " 
-								+ " WHERE idAusschreibung= " + a.getIdAusschreibung());
+								+ " WHERE idAusschreibung= " + a.getId());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
