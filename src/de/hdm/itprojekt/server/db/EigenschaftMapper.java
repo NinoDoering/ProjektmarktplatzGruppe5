@@ -13,8 +13,9 @@ public class EigenschaftMapper {
 	private static EigenschaftMapper eigenschaftMapper = null;
 
 	protected EigenschaftMapper() {
-	};
-
+	
+	}
+	
 	public static EigenschaftMapper eigenschaftMapper() {
 		if (eigenschaftMapper == null) {
 			eigenschaftMapper = new EigenschaftMapper();
@@ -22,7 +23,13 @@ public class EigenschaftMapper {
 		return eigenschaftMapper;
 	}
 
-	public Eigenschaft insertEigenschaft (Eigenschaft eig) {
+	public Eigenschaft findByEigenschaft(Eigenschaft e) {
+	      
+    	return this.findEigenschaftByKey(e.getId());
+ 
+    }
+	
+	public Eigenschaft insertEigenschaft (Eigenschaft e) {
 
 		Connection con = DBConnection.connection();
 
@@ -33,52 +40,54 @@ public class EigenschaftMapper {
 
 			if (rs.next()) {
 
-				eig.setIdEigenschaft(rs.getInt("maxid") + 1);
+				e.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus)"
-									+ " VALUES ('" + eig.getIdEigenschaft() + "','" 
-									+ eig.getAusbildung() + "','" 
-									+ eig.getAbschluss()+ "','" 
-									+ eig.getBerufserfahrungsJahre() + "','" 
-									+ eig.getArbeitsgebiet() + "','"
-									+ eig.getSprachkenntnisse() + "','" 
-									+ eig.getEmploymentStatus() + "')");
+				stmt.executeUpdate("INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus, idPartnerprofil)"
+									+ " VALUES ('" + e.getId() + "','" 
+									+ e.getAusbildung() + "','" 
+									+ e.getAbschluss()+ "','" 
+									+ e.getBerufserfahrungsJahre() + "','" 
+									+ e.getArbeitsgebiet() + "','"
+									+ e.getSprachkenntnisse() + "','" 
+									+ e.getIdPartnerprofil() + "','" 
+									+ e.getEmploymentStatus() + "')");
 
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
-		return eig;
+		return e;
 	}
 
-	public Eigenschaft findEigenschaftById(int idEigenschaft) {
+	public Eigenschaft findEigenschaftByKey (int idEigenschaft) {
 
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus FROM eigenschaft "
+			ResultSet rs = stmt.executeQuery("SELECT * FROM eigenschaft "
 											+ " WHERE idEigenschaft= " + idEigenschaft 
 											+ " ORDER BY idEigenschaft");
 			
 			// Eigenschaft sollen nach id angezeigt werden
 			if (rs.next()) {
-				Eigenschaft eig = new Eigenschaft();
-				eig.setIdEigenschaft(rs.getInt("'idEigenschaft'"));
-				eig.setAusbildung(rs.getString("'ausbildung'"));
-				eig.setAbschluss(rs.getString("'abschluss'"));
-				eig.setBerufserfahrungsJahre(rs.getFloat("'berufserfahrungsJahre'"));
-				eig.setArbeitsgebiet(rs.getString("'arbeitsgebiet'"));
-				eig.setSprachkenntnisse(rs.getString("'sprachkenntnisse'"));
-				eig.setEmploymentStatus(rs.getString("'employmentStatus'"));
+				Eigenschaft e = new Eigenschaft();
+				e.setId(rs.getInt("'idEigenschaft'"));
+				e.setAusbildung(rs.getString("'ausbildung'"));
+				e.setAbschluss(rs.getString("'abschluss'"));
+				e.setBerufserfahrungsJahre(rs.getFloat("'berufserfahrungsJahre'"));
+				e.setArbeitsgebiet(rs.getString("'arbeitsgebiet'"));
+				e.setSprachkenntnisse(rs.getString("'sprachkenntnisse'"));
+				e.setEmploymentStatus(rs.getString("'employmentStatus'"));
+				e.setIdPartnerprofil(rs.getInt("'IdPartnerprofil'"));
 
-				return eig;
+				return e;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 			return null;
 		}
 		return null;
@@ -86,58 +95,93 @@ public class EigenschaftMapper {
 
 	public Vector<Eigenschaft> findAllEigenschaften () {
 		Connection con = DBConnection.connection();
-		Vector<Eigenschaft> vec = new Vector<Eigenschaft>();
+		Vector<Eigenschaft> vector = new Vector<Eigenschaft>();
 
 		try {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus "
-							+ " FROM eigenschaft " + " ORDER BY idEigenschaft ");
+					"SELECT * " + " FROM eigenschaft " 
+							+ " ORDER BY idEigenschaft ");
 
 			while (rs.next()) {
-				Eigenschaft eig = new Eigenschaft();
-				eig.setIdEigenschaft(rs.getInt("idEigenschaft"));
-				eig.setAusbildung(rs.getString("ausbildung"));
-				eig.setAbschluss(rs.getString("abschluss"));
-				eig.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
-				eig.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
-				eig.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
-				eig.setEmploymentStatus(rs.getString("employmentStatus"));
+				Eigenschaft e = new Eigenschaft();
+				e.setId(rs.getInt("idEigenschaft"));
+				e.setAusbildung(rs.getString("ausbildung"));
+				e.setAbschluss(rs.getString("abschluss"));
+				e.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
+				e.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
+				e.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
+				e.setEmploymentStatus(rs.getString("employmentStatus"));
+				e.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 
-				vec.addElement(eig);
+				vector.addElement(e);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
 
-		return vec;
+		return vector;
 	}
+	
+	
+	public Vector<Eigenschaft> findByPartnerprofil (int idPartnerprofil){
+    	
+    	Vector<Eigenschaft> vector = new Vector<Eigenschaft>();
+	    Connection con = DBConnection.connection();
 
-	public Eigenschaft updateEigenschaft (Eigenschaft eig) {
+	    try {
+	      Statement stmt = con.createStatement();
+	      ResultSet rs = stmt.executeQuery("SELECT * FROM eigenschaft "
+	          + "WHERE idPartnerprofil =" + idPartnerprofil);
+
+	     
+	      while (rs.next()) {
+	    	  Eigenschaft e = new Eigenschaft();
+	    	  e.setId(rs.getInt("idEigenschaft"));
+	    	  e.setAusbildung(rs.getString("ausbildung"));
+	    	  e.setAbschluss(rs.getString("abschluss"));
+	    	  e.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
+	    	  e.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
+	    	  e.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
+	    	  e.setEmploymentStatus(rs.getString("employmentStatus"));
+	    	  e.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+		      
+	    	  vector.add(e);
+	      }
+	   
+	    }
+	    catch (SQLException ex) {
+	      ex.printStackTrace();
+	    }  
+	    return vector;
+    }
+
+	public Eigenschaft updateEigenschaft (Eigenschaft e) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
 					stmt.executeUpdate("UPDATE eigenschaft " 
-					+ "SET idEigenschaft='" + eig.getIdEigenschaft() + "' ,'" 
-					+ "ausbildung='" + eig.getAusbildung() + "' ,'" 
-					+ "abschluss='" + eig.getAbschluss() + "' ,'" 
-					+ "berufserfahrungsJahre='" + eig.getBerufserfahrungsJahre() + "' ,'" 
-					+ "arbeitsgebiet='" + eig.getArbeitsgebiet() + "' ,'" 
-					+ "sprachkenntnisse='" + eig.getSprachkenntnisse() + "' ,'" 		
-					+ "employmentStatus='" + eig.getEmploymentStatus() + "' ,'" 
-					+ "WHERE idEigenschaft ='"+ eig.getIdEigenschaft());
+					+ "SET idEigenschaft='" + e.getId() + "' ,'" 
+					+ "ausbildung='" + e.getAusbildung() + "' ,'" 
+					+ "abschluss='" + e.getAbschluss() + "' ,'" 
+					+ "berufserfahrungsJahre='" + e.getBerufserfahrungsJahre() + "' ,'" 
+					+ "arbeitsgebiet='" + e.getArbeitsgebiet() + "' ,'" 
+					+ "sprachkenntnisse='" + e.getSprachkenntnisse() + "' ,'" 		
+					+ "employmentStatus='" + e.getEmploymentStatus() + "' ,'" 
+					+ "idPartnerprofil='" + e.getIdPartnerprofil() + "' ,'" 
+					+ "WHERE idEigenschaft ='"+ e.getId());
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
 
-		return eig;
+		return e;
 	}
 
-	public void deleteEigenschaft (Eigenschaft eig) {
+	public void deleteEigenschaft (Eigenschaft e) {
 
 		Connection con = DBConnection.connection();
 
@@ -145,10 +189,10 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM eigenschaft " 
-								+ " WHERE idEigenschaft= " + eig.getIdEigenschaft());
+								+ " WHERE idEigenschaft= " + e.getId());
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 			}
 		}
 	}

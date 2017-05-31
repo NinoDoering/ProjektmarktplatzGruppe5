@@ -116,7 +116,7 @@ public class ProjektmarktplatzMapper {
 			Statement stmt = con.createStatement();
 
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
-			// Bezeichung enthält
+			// Bezeichung enthï¿½lt
 			ResultSet rs = stmt.executeQuery("SELECT idProjektmarktplatz, bezeichnung, geschaeftsgebiet, projekt "
 					+ " FROM projektmarktplatz " + "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
 
@@ -166,4 +166,4 @@ public class ProjektmarktplatzMapper {
 		}
 	}
 }
-/*
+*/
