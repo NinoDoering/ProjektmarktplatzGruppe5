@@ -1,22 +1,24 @@
 
 package de.hdm.itprojekt.shared.bo;
 
+import java.util.Date;
+import java.sql.*;
 
 public class Beteiligung extends BusinessObject {
 	
 	
-	private static final long serialVersionIUD = 1L;
-	private int beteiligungszeit = 0;
+	private static final long serialVersionUID = 1L;
+	private Date beteiligungszeit;
 	private int idBeteiligter;
 	private int idProjekt;
 	private int idBewertung;
 	
 	
 	
-	public int getBeteiligungszeit() {
+	public Date getBeteiligungszeit() {
 		return beteiligungszeit;
 	}
-	public void setBeteiligungszeit(int beteiligungszeit) {
+	public void setBeteiligungszeit(Date beteiligungszeit) {
 		this.beteiligungszeit = beteiligungszeit;
 	}
 	public int getIdBeteiligter() {
