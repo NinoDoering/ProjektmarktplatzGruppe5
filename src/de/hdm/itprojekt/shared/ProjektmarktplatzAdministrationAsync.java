@@ -39,8 +39,8 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	// Projekt Asynch
 	
-	void anlegenProjekt(int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum,
-			AsyncCallback<Projekt> callback);
+	void anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung,
+			Date startDatum, Date endDatum, AsyncCallback<Projekt> callback);
 
 
 	void loeschenProjekt(Projekt p, AsyncCallback<Void> callback);
@@ -181,6 +181,7 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getAllBewerbungenByOrganisationseinheut(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
 
 	void getAllBeteiligungenToProject(Projekt p, AsyncCallback<Vector<Beteiligung>> callback);
+
 	
 
 

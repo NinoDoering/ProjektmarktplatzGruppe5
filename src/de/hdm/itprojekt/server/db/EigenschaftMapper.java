@@ -125,7 +125,7 @@ public class EigenschaftMapper {
 	}
 	
 	
-	public Vector<Eigenschaft> findByPartnerprofil (int idPartnerprofil){
+	public Vector<Eigenschaft> findEigenschaftByPartnerprofil (int idPartnerprofil){
     	
     	Vector<Eigenschaft> vector = new Vector<Eigenschaft>();
 	    Connection con = DBConnection.connection();

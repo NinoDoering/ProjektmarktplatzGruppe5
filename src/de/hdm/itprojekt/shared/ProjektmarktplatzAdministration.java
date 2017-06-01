@@ -39,7 +39,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	// Projekt p
 	
 
-	public Projekt anlegenProjekt(/*idAusschreibender??*/ int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum)
+	public Projekt anlegenProjekt(/*idAusschreibender??*/ int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum)
 			throws IllegalArgumentException;
 
 
