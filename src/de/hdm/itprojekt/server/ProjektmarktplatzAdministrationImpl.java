@@ -1,4 +1,5 @@
 //Inhalt OK aber alle drei Klassen müssen in Greet...
+//Inhalt OK aber alle drei Klassen müssen in Greet...
 package de.hdm.itprojekt.server;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	private AusschreibungMapper ausschreibungMapper = null;
 	private BeteiligungMapper beteiligungMapper = null;
 	private BewerbungMapper bewerbungMapper = null;
+	private BewertungMapper bewertungMapper = null;
 
 	// No-Argument-Konstruktor
 	public ProjektmarktplatzAdministrationImpl() throws IllegalArgumentException {
@@ -49,7 +51,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.teamMapper = TeamMapper.teamMapper();
 		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
 		this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper(); 
-											//.ausschreibungMapper muss das heißen auch in Mapperklasse
+		this.bewertungMapper = BewertungMapper.bewertungMapper();									//.ausschreibungMapper muss das heißen auch in Mapperklasse
 		this.bewerbungMapper = BewerbungMapper.bewerbungmapper();//gleicher Fehler!!!!!
 		this.beteiligungMapper = BeteiligungMapper.beteiligungMapper(); // gleicher Fall
 		}
@@ -140,11 +142,10 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	// createPartnerprofil
 	
 	@Override
-	public Partnerprofil anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit)
+	public Partnerprofil anlegenPartnerprofil()
 			throws IllegalArgumentException {
 		Partnerprofil pp = new Partnerprofil();
-		pp.getIdAusschreibung();
-		pp.getIdOrganisationseinheit();
+
 		return this.ppMapper.insert(pp);
 	}
 
@@ -195,49 +196,52 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	/*##########################################################
 	 * START PERSON
 	 #########################################################*/
-	
-	
-	// createPerson / insert
-	public Person createPerson(
-	int idPerson,
-	String vorname,
-	String nachname,
-	String titel) throws IllegalArgumentException {
-		Person pers = new Person();
+	@Override
+	public Person anlegenPerson(int idUnternehmen, int idTeam, int idPartnerprofil, String vorname,
+			String nachname) throws IllegalArgumentException {
+		Person pe = new Person();
 		
-		pers.setIdPerson(idPerson);
-		pers.setVorname(vorname);
-		pers.setNachname(nachname);
-		pers.setTitel(titel);
+		pe.setId(1);
+		pe.setIdUnternehmen(idUnternehmen);
+		pe.setIdTeam(idTeam);
+		pe.setIdPartnerprofil(idPartnerprofil);
+		pe.setVorname(vorname);
+		pe.setNachname(nachname);
 		
-		return this.persMapper.insertTeam(pers);
+		
+		return this.persMapper.insertTeam(pe);
+	}
+
+	@Override
+	public void loeschenPerson(Person pe) throws IllegalArgumentException {
+		this.persMapper.delete(idPerson);
+		
+	}
+
+	@Override
+	public void savePerson(Person pe) throws IllegalArgumentException {
+		persMapper.updatePerson(pe);
+		
 	}
 	
-	// getPersonById
+	@Override
 	public Person getPersonById(int idPerson) throws IllegalArgumentException {
 		return this.persMapper.findPersonByKey(idPerson);
 		// String in PersonMapper
 	}
 	
-	// getAllPersons
-	public Vector<Person> getAllPersons() throws IllegalArgumentException {
-		return this.persMapper.findAll();
-	}
+	//wird nicht benötigt
+//	// getAllPersons
+//	public Vector<Person> getAllPersons() throws IllegalArgumentException {
+//		return this.persMapper.findAll();
+//	}
+//	
+//	// getPersonByNachname
+//	public Vector<Person> getPersonByNachname(String nachname) throws IllegalArgumentException {
+//		return this.persMapper.findPersonByNachname(nachname);
+//	}
 	
-	// getPersonByNachname
-	public Vector<Person> getPersonByNachname(String nachname) throws IllegalArgumentException {
-		return this.persMapper.findByNachname(nachname);
-	}
-	
-	// updatePerson
-	public void updatePerson(Person pers) throws IllegalArgumentException {
-		persMapper.updateTeam(pers);
-	}
-	
-	// deletePerson
-	public void deletePerson(int idPerson) throws IllegalArgumentException {
-		this.persMapper.delete(idPerson);
-		}
+
 	
 	/*##########################################################
 	 * START PROJEKT
@@ -377,13 +381,15 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	 * START TEAM
 	 #########################################################*/
 	@Override
-	public Team anlegenTeam(int idOrganisationseinheit, int idPartnerprofil, String teamName, int mitgliederAnzahl)
+	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, int mitgliederAnzahl)
 			throws IllegalArgumentException {
 		Team t = new Team();
 		
 		t.setId(1);
 		t.setTeamName(teamName);
 		t.setMitgliederAnzahl(mitgliederAnzahl);
+		t.setIdUnternehmen(idUnternehmen);
+		t.setIdPartnerprofil(idPartnerprofil);
 		
 		return this.teamMapper.insertTeam(t);
 	}
@@ -421,15 +427,16 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		 #########################################################*/	
 
 	@Override
-	public Unternehmen anlegenUnternehmen(int idOrganisationseinheit, int idPartnerprofil, String firmenName)
+	public Unternehmen anlegenUnternehmen(int idPartnerprofil, String firmenName)
 			throws IllegalArgumentException {
 
-		Unternehmen unternehmen = new Unternehmen();
+		Unternehmen u = new Unternehmen();
 		
-		unternehmen.setId(1);
-		unternehmen.setFirmenName(firmenName);
+		u.setId(1);
+		u.setFirmenName(firmenName);
+		u.setIdPartnerprofil(idPartnerprofil);
 		
-		return this.unternehmenMapper.insertUnternehmen(unternehmen);
+		return this.unternehmenMapper.insertUnternehmen(u);
 	}
 
 	@Override
@@ -518,30 +525,38 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		 * START AUSSCHREIBUNG
 		 #########################################################*/
 		
-		// createAusschreibung
-		public Ausschreibung createAusschreibung(
-				String bezeichnung, 
-				int idAusschreibung, 
-				Date endDatum,
-				String beschreibung,
-				int idProjekt) throws IllegalArgumentException {
+		@Override
+		public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
+				throws IllegalArgumentException {
+			Ausschreibung a = new Ausschreibung();
 			
-			Ausschreibung ausschreibung = new Ausschreibung();
+			a.setId(1);
+			a.setBezeichnung(bezeichnung);
+			a.setEndDatum(endDatum);
+			a.setBeschreibung(beschreibung);
+			a.setIdProjekt(idProjekt);
 			
-			ausschreibung.setBezeichnung(bezeichnung);
-			ausschreibung.setIdAusschreibung(idAusschreibung);
-			ausschreibung.setEndDatum(endDatum);
-			ausschreibung.setBeschreibung(beschreibung);
-			ausschreibung.setIdProjekt(idProjekt);
-			
-			return this.ausschreibungMapper.insertTeam(ausschreibung);
+			return this.ausschreibungMapper.insertAusschreibung(a);
 		}
-		
-		// getAusschreibungById
-		public Ausschreibung getAusschreibungById(int idAusschreibung) throws IllegalArgumentException {
-			return this.ausschreibungMapper.findAusschreibungById(idAusschreibung);
+
+		@Override
+		public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+			this.ausschreibungMapper.deleteAusschreibung(idAusschreibung);
 		}
+
+		@Override
+		public Ausschreibung getAusschreibungbyId(int idAusschreibung) throws IllegalArgumentException {
+			return this.ausschreibungMapper.findAusschreibungByKey(idAusschreibung);
+		}
+
+		@Override
+		public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+			ausschreibungMapper.updateAusschreibung(a);		
+			
+		}
+
 		
+	
 		// getAllAusschreibungen
 		public Vector <Ausschreibung> getAllAusschreibungen() throws IllegalArgumentException {
 			return this.ausschreibungMapper.findAllAusschreibungen();
@@ -549,135 +564,78 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 		// findByAusschreibung???
 		
-		
-		// updateAusschreibung
-		public void updateAusschreibung(Ausschreibung ausschreibung) throws IllegalArgumentException {
-			ausschreibungMapper.updateAusschreibung(ausschreibung);			
-		}
-		
-		// deleteAusschreibung
-		public void deleteAusschreibung(int idAusschreibung) throws IllegalArgumentException {
-			this.ausschreibungMapper.deleteAusschreibung(idAusschreibung);
-			// falscher Datentyp
-		}
-				
+	
+	
 		
 		/*##########################################################
 		 * START BEWERBUNG
 		 #########################################################*/
-		
-		// createBewerbung
-		public Bewerbung createBewerbung(
-				int idBewerbung,
-				String bewerber,
-				String bewerbungsText,
-				Date erstellDatum
-				) throws IllegalArgumentException {
+
+		@Override
+		public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
+				Date erstellDatum) throws IllegalArgumentException {
+			Bewerbung b = new Bewerbung();
 			
-			Bewerbung bewerbung = new Bewerbung();
+			b.setId(1); 
+			b.setIdOrganisationseinheit(idOrganisationseinheit);
+			b.setIdAusschreibung(idAusschreibung);
+			b.setBewerbungsText(bewerbungstext);
+			b.setErstellDatum(erstellDatum);
 			
-			bewerbung.setIdBewerbung(idBewerbung); // wird zu idBusinessObject?
-			bewerbung.setBewerber(bewerber);
-			bewerbung.setBewerbungsText(bewerbungsText);
-			bewerbung.setErstellDatum(erstellDatum);
-			
-			return this.bewerbungMapper.insertBewerbung(bewerbung);
+			return this.bewerbungMapper.insertBewerbung(b);
 		}
-		
-		// getBewerbungById
-		public Bewerbung getBewerbungById(int idBewerbung) throws IllegalArgumentException {
-			return this.bewerbungMapper.findBewerbungById(idBewerbung);
+
+		@Override
+		public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException {
+			bewerbungMapper.deleteBewerbung(idBewerbung);
 		}
+
+		@Override
+		public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException {
+			return this.bewerbungMapper.findBewerbungByKey(idBewerbung);
+		}
+
+		@Override
+		public void saveBewerbung(Bewerbung b) throws IllegalArgumentException {
+			bewerbungMapper.updateBewerbung(b);
+			
+		}
+
 		
 		// getAllBewerbungen
 		public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
 			return this.bewerbungMapper.findAllBewerbungen();
 		}
 		
-		// Klaerungsbedarf
-		// getBewerbungByBewerber
-		public Vector <Bewerbung> getBewerbungByBewerber
-		(Person Bewerber /*richtig?*/) 
-				throws IllegalArgumentException {
-			return this.bewerbungMapper.findBewerbungByBewerber(Bewerber);
-		}
-		
-		// updateBewerbung
-		public void updateBewerbung(Bewerbung bewerbung) throws IllegalArgumentException {
-			bewerbungMapper.updateBewerbung(bewerbung);
-		}
-		
-		// deleteBewerbung
-		public void deleteBewerbung (int idBewerbung) throws IllegalArgumentException {
-			bewerbungMapper.deleteBewerbung(idBewerbung);
-			// falscher Datentyp
-		}
 
 		
 
-		@Override
-		public Ausschreibung anlegenAusschreibung(int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
-				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Ausschreibung getAusschreibungbyId(int idAusschreibung) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
-
-
-
-		@Override
-		public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
-				Date erstellDatum) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void saveBewerbung(Bewerbung b) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
+	
 
 		
 
+
+
+		/*##########################################################
+		 * START BEWERTUNG
+		 #########################################################*/
+
 		@Override
-		public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, double fliessKommaBewertung) {
-			// TODO Auto-generated method stub
-			return null;
+		public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung) {
+			Bewertung bewertung = new Bewertung();
+			
+			bewertung.setId(1); 
+			bewertung.setIdBewerbung(idBewerbung);
+			bewertung.setTextuelleBewertung(textuelleBewertung);
+			bewertung.setFliessKommaBewertung(fliessKommaBewertung);
+	
+			
+			return this.bewertungMapper.insertBewertung(bewertung);
 		}
 
 		@Override
 		public void loeschenBewertung(Bewertung bewertung) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
+			return this.bewertungMapper.deleteBewertung(idBewertung);
 			
 		}
 
@@ -695,24 +653,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 		
 
-		@Override
-		public Person anlegenPerson(int idOrganisationseinheit, int idPartnerprofil, char geschlecht, String vorname,
-				String nachname) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void loeschenPerson(Person pe) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void savePerson(Person pe) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
+		
 
 	
 
@@ -737,11 +678,12 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		}
 
 		@Override
-		public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheut(Organisationseinheit o)
+		public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o)
+		Person Bewerbung /*richtig?*/
 				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
+			return this.bewerbungMapper.findBewerbungByBewerber(Bewerber);
 		}
+		
 
 		@Override
 		public Vector<Beteiligung> getAllBeteiligungenToProject(Projekt p) throws IllegalArgumentException {

@@ -1,4 +1,5 @@
 //Inhalt OK aber alle drei Klassen müssen in Greet...
+//Inhalt OK aber alle drei Klassen müssen in Greet...
 package de.hdm.itprojekt.shared;
 
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	// Ausschreibung Asynch
 	
-	void anlegenAusschreibung(int idProjekt, String bezeichnung, String beschreibung, Date endDatum,
-			AsyncCallback<Ausschreibung> callback);
+	void anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung,
+			Date endDatum, AsyncCallback<Ausschreibung> callback);
 
 
 
@@ -68,7 +69,7 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	// Partnerprofil Asynch
 	
-	void anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit, AsyncCallback<Partnerprofil> callback);
+	void anlegenPartnerprofil(AsyncCallback<Partnerprofil> callback);
 
 
 	void loeschenPartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
@@ -107,7 +108,7 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	// Bewertung Asynch
 	
-	void anlegenBewertung(int idBewerbung, String textuelleBewertung, double fliessKommaBewertung,
+	void anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung,
 			AsyncCallback<Bewertung> callback);
 
 
@@ -131,10 +132,10 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	void saveBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);
 
-
 	// Person Asynch
-	void anlegenPerson(int idOrganisationseinheit, int idPartnerprofil, char geschlecht, String vorname,
-			String nachname, AsyncCallback<Person> callback);
+
+	void anlegenPerson(int idTeam, int idUnternehmen, int idPartnerprofil, String vorname, String nachname,
+			AsyncCallback<Person> callback);
 
 
 
@@ -147,7 +148,7 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	// Team Asynch
 
-	void anlegenTeam(int idOrganisationseinheit, int idPartnerprofil, String teamName, int mitgliederAnzahl,
+	void anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, int mitgliederAnzahl,
 			AsyncCallback<Team> callback);
 
 
@@ -160,7 +161,7 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	// Unternehmen u
 	
-	void anlegenUnternehmen(int idOrganisationseinheit, int idPartnerprofil, String firmenName, AsyncCallback<Unternehmen> callback);
+	void anlegenUnternehmen(int idPartnerprofil, String firmenName, AsyncCallback<Unternehmen> callback);
 
 	void loeschenUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
 	
@@ -180,42 +181,9 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	void getAllBewerbungenByAusschreibung(Ausschreibung a, AsyncCallback<Vector<Bewerbung>> callback);
 
-	void getAllBewerbungenByOrganisationseinheut(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
+	void getAllBewerbungenByOrganisationseinheit(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
 
 	void getAllBeteiligungenToProject(Projekt p, AsyncCallback<Vector<Beteiligung>> callback);
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
