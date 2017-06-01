@@ -459,15 +459,6 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			// TODO Auto-generated method stub
 			
 		}
-		// createBeteiligung
-		public Beteiligung createBeteiligung(
-				int idBeteiligung,
-				int idProjekt,
-				int idBewerbung,
-				int idBewertung) throws IllegalArgumentException {
-			
-			
-		}
 		
 		// getBeteiligungById
 		public Beteiligung getBeteiligungById(int idBeteiligung) throws IllegalArgumentException {
