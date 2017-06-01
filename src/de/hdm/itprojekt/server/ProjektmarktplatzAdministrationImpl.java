@@ -1,3 +1,4 @@
+//Inhalt OK aber alle drei Klassen müssen in Greet...
 package de.hdm.itprojekt.server;
 
 import java.util.ArrayList;
@@ -59,43 +60,46 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	 #########################################################*/
 	
 	// createEigenschaft
-	public Eigenschaft createEigenschaft(
-			int idEigenschaft, String arbeitsgebiet, String ausbildung, float berufserfahrungsJahre, String sprachkenntnisse,
-			String employmentStatus, String abschluss) throws IllegalArgumentException {
-		Eigenschaft eig = new Eigenschaft();
+	
+	@Override
+	public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
+			String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse) throws IllegalArgumentException {
+		Eigenschaft e = new Eigenschaft();
 
-		eig.setIdEigenschaft(idEigenschaft); 
-		eig.setArbeitsgebiet(arbeitsgebiet);
-		eig.setAusbildung(ausbildung);
-		eig.setBerufserfahrungsJahre(berufserfahrungsJahre);
-		eig.setSprachkenntnisse(sprachkenntnisse);
-		eig.setEmploymentStatus(employmentStatus);
-		eig.setAbschluss(abschluss);
+		e.setId(1); 
+		e.setArbeitsgebiet(arbeitsgebiet);
+		e.setAusbildung(ausbildung);
+		e.setBerufserfahrungsJahre(berufserfahrungsJahre);
+		e.setSprachkenntnisse(sprachkenntnisse);
+		e.setEmploymentStatus(employmentStatus);
+		e.setAbschluss(abschluss);
 
-		return this.eigMapper.insertEigenschaft(eig);
+		return this.eigMapper.insertEigenschaft(e);
 	}
 
-	// getEigenschaftById
+	@Override
+	public void loeschenEigenschaft(Eigenschaft e) throws IllegalArgumentException {
+		this.eigMapper.deleteEigenschaft(e); 
+		
+	}
+
+	@Override
+	public void saveEigenschaft(Eigenschaft e) throws IllegalArgumentException {
+		eigMapper.updateEigenschaft(e);	
+		
+	}
+
+
 	public Eigenschaft getEigenschaftById(int idEigenschaft) throws IllegalArgumentException {
-		return this.eigMapper.findEigenschaftById(idEigenschaft);
+		return this.eigMapper.findEigenschaftByKey(idEigenschaft);
 	}
 
-	// getAll
-	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
-		return this.eigMapper.findAllEigenschaften();
-	}
+//	// getAll nicht benötigt
+//	public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
+//		return this.eigMapper.findAllEigenschaften();
+//	}
 	
-	// updateEigenschaft
-	public void updateEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
-		eigMapper.updateEigenschaft(eig);		
-	}
-	
-	// deleteEigenschaft
-	public void deleteEigenschaft(int idEigenschaft) throws IllegalArgumentException {
-		this.eigMapper.deleteEigenschaft(idEigenschaft); 
-		// in Mapper ist Eigenschaft eig. Wir sollen doch aber mit int idEigenschaft?
-											
-	}
+
 	
 	
 	/*##########################################################
@@ -134,11 +138,35 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	 #########################################################*/
 	
 	// createPartnerprofil
-	public Partnerprofil createPartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
+	
+	@Override
+	public Partnerprofil anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit)
+			throws IllegalArgumentException {
 		Partnerprofil pp = new Partnerprofil();
-		pp.setIdPartnerprofil(idPartnerprofil);
-		
+		pp.getIdAusschreibung();
+		pp.getIdOrganisationseinheit();
 		return this.ppMapper.insert(pp);
+	}
+
+	@Override
+	public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Partnerprofil getPartnerprofilbyId(int idPartnerprofil) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void savePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+	public Partnerprofil createPartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
+
 	}
 	
 	// getPartnerprofilById
@@ -229,6 +257,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		p.setStartDatum(startDatum);
 		p.setEndDatum(endDatum);
 		p.setIdPerson(idPerson);
+		p.setIdMarktplatz(idMarktplatz);
 		
 		return this.prjktMapper.insert(p);
 		
@@ -611,30 +640,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			
 		}
 
-		@Override
-		public Partnerprofil anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit)
-				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
 
-		@Override
-		public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Partnerprofil getPartnerprofilbyId(int idPartnerprofil) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void savePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
 
 		@Override
 		public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
@@ -661,24 +667,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			
 		}
 
-		@Override
-		public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
-				String employmentStatus, String ausbildung, String sprachkenntnisse) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void loeschenEigenschaft(Eigenschaft e) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void saveEigenschaft(Eigenschaft e) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			
-		}
+		
 
 		@Override
 		public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, double fliessKommaBewertung) {

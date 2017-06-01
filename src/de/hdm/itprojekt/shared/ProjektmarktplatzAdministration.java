@@ -10,6 +10,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import de.hdm.itprojekt.shared.bo.*;
 
 @RemoteServiceRelativePath("projektmarktplatzdministration")
+//Inhalt OK aber alle drei Klassen müssen in Greet...
 public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Diese Methode bei jeder Instantiierung verwenden, das heiÃŸt diese Methode
@@ -97,7 +98,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	// Eigenschaft e
 	
 	public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
-			String employmentStatus, String ausbildung, String sprachkenntnisse) throws IllegalArgumentException;
+			String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse) throws IllegalArgumentException;
 
 
 	public void loeschenEigenschaft(Eigenschaft e) throws IllegalArgumentException;
