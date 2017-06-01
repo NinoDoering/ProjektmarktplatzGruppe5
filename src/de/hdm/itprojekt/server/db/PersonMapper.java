@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
-import java.*; //Pakete, welche zum Ausführen benötigt werden.
+import java.*; //Pakete, welche zum Ausfï¿½hren benï¿½tigt werden.
 import javax.*;
 import java.sql.*;
 

@@ -9,7 +9,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.*;
 
-@RemoteServiceRelativePath("projektmarktplatzdministration")
+
 public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Diese Methode bei jeder Instantiierung verwenden, das heißt diese Methode

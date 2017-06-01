@@ -13,8 +13,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
-import de.hdm.itprojekt.shared.ProjektmarktplatzAdministration;
-import de.hdm.itprojekt.shared.ProjektmarktplatzAdministrationAsync;
+import de.hdm.itprojekt.client.GreetingService;
+import de.hdm.itprojekt.client.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Person;
 
 
@@ -23,7 +23,7 @@ public class ActivitySuchen extends HorizontalPanel  {
 	
 	
 	//proxy
-	private  ProjektmarktplatzAdministrationAsync gwtproxy = GWT.create(ProjektmarktplatzAdministration.class);
+	private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	//deklarieren von gui variablen
 	Label lblAnzeige;
@@ -33,9 +33,9 @@ public class ActivitySuchen extends HorizontalPanel  {
 	Label lbl1;
 	FlexTable projekttabelle = new FlexTable();
 	public ActivitySuchen() {
-		// Projektmarktplatz suchen Aktivität
+		// Projektmarktplatz suchen Aktivitï¿½t
 		
-lblBeispiel = new Label("Projektmarktplätze");
+lblBeispiel = new Label("Projektmarktplï¿½tze");
 
 tbBeispiel = new TextBox();
 btnButton = new Button("Abschicken");
@@ -85,8 +85,8 @@ add(projekttabelle);
 			}
 			
 		};
-			gwtproxy.findPersonByKey(tbBeispiel.getText(), callback);
-	
+		//	gwtproxy.findPersonByKey(Integer.tbBeispiel.getText(), callback);
+			gwtproxy.findPersonByKey(Integer.parseInt(tbBeispiel.getValue()), callback);
 	}
 
 }

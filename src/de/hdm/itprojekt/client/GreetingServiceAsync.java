@@ -27,7 +27,7 @@ public interface GreetingServiceAsync {
 //
 //	void getProjektmarktplatzAll(AsyncCallback<Vector<Projektmarktplatz>> callback);
 
-	void findPersonByKey(String key, AsyncCallback<Person> callback);
+	void findPersonByKey(int key, AsyncCallback<Person> callback);
 
 
 

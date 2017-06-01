@@ -28,7 +28,7 @@ public interface GreetingService extends RemoteService  {
 //	Vector<Projektmarktplatz> getProjektmarktplatzAll(); 
 	
 	
-	Person findPersonByKey(String key);
+	Person findPersonByKey(int key);
 	
 	// public Projektmarktplatz addProjektmarktplatz(String bezeichnung);
 	

@@ -27,7 +27,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
 public void init() throws IllegalArgumentException{
 		
-		//this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird gelöscht)
+		//this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird gelï¿½scht)
 	
 		this.persMapper = PersonMapper.personMapper();
 		
@@ -69,7 +69,7 @@ public void init() throws IllegalArgumentException{
 	}
 
 	@Override
-	public Person findPersonByKey(String key) 
+	public Person findPersonByKey(int key) 
 			
 			//throws IllegalArgumentException 
 	{
