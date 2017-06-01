@@ -1,3 +1,4 @@
+//Inhalt OK aber alle drei Klassen müssen in Greet...
 package de.hdm.itprojekt.shared;
 
 import java.util.ArrayList;
@@ -93,7 +94,8 @@ public interface ProjektmarktplatzAdministrationAsync {
 	// Eigenschaft Asynch	
 
 	void anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
-			String employmentStatus, String ausbildung, String sprachkenntnisse, AsyncCallback<Eigenschaft> callback);
+			String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse,
+			AsyncCallback<Eigenschaft> callback);
 
 
 	void loeschenEigenschaft(Eigenschaft e, AsyncCallback<Void> callback);
