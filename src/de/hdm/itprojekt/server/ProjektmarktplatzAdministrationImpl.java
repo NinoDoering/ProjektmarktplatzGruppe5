@@ -151,28 +151,23 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	@Override
 	public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		this.ppMapper.delete(pp);
 		
 	}
 
 	@Override
 	public Partnerprofil getPartnerprofilbyId(int idPartnerprofil) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.ppMapper.findPartnerprofilByKey(idPartnerprofil);
 	}
 
 	@Override
 	public void savePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
-	public Partnerprofil createPartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
-
+		ppMapper.update(pp);
 	}
 	
 	// getPartnerprofilById
 	public Partnerprofil getPartnerprofilById(int idPartnerprofil){
-		return this.ppMapper.findByKey(idPartnerprofil);
+		return this.ppMapper.findPartnerprofilByKey(idPartnerprofil);
 	}
 	
 	// getAllPartnerprofile
@@ -186,9 +181,19 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	}
 	
 	// deletePartnerprofil
-	public void deletePartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
-		this.ppMapper.delete(idPartnerprofil);
-		// Falscher Datentyp
+	public void deletePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
+		
+		// Methode muss noch erstellt werden!!
+		Vector<Eigenschaft> e = this.getEigenschaftByForeignPartnerprofil(pp);
+		
+		if(e != null){
+			for(Eigenschaft eigenschaft : e){
+				this.eigMapper.deleteEigenschaft(e);
+			}
+			this.ppMapper.delete(pp);
+			// Datentyp ist Partnerprofil
+		}
+
 	}
 	
 	
@@ -476,7 +481,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			Beteiligung b = new Beteiligung();
 			
 			b.setId(1);
-			b.setIdOrganisationseinheit(idOrganisationseinheit);
+			b.setIdBeteiligter(idOrganisationseinheit);
 			b.setIdProjekt(idProjekt);
 			b.setIdBewertung(idBewertung);
 			
@@ -587,7 +592,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 		@Override
 		public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException {
-			bewerbungMapper.deleteBewerbung(idBewerbung);
+			bewerbungMapper.deleteBewerbung(b);
 		}
 
 		@Override
@@ -641,13 +646,12 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 		@Override
 		public Bewertung getBewertungById(int idBewertung) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
+			return this.bewertungMapper.findBewertungByKey(idBewertung);
 		}
 
 		@Override
 		public void saveBewertung(Bewertung bewertung) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
+			bewertungMapper.updateBewertung(bewertung);
 			
 		}
 
@@ -656,38 +660,36 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 
 	
-
-		@Override
-		public Vector<Ausschreibung> getAllAusschreibungenByOrganisationseinheit(Organisationseinheit o)
-				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp)
-				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o)
-		Person Bewerbung /*richtig?*/
-				throws IllegalArgumentException {
-			return this.bewerbungMapper.findBewerbungByBewerber(Bewerber);
-		}
-		
-
-		@Override
-		public Vector<Beteiligung> getAllBeteiligungenToProject(Projekt p) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
-		}
+//
+//		@Override
+//		public Vector<Ausschreibung> getAllAusschreibungenByOrganisationseinheit(Organisationseinheit o)
+//				throws IllegalArgumentException {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//
+//		@Override
+//		public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp)
+//				throws IllegalArgumentException {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//
+//		@Override
+//		public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//
+//		@Override
+//		public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o)
+//				throws IllegalArgumentException {
+//			return this.bewerbungMapper.findBewerbungByBewerber(o);
+//		}
+//		
+//
+//		@Override
+//		public Vector<Beteiligung> getAllBeteiligungenToProject(Projekt p) throws IllegalArgumentException {
+//			return this.beteiligungMapper.findBeteiligungByProjekt(p);
+//		}
 }
