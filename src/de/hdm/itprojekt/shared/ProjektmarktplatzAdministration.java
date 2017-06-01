@@ -1,3 +1,4 @@
+//Inhalt OK aber alle drei Klassen müssen in Greet...
 package de.hdm.itprojekt.shared;
 
 import java.util.ArrayList;
@@ -9,8 +10,10 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.*;
 
+
 @RemoteServiceRelativePath("projektmarktplatzdministration")
 //Inhalt OK aber alle drei Klassen müssen in Greet...
+
 public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Diese Methode bei jeder Instantiierung verwenden, das heiÃŸt diese Methode
@@ -40,7 +43,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	// Projekt p
 	
 
-	public Projekt anlegenProjekt(/*idAusschreibender??*/ int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum)
+	public Projekt anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum)
 			throws IllegalArgumentException;
 
 
@@ -56,7 +59,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	// Ausschreibung a
 	
-	public Ausschreibung anlegenAusschreibung(int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
+	public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
 			throws IllegalArgumentException;
 
 
@@ -70,7 +73,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	// Partnerprofil pp
 	
-	public Partnerprofil anlegenPartnerprofil(int idAusschreibung, int idOrganisationseinheit)
+	public Partnerprofil anlegenPartnerprofil()
 			throws IllegalArgumentException;
 
 
@@ -110,7 +113,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Bewertung bewertung
 	
-	public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, double fliessKommaBewertung);
+	Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung);
 
 
 	public void loeschenBewertung(Bewertung bewertung)throws IllegalArgumentException;
@@ -137,7 +140,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Person pe
 	
-	public Person anlegenPerson(int idOrganisationseinheit, int idPartnerprofil, char geschlecht, String vorname, String nachname)
+	public Person anlegenPerson(int idTeam, /*Integer ganz*/int idUnternehmen, int idPartnerprofil, String vorname, String nachname)
 			throws IllegalArgumentException;
 
 	public void loeschenPerson(Person pe) throws IllegalArgumentException;
@@ -149,7 +152,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	// Team t
 	
-	public Team anlegenTeam(int idOrganisationseinheit, int idPartnerprofil, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
+	public Team anlegenTeam(/*Integer ganz ausgeschrieben??*/int idUnternehmen, int idPartnerprofil, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
 
 	public void loeschenTeam(Team t) throws IllegalArgumentException;
 
@@ -160,7 +163,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	// Unternehmen u
 	
-	public Unternehmen anlegenUnternehmen(int idOrganisationseinheit, int idPartnerprofil, String firmenName) throws IllegalArgumentException;
+	public Unternehmen anlegenUnternehmen(/*Integer ganz ausgeschrieben??*/int idPartnerprofil, String firmenName) throws IllegalArgumentException;
 
 	public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException;
 
@@ -183,7 +186,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	//Aufruf der eigenen Bewerbungen als Bewerber und dazugehï¿½rigen Ausschreibungen
 
-	public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheut(Organisationseinheit o) throws IllegalArgumentException;
+	public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException;
 	
 	// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
 	public Vector <Beteiligung> getAllBeteiligungenToProject(Projekt p)throws IllegalArgumentException;
