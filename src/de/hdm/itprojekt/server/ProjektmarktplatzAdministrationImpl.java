@@ -109,6 +109,11 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	 #########################################################*/
 	
 	
+	//*********************
+	// WERDEN DIE CODES ÜBERHAUPT BENOETIGT FUER ORGANISATIONSEINHEIT??
+	//**********************************
+	
+	
 	// createOrganisationseinheit
 	public Organisationseinheit createOrganisationseinheit(int idOrganisationseinheit) throws IllegalArgumentException {
 		Organisationseinheit orgaEinheit = new Organisationseinheit();
@@ -119,17 +124,17 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	// getOrganisationseinheitById
 	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) throws IllegalArgumentException {
-		return this.orgaMapper.findOrganisationseinheitById(idOrganisationseinheit);
+		return this.orgaMapper.findOrganisationseinheitByKey(idOrganisationseinheit);
 	}
 	
 	// updateOrganisationseinheit
-	public void updateOrganisationseinheit(Organisationseinheit org) throws IllegalArgumentException {
-		orgaMapper.updateOrganisationseinheit(org);
+	public void updateOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException {
+		orgaMapper.updateOrganisationseinheit(o);
 	}
 	
-	// deleteOrganisationseinheit
-	public void deleteOrganisationseinheit(int idOrganisationseinheit) throws IllegalArgumentException {
-		this.orgaMapper.deleteOrganisationseinheit(idOrganisationseinheit);
+	// deleteOrganisationseinheit ------------- WIRD DIE UEBERHAUPT BENOETIGT??
+	public void deleteOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException {
+		this.orgaMapper.deleteOrganisationseinheit(o);
 		// gleicher Fehler wie oben --> Falscher Datentyp
 	}
 	
@@ -151,8 +156,34 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	@Override
 	public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-		this.ppMapper.delete(pp);
 		
+		// Methode muss noch erstellt werden!!
+				Vector<Eigenschaft> e = this.getEigenschaftByForeignPartnerprofil(pp);
+				
+				if(e != null){
+					for(Eigenschaft eigenschaft : e){
+						this.eigMapper.deleteEigenschaft(e);
+					}
+					this.ppMapper.delete(pp);
+					// Datentyp ist Partnerprofil
+		
+		}
+	}
+
+	// getEigenschaftByForeignPartnerprofil()
+	public Vector<Eigenschaft> getEigenschaftByForeignPartnerprofil(Partnerprofil pp) {
+
+		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+
+		if (pp != null && this.eigMapper != null) {
+			Vector<Eigenschaft> eigenschaft = this.eigMapper.findByForeignPartnerprofilId(pp.getId());
+
+			if (eigenschaft != null) {
+				result.addAll(eigenschaft);
+			}
+		}
+		return result;
+
 	}
 
 	@Override
@@ -165,37 +196,10 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		ppMapper.update(pp);
 	}
 	
-	// getPartnerprofilById
-	public Partnerprofil getPartnerprofilById(int idPartnerprofil){
-		return this.ppMapper.findPartnerprofilByKey(idPartnerprofil);
-	}
-	
 	// getAllPartnerprofile
 	public Vector <Partnerprofil> getAllPartnerprofile() throws IllegalArgumentException {
 		return this.ppMapper.findAll();
 	}
-	
-	// updatePartnerprofil
-	public void updatePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-		ppMapper.update(pp);		
-	}
-	
-	// deletePartnerprofil
-	public void deletePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-		
-		// Methode muss noch erstellt werden!!
-		Vector<Eigenschaft> e = this.getEigenschaftByForeignPartnerprofil(pp);
-		
-		if(e != null){
-			for(Eigenschaft eigenschaft : e){
-				this.eigMapper.deleteEigenschaft(e);
-			}
-			this.ppMapper.delete(pp);
-			// Datentyp ist Partnerprofil
-		}
-
-	}
-	
 	
 	
 	/*##########################################################
@@ -219,8 +223,42 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	@Override
 	public void loeschenPerson(Person pe) throws IllegalArgumentException {
-		this.persMapper.delete(idPerson);
 		
+		Vector<Bewerbung> b = this.getBewerbungByForeignOrganisationseinheit(pe);
+		Vector<Beteiligung> beteiligung = this.getBeteiligungByForeignOrganisationseinheit(pe);
+		Vector<Projekt> p = this.getProjektByForeignPerson(pe);
+		Partnerprofil pp = this.getPartnerprofilByForeignOrganisationseinheit(pe);
+		
+		
+		// Bewerbungen der Person löschen
+		if(b != null){
+			for(Bewerbung bewerbung : b){
+				this.deleteBewerbung(bewerbung);
+			}
+		}
+		
+		// zugehörige Beteiligungen löschen
+		if (beteiligung != null){
+			for (Beteiligung be : beteiligung){
+				this.deleteBeteiligung(be);
+			}	
+		}	
+		
+		// von Person erstellte Projekte löschen
+		if(p != null){
+			for(Projekt projekt : p){
+				this.deleteProjekt(projekt);
+			}
+		}
+		
+		// Partnerprofil der Person löschen
+		if (pp != null){
+			this.deletePartnerprofil(pp);
+		}
+		
+		// Person entgültig löschen
+		this.persMapper.deletePerson(pe);
+	
 	}
 
 	@Override
@@ -446,7 +484,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	@Override
 	public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException {
-		this.unternehmenMapper.delete(u);
+		this.unternehmenMapper.deletePerson(u);
 		
 	}
 
