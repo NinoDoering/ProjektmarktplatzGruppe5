@@ -6,6 +6,8 @@ import java.util.Vector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.itprojekt.server.db.PersonMapper;
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 //Rueckgaengig
 //ZweiterVersuch!
@@ -28,6 +30,8 @@ public interface GreetingServiceAsync {
 //	void getProjektmarktplatzAll(AsyncCallback<Vector<Projektmarktplatz>> callback);
 
 	void findPersonByKey(int key, AsyncCallback<Person> callback);
+	
+	void findAusschreibungByKey (int idAusschreibung, AsyncCallback<Ausschreibung> callback); 
 
 
 

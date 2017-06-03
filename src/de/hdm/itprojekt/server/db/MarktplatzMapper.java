@@ -60,8 +60,7 @@ public class MarktplatzMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM marktplatz"
-							+ "WHERE idMarktplatz=" + idMarktplatz );
+					"SELECT * FROM marktplatz" + "WHERE idMarktplatz=" + idMarktplatz );
 			// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung
 			// angezeigt werden
 

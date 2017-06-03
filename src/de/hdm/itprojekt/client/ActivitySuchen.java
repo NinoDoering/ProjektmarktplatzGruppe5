@@ -32,8 +32,11 @@ public class ActivitySuchen extends HorizontalPanel  {
 	Label lblBeispiel;
 	Label lbl1;
 	FlexTable projekttabelle = new FlexTable();
+	
+	// Personen suchen Aktivit�t
 	public ActivitySuchen() {
-		// Projektmarktplatz suchen Aktivit�t
+		
+		
 		
 lblBeispiel = new Label("Projektmarktpl�tze");
 

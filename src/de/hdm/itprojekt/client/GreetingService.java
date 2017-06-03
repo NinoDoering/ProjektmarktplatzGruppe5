@@ -7,6 +7,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.server.db.PersonMapper;
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 
 //Rueckgaengig
@@ -29,6 +31,9 @@ public interface GreetingService extends RemoteService  {
 	
 	
 	Person findPersonByKey(int key);
+
+	Ausschreibung findAusschreibungByKey(int idAusschreibung);
+	
 	
 	// public Projektmarktplatz addProjektmarktplatz(String bezeichnung);
 	
