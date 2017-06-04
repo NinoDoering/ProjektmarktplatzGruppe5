@@ -38,7 +38,7 @@ public class BewertungMapper {
 				
 				bewertung.setId(rs.getInt("idBewertung"));
 				bewertung.setTextuelleBewertung(rs.getString("textuelleBewertung"));
-				bewertung.setFliessKommaBewertung(rs.getFloat("fließkommaBewertung"));
+				bewertung.setFliessKommaBewertung(rs.getFloat("fliesskommaBewertung"));
 				
 				return bewertung;
 			}
@@ -57,7 +57,7 @@ public class BewertungMapper {
 		
 		try{
 			Statement stmt = con.createStatement();
-			stmt.executeUpdate("INSERT INTO bewertung (idBewerbung, textuelleBewertung, fließkommaBewertung) " 
+			stmt.executeUpdate("INSERT INTO bewertung (idBewerbung, textuelleBewertung, fliesskommaBewertung) " 
 					+ "VALUES ('"
 					+ bewertung.getId() + "','" 
 					+ bewertung.getIdBewerbung() + "','" 
@@ -94,7 +94,7 @@ public class BewertungMapper {
 					+ "SET idBewertung='" + bewertung.getId() + "' ,'" 
 					+ "idBewerbung='" + bewertung.getIdBewerbung() + "' ,'" 
 					+ "textuelleBewertung='" + bewertung.getTextuelleBewertung() + "' ,'" 
-					+ "fließkommaBewertung='" + bewertung.getFliessKommaBewertung() + "' ,'"
+					+ "fliesskommaBewertung='" + bewertung.getFliessKommaBewertung() + "' ,'"
 					+ " WHERE idBewertung= '" + bewertung.getId());
 			
 		} catch (SQLException e) {
@@ -120,7 +120,7 @@ public class BewertungMapper {
 	        Bewertung bewertung = new Bewertung();
 	        bewertung.setId(rs.getInt("idBewertung"));
 	        bewertung.setTextuelleBewertung(rs.getString("textuelleBewertung"));
-	        bewertung.setFliessKommaBewertung(rs.getFloat("fließkommaBewertung"));
+	        bewertung.setFliessKommaBewertung(rs.getFloat("fliesskommaBewertung"));
 	        bewertung.setIdBewerbung(rs.getInt("idBewerbung"));
 	        return bewertung;
 	      }
