@@ -53,7 +53,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 			Statement stmt = con.createStatement();
 			// Teams sollen alphabetisch nach Team-Namen ausgegeben
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idTeam, teamName, mitgliederAnzahl FROM  team" + " WHERE idTeam= " + id );
+					"SELECT * FROM  team" + " WHERE idTeam= " + id );
 
 			if (rs.next()) {
 				Team t = new Team();

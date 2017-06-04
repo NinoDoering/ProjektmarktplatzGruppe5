@@ -108,7 +108,7 @@ public class PartnerprofilMapper {
 
 			stmt.executeUpdate("UPDATE partnerprofil " 
 			+ "SET idPartnerprofil=\"" + pp.getId() + "\" "
-					+ "WHERE idPartnerprofil=" + pp.getId());
+					+ " WHERE idPartnerprofil= " + pp.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -96,8 +96,7 @@ public class AusschreibungMapper {
 		  try {
 			
 			  Statement stmt = con.createStatement();
-			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
-			  		+ " beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  ResultSet rs = stmt.executeQuery("SELECT * FROM ausschreibung "
 			  		+ " WHERE idProjekt= " + idProjekt + " ORDER BY bezeichnung");
 			  
 			  while (rs.next()) {
@@ -159,8 +158,7 @@ public class AusschreibungMapper {
 		  try {
 			
 			  Statement stmt = con.createStatement();
-			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
-			  		+ " beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  ResultSet rs = stmt.executeQuery("SELECT * FROM ausschreibung "
 			  		+ " WHERE idPartnerprofil= " + idPartnerprofil + " ORDER BY bezeichnung");
 			  
 			  while (rs.next()) {
@@ -192,8 +190,7 @@ public class AusschreibungMapper {
 		  try {
 			
 			  Statement stmt = con.createStatement();
-			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
-			  		+ "beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  ResultSet rs = stmt.executeQuery("SELECT * FROM ausschreibung "
 			  		+ " WHERE idAusschreibender= " + idAusschreibender + " ORDER BY bezeichnung");
 			  
 			  while (rs.next()) {

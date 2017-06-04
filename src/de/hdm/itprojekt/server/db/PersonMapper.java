@@ -93,7 +93,7 @@ public Vector<Person> findByTeam(int idTeam){
 		
 		try{
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * " + " FROM person " 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
 			+ "WHERE idTeam= " + idTeam + " ORDER BY nachname");
 			
 			
