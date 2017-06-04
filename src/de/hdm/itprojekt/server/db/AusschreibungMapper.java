@@ -97,8 +97,8 @@ public class AusschreibungMapper {
 			
 			  Statement stmt = con.createStatement();
 			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
-			  		+ "beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
-			  		+ "WHERE idProjekt=" + idProjekt + " ORDER BY bezeichnung");
+			  		+ " beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  		+ " WHERE idProjekt= " + idProjekt + " ORDER BY bezeichnung");
 			  
 			  while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
@@ -160,8 +160,8 @@ public class AusschreibungMapper {
 			
 			  Statement stmt = con.createStatement();
 			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
-			  		+ "beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
-			  		+ "WHERE idPartnerprofil= " + idPartnerprofil + " ORDER BY bezeichnung");
+			  		+ " beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
+			  		+ " WHERE idPartnerprofil= " + idPartnerprofil + " ORDER BY bezeichnung");
 			  
 			  while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
@@ -194,7 +194,7 @@ public class AusschreibungMapper {
 			  Statement stmt = con.createStatement();
 			  ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, idAusschreibender, bezeichnung, "
 			  		+ "beschreibung, idPartnerprofil, idProjekt, endDatum, status FROM ausschreibung "
-			  		+ "WHERE idAusschreibender= " + idAusschreibender + " ORDER BY bezeichnung");
+			  		+ " WHERE idAusschreibender= " + idAusschreibender + " ORDER BY bezeichnung");
 			  
 			  while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
@@ -223,7 +223,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxid " + "FROM ausschreibung ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxid " + " FROM ausschreibung ");
 			
 			if (rs.next()) {
 
@@ -261,7 +261,7 @@ public class AusschreibungMapper {
 					+ "status='" + a.getAusschreibungsstatus() + "' ,'"
 					+ "endDatum='" + format.format(a.getEndDatum()) + "' ,'" 
 					+ "idProjekt='" + a.getIdProjekt() + "' ,'" 
-					+ " WHERE idAusschreibung= '"+ a.getId());
+					+ " WHERE idAusschreibung= '" + a.getId());
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -276,7 +276,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM ausschreibung " 
+			stmt.executeUpdate("DELETE * FROM ausschreibung " 
 								+ " WHERE idAusschreibung= " + a.getId());
 
 		} catch (SQLException e2) {

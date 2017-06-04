@@ -30,8 +30,7 @@ public class PersonMapper extends OrganisationseinheitMapper{
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen" 
-			+ " FROM person " + "WHERE idPerson= " + id);
+			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen FROM person " + " WHERE idPerson= " + id);
 			
 			if (rs.next()) {
 				Person p = new Person();
@@ -131,8 +130,8 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 	
 	try{
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * " + " FROM person " 
-		+ "WHERE idUnternehmen= " + idUnternehmen + " ORDER BY nachname");
+		ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
+		+ " WHERE idUnternehmen= " + idUnternehmen + " ORDER BY nachname");
 		
 		
 		while (rs.next()){
@@ -228,7 +227,7 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 					+ "titel=\"" + p.getTitel() +  "\" " 
 					+ "idUnternehmen=\"" + p.getIdUnternehmen() + "\", " 
 					+ "idTeam=\""+ p.getIdTeam() + "\" " 
-					+ "WHERE idPerson=" + p.getId());
+					+ " WHERE idPerson= " + p.getId());
 
 		} catch (SQLException e5) {
 			e5.printStackTrace();
@@ -243,7 +242,7 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE " + " FROM person " + "WHERE idPerson=" + p.getId());
+			stmt.executeUpdate("DELETE * FROM person " + " WHERE idPerson= " + p.getId());
 		} catch (SQLException e6) {
 			e6.printStackTrace();
 		}

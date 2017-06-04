@@ -124,7 +124,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idBewerbung) AS maxid " + "FROM bewerbung ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idBewerbung) AS maxid " + " FROM bewerbung ");
 			if (rs.next()) {
 
 				b.setId(rs.getInt("maxid") + 1);
@@ -158,7 +158,7 @@ public class BewerbungMapper {
 					+ "bewerbungsText='" + b.getBewerbungsText() + "' ,'" 
 					+ "erstellDatum='" + b.getErstellDatum() + "' ,'" 
 					+ "bewerbungsstatus='" + b.getBewerbungsstatus() + "' ,'" 
-					+ "WHERE idBewerbung ='"+ b.getId());
+					+ " WHERE idBewerbung= '"+ b.getId());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -172,7 +172,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM bewerbung" 
+			stmt.executeUpdate("DELETE * FROM bewerbung" 
 								+ " WHERE idBewerbung= " + b.getId());
 
 		} catch (SQLException e) {

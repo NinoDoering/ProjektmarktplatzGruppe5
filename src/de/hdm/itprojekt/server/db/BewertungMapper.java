@@ -77,7 +77,7 @@ public class BewertungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM bewertung" 
+			stmt.executeUpdate("DELETE * FROM bewertung" 
 								+ " WHERE idBewertung= " + bewertung.getId());
 
 		} catch (SQLException e) {
@@ -95,7 +95,7 @@ public class BewertungMapper {
 					+ "idBewerbung='" + bewertung.getIdBewerbung() + "' ,'" 
 					+ "textuelleBewertung='" + bewertung.getTextuelleBewertung() + "' ,'" 
 					+ "fließkommaBewertung='" + bewertung.getFliessKommaBewertung() + "' ,'"
-					+ "WHERE idBewertung ='"+ bewertung.getId());
+					+ " WHERE idBewertung= '" + bewertung.getId());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,7 +114,7 @@ public class BewertungMapper {
 	      Statement stmt = con.createStatement();
 
 	      ResultSet rs = stmt.executeQuery("SELECT * FROM bewertung "
-	          + "WHERE idBewerbung =" + idBewerbung);
+	          +  " WHERE idBewerbung= " + idBewerbung);
 
 	      if (rs.next()) {
 	        Bewertung bewertung = new Bewertung();

@@ -29,7 +29,7 @@ public class PartnerprofilMapper {
 
 			ResultSet rs = stmt
 					.executeQuery("SELECT idPartnerprofil FROM partnerprofil " 
-			+ "WHERE idPartnerprofil= " + idPartnerprofil);
+			+ " WHERE idPartnerprofil= " + idPartnerprofil);
 
 			if (rs.next()) {
 				Partnerprofil pp = new Partnerprofil();
@@ -53,7 +53,7 @@ public class PartnerprofilMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idPartnerprofil " + "FROM partnerprofil ");
+			ResultSet rs = stmt.executeQuery("SELECT idPartnerprofil FROM partnerprofil ");
 
 			while (rs.next()) {
 				Partnerprofil pp = new Partnerprofil();
@@ -125,7 +125,7 @@ public class PartnerprofilMapper {
 			Statement stmt = con.createStatement();
 
 			stmt.executeUpdate("DELETE FROM partnerprofil " 
-			+ "WHERE idPartnerprofil=" + pp.getId());
+			+ " WHERE idPartnerprofil= " + pp.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

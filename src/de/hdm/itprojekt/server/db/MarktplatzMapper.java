@@ -29,7 +29,7 @@ public class MarktplatzMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idMarktplatz) AS maxid " + "FROM marktplatz ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idMarktplatz) AS maxid " + " FROM marktplatz ");
 
 			if (rs.next()) {
 
@@ -38,7 +38,8 @@ public class MarktplatzMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung, idProjekt) " + "VALUES ('"
+						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung, idProjekt) " 
+				+ "VALUES ('"
 				+pm.getId()+ "','"+ 
 				pm.getGeschaeftsgebiet() + "','" + 
 				pm.getBezeichnung() + "')");
@@ -60,7 +61,7 @@ public class MarktplatzMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM marktplatz" + "WHERE idMarktplatz=" + idMarktplatz );
+					"SELECT * FROM marktplatz " + " WHERE idMarktplatz= " + idMarktplatz );
 			// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung
 			// angezeigt werden
 
@@ -89,8 +90,7 @@ public class MarktplatzMapper {
 			// Datenbankabfrage aller Projekte alphabetisch sortiert nach
 			// bezeichnung
 
-			ResultSet rs = stmt.executeQuery("SELECT * "
-					+ "FROM marktplatz" + "ORDER BY bezeichnung");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM marktplatz " + " ORDER BY bezeichnung");
 			while (rs.next()) {
 				Marktplatz pm = new Marktplatz();
 				pm.setId(rs.getInt("idMarktplatz"));
@@ -116,8 +116,8 @@ public class MarktplatzMapper {
 
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
 			// Bezeichung enth�lt
-			ResultSet rs = stmt.executeQuery("SELECT idMarktplatz, bezeichnung, geschaeftsgebiet, projekt "
-					+ " FROM marktplatz " + "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
+			ResultSet rs = stmt.executeQuery("SELECT idMarktplatz, bezeichnung, geschaeftsgebiet "
+					+ " FROM marktplatz " + " WHERE bezeichnung= '" + bezeichnung + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Marktplatz pm = new Marktplatz();
@@ -142,8 +142,8 @@ public class MarktplatzMapper {
 			// SQL Statment, welches das Updaten von Projekte erlaubt
 
 			stmt.executeUpdate("UPDATE marktplatz " + "SET bezeichnung=\"" + pm.getBezeichnung() + "\", "
-					+ "geschaeftsgebiet=\"" + pm.getGeschaeftsgebiet() + "\", " + 
-					"WHERE idMarktplatz" + pm.getId());
+					+ "geschaeftsgebiet=\"" + pm.getGeschaeftsgebiet() + "\", " 
+					+ " WHERE idMarktplatz= " + pm.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -157,7 +157,7 @@ public class MarktplatzMapper {
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeQuery(
-					"DELETE * from marktplatz" + "WHERE idMarktplatz =" + pm.getId());
+					"DELETE * from marktplatz " + " WHERE idMarktplatz= " + pm.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

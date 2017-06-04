@@ -36,7 +36,7 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idEigenschaft) AS maxid " + "FROM eigenschaft ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idEigenschaft) AS maxid " + " FROM eigenschaft ");
 
 			if (rs.next()) {
 
@@ -101,7 +101,7 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * " + " FROM eigenschaft " 
+					"SELECT * FROM eigenschaft " 
 							+ " ORDER BY idEigenschaft ");
 
 			while (rs.next()) {
@@ -133,7 +133,7 @@ public class EigenschaftMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 	      ResultSet rs = stmt.executeQuery("SELECT * FROM eigenschaft "
-	          + "WHERE idPartnerprofil =" + idPartnerprofil);
+	          + " WHERE idPartnerprofil= " + idPartnerprofil);
 
 	     
 	      while (rs.next()) {
@@ -172,7 +172,7 @@ public class EigenschaftMapper {
 					+ "sprachkenntnisse='" + e.getSprachkenntnisse() + "' ,'" 		
 					+ "employmentStatus='" + e.getEmploymentStatus() + "' ,'" 
 					+ "idPartnerprofil='" + e.getIdPartnerprofil() + "' ,'" 
-					+ "WHERE idEigenschaft ='"+ e.getId());
+					+ " WHERE idEigenschaft= '"+ e.getId());
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -188,7 +188,7 @@ public class EigenschaftMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM eigenschaft " 
+			stmt.executeUpdate("DELETE * FROM eigenschaft " 
 								+ " WHERE idEigenschaft= " + e.getId());
 			
 		} catch (SQLException ex) {

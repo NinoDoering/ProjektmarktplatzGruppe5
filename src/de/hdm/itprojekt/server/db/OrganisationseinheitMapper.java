@@ -81,8 +81,8 @@ public class OrganisationseinheitMapper {
 		
 		try{
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit, adresse, standort, idPartnerprofil"
-					+ " FROM organisationseinheit " + "WHERE idPartnerprofil= " + idPartnerprofil);
+			ResultSet rs = stmt.executeQuery("SELECT idOrganisationseinheit, adresse, standort, idPartnerprofil FROM organisationseinheit " 
+			+ " WHERE idPartnerprofil= " + idPartnerprofil);
 			
 			
 			if(rs.next()){
@@ -112,7 +112,7 @@ public class OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM organisationseinheit " 
+			stmt.executeUpdate("DELETE * FROM organisationseinheit " 
 							+ " WHERE idOrganisationseinheit= " + o.getId());
 			
 		} catch (SQLException e) {
@@ -131,7 +131,7 @@ public class OrganisationseinheitMapper {
 						+ "SET adresse='" + o.getAdresse() + "'," 
 						+ "standort='" + o.getStandort() + "'," 
 						+ "idPartnerprofil=" + o.getIdPartnerprofil()  
-						+ "' WHERE Organisationseinheit_Id="+o.getId());
+						+ "' WHERE idOrganisationseinheit= "+ o.getId());
 				
 			} catch (SQLException e2) {
 				e2.printStackTrace();

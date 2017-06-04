@@ -91,7 +91,7 @@ public class BeteiligungMapper {
 		      Statement stmt = con.createStatement();
 
 		      ResultSet rs = stmt.executeQuery("SELECT * FROM beteiligung "
-		          + "WHERE idProjekt =" + idProjekt);
+		          + " WHERE idProjekt= " + idProjekt);
 
 		     
 		      while (rs.next()) {
@@ -121,7 +121,7 @@ public class BeteiligungMapper {
 	      Statement stmt = con.createStatement();
 
 	      ResultSet rs = stmt.executeQuery("SELECT * FROM beteiligung "
-	          + "WHERE idProjekt =" + idBewertung);
+	          + " WHERE idProjekt= " + idBewertung);
 
 	     
 	      while (rs.next()) {
@@ -150,7 +150,7 @@ public class BeteiligungMapper {
 	      Statement stmt = con.createStatement();
 
 	      ResultSet rs = stmt.executeQuery("SELECT * FROM beteiligung "
-	          + "WHERE idProjekt =" + idBeteiligter);
+	          + " WHERE idProjekt= " + idBeteiligter);
 
 	     
 	      while (rs.next()) {
@@ -210,7 +210,7 @@ public class BeteiligungMapper {
 					+ "idProjekt='" + beteiligung.getIdProjekt() + "' ,'" 
 					+ "idBewertung'" + beteiligung.getIdBewertung() + "' ,'"
 					+ "Beteiligungszeit'" + beteiligung.getBeteiligungszeit() + "' ,'" 
-					+ "WHERE idBeteiligung ='"+ beteiligung.getId());
+					+ " WHERE idBeteiligung= '"+ beteiligung.getId());
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -224,7 +224,7 @@ public class BeteiligungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM beteiligung " 
+			stmt.executeUpdate("DELETE * FROM beteiligung " 
 								+ " WHERE idBeteiligung= " + beteiligung.getId());
 
 		} catch (SQLException e2) {

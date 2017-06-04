@@ -28,7 +28,7 @@ public class ProjektMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idProjekt) AS maxid " + "FROM projekt ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idProjekt) AS maxid " + " FROM projekt ");
 
 			if (rs.next()) {
 
@@ -104,8 +104,7 @@ public class ProjektMapper {
 			// bezeichnung
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz "
-							+ " FROM projekt" + " ORDER BY bezeichnung");
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt " + " ORDER BY bezeichnung");
 			while (rs.next()) {
 				Projekt p = new Projekt();
 				p.setId(rs.getInt("idProjekt"));
@@ -134,11 +133,10 @@ public class ProjektMapper {
 			Statement stmt = con.createStatement();
 
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
-			// Bezeichung enthält
+			// Bezeichung enthï¿½lt
 			ResultSet rs = stmt
-					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz "
-							+ " FROM projekt "
-							+ "WHERE bezeichnung LIKE '" + bezeichnung + "' ORDER BY bezeichnung");
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt "
+							+ " WHERE bezeichnung= '" + bezeichnung + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
@@ -167,11 +165,10 @@ public class ProjektMapper {
 			Statement stmt = con.createStatement();
 
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
-			// Bezeichung enthält
+			// Bezeichung enthï¿½lt
 			ResultSet rs = stmt
-					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz "
-							+ " FROM projekt "
-							+ "WHERE idMarktplatz LIKE '" + idMarktplatz + "' ORDER BY bezeichnung");
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt "
+							+ " WHERE idMarktplatz= '" + idMarktplatz + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
@@ -200,11 +197,10 @@ public class ProjektMapper {
 			Statement stmt = con.createStatement();
 
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
-			// Bezeichung enthält
+			// Bezeichung enthï¿½lt
 			ResultSet rs = stmt
-					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz "
-							+ " FROM projekt "
-							+ "WHERE idPerson LIKE '" + idPerson + "' ORDER BY bezeichnung");
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt "
+							+ "WHERE idPerson= '" + idPerson + "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
@@ -239,7 +235,7 @@ public class ProjektMapper {
 					+ "endDatum=\"" + format.format(p.getEndDatum()) + "\"," 
 					+ "idPerson=\"" + p.getIdPerson() + "\" "
 					+ "idMarktplatz=\"" + p.getIdMarktplatz() + "\" "
-					+ "WHERE idProjekt" + p.getId());
+					+ " WHERE idProjekt= " + p.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -252,7 +248,7 @@ public class ProjektMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE from projekt" + "WHERE idProjekt =" + p.getId());
+			stmt.executeQuery("DELETE * FROM projekt" + " WHERE idProjekt= " + p.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

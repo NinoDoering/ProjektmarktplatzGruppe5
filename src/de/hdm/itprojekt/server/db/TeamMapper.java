@@ -53,7 +53,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 			Statement stmt = con.createStatement();
 			// Teams sollen alphabetisch nach Team-Namen ausgegeben
 			ResultSet rs = stmt.executeQuery(
-					"SELECT idTeam, teamName, mitgliederAnzahl" + " FROM  team" + " WHERE idTeam= " + id );
+					"SELECT idTeam, teamName, mitgliederAnzahl FROM  team" + " WHERE idTeam= " + id );
 
 			if (rs.next()) {
 				Team t = new Team();
@@ -83,8 +83,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen " 
-			+ "FROM team " 
+					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen FROM team " 
 			+ " ORDER BY teamName");
 
 			while (rs.next()) {
@@ -119,8 +118,8 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen" + " FROM team "
-					+ "WHERE teamName LIKE '" + teamName + "' ORDER BY teamName ");
+			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen FROM team "
+					+ " WHERE teamName= '" + teamName + "' ORDER BY teamName ");
 
 			while (rs.next()) {
 				Team t = new Team();
@@ -151,7 +150,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 			+ "SET teamName=\"" + t.getTeamName() + "\", " 
 			+ "mitgliederAnzahl=\"" + t.getMitgliederAnzahl() + "\" " 
 			+ "idUnternehmen=\"" + t.getIdUnternehmen() + "\" "
-			+ "WHERE idTeam" + t.getId());
+			+ " WHERE idTeam= " + t.getId());
 		}
 
 		catch (SQLException e) {
@@ -165,7 +164,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE from team" + "WHERE idTeam = " + t.getId());
+			stmt.executeQuery("DELETE * FROM team " + " WHERE idTeam= " + t.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
