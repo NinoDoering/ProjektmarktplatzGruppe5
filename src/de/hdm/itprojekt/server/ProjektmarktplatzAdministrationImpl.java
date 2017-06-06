@@ -161,7 +161,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 	// getAllPartnerprofile
 	public Vector <Partnerprofil> getAllPartnerprofile() throws IllegalArgumentException {
-		return this.ppMapper.findAll();
+		return this.ppMapper.findAllProjekt();
 	}
 	
 	
@@ -192,7 +192,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		Vector<Beteiligung> beteiligung = this.getBeteiligungByBeteiligter(pe);
 		Vector<Projekt> p = this.getProjektByPerson(pe);
 		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(pe); // muss noch eingearbeitet werden
-		
+		// PP nicht vorhanden in Mapper
 		
 		// Bewerbungen der Person löschen
 		if(b != null){
@@ -256,15 +256,15 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return result;
 	}
 
-	// getBeteiligungByBeteiligter
-	public Vector<Beteiligung> getBeteiligungByBeteiligter(Person pe) {
+	// getBeteiligungByBeteiligter ---------- Kontrolle richtiger Datentyp
+	public Vector<Beteiligung> getBeteiligungByBeteiligter(Organisationseinheit o) {
 		
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
-		if (pe != null && this.beteiligungMapper != null) {
-			Vector<Beteiligung> beteiligung = this.beteiligungMapper.findBeteiligungByBeteiligter(pe.getId());
+		if (o != null && this.beteiligungMapper != null) {
+			Vector<Beteiligung> beteiligung = this.beteiligungMapper.findBeteiligungByBeteiligter(o.getId());
 
-			if (pe != null) {
+			if (o != null) {
 				result.addAll(beteiligung);
 			}
 		}
@@ -333,9 +333,8 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		p.setIdPerson(idPerson);
 		p.setIdMarktplatz(idMarktplatz);
 		
-		return this.prjktMapper.insert(p);
-		
-	}
+		return this.prjktMapper.insertProjekt(p);		
+		}
 
 	// loeschenProjekt
 	@Override
@@ -404,12 +403,12 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 	// getAllProjekte
 	public Vector<Projekt> getAllProjekte() throws IllegalArgumentException {
-		return this.prjktMapper.findAll();
+		return this.prjktMapper.findAllProjekt();
 	}
 	
 	// getProjektByBezeichnung
 	public Vector<Projekt> getProjektByBezeichnung(String bezeichnung) throws IllegalArgumentException {
-		return this.prjktMapper.findByBezeichnung(bezeichnung);
+		return this.prjktMapper.findProjektByBezeichnung(bezeichnung);
 	}
 	
 
@@ -430,7 +429,8 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return this.mpMapper.insertMarktplatz(pm);
 	}
 
-	// loeschenMarktplatz
+	// loeschenMarktplatz ------------- Was ist mit weiteren 
+	// Dingen wie Ausschreibung, Bewerbung usw.?
 	@Override
 	public void loeschenMarktplatz(Marktplatz pm) throws IllegalArgumentException {
 		
@@ -515,11 +515,53 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return this.teamMapper.insertTeam(t);
 	}
 
+	
+	// loeschenTeam --- wird Team genauso wie Person behandelt?
 	@Override
 	public void loeschenTeam(Team t) throws IllegalArgumentException {
-		this.teamMapper.delete(idTeam);
+		
+		Vector<Bewerbung> b = this.getBewerbungByBewerber(t);
+		Vector<Projekt> p = this.getProjektByPerson(t);
+		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(t); // überarbeiten
+		Vector<Beteiligung> beteiligung = this.getBeteiligungByBeteiligter(t); // --- richtiger Datentyp?
+		
+		// zugehoerige Beteiligungen loeschen
+		if (beteiligung != null) {
+			for(Beteiligung b : beteiligung){
+				this.loeschenBeteiligung(b);
+			}
+		}
+		
+		// zugehoerige Partnerprofile loeschen
+		if (pp != null) {
+				this.loeschenPartnerprofil(pp);
+		}
+		
+		
+		this.teamMapper.deleteTeam(t);
 		
 	}
+	//###########################################################################################
+	//############################################################################################
+	
+	
+	
+	
+	// getPartnerprofilByOrganisationseinheit
+	public Partnerprofil getPartnerprofilByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException {
+		
+		// GEMEINSAM BEARBEITEN         ###################################################################
+	}
+	
+	
+	
+	
+
+	// getBeteiligungByBeteiligter
+	//public Vector<Beteiligung> getBeteiligungByBeteiligter(Team t) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		//return null;
+	//}
 
 	@Override
 	public void saveTeam(Team t) throws IllegalArgumentException {
@@ -543,9 +585,9 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 //	}
 	
 		
-		/*##########################################################
-		 * START UNTERNEHMEN
-		 #########################################################*/	
+	/*##########################################################
+	 * START UNTERNEHMEN
+	 #########################################################*/
 
 	@Override
 	public Unternehmen anlegenUnternehmen(int idPartnerprofil, String firmenName)
@@ -560,10 +602,16 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return this.unternehmenMapper.insertUnternehmen(u);
 	}
 
+	// loeschenUnternehmen ---------- gemeinsam durchgehen
 	@Override
 	public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException {
-		this.unternehmenMapper.deletePerson(u);
 		
+		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(u);
+		Vector<Beteiligung> beteiligung = this.getBeteiligungByOrganisationseinheit(u);
+		Vector<Bewerbung> b = this.getAllBewerbungenByOrganisationseinheit(u); // ------ falsch? 
+																				// Weil nicht in Klasse vorhanden
+		
+		this.unternehmenMapper.deleteUnternehmen(u);
 	}
 
 	@Override
@@ -577,12 +625,11 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 	}
 		
-		// getUnternehmenByFirmenName
-		public Unternehmen getUnternehmenByFirmenName(String firmenName) 
-				throws IllegalArgumentException {
-			
-			return this.unternehmenMapper.findByFirmenName(firmenName);
-		}	
+	// getUnternehmenByFirmenName
+	public Unternehmen getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
+
+		return this.unternehmenMapper.findByFirmenName(firmenName);
+	}
 	
 		
 		
@@ -605,21 +652,22 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 		}
 
+		// loeschenBeteiligung --- vollständig
 		@Override
 		public void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
+			this.beteiligungMapper.deleteBeteiligung(beteiligung);
 			
 		}
 
 		@Override
 		public void saveBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
+			beteiligungMapper.updateBeteiligung(beteiligung);
 			
 		}
 		
 		// getBeteiligungById
 		public Beteiligung getBeteiligungById(int idBeteiligung) throws IllegalArgumentException {
-			return this.beteiligungMapper.findBeteiligungById(idBeteiligung);
+			return this.beteiligungMapper.findBeteiligungByKey(idBeteiligung);
 		}
 		
 		// getAllBeteiligungen
@@ -630,16 +678,6 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		// falsch?
 		//public Vector<Beteiligung> findByOwner
 		
-		// updateBeteiligung
-		public void updateBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
-			beteiligungMapper.updateBeteiligung(beteiligung);			
-		}
-		
-		// deleteBeteiligung
-		public void deleteBeteiligung(int idBeteiligung) throws IllegalArgumentException {
-			this.beteiligungMapper.deleteBeteiligung(idBeteiligung);
-			// falscher Datentyp
-		}
 		
 		
 		/*##########################################################
@@ -662,7 +700,34 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 		@Override
 		public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-			this.ausschreibungMapper.deleteAusschreibung(idAusschreibung);
+			
+			Vector<Bewerbung> bewerbungen = this.getAllBewerbungenByAusschreibung(a);
+			
+			if (bewerbungen != null) {
+				for (Bewerbung b : bewerbungen) {
+
+					this.bewerbungMapper.deleteBewerbung(b);
+			
+				}
+			}
+			
+			this.ausschreibungMapper.deleteAusschreibung(a);
+			
+		}
+		
+		public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+			
+			Vector<Bewerbung> result = new Vector<Bewerbung>();
+
+			if (a != null && this.bewerbungMapper != null) {
+				Vector<Bewerbung> b = this.bewerbungMapper.findBewerbungByAusschreibung(a.getId()); // Was ist hier?
+
+				if (b != null) {
+					result.addAll(b);
+				}
+			}
+			
+			return result;
 		}
 
 		@Override
@@ -706,9 +771,17 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return this.bewerbungMapper.insertBewerbung(b);
 		}
 
+		// loeschenBewerbung
 		@Override
 		public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException {
-			bewerbungMapper.deleteBewerbung(b);
+			
+			Bewertung bewertung = this.getBewertungByBewerbung(b);
+			
+			if (bewertung != null) {
+				this.loeschenBewertung(bewertung);
+			}
+			
+			this.bewerbungMapper.deleteBewerbung(b);
 		}
 
 		@Override
@@ -792,10 +865,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 //		}
 //
 //		@Override
-//		public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
+
 //
 //		@Override
 //		public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o)
