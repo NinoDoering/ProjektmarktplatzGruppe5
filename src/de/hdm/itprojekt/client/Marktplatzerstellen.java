@@ -13,8 +13,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
-import de.hdm.itprojekt.client.GreetingService;
-import de.hdm.itprojekt.client.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.GreetingService;
+import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.server.GreetingServiceImpl;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.server.*;
