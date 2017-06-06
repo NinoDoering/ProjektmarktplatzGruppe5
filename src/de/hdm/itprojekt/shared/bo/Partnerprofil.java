@@ -20,6 +20,11 @@ public class Partnerprofil extends BusinessObject {
 		return getIdOrganisationseinheit();
 	}
 
+	@Override
+	public String toString() {
+		return "Partnerprofil []";
+	}
+
 	
 	
 }

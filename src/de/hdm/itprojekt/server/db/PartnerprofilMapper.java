@@ -54,7 +54,7 @@ public class PartnerprofilMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idPartnerprofil FROM partnerprofil ");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM partnerprofil " + " ORDER BY idPartnerprofil");
 
 			while (rs.next()) {
 				Partnerprofil pp = new Partnerprofil();

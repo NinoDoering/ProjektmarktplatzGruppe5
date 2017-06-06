@@ -51,9 +51,11 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 		return null;
 	}
 	
-	// FindByFirmenName -- Was ist mit Id??
-	public Unternehmen findByFirmenName(String firmenName) {
+	// FindByFirmenName 
+	public Vector <Unternehmen> findUnternehmenByFirmenName(String firmenName) {
 		Connection con = DBConnection.connection();
+		Vector<Unternehmen> result = new Vector<Unternehmen>();
+
 
 		//WICHTIG: In TestMapper muss abfrage folgenderma�en aussehen:
 		//System.out.println(UnternehmenMapper.unternehmenMapper().findByFirmenName("'Name'"));
@@ -62,9 +64,9 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idUnternehmen, firmenName FROM unternehmen " + " WHERE firmenName= " + firmenName);
+			ResultSet rs = stmt.executeQuery("SELECT idUnternehmen, firmenName FROM unternehmen " + " WHERE firmenName= '" + firmenName + "' ORDER BY idUnternehmen");
 
-			if (rs.next()) {
+			while (rs.next()) {
 				Unternehmen u = new Unternehmen();
 				u.setFirmenName(rs.getString("firmenName"));
 				u.setId(rs.getInt("idUnternehmen"));
@@ -72,14 +74,13 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 				u.setStandort(super.findByOrganisationseinheit(u).getStandort());
 				u.setIdPartnerprofil(super.findByOrganisationseinheit(u).getIdPartnerprofil());
 				
-				return u;
+				result.addElement(u);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
+		return result;
 
-		return null;
 	}
 	
 	//Unternehmen ausgeben
@@ -100,7 +101,7 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 
 			while (rs.next()) {
 				Unternehmen u = new Unternehmen();
-				u.setId(rs.getInt("idTeam"));
+				u.setId(rs.getInt("idUnternehmen"));
 				u.setFirmenName(rs.getString("FirmenName"));
 				u.setAdresse(super.findByOrganisationseinheit(u).getAdresse());
 				u.setStandort(super.findByOrganisationseinheit(u).getStandort());

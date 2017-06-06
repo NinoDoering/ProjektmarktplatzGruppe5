@@ -56,7 +56,7 @@ public class PersonMapper extends OrganisationseinheitMapper{
 	}
 
 	// FindAll
-	public Vector<Person> findAll() {
+	public Vector<Person> findAllPerson() {
 		Connection con = DBConnection.connection();
 		Vector<Person> result = new Vector<Person>();
 
@@ -88,7 +88,8 @@ public class PersonMapper extends OrganisationseinheitMapper{
 		return result;
 	}
 
-public Vector<Person> findByTeam(int idTeam){
+	//Team durch Personen ausgeben
+public Vector<Person> findPersonByTeam(int idTeam){
 		Connection con = DBConnection.connection();
 		Vector<Person> result = new Vector<Person>();
 		
@@ -122,11 +123,13 @@ public Vector<Person> findByTeam(int idTeam){
 		
 	}
 	
+//Objekt Person ausgeben
 public Person findByPerson(Person p){
 	return this.findPersonByKey(p.getId());	
 }
 
-public Vector<Person> findByUnternehmen(int idUnternehmen){
+//Personen die einem Unternehmen angehören ausgeben
+public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 	Connection con = DBConnection.connection();
 	Vector<Person> result = new Vector<Person>();
 	
