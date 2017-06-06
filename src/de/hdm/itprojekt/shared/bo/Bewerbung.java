@@ -11,7 +11,7 @@ public class Bewerbung extends BusinessObject {
 	private Date erstellDatum;
 	private int idAusschreibung;
 	public enum BewerbungsStatus {eingereicht, zusage, absage} ;
-	private BewerbungsStatus bewerbungsstatus = BewerbungsStatus.eingereicht;
+	private BewerbungsStatus bewerbungsStatus = BewerbungsStatus.eingereicht;
 	public int getIdOrganisationseinheit() {
 		return idOrganisationseinheit;
 	}
@@ -36,18 +36,18 @@ public class Bewerbung extends BusinessObject {
 	public void setIdAusschreibung(int idAusschreibung) {
 		this.idAusschreibung = idAusschreibung;
 	}
-	public BewerbungsStatus getBewerbungsstatus() {
-		return bewerbungsstatus;
+	public BewerbungsStatus getBewerbungsStatus() {
+		return bewerbungsStatus;
 	}
-	public void setBewerbungsstatus(BewerbungsStatus bewerbungsstatus) {
-		this.bewerbungsstatus = bewerbungsstatus;
+	public void setBewerbungsStatus(BewerbungsStatus bewerbungsStatus) {
+		this.bewerbungsStatus = bewerbungsStatus;
 	}
 	
 	@Override
 	public String toString() {
 		return "Bewerbung [idOrganisationseinheit=" + idOrganisationseinheit + ", bewerbungsText=" + bewerbungsText
 				+ ", erstellDatum=" + erstellDatum + ", idAusschreibung=" + idAusschreibung + ", bewerbungsstatus="
-				+ bewerbungsstatus + "]";
+				+ bewerbungsStatus + "]";
 	}
 	
 	
