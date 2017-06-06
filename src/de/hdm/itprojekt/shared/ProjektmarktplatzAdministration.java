@@ -174,10 +174,10 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	
 
-	// Getter-By-All....Aufrufe und Anforderungen definieren 
+	// Getter-By-All....Aufrufe und Anforderungen definieren
 	
 	//Anforderung 3. Aufruf aller Ausschreibungen
-	public Vector<Ausschreibung> getAllAusschreibungenByOrganisationseinheit (Organisationseinheit o) throws IllegalArgumentException;
+	public Vector<Ausschreibung> getAllAusschreibungen (Organisationseinheit o) throws IllegalArgumentException;
 
 	//4. Alle Ausschreibungen die zum Partnerprofil passen
 	public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp)throws IllegalArgumentException;

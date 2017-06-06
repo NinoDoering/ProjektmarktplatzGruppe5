@@ -743,10 +743,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 		
 	
-		// getAllAusschreibungen
-		public Vector <Ausschreibung> getAllAusschreibungen() throws IllegalArgumentException {
-			return this.ausschreibungMapper.findAllAusschreibungen();
-		}
+		
 		
 		// findByAusschreibung???
 		
@@ -845,33 +842,51 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		}
 
 		
+	// Anforderungen
 
-		
+	// 3.Abfrage von allen Ausschreibungen
+	// getAllAusschreibungen
+	public Vector<Ausschreibung> getAllAusschreibungen() throws IllegalArgumentException {
+		return this.ausschreibungMapper.findAllAusschreibungen();
+				}
+
+	// 4. Abfrage aller Ausschreibungen, die auf Partnerprofil des Benutzers passen
+	public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
+		return this.ausschreibungMapper.findAusschreibungByPartnerprofil(pp.getId());
+	}
+	
+	// 6. Abfrage der eigenen Bewerbungen und den zugehoerigen Ausschreibungen
+	// des Benutzers
+	public Vector<Bewerbung> getBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+
+		Vector<Bewerbung> result = new Vector<Bewerbung>();
+		if (a != null && this.bewerbungMapper != null) {
+			Vector<Bewerbung> b = this.bewerbungMapper.findBewerbungByAusschreibung(a.getId());
+
+			if (b != null) {
+				result.addAll(b);
+			}
+		}
+
+		return result;
+	}
 
 	
-//
+//  alle Ausschreibungen von der OrgaEinheit erstellt anzeigen
 //		@Override
-//		public Vector<Ausschreibung> getAllAusschreibungenByOrganisationseinheit(Organisationseinheit o)
+//		public Vector<Ausschreibung> getAllAusschreibungen(Organisationseinheit o)
 //				throws IllegalArgumentException {
 //			// TODO Auto-generated method stub
 //			return null;
 //		}
 //
-//		@Override
-//		public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp)
-//				throws IllegalArgumentException {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
 //
-//		@Override
-
 //
-//		@Override
-//		public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o)
-//				throws IllegalArgumentException {
-//			return this.bewerbungMapper.findBewerbungByBewerber(o);
-//		}
+		/* @Override
+	   *public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Ausschreibung a)
+		*	throws IllegalArgumentException {
+		*	return this.bewerbungMapper.findBewerbungByBewerber(a);
+		}*/
 //		
 //
 //		@Override

@@ -176,8 +176,6 @@ public interface ProjektmarktplatzAdministrationAsync {
 	// Anforderungen und Aufrufe definieren mit Asynch 
 
 
-	void getAllAusschreibungenByOrganisationseinheit(Organisationseinheit o,
-			AsyncCallback<Vector<Ausschreibung>> callback);
 
 	void getAllAusschreibungByPartnerprofil(Partnerprofil pp, AsyncCallback<Vector<Ausschreibung>> callback);
 
@@ -186,6 +184,8 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getAllBewerbungenByOrganisationseinheit(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
 
 	void getAllBeteiligungenToProject(Projekt p, AsyncCallback<Vector<Beteiligung>> callback);
+
+	void getAllAusschreibungen(Organisationseinheit o, AsyncCallback<Vector<Ausschreibung>> callback);
 
 	
 
