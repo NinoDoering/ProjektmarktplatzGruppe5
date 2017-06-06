@@ -21,6 +21,7 @@ public class ProjektMapper {
 		return projektMapper;
 	}
 
+	//insert
 	public Projekt insertProjekt(Projekt p) {
 
 		Connection con = DBConnection.connection();
@@ -56,6 +57,7 @@ public class ProjektMapper {
 		return p;
 	}
 
+	//Projekt nach Id ausgeben
 	public Projekt findProjektByKey (int idProjekt) {
 		
 		Connection con = DBConnection.connection();
@@ -89,10 +91,12 @@ public class ProjektMapper {
 	
 }
 
+	//Objekt Projekt ausgeben
 	public Projekt findByProjekt(Projekt p){
 		  return this.findProjektByKey(p.getId());		  
 	 }
 	
+	//Alle projekte ausgeben
 	public Vector<Projekt> findAllProjekt() {
 		Connection con = DBConnection.connection();
 		Vector<Projekt> result = new Vector<Projekt>();
@@ -125,6 +129,7 @@ public class ProjektMapper {
 		return result;
 	}
 
+	//Projekte nach Bezeichnung ausgeben
 	public Vector<Projekt> findProjektByBezeichnung(String bezeichnung) {
 		Connection con = DBConnection.connection();
 		Vector<Projekt> result = new Vector<Projekt>();
@@ -157,6 +162,7 @@ public class ProjektMapper {
 		return result;
 	}
 
+	//Marktplatz mit dem zugehörigen Projekt ausgeben
 	public Vector<Projekt> findProjektbyMarktplatz(int idMarktplatz) {
 		Connection con = DBConnection.connection();
 		Vector<Projekt> result = new Vector<Projekt>();
@@ -189,6 +195,7 @@ public class ProjektMapper {
 		return result;
 	}
 	
+	//Personen mit dem zugehörigen Projekten ausgeben
 	public Vector<Projekt> findProjektbyPerson(int idPerson) {
 		Connection con = DBConnection.connection();
 		Vector<Projekt> result = new Vector<Projekt>();
@@ -221,6 +228,7 @@ public class ProjektMapper {
 		return result;
 	}
 	
+	//update
 	public Projekt updateProjekt(Projekt p) {
 		Connection con = DBConnection.connection();
 
@@ -243,6 +251,7 @@ public class ProjektMapper {
 		return p;
 	}
 
+	//delete
 	public void deleteProjekt(Projekt p) {
 		Connection con = DBConnection.connection();
 

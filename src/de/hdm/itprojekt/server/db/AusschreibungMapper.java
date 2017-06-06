@@ -30,6 +30,7 @@ public class AusschreibungMapper {
 		return ausschreibungMapper;
 	}
 
+	//Ausschreibung werden nach ID ausgegeben
 	public Ausschreibung findAusschreibungByKey(int idAusschreibung) {
 		Connection con = DBConnection.connection();
 		try {
@@ -60,6 +61,7 @@ public class AusschreibungMapper {
 		return null;
 	}
 
+	//Alle Ausschreibungen werden ausgegeben
 	public Vector <Ausschreibung> findAllAusschreibungen () {
 		Connection con = DBConnection.connection();
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
@@ -88,6 +90,7 @@ public class AusschreibungMapper {
 		return result;
 	}
 
+	//Ausschreibung nach einem Projekt ausgegeben
 	public Vector<Ausschreibung> findAusschreibungByProjekt(int idProjekt){
 		
 		  Connection con = DBConnection.connection();
@@ -120,6 +123,8 @@ public class AusschreibungMapper {
 		  return result;
 	  }
 	
+	
+	//Eine Ausschreibung explizit anzeigen bzw. ausgeben
 	public Vector<Ausschreibung> findByAusschreibung (Ausschreibung a) {
 		Connection con = DBConnection.connection();
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
@@ -127,8 +132,8 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
-											+ " WHERE idAusschreibung= " + a.getId() 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ausschreibung " 
+											+ " WHERE idAusschreibung = " + a.getId() 
 											+ " ORDER BY idAusschreibung");
 			
 			while (rs.next()) {
@@ -150,6 +155,7 @@ public class AusschreibungMapper {
 		return result;
 	}
 	
+	//Ausschreibung über Partnerprofil ausgeben
 	public Vector<Ausschreibung> findAusschreibungByPartnerprofil(int idPartnerprofil){
 		
 		  Connection con = DBConnection.connection();
@@ -159,7 +165,8 @@ public class AusschreibungMapper {
 			
 			  Statement stmt = con.createStatement();
 			  ResultSet rs = stmt.executeQuery("SELECT * FROM ausschreibung "
-			  		+ " WHERE idPartnerprofil= " + idPartnerprofil + " ORDER BY bezeichnung");
+			  		+ " WHERE idPartnerprofil= " + idPartnerprofil 
+			  		+ " ORDER BY bezeichnung");
 			  
 			  while (rs.next()) {
 				Ausschreibung a = new Ausschreibung();
@@ -182,6 +189,7 @@ public class AusschreibungMapper {
 		  return result;
 	  }
 	
+	//Ausgabe der Ausschreibung vom Ersteller
 	public Vector<Ausschreibung> findAusschreibungByAusschreibender(int idAusschreibender){
 		
 		  Connection con = DBConnection.connection();
@@ -214,13 +222,14 @@ public class AusschreibungMapper {
 		  return result;
 	  }
 	
+	//insert
 	public Ausschreibung insertAusschreibung(Ausschreibung a) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxid " + " FROM ausschreibung ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idAusschreibung) AS maxid FROM ausschreibung ");
 			
 			if (rs.next()) {
 
@@ -246,6 +255,7 @@ public class AusschreibungMapper {
 		return a;
 	}
 	
+	//update
 	public Ausschreibung updateAusschreibung (Ausschreibung a) {
 		Connection con = DBConnection.connection();
 		try {
@@ -267,13 +277,14 @@ public class AusschreibungMapper {
 		
 	}
 
-	public void deleteAusschreibung (Ausschreibung a) {
+	//delete
+	public void deleteAusschreibung(Ausschreibung a) {
 		Connection con = DBConnection.connection();
 		
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE * FROM ausschreibung " 
+			stmt.executeUpdate("DELETE FROM ausschreibung " 
 								+ " WHERE idAusschreibung= " + a.getId());
 
 		} catch (SQLException e2) {

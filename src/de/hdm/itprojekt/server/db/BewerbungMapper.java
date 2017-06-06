@@ -31,6 +31,7 @@ public class BewerbungMapper {
 		return bewerbungMapper;
 	}
 	
+	//Objet Bewerbung ausgabe
 	 public Bewerbung findByBewerbung(Bewerbung b) {
 
 	    	return this.findBewerbungByKey(b.getId());
@@ -52,7 +53,7 @@ public class BewerbungMapper {
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationeinheit"));
-				b.setBewerbungsstatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
+				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
 				
 				return b;
 			}
@@ -64,6 +65,7 @@ public class BewerbungMapper {
 		return null;
 	}
 
+	//Alle Bewerbungen ausgeben
 	public Vector<Bewerbung> findAllBewerbungen () {
 		Connection con = DBConnection.connection();
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -78,8 +80,8 @@ public class BewerbungMapper {
 				b.setBewerbungsText(rs.getString("bewerbungsText"));
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
-				b.setIdOrganisationseinheit(rs.getInt("idOrganisationeinheit"));
-				b.setBewerbungsstatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
+				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
+				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsStatus")));
 				
 				result.addElement(b);
 			}
@@ -89,6 +91,7 @@ public class BewerbungMapper {
 		return result;
 	}
 
+	//Bewerbung nach Bewerber ausgeben
 	public Vector<Bewerbung> findBewerbungByBewerber (int idBewerbung) {
 		Connection con = DBConnection.connection();
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -107,7 +110,7 @@ public class BewerbungMapper {
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationeinheit"));
-				b.setBewerbungsstatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
+				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
 				
 				result.addElement(b);
 			}
@@ -118,6 +121,7 @@ public class BewerbungMapper {
 		return result;
 	}
 
+	//insert
 	public Bewerbung insertBewerbung (Bewerbung b) {
 		Connection con = DBConnection.connection();
 
@@ -137,7 +141,7 @@ public class BewerbungMapper {
 									+ b.getIdAusschreibung() + "','" 
 									+ b.getBewerbungsText() + "','"
 									+ b.getIdOrganisationseinheit() + "','" 
-									+ b.getBewerbungsstatus() + "','" 
+									+ b.getBewerbungsStatus() + "','" 
 									+ format.format(b.getErstellDatum()) + "')");
 			}
 			
@@ -147,6 +151,7 @@ public class BewerbungMapper {
 		return b;
 	}
 
+	//update
 	public Bewerbung updateBewerbung (Bewerbung b) {
 		Connection con = DBConnection.connection();
 		try {
@@ -157,7 +162,7 @@ public class BewerbungMapper {
 					+ "idAusschreibung='" + b.getIdAusschreibung() + "' ,'" 
 					+ "bewerbungsText='" + b.getBewerbungsText() + "' ,'" 
 					+ "erstellDatum='" + b.getErstellDatum() + "' ,'" 
-					+ "bewerbungsstatus='" + b.getBewerbungsstatus() + "' ,'" 
+					+ "bewerbungsstatus='" + b.getBewerbungsStatus() + "' ,'" 
 					+ " WHERE idBewerbung= '"+ b.getId());
 			
 		} catch (SQLException e) {
@@ -166,6 +171,7 @@ public class BewerbungMapper {
 		return b;
 	}
 
+	//delete
 	public void deleteBewerbung (Bewerbung b) {
 		Connection con = DBConnection.connection();
 

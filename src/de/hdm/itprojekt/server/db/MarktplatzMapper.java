@@ -22,6 +22,7 @@ public class MarktplatzMapper {
 		return marktplatzMapper;
 	}
 
+	//insert
 	public Marktplatz insertMarktplatz (Marktplatz pm) {
 
 		Connection con = DBConnection.connection();
@@ -29,7 +30,7 @@ public class MarktplatzMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idMarktplatz) AS maxid " + " FROM marktplatz ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idMarktplatz) AS maxid FROM marktplatz ");
 
 			if (rs.next()) {
 
@@ -53,6 +54,7 @@ public class MarktplatzMapper {
 		return pm;
 	}
 
+	//Marktplatz nach Id ausgeben
 	public Marktplatz findMarktplatzByKey (int idMarktplatz) {
 
 		Connection con = DBConnection.connection();
@@ -61,7 +63,8 @@ public class MarktplatzMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM marktplatz " + " WHERE idMarktplatz= " + idMarktplatz );
+					"SELECT * FROM marktplatz " 
+			+ " WHERE idMarktplatz= " + idMarktplatz );
 			// Projekte sollen alphabetisch nach Namen bzw. Bezeichnung
 			// angezeigt werden
 
@@ -80,6 +83,7 @@ public class MarktplatzMapper {
 		return null;
 	}
 
+	//jeden vorhandenen Marktplatz ausgeben
 	public Vector<Marktplatz> findAllMarktplatz() {
 		Connection con = DBConnection.connection();
 		Vector<Marktplatz> vector = new Vector<Marktplatz>();
@@ -90,7 +94,8 @@ public class MarktplatzMapper {
 			// Datenbankabfrage aller Projekte alphabetisch sortiert nach
 			// bezeichnung
 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM marktplatz " + " ORDER BY bezeichnung");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM marktplatz " 
+			+ " ORDER BY bezeichnung");
 			while (rs.next()) {
 				Marktplatz pm = new Marktplatz();
 				pm.setId(rs.getInt("idMarktplatz"));
@@ -107,6 +112,7 @@ public class MarktplatzMapper {
 		return vector;
 	}
 
+	//Marktplatz nach Bezeichnung ausgeben
 	public Vector<Marktplatz> findMarktplatzByBezeichnung(String bezeichnung) {
 		Connection con = DBConnection.connection();
 		Vector<Marktplatz> vector = new Vector<Marktplatz>();
@@ -117,7 +123,9 @@ public class MarktplatzMapper {
 			// SQL Statement, gibt Eintraege aus welche die eingegeben
 			// Bezeichung enth�lt
 			ResultSet rs = stmt.executeQuery("SELECT idMarktplatz, bezeichnung, geschaeftsgebiet "
-					+ " FROM marktplatz " + " WHERE bezeichnung= '" + bezeichnung + "' ORDER BY bezeichnung");
+					+ " FROM marktplatz " 
+					+ " WHERE bezeichnung= '" + bezeichnung 
+					+ "' ORDER BY bezeichnung");
 
 			while (rs.next()) {
 				Marktplatz pm = new Marktplatz();
@@ -133,6 +141,7 @@ public class MarktplatzMapper {
 		return vector;
 	}
 
+	//update
 	public Marktplatz updateMarktplatz (Marktplatz pm) {
 		Connection con = DBConnection.connection();
 
@@ -151,13 +160,15 @@ public class MarktplatzMapper {
 		return pm;
 	}
 
+	//delete
 	public void deleteMarktplatz (Marktplatz pm) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 			stmt.executeQuery(
-					"DELETE * from marktplatz " + " WHERE idMarktplatz= " + pm.getId());
+					"DELETE * from marktplatz " 
+			+ " WHERE idMarktplatz= " + pm.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

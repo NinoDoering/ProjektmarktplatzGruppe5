@@ -30,21 +30,22 @@ public class PersonMapper extends OrganisationseinheitMapper{
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen FROM person " + " WHERE idPerson= " + id);
+			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen FROM person " 
+							+ " WHERE idPerson= " + id);
 			
 			if (rs.next()) {
-				Person p = new Person();
-				p.setId(rs.getInt("idPerson"));
-				p.setVorname(rs.getString("vorname"));
-				p.setNachname(rs.getString("nachname"));
-				p.setTitel(rs.getString("titel"));
-				p.setIdUnternehmen(rs.getInt("idUnternehmen"));
-				p.setIdTeam(rs.getInt("idTeam"));
-				p.setAdresse(super.findOrganisationseinheitByKey(id).getAdresse());
-				p.setStandort(super.findOrganisationseinheitByKey(id).getStandort());
-				p.setIdPartnerprofil(super.findOrganisationseinheitByKey(id).getIdPartnerprofil());
+				Person pe = new Person();
+				pe.setId(rs.getInt("idPerson"));
+				pe.setVorname(rs.getString("vorname"));
+				pe.setNachname(rs.getString("nachname"));
+				pe.setTitel(rs.getString("titel"));
+				pe.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				pe.setIdTeam(rs.getInt("idTeam"));
+				pe.setAdresse(super.findOrganisationseinheitByKey(id).getAdresse());
+				pe.setStandort(super.findOrganisationseinheitByKey(id).getStandort());
+				pe.setIdPartnerprofil(super.findOrganisationseinheitByKey(id).getIdPartnerprofil());
 				
-				return p;
+				return pe;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,18 +68,18 @@ public class PersonMapper extends OrganisationseinheitMapper{
 			+ "FROM person " + "ORDER BY nachname");
 
 			while (rs.next()) {
-				Person p = new Person();
-				p.setId(rs.getInt("idPerson"));
-				p.setVorname(rs.getString("vorname"));
-				p.setNachname(rs.getString("nachname"));
-				p.setTitel(rs.getString("titel"));
-				p.setIdUnternehmen(rs.getInt("idUnternehmen"));
-				p.setIdTeam(rs.getInt("idTeam"));
-				p.setAdresse(super.findByOrganisationseinheit(p).getAdresse());
-				p.setStandort(super.findByOrganisationseinheit(p).getStandort());
-				p.setIdPartnerprofil(super.findByOrganisationseinheit(p).getIdPartnerprofil());
+				Person pe = new Person();
+				pe.setId(rs.getInt("idPerson"));
+				pe.setVorname(rs.getString("vorname"));
+				pe.setNachname(rs.getString("nachname"));
+				pe.setTitel(rs.getString("titel"));
+				pe.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				pe.setIdTeam(rs.getInt("idTeam"));
+				pe.setAdresse(super.findByOrganisationseinheit(pe).getAdresse());
+				pe.setStandort(super.findByOrganisationseinheit(pe).getStandort());
+				pe.setIdPartnerprofil(super.findByOrganisationseinheit(pe).getIdPartnerprofil());
 
-				result.addElement(p);
+				result.addElement(pe);
 			}
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -94,23 +95,24 @@ public Vector<Person> findByTeam(int idTeam){
 		try{
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
-			+ "WHERE idTeam= " + idTeam + " ORDER BY nachname");
+			+ "WHERE idTeam= " + idTeam 
+			+ " ORDER BY nachname");
 			
 			
 			while (rs.next()){
-				Person p = new Person();
-				p.setId(rs.getInt("idPerson"));
-				p.setTitel(rs.getString("titel"));
-				p.setVorname(rs.getString("vorname"));
-				p.setNachname(rs.getString("nachname"));
-				p.setIdUnternehmen(rs.getInt("idUnternehmen"));
-				p.setIdTeam(rs.getInt("idTeam"));
-				p.setAdresse(super.findOrganisationseinheitByKey(idTeam).getAdresse());
-				p.setStandort(super.findOrganisationseinheitByKey(idTeam).getStandort());
-				p.setIdPartnerprofil(super.findOrganisationseinheitByKey(idTeam).getIdPartnerprofil());	
+				Person pe = new Person();
+				pe.setId(rs.getInt("idPerson"));
+				pe.setTitel(rs.getString("titel"));
+				pe.setVorname(rs.getString("vorname"));
+				pe.setNachname(rs.getString("nachname"));
+				pe.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				pe.setIdTeam(rs.getInt("idTeam"));
+				pe.setAdresse(super.findOrganisationseinheitByKey(idTeam).getAdresse());
+				pe.setStandort(super.findOrganisationseinheitByKey(idTeam).getStandort());
+				pe.setIdPartnerprofil(super.findOrganisationseinheitByKey(idTeam).getIdPartnerprofil());	
 
 			
-				result.addElement(p);
+				result.addElement(pe);
 				}
 			}   
 		catch (SQLException e) {
@@ -131,23 +133,24 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 	try{
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
-		+ " WHERE idUnternehmen= " + idUnternehmen + " ORDER BY nachname");
+		+ " WHERE idUnternehmen= " + idUnternehmen 
+		+ " ORDER BY nachname");
 		
 		
 		while (rs.next()){
-			Person p = new Person();
-			p.setId(rs.getInt("idPerson"));
-			p.setTitel(rs.getString("titel"));
-			p.setVorname(rs.getString("vorname"));
-			p.setNachname(rs.getString("nachname"));
-			p.setIdUnternehmen(rs.getInt("idUnternehmen"));
-			p.setIdTeam(rs.getInt("idTeam"));
-			p.setAdresse(super.findOrganisationseinheitByKey(idUnternehmen).getAdresse());
-			p.setStandort(super.findOrganisationseinheitByKey(idUnternehmen).getStandort());
-			p.setIdPartnerprofil(super.findOrganisationseinheitByKey(idUnternehmen).getIdPartnerprofil());	
+			Person pe = new Person();
+			pe.setId(rs.getInt("idPerson"));
+			pe.setTitel(rs.getString("titel"));
+			pe.setVorname(rs.getString("vorname"));
+			pe.setNachname(rs.getString("nachname"));
+			pe.setIdUnternehmen(rs.getInt("idUnternehmen"));
+			pe.setIdTeam(rs.getInt("idTeam"));
+			pe.setAdresse(super.findOrganisationseinheitByKey(idUnternehmen).getAdresse());
+			pe.setStandort(super.findOrganisationseinheitByKey(idUnternehmen).getStandort());
+			pe.setIdPartnerprofil(super.findOrganisationseinheitByKey(idUnternehmen).getIdPartnerprofil());	
 
 		
-			result.addElement(p);
+			result.addElement(pe);
 			}
 		}   
 	catch (SQLException e) {
@@ -186,7 +189,7 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 */
 
 	// INSERT
-	public int insertPerson(Person p) {
+	public int insertPerson(Person pe) {
 		Connection con = DBConnection.connection();
 		int id=0;
 		try {
@@ -196,18 +199,18 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 
 			if (rs.next()) {
 
-				p.setId(rs.getInt("maxid") + 1);
-				id=p.getId();
+				pe.setId(rs.getInt("maxid") + 1);
+				id=pe.getId();
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
 						"INSERT INTO person (idPerson, titel, vorname, nachname, idTeam, idUnternehmen) " 
-				+ "VALUES (" + p.getId() + ",'"
-								+ p.getTitel() + "','" 
-								+ p.getVorname() + "','" 
-								+ p.getNachname() + "','"
-								+ p.getIdTeam() + "','"
-								+ p.getIdUnternehmen() + "')");
+				+ "VALUES (" + pe.getId() + ",'"
+								+ pe.getTitel() + "','" 
+								+ pe.getVorname() + "','" 
+								+ pe.getNachname() + "','"
+								+ pe.getIdTeam() + "','"
+								+ pe.getIdUnternehmen() + "')");
 			}
 		} catch (SQLException e4) {
 			e4.printStackTrace();
@@ -217,41 +220,35 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 	}
 
 	// UPDATE
-	public Person updatePerson(Person p) {
+	public Person updatePerson(Person pe) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("UPDATE person " + "SET vorname=\"" + p.getVorname() + "\", "  
-					+ "nachname=\"" + p.getNachname() + "\" " 
-					+ "titel=\"" + p.getTitel() +  "\" " 
-					+ "idUnternehmen=\"" + p.getIdUnternehmen() + "\", " 
-					+ "idTeam=\""+ p.getIdTeam() + "\" " 
-					+ " WHERE idPerson= " + p.getId());
+			stmt.executeUpdate("UPDATE person " + "SET vorname=\"" + pe.getVorname() + "\", "  
+					+ "nachname=\"" + pe.getNachname() + "\" " 
+					+ "titel=\"" + pe.getTitel() +  "\" " 
+					+ "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", " 
+					+ "idTeam=\""+ pe.getIdTeam() + "\" " 
+					+ " WHERE idPerson= " + pe.getId());
 
 		} catch (SQLException e5) {
 			e5.printStackTrace();
 		}
 
-		return p;
+		return pe;
 	}
 
 	// DELETE
-	public void deletePerson(Person p) {
+	public void deletePerson(Person pe) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE * FROM person " + " WHERE idPerson= " + p.getId());
+			stmt.executeUpdate("DELETE * FROM person " + " WHERE idPerson= " + pe.getId());
 		} catch (SQLException e6) {
 			e6.printStackTrace();
 		}
 	}
 
-	// FAN-IN-FAN-OUT-Analyse -->RICHTIG??
-	/*
-	 * public Vector<Person> getPersonOf(Person p) {
-	 * 
-	 * return PersonMapper.personMapper().findByKey(p); // FALSCH, WARUM? }
-	 */
 }
