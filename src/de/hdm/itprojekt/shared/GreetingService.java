@@ -1,4 +1,4 @@
-package de.hdm.itprojekt.client;
+package de.hdm.itprojekt.shared;
 import de.hdm.itprojekt.server.db.*;
 
 import java.util.Vector;
