@@ -91,6 +91,37 @@ public class BewerbungMapper {
 		return result;
 	}
 
+	//Bewerbung mit der zugehörigen Ausschreibung ausgeben
+	public Vector <Bewerbung> findBewerbungByAusschreibung(int idAusschreibung){
+		Connection con = DBConnection.connection();
+		Vector <Bewerbung> vector = new Vector();
+		
+		try{
+			Statement stmt = con.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung "
+					+ " WHERE idAusschreibung= " + idAusschreibung);
+			
+			while (rs.next()){
+				
+				Bewerbung b = new Bewerbung();
+				
+				b.setId(rs.getInt("idBewerbung"));
+				b.setBewerbungsText(rs.getString("bewerbungsText"));
+				b.setErstellDatum(rs.getDate("erstellDatum"));
+				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsStatus")));
+				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
+				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
+				
+				vector.addElement(b);
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return vector;
+	}
+	
 	//Bewerbung nach Bewerber ausgeben
 	public Vector<Bewerbung> findBewerbungByBewerber (int idBewerbung) {
 		Connection con = DBConnection.connection();
