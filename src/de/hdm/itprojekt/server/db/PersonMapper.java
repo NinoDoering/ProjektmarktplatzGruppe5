@@ -30,7 +30,8 @@ public class PersonMapper extends OrganisationseinheitMapper{
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen FROM person " + " WHERE idPerson= " + id);
+			ResultSet rs = stmt.executeQuery ("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen FROM person " 
+							+ " WHERE idPerson= " + id);
 			
 			if (rs.next()) {
 				Person pe = new Person();
@@ -94,7 +95,8 @@ public Vector<Person> findByTeam(int idTeam){
 		try{
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
-			+ "WHERE idTeam= " + idTeam + " ORDER BY nachname");
+			+ "WHERE idTeam= " + idTeam 
+			+ " ORDER BY nachname");
 			
 			
 			while (rs.next()){
@@ -131,7 +133,8 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 	try{
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
-		+ " WHERE idUnternehmen= " + idUnternehmen + " ORDER BY nachname");
+		+ " WHERE idUnternehmen= " + idUnternehmen 
+		+ " ORDER BY nachname");
 		
 		
 		while (rs.next()){
@@ -248,10 +251,4 @@ public Vector<Person> findByUnternehmen(int idUnternehmen){
 		}
 	}
 
-	// FAN-IN-FAN-OUT-Analyse -->RICHTIG??
-	/*
-	 * public Vector<Person> getPersonOf(Person p) {
-	 * 
-	 * return PersonMapper.personMapper().findByKey(p); // FALSCH, WARUM? }
-	 */
 }

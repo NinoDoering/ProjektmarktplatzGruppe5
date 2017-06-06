@@ -2,10 +2,17 @@ package de.hdm.itprojekt.client;
 import de.hdm.itprojekt.server.db.DBConnection;
 import de.hdm.itprojekt.server.db.*;
 
-import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
+
 import java.*;		//Pakete, welche zum Ausfï¿½hren benï¿½tigt werden.
 import javax.*;
 import java.sql.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 
 public class TestMapper {
 
@@ -102,7 +109,7 @@ Person p9 = new Person();
 		
 		System.out.println(p9.toString());		
 		
-		// Update Test ausgeführt bei der erzeugten Person p9 und den Vornamen geändert in Motrip
+		// Update Test ausgefï¿½hrt bei der erzeugten Person p9 und den Vornamen geï¿½ndert in Motrip
 	//	Person p = new Person();
 		//p = PersonMapper.personMapper().findPersonByKey(30);
 	//	p.setVorname("Anthony Nguyen");
@@ -112,10 +119,63 @@ Person p9 = new Person();
 		
 		
 		//System.out.println(TeamMapper.teamMapper().findbyKey(49));
-		System.out.println(PersonMapper.personMapper().findPersonByKey(11));
+		/*System.out.println(PersonMapper.personMapper().findPersonByKey(1));
 
+		
+		try{
+			Connection con = DBConnection.connection();
+			Statement stmt = con.createStatement();
+			String sql = "delete * From ausschreibung " + " where idAusschreibung = 1";
+			
+			stmt.execute(sql);
+					
+			System.out.println("LÃ¶schung erfolgt");
+		} catch (SQLException e){
+			e.printStackTrace();
 		}
+				}
+				
+				*/
+		
+		//Date dd = new Date();
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	
+		/*Organisationseinheit o = new Organisationseinheit();
+		o.setId(3);
+		o.setAdresse("NobelstraÃŸe 8");
+		o.setStandort("Stuttgart");
+		o.setIdPartnerprofil(3);
+		System.out.println(OrganisationseinheitMapper.organisationseinheitMapper().insertOrganisationseinheit(o));
+		*/
+		
+		//Unternehmen u = new Unternehmen();
+		//u.setFirmenName("Daimler AG");
+		//u.setId(2);
+		
+		//System.out.println(UnternehmenMapper.unternehmenMapper().insertUnternehmen(u));
+		
+	/*	Date dd = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Ausschreibung a = new Ausschreibung();
+		a.setEndDatum(dd);
+		a.setAusschreibungsstatus(Status.besetzt);
+		a.setBeschreibung("a");
+		a.setBezeichnung("s");
+		a.setId(2);
+		a.setIdAusschreibender(2);
+		a.setIdProjekt(1);
+		a.setIdPartnerprofil(2);
+		
+		System.out.println(AusschreibungMapper.ausschreibungMapper().insertAusschreibung(a));
+		
+		*/
+		
+		
+		System.out.println(BewerbungMapper.bewerbungmapper().findBewerbungByBewerber(1));
+	
 	}
 	
-
+}
 

@@ -38,7 +38,7 @@ public class BewertungMapper {
 				
 				bewertung.setId(rs.getInt("idBewertung"));
 				bewertung.setTextuelleBewertung(rs.getString("textuelleBewertung"));
-				bewertung.setFliessKommaBewertung(rs.getFloat("fliesskommaBewertung"));
+				bewertung.setFliesskommaBewertung(rs.getFloat("fliesskommaBewertung"));
 				
 				return bewertung;
 			}
@@ -62,7 +62,7 @@ public class BewertungMapper {
 					+ bewertung.getId() + "','" 
 					+ bewertung.getIdBewerbung() + "','" 
 					+ bewertung.getTextuelleBewertung() + "','"
-					+ bewertung.getFliessKommaBewertung() + "')");
+					+ bewertung.getFliesskommaBewertung() + "')");
 		}
 		catch(SQLException e){
 			e.printStackTrace();
@@ -94,7 +94,7 @@ public class BewertungMapper {
 					+ "SET idBewertung='" + bewertung.getId() + "' ,'" 
 					+ "idBewerbung='" + bewertung.getIdBewerbung() + "' ,'" 
 					+ "textuelleBewertung='" + bewertung.getTextuelleBewertung() + "' ,'" 
-					+ "fliesskommaBewertung='" + bewertung.getFliessKommaBewertung() + "' ,'"
+					+ "fliesskommaBewertung='" + bewertung.getFliesskommaBewertung() + "' ,'"
 					+ " WHERE idBewertung= '" + bewertung.getId());
 			
 		} catch (SQLException e) {
@@ -103,10 +103,12 @@ public class BewertungMapper {
 		return bewertung;
 	}
 	
+	//Objekt Bewertung ausgeben nach der ID
 	public Bewertung findByBewertung(Bewertung bewertung){
 		return this.findBewertungByKey(bewertung.getId());
 	}
 	
+	//Bewertung nach Bewerbung ausgeben
 	public Bewertung findBewertungByBewerbung(int idBewerbung){
 	    Connection con = DBConnection.connection();
 
@@ -120,7 +122,7 @@ public class BewertungMapper {
 	        Bewertung bewertung = new Bewertung();
 	        bewertung.setId(rs.getInt("idBewertung"));
 	        bewertung.setTextuelleBewertung(rs.getString("textuelleBewertung"));
-	        bewertung.setFliessKommaBewertung(rs.getFloat("fliesskommaBewertung"));
+	        bewertung.setFliesskommaBewertung(rs.getFloat("fliesskommaBewertung"));
 	        bewertung.setIdBewerbung(rs.getInt("idBewerbung"));
 	        return bewertung;
 	      }

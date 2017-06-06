@@ -23,12 +23,14 @@ public class EigenschaftMapper {
 		return eigenschaftMapper;
 	}
 
+	//Eigenschaft nach ID ausgeben
 	public Eigenschaft findByEigenschaft(Eigenschaft e) {
 	      
     	return this.findEigenschaftByKey(e.getId());
  
     }
 	
+	//insert
 	public Eigenschaft insertEigenschaft (Eigenschaft e) {
 
 		Connection con = DBConnection.connection();
@@ -61,6 +63,7 @@ public class EigenschaftMapper {
 		return e;
 	}
 
+	//Eigenschaften nach ID ausgeben
 	public Eigenschaft findEigenschaftByKey (int idEigenschaft) {
 
 		Connection con = DBConnection.connection();
@@ -93,6 +96,7 @@ public class EigenschaftMapper {
 		return null;
 	}
 
+	//alle Eigenschaften ausgeben
 	public Vector<Eigenschaft> findAllEigenschaften () {
 		Connection con = DBConnection.connection();
 		Vector<Eigenschaft> vector = new Vector<Eigenschaft>();
@@ -124,7 +128,7 @@ public class EigenschaftMapper {
 		return vector;
 	}
 	
-	
+	//Eigenschaft die von einem Partnerprofil erstellt wurden ausgeben
 	public Vector<Eigenschaft> findEigenschaftByPartnerprofil (int idPartnerprofil){
     	
     	Vector<Eigenschaft> vector = new Vector<Eigenschaft>();
@@ -157,6 +161,7 @@ public class EigenschaftMapper {
 	    return vector;
     }
 
+	//update
 	public Eigenschaft updateEigenschaft (Eigenschaft e) {
 		Connection con = DBConnection.connection();
 
@@ -181,6 +186,7 @@ public class EigenschaftMapper {
 		return e;
 	}
 
+	//delete
 	public void deleteEigenschaft (Eigenschaft e) {
 
 		Connection con = DBConnection.connection();
