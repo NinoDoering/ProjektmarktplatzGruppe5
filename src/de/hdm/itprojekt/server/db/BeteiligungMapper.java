@@ -29,6 +29,7 @@ public class BeteiligungMapper {
 		return beteiligungMapper;
 	}
 
+	//Beteiligungen nach ID ausgegeben
 	public Beteiligung findBeteiligungByKey(int idBeteiligung) {
 		Connection con = DBConnection.connection();
 		try {
@@ -57,6 +58,7 @@ public class BeteiligungMapper {
 		return null;
 	}
 
+	//alle beteiligungen
 	public Vector<Beteiligung> findAllBeteiligungen() {
 		Connection con = DBConnection.connection();
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
@@ -81,7 +83,7 @@ public class BeteiligungMapper {
 		return result;
 	}
 	
-	
+	//Beteiligung nach Projekt
 	public Vector<Beteiligung> findBeteiligungByProjekt(int idProjekt){
 		  
 		    Connection con = DBConnection.connection();
@@ -112,6 +114,7 @@ public class BeteiligungMapper {
 	  }
 
 
+	//Beteiligung nach Bewertung ausgeben
 	public Vector<Beteiligung> findBeteiligungByBewertung(int idBewertung){
 		  
 	    Connection con = DBConnection.connection();
@@ -141,6 +144,7 @@ public class BeteiligungMapper {
 	  return result;
   }
 
+	//Beteiligung nach Beteiligter
 	public Vector<Beteiligung> findBeteiligungByBeteiligter(int idBeteiligter){
 		  
 	    Connection con = DBConnection.connection();
@@ -170,7 +174,7 @@ public class BeteiligungMapper {
 	  return result;
   }
 	
-	
+	//insert
 	public Beteiligung insertBeteiligung (Beteiligung beteiligung) {
 		Connection con = DBConnection.connection();
 
@@ -199,6 +203,7 @@ public class BeteiligungMapper {
 		return beteiligung;
 	}
 
+	//update
 	public Beteiligung updateBeteiligung (Beteiligung beteiligung) {
 		Connection con = DBConnection.connection();
 		try {
@@ -218,6 +223,7 @@ public class BeteiligungMapper {
 		return beteiligung;
 	}
 
+	//delete
 	public void deleteBeteiligung (Beteiligung beteiligung) {
 		Connection con = DBConnection.connection();
 

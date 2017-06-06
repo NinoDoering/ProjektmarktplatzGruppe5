@@ -22,6 +22,7 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 		return unternehmenMapper;
 	}
 
+	//alle Unternehem nach id ausgeben
 	public Unternehmen findUnternehmenByKey(int id) {
 		Connection con = DBConnection.connection();
 
@@ -81,10 +82,12 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 		return null;
 	}
 	
+	//Unternehmen ausgeben
 	public Unternehmen findByUnternehmen(Unternehmen u){
 		return this.findUnternehmenByKey(u.getId());}
 
-	public Vector<Unternehmen> findAll() {
+	//Alle Unternehmen ausgeben
+	public Vector<Unternehmen> findAllUnternehmen() {
 		Connection con = DBConnection.connection();
 		Vector<Unternehmen> result = new Vector<Unternehmen>();
 
@@ -139,6 +142,7 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 		return u;
 	}
 
+	//update
 	public Unternehmen updateUnternehmen(Unternehmen u) {
 		Connection con = DBConnection.connection();
 

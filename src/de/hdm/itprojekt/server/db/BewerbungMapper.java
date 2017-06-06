@@ -31,6 +31,7 @@ public class BewerbungMapper {
 		return bewerbungMapper;
 	}
 	
+	//Objet Bewerbung ausgabe
 	 public Bewerbung findByBewerbung(Bewerbung b) {
 
 	    	return this.findBewerbungByKey(b.getId());
@@ -64,6 +65,7 @@ public class BewerbungMapper {
 		return null;
 	}
 
+	//Alle Bewerbungen ausgeben
 	public Vector<Bewerbung> findAllBewerbungen () {
 		Connection con = DBConnection.connection();
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -89,6 +91,7 @@ public class BewerbungMapper {
 		return result;
 	}
 
+	//Bewerbung nach Bewerber ausgeben
 	public Vector<Bewerbung> findBewerbungByBewerber (int idBewerbung) {
 		Connection con = DBConnection.connection();
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -118,6 +121,7 @@ public class BewerbungMapper {
 		return result;
 	}
 
+	//insert
 	public Bewerbung insertBewerbung (Bewerbung b) {
 		Connection con = DBConnection.connection();
 
@@ -147,6 +151,7 @@ public class BewerbungMapper {
 		return b;
 	}
 
+	//update
 	public Bewerbung updateBewerbung (Bewerbung b) {
 		Connection con = DBConnection.connection();
 		try {
@@ -166,6 +171,7 @@ public class BewerbungMapper {
 		return b;
 	}
 
+	//delete
 	public void deleteBewerbung (Bewerbung b) {
 		Connection con = DBConnection.connection();
 

@@ -20,6 +20,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return teamMapper;
 	}
 
+	//insert
 	public Team insertTeam(Team t) {
 		Connection con = DBConnection.connection();
 
@@ -46,6 +47,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return t;
 	}
 
+	//Team nach ID ausgeben
 	public Team findTeamByKey(int id) {
 		Connection con = DBConnection.connection();
 
@@ -75,7 +77,8 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 	}
 
-	public Vector<Team> findAll() {
+	//alle Teams ausgeben
+	public Vector<Team> findAllTeam() {
 		Connection con = DBConnection.connection();
 		Vector<Team> result = new Vector<Team>();
 
@@ -106,6 +109,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return result;
 	}
 
+	//Objekt Team
 	public Team findByTeam(Team t){
 			return this.findTeamByKey(t.getId());
 			  
@@ -140,6 +144,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return result;
 	}
 
+	//update
 	public Team updateTeam(Team t) {
 		Connection con = DBConnection.connection();
 
@@ -159,6 +164,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return t;
 	}
 
+	//delete
 	public void deleteTeam(Team t) {
 		Connection con = DBConnection.connection();
 

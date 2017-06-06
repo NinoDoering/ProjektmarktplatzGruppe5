@@ -22,6 +22,7 @@ public class OrganisationseinheitMapper {
 		return organisationseinheitMapper;
 	}
 
+	//insert
 	public int insertOrganisationseinheit (Organisationseinheit o) {
 
 		Connection con = DBConnection.connection();
@@ -48,6 +49,7 @@ public class OrganisationseinheitMapper {
 		return id;
 	}
 
+	//Organisationseinheit nach ID ausgeben
 	public Organisationseinheit findOrganisationseinheitByKey (int id) {
 
 		Connection con = DBConnection.connection();
@@ -76,7 +78,8 @@ public class OrganisationseinheitMapper {
 		return null;
 	}
 
-	public Organisationseinheit findByPartnerprofil(int idPartnerprofil){
+	//Organisationseinheit mit dem zugehörigen Partnerprofil ausgeben
+	public Organisationseinheit findOrganisationseinheitByPartnerprofil(int idPartnerprofil){
 	Connection con = DBConnection.connection();
 		
 		try{
@@ -102,10 +105,12 @@ public class OrganisationseinheitMapper {
 		return null;
 	}
 	
+	//Objekt Organisationseinheit ausgeben
 	public Organisationseinheit findByOrganisationseinheit(Organisationseinheit o){
 		return this.findOrganisationseinheitByKey(o.getId());
 		}
 	
+	//delete
 	public void deleteOrganisationseinheit (Organisationseinheit o) {
 		Connection con = DBConnection.connection();
 
@@ -121,22 +126,22 @@ public class OrganisationseinheitMapper {
 		}
 	}
 	
-		public int updateOrganisationseinheit (Organisationseinheit o){
-			Connection con = DBConnection.connection();
-			int id = 0;
-			try {
-				Statement stmt = con.createStatement();
+	//update
+	public int updateOrganisationseinheit (Organisationseinheit o){
+		Connection con = DBConnection.connection();
+		int id = 0;
+		try {
+			Statement stmt = con.createStatement();
 				
-				stmt.executeUpdate("UPDATE organisationseinheit "
-						+ "SET adresse='" + o.getAdresse() + "'," 
-						+ "standort='" + o.getStandort() + "'," 
-						+ "idPartnerprofil=" + o.getIdPartnerprofil()  
-						+ "' WHERE idOrganisationseinheit= "+ o.getId());
+			stmt.executeUpdate("UPDATE organisationseinheit "
+					+ "SET adresse='" + o.getAdresse() + "'," 
+					+ "standort='" + o.getStandort() + "'," 						+ "idPartnerprofil=" + o.getIdPartnerprofil()  
+					+ "' WHERE idOrganisationseinheit= "+ o.getId());
 				
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-			return id;
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		return id;
 		
 	}
 

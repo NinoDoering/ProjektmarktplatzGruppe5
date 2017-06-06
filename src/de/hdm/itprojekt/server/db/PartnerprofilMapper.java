@@ -45,7 +45,8 @@ public class PartnerprofilMapper {
 		return null;
 	}
 
-	public Vector<Partnerprofil> findAll() {
+	//Alle Partnerprofil ausgeben
+	public Vector<Partnerprofil> findAllPartnerprofil() {
 		Connection con = DBConnection.connection();
 
 		Vector<Partnerprofil> result = new Vector<Partnerprofil>();
@@ -68,6 +69,7 @@ public class PartnerprofilMapper {
 		return result;
 	}
 	
+	//Objekt partnerprofil ausgeben
 	public Partnerprofil findByPartnerprofil(Partnerprofil pp){
 		 return this.findPartnerprofilByKey(pp.getId());
 		 
@@ -99,7 +101,7 @@ public class PartnerprofilMapper {
 		return pp;
 	}
 
-	// UPDATE unn�tig
+	// UPDATE
 	public Partnerprofil update(Partnerprofil pp) {
 		Connection con = DBConnection.connection();
 
