@@ -9,7 +9,7 @@ public class Organisationseinheit extends BusinessObject {
 
 	private String adresse;
 	
-	private String Standort;
+	private String standort;
 	
 	
 	private int idPartnerprofil;
@@ -26,12 +26,12 @@ public class Organisationseinheit extends BusinessObject {
 
 
 	public String getStandort() {
-		return Standort;
+		return standort;
 	}
 
 
 	public void setStandort(String standort) {
-		Standort = standort;
+		this.standort = standort;
 	}
 
 
@@ -47,7 +47,7 @@ public class Organisationseinheit extends BusinessObject {
 
 	@Override
 	public String toString() {
-		return "Organisationseinheit [adresse=" + adresse + ", Standort=" + Standort + ", idPartnerprofil="
+		return "Organisationseinheit [adresse=" + adresse + ", Standort=" + standort + ", idPartnerprofil="
 				+ idPartnerprofil + "]";
 	}
 

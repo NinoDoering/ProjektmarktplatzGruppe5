@@ -78,7 +78,7 @@ public class AusschreibungMapper {
 				a.setEndDatum(rs.getDate("endDatum"));
 				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
-				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("ausschreibungsstatus")));
 				
 				result.addElement(a);
 			}
@@ -109,7 +109,7 @@ public class AusschreibungMapper {
 				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 				a.setEndDatum(rs.getDate("endDatum"));
 				a.setIdProjekt(rs.getInt("idProjekt"));
-				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("ausschreibungsstatus")));
 				
 				result.add(a);
 			}
@@ -127,7 +127,7 @@ public class AusschreibungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idAusschreibung, beschreibung, bezeichnung, idProjekt, endDatum FROM ausschreibung " 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ausschreibung " 
 											+ " WHERE idAusschreibung= " + a.getId() 
 											+ " ORDER BY idAusschreibung");
 			
@@ -139,7 +139,7 @@ public class AusschreibungMapper {
 				a.setEndDatum(rs.getDate("endDatum"));
 				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
-				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("ausschreibungsstatus")));
 				
 				result.addElement(a);
 			}
@@ -171,7 +171,7 @@ public class AusschreibungMapper {
 				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 				a.setEndDatum(rs.getDate("endDatum"));
 				a.setIdProjekt(rs.getInt("idProjekt"));
-				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("ausschreibungsstatus")));
 				
 				result.add(a);
 			}
@@ -203,7 +203,7 @@ public class AusschreibungMapper {
 				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
 				a.setEndDatum(rs.getDate("endDatum"));
 				a.setIdProjekt(rs.getInt("idProjekt"));
-				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("ausschreibungsstatus")));
 				
 				result.add(a);
 			}
@@ -255,7 +255,7 @@ public class AusschreibungMapper {
 					+ "bezeichnung='" + a.getBezeichnung() + "' ,'" 
 					+ "beschreibung='" + a.getBeschreibung() + "' ,'" 
 					+ "idAusschreibender='" + a.getIdAusschreibender() + "' ,'"
-					+ "status='" + a.getAusschreibungsstatus() + "' ,'"
+					+ "ausschreibungsstatus='" + a.getAusschreibungsstatus() + "' ,'"
 					+ "endDatum='" + format.format(a.getEndDatum()) + "' ,'" 
 					+ "idProjekt='" + a.getIdProjekt() + "' ,'" 
 					+ " WHERE idAusschreibung= '" + a.getId());

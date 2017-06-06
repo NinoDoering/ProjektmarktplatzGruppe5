@@ -29,7 +29,7 @@ public class MarktplatzMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idMarktplatz) AS maxid " + " FROM marktplatz ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idMarktplatz) AS maxid FROM marktplatz ");
 
 			if (rs.next()) {
 
@@ -38,7 +38,7 @@ public class MarktplatzMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung, idProjekt) " 
+						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung) " 
 				+ "VALUES ('"
 				+pm.getId()+ "','"+ 
 				pm.getGeschaeftsgebiet() + "','" + 
