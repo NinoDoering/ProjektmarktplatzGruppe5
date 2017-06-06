@@ -6,50 +6,27 @@ import de.hdm.itprojekt.shared.report.*;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+
 @RemoteServiceRelativePath("reportgenerator")
 public interface ReportGenerator extends RemoteService {
 
-	void init() throws IllegalArgumentException;
+	public void init() throws IllegalArgumentException;
+	
+	public void setPerson() throws IllegalArgumentException;
+	
+	public abstract AllAusschreibungenByPartnerprofilReport createAllAusschreibungenByPartnerprofilReport (Partnerprofil pp) throws IllegalArgumentException;
 
-	void setUnternehmen(Unternehmen u) throws IllegalArgumentException;
-
-	AllProjektenmarktplatzOfPersonReport createAllProjektenmarktplatzOfPersonReport(Person p)
-			throws IllegalArgumentException;
-
-	AllAusschreibungOfAllProjektReport createAllAusschreibungOfAllProjektReport() throws IllegalArgumentException;
-
-	AllProjektOfAllAusschreibung createAllProjektOfAllAusschreibungReport() throws IllegalArgumentException;
-
-	ReportSimple createReportSimpleAllAusschreibungen() throws IllegalArgumentException;
-
-	AllAuschreibungen getAllAusschreibungen() throws IllegalArgumentException;
-
-	AllAusschreibungenFromPartnerprofil getAllAuschreibungenFromPartnerprofil() throws IllegalArgumentException;
-
-	AllBewerbungenFromAusschreibung getAllBewerbungenFromAusschreibungen() throws IllegalArgumentException;
-
-	AllBewerbungenMitAusschreibungen getAllBewerbungenMitAusschreibungen() throws IllegalArgumentException;
-
-	BeteiligungUndBewerbungen getBeteiligungAndBewerbungen() throws IllegalArgumentException;
-
-	AnzahlBewerbungenUndAusschreibungen getAnzahlBewerbungenUndAusschreibungen() throws IllegalArgumentException;
-
-	void setPerson(Person p) throws IllegalArgumentException;
-
-	void setTeam(Team t) throws IllegalArgumentException;
-
-	void setProjekt(Projekt p) throws IllegalArgumentException;
-
-	void setPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
-
-	void setProjektmarktplatz(Marktplatz pm) throws IllegalArgumentException;
-
-	void setAusschreibung(Ausschreibung a) throws IllegalArgumentException;
-
-	void setBewertung(Bewertung btg) throws IllegalArgumentException;
-
-	void setBewerbung(Bewerbung b) throws IllegalArgumentException;
-
-	void setBeteiligung(Beteiligung bg) throws IllegalArgumentException;
-
+	public abstract AllAusschreibungenReport createAllAusschreibungenReport() throws IllegalArgumentException;
+	
+	public abstract AllBeteiligungenToProjectReport createAllBeteiligungenToProjectReport () throws IllegalArgumentException;
+	
+	public abstract AllBewerbungenByAusschreibungReport createAllBewerbungenByAusschreibungReport () throws IllegalArgumentException;
+	
+	public abstract AllBewerbungenByOrganisationseinheitReport createAllBewerbungenByOrganisationseinheitReport () throws IllegalArgumentException;
+	
+	public abstract FanInFanOutReport createFanInFanOutReport() throws IllegalArgumentException;
+	
+	public abstract FanIn createFanInAnalyse (Organisationseinheit o) throws IllegalArgumentException;
+	
+	
 }

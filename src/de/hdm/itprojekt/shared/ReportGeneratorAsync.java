@@ -6,47 +6,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ReportGeneratorAsync {
 
-	void getAllAusschreibungen(AsyncCallback<AllAuschreibungen> callback);
-
-	void getAllAuschreibungenFromPartnerprofil(AsyncCallback<AllAusschreibungenFromPartnerprofil> callback);
-
-	void getAllBewerbungenFromAusschreibungen(AsyncCallback<AllBewerbungenFromAusschreibung> callback);
-
-	void getAllBewerbungenMitAusschreibungen(AsyncCallback<AllBewerbungenMitAusschreibungen> callback);
-
-	void getBeteiligungAndBewerbungen(AsyncCallback<BeteiligungUndBewerbungen> callback);
-
-	void getAnzahlBewerbungenUndAusschreibungen(AsyncCallback<AnzahlBewerbungenUndAusschreibungen> callback);
-
-	void createReportSimpleAllAusschreibungen(AsyncCallback<ReportSimple> callback);
-
-	void createAllAusschreibungOfAllProjektReport(AsyncCallback<AllAusschreibungOfAllProjektReport> callback);
-
-	void createAllProjektOfAllAusschreibungReport(AsyncCallback<AllProjektOfAllAusschreibung> callback);
-
-	void createAllProjektenmarktplatzOfPersonReport(Person p,
-			AsyncCallback<AllProjektenmarktplatzOfPersonReport> callback);
-
 	void init(AsyncCallback<Void> callback);
 
-	void setUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
+	void setPerson(AsyncCallback<Void> callback);
 
-	void setPerson(Person p, AsyncCallback<Void> callback);
+	void createAllAusschreibungenByPartnerprofilReport(Partnerprofil pp,
+			AsyncCallback<AllAusschreibungenByPartnerprofilReport> callback);
 
-	void setTeam(Team t, AsyncCallback<Void> callback);
+	void createAllAusschreibungenReport(AsyncCallback<AllAusschreibungenReport> callback);
 
-	void setProjekt(Projekt p, AsyncCallback<Void> callback);
+	void createAllBeteiligungenToProjectReport(AsyncCallback<AllBeteiligungenToProjectReport> callback);
 
-	void setPartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
+	void createAllBewerbungenByAusschreibungReport(AsyncCallback<AllBewerbungenByAusschreibungReport> callback);
 
-	void setProjektmarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
+	void createAllBewerbungenByOrganisationseinheitReport(
+			AsyncCallback<AllBewerbungenByOrganisationseinheitReport> callback);
 
-	void setAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
+	void createFanInFanOutReport(AsyncCallback<FanInFanOutReport> callback);
 
-	void setBewertung(Bewertung btg, AsyncCallback<Void> callback);
+	void createFanInAnalyse(Organisationseinheit o, AsyncCallback<FanIn> callback);
 
-	void setBewerbung(Bewerbung b, AsyncCallback<Void> callback);
-
-	void setBeteiligung(Beteiligung bg, AsyncCallback<Void> callback);
-
+	
 }
