@@ -129,7 +129,7 @@ public class MarktplatzMapper {
 
 			while (rs.next()) {
 				Marktplatz pm = new Marktplatz();
-				pm.setId(rs.getInt("idProjektmarktplatz"));
+				pm.setId(rs.getInt("idMarktplatz"));
 				pm.setBezeichnung(rs.getString("bezeichnung"));
 				pm.setGeschaeftsgebiet(rs.getString("geschaeftsgebiet"));
 

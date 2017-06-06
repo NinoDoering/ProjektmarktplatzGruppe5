@@ -52,7 +52,7 @@ public class BewerbungMapper {
 				b.setBewerbungsText(rs.getString("bewerbungsText"));
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
-				b.setIdOrganisationseinheit(rs.getInt("idOrganisationeinheit"));
+				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
 				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
 				
 				return b;
@@ -109,7 +109,7 @@ public class BewerbungMapper {
 				b.setBewerbungsText(rs.getString("bewerbungsText"));
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
-				b.setIdOrganisationseinheit(rs.getInt("idOrganisationeinheit"));
+				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
 				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
 				
 				result.addElement(b);
