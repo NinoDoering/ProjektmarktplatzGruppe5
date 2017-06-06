@@ -42,7 +42,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		// this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse
 		// wird gelöscht)
 		this.eigMapper = EigenschaftMapper.eigenschaftMapper();
-		this.orgaMapper = OrganisationseinheitMapper.organisationseinheitMapper();
+		this.orgaMapper = OrganisationseinheitMapper.organisationseinheitMapper(); // kommt noch raus?
 		this.mpMapper = MarktplatzMapper.marktplatzMapper();
 		this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
 		this.persMapper = PersonMapper.personMapper();
@@ -101,43 +101,6 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 //		return this.eigMapper.findAllEigenschaften();
 //	}
 	
-
-	
-	
-	/*##########################################################
-	 * START ORGANISATIONSEINHEIT
-	 #########################################################*/
-	
-	
-	//*********************
-	// WERDEN DIE CODES ÜBERHAUPT BENOETIGT FUER ORGANISATIONSEINHEIT??
-	//**********************************
-	
-	
-	// createOrganisationseinheit
-	public Organisationseinheit createOrganisationseinheit(int idOrganisationseinheit) throws IllegalArgumentException {
-		Organisationseinheit orgaEinheit = new Organisationseinheit();
-		orgaEinheit.setIdOrganisationseinheit(idOrganisationseinheit);
-
-		return this.orgaMapper.insertOrganisationseinheit(orgaEinheit);
-	}
-
-	// getOrganisationseinheitById
-	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) throws IllegalArgumentException {
-		return this.orgaMapper.findOrganisationseinheitByKey(idOrganisationseinheit);
-	}
-	
-	// updateOrganisationseinheit
-	public void updateOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException {
-		orgaMapper.updateOrganisationseinheit(o);
-	}
-	
-	// deleteOrganisationseinheit ------------- WIRD DIE UEBERHAUPT BENOETIGT??
-	public void deleteOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException {
-		this.orgaMapper.deleteOrganisationseinheit(o);
-		// gleicher Fehler wie oben --> Falscher Datentyp
-	}
-	
 	
 	
 	/*##########################################################
@@ -158,7 +121,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 		
 		// Methode muss noch erstellt werden!!
-				Vector<Eigenschaft> e = this.getEigenschaftByForeignPartnerprofil(pp);
+				Vector<Eigenschaft> e = this.getEigenschaftByPartnerprofil(pp);
 				
 				if(e != null){
 					for(Eigenschaft eigenschaft : e){
@@ -170,13 +133,13 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		}
 	}
 
-	// getEigenschaftByForeignPartnerprofil()
-	public Vector<Eigenschaft> getEigenschaftByForeignPartnerprofil(Partnerprofil pp) {
+	// getEigenschaftByPartnerprofil()
+	public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) {
 
 		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
 
 		if (pp != null && this.eigMapper != null) {
-			Vector<Eigenschaft> eigenschaft = this.eigMapper.findByForeignPartnerprofilId(pp.getId());
+			Vector<Eigenschaft> eigenschaft = this.eigMapper.findEigenschaftByPartnerprofil(pp.getId());
 
 			if (eigenschaft != null) {
 				result.addAll(eigenschaft);
@@ -205,6 +168,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	/*##########################################################
 	 * START PERSON
 	 #########################################################*/
+	
 	@Override
 	public Person anlegenPerson(int idUnternehmen, int idTeam, int idPartnerprofil, String vorname,
 			String nachname) throws IllegalArgumentException {
@@ -218,47 +182,110 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		pe.setNachname(nachname);
 		
 		
-		return this.persMapper.insertTeam(pe);
+		return this.persMapper.insertPerson(pe);
 	}
 
 	@Override
 	public void loeschenPerson(Person pe) throws IllegalArgumentException {
 		
-		Vector<Bewerbung> b = this.getBewerbungByForeignOrganisationseinheit(pe);
-		Vector<Beteiligung> beteiligung = this.getBeteiligungByForeignOrganisationseinheit(pe);
-		Vector<Projekt> p = this.getProjektByForeignPerson(pe);
-		Partnerprofil pp = this.getPartnerprofilByForeignOrganisationseinheit(pe);
+		Vector<Bewerbung> b = this.getBewerbungByBewerber(pe);
+		Vector<Beteiligung> beteiligung = this.getBeteiligungByBeteiligter(pe);
+		Vector<Projekt> p = this.getProjektByPerson(pe);
+		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(pe); // muss noch eingearbeitet werden
 		
 		
 		// Bewerbungen der Person löschen
 		if(b != null){
 			for(Bewerbung bewerbung : b){
-				this.deleteBewerbung(bewerbung);
+				this.loeschenBewerbung(bewerbung);
 			}
 		}
 		
 		// zugehörige Beteiligungen löschen
 		if (beteiligung != null){
 			for (Beteiligung be : beteiligung){
-				this.deleteBeteiligung(be);
+				this.loeschenBeteiligung(be);
 			}	
 		}	
 		
 		// von Person erstellte Projekte löschen
 		if(p != null){
 			for(Projekt projekt : p){
-				this.deleteProjekt(projekt);
+				this.loeschenProjekt(projekt);
 			}
 		}
 		
 		// Partnerprofil der Person löschen
 		if (pp != null){
-			this.deletePartnerprofil(pp);
+			this.loeschenPartnerprofil(pp);
 		}
 		
 		// Person entgültig löschen
 		this.persMapper.deletePerson(pe);
 	
+	}
+	
+	
+	//########################################################################################################
+	//########################################################################################################
+	
+	
+	// getPartnerprofilByOrganisationseinheit ----- DIE MUSS NOCH BEARBEITET WERDEN
+	public Partnerprofil getPartnerprofilByOrganisationseinheit(Person pe) {
+		
+		return null;
+	}
+
+	//########################################################################################################
+	
+	
+	
+	// getProjektByPerson
+	public Vector<Projekt> getProjektByPerson(Person pe) {
+		
+		Vector<Projekt> result = new Vector<Projekt>();
+
+		if (pe != null && this.prjktMapper != null) {
+			Vector<Projekt> projekt = this.prjktMapper.findProjektbyPerson(pe.getId());
+
+			if (pe != null) {
+				result.addAll(projekt);
+			}
+		}
+		
+		return result;
+	}
+
+	// getBeteiligungByBeteiligter
+	public Vector<Beteiligung> getBeteiligungByBeteiligter(Person pe) {
+		
+		Vector<Beteiligung> result = new Vector<Beteiligung>();
+
+		if (pe != null && this.beteiligungMapper != null) {
+			Vector<Beteiligung> beteiligung = this.beteiligungMapper.findBeteiligungByBeteiligter(pe.getId());
+
+			if (pe != null) {
+				result.addAll(beteiligung);
+			}
+		}
+		
+		return result;
+	}
+
+	// getBewerbungByBewerber
+	public Vector<Bewerbung> getBewerbungByBewerber(Person pe){
+		
+		Vector<Bewerbung> result = new Vector<Bewerbung>();
+
+		if (pe != null && this.bewerbungMapper != null) {
+			Vector<Bewerbung> bewerbung = this.bewerbungMapper.findBewerbungByBewerber(pe.getId());
+
+			if (pe != null) {
+				result.addAll(bewerbung);
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -310,39 +337,63 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 	}
 
+	// loeschenProjekt
 	@Override
 	public void loeschenProjekt(Projekt p) throws IllegalArgumentException {
-		// zugehoerige Ausschreibungen werden gelöscht
-		Vector<Ausschreibung> ausschreibungen = this.getAusschreibungByProject
 		
-		if (ausschreibungen != null) {
-			for (int idAusschreibung : ausschreibungen) {
-				this.deleteAusschreibung(idAusschreibung);
+		Vector<Ausschreibung> a = this.getAusschreibungByProjekt(p);
+		Vector<Beteiligung> beteiligung = this.getBeteiligungByProjekt(p);
+		
+		// zugehörige Ausschreibungen löschen
+		if (a != null) {
+			for(Ausschreibung ausschreibung : a){
+				this.loeschenAusschreibung(ausschreibung);
 			}
 		}
 		
-		/* zugehörige Partnerprofile werden gelöscht / die Ausschreibungsids werden benötigt
-		*und dann erst können die Partnerprofile gelöscht werden
-		*ich muss ausschreibung löschen irgendwo schon definieren
-		*/
-		
-		int idAusschreibung; // kann das richtig sein?
-		
-		Vector<Partnerprofil> partnerprofile = this.getPartnerprofileOfAusschreibung(idAusschreibung);
-		
-		if (partnerprofile != null) {
-			for (int idPartnerprofil : partnerprofile){
-				this.deletePartnerprofil(idPartnerprofil);
+		// zugehörige Beteiligungen löschen
+		if (beteiligung != null) {
+			for(Beteiligung b : beteiligung){
+				this.loeschenBeteiligung(b);
 			}
-		
-			this.prjktMapper.delete(idProjekt);
-			// gleicher Fehler
 		}
+		
+		this.prjktMapper.deleteProjekt(p);
+		
+	}
+
+	// getBeteiligungByProjekt
+	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) {
+		Vector<Beteiligung> result = new Vector<Beteiligung>();
+
+		if (p != null && this.beteiligungMapper != null) {
+			Vector<Beteiligung> beteiligung = this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
+
+			if (beteiligung != null) {
+				result.addAll(beteiligung);
+			}
+		}
+		return result;
+	}
+
+	// getAusschreibungByProjekt
+	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) {
+		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
+
+		if (p != null && this.ausschreibungMapper != null) {
+			Vector<Ausschreibung> ausschreibung = this.ausschreibungMapper.findAusschreibungByProjekt(p.getId());
+
+			if (ausschreibung != null) {
+				result.addAll(ausschreibung);
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
 	public Projekt getProjektbyId(int idProjekt) throws IllegalArgumentException {
-		return this.prjktMapper.findByKey(idProjekt);
+		return this.prjktMapper.findProjektByKey(idProjekt);
 	}
 
 	@Override
@@ -362,7 +413,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	}
 	
 
-//SCHAUEN OB CREATEMETHODEN RICHTIGE SIND
+//SCHAUEN OB CREATE-METHODEN RICHTIG SIND
 	
 	/*##########################################################
 	 * START MARKTPLATZ
@@ -379,11 +430,38 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return this.mpMapper.insertMarktplatz(pm);
 	}
 
+	// loeschenMarktplatz
 	@Override
 	public void loeschenMarktplatz(Marktplatz pm) throws IllegalArgumentException {
+		
+		Vector <Projekt> p = this.getProjektbyMarktplatz(pm);
+		
+		// zugehoerige Projekte loeschen
+		if(p != null){
+			for(Projekt projekt : p){
+				this.loeschenProjekt(projekt);
+			}
+		}
+		
 		this.mpMapper.deleteMarktplatz(pm);
 
-		
+	}
+
+	
+	// getProjektbyMarktplatz
+	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) {
+	
+			Vector<Projekt> result = new Vector<Projekt>();
+
+			if (pm != null && this.prjktMapper != null) {
+				Vector<Projekt> projekt = this.prjktMapper.findProjektbyMarktplatz(pm.getId());
+
+				if (pm != null) {
+					result.addAll(projekt);
+				}
+			}
+			
+			return result;
 	}
 
 	@Override
