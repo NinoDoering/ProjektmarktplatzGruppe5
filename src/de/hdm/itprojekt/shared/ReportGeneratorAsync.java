@@ -27,4 +27,5 @@ public interface ReportGeneratorAsync {
 	void createFanInAnalyse(Organisationseinheit o, AsyncCallback<FanIn> callback);
 
 	
+	
 }
