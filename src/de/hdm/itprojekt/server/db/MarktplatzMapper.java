@@ -38,7 +38,7 @@ public class MarktplatzMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
-						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung, idProjekt) " 
+						"INSERT INTO marktplatz (idMarktplatz, geschaeftsgebiet, bezeichnung) " 
 				+ "VALUES ('"
 				+pm.getId()+ "','"+ 
 				pm.getGeschaeftsgebiet() + "','" + 

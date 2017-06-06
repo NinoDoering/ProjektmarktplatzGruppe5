@@ -47,7 +47,7 @@ public void init() throws IllegalArgumentException{
 	@Override
 	
 	
-	
+// --------Person------	
 	public Person findPersonByKey(int key) 
 			
 			//throws IllegalArgumentException 
@@ -57,12 +57,24 @@ public void init() throws IllegalArgumentException{
 		
 	}
 
-	
+//--------Ausschreibung------	
 
 	@Override
 	public Ausschreibung findAusschreibungByKey(int idAusschreibung) {
 		// TODO Auto-generated method stub
 		return this.ausMapper.findAusschreibungByKey(idAusschreibung);
+	}
+	
+	//-------Marktplatz--------
+	public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung) 
+		throws IllegalArgumentException {
+		Marktplatz pm = new Marktplatz(); 
+		
+		pm.setId(1);
+		pm.setGeschaeftsgebiet(geschaeftsgebiet);
+		pm.setBezeichnung(bezeichnung);
+		
+		 return this.marktMapper.insertMarktplatz(pm); 
 	}
 	
 }

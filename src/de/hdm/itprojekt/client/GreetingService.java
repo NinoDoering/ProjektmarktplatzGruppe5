@@ -21,21 +21,25 @@ import de.hdm.itprojekt.shared.bo.Person;
 public interface GreetingService extends RemoteService  {
 	
 	
-	 // String greetServer(String name) throws IllegalArgumentException;
-	
-//	Person showPersonByKey(int idPerson);
-//
-//	String showPersonByKey(Person personKeyFromDBServer);
-//	
-//	Vector<Projektmarktplatz> getProjektmarktplatzAll(); 
-	
-	
-	Person findPersonByKey(int key);
 
+	
+	
+
+	
+
+	// --------Person------	
+	Person findPersonByKey(int key);
+	
+	
+	//--------Ausschreibung------	
 	Ausschreibung findAusschreibungByKey(int idAusschreibung);
 	
+	//---------Marktplatz-----
 	
-	// public Projektmarktplatz addProjektmarktplatz(String bezeichnung);
+	Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)
+				throws IllegalArgumentException;
+
 	
-	// k erneut wichtig!!!!
+	
+
 }

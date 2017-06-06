@@ -34,9 +34,12 @@ public class Projektmarktplatz implements EntryPoint {
 	HorizontalPanel hpMain;
 	ActivitySuchen projektmarktplatzSuchen;
 	ProjektmarktplatzErstellen projektmarktplatzErstellen;
+	Marktplatzerstellen marktplatzerstellen; 
 	
 	Button btn1;
 	Button btn2;
+	Button btn3; 
+	
 	
 
 
@@ -46,17 +49,21 @@ public class Projektmarktplatz implements EntryPoint {
 		btn1 = new Button("Projektmarktplatz suchen"); 
 
 		btn2 = new Button ("Projektmarktplatz erstellen");
+		
+		btn3 = new Button("Marktplatz erstellen");
 		//Button Ende
 	//Panels
 		
 		hpMain = new HorizontalPanel();
 		projektmarktplatzSuchen = new ActivitySuchen();
 		projektmarktplatzErstellen = new ProjektmarktplatzErstellen();
+		marktplatzerstellen = new Marktplatzerstellen();
 		//Panels Ende
 		
 		//styling
 		btn1.setStyleName("btn1");
 		btn2.setStyleName("btn2");
+		btn3.setStyleName("btn3");
 		hpMain.setStyleName("hpmain");
 		//styling ende
 		
@@ -64,10 +71,12 @@ public class Projektmarktplatz implements EntryPoint {
 		//Baumstruktur
 		hpMain.add(btn1);	
 		hpMain.add(btn2);
+		hpMain.add(btn3);
 	
 
 		RootPanel.get("ProjektmarktplatzSuchen").add(hpMain);
 		RootPanel.get("ProjektmarktplatzErstellen").add(hpMain);
+		RootPanel.get("Marktplatzerstellen").add(hpMain);
 
 
 		//Baumstruktur ende
@@ -98,6 +107,16 @@ public class Projektmarktplatz implements EntryPoint {
 			
 		});
 		
+		
+		btn3.addClickHandler(new ClickHandler(){
+			
+			public void onClick(ClickEvent event){
+				hpMain.remove(btn1);
+				hpMain.remove(btn2);
+				hpMain.remove(btn3);
+				hpMain.add(marktplatzerstellen);
+			}
+		});
 		//Ende Clickevents
 
 	}

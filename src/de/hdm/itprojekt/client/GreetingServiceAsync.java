@@ -33,7 +33,7 @@ public interface GreetingServiceAsync {
 	
 	void findAusschreibungByKey (int idAusschreibung, AsyncCallback<Ausschreibung> callback); 
 
-
+	void anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung, AsyncCallback<Marktplatz> callback);
 
 	// void addProjektmarktplatz(String bezeichnung, AsyncCallback<Projektmarktplatz> callback);
 
