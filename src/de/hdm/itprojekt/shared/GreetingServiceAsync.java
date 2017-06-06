@@ -32,8 +32,16 @@ public interface GreetingServiceAsync {
 	void findPersonByKey(int key, AsyncCallback<Person> callback);
 	
 	void findAusschreibungByKey (int idAusschreibung, AsyncCallback<Ausschreibung> callback); 
+	
+	//-------Marktplatz-----
 
 	void anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung, AsyncCallback<Marktplatz> callback);
+	void loeschenMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
+	
+	void getMarktplatzById(int idMarktplatz, AsyncCallback<Marktplatz> callback);
+
+	void saveMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
+	
 
 	// void addProjektmarktplatz(String bezeichnung, AsyncCallback<Projektmarktplatz> callback);
 

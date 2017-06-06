@@ -38,6 +38,12 @@ public interface GreetingService extends RemoteService  {
 	
 	Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)
 				throws IllegalArgumentException;
+	
+	public void loeschenMarktplatz(Marktplatz pm)throws IllegalArgumentException;
+	
+	public Marktplatz getMarktplatzById (int idMarktplatz) throws IllegalArgumentException; 
+	
+	public void saveMarktplatz (Marktplatz pm) throws IllegalArgumentException;
 
 	
 	

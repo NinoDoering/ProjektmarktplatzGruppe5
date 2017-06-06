@@ -34,8 +34,7 @@ public class Projektmarktplatz implements EntryPoint {
 	HorizontalPanel hpMain;
 	ActivitySuchen projektmarktplatzSuchen;
 	ProjektmarktplatzErstellen projektmarktplatzErstellen;
-	Marktplatzerstellen marktplatzerstellen; 
-	
+Marktplatzanlegen marktplatzanlegen;
 	Button btn1;
 	Button btn2;
 	Button btn3; 
@@ -57,7 +56,7 @@ public class Projektmarktplatz implements EntryPoint {
 		hpMain = new HorizontalPanel();
 		projektmarktplatzSuchen = new ActivitySuchen();
 		projektmarktplatzErstellen = new ProjektmarktplatzErstellen();
-		marktplatzerstellen = new Marktplatzerstellen();
+	marktplatzanlegen = new Marktplatzanlegen();
 		//Panels Ende
 		
 		//styling
@@ -107,17 +106,17 @@ public class Projektmarktplatz implements EntryPoint {
 			
 		});
 		
-		
-		btn3.addClickHandler(new ClickHandler(){
+		btn3.addClickHandler(new ClickHandler() {
 			
-			public void onClick(ClickEvent event){
-				hpMain.remove(btn1);
-				hpMain.remove(btn2);
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
 				hpMain.remove(btn3);
-				hpMain.add(marktplatzerstellen);
+				hpMain.remove(btn3);
+				hpMain.add(marktplatzanlegen);
 			}
 		});
-		//Ende Clickevents
+			//Ende Clickevents
 
 	}
 	// erneut wichtig!!!

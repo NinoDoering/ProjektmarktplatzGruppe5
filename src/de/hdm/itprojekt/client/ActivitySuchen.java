@@ -28,6 +28,7 @@ public class ActivitySuchen extends HorizontalPanel  {
 	//deklarieren von gui variablen
 	Label lblAnzeige;
 	Button btnButton;
+
 	TextBox tbBeispiel;
 	Label lblBeispiel;
 	Label lbl1;
@@ -36,13 +37,13 @@ public class ActivitySuchen extends HorizontalPanel  {
 	// Personen suchen Aktivit�t
 	public ActivitySuchen() {
 		
-		
+	gwtproxy.
 		
 lblBeispiel = new Label("Projektmarktpl�tze");
 
 tbBeispiel = new TextBox();
 btnButton = new Button("Abschicken");
-lblAnzeige = new Label("Heyo");
+lblAnzeige = new Label("");
 
 
 

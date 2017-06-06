@@ -174,7 +174,17 @@ Person p9 = new Person();
 		
 		
 		System.out.println(BewerbungMapper.bewerbungmapper().findBewerbungByBewerber(1));
+		
+		Marktplatz mp1 = new Marktplatz(); 
 	
+		mp1.setBezeichnung("MS OFFICEEE");
+		mp1.setGeschaeftsgebiet("EXCEL");
+		
+		
+		MarktplatzMapper.marktplatzMapper().insertMarktplatz(mp1);
+		
+		
+		
 	}
 	
 }
