@@ -882,11 +882,23 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 //
 //
 //
-		/* @Override
-	   *public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Ausschreibung a)
-		*	throws IllegalArgumentException {
-		*	return this.bewerbungMapper.findBewerbungByBewerber(a);
-		}*/
+		// 5. Abfragen aller Bewerbungen auf Ausschreibungen des Benutzers
+		@Override
+	   public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o)
+			throws IllegalArgumentException {
+			
+			Vector <Bewerbung> result = new Vector <Bewerbung>();
+			if(o!=null && this.bewerbungMapper != null)
+			{
+				Vector <Bewerbung> b = this.bewerbungMapper.findBewerbungByBewerber(o.getId());
+				
+				if(b != null){
+					result.addAll(b);
+				}
+			}
+			
+			return result;
+		}
 //		
 //
 //		@Override
