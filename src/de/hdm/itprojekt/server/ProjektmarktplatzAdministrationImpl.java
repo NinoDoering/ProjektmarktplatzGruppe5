@@ -893,4 +893,6 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 //		public Vector<Beteiligung> getAllBeteiligungenToProject(Projekt p) throws IllegalArgumentException {
 //			return this.beteiligungMapper.findBeteiligungByProjekt(p);
 //		}
+//
+//		AllMarktplätzeAnzeigenlassen
 }
