@@ -33,11 +33,11 @@ public class Projektmarktplatz implements EntryPoint {
 	
 	HorizontalPanel hpMain;
 	ActivitySuchen projektmarktplatzSuchen;
-	ProjektmarktplatzErstellen projektmarktplatzErstellen;
-Marktplatzanlegen marktplatzanlegen;
+	Marktplatzanlegen marktplatzanlegen;
+	
 	Button btn1;
 	Button btn2;
-	Button btn3; 
+
 	
 	
 
@@ -49,20 +49,22 @@ Marktplatzanlegen marktplatzanlegen;
 
 		btn2 = new Button ("Projektmarktplatz erstellen");
 		
-		btn3 = new Button("Marktplatz erstellen");
+		
+		
+		
 		//Button Ende
-	//Panels
+		//Panels
 		
 		hpMain = new HorizontalPanel();
+		
 		projektmarktplatzSuchen = new ActivitySuchen();
-		projektmarktplatzErstellen = new ProjektmarktplatzErstellen();
-	marktplatzanlegen = new Marktplatzanlegen();
+		
+		marktplatzanlegen = new Marktplatzanlegen();
 		//Panels Ende
 		
 		//styling
 		btn1.setStyleName("btn1");
 		btn2.setStyleName("btn2");
-		btn3.setStyleName("btn3");
 		hpMain.setStyleName("hpmain");
 		//styling ende
 		
@@ -70,17 +72,22 @@ Marktplatzanlegen marktplatzanlegen;
 		//Baumstruktur
 		hpMain.add(btn1);	
 		hpMain.add(btn2);
-		hpMain.add(btn3);
+		
 	
+		
+		
 
 		RootPanel.get("ProjektmarktplatzSuchen").add(hpMain);
-		RootPanel.get("ProjektmarktplatzErstellen").add(hpMain);
 		RootPanel.get("Marktplatzerstellen").add(hpMain);
+		
+		
 
 
 		//Baumstruktur ende
 		//ClickEvents
 		
+		
+		//
 		btn1.addClickHandler(new ClickHandler() {
 
 
@@ -90,6 +97,7 @@ Marktplatzanlegen marktplatzanlegen;
 				//hpMain.removeFromParent();
 				hpMain.remove(btn1);
 				hpMain.remove(btn2);
+				
 				hpMain.add(projektmarktplatzSuchen);
 
 			
@@ -101,24 +109,13 @@ Marktplatzanlegen marktplatzanlegen;
 			public void onClick(ClickEvent event) {
 				hpMain.remove(btn1);
 				hpMain.remove(btn2);
-				hpMain.add(projektmarktplatzErstellen);
+				hpMain.add(marktplatzanlegen);
 			}
 			
 		});
 		
-		btn3.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				hpMain.remove(btn3);
-				hpMain.remove(btn3);
-				hpMain.add(marktplatzanlegen);
-			}
-		});
-			//Ende Clickevents
+
 
 	}
-	// erneut wichtig!!!
-	// teeeeeeeeest
+	 
 }

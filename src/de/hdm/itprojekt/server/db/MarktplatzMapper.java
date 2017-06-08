@@ -54,6 +54,11 @@ public class MarktplatzMapper {
 		return pm;
 	}
 
+		
+		
+		
+	
+	
 	//Marktplatz nach Id ausgeben
 	public Marktplatz findMarktplatzByKey (int idMarktplatz) {
 

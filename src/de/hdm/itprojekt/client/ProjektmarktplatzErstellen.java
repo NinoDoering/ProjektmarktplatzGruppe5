@@ -21,6 +21,13 @@ import de.hdm.itprojekt.shared.bo.Person;
 
 	public class ProjektmarktplatzErstellen extends HorizontalPanel {
 
+		
+//	################################################################################
+//	##########################ACHTUNG FINDET AUSSCHREIBUNGEN NACH ID################
+//	################################################################################
+		
+		
+		
 // proxy 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class); 
 // gui variablen

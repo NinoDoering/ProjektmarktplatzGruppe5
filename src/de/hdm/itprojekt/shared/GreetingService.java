@@ -10,6 +10,7 @@ import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.bo.Projekt;
 
 //Rueckgaengig
 //zweiterVersuch
@@ -36,6 +37,10 @@ public interface GreetingService extends RemoteService  {
 	
 	//---------Marktplatz-----
 	
+	
+	public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException;
+	
+	
 	Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)
 				throws IllegalArgumentException;
 	
@@ -44,8 +49,12 @@ public interface GreetingService extends RemoteService  {
 	public Marktplatz getMarktplatzById (int idMarktplatz) throws IllegalArgumentException; 
 	
 	public void saveMarktplatz (Marktplatz pm) throws IllegalArgumentException;
+	
+	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) throws IllegalArgumentException; 
 
+	public Marktplatz get1Marktplatz() throws IllegalArgumentException;
 	
 	
+	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) throws IllegalArgumentException;
 
 }

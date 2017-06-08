@@ -4,11 +4,13 @@ import de.hdm.itprojekt.server.db.*;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Label;
 
 import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.bo.Projekt;
 //Rueckgaengig
 //ZweiterVersuch!
 /**
@@ -29,18 +31,32 @@ public interface GreetingServiceAsync {
 //
 //	void getProjektmarktplatzAll(AsyncCallback<Vector<Projektmarktplatz>> callback);
 
+	
+
 	void findPersonByKey(int key, AsyncCallback<Person> callback);
 	
 	void findAusschreibungByKey (int idAusschreibung, AsyncCallback<Ausschreibung> callback); 
 	
 	//-------Marktplatz-----
 
+	void getAllMarktplaetze( AsyncCallback<Vector<Marktplatz>> callback);
+	
+	
 	void anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung, AsyncCallback<Marktplatz> callback);
 	void loeschenMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
 	
 	void getMarktplatzById(int idMarktplatz, AsyncCallback<Marktplatz> callback);
 
 	void saveMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
+
+	void get1Marktplatz(AsyncCallback<Marktplatz> callback);
+
+	
+	void getProjektbyMarktplatz(Marktplatz pm, AsyncCallback<Vector<Projekt>> callback);
+
+	void getAusschreibungByProjekt(Projekt p, AsyncCallback<Vector<Ausschreibung>> callback);
+
+	
 	
 
 	// void addProjektmarktplatz(String bezeichnung, AsyncCallback<Projektmarktplatz> callback);

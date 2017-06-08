@@ -110,12 +110,36 @@ public void init() throws IllegalArgumentException {
 		return this.ausschreibungMapper.findAusschreibungByKey(idAusschreibung);
 	}
 
+	
+	
+	// getAusschreibungByProjekt
+		public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) {
+			Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 
+			if (p != null && this.ausschreibungMapper != null) {
+				Vector<Ausschreibung> ausschreibung = this.ausschreibungMapper.findAusschreibungByProjekt(p.getId());
+
+				if (ausschreibung != null) {
+					result.addAll(ausschreibung);
+				}
+			}
+			
+			return result;
+		}
+	
+	
+	
+	
+
+//-------Marktplatz-------	
+	
 	public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException {
 		return this.mpMapper.findAllMarktplatz();
 	}
 
 
+	
+	
 	public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)
 			throws IllegalArgumentException {
 		
@@ -125,6 +149,7 @@ public void init() throws IllegalArgumentException {
 		pm.setBezeichnung(bezeichnung);
 		
 		return this.mpMapper.insertMarktplatz(pm);
+		
 	}
 
 
@@ -138,7 +163,20 @@ public void init() throws IllegalArgumentException {
 	}
 
 
+	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) {
+		
+		Vector<Projekt> result = new Vector<Projekt>();
 
+		if (pm != null && this.prjktMapper != null) {
+			Vector<Projekt> projekt = this.prjktMapper.findProjektbyMarktplatz(pm.getId());
+
+			if (pm != null) {
+				result.addAll(projekt);
+			}
+		}
+		
+		return result;
+}
 
 
 	@Override
@@ -161,98 +199,27 @@ public void init() throws IllegalArgumentException {
 
 
 
+	@Override
+	public Marktplatz get1Marktplatz() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
 //	@Override
-//	public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung) throws IllegalArgumentException {
+//	public Marktplatz get1Marktplatz() throws IllegalArgumentException {
 //		// TODO Auto-generated method stub
-//		return null;
+//		return this.mpMapper.findAllMarktplatz();
 //	}
-//
-//
-//
-//
-//
-//	@Override
-//	public void loeschenMarktplatz(Marktplatz pm) throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//
-//
-//
-//
-//	@Override
-//	public Marktplatz getMarktplatzById(int idMarktplatz) throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//
-//
-//
-//
-//	@Override
-//	public void saveMarktplatz(Marktplatz pm) throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		
-//	}
-	
-//	//-------Marktplatz--------
-//	public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung) 
-//		throws IllegalArgumentException {
-//		Marktplatz pm = new Marktplatz(); 
-//		
-//		pm.setId(1);
-//		pm.setGeschaeftsgebiet(geschaeftsgebiet);
-//		pm.setBezeichnung(bezeichnung);
-//		
-//		 return this.mpMapper.insertMarktplatz(pm); 
-//	}
-//	
-//	
-//		@Override
-//		public void loeschenMarktplatz(Marktplatz pm) throws IllegalArgumentException {
-//			
-//			Vector <Projekt> p = this.getProjektbyMarktplatz(pm);
-//			
-//			// zugehoerige Projekte loeschen
-//			if(p != null){
-//				for(Projekt projekt : p){
-//					this.loeschenProjekt(projekt);
-//				}
-//			}
-//			
-//			this.mpMapper.deleteMarktplatz(pm);
-//
-//		}
-//
-//		
-//		// getProjektbyMarktplatz
-//		public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) {
-//		
-//				Vector<Projekt> result = new Vector<Projekt>();
-//
-//				if (pm != null && this.prjktMapper != null) {
-//					Vector<Projekt> projekt = this.prjktMapper.findProjektbyMarktplatz(pm.getId());
-//
-//					if (pm != null) {
-//						result.addAll(projekt);
-//					}
-//				}
-//				
-//				return result;
-//		}
-//
-//		@Override
-//		public Marktplatz getMarktplatzById(int idMarktplatz) throws IllegalArgumentException {
-//			return this.mpMapper.findMarktplatzByKey(idMarktplatz);
-//		}
-//
-//		@Override
-//		public void saveMarktplatz(Marktplatz pm) throws IllegalArgumentException {
-//			mpMapper.updateMarktplatz(pm);// TODO Auto-generated method stub
-//			
-//		}
+
+
+
+
+
+
 		
 
 		
