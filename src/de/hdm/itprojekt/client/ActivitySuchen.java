@@ -72,7 +72,7 @@ public class ActivitySuchen extends HorizontalPanel  {
 					
 					Anzeige anzeige1 = new Anzeige();
 					anzeige1.setLblID(""+m.getId());
-					anzeige1.setLblBezeichnung(m.getGeschaeftsgebiet());
+					anzeige1.setLblBezeichnung(m.getBezeichnung());
 					add(anzeige1);
 					remove(tbBeispiel);
 					remove(btnButton);

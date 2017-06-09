@@ -11,6 +11,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -24,12 +26,33 @@ public class Anzeige extends HorizontalPanel {
 private Label lblID;
 private Button lblBezeichnung; 
 private Label testnino;
+private Button newProjekt;
+
+// TextBoxen für Neues Projekt 
+private TextBox ProBez;
+private TextBox ProBesch;
+private DateBox StartD;
+private DateBox EndD;
+private TextBox MarId;
+private TextBox PerId;
 	public Anzeige()
 	{
 		
 		lblID  = new Label(); 
 	 lblBezeichnung = new Button();
 	 testnino = new Label();
+	 newProjekt = new Button("Neues Projekt"); 
+	
+	 // TextBoxen für Neues Projekt 
+	 
+	 ProBez = new TextBox();
+	 ProBesch = new TextBox(); 
+	 StartD = new DateBox();
+	 EndD = new DateBox();
+	 MarId = new TextBox();
+	 PerId = new TextBox();
+	 
+	 
 		add(lblID);
 		add(lblBezeichnung);
 		add(testnino);
@@ -57,8 +80,41 @@ private Label testnino;
 						remove(lblID);
 					
 						testnino.setText(result.firstElement().getBezeichnung()); 
+						add(newProjekt);
+						
+						
+//						newProjekt.addClickHandler(new ClickHandler() {
+//							
+//							@Override
+//							public void onClick(ClickEvent event) {
+//								if (gwtproxy == null) {
+//							      gwtproxy = GWT.create(GreetingService.class);
+//								}
+//								
+//								gwtproxy.anlegenProjekt(Integer.parseInt(PerId.getText()), Integer.parseInt(MarId.getText()), ProBesch.getText(), ProBez.getText(),
+//										StartD.getDatePicker(), EndD.getDatePicker(), new AsyncCallback<Projekt>() {
+//
+//											@Override
+//											public void onFailure(Throwable caught) {
+//												// TODO Auto-generated method stub
+//												
+//											}
+//
+//											@Override
+//											public void onSuccess(Projekt result) {
+//												// TODO Auto-generated method stub
+//												Window.alert("Hallo");
+//												
+//											}
+//										});
+//								
+//							}
+//						});
+						
 						
 					}
+					
+					
 					
 					@Override
 					public void onFailure(Throwable caught) {

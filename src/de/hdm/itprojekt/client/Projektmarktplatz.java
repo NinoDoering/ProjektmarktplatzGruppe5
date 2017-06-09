@@ -38,7 +38,7 @@ public class Projektmarktplatz implements EntryPoint {
 	Button btn1;
 	Button btn2;
 
-	
+	Button meinProfil;
 	
 
 
@@ -49,7 +49,7 @@ public class Projektmarktplatz implements EntryPoint {
 
 		btn2 = new Button ("Projektmarktplatz erstellen");
 		
-		
+		meinProfil = new Button("Mein Profil");
 		
 		
 		//Button Ende
@@ -65,6 +65,7 @@ public class Projektmarktplatz implements EntryPoint {
 		//styling
 		btn1.setStyleName("btn1");
 		btn2.setStyleName("btn2");
+		meinProfil.setStyleName("myProfil");
 		hpMain.setStyleName("hpmain");
 		//styling ende
 		
@@ -72,7 +73,7 @@ public class Projektmarktplatz implements EntryPoint {
 		//Baumstruktur
 		hpMain.add(btn1);	
 		hpMain.add(btn2);
-		
+		hpMain.add(meinProfil);
 	
 		
 		
@@ -115,6 +116,7 @@ public class Projektmarktplatz implements EntryPoint {
 		});
 		
 
+	
 
 	}
 	 

@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared;
 import de.hdm.itprojekt.server.db.*;
 
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -55,6 +56,12 @@ public interface GreetingServiceAsync {
 	void getProjektbyMarktplatz(Marktplatz pm, AsyncCallback<Vector<Projekt>> callback);
 
 	void getAusschreibungByProjekt(Projekt p, AsyncCallback<Vector<Ausschreibung>> callback);
+
+	
+	//-----Projekte----
+	
+	void anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum,
+			Date endDatum, AsyncCallback<Projekt> callback);
 
 	
 	

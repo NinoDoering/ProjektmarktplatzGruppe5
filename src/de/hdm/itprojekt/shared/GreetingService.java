@@ -1,6 +1,7 @@
 package de.hdm.itprojekt.shared;
 import de.hdm.itprojekt.server.db.*;
 
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -56,5 +57,11 @@ public interface GreetingService extends RemoteService  {
 	
 	
 	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) throws IllegalArgumentException;
+	
+	
+	//------ Projekt -----
+	
+	public Projekt anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum)
+			throws IllegalArgumentException;
 
 }

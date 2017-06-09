@@ -22,6 +22,7 @@ import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -208,12 +209,23 @@ public void init() throws IllegalArgumentException {
 
 
 
+// ------------Projekt-----------
+	
+	public Projekt anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum,
+			Date endDatum) throws IllegalArgumentException {
 
-//	@Override
-//	public Marktplatz get1Marktplatz() throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		return this.mpMapper.findAllMarktplatz();
-//	}
+		Projekt p = new Projekt();
+		
+		p.setId(1);
+		p.setBezeichnung(bezeichnung);
+		p.setBeschreibung(beschreibung);
+		p.setStartDatum(startDatum);
+		p.setEndDatum(endDatum);
+		p.setIdPerson(idPerson);
+		p.setIdMarktplatz(idMarktplatz);
+		
+		return this.prjktMapper.insertProjekt(p);		
+		}
 
 
 
