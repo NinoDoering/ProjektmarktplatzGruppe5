@@ -44,6 +44,7 @@ public interface GreetingServiceAsync {
 	
 	
 	void anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung, AsyncCallback<Marktplatz> callback);
+	
 	void loeschenMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
 	
 	void getMarktplatzById(int idMarktplatz, AsyncCallback<Marktplatz> callback);

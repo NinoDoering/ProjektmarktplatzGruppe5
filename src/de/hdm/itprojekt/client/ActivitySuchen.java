@@ -58,6 +58,7 @@ public class ActivitySuchen extends HorizontalPanel  {
 				
 			}
 		});
+		
 		gwtproxy.getAllMarktplaetze( new AsyncCallback<Vector<Marktplatz>>() {
 
 			@Override
