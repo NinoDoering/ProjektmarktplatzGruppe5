@@ -23,7 +23,6 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	private PartnerprofilMapper ppMapper = null;
 	private PersonMapper persMapper = null;
 	private ProjektMapper prjktMapper = null;
-	//private MarktplatzMapper pmpMapper = null;
 	private TeamMapper teamMapper = null;
 	private UnternehmenMapper unternehmenMapper = null;
 	private AusschreibungMapper ausschreibungMapper = null;
@@ -161,7 +160,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 	// getAllPartnerprofile
 	public Vector <Partnerprofil> getAllPartnerprofile() throws IllegalArgumentException {
-		return this.ppMapper.findAllProjekt();
+		return this.ppMapper.findAllPartnerprofil();
 	}
 	
 	
@@ -226,20 +225,6 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	}
 	
 	
-	//########################################################################################################
-	//########################################################################################################
-	
-	
-	// getPartnerprofilByOrganisationseinheit ----- DIE MUSS NOCH BEARBEITET WERDEN
-	public Partnerprofil getPartnerprofilByOrganisationseinheit(Person pe) {
-		
-		return null;
-	}
-
-	//########################################################################################################
-	
-	
-	
 	// getProjektByPerson
 	public Vector<Projekt> getProjektByPerson(Organisationseinheit o) {
 		
@@ -256,7 +241,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return result;
 	}
 
-	// getBeteiligungByBeteiligter ---------- Kontrolle richtiger Datentyp
+	// getBeteiligungByBeteiligter
 	public Vector<Beteiligung> getBeteiligungByBeteiligter(Organisationseinheit o) {
 		
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
@@ -361,19 +346,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 	}
 
-	// getBeteiligungByProjekt
-	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) {
-		Vector<Beteiligung> result = new Vector<Beteiligung>();
-
-		if (p != null && this.beteiligungMapper != null) {
-			Vector<Beteiligung> beteiligung = this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
-
-			if (beteiligung != null) {
-				result.addAll(beteiligung);
-			}
-		}
-		return result;
-	}
+	
 
 	// getAusschreibungByProjekt
 	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) {
@@ -516,7 +489,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	}
 
 	
-	// loeschenTeam --- wird Team genauso wie Person behandelt?
+	// loeschenTeam
 	@Override
 	public void loeschenTeam(Team t) throws IllegalArgumentException {
 		
@@ -564,21 +537,20 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 	// getPartnerprofilByOrganisationseinheit
 	public Partnerprofil getPartnerprofilByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException {
+	
+		if (o instanceof Team){
+			return this.ppMapper.findPartnerprofilByKey(this.teamMapper.findTeamByKey(o.getId()).getIdPartnerprofil());
+		} else if (o instanceof Person){
+			return this.ppMapper.findPartnerprofilByKey(this.persMapper.findPersonByKey(o.getId()).getIdPartnerprofil());
+		} else if (o instanceof Unternehmen){
+			return this.ppMapper.findPartnerprofilByKey(this.unternehmenMapper.findUnternehmenByKey(o.getId()).getIdPartnerprofil());
+		}
+		else{
+				return null;
+		}
 		
-		// GEMEINSAM BEARBEITEN         ###################################################################
 	}
 	
-	
-	
-	
-	
-	
-
-	// getBeteiligungByBeteiligter
-	//public Vector<Beteiligung> getBeteiligungByBeteiligter(Team t) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		//return null;
-	//}
 
 	@Override
 	public void saveTeam(Team t) throws IllegalArgumentException {
@@ -625,8 +597,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		
 		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(u);
 		Vector<Beteiligung> beteiligung = this.getBeteiligungByOrganisationseinheit(u);
-		Vector<Bewerbung> b = this.getAllBewerbungenByOrganisationseinheit(u); // ------ falsch? 
-																				// Weil nicht in Klasse vorhanden
+		Vector<Bewerbung> b = this.getAllBewerbungenByOrganisationseinheit(u);
 		
 		if (beteiligung != null){
 			for (Beteiligung beteiligungen: beteiligung)
@@ -648,6 +619,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		this.unternehmenMapper.deleteUnternehmen(u);
 	}
 
+	// getBeteiligungByOrganisationseinheit
 	public Vector<Beteiligung> getBeteiligungByOrganisationseinheit(Organisationseinheit o) {
 		Vector<Beteiligung> result = new Vector<>();
 
@@ -662,19 +634,21 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return result;
 	}
 
+	// getUnternehmenById
 	@Override
 	public Unternehmen getUnternehmenById(int idUnternehmen) {
 		return this.unternehmenMapper.findUnternehmenByKey(idUnternehmen);
 	}
 
+	// saveUnternehmen
 	@Override
 	public void saveUnternehmen(Unternehmen u) throws IllegalArgumentException {
 		unternehmenMapper.updateUnternehmen(u);
-		
+
 	}
-		
+
 	// getUnternehmenByFirmenName
-	public Unternehmen getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
+	public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
 
 		return this.unternehmenMapper.findUnternehmenByFirmenName(firmenName);
 	}
@@ -685,7 +659,9 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		 * START BETEILIGUNG
 		 #########################################################*/
 		
-		// was ist mit Start- und Enddatum
+		
+	
+	// was ist mit Start- und Enddatum
 		@Override
 		public Beteiligung anlegenBeteiligung(int idOrganisationseinheit, int idProjekt, int idBewertung)
 				throws IllegalArgumentException {
@@ -700,13 +676,14 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	
 		}
 
-		// loeschenBeteiligung --- vollständig
+		// loeschenBeteiligung
 		@Override
 		public void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
 			this.beteiligungMapper.deleteBeteiligung(beteiligung);
 			
 		}
 
+		// saveBeteiligung
 		@Override
 		public void saveBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
 			beteiligungMapper.updateBeteiligung(beteiligung);
@@ -723,15 +700,13 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return this.beteiligungMapper.findAllBeteiligungen();
 		}
 		
-		// falsch?
-		//public Vector<Beteiligung> findByOwner
-		
 		
 		
 		/*##########################################################
 		 * START AUSSCHREIBUNG
 		 #########################################################*/
 		
+		// anlegenAusschreibung
 		@Override
 		public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
 				throws IllegalArgumentException {
@@ -746,6 +721,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return this.ausschreibungMapper.insertAusschreibung(a);
 		}
 
+		// loeschenAusschreibung
 		@Override
 		public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 			
@@ -763,6 +739,8 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			
 		}
 		
+		
+		// getAllBewerbungenByAusschreibung
 		public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 			
 			Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -778,11 +756,13 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return result;
 		}
 
+		// getAusschreibungbyId
 		@Override
 		public Ausschreibung getAusschreibungbyId(int idAusschreibung) throws IllegalArgumentException {
 			return this.ausschreibungMapper.findAusschreibungByKey(idAusschreibung);
 		}
 
+		// saveAusschreibung
 		@Override
 		public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 			ausschreibungMapper.updateAusschreibung(a);		
@@ -790,18 +770,11 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		}
 
 		
-	
-		
-		
-		// findByAusschreibung???
-		
-	
-	
-		
 		/*##########################################################
 		 * START BEWERBUNG
 		 #########################################################*/
 
+		// anlegenBewerbung
 		@Override
 		public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
 				Date erstellDatum) throws IllegalArgumentException {
@@ -840,11 +813,13 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return null;
 		}
 
+		// getBewerbungbyId
 		@Override
 		public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException {
 			return this.bewerbungMapper.findBewerbungByKey(idBewerbung);
 		}
 
+		// saveBewerbung
 		@Override
 		public void saveBewerbung(Bewerbung b) throws IllegalArgumentException {
 			bewerbungMapper.updateBewerbung(b);
@@ -856,20 +831,13 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
 			return this.bewerbungMapper.findAllBewerbungen();
 		}
-		
-
-		
-
-	
-
-		
-
 
 
 		/*##########################################################
 		 * START BEWERTUNG
 		 #########################################################*/
 
+		// anlegenBewertung
 		@Override
 		public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung) {
 			Bewertung bewertung = new Bewertung();
@@ -883,6 +851,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return this.bewertungMapper.insertBewertung(bewertung);
 		}
 
+		// loeschenBewertung
 		@Override
 		public void loeschenBewertung(Bewertung bewertung) throws IllegalArgumentException {
 			
@@ -896,15 +865,20 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			
 		}
 
-		public Vector<Beteiligung> getBeteiligungByBewertung(Bewertung bewertung) {
+		
+		// getBeteiligungByBewertung ---------- zugehoerige Mapper muss korriegiert werden
+												// Rückgabetyp ist kein Vector!!!!
+		public Beteiligung getBeteiligungByBewertung(Bewertung bewertung) {
 			return this.beteiligungMapper.findBeteiligungByBewertung(bewertung.getId());
 		}
 
+		// getBewertungById
 		@Override
 		public Bewertung getBewertungById(int idBewertung) throws IllegalArgumentException {
 			return this.bewertungMapper.findBewertungByKey(idBewertung);
 		}
 
+		// saveBewertung
 		@Override
 		public void saveBewertung(Bewertung bewertung) throws IllegalArgumentException {
 			bewertungMapper.updateBewertung(bewertung);
@@ -916,7 +890,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	// 3.Abfrage von allen Ausschreibungen
 	// getAllAusschreibungen
-	public Vector<Ausschreibung> getAllAusschreibungen() throws IllegalArgumentException {
+	public Vector<Ausschreibung> getAllAusschreibungen(Organisationseinheit o) throws IllegalArgumentException {
 		return this.ausschreibungMapper.findAllAusschreibungen();
 				}
 
@@ -971,10 +945,15 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		}
 //		
 //
-//		@Override
+//	@Override
 //		public Vector<Beteiligung> getAllBeteiligungenToProject(Projekt p) throws IllegalArgumentException {
 //			return this.beteiligungMapper.findBeteiligungByProjekt(p);
 //		}
-//
+
+		// getBeteiligungByProjekt
+		public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) {
+			return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
+		}
+
 //		AllMarktplätzeAnzeigenlassen
 }

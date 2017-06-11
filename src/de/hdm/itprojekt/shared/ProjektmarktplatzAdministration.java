@@ -136,7 +136,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	public void saveBeteiligung (Beteiligung beteiligung) throws IllegalArgumentException;
 
-	public Vector<Beteiligung> getBeteiligungByBeteiligter (Person pe) throws IllegalArgumentException;
+	public Vector<Beteiligung> getBeteiligungByBeteiligter (Organisationseinheit o) throws IllegalArgumentException;
 	
 
 	// Person pe
@@ -190,7 +190,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException;
 	
 	// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
-	public Vector <Beteiligung> getAllBeteiligungenToProject(Projekt p)throws IllegalArgumentException;
+	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p)throws IllegalArgumentException;
 
 //neu
 
