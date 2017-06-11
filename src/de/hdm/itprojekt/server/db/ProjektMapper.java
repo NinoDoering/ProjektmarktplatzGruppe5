@@ -108,7 +108,8 @@ public class ProjektMapper {
 			// bezeichnung
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt " + " ORDER BY bezeichnung");
+					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt " 
+			+ " ORDER BY idProjekt DESC");
 			while (rs.next()) {
 				Projekt p = new Projekt();
 				p.setId(rs.getInt("idProjekt"));
@@ -174,7 +175,7 @@ public class ProjektMapper {
 			// Bezeichung enth�lt
 			ResultSet rs = stmt
 					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt "
-							+ " WHERE idMarktplatz= '" + idMarktplatz + "' ORDER BY bezeichnung");
+							+ " WHERE idMarktplatz= '" + idMarktplatz + "' ORDER BY idProjekt DESC");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
@@ -207,7 +208,7 @@ public class ProjektMapper {
 			// Bezeichung enth�lt
 			ResultSet rs = stmt
 					.executeQuery("SELECT idProjekt, bezeichnung, beschreibung, startDatum, endDatum, idPerson, idMarktplatz FROM projekt "
-							+ "WHERE idPerson= '" + idPerson + "' ORDER BY bezeichnung");
+							+ "WHERE idPerson= '" + idPerson + "' ORDER BY idProjekt DESC");
 
 			while (rs.next()) {
 				Projekt p = new Projekt();
@@ -237,13 +238,13 @@ public class ProjektMapper {
 
 			// SQL Statment, welches das Updaten von Projekte erlaubt
 
-			stmt.executeUpdate("UPDATE projekt " + "SET bezeichnung=\"" + p.getBezeichnung() + "\", "
-				+ "beschreibung=\"" + p.getBeschreibung() + "\", " 
-					+ "startDatum=\"" + format.format(p.getStartDatum()) + "\","
-					+ "endDatum=\"" + format.format(p.getEndDatum()) + "\"," 
-					+ "idPerson=\"" + p.getIdPerson() + "\" "
-					+ "idMarktplatz=\"" + p.getIdMarktplatz() + "\" "
-					+ " WHERE idProjekt= " + p.getId());
+			stmt.executeUpdate("UPDATE projekt " + "SET bezeichnung='" + p.getBezeichnung() + "' ,'"
+				+ "beschreibung='" + p.getBeschreibung() + "' ,'" 
+					+ "startDatum='" + format.format(p.getStartDatum()) + "' ,'"
+					+ "endDatum='" + format.format(p.getEndDatum()) + "' ,'" 
+					+ "idPerson='" + p.getIdPerson() + "' ,'"
+					+ "idMarktplatz='" + p.getIdMarktplatz() + "' ,'"
+					+ " WHERE idProjekt= '" + p.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();

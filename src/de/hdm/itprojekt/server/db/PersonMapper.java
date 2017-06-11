@@ -65,7 +65,7 @@ public class PersonMapper extends OrganisationseinheitMapper{
 
 			ResultSet rs = stmt
 					.executeQuery("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen " 
-			+ "FROM person " + "ORDER BY nachname");
+			+ "FROM person " + "ORDER BY idPerson DESC");
 
 			while (rs.next()) {
 				Person pe = new Person();
@@ -97,7 +97,7 @@ public Vector<Person> findPersonByTeam(int idTeam){
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
 			+ "WHERE idTeam= " + idTeam 
-			+ " ORDER BY nachname");
+			+ " ORDER BY idPerson ASC");
 			
 			
 			while (rs.next()){
@@ -137,7 +137,7 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
 		+ " WHERE idUnternehmen= " + idUnternehmen 
-		+ " ORDER BY nachname");
+		+ " ORDER BY nachname ASC");
 		
 		
 		while (rs.next()){
@@ -192,9 +192,9 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 */
 
 	// INSERT
-	public int insertPerson(Person pe) {
+	public Person insertPerson(Person pe) {
 		Connection con = DBConnection.connection();
-		int id=0;
+		//int id=0;
 		try {
 			Statement stmt = con.createStatement();
 
@@ -203,7 +203,7 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 			if (rs.next()) {
 
 				pe.setId(rs.getInt("maxid") + 1);
-				id=pe.getId();
+				//id=pe.getId();
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(
@@ -219,7 +219,7 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 			e4.printStackTrace();
 		}
 
-		return id;
+		return pe;
 	}
 
 	// UPDATE

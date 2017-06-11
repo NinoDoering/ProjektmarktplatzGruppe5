@@ -34,15 +34,17 @@ public class ActivitySuchen extends HorizontalPanel  {
 	//deklarieren von gui variablen
 	Label lblAnzeige;
 	Button btnButton;
-
+Vector<AnzeigeM> alleAnzeigen;
 	TextBox tbBeispiel;
 	Label lblBeispiel;
 	Label lbl1;
 	FlexTable projekttabelle = new FlexTable();
 	
+	
 	// Personen suchen Aktivit�t
 	public ActivitySuchen() {
 	Projekt p = new Projekt();
+alleAnzeigen = new Vector<AnzeigeM>();
 	p.setId(1);
 		gwtproxy.getAusschreibungByProjekt(p, new AsyncCallback<Vector<Ausschreibung>>() {
 			
@@ -69,24 +71,24 @@ public class ActivitySuchen extends HorizontalPanel  {
 
 			@Override
 			public void onSuccess(Vector<Marktplatz> result) {
-			for (Marktplatz m : result) {
+				clear();
+			
+			for (Marktplatz m : result) { 
+		
+					final AnzeigeM anzeigen = new AnzeigeM();
 					
-					Anzeige anzeige1 = new Anzeige();
-					anzeige1.setLblID(""+m.getId());
-					anzeige1.setLblBezeichnung(m.getBezeichnung());
-					add(anzeige1);
-					remove(tbBeispiel);
-					remove(btnButton);
-					remove(projekttabelle);
-					
-				
-					
+					anzeigen.ID = m.getId();
+					anzeigen.btnBezeichnung.setText(m.getBezeichnung());
+					add(anzeigen);
+					alleAnzeigen.add(anzeigen);
+				anzeigen.setStyleName("sub");
 				}
-				
-				
-				Window.alert(result.firstElement().getBezeichnung());
+
+			
 			}
 		});
+		
+		
 		
 lblBeispiel = new Label("Projektmarktpl�tze");
 
