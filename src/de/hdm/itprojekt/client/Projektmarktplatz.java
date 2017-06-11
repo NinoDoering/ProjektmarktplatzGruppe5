@@ -37,7 +37,7 @@ public class Projektmarktplatz implements EntryPoint {
 	
 	Button btn1;
 	Button btn2;
-
+	Button btn3;
 	Button meinProfil;
 	
 
@@ -48,6 +48,8 @@ public class Projektmarktplatz implements EntryPoint {
 		btn1 = new Button("Projektmarktplatz suchen"); 
 
 		btn2 = new Button ("Projektmarktplatz erstellen");
+		
+		btn3 = new Button ("Back");
 		
 		meinProfil = new Button("Mein Profil");
 		
@@ -78,9 +80,9 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		
 
-		RootPanel.get("ProjektmarktplatzSuchen").add(hpMain);
-		RootPanel.get("Marktplatzerstellen").add(hpMain);
 		
+		RootPanel.get("ProjektmarktplatzSuchen").add(hpMain);
+		RootPanel.get("Marktplatzerstellen").add(btn3);
 		
 
 
@@ -105,6 +107,18 @@ public class Projektmarktplatz implements EntryPoint {
 			}
 		});
 			
+		btn3.addClickHandler(new ClickHandler() {
+
+
+
+			@Override
+			public void onClick(ClickEvent event) {
+				//hpMain.removeFromParent();
+				hpMain.clear();
+				hpMain.add(projektmarktplatzSuchen);			
+			}
+		});
+		
 		btn2.addClickHandler(new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {

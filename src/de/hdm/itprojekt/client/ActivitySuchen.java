@@ -43,6 +43,8 @@ Vector<AnzeigeM> alleAnzeigen;
 	
 	// Personen suchen Aktivit�t
 	public ActivitySuchen() {
+	final	ActivitySuchen as = this;
+		
 	Projekt p = new Projekt();
 alleAnzeigen = new Vector<AnzeigeM>();
 	p.setId(1);
@@ -75,7 +77,7 @@ alleAnzeigen = new Vector<AnzeigeM>();
 			
 			for (Marktplatz m : result) { 
 		
-					final AnzeigeM anzeigen = new AnzeigeM();
+					final AnzeigeM anzeigen = new AnzeigeM(as);
 					
 					anzeigen.ID = m.getId();
 					anzeigen.btnBezeichnung.setText(m.getBezeichnung());

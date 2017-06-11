@@ -52,13 +52,29 @@ padding:10%
   text-decoration: none;
   margin: 20px;
 }
-
+.subb {
+  background: #80ff80;
+  -webkit-border-radius: 38;
+  -moz-border-radius: 38;
+  border-radius: 38px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #3498db;
+  padding: 34px 34px 34px 34px;
+  text-decoration: none;
+  margin: 20px;
+}
 .Abstand{
 	margin: 20px;
 	
 	
 }
+.Abstandou{
+	margin-left: 20px;
+	margin-right: 20px;
 
+}
 .sub:hover {
   background: #3cb0fd;
   background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
