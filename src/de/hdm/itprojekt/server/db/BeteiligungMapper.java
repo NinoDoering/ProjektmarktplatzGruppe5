@@ -115,10 +115,10 @@ public class BeteiligungMapper {
 
 
 	//Beteiligung nach Bewertung ausgeben
-	public Vector<Beteiligung> findBeteiligungByBewertung(int idBewertung){
+	public Beteiligung findBeteiligungByBewertung(int idBewertung){
 		  
 	    Connection con = DBConnection.connection();
-	    Vector<Beteiligung> result = new Vector<Beteiligung>();
+	    
 
 	    try {
 	      Statement stmt = con.createStatement();
@@ -135,13 +135,14 @@ public class BeteiligungMapper {
 	        beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
 	        beteiligung.setBeteiligungszeit(rs.getDouble("beteiligungszeit"));
 	        
-	        result.add(beteiligung);
+	        
 	      }
 	    }
 	    catch (SQLException e2) {
 	      e2.printStackTrace();
+	      return null;
 	    } 
-	  return result;
+	  return null;
   }
 
 	//Beteiligung nach Beteiligter
