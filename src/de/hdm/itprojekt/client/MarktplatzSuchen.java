@@ -30,7 +30,7 @@ public class MarktplatzSuchen extends HorizontalPanel {
 		
 		marktplaetze.setText(0, 0, "Marktplaetze");
 		add(marktplatzShow);
-		Anzeige anzeige1 = new Anzeige();
+		AnzeigeM anzeige1 = new AnzeigeM();
 		anzeige1.setLblID("2");
 		anzeige1.setLblBezeichnung("Chemie");
 		add(anzeige1);
