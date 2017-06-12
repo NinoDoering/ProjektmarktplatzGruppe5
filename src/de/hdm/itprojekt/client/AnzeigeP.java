@@ -24,11 +24,14 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AnzeigeP extends HorizontalPanel {
 	
 	
+
+
 public int ID;	
 
 public Button btnBezeichnung; 
@@ -222,6 +225,16 @@ btnBezeichnung.setStyleName("Abstand");
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
+					
+					//der Async call bekommt die Werte aus der textbox und den Dateboxen
+					Marktplatz pm = new Marktplatz();
+					pm.setId(ID);
+					
+					
+					//######## BEI "Integer.parseInt(idMarkt.getText())" muss Marktplatz selbst ausgesucht werden
+					//######## BEI "ID" wird das Projekt dem Marktplatz hinzugefügt, welcher die ID hat 
+					//			wie das Projekt welches neben dem "+" Button ist  
+					
 					gwtproxy.anlegenProjekt(Integer.parseInt(idPers.getText()), Integer.parseInt(idMarkt.getText()),
 							tbBeschreibung.getText(), tbBezeichnung.getText(),
 							dateBox.getValue(), dateEndBox.getValue(), new AsyncCallback<Projekt>() {

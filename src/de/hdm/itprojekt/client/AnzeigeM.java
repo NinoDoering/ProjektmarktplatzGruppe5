@@ -34,7 +34,10 @@ public class AnzeigeM extends HorizontalPanel {
 	private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 
 	
-public int ID;	
+
+
+
+public int IDM;	
 public Button btnBezeichnung; 
 public Button btnnew;
 final DialogBox dialogBox;
@@ -65,7 +68,7 @@ final DialogBox dialogBox;
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				Marktplatz pm = new Marktplatz();
-				pm.setId(ID);
+				pm.setId(IDM);
 				gwtproxy.getProjektbyMarktplatz(pm, new AsyncCallback<Vector<Projekt>>() {
 
 					@Override

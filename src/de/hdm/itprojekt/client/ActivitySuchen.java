@@ -75,7 +75,7 @@ public class ActivitySuchen extends HorizontalPanel  {
 		
 					final AnzeigeM anzeigen = new AnzeigeM(as);
 					
-					anzeigen.ID = m.getId();
+					anzeigen.IDM = m.getId();
 					anzeigen.btnBezeichnung.setText(m.getBezeichnung()); 
 					 //ainzeigen objekt ruft button btnBezeichnung aus der AnzeigeM klasse auf  
 					//und mit setText wird über m.getBezeichnung  die Info aus der Db geholt 
