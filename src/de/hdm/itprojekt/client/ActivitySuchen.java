@@ -26,43 +26,35 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class ActivitySuchen extends HorizontalPanel  {
 	
-
+// extends HPanel damit der Klasse widget hinzugefügt werden siehe unten bei *#* 
 	
-	//proxy
+	
+	//proxy bzw RPC sorgt für die Kommunikation der GUI mit der Administrations (GreetingServiceImpl ) 
+	// das proxy ruft die Methoden der Impl auf 
 	private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	//deklarieren von gui variablen
 	Label lblAnzeige;
 	Button btnButton;
-Vector<AnzeigeM> alleAnzeigen;
+	Vector<AnzeigeM> alleAnzeigen;
 	TextBox tbBeispiel;
 	Label lblBeispiel;
 	Label lbl1;
 	FlexTable projekttabelle = new FlexTable();
 	
 	
-	// Personen suchen Aktivitï¿½t
+	// Personen suchen Aktivitaet  konstruktor um alle Projektmarktplätze aus der DB in der GUI anzu zeigen
+	
 	public ActivitySuchen() {
 	final	ActivitySuchen as = this;
 		
 	Projekt p = new Projekt();
-alleAnzeigen = new Vector<AnzeigeM>();
+	alleAnzeigen = new Vector<AnzeigeM>();
 	p.setId(1);
-		gwtproxy.getAusschreibungByProjekt(p, new AsyncCallback<Vector<Ausschreibung>>() {
-			
-			@Override
-			public void onSuccess(Vector<Ausschreibung> result) {
-				// TODO Auto-generated method stub
-				Window.alert("So"+result.firstElement().getBeschreibung());
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 		
+		
+	
+		// unser Proxy ruft die Methode auf um alle Marktplaete anzuzeigen
 		gwtproxy.getAllMarktplaetze( new AsyncCallback<Vector<Marktplatz>>() {
 
 			@Override
@@ -75,20 +67,52 @@ alleAnzeigen = new Vector<AnzeigeM>();
 			public void onSuccess(Vector<Marktplatz> result) {
 				clear();
 			
+				
+				// for schleife durchlaeuft  so lange bis alles Marktplaetze ausgegeben werden 
+				// "Marktplatz m : result" steht als abkürzung fuer for (int i = 0; i < .... i++ )
+
 			for (Marktplatz m : result) { 
 		
 					final AnzeigeM anzeigen = new AnzeigeM(as);
 					
 					anzeigen.ID = m.getId();
-					anzeigen.btnBezeichnung.setText(m.getBezeichnung());
+					anzeigen.btnBezeichnung.setText(m.getBezeichnung()); 
+					 //ainzeigen objekt ruft button btnBezeichnung aus der AnzeigeM klasse auf  
+					//und mit setText wird über m.getBezeichnung  die Info aus der Db geholt 
+					
 					add(anzeigen);
+					// anzeigen wird dem Panel bzw ActivitySucehn hinzugefügt   sieh oben *#*
 					alleAnzeigen.add(anzeigen);
+					//anzeigen wird dem Vector alleAnzeigen  hinzugefügt 
 				anzeigen.setStyleName("sub");
 				}
 
 			
 			}
 		});
+		
+
+
+		//!!!!!!!!!!!!!!!!! alles unter dieser Zeile     für das erste mal ignorieren  !!!!!!!!
+		
+	
+		
+		
+//		gwtproxy.getAusschreibungByProjekt(p, new AsyncCallback<Vector<Ausschreibung>>() {
+//		
+//		@Override
+//		public void onSuccess(Vector<Ausschreibung> result) {
+//			// TODO Auto-generated method stub
+//			Window.alert("So"+result.firstElement().getBeschreibung());
+//		}
+//		
+//		@Override
+//		public void onFailure(Throwable caught) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//	});
+		
 		
 		
 		

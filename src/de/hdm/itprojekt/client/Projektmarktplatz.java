@@ -29,6 +29,21 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
+
+
+
+//		----- Startklasse bzw. Startseite unseres Projekte
+//		wird zuerst bei Start aufegrufen siehe EntryPoint
+
+
+//		 unsere Vernetzung läuft wie folgt bis jetzt : 
+//		1. Projektmarktplatz 
+//		2.ActiviySuchen
+//		3.AnzeigeM
+//		4.AnzeigeP
+//		5.AnzeigeA
+
+
 public class Projektmarktplatz implements EntryPoint {
 	
 	HorizontalPanel hpMain;
@@ -40,11 +55,15 @@ public class Projektmarktplatz implements EntryPoint {
 	Button btn3;
 	Button meinProfil;
 	
-
+//	----- onModuleLoad lässt das Programm bzw unsere Seite starten 
+//			vergleich mar mit einer main-Methode in einem regulaeren Java projekt
 
 	public void onModuleLoad() {
 
-
+		
+//		 Initialisierung der Objekte bzw Widgets auf der Startseite 
+		 
+		//Button Start
 		btn1 = new Button("Projektmarktplatz suchen"); 
 
 		btn2 = new Button ("Projektmarktplatz erstellen");
@@ -55,16 +74,19 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		
 		//Button Ende
-		//Panels
+		
+		
+		//Panels Start
 		
 		hpMain = new HorizontalPanel();
 		
 		projektmarktplatzSuchen = new ActivitySuchen();
 		
 		marktplatzanlegen = new Marktplatzanlegen();
+		
 		//Panels Ende
 		
-		//styling
+		//styling um Widget in der CSS datei zu bearbeiten 
 		btn1.setStyleName("btn1");
 		btn2.setStyleName("btn2");
 		meinProfil.setStyleName("myProfil");
@@ -72,7 +94,8 @@ public class Projektmarktplatz implements EntryPoint {
 		//styling ende
 		
 		
-		//Baumstruktur
+		//Baumstruktur 
+//			dem hpMain-Mainpannel werden die Buttons hinzugefügt
 		hpMain.add(btn1);	
 		hpMain.add(btn2);
 		hpMain.add(meinProfil);
@@ -87,7 +110,9 @@ public class Projektmarktplatz implements EntryPoint {
 
 
 		//Baumstruktur ende
-		//ClickEvents
+		
+		
+		//ClickEvents bestimmen was passiert wenn auf ein Button geklickt wird 
 		
 		
 		//
@@ -98,8 +123,9 @@ public class Projektmarktplatz implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				//hpMain.removeFromParent();
-				hpMain.remove(btn1);
-				hpMain.remove(btn2);
+				hpMain.remove(btn1);		//remove steht dafür dass bestimtme Widgets entfernt werden und mit add neue hinzugefügt werden 
+				hpMain.remove(btn2);		// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
+											// siehe Klasse ActivitySuchen
 				
 				hpMain.add(projektmarktplatzSuchen);
 
@@ -107,17 +133,7 @@ public class Projektmarktplatz implements EntryPoint {
 			}
 		});
 			
-		btn3.addClickHandler(new ClickHandler() {
-
-
-
-			@Override
-			public void onClick(ClickEvent event) {
-				//hpMain.removeFromParent();
-				hpMain.clear();
-				hpMain.add(projektmarktplatzSuchen);			
-			}
-		});
+		
 		
 		btn2.addClickHandler(new ClickHandler() {
 			
@@ -129,7 +145,17 @@ public class Projektmarktplatz implements EntryPoint {
 			
 		});
 		
+		btn3.addClickHandler(new ClickHandler() {
 
+
+
+			@Override
+			public void onClick(ClickEvent event) {
+				//hpMain.removeFromParent();
+				hpMain.clear();
+				hpMain.add(projektmarktplatzSuchen);			
+			}
+		});
 	
 
 	}

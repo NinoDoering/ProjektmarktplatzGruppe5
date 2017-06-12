@@ -26,16 +26,20 @@ import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AnzeigeM extends HorizontalPanel {
+	// extends HPanel damit der Klasse widget hinzugefügt werden
 	
+	
+	//proxy bzw RPC sorgt für die Kommunikation der GUI mit der Administrations (GreetingServiceImpl ) 
+		// das proxy ruft die Methoden der Impl auf 
+	private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
+
 	
 public int ID;	
-
 public Button btnBezeichnung; 
 public Button btnnew;
-private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 final DialogBox dialogBox;
 
-// TextBoxen für Neues Projekt 
+
 
 	public AnzeigeM(final ActivitySuchen AS)
 	{
@@ -45,15 +49,16 @@ final DialogBox dialogBox;
 	
 	 btnnew = new Button("+"); 
 	
-	 // TextBoxen für Neues Projekt 
-btnBezeichnung.setStyleName("Abstand");
+	  
+	btnBezeichnung.setStyleName("Abstand");
 	btnnew.setStyleName("Abstand");
-		add(btnBezeichnung);
-		add(btnnew);
+			
+			add(btnBezeichnung);
+			add(btnnew);
+//		Hinzufügen der Buttons zu AnzeigeM
 		
 		
-		
-		
+		// Start der ClickHandler 
 		btnBezeichnung.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -64,15 +69,22 @@ btnBezeichnung.setStyleName("Abstand");
 				gwtproxy.getProjektbyMarktplatz(pm, new AsyncCallback<Vector<Projekt>>() {
 
 					@Override
+					
+					//bedeutet immer was soll passieren wenn etwas nicht Klappt
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 						
 					}
 
 					@Override
+					
+					// was soll passieren wenn der AsyncCallback erfolgreich war 
 					public void onSuccess(Vector<Projekt> result) {
 						// TODO Auto-generated method stub
 						AS.clear();
+						// clear bedeutet aehnlich wie remove entferne die anderen Marktplaetze sobald ein Mplatz gewaehlt wurde 
+						
+						//for schleife 
 						for(Projekt p : result){
 							AnzeigeP anzeigep = new AnzeigeP(AS);
 							anzeigep.btnBezeichnung.setText(p.getBezeichnung());
@@ -96,41 +108,79 @@ btnBezeichnung.setStyleName("Abstand");
 		
 		//von hier 
 		
-		// Create the popup dialog box
+		// eine Dialog PopUp Box wird erstellt 
 		 dialogBox = new DialogBox();
 		 
-				dialogBox.setText("Remote Procedure Call");
+		 
+		 		// instanzieirung der Objekte für dei DialogBox 
+		 
+				dialogBox.setText("Neuer Projektmarktplatz");
 				dialogBox.setAnimationEnabled(true);
-				final Button createButton = new Button("Create");
-				final Button closeButton = new Button("Close");
+				final Button createButton = new Button("Erstelle Marktplatz");
+				final Button closeButton = new Button("Abbrechen");
 				final TextBox tbName = new TextBox();
 				final TextBox tbGeschaeft = new TextBox();
-				// We can set the id of a widget by accessing its Element
+				
+				
+				tbName.setText("Bezeichnung");
+				tbGeschaeft.setText("Geschäftsgebiet");
+				
 				closeButton.getElement().setId("closeButton");
 				final Label textToServerLabel = new Label();
 				final HTML serverResponseLabel = new HTML();
 				VerticalPanel dialogVPanel = new VerticalPanel();
+				
+				//Hinzufuegen der Objekte zum dialogVPanel  
 				dialogVPanel.addStyleName("dialogVPanel");
 				dialogVPanel.add(new HTML("<b>Hier können Sie einen Marktplatz erstellen:</b>"));
 				dialogVPanel.add(textToServerLabel);
-				dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
+				dialogVPanel.add(new HTML("<br><b>Ihre Eingaben:</b>"));
 				dialogVPanel.add(serverResponseLabel);
 				dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
 				dialogVPanel.add(tbName);
 				dialogVPanel.add(tbGeschaeft);
 				dialogVPanel.add(closeButton);
 				dialogVPanel.add(createButton);
+				
+				// der DialogBox wird das dialogVPaneL zugewiesen 
 				dialogBox.setWidget(dialogVPanel);
 
-				// Add a handler to close the DialogBox
+				// was passiert beim Klick des Abbrechen (close) buttons 
 				closeButton.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
 						dialogBox.hide();
+						
+						// was passiert beim Klick des Erstellen (create) Buttons 
+				createButton.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						// TODO Auto-generated method stub
+						
+						// proxy ruft die anlegen eines Marktplatzes Methode auf 
+						gwtproxy.anlegenMarktplatz(tbName.getText(), tbGeschaeft.getText(), new AsyncCallback<Marktplatz>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+
+							@Override
+							public void onSuccess(Marktplatz result) {
+								// TODO Auto-generated method stub
+								Window.alert("Klappt"); 	//kleines auf popendes fenster was zeigt dass alles gut ging 
+								dialogBox.hide();			// Unser PopUp Box soll dancher wieder sich schliessen 
+							}
+						});
+						
+					}
+				});
 					
 					}
 				});
 
-		//bis hier 	
+	
 	
  
 	}}

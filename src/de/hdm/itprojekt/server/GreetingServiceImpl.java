@@ -164,20 +164,7 @@ public void init() throws IllegalArgumentException {
 	}
 
 
-	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) {
-		
-		Vector<Projekt> result = new Vector<Projekt>();
-
-		if (pm != null && this.prjktMapper != null) {
-			Vector<Projekt> projekt = this.prjktMapper.findProjektbyMarktplatz(pm.getId());
-
-			if (pm != null) {
-				result.addAll(projekt);
-			}
-		}
-		
-		return result;
-}
+	
 
 
 	@Override
@@ -230,7 +217,20 @@ public void init() throws IllegalArgumentException {
 
 
 
-
+	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) {
+			
+			Vector<Projekt> result = new Vector<Projekt>();
+	
+			if (pm != null && this.prjktMapper != null) {
+				Vector<Projekt> projekt = this.prjktMapper.findProjektbyMarktplatz(pm.getId());
+	
+				if (pm != null) {
+					result.addAll(projekt);
+				}
+			}
+			
+			return result;
+	}
 
 		
 
