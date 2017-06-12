@@ -25,8 +25,11 @@ public String text;
 public Button btnBezeichnung; 
 public Button btnnew;
 public Button btnBewerben;
+public Label headerA;
 public Label lblBeschreibung;
 public Label lblStatus;
+public Label lblBewerbFrist;
+public Label lblBezeichnung;
 private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 // TextBoxen für Neues Projekt 
 
@@ -35,24 +38,32 @@ private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	 btnBezeichnung = new Button();
 	
 	 btnnew = new Button("+"); 
-btnBewerben = new Button("online bewerben");
+	 btnBewerben = new Button("online bewerben");
+	  headerA = new Label(); 
+	 lblBezeichnung = new Label(); 
 	 lblBeschreibung = new Label();
 	 lblStatus = new Label();
+	 lblBewerbFrist =new Label();
+	 
 	 // TextBoxen für Neues Projekt 
-btnBezeichnung.setStyleName("Abstand");
-	btnnew.setStyleName("Abstand");
-	btnBezeichnung.setText("Beschreibung:");
+	 btnBezeichnung.setStyleName("Abstand");
+	 btnnew.setStyleName("Abstand");
+	 btnBezeichnung.setText("Beschreibung:");
 		add(btnBezeichnung);
-	btnBewerben.setStyleName("btn1");
-	btnBezeichnung.addClickHandler(new ClickHandler() {
+		
+		btnBewerben.setStyleName("btn1");
+		btnBezeichnung.addClickHandler(new ClickHandler() {
 	
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
 			clear();
 			lblStatus.setStyleName("Abstandou");
+			add(headerA);
+			add(lblBezeichnung);
 			add(lblBeschreibung);
 			add(lblStatus);
+			add(lblBewerbFrist);
 			add(btnBewerben);
 			
 		}

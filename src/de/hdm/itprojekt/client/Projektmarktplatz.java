@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DecoratorPanel;
@@ -16,6 +17,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -47,12 +49,13 @@ import com.google.gwt.user.client.ui.Widget;
 public class Projektmarktplatz implements EntryPoint {
 	
 	HorizontalPanel hpMain;
+	
 	ActivitySuchen projektmarktplatzSuchen;
 	Marktplatzanlegen marktplatzanlegen;
 	
 	Button btn1;
 	Button btn2;
-	Button btn3;
+	Button btnBack;
 	Button meinProfil;
 	
 //	----- onModuleLoad lässt das Programm bzw unsere Seite starten 
@@ -68,7 +71,7 @@ public class Projektmarktplatz implements EntryPoint {
 
 		btn2 = new Button ("Projektmarktplatz erstellen");
 		
-		btn3 = new Button ("Back");
+		btnBack = new Button ("Zurueck zur Startseite");
 		
 		meinProfil = new Button("Mein Profil");
 		
@@ -77,6 +80,7 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		
 		//Panels Start
+		
 		
 		hpMain = new HorizontalPanel();
 		
@@ -90,7 +94,9 @@ public class Projektmarktplatz implements EntryPoint {
 		btn1.setStyleName("btn1");
 		btn2.setStyleName("btn2");
 		meinProfil.setStyleName("myProfil");
+		btnBack.setStyleName("BackBtn");
 		hpMain.setStyleName("hpmain");
+	
 		//styling ende
 		
 		
@@ -98,14 +104,16 @@ public class Projektmarktplatz implements EntryPoint {
 //			dem hpMain-Mainpannel werden die Buttons hinzugefügt
 		hpMain.add(btn1);	
 		hpMain.add(btn2);
+		
 		hpMain.add(meinProfil);
-	
+		hpMain.add(btnBack);	
 		
 		
 
 		
 		RootPanel.get("ProjektmarktplatzSuchen").add(hpMain);
-		RootPanel.get("Marktplatzerstellen").add(btn3);
+		//RootPanel.get("Marktplatzerstellen").add(btnBack);
+		//RootPanel.get("Marktplatzerstellen").add(vpSub);
 		
 
 
@@ -145,15 +153,17 @@ public class Projektmarktplatz implements EntryPoint {
 			
 		});
 		
-		btn3.addClickHandler(new ClickHandler() {
+		btnBack.addClickHandler(new ClickHandler() {
 
 
 
 			@Override
 			public void onClick(ClickEvent event) {
 				//hpMain.removeFromParent();
-				hpMain.clear();
-				hpMain.add(projektmarktplatzSuchen);			
+				
+				Window.Location.reload();
+				// Button laesst die Seite neuladen, um erneut auf die Starteite zu gelangen
+
 			}
 		});
 	

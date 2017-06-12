@@ -32,7 +32,12 @@ box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
 padding:10%
 
 
+
 }
+
+
+
+	}
 
 .sub {
   background: #3498db;
@@ -57,9 +62,10 @@ padding:10%
   -webkit-border-radius: 38;
   -moz-border-radius: 38;
   border-radius: 38px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
+  font-family: Calibri;
+  font-weight: bold;
+  color: red;
+  font-size: 100px;
   background: #3498db;
   padding: 34px 34px 34px 34px;
   text-decoration: none;
@@ -109,6 +115,11 @@ padding:10%
 	font-size: 1em;
 	font-weight: bold;
 	font-family: calibri;
+}
+
+.btnBack {
+	
+	
 }
 
 .btn2, .standardbutton, .btn1{  

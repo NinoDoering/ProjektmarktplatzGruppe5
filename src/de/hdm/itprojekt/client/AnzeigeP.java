@@ -64,7 +64,11 @@ btnBezeichnung.setStyleName("Abstand");
 						AS.clear();
 						for(Ausschreibung a : result){
 							AnzeigeA anzeigea = new  AnzeigeA();
+							
+							anzeigea.headerA.setText("Sie befinden sich auf folgender Ausschreibung:  ");
+							anzeigea.lblBezeichnung.setText("Bezeichnung: "+a.getBezeichnung());
 							anzeigea.lblBeschreibung.setText("Beschreibung: "+a.getBeschreibung());
+							anzeigea.lblBewerbFrist.setText("Bewerbungsfrist: "+a.getEndDatum());
 							anzeigea.lblStatus.setText("Status: "+ a.getAusschreibungsstatus());
 							anzeigea.btnBezeichnung.setText(a.getBezeichnung());
 							anzeigea.ID = a.getId();
