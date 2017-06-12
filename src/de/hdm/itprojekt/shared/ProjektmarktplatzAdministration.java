@@ -9,6 +9,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
+import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 
 
 @RemoteServiceRelativePath("projektmarktplatzdministration")
@@ -54,12 +56,18 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	public void saveProjekt(Projekt p) throws IllegalArgumentException;
 
+	public Vector<Projekt> getProjektByPerson(Organisationseinheit o) throws IllegalArgumentException;
 	
+	public Vector<Projekt> getAllProjekte() throws IllegalArgumentException;
 	
+	public Vector<Projekt> getProjektByBezeichnung(String bezeichnung) throws IllegalArgumentException;
+	
+	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) throws IllegalArgumentException;
 	
 	// Ausschreibung a
 	
-	public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum)
+	public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum,
+			int idPartnerprofil, Status ausschreibungsstatus)
 			throws IllegalArgumentException;
 
 
@@ -69,6 +77,8 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	public Ausschreibung getAusschreibungbyId (int idAusschreibung) throws IllegalArgumentException;
 	
 	public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException;
+	
+	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) throws IllegalArgumentException;
 
 	
 	// Partnerprofil pp
@@ -82,20 +92,29 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	public Partnerprofil getPartnerprofilbyId (int idPartnerprofil)throws IllegalArgumentException;
 	
 	public void savePartnerprofil(Partnerprofil pp)throws IllegalArgumentException;
+	
+	public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
 
+	public Vector <Partnerprofil> getAllPartnerprofile() throws IllegalArgumentException;
+	
+	public Partnerprofil getPartnerprofilByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException;
+	
 	
 	// Bewerbung b
 	
-	public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung , String bewerbungstext, Date erstellDatum)
-			throws IllegalArgumentException;
-
+	public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
+			Date erstellDatum, BewerbungsStatus bewerbungsStatus) throws IllegalArgumentException;
 
 
 	public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException;
 
 	public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException;
 	
-	public void saveBewerbung (Bewerbung b)throws IllegalArgumentException;
+	public void saveBewerbung (Bewerbung b) throws IllegalArgumentException;
+	
+	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException;
+	
+	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException;
 
 	
 	// Eigenschaft e
@@ -120,14 +139,14 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 
 	public Bewertung getBewertungById (int idBewertung) throws IllegalArgumentException;
 	
-	public void saveBewertung (Bewertung bewertung)throws IllegalArgumentException;
+	public void saveBewertung (Bewertung bewertung) throws IllegalArgumentException;
 	
+	public Bewertung getBewertungByBewerbung(Bewerbung b) throws IllegalArgumentException;
 
 	// Beteiligung beteiligung
 	
-	public Beteiligung anlegenBeteiligung(int idOrganisationseinheit, int idProjekt, int idBewertung)
+	public Beteiligung anlegenBeteiligung(int idBeteiligter, int idProjekt, int idBewertung, double beteiligungszeit)
 			throws IllegalArgumentException;
-
 
 
 	public void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException;
@@ -137,6 +156,10 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	public void saveBeteiligung (Beteiligung beteiligung) throws IllegalArgumentException;
 
 	public Vector<Beteiligung> getBeteiligungByBeteiligter (Organisationseinheit o) throws IllegalArgumentException;
+	
+	public Vector<Beteiligung> getAllBeteiligungen() throws IllegalArgumentException;
+	
+	public Beteiligung getBeteiligungByBewertung(Bewertung bewertung) throws IllegalArgumentException;
 	
 
 	// Person pe
@@ -172,12 +195,14 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	public void saveUnternehmen (Unternehmen u) throws IllegalArgumentException;
 	
+	public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException;
+	
 	
 
 	// Getter-By-All....Aufrufe und Anforderungen definieren
 	
 	//Anforderung 3. Aufruf aller Ausschreibungen
-	public Vector<Ausschreibung> getAllAusschreibungen (Organisationseinheit o) throws IllegalArgumentException;
+	public Vector<Ausschreibung> getAllAusschreibungen () throws IllegalArgumentException;
 
 	//4. Alle Ausschreibungen die zum Partnerprofil passen
 	public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp)throws IllegalArgumentException;
@@ -185,13 +210,10 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	//5. und 7. Aufruf vom Projektleiter nach allen Bewerbungen auf die Ausschreibungen die er erstellt hat
 	public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 	
-	//Aufruf der eigenen Bewerbungen als Bewerber und dazugeh�rigen Ausschreibungen
-
+	//Aufruf der eigenen Bewerbungen als Bewerber und dazugehoerigen Ausschreibungen
 	public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException;
 	
 	// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
-	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p)throws IllegalArgumentException;
-
-//neu
+	public Vector<Beteiligung> getAllBeteiligungenToProjekt(Vector <Projekt> p)throws IllegalArgumentException;
 
 }

@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.Vector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
+import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 import de.hdm.itprojekt.server.db.*;
 import de.hdm.itprojekt.server.db.PersonMapper;
 
@@ -50,12 +52,23 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getProjektbyId(int idProjekt, AsyncCallback<Projekt> callback);
 
 	void saveProjekt(Projekt p, AsyncCallback<Void> callback);
+	
+	void getProjektByPerson(Organisationseinheit o, AsyncCallback<Vector<Projekt>> callback);
+	
+	void getAllProjekte(AsyncCallback<Vector<Projekt>> callback);
+	
+	void getProjektByBezeichnung(String bezeichnung, AsyncCallback<Vector<Projekt>> callback);
+	
+	void getProjektbyMarktplatz(Marktplatz pm, AsyncCallback<Vector<Projekt>> callback);
+
+
+
 
 	
 	// Ausschreibung Asynch
 	
-	void anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung,
-			Date endDatum, AsyncCallback<Ausschreibung> callback);
+	void anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum,
+			int idPartnerprofil, Status ausschreibungsstatus, AsyncCallback<Ausschreibung> callback);
 
 
 
@@ -64,6 +77,8 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getAusschreibungbyId(int idAusschreibung, AsyncCallback<Ausschreibung> callback);
 
 	void saveAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
+
+	void getAusschreibungByProjekt(Projekt p, AsyncCallback<Vector<Ausschreibung>> callback);
 
 	
 	
@@ -78,11 +93,17 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	void savePartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
 	
+	void getEigenschaftByPartnerprofil(Partnerprofil pp, AsyncCallback<Vector<Eigenschaft>> callback);
+	
+	void getAllPartnerprofile(AsyncCallback<Vector<Partnerprofil>> callback);
+	
+	void getPartnerprofilByOrganisationseinheit(Organisationseinheit o, AsyncCallback<Partnerprofil> callback);
+	
 
 	// Bewerbung Asynch
 	
 	void anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext, Date erstellDatum,
-			AsyncCallback<Bewerbung> callback);
+			BewerbungsStatus bewerbungsStatus, AsyncCallback<Bewerbung> callback);
 
 	void loeschenBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 
@@ -90,6 +111,9 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	void saveBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 
+	void getBewerbungByBewerber(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
+	
+	void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
 	
 	
 	// Eigenschaft Asynch	
@@ -118,11 +142,14 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	void saveBewertung(Bewertung bewertung, AsyncCallback<Void> callback);
 	
+	void getBewertungByBewerbung(Bewerbung b, AsyncCallback<Bewertung> callback);
+
+	
 	
 		// Beteiligung Asynch
 	
 	
-	void anlegenBeteiligung(int idOrganisationseinheit, int idProjekt, int idBewertung,
+	void anlegenBeteiligung(int idBeteiligter, int idProjekt, int idBewertung, double beteiligungszeit,
 			AsyncCallback<Beteiligung> callback);
 
 
@@ -133,6 +160,11 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void saveBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);
 	
 	void getBeteiligungByBeteiligter(Organisationseinheit o, AsyncCallback<Vector<Beteiligung>> callback);
+	
+	void getAllBeteiligungen(AsyncCallback<Vector<Beteiligung>> callback);
+	
+	void getBeteiligungByBewertung(Bewertung bewertung, AsyncCallback<Beteiligung> callback);
+	
 
 	// Person Asynch
 
@@ -170,6 +202,9 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getUnternehmenById(int idUnternehmen, AsyncCallback<Unternehmen> callback);
 
 	void saveUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
+	
+	void getUnternehmenByFirmenName(String firmenName, AsyncCallback<Vector<Unternehmen>> callback);
+
 
 
 
@@ -183,11 +218,17 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	void getAllBewerbungenByOrganisationseinheit(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
 
-	void getBeteiligungByProjekt(Projekt p, AsyncCallback<Vector<Beteiligung>> callback);
+	void getAllBeteiligungenToProjekt(<Projekt> p, AsyncCallback<Vector<Beteiligung>> callback);
 
-	void getAllAusschreibungen(Organisationseinheit o, AsyncCallback<Vector<Ausschreibung>> callback);
+	void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
 
 	
+
+
+
+
+
+
 
 
 }
