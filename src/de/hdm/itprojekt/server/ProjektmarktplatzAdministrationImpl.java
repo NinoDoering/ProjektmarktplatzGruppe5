@@ -1,5 +1,3 @@
-//Inhalt OK aber alle drei Klassen müssen in Greet...
-//Inhalt OK aber alle drei Klassen müssen in Greet...
 package de.hdm.itprojekt.server;
 
 import java.util.ArrayList;
@@ -12,6 +10,7 @@ import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
@@ -335,8 +334,9 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 	public void loeschenProjekt(Projekt p) throws IllegalArgumentException {
 		
 		Vector<Ausschreibung> a = this.getAusschreibungByProjekt(p);
-		Vector<Beteiligung> beteiligung = this.getAllBeteiligungenToProjekt(p);
-		
+		Vector<Beteiligung> beteiligung = this.getBeteiligungByProjekt(p);
+				
+				
 		// zugehörige Ausschreibungen löschen
 		if (a != null) {
 			for(Ausschreibung ausschreibung : a){
@@ -698,6 +698,10 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			return this.beteiligungMapper.findAllBeteiligungen();
 		}
 		
+		// getBeteiligungByProjekt
+		public Vector<Beteiligung> getBeteiligungByProjekt(int idProjekt){
+			return this.beteiligungMapper.findBeteiligungByProjekt(idProjekt);
+		}
 		
 		
 		/*##########################################################
@@ -977,16 +981,16 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 //			return this.beteiligungMapper.findBeteiligungByProjekt(p);
 //		}
 
-		// getBeteiligungByProjekt
-		public Vector<Beteiligung> getAllBeteiligungenToProjekt(Vector<Projekt> p) {
+		// getAllBeteiligungenToProjekt
+		public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) {
 			
-			Vector<Beteiligung> beteiligung = new Vector();
-			for(Projekt projekt : p){
-				Beteiligung b = this.getBeteiligungById();
-				projekte.add(p);
+			Vector<Projekt> projects = new Vector<Projekt>();
+			for(Beteiligung b : beteiligung){
+				Projekt p = this.getProjektbyId(b.getIdProjekt());
+				projects.add(p);
 			}
 
-			return projekte;
+			return projects;
 			
 			
 			//return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
