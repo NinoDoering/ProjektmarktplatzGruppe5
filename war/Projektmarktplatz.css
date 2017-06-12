@@ -29,12 +29,20 @@ h1 {
 	-webkit-box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
 -moz-box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
 box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
-padding:10%
+padding:10%;
 
 
 
 }
+.vpmain{
+	-webkit-box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
+-moz-box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
+box-shadow: 7px 3px 35px -14px rgba(0,0,0,0.75);
+padding:10%;
+margin: -100px -400px 50px -400px;
 
+
+}
 
 
 	}
@@ -70,7 +78,6 @@ padding:10%
   padding: 34px 34px 34px 34px;
   text-decoration: none;
   margin: 20px;
-  
 }
 .Abstand{
 	margin: 20px;
@@ -123,7 +130,7 @@ padding:10%
 	
 }
 
-.btn2, .standardbutton, .btn1{  
+.btn2, .standardbutton, .btn1, .myProfil, .BackBtn, .meineBewerbungen{  
 	
 	border:1px solid #1f2f47;
 	display:inline-block;
@@ -152,7 +159,7 @@ padding:10%
   margin-left: 18%;
 }
 
-.myProfil {
+.myProfile {
 	border:1px solid #1f2f47;
 	display:inline-block;
 	cursor:pointer;
@@ -165,6 +172,9 @@ padding:10%
 	 top : -150px;
 	left: -800px;
   position: relative;
+}
+.myProfile {
+  margin-left: -200%;
 }
 
 

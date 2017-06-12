@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
@@ -49,6 +50,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class Projektmarktplatz implements EntryPoint {
 	
 	HorizontalPanel hpMain;
+	VerticalPanel vpMain;
 	
 	ActivitySuchen projektmarktplatzSuchen;
 	Marktplatzanlegen marktplatzanlegen;
@@ -57,6 +59,7 @@ public class Projektmarktplatz implements EntryPoint {
 	Button btn2;
 	Button btnBack;
 	Button meinProfil;
+	Button meineBewerbungen;
 	
 //	----- onModuleLoad lässt das Programm bzw unsere Seite starten 
 //			vergleich mar mit einer main-Methode in einem regulaeren Java projekt
@@ -75,6 +78,8 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		meinProfil = new Button("Mein Profil");
 		
+		meineBewerbungen = new Button("Meine Bewerbungen");
+		
 		
 		//Button Ende
 		
@@ -82,6 +87,10 @@ public class Projektmarktplatz implements EntryPoint {
 		//Panels Start
 		
 		
+		
+		vpMain = new VerticalPanel();
+		//vpMain.setHorizontalAlignment(HasAlignment.ALIGN_LEFT);
+		//vpMain.setVisible(true);
 		hpMain = new HorizontalPanel();
 		
 		projektmarktplatzSuchen = new ActivitySuchen();
@@ -96,6 +105,8 @@ public class Projektmarktplatz implements EntryPoint {
 		meinProfil.setStyleName("myProfil");
 		btnBack.setStyleName("BackBtn");
 		hpMain.setStyleName("hpmain");
+		vpMain.setStyleName("vpmain");
+		meineBewerbungen.setStyleName("meineBewerbungen");
 	
 		//styling ende
 		
@@ -105,7 +116,9 @@ public class Projektmarktplatz implements EntryPoint {
 		hpMain.add(btn1);	
 		hpMain.add(btn2);
 		
-		hpMain.add(meinProfil);
+		vpMain.add(meinProfil);
+		vpMain.add(meineBewerbungen);
+		vpMain.add(btnBack);
 		
 		
 		
@@ -115,7 +128,7 @@ public class Projektmarktplatz implements EntryPoint {
 		//RootPanel.get("Marktplatzerstellen").add(btnBack);
 		//RootPanel.get("Marktplatzerstellen").add(vpSub);
 		
-
+		RootPanel.get("ProjektmarktplatzSuchen").add(vpMain);
 
 		//Baumstruktur ende
 		
@@ -141,8 +154,38 @@ public class Projektmarktplatz implements EntryPoint {
 			}
 		});
 			
+		meinProfil.addClickHandler(new ClickHandler() {
+
+
+
+			@Override
+			public void onClick(ClickEvent event) {
+				//hpMain.removeFromParent();
+				hpMain.remove(btn1);		//remove steht dafür dass bestimtme Widgets entfernt werden und mit add neue hinzugefügt werden 
+				hpMain.remove(btn2);// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
+				//vpMain.remove(meinProfil);							// siehe Klasse ActivitySuchen
+				
+				vpMain.add(projektmarktplatzSuchen);
+				}
+			
 		
+		});
 		
+		meineBewerbungen.addClickHandler(new ClickHandler() {
+
+
+
+			@Override
+			public void onClick(ClickEvent event) {
+				//hpMain.removeFromParent();
+				hpMain.remove(btn1);		//remove steht dafür dass bestimtme Widgets entfernt werden und mit add neue hinzugefügt werden 
+				hpMain.remove(btn2);// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
+				//vpMain.remove(meinProfil);							// siehe Klasse ActivitySuchen
+				
+				vpMain.add(projektmarktplatzSuchen);
+				}
+		});
+			
 		btn2.addClickHandler(new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
