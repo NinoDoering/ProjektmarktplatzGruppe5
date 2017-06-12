@@ -106,7 +106,7 @@ public class Projektmarktplatz implements EntryPoint {
 		hpMain.add(btn2);
 		
 		hpMain.add(meinProfil);
-		hpMain.add(btnBack);	
+		
 		
 		
 

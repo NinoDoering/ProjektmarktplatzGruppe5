@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -110,6 +111,17 @@ btnBezeichnung.setStyleName("Abstand");
 			final DatePicker endD = new DatePicker();
 			final Label endDatum = new Label("Enddatum: ");
 			final Label text = new Label();
+			final Label textEnd = new Label();
+			final TextBox idPers = new TextBox();
+			final TextBox idMarkt = new TextBox();
+			
+			
+			// hey habe ein DatePicker wo man stard und enddatum von nem Projekte
+//				aussuchen kann, es klappt auch alles die methode speichert den Projekt auch in die DB
+//					aber es setzt egal was man als Dateauswählt in der GUI
+//					immer wird start und enddatum auf Heute (12.06.2017) 
+//					gesetzte 
+//					ich markieren datepicker mit "#"
 			
 			// Erstellung des DatePicker für das StartDatum
 			
@@ -119,8 +131,10 @@ btnBezeichnung.setStyleName("Abstand");
 				public void onValueChange(ValueChangeEvent<Date> event) {
 					Date startDate = event.getValue();
 					
-					String datum = DateTimeFormat.getFormat("MM/dd/yyyy").format(startDate);
+					String datum = DateTimeFormat.getFormat("yyyy-MM-dd").format(startDate);
 					text.setText(datum);
+					//#
+					
 				}
 			});
 			
@@ -133,25 +147,30 @@ btnBezeichnung.setStyleName("Abstand");
 				@Override
 				public void onValueChange(ValueChangeEvent<Date> event) {
 					// TODO Auto-generated method stub
-					Date startDate = event.getValue();
+					Date endDate = event.getValue();
 					
-					String datum = DateTimeFormat.getFormat("MM/dd/yyyy").format(startDate);
-					text.setText(datum);
+					String datum1 = DateTimeFormat.getFormat("yyyy-MM-dd").format(endDate);
+					textEnd.setText(datum1);
+					
+					//#
 				}
 			});
 			
+			endD.setValue( new Date(), true);
+			
+			
 			//DateBox für das Startdatum eines Projektes erstellen 
 			
-			DateTimeFormat dateFormat = DateTimeFormat.getFormat("MM/dd/yyyy");
-			DateBox dateBox = new DateBox();
+			DateTimeFormat dateFormat = DateTimeFormat.getFormat("yyyy-MM-dd");
+			final DateBox dateBox = new DateBox();
 		      dateBox.setFormat(new DateBox.DefaultFormat(dateFormat));
 			
 		      
 		    //DateBox für das Enddatum eines Projektes erstellen
-		      DateTimeFormat dateEnd = DateTimeFormat.getFormat("MM/dd/yyyy");
+		      DateTimeFormat dateEnd = DateTimeFormat.getFormat("yyyy-MM-dd");
 		      
-		      DateBox dateEndBox = new DateBox();
-		      dateEndBox.setFormat(new DateBox.DefaultFormat(dateFormat));
+		      final DateBox dateEndBox = new DateBox();
+		      dateEndBox.setFormat(new DateBox.DefaultFormat(dateEnd));
 			
 		     // Hinzufügen der Label,TextBoxen und  DateBoxen zum PopUp Fenster 
 		      
@@ -165,6 +184,10 @@ btnBezeichnung.setStyleName("Abstand");
 			dialogVPanel.add(new HTML("<br><b>Ihre Eingaben:</b>"));
 			dialogVPanel.add(serverResponseLabel);
 			dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
+			//
+			dialogVPanel.add(idMarkt);
+			dialogVPanel.add(idPers);
+			//
 			dialogVPanel.add(proBez);
 			dialogVPanel.add(tbBezeichnung);
 			dialogVPanel.add(proBeschr);
@@ -194,14 +217,30 @@ btnBezeichnung.setStyleName("Abstand");
 	
 			// was passiert beim Klick des Erstellen (create) Buttons
 			
-//			createButton.addClickHandler(new ClickHandler() {
-//				
-//				@Override
-//				public void onClick(ClickEvent event) {
-//					// TODO Auto-generated method stub
-//					gwtproxy.anlegenProjekt(idPerson, idMarktplatz, beschreibung, bezeichnung, startDatum, endDatum, callback);
-//				}
-//			})
+			createButton.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					gwtproxy.anlegenProjekt(Integer.parseInt(idPers.getText()), Integer.parseInt(idMarkt.getText()),
+							tbBeschreibung.getText(), tbBezeichnung.getText(),
+							dateBox.getValue(), dateEndBox.getValue(), new AsyncCallback<Projekt>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							Window.alert("schief gelaufen");
+						}
+
+						@Override
+						public void onSuccess(Projekt result) {
+							// TODO Auto-generated method stub
+							Window.alert("yessir amk");
+							dialogBox.hide();
+						}
+					});
+				}
+			});
 		
 	}
 	
