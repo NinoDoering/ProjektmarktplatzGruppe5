@@ -886,6 +886,31 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			bewertungMapper.updateBewertung(bewertung);
 			
 		}
+		
+		
+		/*##########################################################
+		 * START ORGANISATIONSEINHEIT
+		 #########################################################*/
+	
+		// getOrganisationseinheitById
+	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) {
+
+		Person pe = persMapper.findPersonByKey(idOrganisationseinheit);
+		Unternehmen u = unternehmenMapper.findUnternehmenByKey(idOrganisationseinheit);
+		Team t = teamMapper.findTeamByKey(idOrganisationseinheit);
+
+		if (pe != null) {
+			return pe;
+		}
+		if (u != null) {
+			return u;
+		}
+		if (t != null) {
+			return t;
+		} else
+			return null;
+	}
+		
 
 		
 	// Anforderungen
@@ -957,7 +982,7 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 			
 			Vector<Beteiligung> beteiligung = new Vector();
 			for(Projekt projekt : p){
-				Beteiligung b = this.getBeteiligungById(projekt.());
+				Beteiligung b = this.getBeteiligungById();
 				projekte.add(p);
 			}
 

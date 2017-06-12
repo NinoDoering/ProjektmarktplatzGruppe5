@@ -197,6 +197,11 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException;
 	
+
+	// Organisationseinheit
+	
+	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) throws IllegalArgumentException;
+	
 	
 
 	// Getter-By-All....Aufrufe und Anforderungen definieren

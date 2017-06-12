@@ -206,11 +206,12 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getUnternehmenByFirmenName(String firmenName, AsyncCallback<Vector<Unternehmen>> callback);
 
 
+	// Organisationseinheit o
+	
+	void getOrganisationseinheitById(int idOrganisationseinheit, AsyncCallback<Organisationseinheit> callback);
 
 
 	// Anforderungen und Aufrufe definieren mit Asynch 
-
-
 
 	void getAllAusschreibungByPartnerprofil(Partnerprofil pp, AsyncCallback<Vector<Ausschreibung>> callback);
 
@@ -218,17 +219,9 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	void getAllBewerbungenByOrganisationseinheit(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
 
-	void getAllBeteiligungenToProjekt(<Projekt> p, AsyncCallback<Vector<Beteiligung>> callback);
+	void getAllBeteiligungenToProjekt(Vector<Projekt> p, AsyncCallback<Vector<Beteiligung>> callback);
 
 	void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
-
-	
-
-
-
-
-
-
 
 
 }
