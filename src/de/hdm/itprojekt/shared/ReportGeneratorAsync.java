@@ -2,6 +2,9 @@ package de.hdm.itprojekt.shared;
 
 import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.shared.report.*;
+
+import java.util.Vector;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface ReportGeneratorAsync {
@@ -10,21 +13,40 @@ public interface ReportGeneratorAsync {
 
 	void setPerson(AsyncCallback<Void> callback);
 
-	void createAllAusschreibungenByPartnerprofilReport(Partnerprofil pp,
+	void createAllAusschreibungenByPartnerprofilReport(Organisationseinheit o,
 			AsyncCallback<AllAusschreibungenByPartnerprofilReport> callback);
 
 	void createAllAusschreibungenReport(AsyncCallback<AllAusschreibungenReport> callback);
 
 	void createAllBeteiligungenToProjectReport(AsyncCallback<AllBeteiligungenToProjectReport> callback);
 
-	void createAllBewerbungenByAusschreibungReport(AsyncCallback<AllBewerbungenByAusschreibungReport> callback);
+	void createAllBewerbungenByAusschreibungReport(Organisationseinheit o,
+			AsyncCallback<AllBewerbungenByAusschreibungReport> callback);
 
-	void createAllBewerbungenByOrganisationseinheitReport(
+	void createAllBewerbungenByOrganisationseinheitReport(Organisationseinheit o,
 			AsyncCallback<AllBewerbungenByOrganisationseinheitReport> callback);
+	
+	void createAllBewerbungenToOneAusschreibungReport(Organisationseinheit o,
+			AsyncCallback<AllBewerbungenToOneAusschreibungReport> callback);
+
+	void createAllBewerbungenWithAusschreibungenReport(Organisationseinheit o,
+			AsyncCallback<AllBewerbungenWithAusschreibungenReport> callback);
 
 	void createFanInFanOutReport(AsyncCallback<FanInFanOutReport> callback);
 
 	void createFanInAnalyse(Organisationseinheit o, AsyncCallback<FanIn> callback);
+
+	void findPersonByKey(int id, AsyncCallback<Person> callback);
+
+	void findTeamByKey(int id, AsyncCallback<Team> callback);
+
+	void findUnternehmenByKey(int id, AsyncCallback<Unternehmen> callback);
+
+	void createProjektverflechtungenReport(int id, AsyncCallback<ProjektverflechtungReport> callback);
+
+	void getAusschreibungByMatchingPartnerprofil(Organisationseinheit o, AsyncCallback<Vector<Ausschreibung>> callback);
+
+
 
 	
 	

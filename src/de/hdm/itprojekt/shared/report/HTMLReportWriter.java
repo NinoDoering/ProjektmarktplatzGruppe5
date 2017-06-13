@@ -125,25 +125,49 @@ private String reportText = "";
 	  
 	  public void process(AllAusschreibungenByPartnerprofilReport r){
 	
+		  
 	  }
 	  
 
 	  
 	  public void process(FanInFanOutReport r){
-	 
-	  }
-	  
-	  public void process(AllBewerbungenByAusschreibungReport r){
+		  this.resetReportText();
+
+		
+		    StringBuffer result = new StringBuffer();
+
+		  
+		    result.append("<H2>" + r.getTitel() + "</H2>");
+		    result.append("<table><tr>");
+		    result.append("</tr><tr><td></td><td>" + r.getErstelldatum().toString()
+		        + "</td></tr></table>");
+
 	
+		    for (int i = 0; i < r.getSubReportsSize(); i++) {
+		
+		    
+		      this.processSimpleReport(r.getSubReportByIndex(i));
+
+		      result.append(this.reportText + "\n");
+
+		    
+		      this.resetReportText();
+		    }
+
+		   
+		    this.reportText = result.toString();
+}
+	  
+	  public void process(AllBewerbungenToOneAusschreibungReport r){
+
 		  this.resetReportText();
 		  
 
-		
 		  StringBuffer result = new StringBuffer();
 		  
 		  
 	
-		  	result.append("<H1>" + r.getTitel() + "</H1>");
+		  	result.append("<H3>" + r.getTitel() + "</H3>");
 		  	result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
 		  	result.append("</tr><tr><td></td><td>" + r.getErstelldatum().toString()
 		  	        + "</td></tr></table>");
@@ -174,10 +198,86 @@ private String reportText = "";
 		       }
 
 		       result.append("</table>");
-		       
-
+	
 		       this.reportText = result.toString();
-	  }  
+	  }
+	  
+	  
+	  public void process(AllBewerbungenByAusschreibungReport r){
+		  this.resetReportText();
+
+		 
+		    StringBuffer result = new StringBuffer();
+
+		
+		    result.append("<H2>" + r.getTitel() + "</H2>");
+		    result.append("<table><tr>");
+		    result.append("</tr><tr><td></td><td>" + r.getErstelldatum().toString()
+		        + "</td></tr></table>");
+
+		
+		    for (int i = 0; i < r.getSubReportsSize(); i++) {
+		
+		    	AllBewerbungenToOneAusschreibungReport subReport = (AllBewerbungenToOneAusschreibungReport) r
+		          .getSubReportByIndex(i);
+
+		      this.process(subReport);
+
+		      result.append(this.reportText + "\n");
+
+		
+		      this.resetReportText();
+		    }
+
+		
+		    this.reportText = result.toString();
+}
+	
+	  
+ public void process(AllBewerbungenWithAusschreibungenReport r){
+		  
+		  this.resetReportText();
+		  
+
+	
+		  StringBuffer result = new StringBuffer();
+		  
+		  
+		
+		  	result.append("<H1>" + r.getTitel() + "</H1>");
+		  	result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+		  	result.append("</tr><tr><td></td><td>" + r.getErstelldatum().toString()+ "</td></tr></table>");
+		  	
+		  	
+		  	 Vector<Row> rows = r.getRows();
+		     result.append("<table style=\"width:400px\">");
+		     
+		     for (int i = 0; i < rows.size(); i++) {
+		         Row row = rows.elementAt(i);
+		         result.append("<tr>");
+		         for (int k = 0; k < row.getColumnsSize(); k++) {
+		           if (i == 0) {
+		             result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnByIndex(k)
+		                 + "</td>");
+		           }
+		           else {
+		             if (i > 1) {
+		               result.append("<td style=\"border-top:1px solid silver\">"
+		                   + row.getColumnByIndex(k) + "</td>");
+		             }
+		             else {
+		               result.append("<td valign=\"top\">" + row.getColumnByIndex(k) + "</td>");
+		             }
+		           }
+		         }
+		         result.append("</tr>");
+		       }
+
+		       result.append("</table>");
+		       
+		  
+		       this.reportText = result.toString();
+}
 	  
 	  
 	  public void process(FanIn r){
@@ -277,6 +377,26 @@ private String reportText = "";
 		       this.reportText = result.toString();
 	  }
 	  
+	  public void process (ProjektverflechtungReport r){
+		  this.resetReportText();
+		  
+		  StringBuffer result = new StringBuffer();
+		  
+		  result.append("<H1>" + r.getTitel() + "<H1>");
+		  result.append("table><tr");
+		  result.append("</tr><tr><td></td><td>" + r.getErstelldatum().toString()
+		  + "</td></tr></table>");
+		  
+		  for (int i = 0; i < r.getSubReportsSize(); i++) {
+			  
+			  this.processSimpleReport(r.getSubReportByIndex(i));
+
+			  result.append(this.reportText + "\n");
+			  this.resetReportText();
+		  }
+		  this.reportText = result.toString();
+	  
+	  }
 	 
 	  
 	  public void process(AllBeteiligungenToProjectReport r){
@@ -328,17 +448,15 @@ private String reportText = "";
 		       this.reportText = result.toString();
 	  }
 	  
+	  
 public void process(AllBewerbungenByOrganisationseinheitReport r){
 		  
 		
 		  this.resetReportText();
-		  
-
-		  
+  
 		   
 		  StringBuffer result = new StringBuffer();
-		  
-		  
+		 
 		 
 		  	result.append("<H1>" + r.getTitel() + "</H1>");
 		  	result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
@@ -426,7 +544,7 @@ public void process(AllBewerbungenByOrganisationseinheitReport r){
 		       
 	
 		       this.reportText = result.toString();
-}
+	  }
 
 	
 }
