@@ -149,6 +149,22 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 		return result;
 
 	}
+	
+	// getEigenschaftByPartnerprofil
+	public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) {
+		
+		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+
+		if (this.eigMapper != null) {
+			Vector<Eigenschaft> eigenschaft = this.eigMapper.findEigenschaftByPartnerprofil(idPartnerprofil);
+
+			if (eigenschaft != null) {
+				result.addAll(eigenschaft);
+			}
+		}
+		return result;
+		
+	}
 
 	// getPartnerprofilbyId
 	@Override
