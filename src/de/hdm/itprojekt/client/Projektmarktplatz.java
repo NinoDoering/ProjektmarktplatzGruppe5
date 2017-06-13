@@ -54,6 +54,7 @@ public class Projektmarktplatz implements EntryPoint {
 	
 	ActivitySuchen projektmarktplatzSuchen;
 	Marktplatzanlegen marktplatzanlegen;
+	ActivityBewerbungen activityBewerbungen;
 	
 	Button btn1;
 	Button btn2;
@@ -96,6 +97,8 @@ public class Projektmarktplatz implements EntryPoint {
 		projektmarktplatzSuchen = new ActivitySuchen();
 		
 		marktplatzanlegen = new Marktplatzanlegen();
+		
+		activityBewerbungen = new ActivityBewerbungen();
 		
 		//Panels Ende
 		
@@ -146,7 +149,7 @@ public class Projektmarktplatz implements EntryPoint {
 				//hpMain.removeFromParent();
 				hpMain.remove(btn1);		//remove steht dafür dass bestimtme Widgets entfernt werden und mit add neue hinzugefügt werden 
 				hpMain.remove(btn2);		// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
-											// siehe Klasse ActivitySuchen
+				hpMain.clear();							// siehe Klasse ActivitySuchen
 				
 				hpMain.add(projektmarktplatzSuchen);
 
@@ -182,10 +185,11 @@ public class Projektmarktplatz implements EntryPoint {
 				hpMain.remove(btn2);// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
 				//vpMain.remove(meinProfil);							// siehe Klasse ActivitySuchen
 				
-				vpMain.add(projektmarktplatzSuchen);
+				vpMain.add(activityBewerbungen);
 				}
 		});
 			
+		
 		btn2.addClickHandler(new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
@@ -195,6 +199,12 @@ public class Projektmarktplatz implements EntryPoint {
 			}
 			
 		});
+		
+		
+		
+		
+		
+		
 		
 		btnBack.addClickHandler(new ClickHandler() {
 
