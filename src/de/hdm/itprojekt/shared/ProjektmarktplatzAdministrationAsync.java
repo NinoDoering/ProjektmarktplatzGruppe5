@@ -93,8 +93,6 @@ public interface ProjektmarktplatzAdministrationAsync {
 
 	void savePartnerprofil(Partnerprofil pp, AsyncCallback<Void> callback);
 	
-	void getEigenschaftByPartnerprofil(Partnerprofil pp, AsyncCallback<Vector<Eigenschaft>> callback);
-	
 	void getAllPartnerprofile(AsyncCallback<Vector<Partnerprofil>> callback);
 	
 	void getPartnerprofilByOrganisationseinheit(Organisationseinheit o, AsyncCallback<Partnerprofil> callback);
@@ -115,6 +113,8 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
 	
+	void getBewerbungByAusschreibung(Ausschreibung a, AsyncCallback<Vector<Bewerbung>> callback);
+	
 	
 	// Eigenschaft Asynch	
 
@@ -128,6 +128,10 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getEigenschaftById(int idEigenschaft, AsyncCallback<Eigenschaft> callback);
 
 	void saveEigenschaft(Eigenschaft e, AsyncCallback<Void> callback);
+	
+	void getEigenschaftByPartnerprofil(Partnerprofil pp, AsyncCallback<Vector<Eigenschaft>> callback);
+	
+	void getEigenschaftByIdPartnerprofil(int idPartnerprofil, AsyncCallback<Vector<Eigenschaft>> callback);
 
 	
 	// Bewertung Asynch
@@ -165,7 +169,7 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	void getBeteiligungByBewertung(Bewertung bewertung, AsyncCallback<Beteiligung> callback);
 	
-	void getBeteiligungByProjekt(int idProjekt, AsyncCallback<Vector<Beteiligung>> callback);
+	void getBeteiligungByProjekt(Projekt p, AsyncCallback<Vector<Beteiligung>> callback);
 	
 
 	// Person Asynch
@@ -224,6 +228,5 @@ public interface ProjektmarktplatzAdministrationAsync {
 	void getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung, AsyncCallback<Vector<Projekt>> callback);
 
 	void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
-
 
 }
