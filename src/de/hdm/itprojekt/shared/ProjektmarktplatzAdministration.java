@@ -161,7 +161,7 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	
 	public Beteiligung getBeteiligungByBewertung(Bewertung bewertung) throws IllegalArgumentException;
 	
-	public Vector<Beteiligung> getBeteiligungByProjekt(int idProjekt) throws IllegalArgumentException;
+	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) throws IllegalArgumentException;
 	
 
 	// Person pe

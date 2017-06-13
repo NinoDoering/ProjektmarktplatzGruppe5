@@ -165,7 +165,7 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	void getBeteiligungByBewertung(Bewertung bewertung, AsyncCallback<Beteiligung> callback);
 	
-	void getBeteiligungByProjekt(int idProjekt, AsyncCallback<Vector<Beteiligung>> callback);
+	void getBeteiligungByProjekt(Projekt p, AsyncCallback<Vector<Beteiligung>> callback);
 	
 
 	// Person Asynch

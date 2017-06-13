@@ -681,120 +681,119 @@ public class ProjektmarktplatzAdministrationImpl extends RemoteServiceServlet
 
 	}
 
-		// saveBeteiligung
-		@Override
-		public void saveBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
-			beteiligungMapper.updateBeteiligung(beteiligung);
-			
-		}
-		
-		// getBeteiligungById
-		public Beteiligung getBeteiligungById(int idBeteiligung) throws IllegalArgumentException {
-			return this.beteiligungMapper.findBeteiligungByKey(idBeteiligung);
-		}
-		
-		// getAllBeteiligungen
-		public Vector<Beteiligung> getAllBeteiligungen() throws IllegalArgumentException {
-			return this.beteiligungMapper.findAllBeteiligungen();
-		}
-		
-		// getBeteiligungByProjekt
-		public Vector<Beteiligung> getBeteiligungByProjekt(int idProjekt){
-			return this.beteiligungMapper.findBeteiligungByProjekt(idProjekt);
-		}
-		
-		
-		/*##########################################################
-		 * START AUSSCHREIBUNG
-		 #########################################################*/
-		
-		// anlegenAusschreibung
-		@Override
-		public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum,
-													int idPartnerprofil, Status ausschreibungsstatus)
-				throws IllegalArgumentException {
-			Ausschreibung a = new Ausschreibung();
-			
-			a.setId(1);
-			a.setBezeichnung(bezeichnung);
-			a.setEndDatum(endDatum);
-			a.setBeschreibung(beschreibung);
-			a.setIdProjekt(idProjekt);
-			a.setIdAusschreibender(idAusschreibender);
-			a.setIdPartnerprofil(idPartnerprofil);
-			a.setAusschreibungsstatus(ausschreibungsstatus);
-			
-			return this.ausschreibungMapper.insertAusschreibung(a);
+	// saveBeteiligung
+	@Override
+	public void saveBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
+		beteiligungMapper.updateBeteiligung(beteiligung);
+
+	}
+
+	// getBeteiligungById
+	public Beteiligung getBeteiligungById(int idBeteiligung) throws IllegalArgumentException {
+		return this.beteiligungMapper.findBeteiligungByKey(idBeteiligung);
+	}
+
+	// getAllBeteiligungen
+	public Vector<Beteiligung> getAllBeteiligungen() throws IllegalArgumentException {
+		return this.beteiligungMapper.findAllBeteiligungen();
+	}
+
+	// getBeteiligungByProjekt
+	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) {
+		return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
+	}
+
+	/*
+	 * ########################################################## START
+	 * AUSSCHREIBUNG #########################################################
+	 */
+
+	// anlegenAusschreibung
+	@Override
+	public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung,
+			String beschreibung, Date endDatum, int idPartnerprofil, Status ausschreibungsstatus)
+			throws IllegalArgumentException {
+		Ausschreibung a = new Ausschreibung();
+
+		a.setId(1);
+		a.setBezeichnung(bezeichnung);
+		a.setEndDatum(endDatum);
+		a.setBeschreibung(beschreibung);
+		a.setIdProjekt(idProjekt);
+		a.setIdAusschreibender(idAusschreibender);
+		a.setIdPartnerprofil(idPartnerprofil);
+		a.setAusschreibungsstatus(ausschreibungsstatus);
+
+		return this.ausschreibungMapper.insertAusschreibung(a);
+	}
+
+	// loeschenAusschreibung
+	@Override
+	public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+
+		Vector<Bewerbung> b = this.getAllBewerbungenByAusschreibung(a);
+
+		if (b != null) {
+			for (Bewerbung bewerbung : b) {
+
+				this.loeschenBewerbung(bewerbung);
+
+			}
 		}
 
-		// loeschenAusschreibung
-		@Override
-		public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-			
-			Vector<Bewerbung> b = this.getAllBewerbungenByAusschreibung(a);
-			
+		this.ausschreibungMapper.deleteAusschreibung(a);
+
+	}
+		
+		
+	// getAllBewerbungenByAusschreibung
+	public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+
+		Vector<Bewerbung> result = new Vector<Bewerbung>();
+
+		if (a != null && this.bewerbungMapper != null) {
+			Vector<Bewerbung> b = this.bewerbungMapper.findBewerbungByAusschreibung(a.getId());																							// hier?
+
 			if (b != null) {
-				for (Bewerbung bewerbung : b) {
-
-					this.loeschenBewerbung(bewerbung);
-			
-				}
+				result.addAll(b);
 			}
-			
-			this.ausschreibungMapper.deleteAusschreibung(a);
-			
-		}
-		
-		
-		// getAllBewerbungenByAusschreibung
-		public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-			
-			Vector<Bewerbung> result = new Vector<Bewerbung>();
-
-			if (a != null && this.bewerbungMapper != null) {
-				Vector<Bewerbung> b = this.bewerbungMapper.findBewerbungByAusschreibung(a.getId()); // Was ist hier?
-
-				if (b != null) {
-					result.addAll(b);
-				}
-			}
-			
-			return result;
 		}
 
-		// getAusschreibungbyId
-		@Override
-		public Ausschreibung getAusschreibungbyId(int idAusschreibung) throws IllegalArgumentException {
-			return this.ausschreibungMapper.findAusschreibungByKey(idAusschreibung);
-		}
+		return result;
+	}
 
-		// saveAusschreibung
-		@Override
-		public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
-			ausschreibungMapper.updateAusschreibung(a);		
-			
-		}
+	// getAusschreibungbyId
+	@Override
+	public Ausschreibung getAusschreibungbyId(int idAusschreibung) throws IllegalArgumentException {
+		return this.ausschreibungMapper.findAusschreibungByKey(idAusschreibung);
+	}
 
-		
-		/*##########################################################
-		 * START BEWERBUNG
-		 #########################################################*/
+	// saveAusschreibung
+	@Override
+	public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+		ausschreibungMapper.updateAusschreibung(a);
 
-		// anlegenBewerbung
-		@Override
-		public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
-				Date erstellDatum, BewerbungsStatus bewerbungsStatus) throws IllegalArgumentException {
-			Bewerbung b = new Bewerbung();
-			
-			b.setId(1); 
-			b.setIdOrganisationseinheit(idOrganisationseinheit);
-			b.setIdAusschreibung(idAusschreibung);
-			b.setBewerbungsText(bewerbungstext);
-			b.setErstellDatum(erstellDatum);
-			b.setBewerbungsStatus(bewerbungsStatus);
-			
-			return this.bewerbungMapper.insertBewerbung(b);
-		}
+	}
+
+	/*##########################################################
+	 * START BEWERBUNG
+	 #########################################################*/
+
+	// anlegenBewerbung
+	@Override
+	public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
+			Date erstellDatum, BewerbungsStatus bewerbungsStatus) throws IllegalArgumentException {
+		Bewerbung b = new Bewerbung();
+
+		b.setId(1);
+		b.setIdOrganisationseinheit(idOrganisationseinheit);
+		b.setIdAusschreibung(idAusschreibung);
+		b.setBewerbungsText(bewerbungstext);
+		b.setErstellDatum(erstellDatum);
+		b.setBewerbungsStatus(bewerbungsStatus);
+
+		return this.bewerbungMapper.insertBewerbung(b);
+	}
 
 		// loeschenBewerbung
 		@Override
