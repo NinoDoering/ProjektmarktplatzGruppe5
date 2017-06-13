@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Label;
 
 import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
@@ -63,6 +64,9 @@ public interface GreetingServiceAsync {
 	
 	void anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum,
 			Date endDatum, AsyncCallback<Projekt> callback);
+
+	//-----Bewerbungen-----
+	void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
 
 	
 	

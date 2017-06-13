@@ -18,6 +18,7 @@ import de.hdm.itprojekt.server.db.TeamMapper;
 import de.hdm.itprojekt.server.db.UnternehmenMapper;
 import de.hdm.itprojekt.shared.FieldVerifier;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
@@ -232,7 +233,10 @@ public void init() throws IllegalArgumentException {
 			return result;
 	}
 
-		
+	//------------Bewerbungen--------------
+	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
+		return this.bewerbungMapper.findAllBewerbungen();
+	}
 
 		
 }
