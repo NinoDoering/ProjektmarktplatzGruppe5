@@ -113,6 +113,8 @@ public interface ProjektmarktplatzAdministrationAsync {
 	
 	void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
 	
+	void getBewerbungByAusschreibung(Ausschreibung a, AsyncCallback<Vector<Bewerbung>> callback);
+	
 	
 	// Eigenschaft Asynch	
 

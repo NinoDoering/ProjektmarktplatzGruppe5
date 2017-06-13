@@ -100,6 +100,8 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	public Partnerprofil getPartnerprofilByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException;
 	
 	public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) throws IllegalArgumentException;
+	
+	
 	// Bewerbung b
 	
 	public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
@@ -115,6 +117,8 @@ public interface ProjektmarktplatzAdministration extends RemoteService {
 	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException;
 	
 	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException;
+	
+	public Vector<Bewerbung> getBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 
 	
 	// Eigenschaft e
