@@ -66,7 +66,7 @@ public class ActivitySuchen extends HorizontalPanel  {
 			@Override
 			public void onSuccess(Vector<Marktplatz> result) {
 				clear();
-			
+				
 				
 				// for schleife durchlaeuft  so lange bis alles Marktplaetze ausgegeben werden 
 				// "Marktplatz m : result" steht als abkürzung fuer for (int i = 0; i < .... i++ )
