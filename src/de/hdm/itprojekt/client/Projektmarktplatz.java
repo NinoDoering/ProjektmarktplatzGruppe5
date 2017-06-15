@@ -4,6 +4,8 @@ import de.hdm.itprojekt.client.gui.Startseite;
 import de.hdm.itprojekt.shared.FieldVerifier;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.LoginService;
+import de.hdm.itprojekt.shared.LoginServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Projekt;
@@ -22,6 +24,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -51,7 +54,7 @@ import com.google.gwt.user.client.ui.Widget;
 //		wird zuerst bei Start aufegrufen siehe EntryPoint
 
 
-//		 unsere Vernetzung läuft wie folgt bis jetzt : 
+//		 unsere Vernetzung lï¿½uft wie folgt bis jetzt : 
 //		1. Projektmarktplatz 
 //		2.ActiviySuchen
 //		3.AnzeigeM
@@ -59,9 +62,13 @@ import com.google.gwt.user.client.ui.Widget;
 //		5.AnzeigeA
 
 
-public class Projektmarktplatz implements EntryPoint {
-	private HorizontalPanel addPanel = new HorizontalPanel();
-	private VerticalPanel mainPanel = new VerticalPanel();
+	public class Projektmarktplatz implements EntryPoint {
+		private HorizontalPanel addPanel = new HorizontalPanel();
+		private VerticalPanel mainPanel = new VerticalPanel();
+
+	
+	
+	
 //	HorizontalPanel hpMain;
 //	VerticalPanel vpMain;
 //	
@@ -77,11 +84,46 @@ public class Projektmarktplatz implements EntryPoint {
 //	Button meineBewerbungen;
 //	private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 //	
-//	----- onModuleLoad lässt das Programm bzw unsere Seite starten 
+//	----- onModuleLoad lï¿½sst das Programm bzw unsere Seite starten 
 //			vergleich mar mit einer main-Methode in einem regulaeren Java projekt
-
+	
+		
+		//---------Login start---------
+//		private LoginInfo loginInfo = null;
+//		private VerticalPanel loginPanel = new VerticalPanel();
+//		private Label loginLabel = new Label("Bitte melden Sie sich mit Ihrem Google-Account an.");
+//		private Anchor signInLink = new Anchor ("Sign In");
+//		private Anchor signOutLink = new Anchor ("Sign Out");
+		
+		
 	public void onModuleLoad() {
+		
+		itprojektload();
 		//mainPanel.add(new Navigator());
+//		LoginServiceAsync loginService = GWT.create(LoginService.class);
+//		
+//		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>(){
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				Window.alert("Fehler Login");
+//			}
+//
+//			@Override
+//			public void onSuccess(LoginInfo result) {
+//				if(loginInfo.isLoggedIn()){
+//					itprojektload();
+//				}else{
+//					loadlogin();
+//				}
+//			}
+//			
+//		});
+		
+		
+	}
+	private void itprojektload(){
+
 		Showcase showcase = new Startseite();
 		mainPanel.add(addPanel);
 		mainPanel.add(showcase);
@@ -89,7 +131,19 @@ public class Projektmarktplatz implements EntryPoint {
 		RootPanel.get("Navigator").add(new Navigator());
 		
 	}
+//	private void loadlogin(){
+//		signInLink.setHref(loginInfo.getLoginUrl());
+//		  loginPanel.add(loginLabel);
+//		  loginPanel.add(signInLink);
+//		  RootPanel.get("Details").add(loginPanel);
+//	}
 }
+	
+	
+	
+	
+	
+	
 //		 Initialisierung der Objekte bzw Widgets auf der Startseite 
 		 
 //		Button Start
@@ -136,7 +190,7 @@ public class Projektmarktplatz implements EntryPoint {
 //		
 //		
 //		//Baumstruktur 
-////			dem hpMain-Mainpannel werden die Buttons hinzugefügt
+////			dem hpMain-Mainpannel werden die Buttons hinzugefï¿½gt
 //		hpMain.add(btn1);	
 //		hpMain.add(btn2);
 //		
@@ -168,8 +222,8 @@ public class Projektmarktplatz implements EntryPoint {
 //			@Override
 //			public void onClick(ClickEvent event) {
 //				//hpMain.removeFromParent();
-//				hpMain.remove(btn1);		//remove steht dafür dass bestimtme Widgets entfernt werden und mit add neue hinzugefügt werden 
-//				hpMain.remove(btn2);		// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
+//				hpMain.remove(btn1);		//remove steht dafï¿½r dass bestimtme Widgets entfernt werden und mit add neue hinzugefï¿½gt werden 
+//				hpMain.remove(btn2);		// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafï¿½r dass eine die neue seite aufgerufen wird 
 //				hpMain.clear();							// siehe Klasse ActivitySuchen
 //				
 //				hpMain.add(projektmarktplatzSuchen);
@@ -185,8 +239,8 @@ public class Projektmarktplatz implements EntryPoint {
 //			@Override
 //			public void onClick(ClickEvent event) {
 //				//hpMain.removeFromParent();
-//				hpMain.remove(btn1);		//remove steht dafür dass bestimtme Widgets entfernt werden und mit add neue hinzugefügt werden 
-//				hpMain.remove(btn2);// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
+//				hpMain.remove(btn1);		//remove steht dafï¿½r dass bestimtme Widgets entfernt werden und mit add neue hinzugefï¿½gt werden 
+//				hpMain.remove(btn2);// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafï¿½r dass eine die neue seite aufgerufen wird 
 //				//vpMain.remove(meinProfil);							// siehe Klasse ActivitySuchen
 //				
 //				vpMain.add(projektmarktplatzSuchen);
@@ -206,8 +260,8 @@ public class Projektmarktplatz implements EntryPoint {
 		//		@Override
 		//		public void onClick(ClickEvent event) {
 		//			//hpMain.removeFromParent();
-		//			hpMain.remove(btn1);		//remove steht dafür dass bestimtme Widgets entfernt werden und mit add neue hinzugefügt werden 
-		//		hpMain.remove(btn2);// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafür dass eine die neue seite aufgerufen wird 
+		//			hpMain.remove(btn1);		//remove steht dafï¿½r dass bestimtme Widgets entfernt werden und mit add neue hinzugefï¿½gt werden 
+		//		hpMain.remove(btn2);// hpMain.add(projektmarktplatzSuchen); sorgt sozusagen dafï¿½r dass eine die neue seite aufgerufen wird 
 				//vpMain.remove(meinProfil);							// siehe Klasse ActivitySuchen
 				
 		//			vpMain.add(activityBewerbungen);

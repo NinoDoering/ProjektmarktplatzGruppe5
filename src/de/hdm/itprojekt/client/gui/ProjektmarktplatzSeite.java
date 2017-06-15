@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.client.Showcase;
@@ -33,6 +34,8 @@ public class ProjektmarktplatzSeite extends Showcase{
 	HorizontalPanel hpanelMarktplatz = new HorizontalPanel();
 	VerticalPanel vpanelMarktplatz = new VerticalPanel();
 	
+	private Marktplatz m1= new Marktplatz();
+	
 	final SingleSelectionModel<Marktplatz> ssmalleprojektmarktplaetze = new SingleSelectionModel<Marktplatz>();
 	
 	Button anlegenbutton = new Button("Anlegen");
@@ -40,7 +43,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "<h1>Marktplatz Suche</h1>";
+		return "<h1>Marktplatz durchsuchen</h1>";
 	}
 
 	@Override
@@ -57,6 +60,20 @@ public class ProjektmarktplatzSeite extends Showcase{
 		
 		marktplatztabelle.setSelectionModel(ssmalleprojektmarktplaetze);
 		
+		ssmalleprojektmarktplaetze.addSelectionChangeHandler(new Handler() {
+			
+			@Override
+			public void onSelectionChange(SelectionChangeEvent event) {
+				// TODO Auto-generated method stub
+				m1 = ssmalleprojektmarktplaetze.getSelectedObject();
+				Showcase showcase = new ProjekteSeite(m1);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
+		
+		
 		TextColumn<Marktplatz> marktplatztabellespaltenname = new TextColumn<Marktplatz>(){
 
 			@Override
@@ -67,7 +84,18 @@ public class ProjektmarktplatzSeite extends Showcase{
 			
 		};
 		
+		TextColumn<Marktplatz> marktplatztabellegeschaeftsgebiet = new TextColumn<Marktplatz>(){
+
+			@Override
+			public String getValue(Marktplatz object) {
+				// TODO Auto-generated method stub
+				return object.getGeschaeftsgebiet();
+			}
+			
+		};
+		
 		marktplatztabelle.addColumn(marktplatztabellespaltenname, "Bezeichnung");
+		marktplatztabelle.addColumn(marktplatztabellegeschaeftsgebiet, "Geschäftsgebiet");
 		gwtproxy.getAllMarktplaetze(new getProjektmarktplatzAusDB());
 		anlegenbutton.addClickHandler(new ClickHandler() {
 			
