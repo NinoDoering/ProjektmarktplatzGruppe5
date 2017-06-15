@@ -29,14 +29,19 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AnzeigeP extends HorizontalPanel {
 	
+<<<<<<< HEAD
 	
 
 
+=======
+private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);	
+>>>>>>> branch 'master' of https://github.com/NinoDoering/ProjektmarktplatzGruppe5.git
 public int ID;	
 
 public Button btnBezeichnung; 
 public Button btnnew;
-private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
+public Button btnnewA;
+final DialogBox dialogBoxAuss;
 final DialogBox dialogBox;
 // TextBoxen für Neues Projekt 
 
@@ -47,12 +52,52 @@ final DialogBox dialogBox;
 	 btnBezeichnung = new Button();
 	
 	 btnnew = new Button("+"); 
+	 
 	
+	 
+	 // dialogboxen Start
+	 // 1.Projekte
+	 dialogBox = new DialogBox();
+	 
+		dialogBox.setText("Neues Projekt");
+		dialogBox.setAnimationEnabled(true);
+		final Button createButton = new Button("Erstellen");
+		final Button closeButton = new Button("Abbrechen");
+		final Label proBez = new Label("Bezeichnung; ");
+		final Label proBeschr = new Label("Beschreibung: ");
+		final TextBox tbBezeichnung = new TextBox();
+		final TextBox tbBeschreibung = new TextBox();
+		final DatePicker startD = new DatePicker();
+		final Label startDatum = new Label("Startdatum: ");
+		final DatePicker endD = new DatePicker();
+		final Label endDatum = new Label("Enddatum: ");
+		final Label text = new Label();
+		final Label textEnd = new Label();
+		final TextBox idPers = new TextBox();
+		final TextBox idMarkt = new TextBox();
+	//2. Ausschreibungen
+	dialogBoxAuss	= new DialogBox();
+	dialogBox.setText("Neue Ausschreibung hinzufuegen");
+	dialogBox.setAnimationEnabled(true);
+	final Button createButtonA = new Button("Erstellen");
+	final Button closeButtonA = new Button("Abbrechen");
+	final Label ausBez = new Label("Bezeichnung");
+	final Label ausBeschr = new Label("Beschreibung");
+	final TextBox tbausBez = new TextBox();
+	final TextBox tbausBeschr = new TextBox();
+	final DatePicker befrist = new DatePicker();
+	final Label idPProfil = new Label("ID Partneerprfil");
+	final Label idProjekt = new Label("ID Projekt");
+	final Label idAusPers = new Label("ID Ausschreibender");
+	final Label status = new Label("Status");
+	
+		
 	 // TextBoxen für Neues Projekt 
 btnBezeichnung.setStyleName("Abstand");
 	btnnew.setStyleName("Abstand");
 		add(btnBezeichnung);
 		add(btnnew);
+		add(btnnewA);
 		btnBezeichnung.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -99,24 +144,7 @@ btnBezeichnung.setStyleName("Abstand");
 			}
 		});
 		
-		 dialogBox = new DialogBox();
-		 
-			dialogBox.setText("Neues Projekt");
-			dialogBox.setAnimationEnabled(true);
-			final Button createButton = new Button("Erstellen");
-			final Button closeButton = new Button("Abbrechen");
-			final Label proBez = new Label("Bezeichnung; ");
-			final Label proBeschr = new Label("Beschreibung: ");
-			final TextBox tbBezeichnung = new TextBox();
-			final TextBox tbBeschreibung = new TextBox();
-			final DatePicker startD = new DatePicker();
-			final Label startDatum = new Label("Startdatum: ");
-			final DatePicker endD = new DatePicker();
-			final Label endDatum = new Label("Enddatum: ");
-			final Label text = new Label();
-			final Label textEnd = new Label();
-			final TextBox idPers = new TextBox();
-			final TextBox idMarkt = new TextBox();
+		
 			
 			
 			// hey habe ein DatePicker wo man stard und enddatum von nem Projekte
@@ -126,6 +154,9 @@ btnBezeichnung.setStyleName("Abstand");
 //					gesetzte 
 //					ich markieren datepicker mit "#"
 			
+		
+			// DatePickr und DateBox Erstellung Start
+			// 1.Projekte 
 			// Erstellung des DatePicker für das StartDatum
 			
 			startD.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -174,8 +205,33 @@ btnBezeichnung.setStyleName("Abstand");
 		      
 		      final DateBox dateEndBox = new DateBox();
 		      dateEndBox.setFormat(new DateBox.DefaultFormat(dateEnd));
+		      
+		     //2. Ausschreibung 
+		      
+		      befrist.addValueChangeHandler(new ValueChangeHandler<Date>() {
+					
+					@Override
+					public void onValueChange(ValueChangeEvent<Date> event) {
+						Date bewerbungsFrist = event.getValue();
+						
+						String datum = DateTimeFormat.getFormat("yyyy-MM-dd").format(bewerbungsFrist);
+						text.setText(datum);
+						//#
+						
+					}
+				});
+		      
+		      befrist.setValue( new Date(), true);
+				
+		    //DateBox für die Bewerbungsfrist einer AUsschreibung erstellen 
+				
+				
+				final DateBox dateBoxA = new DateBox();
+			      dateBoxA.setFormat(new DateBox.DefaultFormat(dateFormat));
+
+				
 			
-		     // Hinzufügen der Label,TextBoxen und  DateBoxen zum PopUp Fenster 
+		     // Hinzufügen der Label,TextBoxen und  DateBoxen zum PopUp Fenster der Projekte
 		      
 			closeButton.getElement().setId("closeButton");
 			final Label textToServerLabel = new Label();
@@ -218,6 +274,40 @@ btnBezeichnung.setStyleName("Abstand");
 			});
 
 	
+			 // Hinzufügen der Label,TextBoxen und  DateBoxen zum PopUp Fenster der Projekte
+			
+			closeButton.getElement().setId("closeButton");
+			
+			
+			VerticalPanel dialogVPanelA = new VerticalPanel();
+			dialogVPanelA.addStyleName("dialogVPanel");
+			dialogVPanelA.add(new HTML("<b>Ein neues Projekt erstellen:</b>"));
+			dialogVPanelA.add(textToServerLabel);
+			dialogVPanelA.add(new HTML("<br><b>Ihre Eingaben:</b>"));
+			dialogVPanelA.add(serverResponseLabel);
+			dialogVPanelA.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
+			//
+			dialogVPanelA.add(idAusPers);
+			dialogVPanelA.add(idMarkt);
+			//
+			dialogVPanelA.add(ausBez);
+			dialogVPanelA.add(ausBeschr);
+			dialogVPanelA.add(tbausBez);
+			dialogVPanelA.add(tbausBeschr);
+		
+			dialogVPanelA.add(text);
+			//dialogVPanel.add(startD);  // DatePicker wird nicht hinzugefügt , da unnötig da 
+										// durch DateBox ein DatePicker aufpopt 
+			
+			
+			dialogVPanelA.add(befrist);							
+			dialogVPanelA.add(dateBoxA);
+			dialogVPanelA.add(closeButtonA);
+			dialogVPanelA.add(createButtonA);
+			dialogBoxAuss.setWidget(dialogVPanelA);
+
+			
+			
 			// was passiert beim Klick des Erstellen (create) Buttons
 			
 			createButton.addClickHandler(new ClickHandler() {
@@ -255,6 +345,16 @@ btnBezeichnung.setStyleName("Abstand");
 				}
 			});
 		
+			
+			btnnewA.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					dialogBoxAuss.center();
+				}
+			});
+			
 	}
 	
 	

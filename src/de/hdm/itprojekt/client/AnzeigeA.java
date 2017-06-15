@@ -32,9 +32,12 @@ public Label lblBewerbFrist;
 public Label lblBezeichnung;
 private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 // TextBoxen für Neues Projekt 
-
+ 
 	public AnzeigeA()
 	{
+		
+		 btnnewA = new Button("+");
+		
 	 btnBezeichnung = new Button();
 	
 	 btnnew = new Button("+"); 
