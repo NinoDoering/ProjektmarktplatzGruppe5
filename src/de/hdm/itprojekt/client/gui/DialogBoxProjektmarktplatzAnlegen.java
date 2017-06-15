@@ -32,6 +32,8 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 	
 	Label marktplatzname = new Label("Projektmarktplatzbezeichnung: ");
 	TextArea bezeichnung = new TextArea();
+	Label geschaeftsgebiet = new Label("Geschäftsgebiet: ");
+	TextArea gebiet = new TextArea();
 	
 	FlexTable marktplatzdialogboxtabelle = new FlexTable();
 	public DialogBoxProjektmarktplatzAnlegen(){
@@ -50,7 +52,7 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 					Window.alert("Bitte geben Sie ein Projektmarktplatzname ein:");
 				}
 				else{
-					gwtproxy.anlegenMarktplatz(null, bezeichnung.getText(), new marktplatzinDB());
+					gwtproxy.anlegenMarktplatz(gebiet.getText(), bezeichnung.getText(), new marktplatzinDB());
 				}
 			}
 		});
@@ -66,6 +68,8 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 		this.add(vpanel);
 		marktplatzdialogboxtabelle.setWidget(1, 0, marktplatzname);
 		marktplatzdialogboxtabelle.setWidget(1, 1, bezeichnung);
+		marktplatzdialogboxtabelle.setWidget(2, 0, geschaeftsgebiet);
+		marktplatzdialogboxtabelle.setWidget(2, 1, gebiet);
 	}
 	private class marktplatzinDB implements AsyncCallback<Marktplatz>{
 
