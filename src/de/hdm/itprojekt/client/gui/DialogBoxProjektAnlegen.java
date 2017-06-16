@@ -51,8 +51,8 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 	Label enddatum = new Label("Enddatum des Projektes");
 	DatePicker endD = new DatePicker();
 	final Label textEnde = new Label();
-	//!!!!!!!!!!!!!!! für test Person ID manuell eingeben !!!!!!!!!!!!!!!!!!!!!!!!
-	Label projektleiter = new Label("ID des zugehörigen Projektleiters");
+	//!!!!!!!!!!!!!!! fï¿½r test Person ID manuell eingeben !!!!!!!!!!!!!!!!!!!!!!!!
+	Label projektleiter = new Label("ID des zugehï¿½rigen Projektleiters");
 	TextBox proLeit	= new TextBox();
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
@@ -145,7 +145,7 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 		public void onSuccess(Projekt result) {
 			Window.alert("Ein neues Projekt wurde erstellt.");
 			hide();
-			Showcase showcase = new ProjekteSeite();
+			Showcase showcase = new ProjekteSeite(mp2);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			
