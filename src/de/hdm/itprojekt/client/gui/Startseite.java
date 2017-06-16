@@ -15,8 +15,8 @@ public class Startseite extends Showcase{
 	@Override
 	protected void run() {
 		VerticalPanel homePanel = new VerticalPanel();
-		this.append("<p> <h1> Herzlich Willkommen zu SEBHATU </h1>"
-				 + "<br> <text> SEBHATU ist eine neue Art Projekte zu erstellen um sie mit anderen Menschen in der SEBHATU-Community zu teilen.  </text>" +
+		this.append("<p> <h1> Herzlich Willkommen zu MeetProjects </h1>"
+				 + "<br> <text> MeetProjects ist eine neue Art Projekte zu erstellen, um Sie mit anderen Menschen in der MeetProjects-Community zu teilen.  </text>" +
 				" </p>");
 		
 		this.add(homePanel);
