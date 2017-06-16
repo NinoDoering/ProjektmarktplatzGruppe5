@@ -40,6 +40,9 @@ public class ProjektmarktplatzSeite extends Showcase{
 	
 	Button anlegenbutton = new Button("Anlegen");
 	
+	String deleteMarktplatz = new String("Löschen");
+	Button deleteM	 = new Button();
+	
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -93,6 +96,8 @@ public class ProjektmarktplatzSeite extends Showcase{
 			}
 			
 		};
+		
+	
 		
 		marktplatztabelle.addColumn(marktplatztabellespaltenname, "Bezeichnung");
 		marktplatztabelle.addColumn(marktplatztabellegeschaeftsgebiet, "GeschÃ¤ftsgebiet");

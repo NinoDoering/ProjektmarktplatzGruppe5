@@ -3,11 +3,14 @@ package de.hdm.itprojekt.client.gui;
 import java.util.Vector;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -121,6 +124,14 @@ public class ProjekteSeite extends Showcase{
 		projekttabelle.addColumn(projektStartD, "Startdatum");
 		projekttabelle.addColumn(projektEndD, "Enddatum");
 		gwtproxy.getProjektbyMarktplatz(mp, new getProjekteAusDB());
+anlegenprojekt.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp);
+				dialogbox.center();
+			}
+		});
 }
 		private class getProjekteAusDB implements AsyncCallback<Vector<Projekt>>{
 
