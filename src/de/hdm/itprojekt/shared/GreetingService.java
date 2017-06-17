@@ -13,6 +13,7 @@ import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 
 //Rueckgaengig
 //zweiterVersuch
@@ -36,6 +37,11 @@ public interface GreetingService extends RemoteService  {
 	
 	//--------Ausschreibung------	
 	Ausschreibung findAusschreibungByKey(int idAusschreibung);
+	
+	public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum,
+			int idPartnerprofil, Status ausschreibungsstatus)
+			throws IllegalArgumentException;
+	
 	
 	//---------Marktplatz-----
 	

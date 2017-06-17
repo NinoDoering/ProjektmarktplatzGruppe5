@@ -13,6 +13,7 @@ import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 //Rueckgaengig
 //ZweiterVersuch!
 /**
@@ -36,6 +37,11 @@ public interface GreetingServiceAsync {
 	
 
 	void findPersonByKey(int key, AsyncCallback<Person> callback);
+	
+	//-------Ausschreibung-----
+	
+	void anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung, String beschreibung, Date endDatum,
+			int idPartnerprofil, Status ausschreibungsstatus, AsyncCallback<Ausschreibung> callback);
 	
 	void findAusschreibungByKey (int idAusschreibung, AsyncCallback<Ausschreibung> callback); 
 	

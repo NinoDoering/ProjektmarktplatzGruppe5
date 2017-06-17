@@ -72,6 +72,11 @@ public class ProjekteSeite extends Showcase{
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
 				//WEITERMACHEN FÜR AUSSCHREIBUNG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				p1= ssmalleprojekte.getSelectedObject();
+				Showcase showcase = new AusschreibungSeite(p1);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+				
 			}
 		});
 		
@@ -124,7 +129,7 @@ public class ProjekteSeite extends Showcase{
 		projekttabelle.addColumn(projektStartD, "Startdatum");
 		projekttabelle.addColumn(projektEndD, "Enddatum");
 		gwtproxy.getProjektbyMarktplatz(mp, new getProjekteAusDB());
-anlegenprojekt.addClickHandler(new ClickHandler() {
+		anlegenprojekt.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {

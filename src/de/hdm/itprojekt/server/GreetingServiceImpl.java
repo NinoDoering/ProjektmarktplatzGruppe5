@@ -22,6 +22,7 @@ import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 
 import java.util.Date;
 import java.util.Vector;
@@ -130,7 +131,23 @@ public void init() throws IllegalArgumentException {
 		}
 	
 	
-	
+		@Override
+		public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung,
+				String beschreibung, Date endDatum, int idPartnerprofil, Status ausschreibungsstatus)
+				throws IllegalArgumentException {
+			Ausschreibung a = new Ausschreibung();
+
+			a.setId(1);
+			a.setBezeichnung(bezeichnung);
+			a.setEndDatum(endDatum);
+			a.setBeschreibung(beschreibung);
+			a.setIdProjekt(idProjekt);
+			a.setIdAusschreibender(idAusschreibender);
+			a.setIdPartnerprofil(idPartnerprofil);
+			a.setAusschreibungsstatus(ausschreibungsstatus);
+
+			return this.ausschreibungMapper.insertAusschreibung(a);
+		}
 	
 
 //-------Marktplatz-------	
