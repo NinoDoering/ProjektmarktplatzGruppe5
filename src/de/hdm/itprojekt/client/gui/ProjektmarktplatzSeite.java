@@ -38,9 +38,9 @@ public class ProjektmarktplatzSeite extends Showcase{
 	
 	final SingleSelectionModel<Marktplatz> ssmalleprojektmarktplaetze = new SingleSelectionModel<Marktplatz>();
 	
-	Button anlegenbutton = new Button("Anlegen");
+	Button anlegenbutton = new Button("Neuen Markplatz anlegen");
 	
-	String deleteMarktplatz = new String("Löschen");
+	String deleteMarktplatz = new String("LÃ¶schen");
 	Button deleteM	 = new Button();
 	
 	@Override

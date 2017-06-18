@@ -11,9 +11,11 @@ import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
+import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 
 //Rueckgaengig
 //zweiterVersuch
@@ -72,5 +74,17 @@ public interface GreetingService extends RemoteService  {
 			throws IllegalArgumentException;
 	//-------Bewerbungen-------
 	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException;
+	
+	public Bewerbung anlegenBewerbung(Bewerbung b) throws IllegalArgumentException;
+
+	public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException;
+
+	public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException;
+	
+//	public void saveBewerbung (Bewerbung b) throws IllegalArgumentException;
+	
+	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException;
+
+	public Vector<Bewerbung> getBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 
 }

@@ -19,7 +19,9 @@ import de.hdm.itprojekt.server.db.UnternehmenMapper;
 import de.hdm.itprojekt.shared.FieldVerifier;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
@@ -72,7 +74,7 @@ public GreetingServiceImpl() throws IllegalArgumentException {
 public void init() throws IllegalArgumentException {
 
 	// this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse
-	// wird gelöscht)
+	// wird gelï¿½scht)
 	this.eigMapper = EigenschaftMapper.eigenschaftMapper();
 	this.orgaMapper = OrganisationseinheitMapper.organisationseinheitMapper(); // kommt noch raus?
 	this.mpMapper = MarktplatzMapper.marktplatzMapper();
@@ -83,7 +85,7 @@ public void init() throws IllegalArgumentException {
 	this.teamMapper = TeamMapper.teamMapper();
 	this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
 	this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper(); 
-	this.bewertungMapper = BewertungMapper.bewertungMapper();									//.ausschreibungMapper muss das heißen auch in Mapperklasse
+	this.bewertungMapper = BewertungMapper.bewertungMapper();									//.ausschreibungMapper muss das heiï¿½en auch in Mapperklasse
 	this.bewerbungMapper = BewerbungMapper.bewerbungmapper();//gleicher Fehler!!!!!
 	this.beteiligungMapper = BeteiligungMapper.beteiligungMapper(); // gleicher Fall
 	}
@@ -232,9 +234,6 @@ public void init() throws IllegalArgumentException {
 		return this.prjktMapper.insertProjekt(p);		
 		}
 
-
-
-
 	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) {
 			
 			Vector<Projekt> result = new Vector<Projekt>();
@@ -253,6 +252,42 @@ public void init() throws IllegalArgumentException {
 	//------------Bewerbungen--------------
 	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
 		return this.bewerbungMapper.findAllBewerbungen();
+	}
+
+	@Override
+	public Bewerbung anlegenBewerbung(Bewerbung b) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return this.bewerbungMapper.insertBewerbung(b);
+	}
+
+	@Override
+	public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public void saveBewerbung(Bewerbung b) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
+	@Override
+	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Bewerbung> getBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 		

@@ -10,7 +10,9 @@ import com.google.gwt.user.client.ui.Label;
 import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
@@ -73,6 +75,20 @@ public interface GreetingServiceAsync {
 
 	//-----Bewerbungen-----
 	void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
+
+	void anlegenBewerbung(Bewerbung b, AsyncCallback<Bewerbung> callback);
+
+	void loeschenBewerbung(Bewerbung b, AsyncCallback<Void> callback);
+
+	void getBewerbungbyId(int idBewerbung, AsyncCallback<Bewerbung> callback);
+
+	// void saveBewerbung(Bewerbung b, AsyncCallback<Void> callback);
+
+	void getBewerbungByBewerber(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
+
+	void getBewerbungByAusschreibung(Ausschreibung a, AsyncCallback<Vector<Bewerbung>> callback);
+	
+	
 
 	
 	

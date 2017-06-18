@@ -38,7 +38,7 @@ public class ProjekteSeite extends Showcase{
 	
 	final SingleSelectionModel<Projekt> ssmalleprojekte = new SingleSelectionModel<Projekt>();
 	
-	Button anlegenprojekt = new Button("Anlegen");
+	Button anlegenprojekt = new Button("Neues Projekt anlegen");
 	
 	public ProjekteSeite(){
 	

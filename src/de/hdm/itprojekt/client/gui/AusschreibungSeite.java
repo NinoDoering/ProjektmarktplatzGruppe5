@@ -10,6 +10,7 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -21,12 +22,14 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AusschreibungSeite extends Showcase {
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Projekt p1 = new Projekt();
+	private Bewerbung bwerb = new Bewerbung();
 	CellTable<Ausschreibung> ausschreibungtabelle = new CellTable<Ausschreibung>();
 	
 	private HorizontalPanel hpanelAusschreibung = new HorizontalPanel();
@@ -34,16 +37,21 @@ public class AusschreibungSeite extends Showcase {
 	
 	final SingleSelectionModel<Ausschreibung> ssmalleausschreibung = new SingleSelectionModel<Ausschreibung>();
 	
-	Button anlegenAusschreibung = new Button("Anlegen");
-	
+	Button anlegenAusschreibung = new Button("Neue Ausschreibung anlegen");
+	Button bewerbenAusschreibung = new Button("Auf diese Ausschreibung bewerben");
+
 	 public AusschreibungSeite() {
 		
 	}
-	 // konstruktor um fremdschl�ssel zu �bergeben
+	 // konstruktor um fremdschl�ssel zu �bergeben
 	 // damit die ausschreibungen zum passenden projekt angezeigt werden 
 	 public AusschreibungSeite(Projekt p1) {
 			this.p1=p1;
 		}
+	 
+	 public AusschreibungSeite(Bewerbung b){
+		 this.bwerb=b;
+	 }
 	 
 	@Override
 	protected String getHeadlineText() {
@@ -58,6 +66,7 @@ public class AusschreibungSeite extends Showcase {
 		ausschreibungtabelle.setWidth("100%", true);
 		vpanelAusschreibung.add(ausschreibungtabelle);
 		hpanelAusschreibung.add(anlegenAusschreibung);
+		hpanelAusschreibung.add(bewerbenAusschreibung);
 		this.add(hpanelAusschreibung);
 		this.add(vpanelAusschreibung);
 		
@@ -121,12 +130,24 @@ public class AusschreibungSeite extends Showcase {
 		ausschreibungtabelle.addColumn(ausschrBefrist,"Bewerbungsfrist");
 		ausschreibungtabelle.addColumn(ausschrStatus, "Status der Ausschreibung");
 		gwtproxy.getAusschreibungByProjekt(p1, new getAusschreibungAusDB());
+		
 		anlegenAusschreibung.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				// neue Auss anlegen
+//				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
+//				DialogBox db1 = new DialogBoxBewerbungAnlegen(ssmalleausschreibung.getSelectedObject(), null);
+//				db1.center();
+			}
+		});
+		
+		bewerbenAusschreibung.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+//				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
+				DialogBox db1 = new DialogBoxBewerbungAnlegen(ssmalleausschreibung.getSelectedObject(), null);
+				db1.center();
 			}
 		});
 	}		
