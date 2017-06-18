@@ -14,7 +14,16 @@ public class Ausschreibung extends BusinessObject  {
 	private int idProjekt;
 	private int idPartnerprofil;
 	private int idAusschreibender;
-    public enum Status {besetzt, abgebrochen, laufend};
+    public enum Status {besetzt, abgebrochen, laufend;
+    	public String toString3(){
+    		switch(this){
+    		case besetzt: return "besetzt";
+    		case abgebrochen: return "abgebrochen";
+    		case laufend: return "laufend";
+    		default: throw new IllegalArgumentException();
+    		}
+    	}
+    }
 	private Status ausschreibungsstatus = Status.laufend;
     
     public void setIdProjekt(int idProjekt) {
