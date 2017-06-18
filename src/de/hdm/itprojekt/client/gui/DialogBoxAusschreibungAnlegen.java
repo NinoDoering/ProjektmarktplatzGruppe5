@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -62,6 +63,13 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	TextArea idASD = new TextArea();
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
+	// Versuch für Status mit RadioButton
+	Label ausschreibungsStatus = new Label("Status der Ausschreibung");
+	RadioButton rb1 = new RadioButton("statusGroup", "besetzt");
+	RadioButton rb2 = new RadioButton("statusGroup", "laufend");
+	RadioButton rb3 = new RadioButton("statusGroup", "abgebrochen");
+	
+	
 	FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
 	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt){
@@ -95,7 +103,9 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 //			@Override
 //			public void onClick(ClickEvent event) {
 //				// TODO Auto-generated method stub
-//				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(), aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(), Integer.parseInt(idPP.getText()), aussbez.getText().toString(), new ausschreibungInDB());
+//				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(),
+//						aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(),
+//						Integer.parseInt(idPP.getText()), null, new ausschreibungInDB() );
 //			}
 //		});
 		
@@ -119,9 +129,12 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		ausschreibungdialogboxtabelle.setWidget(3, 1, aussbefrist);
 		ausschreibungdialogboxtabelle.setWidget(4, 0, idAusschreibender);
 		ausschreibungdialogboxtabelle.setWidget(4, 1, idASD);
-		ausschreibungdialogboxtabelle.setWidget(5, 1, idPartnerprofil);
+		ausschreibungdialogboxtabelle.setWidget(5, 0, idPartnerprofil);
 		ausschreibungdialogboxtabelle.setWidget(5, 1, idPP);
-		
+		ausschreibungdialogboxtabelle.setWidget(6, 0, ausschreibungsStatus);
+		ausschreibungdialogboxtabelle.setWidget(7, 0, rb1);
+		ausschreibungdialogboxtabelle.setWidget(8, 0, rb2);
+		ausschreibungdialogboxtabelle.setWidget(9, 0, rb3);
 	}
 	
 	private class ausschreibungInDB implements AsyncCallback<Ausschreibung>{
