@@ -2,6 +2,7 @@ package de.hdm.itprojekt.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
@@ -57,11 +58,34 @@ public class Navigator extends StackPanel{
 				Showcase showcase = new ProjektmarktplatzSeite();
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
-			}
-		});
 			
-	}
+			}});
+	
+		
+		meineBewerbungen.addClickHandler(new ClickHandler(){
+			
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Showcase showcase = new ActivityBewerbungen();
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+				
+			}});
+		
+		btnBack.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				homeNavigator.removeFromParent();
+				personalNavigator.removeFromParent();
+				Window.Location.reload();
+			}});
+			
+		
+			
+	}}
 	
 	
 	
-}
+

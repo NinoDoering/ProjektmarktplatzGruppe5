@@ -135,9 +135,9 @@ public class AusschreibungSeite extends Showcase {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-//				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
-//				DialogBox db1 = new DialogBoxBewerbungAnlegen(ssmalleausschreibung.getSelectedObject(), null);
-//				db1.center();
+				// TODO Auto-generated method stub
+				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(p1);
+				dialogbox.center();
 			}
 		});
 		

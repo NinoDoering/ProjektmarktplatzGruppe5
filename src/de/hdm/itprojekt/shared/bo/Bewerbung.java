@@ -10,7 +10,15 @@ public class Bewerbung extends BusinessObject {
 	private String bewerbungsText;
 	private Date erstellDatum;
 	private int idAusschreibung;
-	public enum BewerbungsStatus {eingereicht, zusage, absage} ;
+	public enum BewerbungsStatus {eingereicht, zusage, absage;
+		public String toString2(){
+		switch(this) {
+	      case eingereicht: return "eingereicht";
+	      case zusage: return "zusage";
+	      case absage: return "absage";
+	      default: throw new IllegalArgumentException();
+	}	
+	} }
 	private BewerbungsStatus bewerbungsStatus = BewerbungsStatus.eingereicht;
 	public int getIdOrganisationseinheit() {
 		return idOrganisationseinheit;

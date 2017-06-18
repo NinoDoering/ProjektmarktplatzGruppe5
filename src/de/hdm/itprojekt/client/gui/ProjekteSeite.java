@@ -48,6 +48,10 @@ public class ProjekteSeite extends Showcase{
 		this.mp= m1;
 	}
 	
+	public ProjekteSeite(Projekt p1){
+		this.p1=p1;
+	}
+	
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
