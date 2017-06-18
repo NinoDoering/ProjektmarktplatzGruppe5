@@ -8,17 +8,23 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 // --------------------------------ENUM STATUS FEHLT-----------------------
@@ -33,6 +39,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	HorizontalPanel ausschreibungHP = new HorizontalPanel();
 	
 	private Projekt p1 = new Projekt();
+	private Marktplatz mp = new Marktplatz();
 	
 	Button ok = new Button("OK");
 	Button abbrechen = new Button("Abbrechen");
@@ -83,14 +90,14 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		ausschreibungHP.add(ok);
 		ausschreibungHP.add(abbrechen);
 		
-		ok.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(), aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(), Integer.parseInt(idPP.getText()), statu, callback);
-			}
-		});
+//		ok.addClickHandler(new ClickHandler() {
+//			
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(), aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(), Integer.parseInt(idPP.getText()), aussbez.getText().toString(), new ausschreibungInDB());
+//			}
+//		});
 		
 		abbrechen.addClickHandler(new ClickHandler() {
 					
@@ -101,6 +108,40 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 					}
 				});
 		
+		ausschreibungVP.add(ausschreibungdialogboxtabelle);
+		ausschreibungVP.add(ausschreibungHP);
+		this.add(ausschreibungVP);
+		ausschreibungdialogboxtabelle.setWidget(1, 0, ausschreibungbezeichnung);
+		ausschreibungdialogboxtabelle.setWidget(1, 1, aussbez);
+		ausschreibungdialogboxtabelle.setWidget(2, 0, ausschreibungsbeschreibung);
+		ausschreibungdialogboxtabelle.setWidget(2, 1, aussbeschr);
+		ausschreibungdialogboxtabelle.setWidget(3, 0, bewerbungsfrist);
+		ausschreibungdialogboxtabelle.setWidget(3, 1, aussbefrist);
+		ausschreibungdialogboxtabelle.setWidget(4, 0, idAusschreibender);
+		ausschreibungdialogboxtabelle.setWidget(4, 1, idASD);
+		ausschreibungdialogboxtabelle.setWidget(5, 1, idPartnerprofil);
+		ausschreibungdialogboxtabelle.setWidget(5, 1, idPP);
+		
 	}
+	
+	private class ausschreibungInDB implements AsyncCallback<Ausschreibung>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			Window.alert("etwas falsch gelaufen");
+			
+		}
+
+		@Override
+		public void onSuccess(Ausschreibung result) {
+			// TODO Auto-generated method stub
+			hide();
+			Showcase showcase = new ProjekteSeite(p1);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(showcase);
+			
+		}
 }
 
+}
