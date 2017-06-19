@@ -510,13 +510,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 
-	// benötigen wir nicht
-	//// getAllMarktplaetze
-	// public Vector<Marktplatz> getAllMarktplaetze() throws
-	// IllegalArgumentException {
-	// return this.mpMapper.findAll();
-	// }
-	//
+	// getAllMarktplaetze
+	public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException {
+		return this.mpMapper.findAllMarktplatz();
+	}
+
 	//// getMarktplatzByBezeichnung
 	// public Vector<Marktplatz> getMarktplatzByBezeichnung(String bezeichnung)
 	// throws IllegalArgumentException {

@@ -40,9 +40,7 @@ public interface GreetingService extends RemoteService  {
 		
 		// Projektmarktplatz pm
 		
-		public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)throws IllegalArgumentException;;
-
-
+		public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)throws IllegalArgumentException;
 		
 		public void loeschenMarktplatz(Marktplatz pm)throws IllegalArgumentException;;
 		
@@ -50,8 +48,9 @@ public interface GreetingService extends RemoteService  {
 		
 		public void saveMarktplatz (Marktplatz pm) throws IllegalArgumentException;
 		
+		public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException;
 		
-
+		
 		
 		// Projekt p	
 
@@ -214,6 +213,8 @@ public interface GreetingService extends RemoteService  {
 		// Organisationseinheit
 		
 		public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) throws IllegalArgumentException;
+		
+		public Vector<Organisationseinheit> getAllOrganisationseinheiten() throws IllegalArgumentException;
 		
 		
 

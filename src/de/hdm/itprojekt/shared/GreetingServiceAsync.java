@@ -211,6 +211,8 @@ public interface GreetingServiceAsync {
 		// Organisationseinheit o
 		
 		void getOrganisationseinheitById(int idOrganisationseinheit, AsyncCallback<Organisationseinheit> callback);
+		
+		void getAllOrganisationseinheiten(AsyncCallback<Vector<Organisationseinheit>> callback);
 
 
 		// Anforderungen und Aufrufe definieren mit Asynch 
