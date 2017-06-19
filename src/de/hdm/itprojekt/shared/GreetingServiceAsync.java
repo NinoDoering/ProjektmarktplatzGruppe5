@@ -82,6 +82,8 @@ public interface GreetingServiceAsync {
 		void saveAusschreibung(Ausschreibung a, AsyncCallback<Void> callback);
 
 		void getAusschreibungByProjekt(Projekt p, AsyncCallback<Vector<Ausschreibung>> callback);
+		
+		void getAusschreibungByAusschreibender(Organisationseinheit o, AsyncCallback<Vector<Ausschreibung>> callback);
 
 		
 		// Partnerprofil Asynch
@@ -115,6 +117,8 @@ public interface GreetingServiceAsync {
 		void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
 		
 		void getBewerbungByAusschreibung(Ausschreibung a, AsyncCallback<Vector<Bewerbung>> callback);
+		
+		void getBewerbungByAusschreibungId(int idAusschreibung, AsyncCallback<Vector<Bewerbung>> callback);
 		
 		
 		// Eigenschaft Asynch	

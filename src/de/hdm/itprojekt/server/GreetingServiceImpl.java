@@ -816,7 +816,21 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	@Override
 	public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		ausschreibungMapper.updateAusschreibung(a);
-
+	}
+	
+	// getAusschreibungByAusschreibender
+	@Override
+	public Vector<Ausschreibung> getAusschreibungByAusschreibender(Organisationseinheit o)
+			throws IllegalArgumentException {
+		
+		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
+		if(o != null && this.ausschreibungMapper != null){
+			Vector<Ausschreibung> a = this.ausschreibungMapper.findAusschreibungByAusschreibender(o.getId());
+				if(a != null){
+					result.addAll(a);
+				}
+		}
+		return result;
 	}
 
 /*##########################################################

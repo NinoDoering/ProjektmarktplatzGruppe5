@@ -86,6 +86,8 @@ public interface GreetingService extends RemoteService  {
 		public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 		
 		public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) throws IllegalArgumentException;
+		
+		Vector<Ausschreibung> getAusschreibungByAusschreibender(Organisationseinheit o) throws IllegalArgumentException;
 
 		
 		// Partnerprofil pp
@@ -126,6 +128,8 @@ public interface GreetingService extends RemoteService  {
 		public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException;
 		
 		public Vector<Bewerbung> getBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
+		
+		public Vector<Bewerbung> getBewerbungByAusschreibungId(int idAusschreibung) throws IllegalArgumentException;
 
 		
 		// Eigenschaft e
@@ -235,5 +239,6 @@ public interface GreetingService extends RemoteService  {
 		
 		// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
 		public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) throws IllegalArgumentException;
+
 
 	}
