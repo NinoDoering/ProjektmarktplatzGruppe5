@@ -955,6 +955,22 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 			return null;
 	}
 
+	// getAllOrganisationseinheiten
+	public Vector<Organisationseinheit> getAllOrganisationseinheiten() throws IllegalArgumentException {
+
+		Vector<Organisationseinheit> orgaEinheiten = new Vector<Organisationseinheit>();
+
+		Vector<Person> pe = persMapper.findAllPerson();
+		Vector<Team> t = teamMapper.findAllTeam();
+		Vector<Unternehmen> u = unternehmenMapper.findAllUnternehmen();
+
+		orgaEinheiten.addAll(pe);
+		orgaEinheiten.addAll(t);
+		orgaEinheiten.addAll(u);
+
+		return orgaEinheiten;
+	}
+	
 	// Anforderungen
 
 	// 3.Abfrage von allen Ausschreibungen

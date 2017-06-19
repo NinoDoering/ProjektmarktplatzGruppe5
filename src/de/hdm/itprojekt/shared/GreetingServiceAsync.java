@@ -46,6 +46,8 @@ public interface GreetingServiceAsync {
 		void getMarktplatzById(int idMarktplatz, AsyncCallback<Marktplatz> callback);
 
 		void saveMarktplatz(Marktplatz pm, AsyncCallback<Void> callback);
+		
+		void getAllMarktplaetze( AsyncCallback<Vector<Marktplatz>> callback);
 
 		
 		// Projekt Asynch
