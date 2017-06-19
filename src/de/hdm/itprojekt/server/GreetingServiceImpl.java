@@ -223,7 +223,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
  * START PERSON
  #########################################################*/
 
-// anlegenPerson
+	// anlegenPerson
 	@Override
 	public Person anlegenPerson(int idUnternehmen, int idTeam, int idPartnerprofil, String vorname, String nachname)
 			throws IllegalArgumentException {
