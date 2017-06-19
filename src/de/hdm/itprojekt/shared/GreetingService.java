@@ -52,6 +52,7 @@ public interface GreetingService extends RemoteService  {
 		
 		
 		
+		
 		// Projekt p	
 
 		public Projekt anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung, Date startDatum, Date endDatum)
