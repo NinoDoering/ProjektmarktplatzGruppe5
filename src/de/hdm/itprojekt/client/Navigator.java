@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.gui.PersonSeite;
 import de.hdm.itprojekt.client.gui.ProjektmarktplatzSeite;
 
 public class Navigator extends StackPanel{
@@ -72,6 +73,17 @@ public class Navigator extends StackPanel{
 				RootPanel.get("Anzeige").add(showcase);
 				
 			}});
+		meinProfil.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				RootPanel.get("Anzeige").clear();
+				Showcase sh = new PersonSeite();
+				RootPanel.get("Anzeige").add(sh);
+				
+				
+			}
+		});
 		
 		btnBack.addClickHandler(new ClickHandler(){
 

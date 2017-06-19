@@ -25,6 +25,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.BusinessObject;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 
 public class PersonSeite extends Showcase{
@@ -36,11 +37,13 @@ public class PersonSeite extends Showcase{
 	HorizontalPanel hpanelPerson = new HorizontalPanel();
 	VerticalPanel vpanelPerson = new VerticalPanel();
 	
+	private Organisationseinheit o = new Organisationseinheit ();
+	
 	private Person person1= new Person();
 	
 	final SingleSelectionModel<Person> ssmalleperson = new SingleSelectionModel<Person>();
 	
-	Button anzeigebutton = new Button("Profil Anzeigen");
+	Button anzeigebutton = new Button("Profil Suchen");
 	Button bearbeitenbutton = new Button ("Profil Bearbeiten");
 	Button speichernbutton = new Button ("Speichern");
 	Button deletebutton = new Button ("Profil Löschen");
@@ -50,6 +53,10 @@ public class PersonSeite extends Showcase{
 	public PersonSeite() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public PersonSeite(Organisationseinheit o){
+		this.o=o;
+	}
 
 	public PersonSeite(Person p1) {
 		this.person1=p1;
@@ -58,7 +65,7 @@ public class PersonSeite extends Showcase{
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "<h1>Profilseite</h1>";
+		return "<h1>Mein Profil</h1>";
 	}
 
 	@Override
@@ -96,7 +103,7 @@ public class PersonSeite extends Showcase{
 			@Override
 			public String getValue(Person object) {
 				// TODO Auto-generated method stub
-				return object.getId(); 
+			return object.getId()+" "; 
 			}
 			
 		};
@@ -136,28 +143,34 @@ public class PersonSeite extends Showcase{
 		persontabelle.addColumn(persontabellentitel, "Titel");
 		persontabelle.addColumn(personspaltenname, "Vorname");
 		persontabelle.addColumn(persontabellenachname, "Nachname");
-		gwtproxy.findPersonByKey(person1, new getPersonAusDB());
+		
+		gwtproxy.getPersonById(person1.getId(), new getPersonByKey());
+		
 		anzeigebutton.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				//DialogBox dialogbox = new DialogBoxProjektmarktplatzAnlegen();
-				//dialogbox.center();
+			
 			}
 		});
 	}
-public class getPersonAusDB implements AsyncCallback<Vector<Person>>{
+public class getPersonByKey implements AsyncCallback<Person>{
 
 	@Override
 	public void onFailure(Throwable caught) {
-		Window.alert("Hat nicht funktioniert");
+		// TODO Auto-generated method stub
+		Window.alert("Hat nicht Funktioniert.");
+		
 	}
 
 	@Override
-	public void onSuccess(Vector<Person> result) {
-		persontabelle.setRowData(0, result);
-		persontabelle.setRowCount(result.size(), true);
-		Window.alert("Funktioniert");
+	public void onSuccess(Person result) {
+		// TODO Auto-generated method stub
+//		persontabelle.setRowData(0, result);
+//		persontabelle.setRowCount(result.size(), true);
+		Window.alert("Hat Funktioniert.");
+		person1.setId(1);
+
 	}
 	
 }
