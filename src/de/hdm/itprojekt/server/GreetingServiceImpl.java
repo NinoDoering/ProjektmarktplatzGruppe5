@@ -767,7 +767,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		a.setIdProjekt(idProjekt);
 		a.setIdAusschreibender(idAusschreibender);
 		a.setIdPartnerprofil(idPartnerprofil);
-		a.setAusschreibungsstatus(ausschreibungsstatus);
+		a.setAusschreibungsstatus(ausschreibungsstatus.laufend);
 
 		return this.ausschreibungMapper.insertAusschreibung(a);
 	}
@@ -879,6 +879,21 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	// getAllBewerbungen
 	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
 		return this.bewerbungMapper.findAllBewerbungen();
+	}
+	
+	
+	// getBewerbungByAusschreibungId
+	public Vector<Bewerbung> getBewerbungByAusschreibungId(int idAusschreibung) throws IllegalArgumentException {
+		Vector <Bewerbung> result = new Vector <Bewerbung>();
+			if(this.bewerbungMapper != null){
+				
+				Vector<Bewerbung> b = this.bewerbungMapper.findBewerbungByAusschreibung(idAusschreibung);
+				
+				if (b != null){
+					result.addAll(b);
+				}
+			}
+			return result; 
 	}
 
 	/*##########################################################
