@@ -48,7 +48,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public void saveMarktplatz (Marktplatz pm) throws IllegalArgumentException;
 		
-		public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException;
+		Vector<Marktplatz> getAllMarktplaetze();
 		
 		
 		

@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.ActivityBewerbungen;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -34,23 +35,19 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 	Button bewerbungSenden = new Button ("Bewerbung senden");
 	Button bewerbungAbbrechen = new Button ("Bewerbung abbrechen");
 	
-	//private Ausschreibung a = new Ausschreibung ();
-	//private Bewerbung b = new Bewerbung();
-	
 	private Ausschreibung ausschreibungAuswaehlen = new Ausschreibung ();
 	private Bewerbung bewerbungsSchreiben = new Bewerbung ();
 	private Person person1 = new Person();
-	Label bewerbungsTextLabel = new Label();
+	Label bewerbungsTextLabel = new Label("Bewerbungstext");
 	TextArea bewerbungsText = new TextArea();
 	FlexTable bewerbungsTextTabelle = new FlexTable();
 	
 	public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final Person personBewerber){
-		//this.ausschreibungAuswaehlen=ausschreibungAuswahl;
+		
 		this.ausschreibungAuswaehlen=ausschreibungAuswahl;
 		this.person1=personBewerber;
-		//this.a=b;
 		setText("Bewerbung erstellen");
-		this.setAnimationEnabled(true);
+		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
 		bewerbungsText.setCharacterWidth(50);
 		bewerbungsText.setVisibleLines(20);
@@ -61,14 +58,14 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 		bewerbungHP.add(bewerbungAbbrechen);
 		bewerbungVP.add(bewerbungHP);
 		this.add(bewerbungVP);
-		//this.add(bewerbungHP);
 		
 		
 		bewerbungAbbrechen.addClickHandler(new ClickHandler(){
 			
 			@Override
 			public void onClick(ClickEvent event){
-				DialogBoxBewerbungAnlegen.this.hide();
+			hide();
+			
 			}
 		});
 		
@@ -77,13 +74,17 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event){
 		
-				
 				if(bewerbungsText.getText().isEmpty()){
 					Window.alert("Bitte tragen Sie hier Ihr Motivationsschreiben für die Ausschreibung ein.");
-			}
+					bewerbungsSchreiben.setBewerbungsStatus(BewerbungsStatus.eingereicht);
+					bewerbungsSchreiben.setIdAusschreibung(ausschreibungAuswaehlen.getId());
+					bewerbungsSchreiben.setIdOrganisationseinheit(person1.getId());
+					bewerbungsSchreiben.setBewerbungsText(bewerbungsText.getValue());
+					bewerbungsSchreiben.setErstellDatum(new Date());
+				}
 				else{
 					
-			gwtproxy.anlegenBewerbung(bewerbungsSchreiben, new insertBewerbunginDB());
+			gwtproxy.anlegenBewerbung(person1.getIdUnternehmen(), bewerbungsSchreiben.getIdAusschreibung(), bewerbungsSchreiben.getBewerbungsText(), bewerbungsSchreiben.getErstellDatum(), bewerbungsSchreiben.getBewerbungsStatus(), new insertBewerbunginDB());
 				}
 			}
 		
@@ -98,16 +99,11 @@ private class insertBewerbunginDB implements AsyncCallback<Bewerbung>{
 
 	@Override
 	public void onSuccess(Bewerbung result) {
-		bewerbungsSchreiben.setBewerbungsStatus(BewerbungsStatus.eingereicht);
-		bewerbungsSchreiben.setIdAusschreibung(ausschreibungAuswaehlen.getId());
-		bewerbungsSchreiben.setIdOrganisationseinheit(person1.getId());
-		bewerbungsSchreiben.setBewerbungsText(bewerbungsText.getValue());
-		bewerbungsSchreiben.setErstellDatum(new Date());
 		Window.alert("Das Motivationsschreiben wurde erfolgreich gesendet!");
-		hide();
-//		Showcase showcase = new BewerbungsSeite();
-//		RootPanel.get("Navigator").clear();
-//		RootPanel.get("Navigator").add(showcase);
+		hide();	
+		Showcase showcase = new ActivityBewerbungen();
+		RootPanel.get("Navigator").clear();
+		RootPanel.get("Navigator").add(showcase);
 		}		
 	}	
 }
