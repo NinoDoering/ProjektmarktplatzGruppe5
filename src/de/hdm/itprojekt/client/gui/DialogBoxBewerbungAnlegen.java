@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.hdm.itprojekt.client.ActivityBewerbungen;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -101,7 +100,7 @@ private class insertBewerbunginDB implements AsyncCallback<Bewerbung>{
 	public void onSuccess(Bewerbung result) {
 		Window.alert("Das Motivationsschreiben wurde erfolgreich gesendet!");
 		hide();	
-		Showcase showcase = new ActivityBewerbungen();
+		Showcase showcase = new BewerbungenSeite();
 		RootPanel.get("Navigator").clear();
 		RootPanel.get("Navigator").add(showcase);
 		}		

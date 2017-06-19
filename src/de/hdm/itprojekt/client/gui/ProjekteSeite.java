@@ -48,8 +48,8 @@ public class ProjekteSeite extends Showcase{
 		this.mp= m1;
 	}
 	
-	public ProjekteSeite(Projekt p1){
-		this.p1=p1;
+	public ProjekteSeite(Projekt p2){
+		this.p1=p2;
 	}
 	
 	@Override

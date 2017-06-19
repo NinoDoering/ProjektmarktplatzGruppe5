@@ -4,6 +4,13 @@ public class Partnerprofil extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L; //?
 	
+	public Partnerprofil() {
+		// TODO Auto-generated constructor stub
+		
+	}
+
+
+
 	public int getIdAusschreibung(){
 		return getIdAusschreibung();
 	}

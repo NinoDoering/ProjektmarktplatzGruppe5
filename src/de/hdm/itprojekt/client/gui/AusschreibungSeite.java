@@ -6,6 +6,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -14,6 +15,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -23,6 +25,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AusschreibungSeite extends Showcase {
@@ -30,6 +33,8 @@ public class AusschreibungSeite extends Showcase {
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Projekt p1 = new Projekt();
 	private Bewerbung bwerb = new Bewerbung();
+	private Ausschreibung a1 = new Ausschreibung();
+	private Ausschreibung pp1 = new Ausschreibung();
 	CellTable<Ausschreibung> ausschreibungtabelle = new CellTable<Ausschreibung>();
 	
 	private HorizontalPanel hpanelAusschreibung = new HorizontalPanel();
@@ -77,6 +82,11 @@ public class AusschreibungSeite extends Showcase {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
+				// für Eigenschft
+				pp1= ssmalleausschreibung.getSelectedObject();
+				Showcase showcase = new EigenschaftAusSeite();
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
 				
 			}
 		});
@@ -124,8 +134,18 @@ public class AusschreibungSeite extends Showcase {
 		
 		
 	};
+		TextColumn<Ausschreibung> ppId = new TextColumn<Ausschreibung>(){
+			
+			@Override
+			public String getValue(Ausschreibung object) {
+				// TODO Auto-generated method stub
+				return object.getIdPartnerprofil()+"";
+			}
 		
-		ausschreibungtabelle.addColumn(ausschrBeschr, "Bezeichnung");
+		
+	};
+		ausschreibungtabelle.addColumn(ppId, "Id des Partnerprofil");
+		ausschreibungtabelle.addColumn(ausschrBez, "Bezeichnung");
 		ausschreibungtabelle.addColumn(ausschrBeschr, "Beschreibung");
 		ausschreibungtabelle.addColumn(ausschrBefrist,"Bewerbungsfrist");
 		ausschreibungtabelle.addColumn(ausschrStatus, "Status der Ausschreibung");

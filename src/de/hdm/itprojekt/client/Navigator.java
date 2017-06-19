@@ -26,7 +26,14 @@ public class Navigator extends StackPanel{
 	
 	Button projektmarktplatzSuchen = new Button("Projektmarktplätze");
 	
+	Button Logout = new Button("Logout");
+	
 	public Navigator(){
+		
+		homeNavigator.add(Logout);
+		Logout.setWidth("200px");
+		Logout.setStylePrimaryName("navi-button");
+		
 		homeNavigator.add(projektmarktplatzSuchen);
 		projektmarktplatzSuchen.setWidth("200px");
 		projektmarktplatzSuchen.setStylePrimaryName("navi-button");
@@ -95,7 +102,14 @@ public class Navigator extends StackPanel{
 				Window.Location.reload();
 			}});
 			
-		
+		Logout.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				//logout funktion 
+			}
+		});
 			
 	}}
 	

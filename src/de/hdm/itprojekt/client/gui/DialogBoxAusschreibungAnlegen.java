@@ -25,6 +25,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
@@ -39,7 +40,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	VerticalPanel ausschreibungVP = new VerticalPanel();
 	HorizontalPanel ausschreibungHP = new HorizontalPanel();
 	
-	private Projekt p1 = new Projekt();
+	private Projekt p2 = new Projekt();
 	private Marktplatz mp = new Marktplatz();
 	
 	Button ok = new Button("OK");
@@ -55,7 +56,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	DatePicker aussbefrist = new DatePicker();
 	Label textBewerbungsfrist = new Label();
 	
-	// IDs müssen noch manuell eingegeben werden 
+	// IDs mï¿½ssen noch manuell eingegeben werden 
 	Label idPartnerprofil = new Label("Id des Partnerprofil");
 	TextArea idPP = new TextArea();
 	
@@ -63,18 +64,15 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	TextArea idASD = new TextArea();
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
-	// Versuch für Status mit RadioButton
-	Label ausschreibungsStatus = new Label("Status der Ausschreibung");
-	RadioButton rb1 = new RadioButton("statusGroup", "besetzt");
-	RadioButton rb2 = new RadioButton("statusGroup", "laufend");
-	RadioButton rb3 = new RadioButton("statusGroup", "abgebrochen");
+	
+
 	
 	
 	FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
 	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt){
-		this.p1=zugehoerigesProjekt;
-		Label zugehProjektBez = new Label(zugehoerigesProjekt.getBezeichnung());
+		this.p2=zugehoerigesProjekt;
+		Label zugehProjektBez = new Label("Ausschreibung fÃ¼r folgendes Projekt: "+ zugehoerigesProjekt.getBezeichnung());
 		
 		//Datepicker 
 		
@@ -98,16 +96,17 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		ausschreibungHP.add(ok);
 		ausschreibungHP.add(abbrechen);
 		
-//		ok.addClickHandler(new ClickHandler() {
-//			
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				// TODO Auto-generated method stub
-//				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(),
-//						aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(),
-//						Integer.parseInt(idPP.getText()), null, new ausschreibungInDB() );
-//			}
-//		});
+		ok.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(),
+						aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(),
+						Integer.parseInt(idPP.getText()), Status.laufend, new ausschreibungInDB());
+														// Ausschreibungen werden beim erstellen auf laufend gesetzt 
+			}
+		});
 		
 		abbrechen.addClickHandler(new ClickHandler() {
 					
@@ -131,10 +130,8 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		ausschreibungdialogboxtabelle.setWidget(4, 1, idASD);
 		ausschreibungdialogboxtabelle.setWidget(5, 0, idPartnerprofil);
 		ausschreibungdialogboxtabelle.setWidget(5, 1, idPP);
-		ausschreibungdialogboxtabelle.setWidget(6, 0, ausschreibungsStatus);
-		ausschreibungdialogboxtabelle.setWidget(7, 0, rb1);
-		ausschreibungdialogboxtabelle.setWidget(8, 0, rb2);
-		ausschreibungdialogboxtabelle.setWidget(9, 0, rb3);
+		ausschreibungdialogboxtabelle.setWidget(6, 0, zugehProjektBez);
+	
 	}
 	
 	private class ausschreibungInDB implements AsyncCallback<Ausschreibung>{
@@ -150,7 +147,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		public void onSuccess(Ausschreibung result) {
 			// TODO Auto-generated method stub
 			hide();
-			Showcase showcase = new ProjekteSeite(p1);
+			Showcase showcase = new AusschreibungSeite(p2);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			
