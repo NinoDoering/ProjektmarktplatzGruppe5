@@ -131,7 +131,7 @@ public void init() throws IllegalArgumentException {
 		return this.eigMapper.findEigenschaftByKey(idEigenschaft);
 	}
 
-//// getAll nicht benötigt
+//// getAll nicht benï¿½tigt
 //public Vector<Eigenschaft> getAllEigenschaften() throws IllegalArgumentException {
 //	return this.eigMapper.findAllEigenschaften();
 //}
@@ -252,33 +252,33 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 																			// werden
 		// PP nicht vorhanden in Mapper
 
-		// Bewerbungen der Person löschen
+		// Bewerbungen der Person lï¿½schen
 		if (b != null) {
 			for (Bewerbung bewerbung : b) {
 				this.loeschenBewerbung(bewerbung);
 			}
 		}
 
-		// zugehörige Beteiligungen löschen
+		// zugehï¿½rige Beteiligungen lï¿½schen
 		if (beteiligung != null) {
 			for (Beteiligung be : beteiligung) {
 				this.loeschenBeteiligung(be);
 			}
 		}
 
-		// von Person erstellte Projekte löschen
+		// von Person erstellte Projekte lï¿½schen
 		if (p != null) {
 			for (Projekt projekt : p) {
 				this.loeschenProjekt(projekt);
 			}
 		}
 
-		// Partnerprofil der Person löschen
+		// Partnerprofil der Person lï¿½schen
 		if (pp != null) {
 			this.loeschenPartnerprofil(pp);
 		}
 
-		// Person entgültig löschen
+		// Person entgï¿½ltig lï¿½schen
 		this.persMapper.deletePerson(pe);
 
 	}
@@ -345,7 +345,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		// String in PersonMapper
 	}
 
-	// wird nicht benötigt
+	// wird nicht benï¿½tigt
 	//// getAllPersons
 	// public Vector<Person> getAllPersons() throws IllegalArgumentException {
 	// return this.persMapper.findAll();
@@ -389,14 +389,14 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		Vector<Ausschreibung> a = this.getAusschreibungByProjekt(p);
 		Vector<Beteiligung> beteiligung = this.getBeteiligungByProjekt(p);
 
-		// zugehörige Ausschreibungen löschen
+		// zugehï¿½rige Ausschreibungen lï¿½schen
 		if (a != null) {
 			for (Ausschreibung ausschreibung : a) {
 				this.loeschenAusschreibung(ausschreibung);
 			}
 		}
 
-		// zugehörige Beteiligungen löschen
+		// zugehï¿½rige Beteiligungen lï¿½schen
 		if (beteiligung != null) {
 			for (Beteiligung b : beteiligung) {
 				this.loeschenBeteiligung(b);
@@ -536,7 +536,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 /*##########################################################
  * START TEAM
- #########################################################*/
+ ############################################################*/
 
 
 	// anlegenTeam
@@ -575,7 +575,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 			this.loeschenPartnerprofil(pp);
 		}
 
-		// zugehoerige Bewerbungen löschen
+		// zugehoerige Bewerbungen lï¿½schen
 		if (b != null) {
 			for (Bewerbung bewerbungen : b) {
 				this.loeschenBewerbung(bewerbungen);
@@ -623,7 +623,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	public Team getTeamById(int idTeam) throws IllegalArgumentException {
 		return this.teamMapper.findTeamByKey(idTeam);
 	}
-	// benötigen wir nicht
+	// benï¿½tigen wir nicht
 	//// getAllTeams
 	// public Vector<Team> getAllTeams() throws IllegalArgumentException {
 	// return this.teamMapper.findAll();
@@ -1077,5 +1077,5 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		// return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
 	}
 
-	// AllMarktplätzeAnzeigenlassen
+	// AllMarktplï¿½tzeAnzeigenlassen
 }

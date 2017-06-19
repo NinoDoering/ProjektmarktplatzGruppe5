@@ -36,7 +36,7 @@ public interface GreetingServiceAsync {
 		
 		void init(AsyncCallback<Void> callback);
 		
-		// Marktplatz Asynch
+		// Marktplatz --Asynch
 		
 
 		void anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung, AsyncCallback<Marktplatz> callback);

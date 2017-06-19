@@ -38,7 +38,7 @@ public interface GreetingService extends RemoteService  {
 		public void init() throws IllegalArgumentException;
 
 		
-		// Projektmarktplatz pm
+		// Projektmarktplatz-- pm
 		
 		public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)throws IllegalArgumentException;
 		
