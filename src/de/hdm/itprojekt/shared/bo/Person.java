@@ -9,7 +9,18 @@ public class Person extends Organisationseinheit{
 	private String titel;
 	private int idTeam;
 	private int idUnternehmen;
-	 
+	private String EmailAddresse;
+	
+	public String getEmailAddresse() {
+		return EmailAddresse;
+	}
+
+
+	public void setEmailAddresse(String emailAddresse) {
+		EmailAddresse = emailAddresse;
+	}
+
+
 	public int getIdProjekt(){
 		return getIdProjekt();
 	}

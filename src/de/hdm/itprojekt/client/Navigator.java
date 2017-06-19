@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.gui.BewerbungenSeite;
 import de.hdm.itprojekt.client.gui.ProjektmarktplatzSeite;
 
 public class Navigator extends StackPanel{
@@ -67,7 +68,7 @@ public class Navigator extends StackPanel{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				Showcase showcase = new ActivityBewerbungen();
+				Showcase showcase = new BewerbungenSeite();
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				

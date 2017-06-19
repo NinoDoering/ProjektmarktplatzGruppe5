@@ -11,12 +11,11 @@
     <servlet-class>de.hdm.itprojekt.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
-
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/projektmarktplatz/greet</url-pattern>
   </servlet-mapping>
-  <!-- 
+
   <servlet>
     <servlet-name>LoginService</servlet-name>
     <servlet-class>de.hdm.itprojekt.server.LoginServiceImpl</servlet-class>
@@ -24,9 +23,9 @@
     
     <servlet-mapping>
     <servlet-name>LoginService</servlet-name>
-    <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-   -->
+    <url-pattern>/projektmarktplatz/login</url-pattern>
+    </servlet-mapping>  
+   
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Projektmarktplatz.html</welcome-file>
