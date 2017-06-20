@@ -16,31 +16,30 @@ public interface ReportGenerator extends RemoteService {
 
 	public void init() throws IllegalArgumentException;
 	
-	public void setPerson() throws IllegalArgumentException;
 	
-	public  abstract AllAusschreibungenByPartnerprofilReport createAllAusschreibungenByPartnerprofilReport (Organisationseinheit o) throws IllegalArgumentException;
+	AllAusschreibungenByPartnerprofilReport createAllAusschreibungenByPartnerprofilReport (Organisationseinheit o) throws IllegalArgumentException;
 
-	public Vector<Ausschreibung> getAusschreibungByMatchingPartnerprofil(Organisationseinheit o) throws IllegalArgumentException;
+	public AllAusschreibungenByPartnerprofilReport getAusschreibungByMatchingPartnerprofil(Organisationseinheit o) throws IllegalArgumentException;
 	
 	public abstract AllAusschreibungenReport createAllAusschreibungenReport() throws IllegalArgumentException;
 	
-	public abstract AllBeteiligungenToProjectReport createAllBeteiligungenToProjectReport () throws IllegalArgumentException;
+	public abstract AllBeteiligungenToProjectReport createAllBeteiligungenToProjectReport (int id) throws IllegalArgumentException;
 	
 	public abstract AllBewerbungenByAusschreibungReport createAllBewerbungenByAusschreibungReport (Organisationseinheit o) throws IllegalArgumentException;
 	
-	public abstract AllBewerbungenByOrganisationseinheitReport createAllBewerbungenByOrganisationseinheitReport (Organisationseinheit o) throws IllegalArgumentException;
+	public abstract AllBewerbungenByOrganisationseinheitReport createAllBewerbungenByOrganisationseinheitReport (int id) throws IllegalArgumentException;
 	
 	public abstract AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschreibungenReport(Organisationseinheit o) throws IllegalArgumentException;
 	
-	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(
-			
-			Organisationseinheit o) throws IllegalArgumentException;
+	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(int idAusschreibung) throws IllegalArgumentException;
 	
 	public abstract FanInFanOutReport createFanInFanOutReport() throws IllegalArgumentException;
 	
-	public abstract FanIn createFanInAnalyse (Organisationseinheit o) throws IllegalArgumentException;
+	public abstract FanIn createFanInAnalyse () throws IllegalArgumentException;
 	
-	ProjektverflechtungReport createProjektverflechtungenReport(int id);
+	public abstract FanOut createFanOutAnalyse() throws IllegalArgumentException;
+	
+	ProjektverflechtungReport createProjektverflechtungenReport(int id) throws IllegalArgumentException;
 	
 	public Person findPersonByKey(int id) throws IllegalArgumentException;
 	
@@ -48,7 +47,7 @@ public interface ReportGenerator extends RemoteService {
 	
 	public Unternehmen findUnternehmenByKey (int id) throws IllegalArgumentException;
 
-	
+
 	
 	
 }
