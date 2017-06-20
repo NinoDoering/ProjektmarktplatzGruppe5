@@ -84,7 +84,7 @@ public class AusschreibungSeite extends Showcase {
 				// TODO Auto-generated method stub
 				// für Eigenschft
 				pp1= ssmalleausschreibung.getSelectedObject();
-				Showcase showcase = new EigenschaftAusSeite();
+				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject());
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				

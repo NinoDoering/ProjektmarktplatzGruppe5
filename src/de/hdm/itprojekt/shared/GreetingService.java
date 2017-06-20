@@ -38,6 +38,12 @@ public interface GreetingService extends RemoteService  {
 		public void init() throws IllegalArgumentException;
 
 		
+		//test 
+		
+				public Ausschreibung getAusschreibungByPartnerprofilId(Partnerprofil p) throws IllegalArgumentException;
+				
+				public Ausschreibung getpartnerprofilIdbyAusschreibung (Ausschreibung a) throws IllegalArgumentException;
+		
 		// Projektmarktplatz-- pm
 		
 		public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung)throws IllegalArgumentException;
@@ -191,6 +197,8 @@ public interface GreetingService extends RemoteService  {
 		public Person getPersonById(int idPerson) throws IllegalArgumentException;
 		
 		public void savePerson (Person pe)throws IllegalArgumentException;
+		
+		public Vector<Person> getAllPersons() throws IllegalArgumentException;
 		
 
 		// Team t

@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.Showcase;
+
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
@@ -23,7 +24,7 @@ public class EigenschaftAusSeite extends Showcase{
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Ausschreibung a1 = new Ausschreibung();
 	CellTable<Eigenschaft> eigenschafttabelle = new CellTable<Eigenschaft>();
-	private Partnerprofil pp1 = new Partnerprofil();
+	CellTable<Ausschreibung>	pptabelle = new CellTable<Ausschreibung>();
 	private HorizontalPanel hpanelEigenschaft = new HorizontalPanel();
 	private VerticalPanel vpanelEigenschaft = new VerticalPanel(); 
 	
@@ -34,6 +35,8 @@ public class EigenschaftAusSeite extends Showcase{
 	public EigenschaftAusSeite(Ausschreibung a1){
 		this.a1=a1;
 	}
+	
+	
 	
 	@Override
 	protected String getHeadlineText() {
@@ -50,6 +53,9 @@ public class EigenschaftAusSeite extends Showcase{
 		this.add(hpanelEigenschaft);
 		this.add(vpanelEigenschaft);
 		
+		
+		
+		
 		TextColumn<Ausschreibung> ausschrBez = new TextColumn<Ausschreibung>(){
 
 			@Override
@@ -61,12 +67,12 @@ public class EigenschaftAusSeite extends Showcase{
 		
 	};
 	
-		TextColumn<Partnerprofil> ppID = new TextColumn<Partnerprofil>(){
+		TextColumn<Ausschreibung> ppID = new TextColumn<Ausschreibung>(){
 	
 			@Override
-			public String getValue(Partnerprofil object) {
+			public String getValue(Ausschreibung object) {
 				// TODO Auto-generated method stub
-				return object.getId()+"";
+				return object.getIdPartnerprofil()+"";
 			}
 		
 		
@@ -139,16 +145,19 @@ public class EigenschaftAusSeite extends Showcase{
 	
 };
 
-
+		
 		eigenschafttabelle.addColumn(arbeitsgebiet, "Arbeitsgebiet");
-		eigenschafttabelle.addColumn(ausbildung,"Ausbildung");
+		eigenschafttabelle.addColumn(ausbildung,"Erfordeliche Ausbildung: ");
 		eigenschafttabelle.addColumn(berufserfahrungsjahre, "gewünschte Berufserfahrungsjahre");
 		eigenschafttabelle.addColumn(sprachkenntnisse, "Erfordeliche Sprachkenntnisse");
 		eigenschafttabelle.addColumn(employmentStatus, "Arbeitszeit");
-		eigenschafttabelle.addColumn(ausbildung, "Erfordeliche Ausbildung: ");
-		gwtproxy.getEigenschaftByPartnerprofil(pp1, new getEignschaftausDB());
-	}
+		eigenschafttabelle.addColumn(abschluss, "Abschluss");						
+		gwtproxy.getEigenschaftByIdPartnerprofil(a1.getIdPartnerprofil(), new getEignschaftausDB());
 		
+	}
+	
+	
+	
 		private class getEignschaftausDB implements AsyncCallback<Vector<Eigenschaft>>{
 
 			@Override
@@ -159,14 +168,14 @@ public class EigenschaftAusSeite extends Showcase{
 
 			@Override
 			public void onSuccess(Vector<Eigenschaft> result) {
-				Window.alert(" geht aber zeigt nix an");
 				eigenschafttabelle.setRowData(0, result);
 				eigenschafttabelle.setRowCount(result.size(), true);
+				
+				
 			}
 			
 			
 			
-		}
+		} }
 	
 		
-}

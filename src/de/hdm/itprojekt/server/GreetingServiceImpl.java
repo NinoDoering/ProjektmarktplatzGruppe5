@@ -90,7 +90,17 @@ public void init() throws IllegalArgumentException {
 
 
 
+//test 
 
+
+		public Ausschreibung getAusschreibungByPartnerprofilId(Partnerprofil p) throws IllegalArgumentException {
+			return this.ausschreibungMapper.findAusschreibungbyIdPartnerprofil(p.getId());
+		}
+
+		
+		public Ausschreibung getpartnerprofilIdbyAusschreibung (Ausschreibung a) throws IllegalArgumentException{
+			return this.ausschreibungMapper.findpartnerprofilIdbyAusschreibung(a.getId());
+		}
 
 /*##########################################################
  * START EIGENSCHAFT
@@ -356,11 +366,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		// String in PersonMapper
 	}
 
-	// wird nicht ben�tigt
-	//// getAllPersons
-	// public Vector<Person> getAllPersons() throws IllegalArgumentException {
-	// return this.persMapper.findAll();
-	// }
+	
+	// getAllPersons
+	 public Vector<Person> getAllPersons() throws IllegalArgumentException {
+	 return this.persMapper.findAllPerson();
+	 }
+	 
 	//
 	//// getPersonByNachname
 	// public Vector<Person> getPersonByNachname(String nachname) throws

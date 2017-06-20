@@ -30,6 +30,71 @@ public class AusschreibungMapper {
 		return ausschreibungMapper;
 	}
 
+	
+	//test
+	
+	// Ausschreibung nach Partnerprofil evtl. unnötig
+	public Ausschreibung findAusschreibungbyIdPartnerprofil(int idPartnerprofil){
+		Connection con = DBConnection.connection();
+		
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM ausschreibung "
+							+ "WHERE idPartnerprofil= " + idPartnerprofil);
+			
+			if (rs.next()) {
+				Ausschreibung a = new Ausschreibung(); 
+				a.setId(rs.getInt("idAusschreibung"));
+				a.setBeschreibung(rs.getString("beschreibung"));
+				a.setBezeichnung(rs.getString("bezeichnung"));
+				a.setIdProjekt(rs.getInt("idProjekt"));
+				a.setEndDatum(rs.getDate("endDatum"));
+				a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+				a.setIdAusschreibender(rs.getInt("idAusschreibender"));
+				a.setAusschreibungsstatus(Status.valueOf(rs.getString("status")));
+				
+				return a;
+			}
+							
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+
+		return null;
+	}
+			
+			
+		
+		
+	//test 
+	//test2
+			public Ausschreibung findpartnerprofilIdbyAusschreibung (int idAusschreibung){
+				Connection con = DBConnection.connection();
+				
+				try {
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery(
+							"SELECT idPartnerprofil FROM ausschreibung "
+									+ "WHERE idAusschreibung= " + idAusschreibung);
+				
+					if (rs.next()) {
+						Ausschreibung a = new Ausschreibung();
+						a.setIdPartnerprofil(rs.getInt("idPartnerprofil"));
+						return a;
+					}
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+					return null;
+				}
+
+				return null;
+			}
+	
+	//test2
+	
+	
 	//Ausschreibung werden nach ID ausgegeben
 	public Ausschreibung findAusschreibungByKey(int idAusschreibung) {
 		Connection con = DBConnection.connection();

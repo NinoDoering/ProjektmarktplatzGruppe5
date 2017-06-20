@@ -36,6 +36,15 @@ public interface GreetingServiceAsync {
 		
 		void init(AsyncCallback<Void> callback);
 		
+		
+		// test
+		
+				void getAusschreibungByPartnerprofilId(Partnerprofil p, AsyncCallback<Ausschreibung> callback);
+				
+				void getpartnerprofilIdbyAusschreibung(Ausschreibung a, AsyncCallback<Ausschreibung> callback);
+				
+				// Marktplatz --Asynch
+		
 		// Marktplatz --Asynch
 		
 
@@ -186,6 +195,8 @@ public interface GreetingServiceAsync {
 		void getPersonById(int idPerson, AsyncCallback<Person> callback);
 
 		void savePerson(Person pe, AsyncCallback<Void> callback);
+		
+		void getAllPersons(AsyncCallback<Vector<Person>> callback);
 
 
 		// Team Asynch
