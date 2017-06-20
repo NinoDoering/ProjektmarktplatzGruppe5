@@ -110,7 +110,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) throws IllegalArgumentException;
 		
-		public Partnerprofil getPartnerProfilByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
+		public Partnerprofil getPartnerprofilByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 		
 		
 		// Bewerbung b

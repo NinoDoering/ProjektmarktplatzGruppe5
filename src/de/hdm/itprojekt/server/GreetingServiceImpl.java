@@ -219,7 +219,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 	
 	// getPartnerprofilByAusschreibung
-	public Partnerprofil getPartnerProfilByAusschreibung(Ausschreibung a) {
+	public Partnerprofil getPartnerprofilByAusschreibung(Ausschreibung a) {
 
 		if (a != null && this.ppMapper != null) {
 			return this.ppMapper.findPartnerprofilByKey(a.getIdPartnerprofil());
