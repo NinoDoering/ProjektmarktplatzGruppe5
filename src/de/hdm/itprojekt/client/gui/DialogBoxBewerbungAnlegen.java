@@ -28,18 +28,18 @@ import de.hdm.itprojekt.shared.bo.Person;
 public class DialogBoxBewerbungAnlegen extends DialogBox {
 	
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
-	VerticalPanel bewerbungVP = new VerticalPanel();
-	HorizontalPanel bewerbungHP = new HorizontalPanel();
+	private VerticalPanel bewerbungVP = new VerticalPanel();
+	private HorizontalPanel bewerbungHP = new HorizontalPanel();
 	
-	Button bewerbungSenden = new Button ("Bewerbung senden");
-	Button bewerbungAbbrechen = new Button ("Bewerbung abbrechen");
+	private Button bewerbungSenden = new Button ("Bewerbung senden");
+	private Button bewerbungAbbrechen = new Button ("Bewerbung abbrechen");
 	
 	private Ausschreibung ausschreibungAuswaehlen = new Ausschreibung ();
 	private Bewerbung bewerbungsSchreiben = new Bewerbung ();
 	private Person person1 = new Person();
-	Label bewerbungsTextLabel = new Label("Bewerbungstext");
-	TextArea bewerbungsText = new TextArea();
-	FlexTable bewerbungsTextTabelle = new FlexTable();
+	private Label bewerbungsTextLabel = new Label("Bewerbungstext");
+	private TextArea bewerbungsText = new TextArea();
+	private FlexTable bewerbungsTextTabelle = new FlexTable();
 	
 	public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final Person personBewerber){
 		

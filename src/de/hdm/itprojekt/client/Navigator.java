@@ -42,16 +42,16 @@ public class Navigator extends StackPanel{
 		btnBack.setWidth("200px");
 		btnBack.setStylePrimaryName("navi-button");
 		
-		homeNavigator.add(meinProfil);
-		meinProfil.setWidth("200px");
-		meinProfil.setStylePrimaryName("navi-button");
-		
 		homeNavigator.setSpacing(5);
 		homeNavigator.setWidth("100%");
 		
 		personalNavigator.add(meineBewerbungen);
 		meineBewerbungen.setWidth("200px");
 		meineBewerbungen.setStylePrimaryName("navi-button");
+		
+		personalNavigator.add(meinProfil);
+		meinProfil.setWidth("200px");
+		meinProfil.setStylePrimaryName("navi-button");
 		
 		personalNavigator.setSpacing(5);
 		personalNavigator.setWidth("100%");
@@ -88,8 +88,7 @@ public class Navigator extends StackPanel{
 				RootPanel.get("Anzeige").clear();
 				Showcase sh = new PersonSeite();
 				RootPanel.get("Anzeige").add(sh);
-				
-				
+			
 			}
 		});
 		
