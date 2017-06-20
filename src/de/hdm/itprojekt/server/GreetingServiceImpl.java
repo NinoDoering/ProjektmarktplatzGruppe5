@@ -167,7 +167,7 @@ public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentExcept
 				// Datentyp ist Partnerprofil
 	
 	}
-}
+} 
 
 // getEigenschaftByPartnerprofil()
 public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) {
@@ -216,6 +216,17 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	// getAllPartnerprofile
 	public Vector<Partnerprofil> getAllPartnerprofile() throws IllegalArgumentException {
 		return this.ppMapper.findAllPartnerprofil();
+	}
+	
+	// getPartnerprofilByAusschreibung
+	public Partnerprofil getPartnerProfilByAusschreibung(Ausschreibung a) {
+
+		if (a != null && this.ppMapper != null) {
+			return this.ppMapper.findPartnerprofilByKey(a.getIdPartnerprofil());
+
+		} else {
+			return null;
+		}
 	}
 
 

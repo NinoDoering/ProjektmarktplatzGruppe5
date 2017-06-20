@@ -98,7 +98,7 @@ public interface GreetingService extends RemoteService  {
 
 		public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
 
-		public Partnerprofil getPartnerprofilbyId (int idPartnerprofil)throws IllegalArgumentException;
+		public Partnerprofil getPartnerprofilbyId (int idPartnerprofil) throws IllegalArgumentException;
 		
 		public void savePartnerprofil(Partnerprofil pp)throws IllegalArgumentException;
 		
@@ -109,6 +109,8 @@ public interface GreetingService extends RemoteService  {
 		public Partnerprofil getPartnerprofilByOrganisationseinheit(Organisationseinheit o) throws IllegalArgumentException;
 		
 		public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) throws IllegalArgumentException;
+		
+		public Partnerprofil getPartnerProfilByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
 		
 		
 		// Bewerbung b

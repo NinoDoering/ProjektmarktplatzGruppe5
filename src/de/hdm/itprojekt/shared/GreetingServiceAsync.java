@@ -100,6 +100,8 @@ public interface GreetingServiceAsync {
 		
 		void getPartnerprofilByOrganisationseinheit(Organisationseinheit o, AsyncCallback<Partnerprofil> callback);
 		
+		void getPartnerProfilByAusschreibung(Ausschreibung a, AsyncCallback<Partnerprofil> callback);
+		
 
 		// Bewerbung Asynch
 		
