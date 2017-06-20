@@ -124,7 +124,47 @@ private String reportText = "";
 	  
 	  
 	  public void process(AllAusschreibungenByPartnerprofilReport r){
-	
+		  this.resetReportText();
+		  
+		  StringBuffer result = new StringBuffer();
+		  
+		  result.append("<H3>" + r.getTitel() + "</H3>");
+		  result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+		  	result.append("</tr><tr><td></td><td>" + r.getErstelldatum().toString()
+		  	        + "</td></tr></table>");
+		  	
+		  
+		  	
+		  	 Vector<Row> rows = r.getRows();
+		     result.append("<table style=\"width:400px\">");
+		     
+		     for (int i = 0; i < rows.size(); i++) {
+		         Row row = rows.elementAt(i);
+		         result.append("<tr>");
+		         for (int k = 0; k < row.getColumnsSize(); k++) {
+		           if (i == 0) {
+		        	
+		             result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnByIndex(k)
+		                 + "</td>");
+		             
+		           }
+		           else {
+		             if (i > 1) {
+		               result.append("<td style=\"border-top:1px solid silver\">"
+		                   + row.getColumnByIndex(k) + "</td>");
+		             }
+		             else {
+		               result.append("<td valign=\"top\">" + row.getColumnByIndex(k) + "</td>");
+		             }
+		           }
+		         }
+		         result.append("</tr>");
+		       }
+
+		       result.append("</table>");
+		       
+		     
+		       this.reportText = result.toString();
 		  
 	  }
 	  

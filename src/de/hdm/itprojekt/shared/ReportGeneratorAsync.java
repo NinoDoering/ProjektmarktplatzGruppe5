@@ -11,22 +11,22 @@ public interface ReportGeneratorAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void setPerson(AsyncCallback<Void> callback);
+
 
 	void createAllAusschreibungenByPartnerprofilReport(Organisationseinheit o,
 			AsyncCallback<AllAusschreibungenByPartnerprofilReport> callback);
 
 	void createAllAusschreibungenReport(AsyncCallback<AllAusschreibungenReport> callback);
 
-	void createAllBeteiligungenToProjectReport(AsyncCallback<AllBeteiligungenToProjectReport> callback);
+	void createAllBeteiligungenToProjectReport(int id, AsyncCallback<AllBeteiligungenToProjectReport> callback);
 
 	void createAllBewerbungenByAusschreibungReport(Organisationseinheit o,
 			AsyncCallback<AllBewerbungenByAusschreibungReport> callback);
 
-	void createAllBewerbungenByOrganisationseinheitReport(Organisationseinheit o,
+	void createAllBewerbungenByOrganisationseinheitReport(int id,
 			AsyncCallback<AllBewerbungenByOrganisationseinheitReport> callback);
 	
-	void createAllBewerbungenToOneAusschreibungReport(Organisationseinheit o,
+	void createAllBewerbungenToOneAusschreibungReport(int idAusschreibung,
 			AsyncCallback<AllBewerbungenToOneAusschreibungReport> callback);
 
 	void createAllBewerbungenWithAusschreibungenReport(Organisationseinheit o,
@@ -34,7 +34,7 @@ public interface ReportGeneratorAsync {
 
 	void createFanInFanOutReport(AsyncCallback<FanInFanOutReport> callback);
 
-	void createFanInAnalyse(Organisationseinheit o, AsyncCallback<FanIn> callback);
+	void createFanInAnalyse(AsyncCallback<FanIn> callback);
 
 	void findPersonByKey(int id, AsyncCallback<Person> callback);
 
@@ -44,7 +44,10 @@ public interface ReportGeneratorAsync {
 
 	void createProjektverflechtungenReport(int id, AsyncCallback<ProjektverflechtungReport> callback);
 
-	void getAusschreibungByMatchingPartnerprofil(Organisationseinheit o, AsyncCallback<Vector<Ausschreibung>> callback);
+	void getAusschreibungByMatchingPartnerprofil(Organisationseinheit o,
+			AsyncCallback<AllAusschreibungenByPartnerprofilReport> callback);
+
+	void createFanOutAnalyse(AsyncCallback<FanOut> callback);
 
 
 
