@@ -1,5 +1,7 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.Vector;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -19,13 +21,18 @@ import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class PersonSeite extends Showcase{
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person p = new Person();
+	private Organisationseinheit o1 = new Organisationseinheit();
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
+	private Button eigeneProjekte = new Button("Zu meinen Projekten");
+	
 	private Navigator ng = null;
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
 	private Button speichernbutton = new Button ("Profil Speichern");
@@ -81,6 +88,7 @@ public class PersonSeite extends Showcase{
 		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
 		
 		this.add(pp);
+		this.add(eigeneProjekte);
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -182,6 +190,32 @@ public class PersonSeite extends Showcase{
 			RootPanel.get("Anzeige").add(scase);
 		}
 	});
+	
+	
+	eigeneProjekte.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			gwtproxy.getProjektByPerson(p, new AsyncCallback<Vector<Projekt>>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					Window.alert("projektebyPerson geht NICHT");
+				}
+
+				public void onSuccess(Vector<Projekt> result) {
+					// TODO Auto-generated method stub
+					
+					Showcase showcase = new EigeneProjekte(p);
+					RootPanel.get("Anzeige").clear();
+					RootPanel.get("Anzeige").add(showcase);
+				}
+			});
+		}
+	});
+	
 	}
 	
 	
@@ -213,6 +247,7 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 		Showcase scase = new PersonSeite(p);
 		RootPanel.get("Anzeige").clear();
 		RootPanel.get("Anzeige").add(scase);
+		Window.alert("hallo");
 	}
 }
 

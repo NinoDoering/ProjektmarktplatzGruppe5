@@ -43,6 +43,8 @@ public class ProjekteSeite extends Showcase{
 	
 	Button anlegenprojekt = new Button("Neues Projekt anlegen");
 	
+
+	
 	public ProjekteSeite(){
 	
 	}
@@ -71,6 +73,7 @@ public class ProjekteSeite extends Showcase{
 		projekttabelle.setWidth("100%", true);
 		vpanelProjekte.add(projekttabelle);
 		hpanelProjekte.add(anlegenprojekt);
+		
 		//hpanelProjekte.add(lblMarktplatz);
 		this.add(beforeHere);
 		this.add(hpanelProjekte);
@@ -150,7 +153,12 @@ public class ProjekteSeite extends Showcase{
 				dialogbox.center();
 			}
 		});
-}
+
+		
+	}
+	
+	
+	
 		private class getProjekteAusDB implements AsyncCallback<Vector<Projekt>>{
 
 			@Override

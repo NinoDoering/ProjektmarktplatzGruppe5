@@ -9,9 +9,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.client.gui.*;
-import de.hdm.itprojekt.client.gui.PersonSeite;
-
-import de.hdm.itprojekt.client.gui.ProjektmarktplatzSeite;
 import de.hdm.itprojekt.shared.bo.Person;
 
 public class Navigator extends StackPanel{
@@ -27,11 +24,17 @@ public class Navigator extends StackPanel{
 	
 	Button projektmarktplatzSuchen = new Button("Projektmarktplätze");
 	
+	Button agb = new Button("AGB");
+	Button impressum = new Button("Impressum");
+	
 
 	public Navigator(final Person person){
 		
-		
+		rechtsUnten.add(impressum);
+		rechtsUnten.add(agb);
 		rechtsUnten.add(btnBack);
+		
+		
 		
 		homeNavigator.add(projektmarktplatzSuchen);
 		projektmarktplatzSuchen.setWidth("200px");
@@ -51,9 +54,31 @@ public class Navigator extends StackPanel{
 		this.addStyleName("gwt-StackPanel");
 		this.add(homeNavigator, "Startseite");
 		this.add(personalNavigator, "Persönliche Funktionen");
-		projektmarktplatzSuchen.addClickHandler(new ClickHandler() {
+		
+		agb.addClickHandler(new ClickHandler() {
 			
 			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new AGBMeetProjects();
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
+		impressum.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new ImpressumMeetProjects();
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
+		projektmarktplatzSuchen.addClickHandler(new ClickHandler() {
+				@Override
 			public void onClick(ClickEvent event) {
 				Showcase showcase = new ProjektmarktplatzSeite();
 				RootPanel.get("Anzeige").clear();
