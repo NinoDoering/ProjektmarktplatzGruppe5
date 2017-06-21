@@ -35,7 +35,7 @@ public class ProjekteSeite extends Showcase{
 	private HorizontalPanel hpanelProjekte = new HorizontalPanel();
 	private VerticalPanel vpanelProjekte = new VerticalPanel();
 	
-	//private Label lblMarktplatz =  new Label("hallo"+ this.mp.getBezeichnung());
+	private HorizontalPanel beforeHere = new HorizontalPanel();
 	
 	private Projekt p1 = new Projekt();
 	
@@ -49,6 +49,9 @@ public class ProjekteSeite extends Showcase{
 	
 	public ProjekteSeite(Marktplatz m1){
 		this.mp= m1;
+		Label lblMarktplatz =  new Label("Sie befinden sich auf folgendem Marktplatz: " +m1.getBezeichnung()+" ");
+		
+		beforeHere.add(lblMarktplatz);
 	}
 	
 	public ProjekteSeite(Projekt p2){
@@ -68,9 +71,11 @@ public class ProjekteSeite extends Showcase{
 		projekttabelle.setWidth("100%", true);
 		vpanelProjekte.add(projekttabelle);
 		hpanelProjekte.add(anlegenprojekt);
-	//	hpanelProjekte.add(lblMarktplatz);
+		//hpanelProjekte.add(lblMarktplatz);
+		this.add(beforeHere);
 		this.add(hpanelProjekte);
 		this.add(vpanelProjekte);
+		
 		
 		projekttabelle.setSelectionModel(ssmalleprojekte);
 		

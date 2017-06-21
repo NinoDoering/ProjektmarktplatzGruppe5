@@ -36,7 +36,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 	VerticalPanel vpanelMarktplatz = new VerticalPanel();
 	
 	private Marktplatz m1= new Marktplatz();
-	private Label lblMarktplatz = new Label(m1.getBezeichnung());
+
 	final SingleSelectionModel<Marktplatz> ssmalleprojektmarktplaetze = new SingleSelectionModel<Marktplatz>();
 	
 	Button anlegenbutton = new Button("Neuen Markplatz anlegen");
@@ -73,7 +73,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 				Showcase showcase = new ProjekteSeite(m1);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
-				RootPanel.get("Anzeige").add(lblMarktplatz);
+				
 			}
 		});
 		

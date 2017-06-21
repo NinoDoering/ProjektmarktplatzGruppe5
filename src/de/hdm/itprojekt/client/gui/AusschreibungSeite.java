@@ -26,6 +26,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
@@ -36,12 +37,15 @@ public class AusschreibungSeite extends Showcase {
 	private Bewerbung bwerb = new Bewerbung();
 	private Ausschreibung a1 = new Ausschreibung();
 	private Ausschreibung pp1 = new Ausschreibung();
+	private Marktplatz mp = new Marktplatz();
 	CellTable<Ausschreibung> ausschreibungtabelle = new CellTable<Ausschreibung>();
 	//private Label lblPro = new Label("hallo " +p1.getIdMarktplatz() );
 	private HorizontalPanel hpanelAusschreibung = new HorizontalPanel();
 	private VerticalPanel vpanelAusschreibung = new VerticalPanel();
-	
+	private HorizontalPanel beforeHereProjekt = new HorizontalPanel();
+	private HorizontalPanel beforeHereMarktplatz = new HorizontalPanel();
 	final SingleSelectionModel<Ausschreibung> ssmalleausschreibung = new SingleSelectionModel<Ausschreibung>();
+	
 	
 	Button anlegenAusschreibung = new Button("Neue Ausschreibung anlegen");
 	Button bewerbenAusschreibung = new Button("Auf diese Ausschreibung bewerben");
@@ -53,10 +57,18 @@ public class AusschreibungSeite extends Showcase {
 	 // damit die ausschreibungen zum passenden projekt angezeigt werden 
 	 public AusschreibungSeite(Projekt p1) {
 			this.p1=p1;
-		}
+			Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+p1.getBezeichnung()+" ");
+			beforeHereProjekt.add(lblProjekt);
+	 }
 	 
 	 public AusschreibungSeite(Bewerbung b){
 		 this.bwerb=b;
+	 }
+	 
+	 public AusschreibungSeite(Marktplatz mp1){
+		 this.mp=mp1;
+			 
+		
 	 }
 	 
 	@Override
@@ -73,7 +85,10 @@ public class AusschreibungSeite extends Showcase {
 		vpanelAusschreibung.add(ausschreibungtabelle);
 		hpanelAusschreibung.add(anlegenAusschreibung);
 		hpanelAusschreibung.add(bewerbenAusschreibung);
-		//hpanelAusschreibung.add(lblPro);
+		
+	
+		this.add(beforeHereMarktplatz);
+		this.add(beforeHereProjekt);
 		this.add(hpanelAusschreibung);
 		this.add(vpanelAusschreibung);
 		

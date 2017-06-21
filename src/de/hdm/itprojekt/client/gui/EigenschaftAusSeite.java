@@ -8,6 +8,7 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -27,13 +28,14 @@ public class EigenschaftAusSeite extends Showcase{
 	CellTable<Ausschreibung>	pptabelle = new CellTable<Ausschreibung>();
 	private HorizontalPanel hpanelEigenschaft = new HorizontalPanel();
 	private VerticalPanel vpanelEigenschaft = new VerticalPanel(); 
-	
+
 	public EigenschaftAusSeite() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public EigenschaftAusSeite(Ausschreibung a1){
 		this.a1=a1;
+		
 	}
 	
 	
@@ -50,6 +52,7 @@ public class EigenschaftAusSeite extends Showcase{
 		RootPanel.get("Anzeige").setWidth("100%");
 		eigenschafttabelle.setWidth("100%", true);
 		vpanelEigenschaft.add(eigenschafttabelle);
+
 		this.add(hpanelEigenschaft);
 		this.add(vpanelEigenschaft);
 		
