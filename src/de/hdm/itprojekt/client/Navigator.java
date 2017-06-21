@@ -19,30 +19,24 @@ public class Navigator extends StackPanel{
 	VerticalPanel homeNavigator = new VerticalPanel();
 	
 	VerticalPanel personalNavigator = new VerticalPanel();
-	
-	Button btnBack = new Button ("Zurueck zur Startseite");
+	HorizontalPanel rechtsUnten = new HorizontalPanel();
+	Button btnBack = new Button ("Zurück zur Startseite");
 	
 	
 	Button meineBewerbungen = new Button("Meine Bewerbungen");
 	
 	Button projektmarktplatzSuchen = new Button("Projektmarktplätze");
 	
-	
-	
-	
-	
+
 	public Navigator(final Person person){
 		
 		
+		rechtsUnten.add(btnBack);
 		
 		homeNavigator.add(projektmarktplatzSuchen);
 		projektmarktplatzSuchen.setWidth("200px");
 		projektmarktplatzSuchen.setStylePrimaryName("navi-button");
-		
-		homeNavigator.add(btnBack);
-		btnBack.setWidth("200px");
-		btnBack.setStylePrimaryName("navi-button");
-		
+
 		homeNavigator.setSpacing(5);
 		homeNavigator.setWidth("100%");
 		
@@ -50,6 +44,7 @@ public class Navigator extends StackPanel{
 		meineBewerbungen.setWidth("200px");
 		meineBewerbungen.setStylePrimaryName("navi-button");
 		
+		RootPanel.get("RechtsUnten").add(rechtsUnten);
 
 	
 		this.setWidth("250px");
