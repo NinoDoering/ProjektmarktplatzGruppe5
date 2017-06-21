@@ -50,7 +50,7 @@ public class Projektmarktplatz implements EntryPoint {
 	/**
 	 * Deklarierung von Gui-Elementen
 	 */
-	final Button Logout = new Button("Logout");
+	 Button logout; 
 	private Button loginButton = new Button("Login");
 	private LoginInfo loginInfo = null;
 	private VerticalPanel loginPanel = new VerticalPanel();
@@ -139,7 +139,7 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		
 		private void itprojektload(final Person person){
-			Button LogOUT = new Button("Ausloggen");
+			logout = new Button("Ausloggen");
 
 
 		
@@ -151,7 +151,7 @@ public class Projektmarktplatz implements EntryPoint {
 			Button meinProfil = new Button("Mein Profil");
 			
 			rechtsOben.add(meinProfil);
-			rechtsOben.add(LogOUT);
+			rechtsOben.add(logout);
 
 			mainPanel.add(addPanel);
 			mainPanel.add(showcase);
