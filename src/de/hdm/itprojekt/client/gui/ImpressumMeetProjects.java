@@ -4,7 +4,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.itprojekt.client.Showcase;
 
-public class Impressum extends Showcase{
+public class ImpressumMeetProjects extends Showcase{
 
 	
 	@Override
@@ -30,4 +30,4 @@ public class Impressum extends Showcase{
 				+ "<br> <br><A HREF=\"https://www.hdm-stuttgart.de/impressum\"TARGET=\"_blank\">Impressum der Hochschule</A>"
 				+ "</div>");
 	}
-}
+}                        
