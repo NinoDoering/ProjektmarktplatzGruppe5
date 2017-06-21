@@ -59,5 +59,7 @@ public class AGB extends Showcase {
 		+"<p></p>"
 		+"Bei Fragen zu diesen Datenschutzbestimmungen wenden Sie sich bitte über unsere Kontakt-Seite an uns."
 		+"</div>");
+		
+		
 	}
 }

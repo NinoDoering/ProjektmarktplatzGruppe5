@@ -16,6 +16,7 @@ public class Impressum extends Showcase{
 	@Override
 	protected void run() {
 		
+		
 		RootPanel.get("Anzeige").setWidth("100%");
 		
 		this.append("<div class='Impressum'>"
