@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -21,19 +22,18 @@ public class Navigator extends StackPanel{
 	
 	Button btnBack = new Button ("Zurueck zur Startseite");
 	
-	Button meinProfil = new Button("Mein Profil");
 	
 	Button meineBewerbungen = new Button("Meine Bewerbungen");
 	
 	Button projektmarktplatzSuchen = new Button("Projektmarktplätze");
 	
-	Button Logout = new Button("Logout");
+	
+	
+	
 	
 	public Navigator(final Person person){
 		
-		homeNavigator.add(Logout);
-		Logout.setWidth("200px");
-		Logout.setStylePrimaryName("navi-button");
+		
 		
 		homeNavigator.add(projektmarktplatzSuchen);
 		projektmarktplatzSuchen.setWidth("200px");
@@ -50,12 +50,7 @@ public class Navigator extends StackPanel{
 		meineBewerbungen.setWidth("200px");
 		meineBewerbungen.setStylePrimaryName("navi-button");
 		
-		personalNavigator.add(meinProfil);
-		meinProfil.setWidth("200px");
-		meinProfil.setStylePrimaryName("navi-button");
-		
-		personalNavigator.setSpacing(5);
-		personalNavigator.setWidth("100%");
+
 	
 		this.setWidth("250px");
 		this.addStyleName("gwt-StackPanel");
@@ -82,16 +77,7 @@ public class Navigator extends StackPanel{
 				RootPanel.get("Anzeige").add(showcase);
 				
 			}});
-		meinProfil.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				RootPanel.get("Anzeige").clear();
-				Showcase sh = new PersonSeite(person);
-				RootPanel.get("Anzeige").add(sh);
-			
-			}
-		});
+
 		
 		btnBack.addClickHandler(new ClickHandler(){
 
@@ -102,14 +88,7 @@ public class Navigator extends StackPanel{
 				Window.Location.reload();
 			}});
 			
-		Logout.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				//logout funktion 
-			}
-		});
+	
 			
 	}}
 	

@@ -138,14 +138,35 @@ public class Projektmarktplatz implements EntryPoint {
 		}
 		
 		
-		private void itprojektload(Person person){
+		private void itprojektload(final Person person){
+			Button LogOUT = new Button("Ausloggen");
+		
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
+			HorizontalPanel rechtsOben = new HorizontalPanel();
 			Showcase showcase = new Startseite();
+			Button meinProfil = new Button("Mein Profil");
+			
+			rechtsOben.add(meinProfil);
+			rechtsOben.add(LogOUT);
 			mainPanel.add(addPanel);
 			mainPanel.add(showcase);
+			RootPanel.get("RechtsOben").add(rechtsOben);
 			RootPanel.get("Anzeige").add(mainPanel);
 			RootPanel.get("Navigator").add(new Navigator(person));		
+			
+			meinProfil.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					RootPanel.get("Anzeige").clear();
+					Showcase sh = new PersonSeite(person);
+					RootPanel.get("Anzeige").add(sh);
+				
+				}
+			});
+			
+			
 		}
 	
 }
