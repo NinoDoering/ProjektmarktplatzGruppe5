@@ -12,6 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -33,6 +34,8 @@ public class ProjekteSeite extends Showcase{
 	
 	private HorizontalPanel hpanelProjekte = new HorizontalPanel();
 	private VerticalPanel vpanelProjekte = new VerticalPanel();
+	
+	//private Label lblMarktplatz =  new Label("hallo"+ this.mp.getBezeichnung());
 	
 	private Projekt p1 = new Projekt();
 	
@@ -65,6 +68,7 @@ public class ProjekteSeite extends Showcase{
 		projekttabelle.setWidth("100%", true);
 		vpanelProjekte.add(projekttabelle);
 		hpanelProjekte.add(anlegenprojekt);
+	//	hpanelProjekte.add(lblMarktplatz);
 		this.add(hpanelProjekte);
 		this.add(vpanelProjekte);
 		

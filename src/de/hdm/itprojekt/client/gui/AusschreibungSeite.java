@@ -13,6 +13,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -36,7 +37,7 @@ public class AusschreibungSeite extends Showcase {
 	private Ausschreibung a1 = new Ausschreibung();
 	private Ausschreibung pp1 = new Ausschreibung();
 	CellTable<Ausschreibung> ausschreibungtabelle = new CellTable<Ausschreibung>();
-	
+	//private Label lblPro = new Label("hallo " +p1.getIdMarktplatz() );
 	private HorizontalPanel hpanelAusschreibung = new HorizontalPanel();
 	private VerticalPanel vpanelAusschreibung = new VerticalPanel();
 	
@@ -72,6 +73,7 @@ public class AusschreibungSeite extends Showcase {
 		vpanelAusschreibung.add(ausschreibungtabelle);
 		hpanelAusschreibung.add(anlegenAusschreibung);
 		hpanelAusschreibung.add(bewerbenAusschreibung);
+		//hpanelAusschreibung.add(lblPro);
 		this.add(hpanelAusschreibung);
 		this.add(vpanelAusschreibung);
 		
