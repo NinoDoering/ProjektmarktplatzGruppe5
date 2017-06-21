@@ -49,7 +49,7 @@ public class PersonSeite extends Showcase{
 	private HorizontalPanel personHP = new HorizontalPanel();
 	
 	
-	private ListBox listeTitel = new ListBox();
+	private ListBox listeAnrede = new ListBox();
 	private TextBox boxTitel = new TextBox();
 	private TextBox boxName = new TextBox();
 	private TextBox boxNachname = new TextBox();
@@ -59,6 +59,7 @@ public class PersonSeite extends Showcase{
 	private TextBox boxFirmenName = new TextBox();
 	private TextBox boxEmail = new TextBox();
 	
+	private Label labelAnrede = new Label("Anrede");
 	private Label labelTitel = new Label("Titel");
 	private Label labelName = new Label ("Vorname");
 	private Label labelNachname = new Label("Nachname");
@@ -77,7 +78,6 @@ public class PersonSeite extends Showcase{
 
 	@Override
 	protected void run() {
-		// TODO Auto-generated method stub
 		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
 		
 		this.add(pp);
@@ -88,27 +88,29 @@ public class PersonSeite extends Showcase{
 		teambutton.setStylePrimaryName("profilButton");
 		unternehmenbutton.setStylePrimaryName("profilButton");
 
-		listeTitel.addItem("Frau");
-		listeTitel.addItem("Herr");
+		listeAnrede.addItem("Frau");
+		listeAnrede.addItem("Herr");
 		
 		personVP.setSpacing(7);
 		
-		table.setWidget(0, 1, boxTitel);
-		table.setWidget(0, 0, labelTitel);
-		table.setWidget(1, 1, boxName);
-		table.setWidget(1, 0, labelName);
-		table.setWidget(2, 1, boxNachname);
-		table.setWidget(2, 0, labelNachname);
-		table.setWidget(3, 1, boxAdresse);
-		table.setWidget(3, 0, labelAdresse);
-		table.setWidget(4, 1, boxStandort);
-		table.setWidget(4, 0, labelStandort);
-		table.setWidget(5, 1, boxTeamName);
-		table.setWidget(5, 0, labelTeamName);
-		table.setWidget(6, 1, boxFirmenName);
-		table.setWidget(6, 0, labelFirmenName);
-		table.setWidget(7, 1, boxEmail);
-		table.setWidget(7, 0, labelEmail);
+		table.setWidget(0, 1, listeAnrede);
+		table.setWidget(0, 0, labelAnrede);
+		table.setWidget(1, 1, boxTitel);
+		table.setWidget(1, 0, labelTitel);
+		table.setWidget(2, 1, boxName);
+		table.setWidget(2, 0, labelName);
+		table.setWidget(3, 1, boxNachname);
+		table.setWidget(3, 0, labelNachname);
+		table.setWidget(4, 1, boxAdresse);
+		table.setWidget(4, 0, labelAdresse);
+		table.setWidget(5, 1, boxStandort);
+		table.setWidget(5, 0, labelStandort);
+		table.setWidget(6, 1, boxTeamName);
+		table.setWidget(6, 0, labelTeamName);
+		table.setWidget(7, 1, boxFirmenName);
+		table.setWidget(7, 0, labelFirmenName);
+		table.setWidget(8, 1, boxEmail);
+		table.setWidget(8, 0, labelEmail);
 		
 		flexTable.setWidget(0, 0, bearbeitenbutton);
 		flexTable.setWidget(0, 1, speichernbutton);
@@ -116,13 +118,8 @@ public class PersonSeite extends Showcase{
 		flexTable.setWidget(1, 0, deletebutton);
 		flexTable.setWidget(2, 1, teambutton);
 		flexTable.setWidget(2, 0, unternehmenbutton);
-
-	bearbeitenbutton.addClickHandler(new ClickHandler(){
 		
-		@Override
-		public void onClick(ClickEvent event){
-		table.setWidget(1, 1, boxTitel);
-		
+		boxTitel.setReadOnly(true);
 		boxName.setReadOnly(true);
 		boxNachname.setReadOnly(true);
 		boxAdresse.setReadOnly(true);
@@ -130,6 +127,26 @@ public class PersonSeite extends Showcase{
 		boxTeamName.setReadOnly(true);
 		boxFirmenName.setReadOnly(true);
 		boxEmail.setReadOnly(true);
+		
+
+		personVP.add(table);
+		personVP.add(flexTable);
+		this.add(personVP);
+		
+	bearbeitenbutton.addClickHandler(new ClickHandler(){
+		
+		@Override
+		public void onClick(ClickEvent event){
+		table.setWidget(1, 1, boxTitel);
+		
+		boxTitel.setReadOnly(false);
+		boxName.setReadOnly(false);
+		boxNachname.setReadOnly(false);
+		boxAdresse.setReadOnly(false);
+		boxStandort.setReadOnly(false);
+		boxTeamName.setReadOnly(false);
+		boxFirmenName.setReadOnly(false);
+		boxEmail.setReadOnly(false);
 		
 		bearbeitenbutton.setVisible(false);
 		speichernbutton.setVisible(true);
@@ -151,7 +168,7 @@ public class PersonSeite extends Showcase{
 		
 		@Override
 		public void onClick(ClickEvent event){
-			gwtproxy.getPersonById(p.getId(), new SpeichernProfilCallback());
+			gwtproxy.savePerson(p, new SpeichernProfilCallback());
 		
 		}
 	});
@@ -165,83 +182,58 @@ public class PersonSeite extends Showcase{
 			RootPanel.get("Anzeige").add(scase);
 		}
 	});
-
-final class GetPersonAusDB implements AsyncCallback <Person>{
-
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			Window.alert("ssss");
-
-		}
-
-		@Override
-		public void onSuccess(Person result) {
-			Window.alert("s");
-			boxName.setText(result.getVorname());
-			boxNachname.setText(result.getNachname());
-			boxAdresse.setText(result.getAdresse());
-			boxStandort.setText(result.getStandort());
-			boxTitel.setText(result.getTitel());
-		}
-		
 	}
-//class GetPersonByKey implements AsyncCallback<Person>{
-//	
-//	@Override
-//	public void onFailure(Throwable caught) {
-//		// TODO Auto-generated method stub
-//		Window.alert("Fehlgeschlagen");
-//	}
-//
-//	@Override
-//	public void onSuccess(Person result) {
-//		// TODO Auto-generated method stub
-//		
-//
-//		}	
-//	}
-//}
 	
-final class BearbeitenvomProfilCallback implements AsyncCallback<Person>{
+	
+private class BearbeitenvomProfilCallback implements AsyncCallback<Person>{
 
 	@Override
 	public void onFailure(Throwable caught) {
 		// TODO Auto-generated method stub
-		Window.alert("Bearbeiten vom Profil hat nicht funktioniert.");
 	}
 
 	@Override
 	public void onSuccess(Person result) {
 		// TODO Auto-generated method stub
 	//	result.getVorname(boxTitel.getText(boxTitel.getSelectedText()));
-		Window.alert("yes");
 	
 	}
 	
 }
 	
-final class SpeichernProfilCallback implements AsyncCallback<Void>{
+private class SpeichernProfilCallback implements AsyncCallback<Void>{
 
 	@Override
 	public void onFailure(Throwable caught) {
 		// TODO Auto-generated method stub
-		Window.alert("Fehler beim speichern.");
 	}
 
 	@Override
 	public void onSuccess(Void result) {
-		// TODO Auto-generated method stub
-		Window.alert("ja");
 		Showcase scase = new PersonSeite(p);
 		RootPanel.get("Anzeige").clear();
 		RootPanel.get("Anzeige").add(scase);
 	}
 }
 
+private class GetPersonAusDB implements AsyncCallback<Person> {
 
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+		}
 
-
+		@Override
+		public void onSuccess(Person result) {
+			Window.alert(" " + result.getEmailAddresse()); 
+			boxName.setText(result.getVorname());
+			boxNachname.setText(result.getNachname());
+			boxAdresse.setText(result.getAdresse());
+			boxStandort.setText(result.getStandort());
+			boxTitel.setText(result.getTitel());
+			
+		}
+		
 	}
 
 }

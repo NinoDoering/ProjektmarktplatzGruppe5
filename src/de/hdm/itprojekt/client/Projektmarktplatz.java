@@ -58,6 +58,8 @@ public class Projektmarktplatz implements EntryPoint {
 	private Label loginLabel = new Label("Bitte melde dich mit deinem Google Account an.");
 	private Anchor signInLink= new Anchor("Login");
 	private Anchor signOutLink = new Anchor("Logout");
+	private Person p = new Person();
+	
 	
 	@Override
 	public void onModuleLoad() {
@@ -90,7 +92,11 @@ public class Projektmarktplatz implements EntryPoint {
 			public void onSuccess(LoginInfo result) {
 				loginInfo = result;
 				if(loginInfo.isLoggedIn()){
-					itprojektload();
+					
+					////---------------------
+					p.setId(1);
+					
+					itprojektload(p);
 				} else{
 					loadLogin();
 				}
@@ -132,14 +138,14 @@ public class Projektmarktplatz implements EntryPoint {
 		}
 		
 		
-		private void itprojektload(){
+		private void itprojektload(Person person){
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
 			Showcase showcase = new Startseite();
 			mainPanel.add(addPanel);
 			mainPanel.add(showcase);
 			RootPanel.get("Anzeige").add(mainPanel);
-			RootPanel.get("Navigator").add(new Navigator());		
+			RootPanel.get("Navigator").add(new Navigator(person));		
 		}
 	
 }
