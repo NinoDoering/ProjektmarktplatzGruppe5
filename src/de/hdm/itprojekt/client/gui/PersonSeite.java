@@ -21,6 +21,7 @@ import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
@@ -32,6 +33,7 @@ public class PersonSeite extends Showcase{
 	private Organisationseinheit o1 = new Organisationseinheit();
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
+	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
 	
 	private Navigator ng = null;
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
@@ -89,6 +91,7 @@ public class PersonSeite extends Showcase{
 		
 		this.add(pp);
 		this.add(eigeneProjekte);
+		this.add(eigeneBewerbungen);
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -185,7 +188,7 @@ public class PersonSeite extends Showcase{
 		
 		@Override
 		public void onClick(ClickEvent event){
-			Showcase scase = new EigenschaftAusSeite();
+			Showcase scase = new EigeneBewerbungenSeite(p);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(scase);
 		}
@@ -209,6 +212,31 @@ public class PersonSeite extends Showcase{
 					// TODO Auto-generated method stub
 					
 					Showcase showcase = new EigeneProjekte(p);
+					RootPanel.get("Anzeige").clear();
+					RootPanel.get("Anzeige").add(showcase);
+				}
+			});
+		}
+	});
+	
+	
+	eigeneBewerbungen.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			gwtproxy.getBewerbungByBewerber(p, new AsyncCallback<Vector<Bewerbung>>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				public void onSuccess(Vector<Bewerbung> result) {
+					// TODO Auto-generated method stub
+					Window.alert(" warum nix anzeigen");
+					Showcase showcase = new EigeneBewerbungenSeite(p);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
 				}

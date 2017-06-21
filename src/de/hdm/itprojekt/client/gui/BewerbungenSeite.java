@@ -104,8 +104,10 @@ RootPanel.get("Anzeige").setWidth("100%");
 		bewerbungentabelle.addColumn(bewerbungtabellebewerbungstext, "Bewerbungstext");
 		bewerbungentabelle.addColumn(bewerbungtabellestatus, "Bewerbungsstatus");
 		gwtproxy.getAllBewerbungen(new getBewerbungenAusDB());
+		//gwtproxy.getBewerbungByBewerber(o, callback);
+		
+		
 		deleteBew.addClickHandler(new ClickHandler() {
-			
 			@Override
 			public void onClick(ClickEvent event) {
 				Window.alert("erstmal nix");
@@ -125,6 +127,9 @@ RootPanel.get("Anzeige").setWidth("100%");
 		}
 		
 	}
+	
+	
+	
 	}
 	
 	
