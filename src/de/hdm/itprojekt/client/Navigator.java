@@ -11,6 +11,7 @@ import de.hdm.itprojekt.client.gui.*;
 import de.hdm.itprojekt.client.gui.PersonSeite;
 
 import de.hdm.itprojekt.client.gui.ProjektmarktplatzSeite;
+import de.hdm.itprojekt.shared.bo.Person;
 
 public class Navigator extends StackPanel{
 
@@ -28,7 +29,7 @@ public class Navigator extends StackPanel{
 	
 	Button Logout = new Button("Logout");
 	
-	public Navigator(){
+	public Navigator(final Person person){
 		
 		homeNavigator.add(Logout);
 		Logout.setWidth("200px");
@@ -86,7 +87,7 @@ public class Navigator extends StackPanel{
 			@Override
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Anzeige").clear();
-				Showcase sh = new PersonSeite();
+				Showcase sh = new PersonSeite(person);
 				RootPanel.get("Anzeige").add(sh);
 			
 			}
