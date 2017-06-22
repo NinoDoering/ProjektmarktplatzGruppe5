@@ -67,12 +67,6 @@ public class Projektmarktplatz implements EntryPoint {
 	public void onModuleLoad() {
 	
 		
-		
-		//Logout funktion muss noch iwo rein!
-		//signOutLink.setHref(loginInfo.getLogoutUrl());
-		
-		
-		
 		marktplatzVerwaltung = ClientSideSettings.getMarktplatzVerwaltung();
 		loginService = ClientSideSettings.getLoginService();
 		
@@ -119,7 +113,7 @@ public class Projektmarktplatz implements EntryPoint {
 						if(isUserRegistered==false){
 							RootPanel.get("Details").clear();
 							
-							RootPanel.get("Details").add(new RegistrierungsFormular());
+							RootPanel.get("Details").add(new Registrierungsformular());
 						}
 						}
 						
@@ -166,7 +160,7 @@ public class Projektmarktplatz implements EntryPoint {
 
 		private void itprojektload(int id){
 			signOutLink.setHref(loginInfo.getLogoutUrl());
-			
+			final Person p = new Person();
 			Button LogOUT = new Button("Ausloggen");
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
@@ -182,7 +176,7 @@ public class Projektmarktplatz implements EntryPoint {
 			mainPanel.add(showcase);
 			RootPanel.get("RechtsOben").add(rechtsOben);
 			RootPanel.get("Anzeige").add(mainPanel);
-			RootPanel.get("Navigator").add(new Navigator());	
+			RootPanel.get("Navigator").add(new Navigator(p));	
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 			Logout.setWidth("150px");
 			Logout.setStylePrimaryName("loginbutton");
@@ -199,14 +193,14 @@ public class Projektmarktplatz implements EntryPoint {
 			
 			ReportGeneratorAsync ReportGenerator = ClientSideSettings.getReportGenerator();
 
-			RootPanel.get("Navigator").add(new Navigator(person));		
+			RootPanel.get("Navigator").add(new Navigator(p));		
 			
 			meinProfil.addClickHandler(new ClickHandler() {
 				
 				@Override
 				public void onClick(ClickEvent event) {
 					RootPanel.get("Anzeige").clear();
-					Showcase sh = new PersonSeite(person);
+					Showcase sh = new PersonSeite(p);
 					RootPanel.get("Anzeige").add(sh);
 				
 				}
@@ -217,53 +211,135 @@ public class Projektmarktplatz implements EntryPoint {
 			
 		}
 
+		private class Registrierungsformular extends Showcase{
+
+
+			private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
+			
+			private VerticalPanel vMain = new VerticalPanel();
+			private FlexTable buttonPanel = new FlexTable();
+			private FlexTable formPanel = new FlexTable();
+			
+			
+			private Button saveButton = new Button("Absenden");
+			
+			private LoginInfo loginInfo = null;
+			
+			private ListBox titelEing = new ListBox();
+			private TextBox vNameEing = new TextBox();
+			private TextBox nNameEing = new TextBox();
+			private TextBox adresseEing = new TextBox();
+			private TextBox ortEing = new TextBox();
+			private TextBox emailEing = new TextBox();
+			
+			
+			private Label titelTxt = new Label("Anrede");
+			private Label vNameTxt = new Label("titel");
+			private Label nNameTxt = new Label("Nachname");
+			private Label adresseTxt = new Label("Straße");
+			private Label ortTxt = new Label("Ort");
+			private Label emailTxT = new Label("Google-Mail");
+			
+			private GreetingServiceAsync marktplatzVerwaltung = 
+					ClientSideSettings.getMarktplatzVerwaltung();
+
+			@Override
+			protected String getHeadlineText() {
+				// TODO Auto-generated method stub
+				return "Hier können Sie sich für MeetProjects registrieren";
+			}
+
+			@Override
+			protected void run() {
+				emailEing.setText(loginInfo.getEmailAddress());
+				emailEing.setReadOnly(true);
+				//Stylen der Buttons
+				saveButton.setStylePrimaryName("navi-button");
+				
+				//HinzufÃ¼gen der Inhalte der titelEing
+				titelEing.addItem("Herr");
+				titelEing.addItem("Frau");
+					
+				// BefÃ¼llen der FlexTable
+				formPanel.setWidget(0, 1, emailEing);
+				formPanel.setWidget(0, 0, emailTxT);
+				
+				formPanel.setWidget(1, 1, titelEing);
+				formPanel.setWidget(1, 0, titelTxt);
+
+				formPanel.setWidget(2, 1, vNameEing);
+				formPanel.setWidget(2, 0, vNameTxt);
+
+				formPanel.setWidget(3, 1, nNameEing);
+				formPanel.setWidget(3, 0, nNameTxt);
+
+				formPanel.setWidget(4, 1, adresseEing);
+				formPanel.setWidget(4, 0, adresseTxt);
+
+				
+				formPanel.setWidget(7, 1, ortEing);
+				formPanel.setWidget(7, 0, ortTxt);
+
+
+				/**
+				 * AnfÃ¼gen der FlexTable und des Buttons  an das Panel
+				 */
+				vMain.setSpacing(8);
+				buttonPanel.setWidget(0, 1, saveButton);
+				
+				vMain.add(formPanel);
+				vMain.add(buttonPanel);
+				this.add(vMain);
+				
+				//ClickHandler, der bei einem Klick auf den Absenden Button den ProfilBearbeitenCallback ausfÃ¼hrt.
+
+				saveButton.addClickHandler(new ClickHandler() {
+					public void onClick(ClickEvent event) {
+						try {
+							vNameEing.getText();
+							marktplatzVerwaltung.anlegenPartnerprofil(new NeuePersonAnlegen());
+						} catch (Exception e) {
+							Window.alert("PLZ muss eine Zahl sein!");
+						}
+					
+					}
+				});
+				
+			
+			}
+			
+			private class NeuePersonAnlegen implements AsyncCallback<Partnerprofil>{
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onSuccess(Partnerprofil result) {
+					if(vNameEing.getText().isEmpty()==false){
+					marktplatzVerwaltung.anlegenPerson(new Integer(0), new Integer(0), result.getId(), vNameEing.getText(),   nNameEing.getText(), 
+							titelEing.getSelectedItemText(), emailEing.getText(), ortEing.getText(), adresseEing.getText(),   
+							   new AsyncCallback<Person>() {
+
+								@Override
+								public void onFailure(Throwable caught) {
+									Window.alert("Neuer User konnte nicht erstellt werden!");
+								}
+
+								@Override
+								public void onSuccess(Person result) {
+									Window.alert("GlÃ¼ckwunsch " + vNameEing.getText() +" "+ nNameEing.getText()+"! Sie sind jetzt Teilnehmer bei Prokeko!");
+									itprojektload(result.getId());
+								}
+
+								
+							});
+				}
+			}
+			
+		}
+				
+			}
 }
 
-//	public class RegistrierungsFormular extends Showcase{
-//
-//
-//	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
-//	
-//	private VerticalPanel vMain = new VerticalPanel();
-//	private FlexTable buttonPanel = new FlexTable();
-//	private FlexTable formPanel = new FlexTable();
-//	
-//	
-//	private Button saveButton = new Button("Absenden");
-//	
-//	
-//	private ListBox anredeEing = new ListBox();
-//	private TextBox vNameEing = new TextBox();
-//	private TextBox nNameEing = new TextBox();
-//	private TextBox strasseEing = new TextBox();
-//	private TextBox hausnrEing = new TextBox();
-//	private TextBox plzEing = new TextBox();
-//	private TextBox ortEing = new TextBox();
-//	private TextBox emailEing = new TextBox();
-//	
-//	
-//	private Label anredeTxt = new Label("Anrede");
-//	private Label vNameTxt = new Label("Vorname");
-//	private Label nNameTxt = new Label("Nachname");
-//	private Label strasseTxt = new Label("Straße");
-//	private Label hausnrTxt = new Label("Hausnummer");
-//	private Label plzTxt = new Label("Postleitzahl");
-//	private Label ortTxt = new Label("Ort");
-//	private Label emailTxT = new Label("Google-Mail");
-//	
-//	private GreetingServiceAsync marktplatzVerwaltung = 
-//			ClientSideSettings.getMarktplatzVerwaltung();
-//
-//	@Override
-//	protected String getHeadlineText() {
-//		// TODO Auto-generated method stub
-//		return "Hier können Sie sich für MeetProjects registrieren";
-//	}
-//
-//	@Override
-//	protected void run() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//	
-//}
