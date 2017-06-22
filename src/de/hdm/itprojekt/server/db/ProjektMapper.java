@@ -238,13 +238,20 @@ public class ProjektMapper {
 
 			// SQL Statment, welches das Updaten von Projekte erlaubt
 
-			stmt.executeUpdate("UPDATE projekt " + "SET bezeichnung='" + p.getBezeichnung() + "' ,'"
-				+ "beschreibung='" + p.getBeschreibung() + "' ,'" 
-					+ "startDatum='" + format.format(p.getStartDatum()) + "' ,'"
-					+ "endDatum='" + format.format(p.getEndDatum()) + "' ,'" 
-					+ "idPerson='" + p.getIdPerson() + "' ,'"
-					+ "idMarktplatz='" + p.getIdMarktplatz() + "' ,'"
-					+ " WHERE idProjekt= '" + p.getId());
+//			stmt.executeUpdate("UPDATE projekt " + " SET bezeichnung='" + p.getBezeichnung() + "' ,"
+//				+ "beschreibung='" + p.getBeschreibung() + "' ,'" 
+//					+ "startDatum='" + format.format(p.getStartDatum()) + "' ,'"
+//					+ "endDatum='" + format.format(p.getEndDatum()) + "' ,'" 
+//					+ "idPerson='" + p.getIdPerson() + "' ,'"
+//					+ "idMarktplatz='" + p.getIdMarktplatz() + "' ,'"
+//					+ "WHERE idProjekt= '" + p.getId());
+			 stmt.executeUpdate("UPDATE projekt " + "SET bezeichnung='"
+			          + p.getBezeichnung() + "', beschreibung='" + p.getBeschreibung() + "', startDatum='" 
+			          + format.format(p.getStartDatum()) + "', endDatum= '" 
+			          + format.format(p.getEndDatum()) 
+			          + "'WHERE idProjekt=" + p.getId());
+
+		
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -258,7 +265,7 @@ public class ProjektMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE * FROM projekt" + " WHERE idProjekt= " + p.getId());
+			stmt.executeUpdate("DELETE FROM projekt" + " WHERE idProjekt= " + p.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

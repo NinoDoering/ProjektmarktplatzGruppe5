@@ -34,38 +34,37 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	VerticalPanel projektVP = new VerticalPanel();
 	HorizontalPanel projektHP = new HorizontalPanel();
 	private Marktplatz mp2 = new Marktplatz();
-	private Projekt p1 = new Projekt();
 	Button ok = new Button("OK");
 	Button abbrechen = new Button("Abbrechen");
 	
-	Label projektbezeichnung = new Label("Projektbezeichnung");
-	TextArea projektbez = new TextArea();
+	private Label projektbezeichnung = new Label("Projektbezeichnung");
+	private TextArea projektbez = new TextArea();
 	
-	Label projektbeschreibung = new Label("Projektbeschreibung");
-	TextArea projektbeschr = new TextArea();
+	private Label projektbeschreibung = new Label("Projektbeschreibung");
+	private TextArea projektbeschr = new TextArea();
 	
-	Label startdatum = new Label("Startdatum des Projektes");
-	DatePicker startD = new DatePicker();
-	Label textStart = new Label();
+	private Label startdatum = new Label("Startdatum des Projektes");
+	private DatePicker startD = new DatePicker();
+	private Label textStart = new Label();
 	
 	
-	Label enddatum = new Label("Enddatum des Projektes");
-	DatePicker endD = new DatePicker();
+	private Label enddatum = new Label("Enddatum des Projektes");
+	private DatePicker endD = new DatePicker();
 	final Label textEnde = new Label();
-	//!!!!!!!!!!!!!!! f�r test Person ID manuell eingeben !!!!!!!!!!!!!!!!!!!!!!!!
-	Label projektleiter = new Label("ID des zugeh�rigen Projektleiters");
-	TextBox proLeit	= new TextBox();
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
 	
 	FlexTable projektdialogboxtabelle = new FlexTable(); 
 	
-	public DialogBoxProjektBearbeiten(final Projekt selectedObject){
-			this.setText("Projektmarktplatz anlegen");
+	public DialogBoxProjektBearbeiten(final Projekt selectedObject, final Marktplatz m1){
+		projektbez.setValue(selectedObject.getBezeichnung());	
+		projektbeschr.setValue(selectedObject.getBeschreibung());
+		startD.setValue(selectedObject.getStartDatum(), true);
+		endD.setValue(selectedObject.getEndDatum(), true);
+		
+		this.setText("Projektmarktplatz anlegen");
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(true);
-			this.p1 = selectedObject;
-		
-		
+			this.mp2 = m1 ;
 		projektHP.add(ok);
 		projektHP.add(abbrechen);
 		
@@ -79,7 +78,13 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 							Window.alert("Bitte Geben Sie einen Projektmarktplatznamen ein");	
 						}
 						else{
-							gwtproxy.saveProjekt(p1, new projektBearbeiten());
+							selectedObject.setBeschreibung(projektbeschr.getText());
+							selectedObject.setBezeichnung(projektbez.getText());
+							selectedObject.setStartDatum(startD.getValue());
+							selectedObject.setEndDatum(endD.getValue());
+							gwtproxy.saveProjekt(selectedObject, new projektBearbeiten());
+							
+							
 						}
 					}
 				});
@@ -95,6 +100,31 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 				RootPanel.get("Anzeige").add(showcase);
 			}
 		});
+		startD.addValueChangeHandler(new ValueChangeHandler<Date>() {
+					
+					@Override
+					public void onValueChange(ValueChangeEvent<Date> event) {
+						// TODO Auto-generated method stub
+						Date date = event.getValue();
+						String datum = DateTimeFormat.getFormat("yyyy-MM-dd").format(date);
+						textStart.setText(datum);
+					}
+					
+				});
+		
+		
+		
+		endD.addValueChangeHandler(new ValueChangeHandler<Date>() {
+
+			@Override
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				// TODO Auto-generated method stub
+				Date date = event.getValue();
+				String datum = DateTimeFormat.getFormat("yyyy-MM-dd").format(date);
+				textEnde.setText(datum);
+			}
+		});
+		
 		
 		
 		projektdialogboxtabelle.setWidget(1, 0, projektbezeichnung);
@@ -105,8 +135,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		projektdialogboxtabelle.setWidget(3, 1, startD);
 		projektdialogboxtabelle.setWidget(4, 0, enddatum);
 		projektdialogboxtabelle.setWidget(4, 1, endD);
-		projektdialogboxtabelle.setWidget(5, 0, projektleiter);
-		projektdialogboxtabelle.setWidget(5, 1, proLeit);
+		
 		
 		
 		projektVP.add(projektdialogboxtabelle);
@@ -132,7 +161,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			Window.alert("Veränderung wurden gespeichert !");
 			Showcase showcase = new ProjekteSeite(mp2);
 			RootPanel.get("Anzeige").clear();
-			RootPanel.get("Anzeige").add(showcase); 
+			RootPanel.get("Anzeige").add(showcase);
 		}
 
 		

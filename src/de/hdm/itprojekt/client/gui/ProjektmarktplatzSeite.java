@@ -98,7 +98,6 @@ public class ProjektmarktplatzSeite extends Showcase{
 			}
 			
 		};
-		
 	
 		
 		marktplatztabelle.addColumn(marktplatztabellespaltenname, "Bezeichnung");

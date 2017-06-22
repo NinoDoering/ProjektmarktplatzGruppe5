@@ -92,12 +92,14 @@ public class Navigator extends StackPanel{
 		projektmarktplatzSuchen.addClickHandler(new ClickHandler() {
 				@Override
 			public void onClick(ClickEvent event) {
-				/** Clirim muss sich darum noch kümmern
+				/** Clirim muss sich darum noch kï¿½mmern
 				 * 
 				 */
-				identityMarketChoice.setOwnOrgUnitToZero();
-				identityMarketChoice.deactivateProjectMarkets();
-				identityMarketChoice.deactivateOrgUnits();
+					
+					//TONY PART
+//				identityMarketChoice.setOwnOrgUnitToZero();
+//				identityMarketChoice.deactivateProjectMarkets();
+//				identityMarketChoice.deactivateOrgUnits();
 				Showcase showcase = new ProjektmarktplatzSeite();
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
@@ -111,8 +113,10 @@ public class Navigator extends StackPanel{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				identityMarketChoice.activateProjectMarkets();
-				identityMarketChoice.activateOrgUnits();
+				
+				//TONY PART
+//				identityMarketChoice.activateProjectMarkets();
+//				identityMarketChoice.activateOrgUnits();
 				Showcase showcase = new BewerbungenSeite();
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
@@ -165,12 +169,14 @@ public class Navigator extends StackPanel{
 		public Navigator getNavigator(){
 			return this;
 		}
-		public IdentityMarketChoice getIdentityMarketChoice(){
-			return identityMarketChoice;
-		}
-		public void setIdentityMarketChoice(IdentityMarketChoice identityMarketChoice){
-			this.identityMarketChoice=identityMarketChoice;
-	}
+		
+		//TONY PART
+//		public IdentityMarketChoice getIdentityMarketChoice(){
+//			return identityMarketChoice;
+//		}
+//		public void setIdentityMarketChoice(IdentityMarketChoice identityMarketChoice){
+//			this.identityMarketChoice=identityMarketChoice;
+//	}
 }
 	
 	

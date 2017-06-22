@@ -177,7 +177,7 @@ public class Projektmarktplatz implements EntryPoint {
 			mainPanel.add(showcase);
 			RootPanel.get("RechtsOben").add(rechtsOben);
 			RootPanel.get("Anzeige").add(mainPanel);
-			RootPanel.get("Navigator").add(new Navigator(person));	
+			RootPanel.get("Navigator").add(new Navigator());	//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 			Logout.setWidth("150px");
 			Logout.setStylePrimaryName("loginbutton");
@@ -194,7 +194,7 @@ public class Projektmarktplatz implements EntryPoint {
 			
 			ReportGeneratorAsync ReportGenerator = ClientSideSettings.getReportGenerator();
 
-			RootPanel.get("Navigator").add(new Navigator(person));		
+			RootPanel.get("Navigator").add(new Navigator());		//TONY PART RootPanel.get("Navigator").add(new Navigator(person));		
 			
 			meinProfil.addClickHandler(new ClickHandler() {
 				

@@ -125,7 +125,7 @@ public class ProjekteSeite extends Showcase{
 				// TODO Auto-generated method stub
 				Projekt p1 = ssmalleprojekte.getSelectedObject();
 				if (p1 != null){
-					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1);
+					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1, mp);
 					//RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
 					Window.alert(p1.getBeschreibung()+"jaa");
@@ -153,6 +153,9 @@ public class ProjekteSeite extends Showcase{
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Das Projekt wurde erfolgreich gelöscht");
+						Showcase showcase = new ProjekteSeite(mp);
+						RootPanel.get("Anzeige").clear();
+						RootPanel.get("Anzeige").add(showcase);
 					}
 				});
 			}
