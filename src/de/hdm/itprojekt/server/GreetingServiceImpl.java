@@ -246,7 +246,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	// anlegenPerson
 	@Override
-	public Person anlegenPerson(int idUnternehmen, int idTeam, int idPartnerprofil, String vorname, String nachname)
+	public Person anlegenPerson(int idUnternehmen, int idTeam, int idPartnerprofil, String vorname, String nachname, String titel, String emailAddresse, String standort, String adresse)
 			throws IllegalArgumentException {
 		Person pe = new Person();
 
@@ -256,6 +256,10 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		pe.setIdPartnerprofil(idPartnerprofil);
 		pe.setVorname(vorname);
 		pe.setNachname(nachname);
+		pe.setTitel(titel);
+		pe.setEmailAddresse(emailAddresse);
+		pe.setStandort(standort);
+		pe.setAdresse(adresse);
 
 		return this.persMapper.insertPerson(pe);
 	}

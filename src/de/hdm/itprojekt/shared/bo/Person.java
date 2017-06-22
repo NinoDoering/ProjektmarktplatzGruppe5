@@ -4,20 +4,23 @@ public class Person extends Organisationseinheit{
 
 	private static final long serialVersionUID = 1L;
 	
+	
 	private String vorname;
 	private String nachname;
 	private String titel;
-	private int idTeam;
-	private int idUnternehmen;
-	private String EmailAddresse;
+	private Integer idTeam = null;
+	private Integer idUnternehmen = null;
+	private String emailAddresse;
 	
 	public String getEmailAddresse() {
-		return EmailAddresse;
+		return emailAddresse;
 	}
 
 
+	
+
 	public void setEmailAddresse(String emailAddresse) {
-		EmailAddresse = emailAddresse;
+		this.emailAddresse = emailAddresse;
 	}
 
 
@@ -57,22 +60,22 @@ public class Person extends Organisationseinheit{
 	}
 
 
-	public int getIdTeam() {
+	public Integer getIdTeam() {
 		return idTeam;
 	}
 
 
-	public void setIdTeam(int idTeam) {
+	public void setIdTeam(Integer idTeam) {
 		this.idTeam = idTeam;
 	}
 
 
-	public int getIdUnternehmen() {
+	public Integer getIdUnternehmen() {
 		return idUnternehmen;
 	}
 
 
-	public void setIdUnternehmen(int idUnternehmen) {
+	public void setIdUnternehmen(Integer idUnternehmen) {
 		this.idUnternehmen = idUnternehmen;
 	}
 

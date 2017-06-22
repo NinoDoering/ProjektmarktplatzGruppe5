@@ -187,7 +187,7 @@ public interface GreetingServiceAsync {
 
 		// Person Asynch
 
-		void anlegenPerson(int idTeam, int idUnternehmen, int idPartnerprofil, String vorname, String nachname,
+		void anlegenPerson(int idTeam, int idUnternehmen, int idPartnerprofil, String vorname, String nachname, String titel, String emailAddresse, String standort, String adresse,
 				AsyncCallback<Person> callback);
 
 		void loeschenPerson(Person pe, AsyncCallback<Void> callback);

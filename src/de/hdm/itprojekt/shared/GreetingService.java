@@ -189,7 +189,7 @@ public interface GreetingService extends RemoteService  {
 
 		// Person pe
 		
-		public Person anlegenPerson(int idTeam, /*Integer ganz*/int idUnternehmen, int idPartnerprofil, String vorname, String nachname)
+		public Person anlegenPerson(int idTeam, /*Integer ganz*/int idUnternehmen, int idPartnerprofil, String vorname, String nachname, String titel, String emailAddresse, String standort, String adresse)
 				throws IllegalArgumentException;
 
 		public void loeschenPerson(Person pe) throws IllegalArgumentException;

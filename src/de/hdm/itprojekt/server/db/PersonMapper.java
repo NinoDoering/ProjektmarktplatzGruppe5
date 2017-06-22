@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
-import java.*; //Pakete, welche zum Ausfï¿½hren benï¿½tigt werden.
+import java.*; //Pakete, welche zum Ausf?hren ben?tigt werden.
 import javax.*;
 import java.sql.*;
 
@@ -128,7 +128,7 @@ public Person findByPerson(Person p){
 	return this.findPersonByKey(p.getId());	
 }
 
-//Personen die einem Unternehmen angehÃ¶ren ausgeben
+//Personen die einem Unternehmen angehören ausgeben
 public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 	Connection con = DBConnection.connection();
 	Vector<Person> result = new Vector<Person>();
@@ -206,16 +206,26 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 				//id=pe.getId();
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(
-						"INSERT INTO person (idPerson, titel, vorname, nachname, idTeam, idUnternehmen) " 
-				+ "VALUES (" + pe.getId() + ",'"
-								+ pe.getTitel() + "','" 
-								+ pe.getVorname() + "','" 
-								+ pe.getNachname() + "','"
-								+ pe.getIdTeam() + "','"
-								+ pe.getIdUnternehmen() + "')");
-			}
-		} catch (SQLException e4) {
+				if(pe.getIdTeam()==null && pe.getIdUnternehmen()==null){
+			        stmt.executeUpdate("INSERT INTO person (emailAddresse, idPerson, titel, vorname, nachname) "
+				            + "VALUES ('" + pe.getEmailAddresse() + "'," + pe.getId() + ",'" + pe.getTitel() + "','"
+				            + pe.getVorname() + "','" + pe.getNachname() +"')");
+		        }else if(pe.getIdTeam()!=null && pe.getIdUnternehmen()==null){
+			        stmt.executeUpdate("INSERT INTO person (emailAddresse, idPerson, titel, vorname, nachname, idTeam) "
+				            + "VALUES ('" + pe.getEmailAddresse() + "'," + pe.getId() + ",'" + pe.getTitel() + "','"
+				            + pe.getVorname() + "','" + pe.getNachname() + "','" + pe.getIdTeam() +"')");
+		        }else if(pe.getIdTeam()==null && pe.getIdUnternehmen()!=null){
+			        stmt.executeUpdate("INSERT INTO person (emailAddresse, idPerson, titel, vorname, nachname, idUnternehmen) "
+				            + "VALUES ('" + pe.getEmailAddresse() + "'," + pe.getId() + ",'" + pe.getTitel() + "','"
+				            + pe.getVorname() + "','" + pe.getNachname() + "','" + pe.getIdUnternehmen() +"')");
+		        }else if(pe.getIdTeam()!=null && pe.getIdUnternehmen()!=null){
+			        
+			        stmt.executeUpdate("INSERT INTO person (emailAddresse, idPerson, titel, norname, nachname, idUnternehmen, idTeam) "
+			            + "VALUES ('" + pe.getEmailAddresse() + "'," + pe.getId() + ",'" + pe.getTitel() + "','"
+			            + pe.getVorname() + "','" + pe.getNachname() + "','" + pe.getIdUnternehmen() + "','" + pe.getIdTeam() +"')");
+		        }        
+		}} 
+			catch (SQLException e4) {
 			e4.printStackTrace();
 		}
 
