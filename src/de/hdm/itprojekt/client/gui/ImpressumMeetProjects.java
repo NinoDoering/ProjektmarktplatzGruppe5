@@ -19,15 +19,15 @@ public class ImpressumMeetProjects extends Showcase{
 		
 		RootPanel.get("Anzeige").setWidth("100%");
 		
-		this.append("<div class='Impressum'>"
-				+ "<b>Betreuer bei diesem IT-Projekt waren Herr Prof. Dr. Rathke und Thies."
-				+ "<b>Studiengang: Wirtschaftsinformatik und Digitale Medien</b></br>"
+		this.append("<div class='Impressum'></br>"
+				+ "<b>Betreuer bei diesem IT-Projekt waren Herr Prof. Dr. Rathke und Thies.</br>"
+				+ "<b>Studiengang: Wirtschaftsinformatik und digitale Medien</b></br></br>"
 				+ "Hochschule der Medien"+ "</br>"
 				+ "Nobelstrasse 10</br>"
 				+ "70569 Stuttgart</br></br>"
-				+ "Kontakt</br>Telefon: +49 711 8923 10</br>"
-				+ "<br><br>Der Studiengang Wirtschaftsinformatik und digitale Medien wird rechtlich vertreten durch die Hochschule der Medien Stuttgart." 
-				+ "<br> <br><A HREF=\"https://www.hdm-stuttgart.de/impressum\"TARGET=\"_blank\">Impressum der Hochschule</A>"
+				+ "Kontakt</br>Telefon: +49 711 / 89 23 10</br>"
+				+ "<br><br>Der Studiengang Wirtschaftsinformatik und digitale Medien wird rechtlich vertreten durch die Hochschule der Medien Stuttgart.</br>" 
+				+ "<br> <br><A HREF=\"https://www.hdm-stuttgart.de/impressum\"TARGET=\"_blank\">Impressum der Hochschule der Medien</A>"
 				+ "</div>");
 	}
 }                        
