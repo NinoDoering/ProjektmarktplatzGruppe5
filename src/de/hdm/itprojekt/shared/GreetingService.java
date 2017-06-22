@@ -131,7 +131,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public void saveBewerbung (Bewerbung b) throws IllegalArgumentException;
 		
-		public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException;
+		public Vector<Bewerbung> getBewerbungByBewerber(Person p) throws IllegalArgumentException;
 		
 		public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException;
 		

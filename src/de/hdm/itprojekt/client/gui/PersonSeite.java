@@ -180,6 +180,7 @@ public class PersonSeite extends Showcase{
 		@Override
 		public void onClick(ClickEvent event){
 			gwtproxy.savePerson(p, new SpeichernProfilCallback());
+			
 		
 		}
 	});
@@ -235,7 +236,6 @@ public class PersonSeite extends Showcase{
 
 				public void onSuccess(Vector<Bewerbung> result) {
 					// TODO Auto-generated method stub
-					Window.alert(" warum nix anzeigen");
 					Showcase showcase = new EigeneBewerbungenSeite(p);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);

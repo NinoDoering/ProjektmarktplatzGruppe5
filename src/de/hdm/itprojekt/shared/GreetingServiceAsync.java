@@ -123,7 +123,7 @@ public interface GreetingServiceAsync {
 
 		void saveBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 
-		void getBewerbungByBewerber(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
+		void getBewerbungByBewerber(Person p, AsyncCallback<Vector<Bewerbung>> callback);
 		
 		void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
 		

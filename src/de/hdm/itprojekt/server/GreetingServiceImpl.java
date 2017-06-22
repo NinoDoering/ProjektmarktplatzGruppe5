@@ -341,14 +341,14 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getBewerbungByBewerber
-	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) {
+	public Vector<Bewerbung> getBewerbungByBewerber(Person p) {
 
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
 
-		if (o != null && this.bewerbungMapper != null) {
-			Vector<Bewerbung> bewerbung = this.bewerbungMapper.findBewerbungByBewerber(o.getId());
+		if (p != null && this.bewerbungMapper != null) {
+			Vector<Bewerbung> bewerbung = this.bewerbungMapper.findBewerbungByBewerber(p.getId());
 
-			if (o != null) {
+			if (p != null) {
 				result.addAll(bewerbung);
 			}
 		}
@@ -584,7 +584,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	@Override
 	public void loeschenTeam(Team t) throws IllegalArgumentException {
 
-		Vector<Bewerbung> b = this.getBewerbungByBewerber(t);
+	//	Vector<Bewerbung> b = this.getBewerbungByBewerber(t);
 		Vector<Projekt> p = this.getProjektByPerson(t);
 		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(t);
 		Vector<Beteiligung> beteiligung = this.getBeteiligungByBeteiligter(t);
@@ -602,11 +602,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		}
 
 		// zugehoerige Bewerbungen l�schen
-		if (b != null) {
-			for (Bewerbung bewerbungen : b) {
-				this.loeschenBewerbung(bewerbungen);
-			}
-		}
+//		if (b != null) {
+//			for (Bewerbung bewerbungen : b) {
+//				this.loeschenBewerbung(bewerbungen);
+//			}
+//		}
 
 		// von Team erstellte Projekte loeschen
 		if (p != null) {
@@ -858,6 +858,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		}
 		return result;
 	}
+	
+	public void getAusschreibungByBewerbung(Bewerbung b) throws IllegalArgumentException {
+		
+		
+		
+	}
 
 /*##########################################################
  * START BEWERBUNG
@@ -1102,6 +1108,9 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 		// return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
 	}
+
+
+
 
 	// AllMarktpl�tzeAnzeigenlassen
 }
