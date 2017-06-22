@@ -41,7 +41,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 
 /**
- * Entry point Klasse des Projektmarktplatzes. Dafür benötigen wir die Methode
+ * Entry point Klasse des Projektmarktplatzes. Dafï¿½r benï¿½tigen wir die Methode
  * <code>onModuleLoad()</code>.
  */
 public class Projektmarktplatz implements EntryPoint {
@@ -70,7 +70,7 @@ public class Projektmarktplatz implements EntryPoint {
 		marktplatzVerwaltung = ClientSideSettings.getMarktplatzVerwaltung();
 		loginService = ClientSideSettings.getLoginService();
 		
-		//Überprüfen des Login-Status
+		//ï¿½berprï¿½fen des Login-Status
 		LoginServiceAsync loginService = GWT.create(LoginService.class); 
 		
 
@@ -105,15 +105,15 @@ public class Projektmarktplatz implements EntryPoint {
 								if(person.getEmailAddresse()==loginInfo.getEmailAddress()){
 									isUserRegistered = true;
 									
-									itprojektload(person.getId());
+									itprojektload(person);
 									break;
 									
 								}
 							}
 						if(isUserRegistered==false){
-							RootPanel.get("Details").clear();
+							RootPanel.get("Anzeige").clear();
 							
-							RootPanel.get("Details").add(new Registrierungsformular());
+							RootPanel.get("Anzeige").add(new Registrierungsformular());
 						}
 						}
 						
@@ -158,9 +158,8 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		
 
-		private void itprojektload(int id){
+		private void itprojektload(final Person person){
 			signOutLink.setHref(loginInfo.getLogoutUrl());
-			final Person p = new Person();
 			Button LogOUT = new Button("Ausloggen");
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
@@ -176,7 +175,7 @@ public class Projektmarktplatz implements EntryPoint {
 			mainPanel.add(showcase);
 			RootPanel.get("RechtsOben").add(rechtsOben);
 			RootPanel.get("Anzeige").add(mainPanel);
-			RootPanel.get("Navigator").add(new Navigator(p));	
+			RootPanel.get("Navigator").add(new Navigator(person));	
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 			Logout.setWidth("150px");
 			Logout.setStylePrimaryName("loginbutton");
@@ -193,14 +192,14 @@ public class Projektmarktplatz implements EntryPoint {
 			
 			ReportGeneratorAsync ReportGenerator = ClientSideSettings.getReportGenerator();
 
-			RootPanel.get("Navigator").add(new Navigator(p));		
+			RootPanel.get("Navigator").add(new Navigator(person));		
 			
 			meinProfil.addClickHandler(new ClickHandler() {
 				
 				@Override
 				public void onClick(ClickEvent event) {
 					RootPanel.get("Anzeige").clear();
-					Showcase sh = new PersonSeite(p);
+					Showcase sh = new PersonSeite(person);
 					RootPanel.get("Anzeige").add(sh);
 				
 				}
@@ -223,7 +222,6 @@ public class Projektmarktplatz implements EntryPoint {
 			
 			private Button saveButton = new Button("Absenden");
 			
-			private LoginInfo loginInfo = null;
 			
 			private ListBox titelEing = new ListBox();
 			private TextBox vNameEing = new TextBox();
@@ -233,11 +231,11 @@ public class Projektmarktplatz implements EntryPoint {
 			private TextBox emailEing = new TextBox();
 			
 			
-			private Label titelTxt = new Label("Anrede");
-			private Label vNameTxt = new Label("titel");
+			private Label titelTxt = new Label("Titel");
+			private Label vNameTxt = new Label("Vorname");
 			private Label nNameTxt = new Label("Nachname");
-			private Label adresseTxt = new Label("Straße");
-			private Label ortTxt = new Label("Ort");
+			private Label adresseTxt = new Label("StraÃŸe/Hausnummer");
+			private Label ortTxt = new Label("PLZ/Ort");
 			private Label emailTxT = new Label("Google-Mail");
 			
 			private GreetingServiceAsync marktplatzVerwaltung = 
@@ -246,20 +244,25 @@ public class Projektmarktplatz implements EntryPoint {
 			@Override
 			protected String getHeadlineText() {
 				// TODO Auto-generated method stub
-				return "Hier können Sie sich für MeetProjects registrieren";
+				return "Hier kÃ¶nnen Sie sich fÃ¼r MeetProjects registrieren";
 			}
 
 			@Override
 			protected void run() {
+			
 				emailEing.setText(loginInfo.getEmailAddress());
 				emailEing.setReadOnly(true);
 				//Stylen der Buttons
 				saveButton.setStylePrimaryName("navi-button");
 				
 				//HinzufÃ¼gen der Inhalte der titelEing
-				titelEing.addItem("Herr");
-				titelEing.addItem("Frau");
-					
+				titelEing.addItem("Prof.");
+				titelEing.addItem("Prof. Dr.");
+				titelEing.addItem("Prof. Dr. Ing.");
+				titelEing.addItem("Dr. Ing.");
+				titelEing.addItem("Ing.");
+				titelEing.addItem("Prof. Ing.");
+				
 				// BefÃ¼llen der FlexTable
 				formPanel.setWidget(0, 1, emailEing);
 				formPanel.setWidget(0, 0, emailTxT);
@@ -281,12 +284,9 @@ public class Projektmarktplatz implements EntryPoint {
 				formPanel.setWidget(7, 0, ortTxt);
 
 
-				/**
-				 * AnfÃ¼gen der FlexTable und des Buttons  an das Panel
-				 */
-				vMain.setSpacing(8);
+				vMain.setSpacing(6);
 				buttonPanel.setWidget(0, 1, saveButton);
-				
+
 				vMain.add(formPanel);
 				vMain.add(buttonPanel);
 				this.add(vMain);
@@ -299,7 +299,7 @@ public class Projektmarktplatz implements EntryPoint {
 							vNameEing.getText();
 							marktplatzVerwaltung.anlegenPartnerprofil(new NeuePersonAnlegen());
 						} catch (Exception e) {
-							Window.alert("PLZ muss eine Zahl sein!");
+							Window.alert("Z 299!");
 						}
 					
 					}
@@ -329,8 +329,8 @@ public class Projektmarktplatz implements EntryPoint {
 
 								@Override
 								public void onSuccess(Person result) {
-									Window.alert("GlÃ¼ckwunsch " + vNameEing.getText() +" "+ nNameEing.getText()+"! Sie sind jetzt Teilnehmer bei Prokeko!");
-									itprojektload(result.getId());
+									Window.alert("GlÃ¼ckwunsch " + vNameEing.getText() +" "+ nNameEing.getText()+"! Sie sind jetzt Teilnehmer bei MeetProjects!");
+									itprojektload(result);
 								}
 
 								

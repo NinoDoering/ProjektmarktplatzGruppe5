@@ -64,7 +64,7 @@ public class PersonMapper extends OrganisationseinheitMapper{
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen " 
+					.executeQuery("SELECT idPerson, titel, vorname, nachname, idTeam, idUnternehmen, emailAddresse " 
 			+ "FROM person " + "ORDER BY idPerson DESC");
 
 			while (rs.next()) {
@@ -73,6 +73,7 @@ public class PersonMapper extends OrganisationseinheitMapper{
 				pe.setVorname(rs.getString("vorname"));
 				pe.setNachname(rs.getString("nachname"));
 				pe.setTitel(rs.getString("titel"));
+				pe.setEmailAddresse(rs.getString("emailAddresse"));
 				pe.setIdUnternehmen(rs.getInt("idUnternehmen"));
 				pe.setIdTeam(rs.getInt("idTeam"));
 				pe.setAdresse(super.findByOrganisationseinheit(pe).getAdresse());
