@@ -113,19 +113,19 @@ public class ProjektmarktplatzSeite extends Showcase{
 			}
 		});
 	}
-public class getProjektmarktplatzAusDB implements AsyncCallback<Vector<Marktplatz>>{
-
-	@Override
-	public void onFailure(Throwable caught) {
-		Window.alert("Hat nicht funktioniert");
-	}
-
-	@Override
-	public void onSuccess(Vector<Marktplatz> result) {
-		marktplatztabelle.setRowData(0, result);
-		marktplatztabelle.setRowCount(result.size(), true);
-		Window.alert("Funktioniert");
-	}
-	
-}
-}
+		public class getProjektmarktplatzAusDB implements AsyncCallback<Vector<Marktplatz>>{
+		
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Hat nicht funktioniert");
+			}
+		
+			@Override
+			public void onSuccess(Vector<Marktplatz> result) {
+				marktplatztabelle.setRowData(0, result);
+				marktplatztabelle.setRowCount(result.size(), true);
+				Window.alert("Funktioniert");
+			}
+			
+		}
+		}

@@ -41,10 +41,14 @@ public class ProjekteSeite extends Showcase{
 	
 	final SingleSelectionModel<Projekt> ssmalleprojekte = new SingleSelectionModel<Projekt>();
 	
-	Button anlegenprojekt = new Button("Neues Projekt anlegen");
+	private Button anlegenprojekt = new Button("Neues Projekt anlegen");
 	
+	private Button bearbeitenProjekt = new Button("Gewähltes Projekt bearbeiten");
+	
+	private Button anzeigenProjekt = new Button("Gewähltes Projekt anzeigen");
+	
+	private Button loeschenProjekt = new Button("Gewähltes Projekt löschen");
 
-	
 	public ProjekteSeite(){
 	
 	}
@@ -52,8 +56,9 @@ public class ProjekteSeite extends Showcase{
 	public ProjekteSeite(Marktplatz m1){
 		this.mp= m1;
 		Label lblMarktplatz =  new Label("Sie befinden sich auf folgendem Marktplatz: " +m1.getBezeichnung()+" ");
-		
+		Label hilfeBedienung = new Label("Bitte wählen sie ein Projekt aus um danach darauf zu greifen zu können");
 		beforeHere.add(lblMarktplatz);
+		beforeHere.add(hilfeBedienung);
 	}
 	
 	public ProjekteSeite(Projekt p2){
@@ -72,12 +77,17 @@ public class ProjekteSeite extends Showcase{
 		RootPanel.get("Anzeige").setWidth("100%");
 		projekttabelle.setWidth("100%", true);
 		vpanelProjekte.add(projekttabelle);
+		
+		hpanelProjekte.add(anzeigenProjekt);
+		hpanelProjekte.add(bearbeitenProjekt);
+		hpanelProjekte.add(loeschenProjekt);
 		hpanelProjekte.add(anlegenprojekt);
 		
 		//hpanelProjekte.add(lblMarktplatz);
 		this.add(beforeHere);
 		this.add(hpanelProjekte);
 		this.add(vpanelProjekte);
+		
 		
 		
 		projekttabelle.setSelectionModel(ssmalleprojekte);
@@ -89,12 +99,65 @@ public class ProjekteSeite extends Showcase{
 				// TODO Auto-generated method stub
 				//WEITERMACHEN FÜR AUSSCHREIBUNG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				p1= ssmalleprojekte.getSelectedObject();
-				Showcase showcase = new AusschreibungSeite(p1);
-				RootPanel.get("Anzeige").clear();
-				RootPanel.get("Anzeige").add(showcase);
+//				Showcase showcase = new AusschreibungSeite(p1);
+//				RootPanel.get("Anzeige").clear();
+//				RootPanel.get("Anzeige").add(showcase);
 				
 			}
 		});
+		
+		
+		anzeigenProjekt.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Showcase showcase = new AusschreibungSeite(p1);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
+		
+		bearbeitenProjekt.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Projekt p1 = ssmalleprojekte.getSelectedObject();
+				if (p1 != null){
+					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1);
+					//RootPanel.get("Anzeige").clear();
+					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
+					Window.alert(p1.getBeschreibung()+"jaa");
+					
+				}
+			}
+		});
+		
+		
+		loeschenProjekt.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Projekt projekt = ssmalleprojekte.getSelectedObject();
+				gwtproxy.loeschenProjekt(projekt, new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("Fehler beim Löschen");
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						Window.alert("Das Projekt wurde erfolgreich gelöscht");
+					}
+				});
+			}
+		});
+
 		
 		TextColumn<Projekt> projektBez = new TextColumn<Projekt>(){
 
@@ -144,9 +207,10 @@ public class ProjekteSeite extends Showcase{
 		projekttabelle.addColumn(projektBeschr, "Beschreibung");
 		projekttabelle.addColumn(projektStartD, "Startdatum");
 		projekttabelle.addColumn(projektEndD, "Enddatum");
-		gwtproxy.getProjektbyMarktplatz(mp, new getProjekteAusDB());
-		anlegenprojekt.addClickHandler(new ClickHandler() {
-			
+		gwtproxy.getProjektbyMarktplatz(mp, new getProjekteAusDB());		
+		
+		
+		anlegenprojekt.addClickHandler(new ClickHandler() {		
 			@Override
 			public void onClick(ClickEvent event) {
 				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp);
@@ -164,7 +228,7 @@ public class ProjekteSeite extends Showcase{
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				Window.alert("Hat nicht funktioniert");
+				Window.alert("Projekte anzeigen hat nicht funktioniert");
 			}
 
 			@Override

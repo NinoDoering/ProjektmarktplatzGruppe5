@@ -340,15 +340,31 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
-	// getBewerbungByBewerber
-	public Vector<Bewerbung> getBewerbungByBewerber(Person p) {
+	// getBewerbungByBewerber(Person pe)
+	public Vector<Bewerbung> getBewerbungByBewerber(Person pe) {
 
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
 
-		if (p != null && this.bewerbungMapper != null) {
-			Vector<Bewerbung> bewerbung = this.bewerbungMapper.findBewerbungByBewerber(p.getId());
+		if (pe != null && this.bewerbungMapper != null) {
+			Vector<Bewerbung> bewerbung = this.bewerbungMapper.findBewerbungByBewerber(pe.getId());
 
-			if (p != null) {
+			if (pe != null) {
+				result.addAll(bewerbung);
+			}
+		}
+
+		return result;
+	}
+	
+	// getBewerbungByBewerber(Organisationseinheit o)
+	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException {
+
+		Vector<Bewerbung> result = new Vector<Bewerbung>();
+
+		if (o != null && this.bewerbungMapper != null) {
+			Vector<Bewerbung> bewerbung = this.bewerbungMapper.findBewerbungByBewerber(o.getId());
+
+			if (o != null) {
 				result.addAll(bewerbung);
 			}
 		}
@@ -859,10 +875,10 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 	
-	public void getAusschreibungByBewerbung(Bewerbung b) throws IllegalArgumentException {
-		
-		
-		
+	// getAusschreibungByBewerbung
+	public Ausschreibung getAusschreibungByBewerbung(Bewerbung b) throws IllegalArgumentException {
+		Ausschreibung ausschreibung = this.getAusschreibungbyId(b.getIdAusschreibung());
+		return ausschreibung;		
 	}
 
 /*##########################################################
