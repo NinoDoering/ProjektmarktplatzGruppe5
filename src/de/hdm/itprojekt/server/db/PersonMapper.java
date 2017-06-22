@@ -129,7 +129,7 @@ public Person findByPerson(Person p){
 	return this.findPersonByKey(p.getId());	
 }
 
-//Personen die einem Unternehmen angehören ausgeben
+//Personen die einem Unternehmen angehï¿½ren ausgeben
 public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 	Connection con = DBConnection.connection();
 	Vector<Person> result = new Vector<Person>();
@@ -203,7 +203,8 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 
 			if (rs.next()) {
 
-				pe.setId(rs.getInt("maxid") + 1);
+//				pe.setId(rs.getInt("maxid") + 1);
+				pe.setId(super.insertOrganisationseinheit(pe));
 				//id=pe.getId();
 				stmt = con.createStatement();
 
@@ -221,7 +222,7 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 				            + pe.getVorname() + "','" + pe.getNachname() + "','" + pe.getIdUnternehmen() +"')");
 		        }else if(pe.getIdTeam()!=null && pe.getIdUnternehmen()!=null){
 			        
-			        stmt.executeUpdate("INSERT INTO person (emailAddresse, idPerson, titel, norname, nachname, idUnternehmen, idTeam) "
+			        stmt.executeUpdate("INSERT INTO person (emailAddresse, idPerson, titel, vorname, nachname, idUnternehmen, idTeam) "
 			            + "VALUES ('" + pe.getEmailAddresse() + "'," + pe.getId() + ",'" + pe.getTitel() + "','"
 			            + pe.getVorname() + "','" + pe.getNachname() + "','" + pe.getIdUnternehmen() + "','" + pe.getIdTeam() +"')");
 		        }        
