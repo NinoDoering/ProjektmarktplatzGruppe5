@@ -70,7 +70,6 @@ public class Projektmarktplatz implements EntryPoint {
 		marktplatzVerwaltung = ClientSideSettings.getMarktplatzVerwaltung();
 		loginService = ClientSideSettings.getLoginService();
 		
-		//�berpr�fen des Login-Status
 		LoginServiceAsync loginService = GWT.create(LoginService.class); 
 		
 
@@ -159,6 +158,9 @@ public class Projektmarktplatz implements EntryPoint {
 		
 
 		private void itprojektload(final Person person){
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Navigator").clear();
+			
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 			Button LogOUT = new Button("Ausloggen");
 			HorizontalPanel addPanel = new HorizontalPanel();
@@ -318,8 +320,7 @@ public class Projektmarktplatz implements EntryPoint {
 				@Override
 				public void onSuccess(Partnerprofil result) {
 					if(vNameEing.getText().isEmpty()==false){
-					marktplatzVerwaltung.anlegenPerson(new Integer(0), new Integer(0), result.getId(), vNameEing.getText(),   nNameEing.getText(), 
-							titelEing.getSelectedItemText(), emailEing.getText(), ortEing.getText(), adresseEing.getText(),   
+					marktplatzVerwaltung.anlegenPerson(new Integer(0), new Integer(0), result.getId(), vNameEing.getText(), nNameEing.getText(), titelEing.getSelectedItemText(), emailEing.getText(), ortEing.getText(), adresseEing.getText(),   
 							   new AsyncCallback<Person>() {
 
 								@Override
@@ -331,6 +332,7 @@ public class Projektmarktplatz implements EntryPoint {
 								public void onSuccess(Person result) {
 									Window.alert("Glückwunsch " + vNameEing.getText() +" "+ nNameEing.getText()+"! Sie sind jetzt Teilnehmer bei MeetProjects!");
 									itprojektload(result);
+									
 								}
 
 								
