@@ -37,14 +37,6 @@ public interface GreetingServiceAsync {
 		void init(AsyncCallback<Void> callback);
 		
 		
-		// test
-		
-				void getAusschreibungByPartnerprofilId(Partnerprofil p, AsyncCallback<Ausschreibung> callback);
-				
-				void getpartnerprofilIdbyAusschreibung(Ausschreibung a, AsyncCallback<Ausschreibung> callback);
-				
-				// Marktplatz --Asynch
-		
 		// Marktplatz --Asynch
 		
 
@@ -93,6 +85,10 @@ public interface GreetingServiceAsync {
 		void getAusschreibungByProjekt(Projekt p, AsyncCallback<Vector<Ausschreibung>> callback);
 		
 		void getAusschreibungByAusschreibender(Organisationseinheit o, AsyncCallback<Vector<Ausschreibung>> callback);
+		
+		void getAusschreibungByBewerbung(Bewerbung b, AsyncCallback<Ausschreibung> callback);
+		
+		void getAusschreibungByPartnerprofilId(Partnerprofil p, AsyncCallback<Ausschreibung> callback);
 
 		
 		// Partnerprofil Asynch
@@ -111,6 +107,8 @@ public interface GreetingServiceAsync {
 		
 		void getPartnerprofilByAusschreibung(Ausschreibung a, AsyncCallback<Partnerprofil> callback);
 		
+		void getpartnerprofilIdbyAusschreibung(Ausschreibung a, AsyncCallback<Ausschreibung> callback);
+		
 
 		// Bewerbung Asynch
 		
@@ -124,6 +122,8 @@ public interface GreetingServiceAsync {
 		void saveBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 
 		void getBewerbungByBewerber(Person p, AsyncCallback<Vector<Bewerbung>> callback);
+		
+		void getBewerbungByBewerber(Organisationseinheit o, AsyncCallback<Vector<Bewerbung>> callback);
 		
 		void getAllBewerbungen(AsyncCallback<Vector<Bewerbung>> callback);
 		
