@@ -3,8 +3,8 @@ package de.hdm.itprojekt.shared.bo;
 public class Bewertung extends BusinessObject {
 
 	private static final long serialVersionUID = 1L;
-	private float fliesskommaBewertung;
-	private String textuelleBewertung;
+	private float fliesskommaBewertung = 0.0f;
+	private String textuelleBewertung ="";
 	private int idBewerbung = 0;
 	
 	
