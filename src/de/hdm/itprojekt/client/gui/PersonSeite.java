@@ -2,11 +2,15 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.Vector;
 
+import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -16,21 +20,30 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
+import de.hdm.itprojekt.shared.bo.Team;
+import de.hdm.itprojekt.shared.bo.Unternehmen;
+import de.hdm.itprojekt.shared.report.Column;
 
 public class PersonSeite extends Showcase{
 
-	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
+	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person p = new Person();
 	private Organisationseinheit o1 = new Organisationseinheit();
+	private CellTable<Eigenschaft> personEigenschaft = new CellTable <Eigenschaft>();
+	private Eigenschaft eig = new Eigenschaft();
+	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
@@ -40,13 +53,27 @@ public class PersonSeite extends Showcase{
 	private Button speichernbutton = new Button ("Profil Speichern");
 	private Button abbrechenbutton = new Button ("Profil Abbrechen");
 	private Button deletebutton = new Button ("Profil Löschen");
+	
 	private Button teambutton = new Button ("Team Hinzufügen");
 	private Button unternehmenbutton = new Button ("Unternehmen Hinzufügen");
+	private Button eigenschaftButton = new Button ("Eigenschaften Hinzufügen");
 
 	private FlexTable table = new FlexTable();
 	private FlexTable flexTable = new FlexTable();
+	private FlexTable pTable = new FlexTable();
+	private FlexTable buttonTable = new FlexTable();
+	private FlexTable teamTable = new FlexTable();
+	private FlexTable unternehmenTable = new FlexTable();
+	
 	private static DialogBox team = new DialogBox();
+	private Button teamBearbeiten = new Button("Team Bearbeiten");
+	private Button teamSpeichern = new Button("Team Speichern");
+	private Button teamAbbrechen = new Button("Team Abbrechen");
+	
 	private static DialogBox unternehmen = new DialogBox();
+	private Button unternehmenBearbeiten = new Button("Unternehmen Bearbeiten");
+	private Button unternehmenSpeichern = new Button("Unternehmen Speichern");
+	private Button unternehmenAbbrechen = new Button("Unternehmen Abbrechen");
 	
 	public PersonSeite(){
 		
@@ -55,8 +82,11 @@ public class PersonSeite extends Showcase{
 		this.p = p;
 	}
 	private VerticalPanel personVP = new VerticalPanel();
+	private VerticalPanel eigenschaftVP = new VerticalPanel();
+	private VerticalPanel ppVP = new VerticalPanel();
+	private VerticalPanel hinzuVP = new VerticalPanel();
 	private HorizontalPanel personHP = new HorizontalPanel();
-	
+	private HorizontalPanel ppHP = new HorizontalPanel();
 	
 	private ListBox listeAnrede = new ListBox();
 	private TextBox boxTitel = new TextBox();
@@ -78,16 +108,56 @@ public class PersonSeite extends Showcase{
 	private Label labelFirmenName = new Label ("Firmenname");
 	private Label labelEmail = new Label ("E-Mail");
 	
-
+	private Anchor personloeschen = new Anchor ("Profil Löschen");
+	private Anchor klickFunktion = new Anchor ("Unternehmen/Team Löschen/Erstellen");
+	
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
 		return "<h1> Mein Profil </h1>";
 	}
-
+	
 	@Override
 	protected void run() {
-		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
+	personloeschen.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+
+		}
+	});
+	
+//	klickFunktion.addClickHandler(new ClickHandler() {
+//				
+//				@Override
+//				public void onClick(ClickEvent event) {
+//					DialogBox box = new DialogBoxTeamUnternehmen(p);
+//					box.center();
+//				}
+//			});
+	
+		if(gwtproxy == null){
+			gwtproxy = GWT.create(GreetingService.class);
+		}
+		
+		gwtproxy.getPersonById(p.getIdTeam(), new GetPersonAusDB());
+
+		if(p.getIdTeam()!=null){
+			gwtproxy.getTeamById(p.getIdTeam(), new GetTeamAusDB());
+		}
+		if(p.getIdUnternehmen()!=null){
+			gwtproxy.getUnternehmenById(p.getIdUnternehmen(), new GetUnternehmenAusDB());
+		}
+//		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
+		
+		boxTitel.setReadOnly(true);
+		boxName.setReadOnly(true);
+		boxNachname.setReadOnly(true);
+		boxAdresse.setReadOnly(true);
+		boxStandort.setReadOnly(true);
+		boxTeamName.setReadOnly(true);
+		boxFirmenName.setReadOnly(true);
+		boxEmail.setReadOnly(true);
 		
 		this.add(pp);
 		this.add(eigeneProjekte);
@@ -98,11 +168,18 @@ public class PersonSeite extends Showcase{
 		deletebutton.setStylePrimaryName("profilButton");
 		teambutton.setStylePrimaryName("profilButton");
 		unternehmenbutton.setStylePrimaryName("profilButton");
+		teamBearbeiten.setStylePrimaryName("profilButton");
+		teamSpeichern.setStylePrimaryName("profilButton");
+		teamAbbrechen.setStylePrimaryName("profilButton");
+		unternehmenBearbeiten.setStylePrimaryName("profilButton");
+		unternehmenSpeichern.setStylePrimaryName("profilButton");
+		unternehmenAbbrechen.setStylePrimaryName("profilButton");
+		eigenschaftButton.setStylePrimaryName("profilButton");
 
 		listeAnrede.addItem("Frau");
 		listeAnrede.addItem("Herr");
 		
-		personVP.setSpacing(7);
+		personVP.setSpacing(8);
 		
 		table.setWidget(0, 1, listeAnrede);
 		table.setWidget(0, 0, labelAnrede);
@@ -116,12 +193,11 @@ public class PersonSeite extends Showcase{
 		table.setWidget(4, 0, labelAdresse);
 		table.setWidget(5, 1, boxStandort);
 		table.setWidget(5, 0, labelStandort);
-		table.setWidget(6, 1, boxTeamName);
-		table.setWidget(6, 0, labelTeamName);
-		table.setWidget(7, 1, boxFirmenName);
-		table.setWidget(7, 0, labelFirmenName);
-		table.setWidget(8, 1, boxEmail);
-		table.setWidget(8, 0, labelEmail);
+		
+	
+		table.setWidget(7, 1, boxEmail);
+		table.setWidget(7, 0, labelEmail);
+		table.setCellSpacing(10);
 		
 		flexTable.setWidget(0, 0, bearbeitenbutton);
 		flexTable.setWidget(0, 1, speichernbutton);
@@ -130,20 +206,107 @@ public class PersonSeite extends Showcase{
 		flexTable.setWidget(2, 1, teambutton);
 		flexTable.setWidget(2, 0, unternehmenbutton);
 		
-		boxTitel.setReadOnly(true);
-		boxName.setReadOnly(true);
-		boxNachname.setReadOnly(true);
-		boxAdresse.setReadOnly(true);
-		boxStandort.setReadOnly(true);
-		boxTeamName.setReadOnly(true);
-		boxFirmenName.setReadOnly(true);
-		boxEmail.setReadOnly(true);
+//		boxTitel.setReadOnly(true);
+//		boxName.setReadOnly(true);
+//		boxNachname.setReadOnly(true);
+//		boxAdresse.setReadOnly(true);
+//		boxStandort.setReadOnly(true);
+//		boxTeamName.setReadOnly(true);
+//		boxFirmenName.setReadOnly(true);
+//		boxEmail.setReadOnly(true);
 		
-
-		personVP.add(table);
+		teamTable.setWidget(0, 1, boxTeamName);
+		teamTable.setWidget(1, 1, labelTeamName);
+		teamTable.setCellSpacing(10);
+		
+		unternehmenTable.setWidget(0, 1, boxFirmenName);
+		unternehmenTable.setWidget(1, 1, labelFirmenName);
+		unternehmenTable.setCellSpacing(10);
+	
+		
+		personVP.add(personloeschen);
+		personVP.add(klickFunktion);
 		personVP.add(flexTable);
-		this.add(personVP);
+		personVP.add(table);
+		personVP.add(unternehmenTable);
 		
+		hinzuVP.add(eigenschaftButton);
+		hinzuVP.add(personEigenschaft);
+
+		ppVP.add(teamTable);
+		ppHP.add(ppVP);
+		personHP.add(personVP);
+		personHP.add(ppVP);	
+		personHP.add(hinzuVP);
+		this.add(personHP);
+
+		this.setSpacing(8);
+//		
+//		Column<Eigenschaft> employmentStatusEigenchaft = new Column<Eigenschaft>(new ClickableTextCell()){
+//			
+//			public String getValue(Eigenschaft object){
+//				return object.getEmploymentStatus();
+//			}
+//		});
+//		
+//		Column<Eigenschaft> sprachkenntnisseEigenschaft = Column<Eigenschaft>(new ClickableTextCell()){
+//			
+//			public String getValue(Eigenschaft object){
+//				return object.getSprachkenntnisse();
+//			}
+//			
+//		});
+//		
+//		Column<Eigenschaft> arbeitsgebietEigenschaft = Column<Eigenschaft>(new ClickableTextCell()){
+//			
+//			public String getValue(Eigenschaft object){
+//				return object.getArbeitsgebiet();
+//			}
+//			
+//		};
+//		
+		
+//	selectionEigenschaft.addSelectionChangeHandler(new Handler(){
+//		public void onSelectionChange(final SelectionChangeEvent event){
+//			
+//			 = selectionEigenschaft.getSelectedObject();
+//				if(selected)
+//				
+//			}
+//		});
+	
+	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			boxFirmenName.setReadOnly(false);
+			
+			unternehmenBearbeiten.setVisible(false);
+			unternehmenSpeichern.setVisible(true);
+			unternehmenAbbrechen.setVisible(true);
+
+		}
+		
+	});
+	
+	teamBearbeiten.addClickHandler(new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			boxTeamName.setReadOnly(false);
+			
+			
+			teamBearbeiten.setVisible(false);
+			teamBearbeiten.setVisible(true);
+			teamBearbeiten.setVisible(true);
+
+		}
+		
+	});
+	
+	
 	bearbeitenbutton.addClickHandler(new ClickHandler(){
 		
 		@Override
@@ -164,6 +327,28 @@ public class PersonSeite extends Showcase{
 		abbrechenbutton.setVisible(true);
 	}
 });
+	
+	teamAbbrechen.addClickHandler(new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			Showcase scase = new PersonSeite(p);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(scase);
+		}
+	});
+	
+	unternehmenAbbrechen.addClickHandler(new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			Showcase scase = new PersonSeite(p);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(scase);
+		}	
+	});
 	
 	abbrechenbutton.addClickHandler(new ClickHandler(){
 		
@@ -246,6 +431,8 @@ public class PersonSeite extends Showcase{
 	
 	}
 	
+
+	
 	
 private class BearbeitenvomProfilCallback implements AsyncCallback<Person>{
 
@@ -298,6 +485,42 @@ private class GetPersonAusDB implements AsyncCallback<Person> {
 		}
 		
 	}
+
+private class GetTeamAusDB implements AsyncCallback<Team>{
+
+	@Override
+	public void onFailure(Throwable caught) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSuccess(Team result) {
+		// TODO Auto-generated method stub
+		boxTeamName.setReadOnly(true);
+		boxTeamName.setText(result.getTeamName());
+
+	}
+	
+}
+
+private class GetUnternehmenAusDB implements AsyncCallback<Unternehmen>{
+
+	@Override
+	public void onFailure(Throwable caught) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSuccess(Unternehmen result) {
+		// TODO Auto-generated method stub
+		boxFirmenName.setReadOnly(true);
+		boxFirmenName.setText(result.getFirmenName());
+
+	}
+	
+}
 
 }
 
