@@ -167,7 +167,7 @@ public interface GreetingServiceAsync {
 		// Beteiligung Asynch
 		
 		
-		void anlegenBeteiligung(int idBeteiligter, int idProjekt, int idBewertung, double beteiligungszeit,
+		void anlegenBeteiligung(double beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung,
 				AsyncCallback<Beteiligung> callback);
 
 		void loeschenBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);

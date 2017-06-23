@@ -747,16 +747,16 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	
 	// anlegenBeteiligung
 	@Override
-	public Beteiligung anlegenBeteiligung(int idBeteiligter, int idProjekt, int idBewertung, double beteiligungszeit)
+	public Beteiligung anlegenBeteiligung(double beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung)
 			throws IllegalArgumentException {
 		Beteiligung b = new Beteiligung();
 
 		b.setId(1);
-		b.setIdBeteiligter(idBeteiligter);
+		b.setBeteiligungszeit(beteiligungszeit);
+		b.setIdBeteiligter(idOrganisationseinheit);
 		b.setIdProjekt(idProjekt);
 		b.setIdBewertung(idBewertung);
-		b.setBeteiligungszeit(beteiligungszeit);
-
+		
 		return this.beteiligungMapper.insertBeteiligung(b);
 
 	}

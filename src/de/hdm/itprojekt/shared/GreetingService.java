@@ -172,7 +172,7 @@ public interface GreetingService extends RemoteService  {
 
 		// Beteiligung beteiligung
 		
-		public Beteiligung anlegenBeteiligung(int idBeteiligter, int idProjekt, int idBewertung, double beteiligungszeit)
+		public Beteiligung anlegenBeteiligung(double beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung)
 				throws IllegalArgumentException;
 
 
