@@ -15,13 +15,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.client.gui.*;
 import de.hdm.itprojekt.shared.bo.*;
 
-public class TopBar extends HorizontalPanel{
+public class TopBar extends StackPanel{
 
 	private static ClickHandler currentClickHandler = null;
 	private static ClickEvent currentClickEvent = null;
 	
 	HorizontalPanel TopBarPanel = new HorizontalPanel();
-	
+	private Anchor signOutLink = new Anchor("Logout");
 	Button LogOUT = new Button("Ausloggen");
 	Button meinProfil = new Button("Mein Profil");
 	Button manageRole = new Button("Identität verwalten");
@@ -36,11 +36,13 @@ public class TopBar extends HorizontalPanel{
 	LogOUT.setWidth("150px");
 	LogOUT.setStylePrimaryName("loginbutton");
 
+	RootPanel.get("TopBar").add(TopBarPanel);
+	
 	LogOUT.addClickHandler(new ClickHandler(){
 
 		@Override
 		public void onClick(ClickEvent event) {
-//			Window.open(signOutLink.getHref(), "_self", "");;
+			Window.open(signOutLink.getHref(), "_self", "");;
 			
 		}
 		
@@ -69,4 +71,9 @@ public class TopBar extends HorizontalPanel{
 	
 	
 	
-}}
+	
+}
+public TopBar(){
+		
+	}	
+}

@@ -172,7 +172,7 @@ public class Projektmarktplatz implements EntryPoint {
 //			rechtsOben.add(meinProfil);
 //			rechtsOben.add(manageRole);
 //			rechtsOben.add(LogOUT);
-//			
+			
 			mainPanel.add(addPanel);
 			mainPanel.add(showcase);
 //			RootPanel.get("RechtsOben").add(rechtsOben);
