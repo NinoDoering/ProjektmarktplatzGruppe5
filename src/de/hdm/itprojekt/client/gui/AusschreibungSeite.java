@@ -47,8 +47,11 @@ public class AusschreibungSeite extends Showcase {
 	final SingleSelectionModel<Ausschreibung> ssmalleausschreibung = new SingleSelectionModel<Ausschreibung>();
 	
 	
-	Button anlegenAusschreibung = new Button("Neue Ausschreibung anlegen");
-	Button bewerbenAusschreibung = new Button("Auf diese Ausschreibung bewerben");
+	private Button anlegenAusschreibung = new Button("Neue Ausschreibung anlegen");
+	private Button bewerbenAusschreibung = new Button("Auf diese Ausschreibung bewerben");
+	private Button anzeigenAusschribung = new Button("Qualifikationen anzeigen");
+	private Button loeschenAusschreibung = new Button("gewählte Ausschreibung löschen");
+	private Button bearbeitenAusschreibung = new Button("gewählte Ausschreibung bearbeiten");
 
 	 public AusschreibungSeite() {
 		
@@ -67,6 +70,8 @@ public class AusschreibungSeite extends Showcase {
 	 
 	 public AusschreibungSeite(Marktplatz mp1){
 		 this.mp=mp1;
+		 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt "+mp.getBezeichnung());
+		 beforeHereProjekt.add(lblProjekt);
 			 
 		
 	 }
@@ -83,8 +88,11 @@ public class AusschreibungSeite extends Showcase {
 		RootPanel.get("Anzeige").setWidth("100%");
 		ausschreibungtabelle.setWidth("100%", true);
 		vpanelAusschreibung.add(ausschreibungtabelle);
+		hpanelAusschreibung.add(anzeigenAusschribung);
 		hpanelAusschreibung.add(anlegenAusschreibung);
 		hpanelAusschreibung.add(bewerbenAusschreibung);
+		hpanelAusschreibung.add(bearbeitenAusschreibung);
+		hpanelAusschreibung.add(loeschenAusschreibung);
 		
 	
 		this.add(beforeHereMarktplatz);
@@ -101,9 +109,9 @@ public class AusschreibungSeite extends Showcase {
 				// TODO Auto-generated method stub
 				// für Eigenschft
 				pp1= ssmalleausschreibung.getSelectedObject();
-				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject());
-				RootPanel.get("Anzeige").clear();
-				RootPanel.get("Anzeige").add(showcase);
+//				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject());
+//				RootPanel.get("Anzeige").clear();
+//				RootPanel.get("Anzeige").add(showcase);
 				
 			}
 		});
@@ -167,6 +175,62 @@ public class AusschreibungSeite extends Showcase {
 		ausschreibungtabelle.addColumn(ausschrBefrist,"Bewerbungsfrist");
 		ausschreibungtabelle.addColumn(ausschrStatus, "Status der Ausschreibung");
 		gwtproxy.getAusschreibungByProjekt(p1, new getAusschreibungAusDB());
+		
+		
+		//START der Clickhandler 
+		
+		anzeigenAusschribung.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject());
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
+		bearbeitenAusschreibung.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
+				if (a1 != null){
+					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(a1, p1, mp);
+					RootPanel.get("Anzeige").add(dialogBoxAusschreibungBearbeiten);
+					Window.alert(a1.getBeschreibung()+ "  jaajaaa");
+				}
+				}
+		});
+		
+		
+		loeschenAusschreibung.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Ausschreibung ausschreibung = ssmalleausschreibung.getSelectedObject();
+				gwtproxy.loeschenAusschreibung(ausschreibung, new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("Fehler beim Löschen der Ausschreibung");
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						Window.alert("Die Ausschreibung wurde erfolgreich gelöscht");
+						Showcase showcase = new AusschreibungSeite(p1);
+						RootPanel.get("Anzeige").clear();
+						RootPanel.get("Anzeige").add(showcase);
+					}
+				});
+			}
+		});
+		
 		
 		anlegenAusschreibung.addClickHandler(new ClickHandler() {
 			

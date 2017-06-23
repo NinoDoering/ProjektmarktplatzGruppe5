@@ -126,9 +126,9 @@ public class ProjekteSeite extends Showcase{
 				Projekt p1 = ssmalleprojekte.getSelectedObject();
 				if (p1 != null){
 					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1, mp);
-					//RootPanel.get("Anzeige").clear();
+					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
-					Window.alert(p1.getBeschreibung()+"jaa");
+				
 					
 				}
 			}

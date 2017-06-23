@@ -325,15 +325,22 @@ public class AusschreibungMapper {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeUpdate("UPDATE ausschreibung " 
-					+ "SET idAusschreibung='" + a.getId() + "' ,'" 
-					+ "bezeichnung='" + a.getBezeichnung() + "' ,'" 
-					+ "beschreibung='" + a.getBeschreibung() + "' ,'" 
-					+ "idAusschreibender='" + a.getIdAusschreibender() + "' ,'"
-					+ "status='" + a.getAusschreibungsstatus() + "' ,'"
-					+ "endDatum='" + format.format(a.getEndDatum()) + "' ,'" 
-					+ "idProjekt='" + a.getIdProjekt() + "' ,'" 
-					+ " WHERE idAusschreibung= '" + a.getId());
+		//	stmt.executeUpdate("UPDATE ausschreibung " 
+//					+ "SET idAusschreibung= '" + a.getId() + "' ,'" 
+//					+ " bezeichnung= '" + a.getBezeichnung() + "' ,'" 
+//					+ " beschreibung= '" + a.getBeschreibung() + "' ,'" 
+//					+ " idAusschreibender= '" + a.getIdAusschreibender() + "' ,'"
+//					+ " status= '" + a.getAusschreibungsstatus() + "' ,'"
+//					+ " endDatum= '" + format.format(a.getEndDatum()) + "' ,'" 
+//					+ " idProjekt= '" + a.getIdProjekt() + "' ,'" 
+//					+ " WHERE idAusschreibung= '" + a.getId());
+			
+			 stmt.executeUpdate("UPDATE ausschreibung " + "SET bezeichnung='"
+			          + a.getBezeichnung() + "', beschreibung='" + a.getBeschreibung() + "', status='" 
+			          + a.getAusschreibungsstatus() + "', endDatum= '" 
+			          + format.format(a.getEndDatum()) 
+			          + "'WHERE idAusschreibung=" + a.getId());
+			
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();

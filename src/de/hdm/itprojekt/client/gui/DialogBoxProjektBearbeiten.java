@@ -61,12 +61,12 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		startD.setValue(selectedObject.getStartDatum(), true);
 		endD.setValue(selectedObject.getEndDatum(), true);
 		
-		this.setText("Projektmarktplatz anlegen");
+			this.setText("Projektmarktplatz anlegen");
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(true);
 			this.mp2 = m1 ;
-		projektHP.add(ok);
-		projektHP.add(abbrechen);
+			projektHP.add(ok);
+			projektHP.add(abbrechen);
 		
 		
 		ok.addClickHandler(new ClickHandler() {
@@ -135,15 +135,10 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		projektdialogboxtabelle.setWidget(3, 1, startD);
 		projektdialogboxtabelle.setWidget(4, 0, enddatum);
 		projektdialogboxtabelle.setWidget(4, 1, endD);
-		
-		
-		
+			
 		projektVP.add(projektdialogboxtabelle);
 		projektVP.add(projektHP);
 		this.add(projektVP);
-		
-		
-		
 
 	}
 	

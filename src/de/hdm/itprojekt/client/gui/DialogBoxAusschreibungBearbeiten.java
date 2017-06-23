@@ -15,28 +15,22 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.itprojekt.client.Showcase;
+
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
-import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
-// --------------------------------ENUM STATUS FEHLT-----------------------
+public class DialogBoxAusschreibungBearbeiten extends DialogBox {
+	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 
-
-
-public class DialogBoxAusschreibungAnlegen extends DialogBox {
-
-private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
-	
 	private VerticalPanel ausschreibungVP = new VerticalPanel();
 	private HorizontalPanel ausschreibungHP = new HorizontalPanel();
 	
@@ -56,25 +50,53 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private DatePicker aussbefrist = new DatePicker();
 	private Label textBewerbungsfrist = new Label();
 	
-	// IDs m�ssen noch manuell eingegeben werden 
-	private Label idPartnerprofil = new Label("Id des Partnerprofil");
-	private TextArea idPP = new TextArea();
 	
-	private Label idAusschreibender = new Label("Id des Ausschreibenden");
-	private TextArea idASD = new TextArea();
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	private FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
-	
-
-	
-	
-	FlexTable ausschreibungdialogboxtabelle = new FlexTable();
-	
-	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt){
-		this.p2=zugehoerigesProjekt;
-		Label zugehProjektBez = new Label("Ausschreibung für folgendes Projekt: "+ zugehoerigesProjekt.getBezeichnung());
+	//Konstruktor mit benötigten Übergabeparameter Fremdschlüsselübergabe
+	public DialogBoxAusschreibungBearbeiten(final Ausschreibung selectedObjectA, final Projekt p1, final Marktplatz m1){
+		aussbez.setValue(selectedObjectA.getBezeichnung());
+		aussbeschr.setValue(selectedObjectA.getBeschreibung());
+		aussbefrist.setValue(selectedObjectA.getEndDatum(), true);
 		
-		//Datepicker 
+		this.setText("Ausschreibung bearbeiten");
+		this.setAnimationEnabled(false);
+		this.setGlassEnabled(true);
+		this.p2 = p1 ;
+		this.mp= m1;
+
+		ausschreibungHP.add(ok);
+		ausschreibungHP.add(abbrechen);
+		
+		
+		ok.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				if(aussbez.getText().isEmpty()){
+					Window.alert("Bitte Geben Sie einen Ausschreibungsnamen ein");	
+				}
+				else{
+					selectedObjectA.setBezeichnung(aussbez.getText());
+					selectedObjectA.setBeschreibung(aussbeschr.getText());
+					selectedObjectA.setEndDatum(aussbefrist.getValue());
+					gwtproxy.saveAusschreibung(selectedObjectA, new ausschreibungBearbeiten() );
+					
+				}
+			}
+		});
+		
+		abbrechen.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new AusschreibungSeite();
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
 		
 		aussbefrist.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			
@@ -87,71 +109,36 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			}
 		});
 		
-		aussbefrist.setValue(new Date(), true);
 		
-		this.setText("Ausschreibung anlegen");
-		this.setAnimationEnabled(false);
-		this.setGlassEnabled(true);
-		
-		ausschreibungHP.add(ok);
-		ausschreibungHP.add(abbrechen);
-		
-		ok.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(),
-						aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(),
-						Integer.parseInt(idPP.getText()), Status.laufend, new ausschreibungInDB());
-														// Ausschreibungen werden beim erstellen auf laufend gesetzt 
-			}
-		});
-		
-		abbrechen.addClickHandler(new ClickHandler() {
-					
-					@Override
-					public void onClick(ClickEvent event) {
-					hide();
-						
-					}
-				});
-		
-		ausschreibungVP.add(ausschreibungdialogboxtabelle);
-		ausschreibungVP.add(ausschreibungHP);
-		this.add(ausschreibungVP);
 		ausschreibungdialogboxtabelle.setWidget(1, 0, ausschreibungbezeichnung);
 		ausschreibungdialogboxtabelle.setWidget(1, 1, aussbez);
 		ausschreibungdialogboxtabelle.setWidget(2, 0, ausschreibungsbeschreibung);
 		ausschreibungdialogboxtabelle.setWidget(2, 1, aussbeschr);
 		ausschreibungdialogboxtabelle.setWidget(3, 0, bewerbungsfrist);
 		ausschreibungdialogboxtabelle.setWidget(3, 1, aussbefrist);
-		ausschreibungdialogboxtabelle.setWidget(4, 0, idAusschreibender);
-		ausschreibungdialogboxtabelle.setWidget(4, 1, idASD);
-		ausschreibungdialogboxtabelle.setWidget(5, 0, idPartnerprofil);
-		ausschreibungdialogboxtabelle.setWidget(5, 1, idPP);
-		ausschreibungdialogboxtabelle.setWidget(6, 0, zugehProjektBez);
-	
+		
+		ausschreibungVP.add(ausschreibungdialogboxtabelle);
+		ausschreibungVP.add(ausschreibungHP);
+		this.add(ausschreibungVP);
+		
 	}
 	
-	private class ausschreibungInDB implements AsyncCallback<Ausschreibung>{
+	private class ausschreibungBearbeiten implements AsyncCallback<Void>{
 
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			Window.alert("etwas falsch gelaufen");
 			
 		}
 
 		@Override
-		public void onSuccess(Ausschreibung result) {
+		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
-			hide();
+			Window.alert("Veränderung wurden gespeichert !");
 			Showcase showcase = new AusschreibungSeite(p2);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
-			
 		}
-}
-
+		
+	}
 }
