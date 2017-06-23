@@ -136,11 +136,9 @@ public class PersonSeite extends Showcase{
 //				}
 //			});
 	
-		if(gwtproxy == null){
-			gwtproxy = GWT.create(GreetingService.class);
-		}
+	
 		
-		gwtproxy.getPersonById(p.getIdTeam(), new GetPersonAusDB());
+		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
 
 		if(p.getIdTeam()!=null){
 			gwtproxy.getTeamById(p.getIdTeam(), new GetTeamAusDB());
@@ -148,7 +146,7 @@ public class PersonSeite extends Showcase{
 		if(p.getIdUnternehmen()!=null){
 			gwtproxy.getUnternehmenById(p.getIdUnternehmen(), new GetUnternehmenAusDB());
 		}
-//		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
+
 		
 		boxTitel.setReadOnly(true);
 		boxName.setReadOnly(true);
@@ -275,6 +273,23 @@ public class PersonSeite extends Showcase{
 //			}
 //		});
 	
+		
+	// Teamhinzufügen 
+		
+	teambutton.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					Window.alert("Veränderung wurden gespeichert !");
+					DialogBox dialoxBoxTeamAnlegen = new DialogBoxTeamAnlegen(p);
+					RootPanel.get("Anzeige").clear();
+					RootPanel.get("Anzeige").add(dialoxBoxTeamAnlegen);
+				}
+			});
+		
+		
+		
 	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
 
 		@Override

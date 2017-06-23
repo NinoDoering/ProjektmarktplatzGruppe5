@@ -88,12 +88,11 @@ public class AusschreibungSeite extends Showcase {
 		RootPanel.get("Anzeige").setWidth("100%");
 		ausschreibungtabelle.setWidth("100%", true);
 		vpanelAusschreibung.add(ausschreibungtabelle);
-		hpanelAusschreibung.add(anzeigenAusschribung);
-		hpanelAusschreibung.add(anlegenAusschreibung);
+		hpanelAusschreibung.add(anzeigenAusschribung);		
 		hpanelAusschreibung.add(bewerbenAusschreibung);
 		hpanelAusschreibung.add(bearbeitenAusschreibung);
 		hpanelAusschreibung.add(loeschenAusschreibung);
-		
+		hpanelAusschreibung.add(anlegenAusschreibung);
 	
 		this.add(beforeHereMarktplatz);
 		this.add(beforeHereProjekt);

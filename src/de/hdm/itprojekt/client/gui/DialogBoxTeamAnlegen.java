@@ -3,6 +3,7 @@ package de.hdm.itprojekt.client.gui;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -47,12 +48,16 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 	
 	
 	public DialogBoxTeamAnlegen(final Person person){
-		this.person=person;
+		teamNameArea.setValue(person.getIdTeam()+"");
+		
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
 		this.setText("Team");
 		speichernTeam.setStylePrimaryName("teambtn");
 		abbrechenTeam.setStylePrimaryName("teambtn");
+		
+		
+		
 		teamHP.add(speichernTeam);
 		teamHP.add(abbrechenTeam);
 		
@@ -61,7 +66,9 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				hide();
+				Showcase showcase = new PersonSeite(person);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
 			}
 			
 		});
@@ -71,7 +78,29 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				gwtproxy.anlegenTeam(person.getIdUnternehmen(), person.getIdPartnerprofil(), team.getTeamName(), team.getMitgliederAnzahl(), new insertTeamDB());
+				if(teamNameArea.getText().isEmpty()){
+					Window.alert("Bitte Geben Sie einen Team-ID an ein");
+					
+				}else {
+					person.setIdTeam(Integer.parseInt(teamNameArea.getText()));
+					gwtproxy.savePerson(person, new AsyncCallback<Void>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							Window.alert("TEAMADD GEHT nicht");
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// TODO Auto-generated method stub
+							Window.alert("team geändert");
+							Showcase showcase = new PersonSeite(person);
+							RootPanel.get("Anzeige").clear();
+							RootPanel.get("Anzeige").add(showcase);
+						}
+					});
+				}
 			}
 			
 		});
@@ -86,67 +115,5 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 		teamVP.add(teamTable);
 		teamVP.add(teamHP);
 		this.add(teamVP);
-	}
+	}}
 	
-private class insertTeamDB implements AsyncCallback<Person>{
-
-	@Override
-	public void onFailure(Throwable caught) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onSuccess(Person result) {
-		// TODO Auto-generated method stub
-		gwtproxy.anlegenTeam(Integer.parseInt(teamUnternehemenArea.getText()), Integer.parseInt(person.getIdPartnerprofil()), teamNameArea.getText(), teamAnzahlArea.getText(), new AysncCallback<Team>(){
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			
-		}
-			@Override
-			public void onSuccess(Team result) {
-				
-				person.setIdTeam(result.getId());
-				
-			    gwtproxy.updatePerson(person, new updatePersonDB());
-				hide();
-				
-				Navigator ng = new Navigator(person);
-				
-				RootPanel.get("idendity").clear();
-				RootPanel.get("idendity").add(new IdentitySelection(person, ng));
-				
-				RootPanel.get("Navigator").clear();
-				RootPanel.get("Navigator").add(ng);
-					
-				Showcase showcase = new PersonSeite(person);
-				
-				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(showcase);
-		}
-	});
-	
-}
-}
-	
-private class updatePersonDB implements AsyncCallback<Person>{
-
-	@Override
-	public void onFailure(Throwable caught) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onSuccess(Person result) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-}
-	
-}

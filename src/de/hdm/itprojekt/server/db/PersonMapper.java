@@ -238,14 +238,43 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 	public Person updatePerson(Person pe) {
 		Connection con = DBConnection.connection();
 		try {
-			Statement stmt = con.createStatement();
-
-			stmt.executeUpdate("UPDATE person " + "SET vorname=\"" + pe.getVorname() + "\", "  
-					+ "nachname=\"" + pe.getNachname() + "\" " 
-					+ "titel=\"" + pe.getTitel() +  "\" " 
-					+ "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", " 
-					+ "idTeam=\""+ pe.getIdTeam() + "\" " 
-					+ " WHERE idPerson= " + pe.getId());
+//			Statement stmt = con.createStatement();
+//
+//			stmt.executeUpdate("UPDATE person " + "SET vorname=\"" + pe.getVorname() + "\", "  
+//					+ "nachname=\"" + pe.getNachname() + "\" " 
+//					+ "titel=\"" + pe.getTitel() +  "\" " 
+//					+ "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", " 
+//					+ "idTeam=\""+ pe.getIdTeam() + "\" " 
+//					+ " WHERE idPerson= " + pe.getId());
+			
+			
+			
+			 Statement stmt = con.createStatement();
+			
+			 if(pe.getIdTeam()==null && pe.getIdUnternehmen()==null){
+			      stmt.executeUpdate("UPDATE person " + "SET vorname=\""
+				          + pe.getVorname() + "\", " + "nachname=\"" + pe.getNachname() + "\", " + "titel=\""+ pe.getTitel() +
+				          "\", " + "idUnternehmen=NULL, idTeam=NULL" + " WHERE idPerson=" + pe.getId());
+			      
+	        }else if(pe.getIdTeam()!=null && pe.getIdUnternehmen()==null){
+			      stmt.executeUpdate("UPDATE person " + "SET vorname=\""
+				          + pe.getVorname() + "\", " + "nachname=\"" + pe.getNachname() + "\", " + "titel=\""+ pe.getTitel() +
+				          "\", " + "idUnternehmen=NULL, idTeam=\""+ pe.getIdTeam() + "\" "
+				          + "WHERE idPerson=" + pe.getId());
+			      
+	        }else if(pe.getIdTeam()==null && pe.getIdUnternehmen()!=null){
+			      stmt.executeUpdate("UPDATE person " + "SET vorname=\""
+				          + pe.getVorname() + "\", " + "nachname=\"" + pe.getNachname() + "\", " + "titel=\""+ pe.getTitel() +
+				          "\", " + "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", " + "idTeam=NULL" + " WHERE idPerson=" + pe.getId());
+			      
+	        }else if(pe.getIdTeam()!=null && pe.getIdUnternehmen()!=null){
+			      stmt.executeUpdate("UPDATE person, organisationseinheit " + "SET vorname=\""
+				          + pe.getVorname() + "\", " + "nachname=\"" + pe.getNachname() + "\", " + "titel=\""+ pe.getTitel() +
+				          "\", " + "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", "+ "standort=\"" + pe.getStandort() +"\"," +"adresse=\""+ pe.getAdresse() + "\"," + "idTeam=\""+ pe.getIdTeam() + "\" "
+				          + "WHERE idPerson=" + pe.getId());
+} 
+			
+			
 
 		} catch (SQLException e5) {
 			e5.printStackTrace();
