@@ -22,7 +22,7 @@ public class ClientSideSettings extends CommonSettings{
 	
 	private static final String LOGGER_NAME = "Projektmarktplatz Web Client";
 	
-	private static GreetingServiceAsync marktplatzVerwaltung = null;
+	private static GreetingServiceAsync gwtproxy2 = null;
 	
 	private static final Logger log = Logger.getLogger(LOGGER_NAME);
 	
@@ -44,11 +44,11 @@ public class ClientSideSettings extends CommonSettings{
 	
 	public static GreetingServiceAsync getMarktplatzVerwaltung(){
 		//Falls bis jetzt noch keine PMV Instanz bestand
-		if (marktplatzVerwaltung == null){
-			marktplatzVerwaltung = GWT.create(GreetingService.class);
+		if (gwtproxy2 == null){
+			gwtproxy2 = GWT.create(GreetingService.class);
 		}
 		
-		return marktplatzVerwaltung;
+		return gwtproxy2;
 	}
 	
 

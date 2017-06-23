@@ -199,9 +199,9 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idPerson) AS maxid " + "FROM person ");
+//			ResultSet rs = stmt.executeQuery("SELECT MAX(idPerson) AS maxid " + "FROM person");
 
-			if (rs.next()) {
+//			if (rs.next()) {
 
 //				pe.setId(rs.getInt("maxid") + 1);
 				pe.setId(super.insertOrganisationseinheit(pe));
@@ -224,9 +224,9 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 			        
 			        stmt.executeUpdate("INSERT INTO person (emailAddresse, idPerson, titel, vorname, nachname, idUnternehmen, idTeam) "
 			            + "VALUES ('" + pe.getEmailAddresse() + "'," + pe.getId() + ",'" + pe.getTitel() + "','"
-			            + pe.getVorname() + "','" + pe.getNachname() + "','" + pe.getIdUnternehmen() + "','" + pe.getIdTeam() +"')");
+			            + pe.getVorname() + "','" + pe.getNachname() + "'," + pe.getIdUnternehmen() + "," + pe.getIdTeam() +")");
 		        }        
-		}} 
+		} 
 			catch (SQLException e4) {
 			e4.printStackTrace();
 		}

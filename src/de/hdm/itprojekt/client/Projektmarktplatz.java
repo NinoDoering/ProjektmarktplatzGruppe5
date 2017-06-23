@@ -47,7 +47,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class Projektmarktplatz implements EntryPoint {
 
 	
-	private GreetingServiceAsync marktplatzVerwaltung;
+	private GreetingServiceAsync gwtproxy2;
 	private LoginServiceAsync loginService;
 	
 	/**
@@ -67,7 +67,7 @@ public class Projektmarktplatz implements EntryPoint {
 	public void onModuleLoad() {
 	
 		
-		marktplatzVerwaltung = ClientSideSettings.getMarktplatzVerwaltung();
+		gwtproxy2 = ClientSideSettings.getMarktplatzVerwaltung();
 		loginService = ClientSideSettings.getLoginService();
 		
 		LoginServiceAsync loginService = GWT.create(LoginService.class); 
@@ -88,7 +88,7 @@ public class Projektmarktplatz implements EntryPoint {
 				loginInfo = result;
 				if(loginInfo.isLoggedIn()){
 					
-					marktplatzVerwaltung.getAllPersons(new AsyncCallback<Vector<Person>>(){
+					gwtproxy2.getAllPersons(new AsyncCallback<Vector<Person>>(){
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -240,7 +240,7 @@ public class Projektmarktplatz implements EntryPoint {
 			private Label ortTxt = new Label("PLZ/Ort");
 			private Label emailTxT = new Label("Google-Mail");
 			
-			private GreetingServiceAsync marktplatzVerwaltung = 
+			private GreetingServiceAsync gwtproxy2 = 
 					ClientSideSettings.getMarktplatzVerwaltung();
 
 			@Override
@@ -299,7 +299,7 @@ public class Projektmarktplatz implements EntryPoint {
 					public void onClick(ClickEvent event) {
 						try {
 							vNameEing.getText();
-							marktplatzVerwaltung.anlegenPartnerprofil(new NeuePersonAnlegen());
+							gwtproxy2.anlegenPartnerprofil(new NeuePersonAnlegen());
 						} catch (Exception e) {
 							Window.alert("Z 299!");
 						}
@@ -320,7 +320,15 @@ public class Projektmarktplatz implements EntryPoint {
 				@Override
 				public void onSuccess(Partnerprofil result) {
 					if(vNameEing.getText().isEmpty()==false){
-					marktplatzVerwaltung.anlegenPerson(new Integer(0), new Integer(0), result.getId(), vNameEing.getText(), nNameEing.getText(), titelEing.getSelectedItemText(), emailEing.getText(), ortEing.getText(), adresseEing.getText(),   
+						gwtproxy2.anlegenPerson(new Integer(0), 
+								new Integer(0), 
+								result.getId(), 
+								vNameEing.getText(), 
+								nNameEing.getText(), 
+								titelEing.getSelectedItemText(), 
+								emailEing.getText(), 
+								ortEing.getText(), 
+								adresseEing.getText(),   
 							   new AsyncCallback<Person>() {
 
 								@Override
@@ -331,6 +339,7 @@ public class Projektmarktplatz implements EntryPoint {
 								@Override
 								public void onSuccess(Person result) {
 									Window.alert("Glückwunsch " + vNameEing.getText() +" "+ nNameEing.getText()+"! Sie sind jetzt Teilnehmer bei MeetProjects!");
+									RootPanel.get("Anzeige").clear();
 									itprojektload(result);
 									
 								}
