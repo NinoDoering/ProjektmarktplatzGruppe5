@@ -11,13 +11,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.Window;
 
 
-public class AlleAusschreibungen extends Showcase{
+public class AlleAusschreibungenShowcase extends Showcase{
 
 	//Können die Überschrift der AnzeigeSeite auch ändern
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "<h1>Alle Ausschreibung im Bezug zum Report</h1>";
+		return "<h1>Report der von allen Ausschreibungen</h1>";
 	}
 
 	@Override
