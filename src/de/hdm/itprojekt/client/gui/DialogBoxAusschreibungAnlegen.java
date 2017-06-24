@@ -147,7 +147,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		public void onSuccess(Ausschreibung result) {
 			// TODO Auto-generated method stub
 			hide();
-			Showcase showcase = new AusschreibungSeite(p2);
+			Showcase showcase = new AusschreibungSeite(p2, mp);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			

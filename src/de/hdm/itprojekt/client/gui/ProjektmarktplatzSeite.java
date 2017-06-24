@@ -70,7 +70,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
 				m1 = ssmalleprojektmarktplaetze.getSelectedObject();
-				Showcase showcase = new ProjekteSeite(m1);
+				Showcase showcase = new ProjekteSeite(null, m1);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				
@@ -104,6 +104,8 @@ public class ProjektmarktplatzSeite extends Showcase{
 		marktplatztabelle.addColumn(marktplatztabellegeschaeftsgebiet, "Geschäftsgebiet");
 		gwtproxy.getAllMarktplaetze(new getProjektmarktplatzAusDB());
 		
+		
+		//start der Clickhandler
 		
 		anlegenbutton.addClickHandler(new ClickHandler() {
 			
