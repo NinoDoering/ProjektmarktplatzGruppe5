@@ -154,7 +154,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			Window.alert("Veränderung wurden gespeichert !");
-			Showcase showcase = new ProjekteSeite(mp2);
+			Showcase showcase = new ProjekteSeite(null, mp2);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}

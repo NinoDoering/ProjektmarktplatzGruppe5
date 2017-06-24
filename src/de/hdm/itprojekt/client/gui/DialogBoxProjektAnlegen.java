@@ -145,7 +145,7 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 		public void onSuccess(Projekt result) {
 			Window.alert("Ein neues Projekt wurde erstellt.");
 			hide();
-			Showcase showcase = new ProjekteSeite(mp2);
+			Showcase showcase = new ProjekteSeite(result, mp2);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			

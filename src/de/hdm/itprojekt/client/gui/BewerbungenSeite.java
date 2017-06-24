@@ -27,10 +27,16 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.gui.*;
 
 public class BewerbungenSeite extends Showcase{
+	
+	
+	
+	//FUNKTIONIERT NOCH NICHT
+	
 //	VerticalPanel vpanel = new VerticalPanel();
 	private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
@@ -38,7 +44,7 @@ public class BewerbungenSeite extends Showcase{
 	
 	HorizontalPanel hpanelBewerbung = new HorizontalPanel();
 	VerticalPanel vpanelBewerbung = new VerticalPanel();
-	
+	private Organisationseinheit o1 = new Organisationseinheit();
 	private Bewerbung b1 = new Bewerbung();
 	
 	final SingleSelectionModel<Bewerbung> ssmalleBerwerbungen = new SingleSelectionModel<Bewerbung>();
@@ -103,8 +109,8 @@ RootPanel.get("Anzeige").setWidth("100%");
 	
 		bewerbungentabelle.addColumn(bewerbungtabellebewerbungstext, "Bewerbungstext");
 		bewerbungentabelle.addColumn(bewerbungtabellestatus, "Bewerbungsstatus");
-		gwtproxy.getAllBewerbungen(new getBewerbungenAusDB());
-		//gwtproxy.getBewerbungByBewerber(o, callback);
+		//gwtproxy.getAllBewerbungen(new getBewerbungenAusDB());
+		gwtproxy.getBewerbungByBewerber(o1, new getBewerbungenAusDB());
 		
 		
 		deleteBew.addClickHandler(new ClickHandler() {
@@ -114,6 +120,7 @@ RootPanel.get("Anzeige").setWidth("100%");
 			}
 		});
 	}
+	
 	public class getBewerbungenAusDB implements AsyncCallback<Vector<Bewerbung>>{
 
 		@Override

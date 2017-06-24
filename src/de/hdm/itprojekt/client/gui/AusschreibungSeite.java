@@ -52,29 +52,34 @@ public class AusschreibungSeite extends Showcase {
 	private Button anzeigenAusschribung = new Button("Qualifikationen anzeigen");
 	private Button loeschenAusschreibung = new Button("gewählte Ausschreibung löschen");
 	private Button bearbeitenAusschreibung = new Button("gewählte Ausschreibung bearbeiten");
+	private Button backToProjekte = new Button("Zurück zu den Projekten");
 
 	 public AusschreibungSeite() {
 		
 	}
 	 // konstruktor um fremdschl�ssel zu �bergeben
 	 // damit die ausschreibungen zum passenden projekt angezeigt werden 
-	 public AusschreibungSeite(Projekt p1) {
+	 public AusschreibungSeite(Projekt p1, Marktplatz mp1) {
 			this.p1=p1;
-			Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+p1.getBezeichnung()+" ");
-			beforeHereProjekt.add(lblProjekt);
+			this.mp=mp1;
+			 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+p1.getBezeichnung()+" ");
+			 Label lblMarktplatz = new Label("Sie befinden sich auf folgendem Marktplatz "+mp.getBezeichnung());
+			 beforeHereProjekt.add(lblMarktplatz);
+			 beforeHereProjekt.add(lblProjekt);
+			 beforeHereProjekt.setSpacing(20);
 	 }
 	 
 	 public AusschreibungSeite(Bewerbung b){
 		 this.bwerb=b;
 	 }
 	 
-	 public AusschreibungSeite(Marktplatz mp1){
-		 this.mp=mp1;
-		 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt "+mp.getBezeichnung());
-		 beforeHereProjekt.add(lblProjekt);
-			 
-		
-	 }
+//	 public AusschreibungSeite(Marktplatz mp1){
+//		 this.mp=mp1;
+//		 Label lblProjekt = new Label("Sie befinden sich auf folgendem Marktplatz "+mp.getBezeichnung());
+//		 beforeHereProjekt.add(lblProjekt);
+//			 
+//		
+//	 }
 	 
 	@Override
 	protected String getHeadlineText() {
@@ -87,7 +92,9 @@ public class AusschreibungSeite extends Showcase {
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		ausschreibungtabelle.setWidth("100%", true);
+		ausschreibungtabelle.setStylePrimaryName("celltable");
 		vpanelAusschreibung.add(ausschreibungtabelle);
+		hpanelAusschreibung.add(backToProjekte);
 		hpanelAusschreibung.add(anzeigenAusschribung);		
 		hpanelAusschreibung.add(bewerbenAusschreibung);
 		hpanelAusschreibung.add(bearbeitenAusschreibung);
@@ -178,12 +185,23 @@ public class AusschreibungSeite extends Showcase {
 		
 		//START der Clickhandler 
 		
+		backToProjekte.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new ProjekteSeite(p1, mp);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
 		anzeigenAusschribung.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject());
+				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject(), p1, mp);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -222,7 +240,7 @@ public class AusschreibungSeite extends Showcase {
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Die Ausschreibung wurde erfolgreich gelöscht");
-						Showcase showcase = new AusschreibungSeite(p1);
+						Showcase showcase = new AusschreibungSeite(p1,mp);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
