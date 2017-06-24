@@ -76,6 +76,7 @@ public class ProjekteSeite extends Showcase{
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		projekttabelle.setWidth("100%", true);
+		projekttabelle.setStylePrimaryName("celltable");
 		vpanelProjekte.add(projekttabelle);
 		
 		hpanelProjekte.add(anzeigenProjekt);

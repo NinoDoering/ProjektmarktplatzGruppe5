@@ -56,7 +56,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 		RootPanel.get("Anzeige").setWidth("100%");
 		
 		marktplatztabelle.setWidth("100%", true);
-		
+		marktplatztabelle.setStylePrimaryName("celltable");
 		vpanelMarktplatz.add(marktplatztabelle);
 		hpanelMarktplatz.add(anlegenbutton);
 		this.add(hpanelMarktplatz);

@@ -47,6 +47,7 @@ public class TeamSeite extends Showcase {
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		teamtabelle.setWidth("100%", true);
+		teamtabelle.setStylePrimaryName("celltable");
 		vpanelTeam.add(teamtabelle);
 		
 		this.add(vpanelTeam);

@@ -240,39 +240,7 @@ public class PersonSeite extends Showcase{
 		this.add(personHP);
 
 		this.setSpacing(8);
-//		
-//		Column<Eigenschaft> employmentStatusEigenchaft = new Column<Eigenschaft>(new ClickableTextCell()){
-//			
-//			public String getValue(Eigenschaft object){
-//				return object.getEmploymentStatus();
-//			}
-//		});
-//		
-//		Column<Eigenschaft> sprachkenntnisseEigenschaft = Column<Eigenschaft>(new ClickableTextCell()){
-//			
-//			public String getValue(Eigenschaft object){
-//				return object.getSprachkenntnisse();
-//			}
-//			
-//		});
-//		
-//		Column<Eigenschaft> arbeitsgebietEigenschaft = Column<Eigenschaft>(new ClickableTextCell()){
-//			
-//			public String getValue(Eigenschaft object){
-//				return object.getArbeitsgebiet();
-//			}
-//			
-//		};
-//		
-		
-//	selectionEigenschaft.addSelectionChangeHandler(new Handler(){
-//		public void onSelectionChange(final SelectionChangeEvent event){
-//			
-//			 = selectionEigenschaft.getSelectedObject();
-//				if(selected)
-//				
-//			}
-//		});
+
 	
 		
 	// Teamhinzufügen oder ändern

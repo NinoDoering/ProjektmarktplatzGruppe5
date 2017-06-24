@@ -48,6 +48,7 @@ public class UnternehmenSeite extends Showcase {
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		unternehmentabelle.setWidth("100%", true);
+		unternehmentabelle.setStylePrimaryName("celltable");
 		vpanelUnternehmen.add(unternehmentabelle);
 		
 		this.add(vpanelUnternehmen);

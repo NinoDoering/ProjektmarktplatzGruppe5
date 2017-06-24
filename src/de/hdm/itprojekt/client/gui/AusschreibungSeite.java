@@ -87,6 +87,7 @@ public class AusschreibungSeite extends Showcase {
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		ausschreibungtabelle.setWidth("100%", true);
+		ausschreibungtabelle.setStylePrimaryName("celltable");
 		vpanelAusschreibung.add(ausschreibungtabelle);
 		hpanelAusschreibung.add(anzeigenAusschribung);		
 		hpanelAusschreibung.add(bewerbenAusschreibung);
