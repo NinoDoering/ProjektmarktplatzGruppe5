@@ -11,7 +11,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.Window;
 
 
-public class AlleAusschreibungenReport extends Showcase{
+public class AlleAusschreibungenShowcase extends Showcase{
 
 	//Können die Überschrift der AnzeigeSeite auch ändern
 	@Override
