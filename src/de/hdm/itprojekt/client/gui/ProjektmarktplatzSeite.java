@@ -103,6 +103,8 @@ public class ProjektmarktplatzSeite extends Showcase{
 		marktplatztabelle.addColumn(marktplatztabellespaltenname, "Bezeichnung");
 		marktplatztabelle.addColumn(marktplatztabellegeschaeftsgebiet, "Geschäftsgebiet");
 		gwtproxy.getAllMarktplaetze(new getProjektmarktplatzAusDB());
+		
+		
 		anlegenbutton.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -123,7 +125,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 			public void onSuccess(Vector<Marktplatz> result) {
 				marktplatztabelle.setRowData(0, result);
 				marktplatztabelle.setRowCount(result.size(), true);
-				Window.alert("Funktioniert");
+			
 			}
 			
 		}

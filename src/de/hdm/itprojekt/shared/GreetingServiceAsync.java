@@ -210,6 +210,8 @@ public interface GreetingServiceAsync {
 		void getTeamById(int idTeam, AsyncCallback<Team> callback);
 
 		void saveTeam(Team t, AsyncCallback<Void> callback);
+		
+		void getAllTeams(AsyncCallback<Vector<Team>> callback);
 
 
 		// Unternehmen u
@@ -223,6 +225,8 @@ public interface GreetingServiceAsync {
 		void saveUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
 		
 		void getUnternehmenByFirmenName(String firmenName, AsyncCallback<Vector<Unternehmen>> callback);
+
+		void getAllUnternehmen(AsyncCallback<Vector<Unternehmen>> callback);
 
 
 		// Organisationseinheit o
@@ -243,5 +247,10 @@ public interface GreetingServiceAsync {
 		void getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung, AsyncCallback<Vector<Projekt>> callback);
 
 		void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
+
+
+	
+
+	
 
 	}

@@ -215,7 +215,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public void saveTeam (Team t) throws IllegalArgumentException;
 
-		
+		public Vector<Team> getAllTeams() throws IllegalArgumentException;
 		// Unternehmen u
 		
 		public Unternehmen anlegenUnternehmen(/*Integer ganz ausgeschrieben??*/int idPartnerprofil, String firmenName) throws IllegalArgumentException;
@@ -228,6 +228,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException;
 		
+		public Vector<Unternehmen> getAllUnternehmen() throws IllegalArgumentException;
 
 		// Organisationseinheit
 		

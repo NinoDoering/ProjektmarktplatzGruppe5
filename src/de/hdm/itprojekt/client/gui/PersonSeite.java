@@ -100,8 +100,8 @@ public class PersonSeite extends Showcase{
 	private Label labelNachname = new Label("Nachname");
 	private Label labelAdresse = new Label ("Adresse");
 	private Label labelStandort = new Label ("Standort");
-	private Label labelTeamName = new Label ("Teamname");
-	private Label labelFirmenName = new Label ("Firmenname");
+	private Label labelTeamName = new Label ("Teamname: ");
+	private Label labelFirmenName = new Label ("Firmenname: ");
 	private Label labelEmail = new Label ("E-Mail");
 	
 //	private Anchor personloeschen = new Anchor ("Profil Löschen");
@@ -197,8 +197,7 @@ public class PersonSeite extends Showcase{
 		flexTableButtons.setWidget(1, 0, speichernbutton);		
 		flexTableButtons.setWidget(2, 0, abbrechenbutton);		
 		flexTableButtons.setWidget(3, 0, deletebutton);
-		flexTableButtons.setWidget(4, 0, teambutton);
-		flexTableButtons.setWidget(5, 0, unternehmenbutton);
+		
 		
 //		boxTitel.setReadOnly(true);
 //		boxName.setReadOnly(true);
@@ -209,12 +208,16 @@ public class PersonSeite extends Showcase{
 //		boxFirmenName.setReadOnly(true);
 //		boxEmail.setReadOnly(true);
 		
-		teamTable.setWidget(1, 1, boxTeamName);
+		
 		teamTable.setWidget(0, 1, labelTeamName);
+		teamTable.setWidget(1, 1, boxTeamName);
+		teamTable.setWidget(2, 1, teambutton);
 		teamTable.setCellSpacing(10);
 		
-		unternehmenTable.setWidget(1, 1, boxFirmenName);
+		
 		unternehmenTable.setWidget(0, 1, labelFirmenName);
+		unternehmenTable.setWidget(1, 1, boxFirmenName);
+		unternehmenTable.setWidget(2, 1, unternehmenbutton);
 		unternehmenTable.setCellSpacing(10);
 	
 		
@@ -272,22 +275,37 @@ public class PersonSeite extends Showcase{
 //		});
 	
 		
-	// Teamhinzufügen 
+	// Teamhinzufügen oder ändern
 		
 	teambutton.addClickHandler(new ClickHandler() {
 				
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-					Window.alert("Veränderung wurden gespeichert !");
-					DialogBox dialoxBoxTeamAnlegen = new DialogBoxTeamAnlegen(p);
+					
+					//DialogBox dialoxBoxTeamAnlegen = new DialogBoxTeamAnlegen(p);
+					Showcase showcase = new TeamSeite(p);
 					RootPanel.get("Anzeige").clear();
-					RootPanel.get("Anzeige").add(dialoxBoxTeamAnlegen);
+					RootPanel.get("Anzeige").add(showcase);
 				}
 			});
 		
+	// Unternehmen hinzufügen oder ändern
+	
+	unternehmenbutton.addClickHandler(new ClickHandler() {
 		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			Showcase showcase = new UnternehmenSeite(p);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(showcase);
+		}
+	});
 		
+	
+	
+	
 	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
 
 		@Override
@@ -475,7 +493,7 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 		Showcase scase = new PersonSeite(p);
 		RootPanel.get("Anzeige").clear();
 		RootPanel.get("Anzeige").add(scase);
-		Window.alert("hallo");
+		
 	}
 }
 
