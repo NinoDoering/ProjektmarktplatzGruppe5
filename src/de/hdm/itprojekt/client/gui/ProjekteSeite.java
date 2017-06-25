@@ -53,17 +53,17 @@ public class ProjekteSeite extends Showcase{
 	
 	}
 	
-	public ProjekteSeite(Marktplatz m1){
+	public ProjekteSeite(Projekt p2, Marktplatz m1){
 		this.mp= m1;
+		this.p1=p2;
 		Label lblMarktplatz =  new Label("Sie befinden sich auf folgendem Marktplatz: " +m1.getBezeichnung()+" ");
-		Label hilfeBedienung = new Label("Bitte wählen sie ein Projekt aus um danach darauf zu greifen zu können");
+		Label hilfeBedienung = new Label("   Bitte wählen sie ein Projekt aus um danach darauf zu greifen zu können");
 		beforeHere.add(lblMarktplatz);
 		beforeHere.add(hilfeBedienung);
+		beforeHere.setSpacing(20);
 	}
 	
-	public ProjekteSeite(Projekt p2){
-		this.p1=p2;
-	}
+	
 	
 	@Override
 	protected String getHeadlineText() {
@@ -76,6 +76,7 @@ public class ProjekteSeite extends Showcase{
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		projekttabelle.setWidth("100%", true);
+		projekttabelle.setStylePrimaryName("celltable");
 		vpanelProjekte.add(projekttabelle);
 		
 		hpanelProjekte.add(anzeigenProjekt);
@@ -111,7 +112,7 @@ public class ProjekteSeite extends Showcase{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				Showcase showcase = new AusschreibungSeite(p1);
+				Showcase showcase = new AusschreibungSeite(p1,mp);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -153,7 +154,7 @@ public class ProjekteSeite extends Showcase{
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Das Projekt wurde erfolgreich gelöscht");
-						Showcase showcase = new ProjekteSeite(mp);
+						Showcase showcase = new ProjekteSeite(p1,mp);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}

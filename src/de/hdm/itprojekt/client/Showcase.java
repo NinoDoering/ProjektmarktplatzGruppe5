@@ -4,7 +4,7 @@ import com.google.gwt.user.client.ui.*;
 
 /**
  * Diese Klasse ist die Basisklasse aller Showcases. Jeder Showcase ist ein
- * VerticalPanel und lässt sich somit unter GWT entsprechend anordnen.
+ * VerticalPanel und lï¿½sst sich somit unter GWT entsprechend anordnen.
  * 
  * @author thies
  * @version 1.0
@@ -13,13 +13,13 @@ import com.google.gwt.user.client.ui.*;
 public abstract class Showcase extends VerticalPanel {
 
   /**
-   * Jedes GWT Widget muss diese Methode implementieren. Sie gibt an, sas
+   * Jedes GWT Widget muss diese Methode implementieren. Sie gibt an, was
    * geschehen soll, wenn eine Widget-Instanz zur Anzeige gebracht wird.
    */
   @Override
 public void onLoad() {
     /*
-     * Bevor wir unsere eigene Formatierung veranslassen, überlassen wir es der
+     * Bevor wir unsere eigene Formatierung veranslassen, ï¿½berlassen wir es der
      * Superklasse eine Initialisierung vorzunehmen.
      */
     super.onLoad();
@@ -27,22 +27,22 @@ public void onLoad() {
     /*
      * Als erstes geben wir stets die Headline des Showcase aus. Da
      * getHeadlineText() als abstrakte Methode bzw. als Einschubmethode
-     * realisiert wird, obliegt es den Subklassen, für eine Ausgestaltung also
+     * realisiert wird, obliegt es den Subklassen, fï¿½r eine Ausgestaltung also
      * Implementierung zu sorgen.
      */
     this.add(this.createHeadline(this.getHeadlineText()));
 
     /*
-     * Wenn alles vorbereitet ist, stoßen wir die run()-Methode an. Auch run()
+     * Wenn alles vorbereitet ist, stoï¿½en wir die run()-Methode an. Auch run()
      * ist als abstrakte Methode bzw. als Einschubmethode realisiert. Auch hier
-     * ist es Aufgabe der Subklassen, für deren Implementierung zu sorgen.
+     * ist es Aufgabe der Subklassen, fï¿½r deren Implementierung zu sorgen.
      */
     this.run();
   }
 
   /**
    * Mit Hilfe dieser Methode erstellen wir aus einem String ein mittels CSS
-   * formatierbares HTML-Element. Unter CSS lässt sich das Ergebnis über
+   * formatierbares HTML-Element. Unter CSS lï¿½sst sich das Ergebnis ï¿½ber
    * <code>.bankproject-headline</code> referenzieren bzw. formatieren.
    * 
    * @param text der String, den wir als andernorts HTML setzen wollen.
@@ -51,19 +51,20 @@ public void onLoad() {
   protected HTML createHeadline(String text) {
     HTML content = new HTML(text);
     content.setStylePrimaryName("itproject-headline");
+   //content.setAutoHorizontalAlignment(ALIGN_CENTER); mit gruppe besprechen erst dann auskommentieren
     return content;
   }
 
   /**
    * Mit Hilfe dieser Methode erstellen wir aus einem String ein mittels CSS
-   * formatierbares HTML-Element, das an das Ende der bisherigen Ausgabe dieses
-   * Showcase angehängt wird. Unter CSS lässt sich das Ergebnis über
+   * formatierbares HTML-Element, dasss an das Ende der bisherigen Ausgabe dieses
+   * Showcase angehï¿½ngt wird. Unter CSS lï¿½sst sich das Ergebnis ï¿½ber
    * <code>.bankproject-simpletext</code> referenzieren bzw. formatieren.
    * 
    * @param text der String, den wir als HTML an die bisherige Showcase-Ausgabe
-   *          anhängen wollen.
+   *          anhï¿½ngen wollen.
    */
-  protected void append(String text) {
+  public void append(String text) {
     HTML content = new HTML(text);
     content.setStylePrimaryName("itproject-simpletext");
     this.add(content);

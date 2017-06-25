@@ -47,6 +47,7 @@ public class EigeneProjekte extends Showcase {
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		eigeneprojektetabelle.setWidth("100%", true);
+		eigeneprojektetabelle.setStylePrimaryName("celltable");
 		vpanelEigeneProjekte.add(eigeneprojektetabelle);
 	
 		this.add(vpanelEigeneProjekte);

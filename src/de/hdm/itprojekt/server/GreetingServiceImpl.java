@@ -667,9 +667,9 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 	// ben�tigen wir nicht
 	//// getAllTeams
-	// public Vector<Team> getAllTeams() throws IllegalArgumentException {
-	// return this.teamMapper.findAll();
-	// }
+	 public Vector<Team> getAllTeams() throws IllegalArgumentException {
+	 return this.teamMapper.findAllTeam();	 }
+	 
 	//
 	//// getTeamByTeamName
 	// public Vector<Team> getTeamByTeamName(String teamName) throws
@@ -738,6 +738,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
 
 		return this.unternehmenMapper.findUnternehmenByFirmenName(firmenName);
+	}
+	
+	// alle Unternehmen 
+	
+	public Vector<Unternehmen> getAllUnternehmen() throws IllegalArgumentException {
+		return unternehmenMapper.findAllUnternehmen();
 	}
 	
 	/*##########################################################

@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -140,7 +141,7 @@ public class Projektmarktplatz implements EntryPoint {
 			loginPanel.add(AnmeldenLabel);
 			loginPanel.add(loginButton);
 			signInLink.setHref(loginInfo.getLoginUrl());
-
+			
 			RootPanel.get("Navigator").add(loginPanel);
 			RootPanel.get("Navigator").add(loginButton);
 			loginButton.addClickHandler(new ClickHandler(){
@@ -162,7 +163,7 @@ public class Projektmarktplatz implements EntryPoint {
 			RootPanel.get("Navigator").clear();
 			
 			signOutLink.setHref(loginInfo.getLogoutUrl());
-//			Button LogOUT = new Button("Ausloggen");
+			Button LogOUT = new Button("Ausloggen");
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
 //			HorizontalPanel rechtsOben = new HorizontalPanel();
@@ -179,18 +180,21 @@ public class Projektmarktplatz implements EntryPoint {
 			RootPanel.get("Anzeige").add(mainPanel);
 			RootPanel.get("Navigator").add(new Navigator());
 			RootPanel.get("TopBar").add(new TopBar(person));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
+			RootPanel.get("TopBar").add(LogOUT);
 			signOutLink.setHref(loginInfo.getLogoutUrl());
-//			LogOUT.setWidth("150px");
-//			LogOUT.setStylePrimaryName("loginbutton");
-//
-//			LogOUT.addClickHandler(new ClickHandler(){
-//
-//				@Override
-//				public void onClick(ClickEvent event) {
-//					Window.open(signOutLink.getHref(), "_self", "");;
-//					
-//				}
-//				
+			LogOUT.setWidth("150px");
+			LogOUT.setStylePrimaryName("loginbutton");
+
+			LogOUT.addClickHandler(new ClickHandler(){
+
+				@Override
+				public void onClick(ClickEvent event) {
+					Window.open(signOutLink.getHref(), "_self", "");;
+					
+				}
+				
+				
+				
 //			});
 //			
 //			manageRole.addClickHandler(new ClickHandler(){
@@ -248,7 +252,7 @@ public class Projektmarktplatz implements EntryPoint {
 //			
 //			
 			
-		}
+		});}
 
 		private class Registrierungsformular extends Showcase{
 
@@ -390,5 +394,64 @@ public class Projektmarktplatz implements EntryPoint {
 		}
 				
 			}
+		private class TopBar extends StackPanel{
+
+			HorizontalPanel TopBarPanel = new HorizontalPanel();
+			Button LogOUT = new Button("Ausloggen");
+			Button meinProfil = new Button("Mein Profil");
+			Button manageRole = new Button("Identität verwalten");
+			
+			public TopBar(final Person person){
+			
+			
+			TopBarPanel.add(meinProfil);
+			TopBarPanel.add(manageRole);
+			TopBarPanel.add(LogOUT);
+			
+			
+			LogOUT.setWidth("150px");
+			LogOUT.setStylePrimaryName("loginbutton");
+
+			RootPanel.get("TopBar").add(TopBarPanel);
+			
+			LogOUT.addClickHandler(new ClickHandler(){
+
+				@Override
+				public void onClick(ClickEvent event) {
+					Window.open(signOutLink.getHref(), "_self", "");;
+				}
+				
+			});
+			
+			manageRole.addClickHandler(new ClickHandler(){
+
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
+			
+			meinProfil.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					RootPanel.get("Anzeige").clear();
+					Showcase sh = new PersonSeite(person);
+					RootPanel.get("Anzeige").add(sh);
+				
+				}
+			});
+			
+			
+			
+			
+		}
+		public TopBar(){
+				
+			}	
+		}
+
 }
 

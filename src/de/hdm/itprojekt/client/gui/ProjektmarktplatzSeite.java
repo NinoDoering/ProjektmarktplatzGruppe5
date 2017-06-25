@@ -56,7 +56,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 		RootPanel.get("Anzeige").setWidth("100%");
 		
 		marktplatztabelle.setWidth("100%", true);
-		
+		marktplatztabelle.setStylePrimaryName("celltable");
 		vpanelMarktplatz.add(marktplatztabelle);
 		hpanelMarktplatz.add(anlegenbutton);
 		this.add(hpanelMarktplatz);
@@ -70,7 +70,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
 				m1 = ssmalleprojektmarktplaetze.getSelectedObject();
-				Showcase showcase = new ProjekteSeite(m1);
+				Showcase showcase = new ProjekteSeite(null, m1);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				
@@ -103,6 +103,10 @@ public class ProjektmarktplatzSeite extends Showcase{
 		marktplatztabelle.addColumn(marktplatztabellespaltenname, "Bezeichnung");
 		marktplatztabelle.addColumn(marktplatztabellegeschaeftsgebiet, "Geschäftsgebiet");
 		gwtproxy.getAllMarktplaetze(new getProjektmarktplatzAusDB());
+		
+		
+		//start der Clickhandler
+		
 		anlegenbutton.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -123,7 +127,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 			public void onSuccess(Vector<Marktplatz> result) {
 				marktplatztabelle.setRowData(0, result);
 				marktplatztabelle.setRowCount(result.size(), true);
-				Window.alert("Funktioniert");
+			
 			}
 			
 		}

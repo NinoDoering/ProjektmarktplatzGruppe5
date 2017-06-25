@@ -31,8 +31,10 @@ public interface ReportGenerator extends RemoteService {
 	
 	public abstract AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschreibungenReport(Organisationseinheit o) throws IllegalArgumentException;
 	
-	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(int idAusschreibung) throws IllegalArgumentException;
+//	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(int idAusschreibung) throws IllegalArgumentException;
 	
+	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(Organisationseinheit o) throws IllegalArgumentException;
+
 	public abstract FanInFanOutReport createFanInFanOutReport() throws IllegalArgumentException;
 	
 	public abstract FanIn createFanInAnalyse () throws IllegalArgumentException;

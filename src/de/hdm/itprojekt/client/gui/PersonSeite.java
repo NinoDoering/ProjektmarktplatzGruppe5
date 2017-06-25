@@ -41,7 +41,7 @@ public class PersonSeite extends Showcase{
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person p = new Person();
 	private Organisationseinheit o1 = new Organisationseinheit();
-	private CellTable<Eigenschaft> personEigenschaft = new CellTable <Eigenschaft>();
+	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
@@ -58,8 +58,8 @@ public class PersonSeite extends Showcase{
 	private Button unternehmenbutton = new Button ("Unternehmen Hinzufügen");
 	private Button eigenschaftButton = new Button ("Eigenschaften Hinzufügen");
 
-	private FlexTable table = new FlexTable();
-	private FlexTable flexTable = new FlexTable();
+	private FlexTable tablePerson = new FlexTable();
+	private FlexTable flexTableButtons = new FlexTable();
 	private FlexTable pTable = new FlexTable();
 	private FlexTable buttonTable = new FlexTable();
 	private FlexTable teamTable = new FlexTable();
@@ -81,13 +81,9 @@ public class PersonSeite extends Showcase{
 	public PersonSeite(Person p){
 		this.p = p;
 	}
-	private VerticalPanel personVP = new VerticalPanel();
-	private VerticalPanel eigenschaftVP = new VerticalPanel();
-	private VerticalPanel ppVP = new VerticalPanel();
+	private VerticalPanel personVP = new VerticalPanel();	
 	private VerticalPanel hinzuVP = new VerticalPanel();
 	private HorizontalPanel personHP = new HorizontalPanel();
-	private HorizontalPanel ppHP = new HorizontalPanel();
-	
 	private ListBox listeAnrede = new ListBox();
 	private TextBox boxTitel = new TextBox();
 	private TextBox boxName = new TextBox();
@@ -104,12 +100,14 @@ public class PersonSeite extends Showcase{
 	private Label labelNachname = new Label("Nachname");
 	private Label labelAdresse = new Label ("Adresse");
 	private Label labelStandort = new Label ("Standort");
-	private Label labelTeamName = new Label ("Teamname");
-	private Label labelFirmenName = new Label ("Firmenname");
+	private Label labelTeamName = new Label ("Teamname: ");
+	private Label labelFirmenName = new Label ("Firmenname: ");
 	private Label labelEmail = new Label ("E-Mail");
 	
-	private Anchor personloeschen = new Anchor ("Profil Löschen");
-	private Anchor klickFunktion = new Anchor ("Unternehmen/Team Löschen/Erstellen");
+//	private Anchor personloeschen = new Anchor ("Profil Löschen");
+//	private Anchor klickFunktion = new Anchor ("Unternehmen/Team Löschen/Erstellen");
+//	
+	
 	
 	@Override
 	protected String getHeadlineText() {
@@ -119,13 +117,13 @@ public class PersonSeite extends Showcase{
 	
 	@Override
 	protected void run() {
-	personloeschen.addClickHandler(new ClickHandler() {
-		
-		@Override
-		public void onClick(ClickEvent event) {
-
-		}
-	});
+//	personloeschen.addClickHandler(new ClickHandler() {
+//		
+//		@Override
+//		public void onClick(ClickEvent event) {
+//
+//		}
+//	});
 	
 //	klickFunktion.addClickHandler(new ClickHandler() {
 //				
@@ -179,30 +177,27 @@ public class PersonSeite extends Showcase{
 		
 		personVP.setSpacing(8);
 		
-		table.setWidget(0, 1, listeAnrede);
-		table.setWidget(0, 0, labelAnrede);
-		table.setWidget(1, 1, boxTitel);
-		table.setWidget(1, 0, labelTitel);
-		table.setWidget(2, 1, boxName);
-		table.setWidget(2, 0, labelName);
-		table.setWidget(3, 1, boxNachname);
-		table.setWidget(3, 0, labelNachname);
-		table.setWidget(4, 1, boxAdresse);
-		table.setWidget(4, 0, labelAdresse);
-		table.setWidget(5, 1, boxStandort);
-		table.setWidget(5, 0, labelStandort);
+		tablePerson.setWidget(0, 1, listeAnrede);
+		tablePerson.setWidget(0, 0, labelAnrede);
+		tablePerson.setWidget(1, 1, boxTitel);
+		tablePerson.setWidget(1, 0, labelTitel);
+		tablePerson.setWidget(2, 1, boxName);
+		tablePerson.setWidget(2, 0, labelName);
+		tablePerson.setWidget(3, 1, boxNachname);
+		tablePerson.setWidget(3, 0, labelNachname);
+		tablePerson.setWidget(4, 1, boxAdresse);
+		tablePerson.setWidget(4, 0, labelAdresse);
+		tablePerson.setWidget(5, 1, boxStandort);
+		tablePerson.setWidget(5, 0, labelStandort);
+		tablePerson.setWidget(7, 1, boxEmail);
+		tablePerson.setWidget(7, 0, labelEmail);
+		tablePerson.setCellSpacing(10);
 		
-	
-		table.setWidget(7, 1, boxEmail);
-		table.setWidget(7, 0, labelEmail);
-		table.setCellSpacing(10);
+		flexTableButtons.setWidget(0, 0, bearbeitenbutton);
+		flexTableButtons.setWidget(1, 0, speichernbutton);		
+		flexTableButtons.setWidget(2, 0, abbrechenbutton);		
+		flexTableButtons.setWidget(3, 0, deletebutton);
 		
-		flexTable.setWidget(0, 0, bearbeitenbutton);
-		flexTable.setWidget(0, 1, speichernbutton);
-		flexTable.setWidget(1, 1, abbrechenbutton);
-		flexTable.setWidget(1, 0, deletebutton);
-		flexTable.setWidget(2, 1, teambutton);
-		flexTable.setWidget(2, 0, unternehmenbutton);
 		
 //		boxTitel.setReadOnly(true);
 //		boxName.setReadOnly(true);
@@ -213,83 +208,72 @@ public class PersonSeite extends Showcase{
 //		boxFirmenName.setReadOnly(true);
 //		boxEmail.setReadOnly(true);
 		
-		teamTable.setWidget(0, 1, boxTeamName);
-		teamTable.setWidget(1, 1, labelTeamName);
+		
+		teamTable.setWidget(0, 1, labelTeamName);
+		teamTable.setWidget(1, 1, boxTeamName);
+		teamTable.setWidget(2, 1, teambutton);
 		teamTable.setCellSpacing(10);
 		
-		unternehmenTable.setWidget(0, 1, boxFirmenName);
-		unternehmenTable.setWidget(1, 1, labelFirmenName);
+		
+		unternehmenTable.setWidget(0, 1, labelFirmenName);
+		unternehmenTable.setWidget(1, 1, boxFirmenName);
+		unternehmenTable.setWidget(2, 1, unternehmenbutton);
 		unternehmenTable.setCellSpacing(10);
 	
 		
-		personVP.add(personloeschen);
-		personVP.add(klickFunktion);
-		personVP.add(flexTable);
-		personVP.add(table);
-		personVP.add(unternehmenTable);
+//		personVP.add(personloeschen);
+//		personVP.add(klickFunktion);
+//		personVP.add(flexTableButtons);
+//		personVP.add(tablePerson);
+//		personVP.add(unternehmenTable);
 		
 		hinzuVP.add(eigenschaftButton);
-		hinzuVP.add(personEigenschaft);
+		hinzuVP.add(personEigenschaftTabelle);
 
-		ppVP.add(teamTable);
-		ppHP.add(ppVP);
-		personHP.add(personVP);
-		personHP.add(ppVP);	
-		personHP.add(hinzuVP);
+//		ppVP.add(teamTable);
+//		ppHP.add(ppVP);
+		personHP.add(tablePerson);
+		personHP.add(flexTableButtons);
+		personHP.add(teamTable);
+		personHP.add(unternehmenTable);
+	
 		this.add(personHP);
 
 		this.setSpacing(8);
-//		
-//		Column<Eigenschaft> employmentStatusEigenchaft = new Column<Eigenschaft>(new ClickableTextCell()){
-//			
-//			public String getValue(Eigenschaft object){
-//				return object.getEmploymentStatus();
-//			}
-//		});
-//		
-//		Column<Eigenschaft> sprachkenntnisseEigenschaft = Column<Eigenschaft>(new ClickableTextCell()){
-//			
-//			public String getValue(Eigenschaft object){
-//				return object.getSprachkenntnisse();
-//			}
-//			
-//		});
-//		
-//		Column<Eigenschaft> arbeitsgebietEigenschaft = Column<Eigenschaft>(new ClickableTextCell()){
-//			
-//			public String getValue(Eigenschaft object){
-//				return object.getArbeitsgebiet();
-//			}
-//			
-//		};
-//		
-		
-//	selectionEigenschaft.addSelectionChangeHandler(new Handler(){
-//		public void onSelectionChange(final SelectionChangeEvent event){
-//			
-//			 = selectionEigenschaft.getSelectedObject();
-//				if(selected)
-//				
-//			}
-//		});
+
 	
 		
-	// Teamhinzufügen 
+	// Teamhinzufügen oder ändern
 		
 	teambutton.addClickHandler(new ClickHandler() {
 				
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-					Window.alert("Veränderung wurden gespeichert !");
-					DialogBox dialoxBoxTeamAnlegen = new DialogBoxTeamAnlegen(p);
+					
+					//DialogBox dialoxBoxTeamAnlegen = new DialogBoxTeamAnlegen(p);
+					Showcase showcase = new TeamSeite(p);
 					RootPanel.get("Anzeige").clear();
-					RootPanel.get("Anzeige").add(dialoxBoxTeamAnlegen);
+					RootPanel.get("Anzeige").add(showcase);
 				}
 			});
 		
+	// Unternehmen hinzufügen oder ändern
+	
+	unternehmenbutton.addClickHandler(new ClickHandler() {
 		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			Showcase showcase = new UnternehmenSeite(p);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(showcase);
+		}
+	});
 		
+	
+	
+	
 	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
 
 		@Override
@@ -326,7 +310,7 @@ public class PersonSeite extends Showcase{
 		
 		@Override
 		public void onClick(ClickEvent event){
-		table.setWidget(1, 1, boxTitel);
+		tablePerson.setWidget(1, 1, boxTitel);
 		
 		boxTitel.setReadOnly(false);
 		boxName.setReadOnly(false);
@@ -477,7 +461,7 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 		Showcase scase = new PersonSeite(p);
 		RootPanel.get("Anzeige").clear();
 		RootPanel.get("Anzeige").add(scase);
-		Window.alert("hallo");
+		
 	}
 }
 
