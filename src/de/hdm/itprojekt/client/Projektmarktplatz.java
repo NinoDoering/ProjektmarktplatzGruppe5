@@ -437,6 +437,7 @@ public class Projektmarktplatz implements EntryPoint {
 				
 				@Override
 				public void onClick(ClickEvent event) {
+		
 					RootPanel.get("Anzeige").clear();
 					Showcase sh = new PersonSeite(person);
 					RootPanel.get("Anzeige").add(sh);

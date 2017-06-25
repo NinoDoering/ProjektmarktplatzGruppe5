@@ -59,6 +59,11 @@ public class ProjekteSeite extends Showcase{
 		this.mp = m1;
 		this.person = person;
 	}
+	
+	public ProjekteSeite(Projekt p2, Person person){
+		this.p1=p2;
+		this.person = person;
+	}
 		
 	public ProjekteSeite(Projekt p2, Marktplatz m1, Person projektLeiter){
 		this.mp= m1;
@@ -88,9 +93,12 @@ public class ProjekteSeite extends Showcase{
 		vpanelProjekte.add(projekttabelle);
 		
 		hpanelProjekte.add(anzeigenProjekt);
-		hpanelProjekte.add(bearbeitenProjekt);
-		hpanelProjekte.add(loeschenProjekt);
 		hpanelProjekte.add(anlegenprojekt);
+		
+		//Werden aus gekommentiert da nicht jeder alle Projekte bearbeiten oder löschen darf 
+//		hpanelProjekte.add(bearbeitenProjekt);
+//		hpanelProjekte.add(loeschenProjekt);
+		
 		
 		//hpanelProjekte.add(lblMarktplatz);
 		this.add(beforeHere);
@@ -127,6 +135,17 @@ public class ProjekteSeite extends Showcase{
 		});
 		
 		
+		
+		anlegenprojekt.addClickHandler(new ClickHandler() {		
+			@Override
+			public void onClick(ClickEvent event) {
+				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp, person);
+				dialogbox.center();
+			}
+		});
+		
+		
+		//Werden nicht verwendet da nicht jeder alle Projekte bearbeiten oder löschen darf 
 		bearbeitenProjekt.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -144,6 +163,9 @@ public class ProjekteSeite extends Showcase{
 		});
 		
 		
+		
+	
+		//Werden nicht verwendet da nicht jeder alle Projekte bearbeiten oder löschen darf 
 		loeschenProjekt.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -222,13 +244,7 @@ public class ProjekteSeite extends Showcase{
 		gwtproxy.getProjektbyMarktplatz(mp, new getProjekteAusDB());		
 		
 		
-		anlegenprojekt.addClickHandler(new ClickHandler() {		
-			@Override
-			public void onClick(ClickEvent event) {
-				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp, person);
-				dialogbox.center();
-			}
-		});
+		
 
 		
 	}

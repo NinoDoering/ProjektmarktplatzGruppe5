@@ -133,7 +133,7 @@ public class PersonSeite extends Showcase{
 //					box.center();
 //				}
 //			});
-	
+	Window.alert(""+p.getNachname());
 	
 		
 		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
@@ -385,6 +385,7 @@ public class PersonSeite extends Showcase{
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
+	
 			gwtproxy.getProjektByPerson(p, new AsyncCallback<Vector<Projekt>>() {
 
 				@Override

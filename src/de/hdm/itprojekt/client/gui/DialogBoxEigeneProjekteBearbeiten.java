@@ -2,6 +2,7 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.Date;
 
+import com.google.gwt.aria.client.SelectedValue;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -29,13 +30,13 @@ import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
-public class DialogBoxProjektBearbeiten extends DialogBox {
+public class DialogBoxEigeneProjekteBearbeiten extends DialogBox {
 private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private VerticalPanel projektVP = new VerticalPanel();
 	private HorizontalPanel projektHP = new HorizontalPanel();
 	private Marktplatz mp2 = new Marktplatz();
-	private Person projektLeiter = new Person();
+	private Person person = new Person();
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
 	
@@ -57,15 +58,19 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private FlexTable projektdialogboxtabelle = new FlexTable(); 
 	
-	public DialogBoxProjektBearbeiten(final Projekt selectedObject, final Person projektLeiter){
+	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Person projektLeiter){
 		projektbez.setValue(selectedObject.getBezeichnung());	
 		projektbeschr.setValue(selectedObject.getBeschreibung());
 		startD.setValue(selectedObject.getStartDatum(), true);
 		endD.setValue(selectedObject.getEndDatum(), true);
-		this.projektLeiter= projektLeiter;
+		this.person= projektLeiter;
 	}
 	
-	public DialogBoxProjektBearbeiten(final Projekt selectedObject, final Marktplatz m1, final Person projektLeiter){
+	public DialogBoxEigeneProjekteBearbeiten( final Person projektLeiter){
+		this.person=projektLeiter;
+	}
+	
+	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Marktplatz m1, final Person projektLeiter){
 		projektbez.setValue(selectedObject.getBezeichnung());	
 		projektbeschr.setValue(selectedObject.getBeschreibung());
 		startD.setValue(selectedObject.getStartDatum(), true);
@@ -75,11 +80,14 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(true);
 			this.mp2 = m1 ;
-			this.projektLeiter= projektLeiter;
+			this.person= projektLeiter;
 			projektHP.add(ok);
 			projektHP.add(abbrechen);
 		
 		
+	
+			
+			
 		ok.addClickHandler(new ClickHandler() {
 					
 					@Override
@@ -165,7 +173,8 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			Window.alert("Veränderung wurden gespeichert !");
-			Showcase showcase = new ProjekteSeite(null, mp2, null);
+			Showcase showcase = new EigeneProjekte(person);
+			
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}

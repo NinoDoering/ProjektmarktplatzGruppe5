@@ -76,6 +76,11 @@ public class AusschreibungSeite extends Showcase {
 		 this.bwerb=b;
 	 }
 	 
+	 public AusschreibungSeite(Projekt projekt, Person person){
+		 this.p1=projekt;
+		 this.projektLeiter=person;
+	 }
+	 
 //	 public AusschreibungSeite(Marktplatz mp1){
 //		 this.mp=mp1;
 //		 Label lblProjekt = new Label("Sie befinden sich auf folgendem Marktplatz "+mp.getBezeichnung());
