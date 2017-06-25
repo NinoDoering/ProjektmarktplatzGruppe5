@@ -23,6 +23,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class ProjekteSeite extends Showcase{
@@ -30,6 +31,7 @@ public class ProjekteSeite extends Showcase{
 	private static final String ssmalleprojektmarktplaetze = null;
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Marktplatz mp = new Marktplatz();
+	private Person person = new Person();
 	CellTable<Projekt> projekttabelle = new CellTable<Projekt>();
 	
 	private HorizontalPanel hpanelProjekte = new HorizontalPanel();
@@ -53,9 +55,15 @@ public class ProjekteSeite extends Showcase{
 	
 	}
 	
-	public ProjekteSeite(Projekt p2, Marktplatz m1){
+	public ProjekteSeite(Marktplatz m1, Person person){
+		this.mp = m1;
+		this.person = person;
+	}
+		
+	public ProjekteSeite(Projekt p2, Marktplatz m1, Person projektLeiter){
 		this.mp= m1;
 		this.p1=p2;
+		this.person= projektLeiter;
 		Label lblMarktplatz =  new Label("Sie befinden sich auf folgendem Marktplatz: " +m1.getBezeichnung()+" ");
 		Label hilfeBedienung = new Label("   Bitte wählen sie ein Projekt aus um danach darauf zu greifen zu können");
 		beforeHere.add(lblMarktplatz);
@@ -112,7 +120,7 @@ public class ProjekteSeite extends Showcase{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				Showcase showcase = new AusschreibungSeite(p1,mp);
+				Showcase showcase = new AusschreibungSeite(p1,mp, person);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -126,7 +134,7 @@ public class ProjekteSeite extends Showcase{
 				// TODO Auto-generated method stub
 				Projekt p1 = ssmalleprojekte.getSelectedObject();
 				if (p1 != null){
-					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1, mp);
+					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1, mp, person);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
 				
@@ -154,7 +162,7 @@ public class ProjekteSeite extends Showcase{
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Das Projekt wurde erfolgreich gelöscht");
-						Showcase showcase = new ProjekteSeite(p1,mp);
+						Showcase showcase = new ProjekteSeite(p1,mp, person);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -217,7 +225,7 @@ public class ProjekteSeite extends Showcase{
 		anlegenprojekt.addClickHandler(new ClickHandler() {		
 			@Override
 			public void onClick(ClickEvent event) {
-				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp);
+				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp, person);
 				dialogbox.center();
 			}
 		});
