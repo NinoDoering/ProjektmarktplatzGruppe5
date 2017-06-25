@@ -655,5 +655,46 @@ throws IllegalArgumentException {
 		
 		return result;
 	}
+	
+public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationseinheit o) throws IllegalArgumentException{
+		
+		Vector<Organisationseinheit> bewerber = new Vector<Organisationseinheit>();
+		
+		/**
+		 * @param Organisationseinheit o
+		 * @return Vector mit allen Ausschreibung zu dem übergebenen Organisationseinheit-Objekt
+		 */
+		Vector<Ausschreibung> meineAusschreibungen = greetingservice.getAusschreibungByAusschreibender(o);
+		
+		for (Ausschreibung a : meineAusschreibungen) {
+			
+			/**
+			 * @param id der Ausschreibung, welche aus dem Ausschreibung-Objekt gelesen wird
+			 * @return Vector mit allen Bewerbungen zur übergebenen Ausschreibung 
+			 */
+			Vector<Bewerbung> bewerbungen =  greetingservice.getBewerbungByAusschreibungId(a.getId());
+			
+				for (Bewerbung bewerbung : bewerbungen) {
+					/**
+					 * 
+					 * @param id der Organisationseinheit, welche aus der jeweiligen Bewerbung gelesen wird
+					 * @return Organisationseinheit-Objekt
+					 */
+					if(bewerber.contains(greetingservice.getOrganisationseinheitById(bewerbung.getIdOrganisationseinheit()))){
+						
+					}else{
+						/**
+						 * 
+						 * @param id der Organisationseinheit, welche aus der jeweiligen Bewerbung gelesen wird
+						 * @return Organisationseinheit-Objekt
+						 */
+						bewerber.add(greetingservice.getOrganisationseinheitById(bewerbung.getIdOrganisationseinheit()));
+					}
+					
+					
+				}
+			}
+		return bewerber;
+}
 
 }

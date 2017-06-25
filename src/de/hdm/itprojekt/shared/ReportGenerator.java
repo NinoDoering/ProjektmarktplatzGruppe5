@@ -49,6 +49,7 @@ public interface ReportGenerator extends RemoteService {
 	
 	public Unternehmen findUnternehmenByKey (int id) throws IllegalArgumentException;
 
+	public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationseinheit o) throws IllegalArgumentException;
 
 	
 	
