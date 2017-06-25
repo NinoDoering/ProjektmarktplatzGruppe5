@@ -9,11 +9,11 @@ import de.hdm.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm.itprojekt.shared.report.AllBewerbungenByOrganisationseinheitReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
-public class AllBewerbungenByOrganisationseinheitShowcase extends Showcase {
+public class AlleBewerbungenByOrganisationseinheitShowcase extends Showcase {
 
 	private RoleManagement rolemanagementReport = null;
 
-	public AllBewerbungenByOrganisationseinheitShowcase(RoleManagement rolemanagementReport){
+	public AlleBewerbungenByOrganisationseinheitShowcase(RoleManagement rolemanagementReport){
 		this.rolemanagementReport=rolemanagementReport;
 	}
 	

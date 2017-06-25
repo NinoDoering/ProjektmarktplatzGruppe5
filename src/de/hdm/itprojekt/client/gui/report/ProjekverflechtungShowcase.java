@@ -19,11 +19,11 @@ import de.hdm.itprojekt.shared.bo.Unternehmen;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 import de.hdm.itprojekt.shared.report.ProjektverflechtungReport;
 
-public class ProjekverflechtungReport extends Showcase {
+public class ProjekverflechtungShowcase extends Showcase {
 
 	private RoleManagement rolemanagementReport = null;
 
-	public ProjekverflechtungReport(RoleManagement rolemanagementReport){
+	public ProjekverflechtungShowcase(RoleManagement rolemanagementReport){
 		this.rolemanagementReport=rolemanagementReport;
 	}
 	
