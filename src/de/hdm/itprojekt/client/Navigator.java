@@ -40,7 +40,7 @@ public class Navigator extends StackPanel{
 	
 	Button reportButton = new Button("Report Generator");
 	
-	public Navigator(){
+	public Navigator(final Person person){
 		
 		rechtsUnten.add(impressum);
 		rechtsUnten.add(agb);
@@ -100,7 +100,7 @@ public class Navigator extends StackPanel{
 //				identityMarketChoice.setOwnOrgUnitToZero();
 //				identityMarketChoice.deactivateProjectMarkets();
 //				identityMarketChoice.deactivateOrgUnits();
-				Showcase showcase = new ProjektmarktplatzSeite();
+				Showcase showcase = new ProjektmarktplatzSeite(person);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				currentClickHandler=this;

@@ -26,6 +26,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class DialogBoxAusschreibungBearbeiten extends DialogBox {
@@ -36,6 +37,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 	
 	private Projekt p2 = new Projekt();
 	private Marktplatz mp = new Marktplatz();
+	private Person projektLeiter = new Person();
 	
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
@@ -54,7 +56,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 	private FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
 	//Konstruktor mit benötigten Übergabeparameter Fremdschlüsselübergabe
-	public DialogBoxAusschreibungBearbeiten(final Ausschreibung selectedObjectA, final Projekt p1, final Marktplatz m1){
+	public DialogBoxAusschreibungBearbeiten(final Ausschreibung selectedObjectA, final Projekt p1, final Marktplatz m1, final Person projektLeiter){
 		aussbez.setValue(selectedObjectA.getBezeichnung());
 		aussbeschr.setValue(selectedObjectA.getBeschreibung());
 		aussbefrist.setValue(selectedObjectA.getEndDatum(), true);
@@ -64,6 +66,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		this.setGlassEnabled(true);
 		this.p2 = p1 ;
 		this.mp= m1;
+		this.projektLeiter=projektLeiter;
 
 		ausschreibungHP.add(ok);
 		ausschreibungHP.add(abbrechen);
@@ -135,7 +138,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			Window.alert("Veränderung wurden gespeichert !");
-			Showcase showcase = new AusschreibungSeite(p2,mp);
+			Showcase showcase = new AusschreibungSeite(p2,mp, projektLeiter);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}

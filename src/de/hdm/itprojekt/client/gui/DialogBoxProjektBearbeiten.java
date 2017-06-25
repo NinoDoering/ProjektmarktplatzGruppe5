@@ -26,6 +26,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class DialogBoxProjektBearbeiten extends DialogBox {
@@ -34,6 +35,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	VerticalPanel projektVP = new VerticalPanel();
 	HorizontalPanel projektHP = new HorizontalPanel();
 	private Marktplatz mp2 = new Marktplatz();
+	private Person projektLeiter = new Person();
 	Button ok = new Button("OK");
 	Button abbrechen = new Button("Abbrechen");
 	
@@ -55,7 +57,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	FlexTable projektdialogboxtabelle = new FlexTable(); 
 	
-	public DialogBoxProjektBearbeiten(final Projekt selectedObject, final Marktplatz m1){
+	public DialogBoxProjektBearbeiten(final Projekt selectedObject, final Marktplatz m1, final Person projektLeiter){
 		projektbez.setValue(selectedObject.getBezeichnung());	
 		projektbeschr.setValue(selectedObject.getBeschreibung());
 		startD.setValue(selectedObject.getStartDatum(), true);
@@ -65,6 +67,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(true);
 			this.mp2 = m1 ;
+			this.projektLeiter= projektLeiter;
 			projektHP.add(ok);
 			projektHP.add(abbrechen);
 		
@@ -154,7 +157,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			Window.alert("Veränderung wurden gespeichert !");
-			Showcase showcase = new ProjekteSeite(null, mp2);
+			Showcase showcase = new ProjekteSeite(null, mp2, null);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}

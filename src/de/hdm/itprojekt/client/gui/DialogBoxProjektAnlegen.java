@@ -25,6 +25,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class DialogBoxProjektAnlegen extends DialogBox{
@@ -34,6 +35,7 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 	VerticalPanel projektVP = new VerticalPanel();
 	HorizontalPanel projektHP = new HorizontalPanel();
 	private Marktplatz mp2 = new Marktplatz();
+	private Person projektLeiter = new Person();
 	Button ok = new Button("OK");
 	Button abbrechen = new Button("Abbrechen");
 	
@@ -58,8 +60,9 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 	
 	FlexTable projektdialogboxtabelle = new FlexTable(); 
 	
-	public DialogBoxProjektAnlegen(final Marktplatz zugehoerigerMarktplatz){
+	public DialogBoxProjektAnlegen(final Marktplatz zugehoerigerMarktplatz, final Person proLeiter){
 		this.mp2= zugehoerigerMarktplatz;
+		this.projektLeiter= proLeiter;
 		Label zugehMarktplatzBez = new Label(zugehoerigerMarktplatz.getBezeichnung());
 		
 		//Datepicker 
@@ -102,8 +105,9 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-			
-				gwtproxy.anlegenProjekt(Integer.parseInt(proLeit.getText()), zugehoerigerMarktplatz.getId(), projektbeschr.getText(), projektbez.getText(), startD.getValue(), endD.getValue(), new projektinDB());
+			Window.alert("Marktplatz " + zugehoerigerMarktplatz.getId());
+			Window.alert("Projektleiter " + proLeiter.getId());
+				gwtproxy.anlegenProjekt(proLeiter.getId(), zugehoerigerMarktplatz.getId(), projektbeschr.getText(), projektbez.getText(), startD.getValue(), endD.getValue(), new projektinDB());
 				
 			}
 		});
@@ -128,8 +132,8 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 		projektdialogboxtabelle.setWidget(3, 1, startD);
 		projektdialogboxtabelle.setWidget(4, 0, enddatum);
 		projektdialogboxtabelle.setWidget(4, 1, endD);
-		projektdialogboxtabelle.setWidget(5, 0, projektleiter);
-		projektdialogboxtabelle.setWidget(5, 1, proLeit);
+//		projektdialogboxtabelle.setWidget(5, 0, projektleiter);
+//		projektdialogboxtabelle.setWidget(5, 1, proLeit);
 		
 	}
 	
@@ -145,7 +149,11 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 		public void onSuccess(Projekt result) {
 			Window.alert("Ein neues Projekt wurde erstellt.");
 			hide();
-			Showcase showcase = new ProjekteSeite(result, mp2);
+//			Showcase showcase = new ProjekteSeite(result, mp2);
+//			RootPanel.get("Anzeige").clear();
+//			RootPanel.get("Anzeige").add(showcase);
+			
+			Showcase showcase = new ProjekteSeite(mp2, projektLeiter);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			

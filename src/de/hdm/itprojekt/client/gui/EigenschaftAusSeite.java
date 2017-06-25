@@ -23,6 +23,7 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class EigenschaftAusSeite extends Showcase{
@@ -31,6 +32,7 @@ public class EigenschaftAusSeite extends Showcase{
 	private Ausschreibung a1 = new Ausschreibung();
 	private Projekt p1 = new Projekt();
 	private Marktplatz m1 = new Marktplatz();
+	private Person projektLeiter = new Person();
 	CellTable<Eigenschaft> eigenschafttabelle = new CellTable<Eigenschaft>();
 	CellTable<Ausschreibung>	pptabelle = new CellTable<Ausschreibung>();
 	private HorizontalPanel hpanelEigenschaft = new HorizontalPanel();
@@ -41,10 +43,11 @@ public class EigenschaftAusSeite extends Showcase{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public EigenschaftAusSeite(Ausschreibung a1, Projekt p1, Marktplatz m1){
+	public EigenschaftAusSeite(Ausschreibung a1, Projekt p1, Marktplatz m1, Person projektLeiter){
 		this.a1=a1;
 		this.p1 =p1;
 		this.m1=m1;
+		this.projektLeiter = projektLeiter;
 		Label lblAUsschreibung = new Label("Sie befinden sich auf den Qualifikationen folgender Ausschreibung" +a1.getBezeichnung());
 		beforeHere.add(lblAUsschreibung);
 	}
@@ -178,7 +181,7 @@ public class EigenschaftAusSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new AusschreibungSeite(p1,m1);
+				Showcase showcase = new AusschreibungSeite(p1,m1, projektLeiter);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}

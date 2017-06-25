@@ -19,6 +19,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Person;
 
 public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 		
@@ -35,11 +36,14 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 	Label geschaeftsgebiet = new Label("Geschäftsgebiet: ");
 	TextArea gebiet = new TextArea();
 	
+	private Person person = new Person();
+	
 	FlexTable marktplatzdialogboxtabelle = new FlexTable();
-	public DialogBoxProjektmarktplatzAnlegen(){
+	public DialogBoxProjektmarktplatzAnlegen(final Person person){
 		this.setText("Projektmarktplatz anlegen");
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
+		this.person = person;
 		
 		hpanel.add(ok);
 		hpanel.add(abbrechen);
@@ -82,7 +86,7 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 		public void onSuccess(Marktplatz result) {
 			Window.alert("Neuer Marktplatz wurde angelegt");
 			hide();
-			Showcase showcase = new ProjektmarktplatzSeite();
+			Showcase showcase = new ProjektmarktplatzSeite(person);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			

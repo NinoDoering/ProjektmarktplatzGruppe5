@@ -178,7 +178,7 @@ public class Projektmarktplatz implements EntryPoint {
 			mainPanel.add(showcase);
 //			RootPanel.get("RechtsOben").add(rechtsOben);
 			RootPanel.get("Anzeige").add(mainPanel);
-			RootPanel.get("Navigator").add(new Navigator());
+			RootPanel.get("Navigator").add(new Navigator(person));
 			RootPanel.get("TopBar").add(new TopBar(person));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
 			RootPanel.get("TopBar").add(LogOUT);
 			signOutLink.setHref(loginInfo.getLogoutUrl());
