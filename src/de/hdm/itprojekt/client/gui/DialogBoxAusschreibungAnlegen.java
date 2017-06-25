@@ -27,6 +27,7 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 // --------------------------------ENUM STATUS FEHLT-----------------------
@@ -42,6 +43,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private Projekt p2 = new Projekt();
 	private Marktplatz mp = new Marktplatz();
+	private Person projektLeiter = new Person();
 	
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
@@ -70,8 +72,9 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
-	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt){
+	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt, final Person projektLeiter){
 		this.p2=zugehoerigesProjekt;
+		this.projektLeiter =projektLeiter;
 		Label zugehProjektBez = new Label("Ausschreibung für folgendes Projekt: "+ zugehoerigesProjekt.getBezeichnung());
 		
 		//Datepicker 
@@ -147,7 +150,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		public void onSuccess(Ausschreibung result) {
 			// TODO Auto-generated method stub
 			hide();
-			Showcase showcase = new AusschreibungSeite(p2, mp);
+			Showcase showcase = new AusschreibungSeite(p2, mp, projektLeiter);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			

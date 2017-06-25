@@ -28,6 +28,7 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
+import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AusschreibungSeite extends Showcase {
@@ -38,6 +39,7 @@ public class AusschreibungSeite extends Showcase {
 	private Ausschreibung a1 = new Ausschreibung();
 	private Ausschreibung pp1 = new Ausschreibung();
 	private Marktplatz mp = new Marktplatz();
+	private Person projektLeiter = new Person();
 	CellTable<Ausschreibung> ausschreibungtabelle = new CellTable<Ausschreibung>();
 	//private Label lblPro = new Label("hallo " +p1.getIdMarktplatz() );
 	private HorizontalPanel hpanelAusschreibung = new HorizontalPanel();
@@ -59,9 +61,10 @@ public class AusschreibungSeite extends Showcase {
 	}
 	 // konstruktor um fremdschl�ssel zu �bergeben
 	 // damit die ausschreibungen zum passenden projekt angezeigt werden 
-	 public AusschreibungSeite(Projekt p1, Marktplatz mp1) {
+	 public AusschreibungSeite(Projekt p1, Marktplatz mp1, Person projektLeiter) {
 			this.p1=p1;
 			this.mp=mp1;
+			this.projektLeiter = projektLeiter;
 			 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+p1.getBezeichnung()+" ");
 			 Label lblMarktplatz = new Label("Sie befinden sich auf folgendem Marktplatz "+mp.getBezeichnung());
 			 beforeHereProjekt.add(lblMarktplatz);
@@ -190,7 +193,7 @@ public class AusschreibungSeite extends Showcase {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new ProjekteSeite(p1, mp);
+				Showcase showcase = new ProjekteSeite(p1, mp, projektLeiter);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -201,7 +204,7 @@ public class AusschreibungSeite extends Showcase {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject(), p1, mp);
+				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject(), p1, mp, projektLeiter);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -214,7 +217,7 @@ public class AusschreibungSeite extends Showcase {
 				// TODO Auto-generated method stub
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
-					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(a1, p1, mp);
+					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(a1, p1, mp, projektLeiter);
 					RootPanel.get("Anzeige").add(dialogBoxAusschreibungBearbeiten);
 					Window.alert(a1.getBeschreibung()+ "  jaajaaa");
 				}
@@ -240,7 +243,7 @@ public class AusschreibungSeite extends Showcase {
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Die Ausschreibung wurde erfolgreich gelöscht");
-						Showcase showcase = new AusschreibungSeite(p1,mp);
+						Showcase showcase = new AusschreibungSeite(p1,mp, projektLeiter);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -254,7 +257,7 @@ public class AusschreibungSeite extends Showcase {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(p1);
+				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(p1, projektLeiter);
 				dialogbox.center();
 			}
 		});

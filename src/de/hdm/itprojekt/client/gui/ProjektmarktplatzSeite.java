@@ -25,6 +25,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Person;
 
 public class ProjektmarktplatzSeite extends Showcase{
 
@@ -49,7 +50,10 @@ public class ProjektmarktplatzSeite extends Showcase{
 		// TODO Auto-generated method stub
 		return "<h1>Marktplatz durchsuchen</h1>";
 	}
-
+	private Person person = new Person();
+	public ProjektmarktplatzSeite(Person person){
+		this.person = person;
+	}
 	@Override
 	protected void run() {
 		
@@ -70,7 +74,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
 				m1 = ssmalleprojektmarktplaetze.getSelectedObject();
-				Showcase showcase = new ProjekteSeite(null, m1);
+				Showcase showcase = new ProjekteSeite(m1, person);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				
@@ -111,7 +115,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				DialogBox dialogbox = new DialogBoxProjektmarktplatzAnlegen();
+				DialogBox dialogbox = new DialogBoxProjektmarktplatzAnlegen(person);
 				dialogbox.center();
 			}
 		});

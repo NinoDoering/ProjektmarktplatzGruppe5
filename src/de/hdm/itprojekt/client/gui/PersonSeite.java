@@ -474,7 +474,7 @@ private class GetPersonAusDB implements AsyncCallback<Person> {
 
 		@Override
 		public void onSuccess(Person result) {
-			Window.alert(" " + result.getEmailAddresse()); 
+			
 			boxName.setText(result.getVorname());
 			boxNachname.setText(result.getNachname());
 			boxAdresse.setText(result.getAdresse());
