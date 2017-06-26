@@ -30,7 +30,7 @@ public class NavigatorReport extends StackPanel {
 	
 	private Button ausschreibungenButton = new Button("Alle Ausschreibungen aufrufen");
 	private Button ausschreibungToPartnerprofilButton = new Button("Ausschreibungen zu Partnerprofil aufrufen");
-	private Button bewerbungenToOneAusschreibungenButton = new Button("Bewerbungen zu eigenen Ausschreibungen aufrufen");
+	private Button bewerbungenByAusschreibungenButton = new Button("Bewerbungen zu eigenen Ausschreibungen aufrufen");
 	private Button bewerbungenByOrganisationseinheitButton = new Button("Eigene Bewerbungen aufrufen");
 	private Button projektverflechtungenButton = new Button("Projektverflechtungen aufrufen");
 	private Button fanInFanOutAnalyseButton = new Button("Fan-in/Fan-out Analyse aufrufen");
@@ -57,9 +57,9 @@ public class NavigatorReport extends StackPanel {
 		ausschreibungToPartnerprofilButton.setWidth("200px");
 		ausschreibungToPartnerprofilButton.setStylePrimaryName("navi-button");
 		
-		panelReport.add(bewerbungenToOneAusschreibungenButton);
-		bewerbungenToOneAusschreibungenButton.setWidth("200px");
-		bewerbungenToOneAusschreibungenButton.setStylePrimaryName("navi-button");
+		panelReport.add(bewerbungenByAusschreibungenButton);
+		bewerbungenByAusschreibungenButton.setWidth("200px");
+		bewerbungenByAusschreibungenButton.setStylePrimaryName("navi-button");
 		
 		panelReport.add(bewerbungenByOrganisationseinheitButton);
 		bewerbungenByOrganisationseinheitButton.setWidth("200px");
@@ -84,7 +84,7 @@ public class NavigatorReport extends StackPanel {
 		this.setWidth("250px");
 		this.addStyleName("gwt-StackPanel");
 		this.add(panelReport, "Startseite");
-		this.add(panelNavigator, "Persönliche Funktionen");
+		this.add(panelNavigator, "Administrationsbereich");
 		
 		//ClickHandler für die ganzen Button
 		startseiteButton.addClickHandler(new ClickHandler(){
@@ -135,7 +135,7 @@ public class NavigatorReport extends StackPanel {
 			}
 		});
 		
-		bewerbungenToOneAusschreibungenButton.addClickHandler(new ClickHandler(){
+		bewerbungenByAusschreibungenButton.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
@@ -153,7 +153,7 @@ public class NavigatorReport extends StackPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase reportScase = new AlleBewerbungenToOneAusschreibungShowcase(roleManagement);
+				Showcase reportScase = new AlleBewerbungenByAusschreibungShowcase(roleManagement);
 				RootPanel.get("AnzeigeReport").clear();
 				RootPanel.get("AnzeigeReport").add(reportScase);
 				clickHandler= this;

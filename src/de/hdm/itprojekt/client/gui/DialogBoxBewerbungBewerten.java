@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.Navigator;
+import de.hdm.itprojekt.client.gui.BewerbungenAufAusschreibungSeite.BewertungBewerbung;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Beteiligung;
@@ -58,12 +59,12 @@ public class DialogBoxBewerbungBewerten extends DialogBox {
 	ListBox bewertungLb = new ListBox();
 	String[] bewertungen = {"0,1", "0,2", "0,3","0,4", "0,5", "0,6", "0,7", "0,8", "0,9", "1,0"};
 	
-	private IdentityMarketChoice identityMarketChoice =null;
+	private RoleManagement roleManagement =null;
 	private Navigator navigator=null;
 	
 // Konstruktor erstellen
-	public DialogBoxBewerbungBewerten (BewertungBewerbung bb, IdentityMarketChoice identityMarketChoice, final Navigator navigator){ 
-		this.identityMarketChoice=identityMarketChoice;
+	public DialogBoxBewerbungBewerten (BewertungBewerbung bb, RoleManagement roleManagement, final Navigator navigator){ 
+		this.roleManagement=roleManagement;
 		this.navigator=navigator;
 		this.setText("Bewerbung bewerten");
 		this.setAnimationEnabled(false);
@@ -102,8 +103,8 @@ public class DialogBoxBewerbungBewerten extends DialogBox {
 		textuelleBewertungTxta.setPixelSize(200, 200);
 		
 		bewerberTxt.setText(bewertungBewerbung.getBewerber());
-		bewerbungstextTxta.setText(bewertungBewerbung.getBewerbungsText());
-		textuelleBewertungTxta.setText(bewertungBewerbung.getTextuelleBewertung);
+		bewerbungstextTxta.setText(bewertungBewerbung.getBewerbungstext());
+		textuelleBewertungTxta.setText(bewertungBewerbung.getTextuelleBewertung());
 	
 	//Panels zu Widgets zuweisen
 		
@@ -119,7 +120,7 @@ public class DialogBoxBewerbungBewerten extends DialogBox {
 					Window.alert("Bitte geben Sie eine Stellungnahme ab!");
 				}else{
 					Bewerbung b = new Bewerbung();
-					b.setId(bewerbungBewertung.getIdBewerbung());
+					b.setId(bewertungBewerbung.getIdBewerbung());
 					b.setIdAusschreibung(bewertungBewerbung.getIdAusschreibung());
 					b.setIdOrganisationseinheit(bewertungBewerbung.getIdBewerber());
 					greetingservice.getAusschreibungByBewerbung(b, new GetAusschreibungFromBewerbungCallback(){						
@@ -131,11 +132,11 @@ public class DialogBoxBewerbungBewerten extends DialogBox {
 		
 		bewerberAblehnenButton.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event){
-				if(bewertungBewerbung.getBewerbungsStatus()== BewerbungsStatus.absage){
+				if(bewertungBewerbung.getBewerbungsstatus()== BewerbungsStatus.absage){
 					Window.alert("Bewerber wurde bereits abgesagt!");
 					hide();
 					navigator.reload();
-				} else if (bewertungBewerbung.getBewerbungsStatus()== BewerbungsStatus.zusage){
+				} else if (bewertungBewerbung.getBewerbungsstatus()== BewerbungsStatus.zusage){
 					Window.alert("Bewerber wurde bereits zugesagt!");
 					hide();
 					navigator.reload();
@@ -145,10 +146,10 @@ public class DialogBoxBewerbungBewerten extends DialogBox {
 						b.setBewerbungsStatus(BewerbungsStatus.absage);
 						b.setIdOrganisationseinheit(bewertungBewerbung.getIdBewerber());
 						b.setId(bewertungBewerbung.getIdBewerbung());
-						b.setBewerbungsText(bewertungBewerbung.getBewerbungsText());
+						b.setBewerbungsText(bewertungBewerbung.getBewerbungstext());
 						b.setIdAusschreibung(bewertungBewerbung.getIdAusschreibung());
-						b.setErstellDatum(bewertungBewerbung.getErstelldatum());
-						greetingservice.saveBewerbung(b, SaveBewerbungCallback());
+						b.setErstellDatum(bewertungBewerbung.getErstellDatum());
+						greetingservice.saveBewerbung(b, new SaveBewerbungCallback());
 						
 						// Listbox Bewertung von String in Float umwandeln
 						try{
@@ -158,7 +159,7 @@ public class DialogBoxBewerbungBewerten extends DialogBox {
 							float number2 = number/10;
 							
 							bewertung.setFliesskommaBewertung(number2);
-							bewertungBewerbung.setBewertungWert(number2);
+							bewertungBewerbung.setWert(number2);
 						
 						// Werte setzen
 							
@@ -197,18 +198,19 @@ public class DialogBoxBewerbungBewerten extends DialogBox {
 				float number2 = number/10;
 				
 				bewertung.setFliesskommaBewertung(number2);
-				bewertungBewerbung.setBewertungWert(number2);
+				bewertungBewerbung.setWert(number2);
 			} catch (Exception e){
 				e.getStackTrace();
 			}
 		
 		bewertung.setId(bewertungBewerbung.getIdBewerbung());
-		bewertungBewerbung.setTextuelleBewertung(textuelleBewertung.getIdBewerbung());
+		bewertungBewerbung.setTextuelleBewertung(textuelleBewertungTxta.getText());
 		bewertung.setIdBewerbung(bewertungBewerbung.getIdBewerbung());
 		bewertung.setTextuelleBewertung(bewertungBewerbung.getTextuelleBewertung());
 		
+		//Prüfen ob Bewertung neu erstellt oder überschrieben wurde
 		if(bewertungBewerbung.getIdBewertung()==0){
-			greetingservice.anlegenBewertung(new Date(), bewertung.getTextuelleBewertung(),bewertung.getFliesskommaBewertung(), bewertung.getIdBewerbung(), new AnlegenBewertungCallback());
+			greetingservice.anlegenBewertung(bewertung.getIdBewerbung(), bewertung.getTextuelleBewertung(),bewertung.getFliesskommaBewertung(), new AnlegenBewertungCallback());
 		}else{
 			greetingservice.saveBewertung(bewertung, new SaveBewertungCallback());
 		}
@@ -294,8 +296,8 @@ private class GetProjektCallback implements AsyncCallback<Projekt>{
 	public void onSuccess(Projekt result) {
 		Bewerbung b = new Bewerbung();
 		Bewertung bewertung = new Bewertung();
-		bewertungBewerbung.setStartdatum(result.getStartdatum());
-		bewertungBewerbung.setEnddatum(result.getEnddatum());
+		bewertungBewerbung.setStartdatum(result.getStartDatum());
+		bewertungBewerbung.setEnddatum(result.getEndDatum());
 		bewertungBewerbung.setIdProjekt(result.getId());
 		
 		if(bewertungBewerbung.getBewerbungsstatus() == BewerbungsStatus.zusage){
@@ -308,9 +310,9 @@ private class GetProjektCallback implements AsyncCallback<Projekt>{
 			b.setIdOrganisationseinheit(bewertungBewerbung.getIdBewerber());	
 			b.setId(bewertungBewerbung.getIdBewerbung());
 			b.setBewerbungsStatus(BewerbungsStatus.zusage);
-			b.setBewerbungsText(bewertungBewerbung.getBewerbungsText());
+			b.setBewerbungsText(bewertungBewerbung.getBewerbungstext());
 			b.setIdAusschreibung(bewertungBewerbung.getIdAusschreibung());
-			b.setErstelldatum(bewertungBewerbung.getErstellDatum());
+			b.setErstellDatum(bewertungBewerbung.getErstellDatum());
 			
 greetingservice.saveBewerbung(b, new SaveBewerbungCallback());
 try{
@@ -319,14 +321,14 @@ try{
 		float number2 = number /10;
 		
 		bewertung.setFliesskommaBewertung(number2);
-		bewertungBewerbung.setBewertungWert(number2);
+		bewertungBewerbung.setWert(number2);
 		
 /* Werte setzen
  * 
  */
-		bewertungBewerbung.setTextuelleBearbeitung(textuelleBearbeitungTxta.getText());
+		bewertungBewerbung.setTextuelleBewertung(textuelleBewertungTxta.getText());
 		bewertung.setIdBewerbung(bewertungBewerbung.getIdBewerbung());
-		bewertung.setTextuelleBewertung(bewertungBewerbung.getTextuelleBearbeitung());
+		bewertung.setTextuelleBewertung(bewertungBewerbung.getTextuelleBewertung());
 		
 		greetingservice.anlegenBewertung(bewertung.getIdBewerbung(), bewertung.getTextuelleBewertung(), bewertung.getFliesskommaBewertung(), new AsyncCallback<Bewertung>(){
 		
@@ -339,7 +341,7 @@ try{
 			@Override
 			public void onSuccess(Bewertung result) {
 				
-			greetingservice.anlegenBeteiligung(bewertungBewerbung.getStartdatum(), bewertungBewerbung.getEnddatum(), bewertungBewerbung.getIdBewerber(), bewertungBewerbung.getIdProjekt(), result.getId(), new BeteiligungErstelltCallback());
+			greetingservice.anlegenBeteiligung(bewertungBewerbung.getBeteiligungszeit(), bewertungBewerbung.getIdBewerber(),bewertungBewerbung.getIdProjekt(), result.getId(), new BeteiligungErstelltCallback());
 			}
 		});
 	} catch (Exception e){

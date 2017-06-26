@@ -25,16 +25,16 @@ public interface ReportGenerator extends RemoteService {
 	
 	public abstract AllBeteiligungenToProjectReport createAllBeteiligungenToProjectReport (int id) throws IllegalArgumentException;
 	
+	// Alle Bewerbungen auf eigene Auschreibungen
 	public abstract AllBewerbungenByAusschreibungReport createAllBewerbungenByAusschreibungReport (Organisationseinheit o) throws IllegalArgumentException;
 	
 	public abstract AllBewerbungenByOrganisationseinheitReport createAllBewerbungenByOrganisationseinheitReport (int id) throws IllegalArgumentException;
 	
 	public abstract AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschreibungenReport(Organisationseinheit o) throws IllegalArgumentException;
 	
-//	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(int idAusschreibung) throws IllegalArgumentException;
+	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(int idAusschreibung) throws IllegalArgumentException;
 	
-	public abstract AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschreibungReport(Organisationseinheit o) throws IllegalArgumentException;
-
+	
 	public abstract FanInFanOutReport createFanInFanOutReport() throws IllegalArgumentException;
 	
 	public abstract FanIn createFanInAnalyse () throws IllegalArgumentException;
@@ -51,6 +51,6 @@ public interface ReportGenerator extends RemoteService {
 
 	public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationseinheit o) throws IllegalArgumentException;
 
-	
+	public Vector<Person> getAllPersonen() throws IllegalArgumentException;
 	
 }

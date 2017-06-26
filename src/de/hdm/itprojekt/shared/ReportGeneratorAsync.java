@@ -20,16 +20,17 @@ public interface ReportGeneratorAsync {
 
 	void createAllBeteiligungenToProjectReport(int id, AsyncCallback<AllBeteiligungenToProjectReport> callback);
 
+	// Projektleiter ruft alle Bewerbungen auf eigene AUsschreibungen auf
 	void createAllBewerbungenByAusschreibungReport(Organisationseinheit o,
 			AsyncCallback<AllBewerbungenByAusschreibungReport> callback);
 
+	// Bewerber ruft eigene Bewerbungen auf
 	void createAllBewerbungenByOrganisationseinheitReport(int id,
 			AsyncCallback<AllBewerbungenByOrganisationseinheitReport> callback);
 	
-	void createAllBewerbungenToOneAusschreibungReport(Organisationseinheit o,
+
+	void createAllBewerbungenToOneAusschreibungReport(int idAusschreibung,
 			AsyncCallback<AllBewerbungenToOneAusschreibungReport> callback);
-//	void createAllBewerbungenToOneAusschreibungReport(int idAusschreibung,
-//			AsyncCallback<AllBewerbungenToOneAusschreibungReport> callback);
 
 	void createAllBewerbungenWithAusschreibungenReport(Organisationseinheit o,
 			AsyncCallback<AllBewerbungenWithAusschreibungenReport> callback);
@@ -56,6 +57,10 @@ public interface ReportGeneratorAsync {
 	void getBewerberByAusschreibungen(Organisationseinheit o, AsyncCallback<Vector<Organisationseinheit>> callback);
 
 
+
+	void getAllPersonen(AsyncCallback<Vector<Person>> callback);
+
+	
 
 	
 	

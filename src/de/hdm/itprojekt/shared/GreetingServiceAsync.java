@@ -136,7 +136,7 @@ public interface GreetingServiceAsync {
 		
 		// Eigenschaft Asynch	
 
-		void anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
+		void anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, String berufserfahrungsJahre,
 				String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse,
 				AsyncCallback<Eigenschaft> callback);
 

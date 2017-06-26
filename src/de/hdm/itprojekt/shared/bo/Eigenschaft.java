@@ -5,7 +5,7 @@ public class Eigenschaft extends BusinessObject {
 	private static final long serialVersionUID = 1L;
 	private String arbeitsgebiet;
 	private String ausbildung;
-	private float berufserfahrungsJahre;
+	private String berufserfahrungsJahre;
 	private String sprachkenntnisse;
 	private String employmentStatus;
 	private String abschluss;
@@ -36,13 +36,13 @@ public class Eigenschaft extends BusinessObject {
 
 
 
-	public float getBerufserfahrungsJahre() {
+	public String getBerufserfahrungsJahre() {
 		return berufserfahrungsJahre;
 	}
 
 
 
-	public void setBerufserfahrungsJahre(float berufserfahrungsJahre) {
+	public void setBerufserfahrungsJahre(String berufserfahrungsJahre) {
 		this.berufserfahrungsJahre = berufserfahrungsJahre;
 	}
 

@@ -166,15 +166,19 @@ public class BewerbungMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO bewerbung (idBewerbung, bewerbungsText, erstellDatum, idOrganisationseinheit, idAusschreibung, bewerbungsstatus) " 
-									+ "VALUES ('"
-									+ b.getId() + "','" 
-									+ b.getIdAusschreibung() + "','" 
-									+ b.getBewerbungsText() + "','"
+				stmt.executeUpdate("INSERT INTO bewerbung (idBewerbung, bewerbungstext, erstellDatum, idOrganisationseinheit, idAusschreibung, bewerbungsStatus) " 
+									+ "VALUES ("
+									+ b.getId() + ",'" 
+									+ b.getBewerbungsText() + "','" 
+									+ format.format(b.getErstellDatum()) + "','"
 									+ b.getIdOrganisationseinheit() + "','" 
-									+ b.getBewerbungsStatus() + "','" 
-									+ format.format(b.getErstellDatum()) + "')");
+									+ b.getIdAusschreibung() + "','" 
+									+ b.getBewerbungsStatus() + "')");
+			
+									
 			}
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
