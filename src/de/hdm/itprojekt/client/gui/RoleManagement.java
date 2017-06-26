@@ -38,6 +38,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -61,20 +62,20 @@ private static RoleManagement navigation=null;
 	
 	private static Team team;
 	private static Unternehmen unternehmen;
-	private static Vector<Projektmarktplatz> projektmarktplaetze;
+	private static Vector<Marktplatz> marktplaetze;
 	private boolean marktplatz = false;
 	
 	
-	public RoleManagement (Person person, final TopBar topbar){
+	public RoleManagement (Person person){
 	
-		this.setWidget(1, 0, new Label("Organisationseinheiten: "));		
+		this.setWidget(1, 0, new Label("Rolle: "));		
 		this.setWidget(1, 1, orgEinheit);
 
 //		this.setWidget(2, 0, new Label("Projektmarktplatz: "));		
 //		this.setWidget(2, 1, Listbox2);
 		
 		
-		this.setStylePrimaryName("IdentityPanel");
+		this.setStylePrimaryName("RolePanel");
 		
 		cellFormatter.setHorizontalAlignment(1, 1, HasHorizontalAlignment.ALIGN_RIGHT);
 	    cellFormatter.setHorizontalAlignment(2, 1, HasHorizontalAlignment.ALIGN_RIGHT);
@@ -108,12 +109,12 @@ private static RoleManagement navigation=null;
 	
 	public int getSelectedIndex(){
 		
-		int selectedID = orgEinheit.getSelectedIndex();
+		int selectedId = orgEinheit.getSelectedIndex();
 		
-		return selectedID;
+		return selectedId;
 	}
 
-	public int getSelectedIdentityID(){
+	public int getSelectedRoleID(){
 		if(person.getIdTeam() != null){
 			if(orgEinheit.getSelectedIndex() == 0){
 				return person.getId();
@@ -132,7 +133,7 @@ private static RoleManagement navigation=null;
 	return 0; 
 	}
 	
-	public Organisationseinheit getSelectedIdentityAsObject(){
+	public Organisationseinheit getSelectedRoleAsObject(){
 
 		if(person.getIdTeam() != null){
 			if(orgEinheit.getSelectedIndex()==0){
@@ -283,34 +284,6 @@ private class getUser implements AsyncCallback<Person>{
 			
 		}
 
-//	private class getProjektmarktplatz implements AsyncCallback<Vector<Projektmarktplatz>>{
-//
-//		@Override
-//		public void onFailure(Throwable caught) {
-//			Window.alert("Der Projektmarktplatz der Person konnte nicht geladen werden");		
-//		}
-//		
-//		@Override
-//		public void onSuccess(Vector<Projektmarktplatz> result) {
-//			
-//			if (result != null){
-//				if (result.isEmpty()){
-//					orgEinheit.addItem("Bitte einen Projektmarktplatz wÃ¤hlen oder anlegen");
-//					menubar.getProjektmarktplaetzeButton().click();
-//					RootPanel.get("Navigator").clear();
-//				}else{
-//					marktplatz = true;
-//					for(Projektmarktplatz p : result){
-//					orgEinheit.addItem(p.getBez());
-//					}
-//					projektmarktplaetze = result;
-//					RootPanel.get("Navigator").add(menubar);
-//				}
-//				
-//			}
-//			
-//		}
-//		
-//	}
+
 	
 }

@@ -23,6 +23,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
@@ -32,6 +33,7 @@ public class ProjekteSeite extends Showcase{
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Marktplatz mp = new Marktplatz();
 	private Person person = new Person();
+	private Organisationseinheit orga = new Organisationseinheit();
 	CellTable<Projekt> projekttabelle = new CellTable<Projekt>();
 	
 	private HorizontalPanel hpanelProjekte = new HorizontalPanel();
@@ -59,6 +61,20 @@ public class ProjekteSeite extends Showcase{
 		this.mp = m1;
 		this.person = person;
 	}
+	
+	public ProjekteSeite(Projekt p2, Person person){
+		this.p1=p2;
+		this.person = person;
+	}
+	
+	public ProjekteSeite(Projekt p2, Marktplatz markt,Organisationseinheit o1, Person person ){
+		this.p1=p2;
+		this.person = person;
+		this.orga=o1;
+		this.mp=markt;
+		person.setId(orga.getId());
+
+	}
 		
 	public ProjekteSeite(Projekt p2, Marktplatz m1, Person projektLeiter){
 		this.mp= m1;
@@ -81,6 +97,7 @@ public class ProjekteSeite extends Showcase{
 
 	@Override
 	protected void run() {
+
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		projekttabelle.setWidth("100%", true);
@@ -88,9 +105,12 @@ public class ProjekteSeite extends Showcase{
 		vpanelProjekte.add(projekttabelle);
 		
 		hpanelProjekte.add(anzeigenProjekt);
-		hpanelProjekte.add(bearbeitenProjekt);
-		hpanelProjekte.add(loeschenProjekt);
 		hpanelProjekte.add(anlegenprojekt);
+		
+		//Werden aus gekommentiert da nicht jeder alle Projekte bearbeiten oder l�schen darf 
+//		hpanelProjekte.add(bearbeitenProjekt);
+//		hpanelProjekte.add(loeschenProjekt);
+		
 		
 		//hpanelProjekte.add(lblMarktplatz);
 		this.add(beforeHere);
@@ -127,6 +147,17 @@ public class ProjekteSeite extends Showcase{
 		});
 		
 		
+		
+		anlegenprojekt.addClickHandler(new ClickHandler() {		
+			@Override
+			public void onClick(ClickEvent event) {
+				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp, person);
+				dialogbox.center();
+			}
+		});
+		
+		
+		//Werden nicht verwendet da nicht jeder alle Projekte bearbeiten oder l�schen darf 
 		bearbeitenProjekt.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -144,6 +175,9 @@ public class ProjekteSeite extends Showcase{
 		});
 		
 		
+		
+	
+		//Werden nicht verwendet da nicht jeder alle Projekte bearbeiten oder l�schen darf 
 		loeschenProjekt.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -222,13 +256,7 @@ public class ProjekteSeite extends Showcase{
 		gwtproxy.getProjektbyMarktplatz(mp, new getProjekteAusDB());		
 		
 		
-		anlegenprojekt.addClickHandler(new ClickHandler() {		
-			@Override
-			public void onClick(ClickEvent event) {
-				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp, person);
-				dialogbox.center();
-			}
-		});
+		
 
 		
 	}
