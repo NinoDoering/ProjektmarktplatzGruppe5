@@ -158,7 +158,7 @@ public class Projektmarktplatz implements EntryPoint {
 		
 		
 
-		private void itprojektload(final Person person){
+		private void itprojektload(Person person){
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Navigator").clear();
 			
@@ -168,6 +168,7 @@ public class Projektmarktplatz implements EntryPoint {
 			VerticalPanel mainPanel = new VerticalPanel();
 //			HorizontalPanel rechtsOben = new HorizontalPanel();
 			Showcase showcase = new Startseite();
+			TopBar topbar = new TopBar();
 //			Button meinProfil = new Button("Mein Profil");
 //			Button manageRole = new Button("Identität verwalten");
 //			rechtsOben.add(meinProfil);
@@ -181,7 +182,7 @@ public class Projektmarktplatz implements EntryPoint {
 			RootPanel.get("Navigator").add(new Navigator(person));
 			RootPanel.get("TopBar").add(new TopBar(person));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
 //			RootPanel.get("TopBar").add(LogOUT);
-			RootPanel.get("TopBar").add(new RoleManagement(person));
+			RootPanel.get("TopBar").add(new RoleManagement(person, topbar));
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 //			LogOUT.setWidth("150px");
 //			LogOUT.setStylePrimaryName("loginbutton");
@@ -395,67 +396,67 @@ public class Projektmarktplatz implements EntryPoint {
 			
 		}
 				
-			}
-		private class TopBar extends StackPanel{
-
-			HorizontalPanel TopBarPanel = new HorizontalPanel();
-			Button LogOUT = new Button("Ausloggen");
-			Button meinProfil = new Button("Mein Profil");
-//			Button manageRole = new Button("Identität verwalten");
-			
-			public TopBar(final Person person){
-			
-			
-			TopBarPanel.add(meinProfil);
-//			TopBarPanel.add(manageRole);
-			TopBarPanel.add(LogOUT);
-			
-			
-//			LogOUT.setWidth("150px");
-//			LogOUT.setStylePrimaryName("loginbutton");
-
-			RootPanel.get("TopBar").add(TopBarPanel);
-			
-			LogOUT.addClickHandler(new ClickHandler(){
-
-				@Override
-				public void onClick(ClickEvent event) {
-					Window.open(signOutLink.getHref(), "_self", "");;
-				}
-				
-			});
-			
-//			manageRole.addClickHandler(new ClickHandler(){
+		}}
+//		private class TopBar extends StackPanel{
+//
+//			HorizontalPanel TopBarPanel = new HorizontalPanel();
+//			Button LogOUT = new Button("Ausloggen");
+//			Button meinProfil = new Button("Mein Profil");
+////			Button manageRole = new Button("Identität verwalten");
+//			
+//			public TopBar(final Person person){
+//			
+//			
+//			TopBarPanel.add(meinProfil);
+////			TopBarPanel.add(manageRole);
+//			TopBarPanel.add(LogOUT);
+//			
+//			
+////			LogOUT.setWidth("150px");
+////			LogOUT.setStylePrimaryName("loginbutton");
+//
+//			RootPanel.get("TopBar").add(TopBarPanel);
+//			
+//			LogOUT.addClickHandler(new ClickHandler(){
 //
 //				@Override
 //				public void onClick(ClickEvent event) {
-//					RoleManagement sh = new RoleManagement(person);
-//					RootPanel.get("Anzeige").add(sh);
-//					
+//					Window.open(signOutLink.getHref(), "_self", "");;
 //				}
 //				
 //			});
-			
-			meinProfil.addClickHandler(new ClickHandler() {
-				
-				@Override
-				public void onClick(ClickEvent event) {
-		
-					RootPanel.get("Anzeige").clear();
-					Showcase sh = new PersonSeite(person);
-					RootPanel.get("Anzeige").add(sh);
-				
-				}
-			});
-			
-			
-			
-			
-		}
-		public TopBar(){
-				
-			}	
-		}
-
-}
+//			
+////			manageRole.addClickHandler(new ClickHandler(){
+////
+////				@Override
+////				public void onClick(ClickEvent event) {
+////					RoleManagement sh = new RoleManagement(person);
+////					RootPanel.get("Anzeige").add(sh);
+////					
+////				}
+////				
+////			});
+//			
+//			meinProfil.addClickHandler(new ClickHandler() {
+//				
+//				@Override
+//				public void onClick(ClickEvent event) {
+//		
+//					RootPanel.get("Anzeige").clear();
+//					Showcase sh = new PersonSeite(person);
+//					RootPanel.get("Anzeige").add(sh);
+//				
+//				}
+//			});
+//			
+//			
+//			
+//			
+//		}
+//		public TopBar(){
+//				
+//			}	
+//		}
+//
+//}
 
