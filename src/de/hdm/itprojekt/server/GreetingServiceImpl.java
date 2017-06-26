@@ -109,7 +109,7 @@ public void init() throws IllegalArgumentException {
 // createEigenschaft
 
 	@Override
-	public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
+	public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, String berufserfahrungsJahre,
 			String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse)
 			throws IllegalArgumentException {
 		Eigenschaft e = new Eigenschaft();
@@ -1136,6 +1136,8 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 		// return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
 	}
+
+
 
 
 

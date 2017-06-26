@@ -148,7 +148,7 @@ public interface GreetingService extends RemoteService  {
 		
 		// Eigenschaft e
 		
-		public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, float berufserfahrungsJahre,
+		public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, String berufserfahrungsJahre,
 				String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse) throws IllegalArgumentException;
 
 
@@ -256,6 +256,8 @@ public interface GreetingService extends RemoteService  {
 		
 		// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
 		public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) throws IllegalArgumentException;
+
+
 
 
 	}
