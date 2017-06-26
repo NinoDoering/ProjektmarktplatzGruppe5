@@ -291,6 +291,7 @@ public class PersonSeite extends Showcase{
 				boxEmail.setReadOnly(true);
 				
 				bearbeitenbutton.setVisible(false);
+				deletebutton.setVisible(false);
 				speichernbutton.setVisible(true);
 				abbrechenbutton.setVisible(true);
 				
