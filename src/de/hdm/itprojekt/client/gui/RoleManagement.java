@@ -46,7 +46,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class RoleManagement extends FlexTable {
 
 	
-private static RoleManagement navigation=null;
+private static RoleManagement navigator=null;
 	
 	private ListBox orgEinheit = new ListBox();
 //	private static ListBox Listbox2 = new ListBox();
