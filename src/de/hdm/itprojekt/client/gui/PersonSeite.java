@@ -45,20 +45,16 @@ public class PersonSeite extends Showcase{
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
 	
-	private RoleManagement roleManagement = new RoleManagement();
-	private Navigator navigator = new Navigator();
 	
 	
 	
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
-<<<<<<< HEAD
+
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
 	
-=======
-	private Button eigeneAusschreibungen = new Button("Meine Ausschreibungen");
->>>>>>> refs/heads/master
+
 	private Navigator ng = null;
 	private RoleManagement roleManagement= null;
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
@@ -438,7 +434,7 @@ public class PersonSeite extends Showcase{
 
 		@Override
 		public void onClick(ClickEvent event) {
-			Showcase showcase = new EigeneAusschreibungen(roleManagement, navigator);
+			Showcase showcase = new EigeneAusschreibungen(roleManagement, ng);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}
