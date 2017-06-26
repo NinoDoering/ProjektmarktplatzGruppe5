@@ -271,11 +271,18 @@ public class AusschreibungSeite extends Showcase {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
+				if (a1 != null){
 //				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
-				DialogBox db1 = new DialogBoxBewerbungAnlegen(ssmalleausschreibung.getSelectedObject(), null);
+				DialogBox db1 = new DialogBoxBewerbungAnlegen(ssmalleausschreibung.getSelectedObject(), projektLeiter);
 				db1.center();
-			}
+				}}
 		});
+		
+		
+
+		
+		
 	}		
 		private class getAusschreibungAusDB implements AsyncCallback<Vector<Ausschreibung>>{
 
