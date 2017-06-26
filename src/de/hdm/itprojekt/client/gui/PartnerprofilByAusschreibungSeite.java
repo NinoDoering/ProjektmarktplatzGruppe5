@@ -40,6 +40,9 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 	private RoleManagement roleManagement=null;
 	private Navigator navigator =null;
 	
+
+
+	
 	public PartnerprofilByAusschreibungSeite(final int idPartnerprofil,  final RoleManagement roleManagement, final Navigator navigator){
 		this.roleManagement=roleManagement;
 		this.navigator=navigator;
@@ -201,7 +204,8 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 					Window.alert("Die Eigenschaft wurde erfolgreich gelöscht.");
 
 					RootPanel.get("Anzeige").clear();
-					RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(MeineAusschreibungenSeite.getIdPartnerprofilOfSelectedAusschreibung(), false, false, roleManagement, navigator));
+					RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(EigeneAusschreibungen.getIdPartnerprofilOfSelectedAusschreibung(), roleManagement, navigator));
+					
 					
 				}
 			});
@@ -215,6 +219,11 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 	
 	}
 
+
+
+
+
+	
   }
 
 

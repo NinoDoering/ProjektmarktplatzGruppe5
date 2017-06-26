@@ -40,6 +40,11 @@ public class Navigator extends StackPanel{
 	
 	Button reportButton = new Button("Report Generator");
 	
+	
+	public Navigator(){
+		
+	}
+	
 	public Navigator(final Person person){
 		
 		rechtsUnten.add(impressum);
