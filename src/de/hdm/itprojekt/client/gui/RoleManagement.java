@@ -11,6 +11,7 @@ import de.hdm.itprojekt.shared.LoginService;
 import de.hdm.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.client.Projektmarktplatz;
 
 import java.util.Vector;
 
@@ -66,7 +67,7 @@ private static RoleManagement navigator=null;
 	private boolean marktplatz = false;
 	
 	
-	public RoleManagement (Person person){
+	public RoleManagement (Person person, final TopBar tb){
 	
 		this.setWidget(1, 0, new Label("Rolle: "));		
 		this.setWidget(1, 1, orgEinheit);
@@ -97,11 +98,11 @@ private static RoleManagement navigator=null;
 
 			@Override
 			public void onChange(ChangeEvent event) {
-//				topbar.reload();
+				tb.reload();
 				
 			}
 
-			
+		
 
 		});
 	}
@@ -186,6 +187,8 @@ private static RoleManagement navigator=null;
 	public void deactivateOrgUnits(){
 		orgEinheit.setEnabled(false);
 	}
+	
+	
 	
 //	public void deactivateProjectMarkets(){
 //		Listbox2.setEnabled(false);
