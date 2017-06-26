@@ -8,10 +8,24 @@
 
 #Anzeige{
 	color:red;
-	background-image: url("https://image.freepik.com/vektoren-kostenlos/moderne-blaue-wellenform_1035-6611.jpg");
+	background-image: url("http://img.kutoo8.com//upload/image/17003522/1367481376306739_960x540.jpg");
 	background-repeat: no-repeat;
+}
+
+#Navigator{
+	background-image: url("http://img.kutoo8.com//upload/image/17003522/1367481376306739_960x540.jpg");
 }
 
 .celltable{
 	color: blue; 
+}
+
+
+
+#TopBar{
+	background-image: url("http://img.kutoo8.com//upload/image/17003522/1367481376306739_960x540.jpg");
+}
+
+#RechtsUnten{
+	background-image: url("http://img.kutoo8.com//upload/image/17003522/1367481376306739_960x540.jpg");
 }
