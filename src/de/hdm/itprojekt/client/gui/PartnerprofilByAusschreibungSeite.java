@@ -206,6 +206,7 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(EigeneAusschreibungen.getIdPartnerprofilOfSelectedAusschreibung(), roleManagement, navigator));
 					
+					
 				}
 			});
 		}
