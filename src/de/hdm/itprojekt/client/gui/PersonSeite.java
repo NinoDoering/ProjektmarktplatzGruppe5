@@ -53,9 +53,14 @@ public class PersonSeite extends Showcase{
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
+<<<<<<< HEAD
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
 	
+=======
+	private Button eigeneAusschreibungen = new Button("Meine Ausschreibungen");
+>>>>>>> refs/heads/master
 	private Navigator ng = null;
+	private RoleManagement roleManagement= null;
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
 	private Button speichernbutton = new Button ("Profil Speichern");
 	private Button abbrechenbutton = new Button ("Profil Abbrechen");
@@ -114,7 +119,8 @@ public class PersonSeite extends Showcase{
 //	private Anchor personloeschen = new Anchor ("Profil Löschen");
 //	private Anchor klickFunktion = new Anchor ("Unternehmen/Team Löschen/Erstellen");
 //	
-	
+
+
 	
 	@Override
 	protected String getHeadlineText() {
@@ -145,6 +151,8 @@ public class PersonSeite extends Showcase{
 		
 		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
 
+		
+		
 		if(p.getIdTeam()!=null){
 			gwtproxy.getTeamById(p.getIdTeam(), new GetTeamAusDB());
 		}
@@ -280,7 +288,54 @@ public class PersonSeite extends Showcase{
 	});
 		
 	
+		// Profil bearbeiten
+		bearbeitenbutton.addClickHandler(new ClickHandler(){
+				
+				@Override
+				public void onClick(ClickEvent event){
+				tablePerson.setWidget(1, 1, boxTitel);
+				
+				boxTitel.setReadOnly(false);
+				boxName.setReadOnly(false);
+				boxNachname.setReadOnly(false);
+				boxAdresse.setReadOnly(false);
+				boxStandort.setReadOnly(false);
+				boxTeamName.setReadOnly(false);
+				boxFirmenName.setReadOnly(false);
+				boxEmail.setReadOnly(true);
+				
+				bearbeitenbutton.setVisible(false);
+				deletebutton.setVisible(false);
+				speichernbutton.setVisible(true);
+				abbrechenbutton.setVisible(true);
+				
+				}
+		});
 	
+		// Profil-änderungen speichern
+		speichernbutton.addClickHandler(new ClickHandler(){
+				
+				@Override
+				public void onClick(ClickEvent event){
+					gwtproxy.savePerson(p, new SpeichernProfilCallback());
+					
+					
+					
+					
+					
+				}
+			});
+		
+		// Profilbeabreiten abbrechen
+		abbrechenbutton.addClickHandler(new ClickHandler(){
+			
+			@Override
+			public void onClick(ClickEvent event){
+				Showcase scase = new PersonSeite(p);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(scase);
+			}
+		});
 	
 	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
 
@@ -314,26 +369,7 @@ public class PersonSeite extends Showcase{
 	});
 	
 	
-	bearbeitenbutton.addClickHandler(new ClickHandler(){
-		
-		@Override
-		public void onClick(ClickEvent event){
-		tablePerson.setWidget(1, 1, boxTitel);
-		
-		boxTitel.setReadOnly(false);
-		boxName.setReadOnly(false);
-		boxNachname.setReadOnly(false);
-		boxAdresse.setReadOnly(false);
-		boxStandort.setReadOnly(false);
-		boxTeamName.setReadOnly(false);
-		boxFirmenName.setReadOnly(false);
-		boxEmail.setReadOnly(false);
-		
-		bearbeitenbutton.setVisible(false);
-		speichernbutton.setVisible(true);
-		abbrechenbutton.setVisible(true);
-	}
-});
+	
 	
 	teamAbbrechen.addClickHandler(new ClickHandler(){
 
@@ -357,25 +393,9 @@ public class PersonSeite extends Showcase{
 		}	
 	});
 	
-	abbrechenbutton.addClickHandler(new ClickHandler(){
-		
-		@Override
-		public void onClick(ClickEvent event){
-			Showcase scase = new PersonSeite(p);
-			RootPanel.get("Anzeige").clear();
-			RootPanel.get("Anzeige").add(scase);
-		}
-	});
+	
 
-	speichernbutton.addClickHandler(new ClickHandler(){
-		
-		@Override
-		public void onClick(ClickEvent event){
-			gwtproxy.savePerson(p, new SpeichernProfilCallback());
-			
-		
-		}
-	});
+	
 
 	pp.addClickHandler(new ClickHandler(){
 		
@@ -448,6 +468,18 @@ public class PersonSeite extends Showcase{
 		}
 	});
 	
+	eigeneAusschreibungen.addClickHandler(new ClickHandler() {
+	
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			Showcase showcase = new EigeneAusschreibungen(roleManagement, ng);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(showcase);
+		}
+		
+	});
 	}
 	
 
@@ -478,10 +510,19 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 
 	@Override
 	public void onSuccess(Void result) {
-		Showcase scase = new PersonSeite(p);
-		RootPanel.get("Anzeige").clear();
-		RootPanel.get("Anzeige").add(scase);
+		p.setVorname(boxTitel.getText());
+		p.setNachname(boxNachname.getText());
+		p.setAdresse(boxAdresse.getText());
+		p.setStandort(boxStandort.getText());
 		
+		boxTitel.setReadOnly(true);
+		boxName.setReadOnly(true);
+		boxNachname.setReadOnly(true);
+		boxAdresse.setReadOnly(true);
+		boxStandort.setReadOnly(true);
+		boxTeamName.setReadOnly(true);
+		boxFirmenName.setReadOnly(true);
+		boxEmail.setReadOnly(true);
 	}
 }
 
@@ -500,6 +541,8 @@ private class GetPersonAusDB implements AsyncCallback<Person> {
 			boxAdresse.setText(result.getAdresse());
 			boxStandort.setText(result.getStandort());
 			boxTitel.setText(result.getTitel());
+			boxEmail.setText(p.getEmailAddresse());
+			
 			
 		}
 		

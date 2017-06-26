@@ -163,8 +163,8 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 	 */
 	zurueckButton.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(new MeineAusschreibungen(roleManagement, navigator));	
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(new EigeneAusschreibungen(roleManagement, navigator));	
 		}
 });
 	
@@ -179,7 +179,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 				int idPartnerprofil = selectionModel.getSelectedObject().getidPartnerprofil();
 			//Klasse muss noch erstellt werden
 				RootPanel.get("Anzeige").clear();
-				RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(idPartnerprofil, false, true, roleManagement, navigator));
+				RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(idPartnerprofil, roleManagement, navigator));
 				
 				} else {
 					Window.alert("Bitte wähle zuerst eine Bewerbung aus.");
