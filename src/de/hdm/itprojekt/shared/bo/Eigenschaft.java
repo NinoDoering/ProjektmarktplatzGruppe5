@@ -42,7 +42,7 @@ public class Eigenschaft extends BusinessObject {
 
 
 
-	public void setBerufserfahrungsJahre(float berufserfahrungsJahre) {
+	public void setBerufserfahrungsJahre(String berufserfahrungsJahre) {
 		this.berufserfahrungsJahre = berufserfahrungsJahre;
 	}
 

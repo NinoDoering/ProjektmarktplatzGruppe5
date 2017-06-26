@@ -157,7 +157,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
 
 
-
+//auf eigene Bewerbungen
 @Override
 	public AllBewerbungenByOrganisationseinheitReport createAllBewerbungenByOrganisationseinheitReport(int id){
 			
@@ -695,6 +695,14 @@ public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationsei
 				}
 			}
 		return bewerber;
+}
+
+
+
+@Override
+public Vector<Person> getAllPersonen() throws IllegalArgumentException {
+	// TODO Auto-generated method stub
+	return greetingservice.getAllPersons();
 }
 
 }

@@ -81,7 +81,7 @@ public class EigenschaftMapper {
 				e.setId(rs.getInt("idEigenschaft"));
 				e.setAusbildung(rs.getString("ausbildung"));
 				e.setAbschluss(rs.getString("abschluss"));
-				e.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
+				e.setBerufserfahrungsJahre(rs.getString("berufserfahrungsJahre"));
 				e.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
 				e.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
 				e.setEmploymentStatus(rs.getString("employmentStatus"));
@@ -113,7 +113,7 @@ public class EigenschaftMapper {
 				e.setId(rs.getInt("idEigenschaft"));
 				e.setAusbildung(rs.getString("ausbildung"));
 				e.setAbschluss(rs.getString("abschluss"));
-				e.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
+				e.setBerufserfahrungsJahre(rs.getString("berufserfahrungsJahre"));
 				e.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
 				e.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
 				e.setEmploymentStatus(rs.getString("employmentStatus"));
@@ -145,7 +145,7 @@ public class EigenschaftMapper {
 	    	  e.setId(rs.getInt("idEigenschaft"));
 	    	  e.setAusbildung(rs.getString("ausbildung"));
 	    	  e.setAbschluss(rs.getString("abschluss"));
-	    	  e.setBerufserfahrungsJahre(rs.getFloat("berufserfahrungsJahre"));
+	    	  e.setBerufserfahrungsJahre(rs.getString("berufserfahrungsJahre"));
 	    	  e.setArbeitsgebiet(rs.getString("arbeitsgebiet"));
 	    	  e.setSprachkenntnisse(rs.getString("sprachkenntnisse"));
 	    	  e.setEmploymentStatus(rs.getString("employmentStatus"));

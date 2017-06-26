@@ -67,6 +67,11 @@ private static RoleManagement navigator=null;
 	private boolean marktplatz = false;
 	
 	
+	public RoleManagement(){
+		
+	}
+	
+	
 	public RoleManagement (Person person, final TopBar tb){
 	
 		this.setWidget(1, 0, new Label("Rolle: "));		
