@@ -27,8 +27,10 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class DialogBoxBewerbungAnlegen extends DialogBox {
 	
@@ -48,6 +50,8 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 	
 	// BO's
 	private Ausschreibung ausschreibungAuswaehlen = new Ausschreibung ();
+	private Marktplatz marktplatz1 = new Marktplatz();
+	private Projekt projekt1 = new Projekt();
 	private Bewerbung bewerbungsSchreiben = new Bewerbung ();
 	private Person person1 = new Person();
 	private Organisationseinheit orga = new Organisationseinheit();
@@ -86,7 +90,7 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Window.alert("DIESE :"+ ausschreibungAuswaehlen.getBezeichnung()+"  "+ person1.getId());
+				Window.alert("DIESE :"+ ausschreibungAuswaehlen.getBezeichnung()+"  "+ projekt1.getId());
 			gwtproxy.anlegenBewerbung(person1.getId(), ausschreibungAuswaehlen.getId(), bewerbungsText.getText(), datumBewerbung.getValue(), BewerbungsStatus.eingereicht, new bewerbungInDB());
 			}
 		});
@@ -123,8 +127,8 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 			public void onSuccess(Bewerbung result) {
 				// TODO Auto-generated method stub
 				hide();
-				Window.alert("Anscheinend funkts es " +ausschreibungAuswaehlen.getId() + "  "+ person1.getId());
-				Showcase showcase = new AusschreibungSeite();
+				Window.alert("Anscheinend funkts es   "+projekt1.getId()+"  " +marktplatz1.getId() + "  "+ person1.getId());
+				Showcase showcase = new AusschreibungSeite(projekt1, marktplatz1, person1);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -136,67 +140,5 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 }
 	
 	
-//		
-//		personBewerber.setId(orga.getId());
-//		setText("Bewerbung erstellen");
-//		this.setAnimationEnabled(false);
-//		this.setGlassEnabled(true);
-//		bewerbungsText.setCharacterWidth(50);
-//		bewerbungsText.setVisibleLines(20);
-//		bewerbungsTextTabelle.setWidget(1, 0, bewerbungsTextLabel);
-//		bewerbungsTextTabelle.setWidget(1, 1, bewerbungsText);
-//		bewerbungVP.add(bewerbungsTextTabelle);
-//		bewerbungHP.add(bewerbungSenden);
-//		bewerbungHP.add(bewerbungAbbrechen);
-//		bewerbungVP.add(bewerbungHP);
-//		this.add(bewerbungVP);
-//		
-//		
-//		bewerbungAbbrechen.addClickHandler(new ClickHandler(){
-//			
-//			@Override
-//			public void onClick(ClickEvent event){
-//			hide();
-//			
-//			}
-//		});
-//		
-//		bewerbungSenden.addClickHandler(new ClickHandler(){
-//			
-//			@Override
-//			public void onClick(ClickEvent event){
-//				Window.alert("" +ausschreibungAuswaehlen.getBezeichnung());
-//				if(bewerbungsText.getText().isEmpty()){
-//					Window.alert("Bitte tragen Sie hier Ihr Motivationsschreiben für die Ausschreibung ein.");
-//					bewerbungsSchreiben.setBewerbungsStatus(BewerbungsStatus.eingereicht);
-//					bewerbungsSchreiben.setIdAusschreibung(ausschreibungAuswaehlen.getId());
-//					bewerbungsSchreiben.setIdOrganisationseinheit(person1.getId());
-//					bewerbungsSchreiben.setBewerbungsText(bewerbungsText.getValue());
-//					bewerbungsSchreiben.setErstellDatum(new Date());
-//				}
-//				else{
-//			gwtproxy.anlegenBewerbung(orga.getId(), bewerbungsSchreiben.getIdAusschreibung(), bewerbungsSchreiben.getBewerbungsText(), bewerbungsSchreiben.getErstellDatum(), bewerbungsSchreiben.getBewerbungsStatus(), new insertBewerbunginDB());
-//		//	gwtproxy.anlegenBewerbung(person1.getIdUnternehmen(), bewerbungsSchreiben.getIdAusschreibung(), bewerbungsSchreiben.getBewerbungsText(), bewerbungsSchreiben.getErstellDatum(), bewerbungsSchreiben.getBewerbungsStatus(), new insertBewerbunginDB());
-//				}
-//			}
-//		
-//		});
 
-	
-//private class insertBewerbunginDB implements AsyncCallback<Bewerbung>{
-//
-//	@Override
-//	public void onFailure(Throwable caught) {
-//		Window.alert("Das Motivationsschreiben konnte nicht gesendet werden!");
-//	}
-//
-//	@Override
-//	public void onSuccess(Bewerbung result) {
-//		Window.alert("Das Motivationsschreiben wurde erfolgreich gesendet!");
-//		hide();	
-//		Showcase showcase = new AusschreibungSeite();
-//		RootPanel.get("Anzeige").clear();
-//		RootPanel.get("Anzeige").add(showcase);
-//		}		
-//	}	
 
