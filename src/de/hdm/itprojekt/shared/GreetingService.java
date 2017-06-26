@@ -78,6 +78,8 @@ public interface GreetingService extends RemoteService  {
 		
 		public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) throws IllegalArgumentException;
 		
+		public Projekt getProjektByAusschreibung(Ausschreibung a) throws IllegalArgumentException;
+		
 		
 		// Ausschreibung a
 		

@@ -486,6 +486,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	public Vector<Projekt> getProjektByBezeichnung(String bezeichnung) throws IllegalArgumentException {
 		return this.prjktMapper.findProjektByBezeichnung(bezeichnung);
 	}
+	
+	// getProjektByAusschreibung
+	public Projekt getProjektByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+		Projekt projekt = this.getProjektbyId(a.getIdProjekt());
+		return projekt;
+	}
 
 	// SCHAUEN OB CREATE-METHODEN RICHTIG SIND
 

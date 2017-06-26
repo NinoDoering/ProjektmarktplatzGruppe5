@@ -69,6 +69,8 @@ public interface GreetingServiceAsync {
 		void getProjektByBezeichnung(String bezeichnung, AsyncCallback<Vector<Projekt>> callback);
 		
 		void getProjektbyMarktplatz(Marktplatz pm, AsyncCallback<Vector<Projekt>> callback);
+		
+		void getProjektByAusschreibung(Ausschreibung a, AsyncCallback<Projekt> callback);
 
 		
 		// Ausschreibung Asynch
@@ -247,10 +249,6 @@ public interface GreetingServiceAsync {
 		void getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung, AsyncCallback<Vector<Projekt>> callback);
 
 		void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
-
-
-	
-
 	
 
 	}
