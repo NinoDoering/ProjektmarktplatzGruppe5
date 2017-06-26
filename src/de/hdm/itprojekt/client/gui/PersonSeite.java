@@ -430,11 +430,13 @@ public class PersonSeite extends Showcase{
 	
 	});
 	
+	// Eigene Ausschreibungen anzeigen 
+	
 	eigeneAusschreibungen.addClickHandler(new ClickHandler(){
 
 		@Override
 		public void onClick(ClickEvent event) {
-			Showcase showcase = new EigeneAusschreibungen(roleManagement, ng);
+			Showcase showcase = new EigeneAusschreibungen();
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}
@@ -470,9 +472,9 @@ public class PersonSeite extends Showcase{
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
-			Showcase showcase = new EigeneAusschreibungen(roleManagement, ng);
-			RootPanel.get("Anzeige").clear();
-			RootPanel.get("Anzeige").add(showcase);
+//			Showcase showcase = new EigeneAusschreibungen(roleManagement, ng);
+//			RootPanel.get("Anzeige").clear();
+//			RootPanel.get("Anzeige").add(showcase);
 		}
 		
 	});
