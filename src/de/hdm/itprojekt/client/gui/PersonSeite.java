@@ -47,8 +47,9 @@ public class PersonSeite extends Showcase{
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
-	
+	private Button eigeneAusschreibungen = new Button("Meine Ausschreibungen");
 	private Navigator ng = null;
+	private RoleManagement roleManagement= null;
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
 	private Button speichernbutton = new Button ("Profil Speichern");
 	private Button abbrechenbutton = new Button ("Profil Abbrechen");
@@ -107,7 +108,8 @@ public class PersonSeite extends Showcase{
 //	private Anchor personloeschen = new Anchor ("Profil Löschen");
 //	private Anchor klickFunktion = new Anchor ("Unternehmen/Team Löschen/Erstellen");
 //	
-	
+
+
 	
 	@Override
 	protected String getHeadlineText() {
@@ -160,6 +162,7 @@ public class PersonSeite extends Showcase{
 		this.add(pp);
 		this.add(eigeneProjekte);
 		this.add(eigeneBewerbungen);
+		this.add(eigeneAusschreibungen);
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -443,6 +446,18 @@ public class PersonSeite extends Showcase{
 		}
 	});
 	
+	eigeneAusschreibungen.addClickHandler(new ClickHandler() {
+	
+
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			Showcase showcase = new EigeneAusschreibungen(roleManagement, ng);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(showcase);
+		}
+		
+	});
 	}
 	
 
