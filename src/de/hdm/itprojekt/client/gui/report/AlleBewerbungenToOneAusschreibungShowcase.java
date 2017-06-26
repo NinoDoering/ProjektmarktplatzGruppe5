@@ -29,7 +29,7 @@ public class AlleBewerbungenToOneAusschreibungShowcase extends Showcase{
 		final Showcase scase = this;
 		ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		reportGenerator.createAllBewerbungenToOneAusschreibungReport(rolemanagementReport.getSelectedIdentityAsObject(), new AsyncCallback<AllBewerbungenToOneAusschreibungReport>(){
+		reportGenerator.createAllBewerbungenToOneAusschreibungReport(rolemanagementReport.getSelectedRoleAsObject(), new AsyncCallback<AllBewerbungenToOneAusschreibungReport>(){
 
 			@Override
 			public void onFailure(Throwable caught) {

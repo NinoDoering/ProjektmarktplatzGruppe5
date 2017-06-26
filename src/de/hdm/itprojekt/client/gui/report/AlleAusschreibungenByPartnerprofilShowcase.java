@@ -29,7 +29,7 @@ public class AlleAusschreibungenByPartnerprofilShowcase extends Showcase {
 		final Showcase scase = this;
 		ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		reportGenerator.createAllAusschreibungenByPartnerprofilReport(rolemanagementReport.getSelectedIdentityAsObject(), new AsyncCallback<AllAusschreibungenByPartnerprofilReport>(){
+		reportGenerator.createAllAusschreibungenByPartnerprofilReport(rolemanagementReport.getSelectedRoleAsObject(), new AsyncCallback<AllAusschreibungenByPartnerprofilReport>(){
 
 			@Override
 			public void onFailure(Throwable caught) {

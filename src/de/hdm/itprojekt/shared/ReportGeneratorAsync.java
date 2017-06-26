@@ -28,8 +28,8 @@ public interface ReportGeneratorAsync {
 	
 	void createAllBewerbungenToOneAusschreibungReport(Organisationseinheit o,
 			AsyncCallback<AllBewerbungenToOneAusschreibungReport> callback);
-//	void createAllBewerbungenToOneAusschreibungReport(int idAusschreibung,
-//			AsyncCallback<AllBewerbungenToOneAusschreibungReport> callback);
+	void createAllBewerbungenToOneAusschreibungReport(int idAusschreibung,
+			AsyncCallback<AllBewerbungenToOneAusschreibungReport> callback);
 
 	void createAllBewerbungenWithAusschreibungenReport(Organisationseinheit o,
 			AsyncCallback<AllBewerbungenWithAusschreibungenReport> callback);
