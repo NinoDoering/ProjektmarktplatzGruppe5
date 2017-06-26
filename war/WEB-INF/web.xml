@@ -26,9 +26,25 @@
     <url-pattern>/projektmarktplatz/login</url-pattern>
     </servlet-mapping>  
    
+    <servlet-mapping>
+      <servlet-name>LoginService</servlet-name>
+      <url-pattern>/reportgenerator/login</url-pattern>
+  </servlet-mapping>
+   
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Projektmarktplatz.html</welcome-file>
+     <welcome-file>ProjektmarktplatzReports.html</welcome-file>
   </welcome-file-list>
+
+<servlet>
+      <servlet-name>ReportGenerator</servlet-name>
+      <servlet-class>de.hdm.itprojekt.server.report.ReportGeneratorImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+      <servlet-name>ReportGenerator</servlet-name>
+      <url-pattern>/reportgenerator/reportgenerator</url-pattern>
+  </servlet-mapping>
 
 </web-app>

@@ -45,7 +45,7 @@ public class ProjekverflechtungShowcase extends Showcase {
 	
 		boxBewerbung.addItem("Wählen Sie bitte einen Bewerber aus.");
 		
-		reportGenerator.getBewerberByAusschreibungen(rolemanagementReport.getSelectedIdentityAsObject(), new AsyncCallback<Vector<Organisationseinheit>>(){
+		reportGenerator.getBewerberByAusschreibungen(rolemanagementReport.getSelectedRoleAsObject(), new AsyncCallback<Vector<Organisationseinheit>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {

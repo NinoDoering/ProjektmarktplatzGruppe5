@@ -29,7 +29,7 @@ public class AlleBewerbungenByOrganisationseinheitShowcase extends Showcase {
 		final Showcase scase = this;
 		ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		reportGenerator.createAllBewerbungenByOrganisationseinheitReport(rolemanagementReport.getSelectedIdentityID(), new AsyncCallback<AllBewerbungenByOrganisationseinheitReport>(){
+		reportGenerator.createAllBewerbungenByOrganisationseinheitReport(rolemanagementReport.getSelectedRoleID(), new AsyncCallback<AllBewerbungenByOrganisationseinheitReport>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
