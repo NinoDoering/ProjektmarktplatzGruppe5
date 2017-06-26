@@ -133,7 +133,7 @@ public class PersonSeite extends Showcase{
 //					box.center();
 //				}
 //			});
-	Window.alert(""+p.getNachname());
+	
 	
 		
 		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());

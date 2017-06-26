@@ -27,6 +27,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
@@ -37,6 +38,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private HorizontalPanel projektHP = new HorizontalPanel();
 	private Marktplatz mp2 = new Marktplatz();
 	private Person person = new Person();
+	private Organisationseinheit orga = new Organisationseinheit();
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
 	
@@ -70,17 +72,35 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		this.person=projektLeiter;
 	}
 	
-	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Marktplatz m1, final Person projektLeiter){
+//	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Marktplatz m1, Organisationseinheit o1,  final Person projektLeiter){
+//		projektbez.setValue(selectedObject.getBezeichnung());	
+//		projektbeschr.setValue(selectedObject.getBeschreibung());
+//		startD.setValue(selectedObject.getStartDatum(), true);
+//		endD.setValue(selectedObject.getEndDatum(), true);
+//		this.mp2 = m1 ; 
+//		
+//		this.person= projektLeiter;
+//		
+//	}
+	
+	
+	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Marktplatz m1, Organisationseinheit o1, final Person projektLeiter){
 		projektbez.setValue(selectedObject.getBezeichnung());	
 		projektbeschr.setValue(selectedObject.getBeschreibung());
 		startD.setValue(selectedObject.getStartDatum(), true);
 		endD.setValue(selectedObject.getEndDatum(), true);
+		
+	
+		
 		
 			this.setText("Projektmarktplatz anlegen");
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(true);
 			this.mp2 = m1 ;
 			this.person= projektLeiter;
+			this.orga= o1;
+			person.setId(orga.getId());
+			
 			projektHP.add(ok);
 			projektHP.add(abbrechen);
 		
@@ -177,6 +197,8 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
+		
+			
 		}
 
 		

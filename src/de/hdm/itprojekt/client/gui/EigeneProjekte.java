@@ -39,7 +39,7 @@ public class EigeneProjekte extends Showcase {
 	private Projekt p1 = new Projekt();
 	private Person pers1 = new Person();
 	private Marktplatz markt1 = new Marktplatz();
-	
+	private Organisationseinheit orga = new Organisationseinheit();
 	
 	//Buttons
 
@@ -71,6 +71,15 @@ public class EigeneProjekte extends Showcase {
 			 this.markt1=mp;
 		}
 	 
+	public EigeneProjekte(Projekt p12, Marktplatz markt12, Organisationseinheit o2, Person pers12) {
+		// TODO Auto-generated constructor stub
+		 this.p1= p12;
+		 this.markt1=markt12;
+		 this.o=o2;
+		 this.pers1= pers12;
+	
+	}
+
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -81,7 +90,7 @@ public class EigeneProjekte extends Showcase {
 	@Override
 	protected void run() {
 		
-		Window.alert("hany "+o.getId());
+	
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		eigeneprojektetabelle.setWidth("100%", true);
@@ -132,10 +141,10 @@ public class EigeneProjekte extends Showcase {
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 		
-
+			
 				Projekt p1 = ssmallEigeneProjekte.getSelectedObject();
 				if (p1 != null){
-					DialogBox dialogBoxProjektBearbeiten = new DialogBoxEigeneProjekteBearbeiten(p1,markt1, pers1);
+					DialogBox dialogBoxProjektBearbeiten = new DialogBoxEigeneProjekteBearbeiten(p1,markt1, o, pers1);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
 					
@@ -165,8 +174,9 @@ public class EigeneProjekte extends Showcase {
 				@Override
 				public void onSuccess(Void result) {
 					// TODO Auto-generated method stub
+					
 					Window.alert("Das Projekt wurde erfolgreich gelöscht");
-					Showcase showcase = new ProjekteSeite(p1,pers1);
+					Showcase showcase = new EigeneProjekte(p1,markt1, o, pers1);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
 				}
