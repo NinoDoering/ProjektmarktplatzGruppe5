@@ -126,6 +126,8 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		
 	}
 	
+
+
 	private class ausschreibungBearbeiten implements AsyncCallback<Void>{
 
 		@Override
