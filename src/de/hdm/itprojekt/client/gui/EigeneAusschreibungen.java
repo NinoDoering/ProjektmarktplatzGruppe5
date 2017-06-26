@@ -48,20 +48,69 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 public class EigeneAusschreibungen extends Showcase {
 
 	
+	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
+	private CellTable<Ausschreibung> eigeneAusschreibungtabelle = new CellTable<Ausschreibung>();
+	final SingleSelectionModel<Ausschreibung> ssmallEigeneAusschreibung = new SingleSelectionModel<Ausschreibung>();
+	private Projekt p1 = new Projekt();
+	private Person pers1 = new Person();
+	private Marktplatz markt1 = new Marktplatz();
+	private Organisationseinheit orga = new Organisationseinheit();
+	private Ausschreibung ausschr1 = new Ausschreibung();
 	
-
 	
+	// Buttons 
+	private Button bearbeitenAusschreibung = new Button("Gewähltes Ausschreibung bearbeiten");
+	private Button anzeigenAusschreibung = new Button("Gewähltes Ausschreibung anzeigen");
+	private Button loeschenAusschreibung = new Button("Gewählte Ausschreibung löschen");
 	
+	//Panels 
+	private HorizontalPanel  hpanelEigeneAusschreibung = new HorizontalPanel();
+	private VerticalPanel vpanelEigeneAusschreibung = new VerticalPanel();
 	
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return null;
+		return "<h1> Ihre eigenen Projekte </h1>";
 	}
 
 	@Override
 	protected void run() {
 		// TODO Auto-generated method stub
+		RootPanel.get("Anzeige").setWidth("100%");
+		eigeneAusschreibungtabelle.setWidth("100%", true);
+		eigeneAusschreibungtabelle.setStylePrimaryName("celltable");
+		vpanelEigeneAusschreibung.add(eigeneAusschreibungtabelle);
+		
+			hpanelEigeneAusschreibung.add(anzeigenAusschreibung);
+			hpanelEigeneAusschreibung.add(bearbeitenAusschreibung);
+			hpanelEigeneAusschreibung.add(loeschenAusschreibung);
+			
+			this.add(hpanelEigeneAusschreibung);
+			this.add(vpanelEigeneAusschreibung);
+			
+			eigeneAusschreibungtabelle.setSelectionModel(ssmallEigeneAusschreibung);
+			
+			ssmallEigeneAusschreibung.addSelectionChangeHandler(new Handler() {
+				
+				@Override
+				public void onSelectionChange(SelectionChangeEvent event) {
+					// TODO Auto-generated method stub
+					ausschr1= ssmallEigeneAusschreibung.getSelectedObject();
+				}
+			});
+			
+			//ClickHandler 
+			
+			anzeigenAusschreibung.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					Showcase showcase = new EigenschaftAusSeite(ausschr1, p1, markt1, pers1);
+					RootPanel.get("Anzeige").clear();
+					RootPanel.get("Anzeige").add(showcase);
+				}
+			});
 		
 	}
 }
