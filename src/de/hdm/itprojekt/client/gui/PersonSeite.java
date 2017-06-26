@@ -44,9 +44,16 @@ public class PersonSeite extends Showcase{
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
+	
+	private RoleManagement roleManagement = new RoleManagement();
+	private Navigator navigator = new Navigator();
+	
+	
+	
 	private Button pp = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
+	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
 	
 	private Navigator ng = null;
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
@@ -78,7 +85,7 @@ public class PersonSeite extends Showcase{
 	public PersonSeite(){
 		
 	}
-	public PersonSeite(Person p){
+	public PersonSeite(Person p ){
 		this.p = p;
 	}
 	private VerticalPanel personVP = new VerticalPanel();	
@@ -158,6 +165,7 @@ public class PersonSeite extends Showcase{
 		this.add(pp);
 		this.add(eigeneProjekte);
 		this.add(eigeneBewerbungen);
+		this.add(eigeneAusschreibungen);
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -403,8 +411,19 @@ public class PersonSeite extends Showcase{
 				}
 			});
 		}
+	
 	});
 	
+	eigeneAusschreibungen.addClickHandler(new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+			Showcase showcase = new EigeneAusschreibungen(roleManagement, navigator);
+			RootPanel.get("Anzeige").clear();
+			RootPanel.get("Anzeige").add(showcase);
+		}
+	
+	});
 	
 	eigeneBewerbungen.addClickHandler(new ClickHandler() {
 		
