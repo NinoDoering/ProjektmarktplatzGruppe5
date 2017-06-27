@@ -43,27 +43,33 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 // Panels erstellen
 	private VerticalPanel ausschreibungVP = new VerticalPanel();
+	private VerticalPanel vpanel = new VerticalPanel();
 	private HorizontalPanel qualiHP = new HorizontalPanel();
 	private HorizontalPanel ausschreibungHP = new HorizontalPanel();
+	private HorizontalPanel hpanel = new HorizontalPanel();
+
 	
-// Objekte für die Parameterübergabe
+// Objekte und Variablen für die Parameterübergabe
 	private Projekt p2 = new Projekt();
 	private Marktplatz mp = new Marktplatz();
 	private Person projektLeiter = new Person();
 	private int partnerprofil ;
+	private String bez,beschr;
 	private Ausschreibung a = new Ausschreibung();
 	private Eigenschaft e = new Eigenschaft();
 	
+	// Buttons erstellen
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
 	private Button eigenschaftenBearbeiten = new Button("Qualifikationen hinzufügen");
+	private Button qabbrechen = new Button("Abbrechen");
+	private Button speichern = new Button("Speichern");
 	
+	// Labels und TextAreas erstellen
 	private Label ausschreibungbezeichnung = new Label("Ausschreibungsbezeichnung");
 	private TextArea aussbez = new TextArea();
-	
 	private Label ausschreibungsbeschreibung = new Label("Ausschreibungsbeschreibung");
 	private TextArea aussbeschr = new TextArea();
-	
 	private Label bewerbungsfrist = new Label("Bewerbungsfrist");
 	private DatePicker aussbefrist = new DatePicker();
 	private Label textBewerbungsfrist = new Label();
@@ -74,13 +80,8 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
-	//DBox q anfang
-	private Button qabbrechen = new Button("Abbrechen");
-	private VerticalPanel vpanel = new VerticalPanel();
-	private HorizontalPanel hpanel = new HorizontalPanel();
-	private Button speichern = new Button("Speichern");
 
-private String bez,beschr;
+	//	Listbox
 	private ListBox arbeitsgebietEigenschaften = new ListBox();
 	private ListBox ausbildungEigenschaften = new ListBox();
 	private ListBox berufserfahrungsjahreEigenschaften = new ListBox();

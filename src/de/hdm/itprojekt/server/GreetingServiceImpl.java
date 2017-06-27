@@ -114,6 +114,7 @@ public void init() throws IllegalArgumentException {
 			throws IllegalArgumentException {
 		Eigenschaft e = new Eigenschaft();
 
+		
 		e.setId(1);
 		e.setIdPartnerprofil(idPartnerprofil);
 		e.setArbeitsgebiet(arbeitsgebiet);

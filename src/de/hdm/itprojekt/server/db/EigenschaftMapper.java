@@ -97,6 +97,7 @@ public class EigenschaftMapper {
 	}
 
 	//alle Eigenschaften ausgeben
+	
 	public Vector<Eigenschaft> findAllEigenschaften () {
 		Connection con = DBConnection.connection();
 		Vector<Eigenschaft> vector = new Vector<Eigenschaft>();
