@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -103,16 +104,23 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Eigenschaft eigt = new Eigenschaft();
 	private Partnerprofil pP = new Partnerprofil();
 	private Ausschreibung aussch = new Ausschreibung();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
+	
 	//Dbox q ende
 
 	
 	
 	FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
-	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt, final Person projektLeiter){
+	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt,final RoleManagement rm, final Navigator navi, final Person projektLeiter){
 		this.p2=zugehoerigesProjekt;
 		this.projektLeiter =projektLeiter;
 		Label zugehProjektBez = new Label("Ausschreibung für folgendes Projekt: "+ zugehoerigesProjekt.getBezeichnung());
+		this.rm = rm;
+		this.navi = navi;
+		
+		Window.alert("Projekt  :              "+zugehoerigesProjekt.getBezeichnung());
 		
 		//dbox a
 		qualiHP.add(abschlussLabel);
@@ -182,10 +190,11 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-		
-				gwtproxy.anlegenAusschreibung(projektLeiter.getId(), zugehoerigesProjekt.getId(), aussbez.getText(),
+				Window.alert(" Projekt ?? :   "+rm.getSelectedRoleID() +" " + zugehoerigesProjekt.getBezeichnung());
+				gwtproxy.anlegenAusschreibung(rm.getSelectedRoleID(), zugehoerigesProjekt.getId(), aussbez.getText(),
 						aussbeschr.getText(), aussbefrist.getValue(), partnerprofil,
 						Status.laufend, new ausschreibungInDB());
+				
 			}
 		});
 		
@@ -265,8 +274,10 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	
 	}
-	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt, final Person projektLeiter,String bez,String besch)
-	{this( zugehoerigesProjekt, projektLeiter);
+	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt, final Person projektLeiter,String bez,String besch,RoleManagement rm, Navigator navi){
+		this.rm=rm;
+		this.navi=navi;
+		//( zugehoerigesProjekt, rm, navi, projektLeiter);
 	aussbez.setText(bez);	
 	aussbeschr.setText(besch);		
 	}

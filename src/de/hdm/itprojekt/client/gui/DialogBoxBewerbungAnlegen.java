@@ -63,11 +63,22 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 	private DatePicker datumBewerbung = new DatePicker();
 	private Label lblDatum = new Label();
 	
-	public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final RoleManagement rm, Navigator navi){
+public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final RoleManagement rm, Navigator navi){
+		this.ausschreibungAuswaehlen=ausschreibungAuswahl;
+		this.rm = rm ;
+		this.navi = navi;
+//		this.marktplatz1=mp;
+//		this.projekt1=projekt;
+		}
+	
+	public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final RoleManagement rm, Navigator navi, Marktplatz mp, Projekt projekt){
 		
 		this.ausschreibungAuswaehlen=ausschreibungAuswahl;
 		this.rm = rm ;
 		this.navi = navi;
+		this.marktplatz1=mp;
+		this.projekt1=projekt;
+		
 		
 		this.setText("Bewerbung anlegen");
 		this.setAnimationEnabled(false);
@@ -76,6 +87,7 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 		bewerbungHP.add(bewerbungSenden);
 		bewerbungHP.add(bewerbungAbbrechen);
 		
+		Window.alert("Projekt :              "+ausschreibungAuswahl.getBezeichnung());
 		
 		// Datepicker
 		datumBewerbung.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -134,7 +146,7 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 				// TODO Auto-generated method stub
 				hide();
 				Window.alert("Anscheinend funkts es   "+projekt1.getId()+"  " +marktplatz1.getId() + "  "+ person1.getId());
-				Showcase showcase = new AusschreibungSeite(projekt1, marktplatz1, person1);
+				Showcase showcase = new AusschreibungSeite(marktplatz1, projekt1, ausschreibungAuswaehlen, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}

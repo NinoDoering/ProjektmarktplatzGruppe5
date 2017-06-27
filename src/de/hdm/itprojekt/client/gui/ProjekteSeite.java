@@ -32,7 +32,6 @@ public class ProjekteSeite extends Showcase{
 
 	private static final String ssmalleprojektmarktplaetze = null;
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
-	private Marktplatz mp = new Marktplatz();
 	private Person person = new Person();
 	private Organisationseinheit orga = new Organisationseinheit();
 	CellTable<Projekt> projekttabelle = new CellTable<Projekt>();
@@ -55,13 +54,15 @@ public class ProjekteSeite extends Showcase{
 	private Button loeschenProjekt = new Button("Gewähltes Projekt löschen");
 
 	private Marktplatz selectedmarktplatz = null;
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	
 	public ProjekteSeite(){
 	
 	}
 	
 	public ProjekteSeite(Marktplatz m1, Person person){
-		this.mp = m1;
+		this.selectedmarktplatz = m1;
 		this.person = person;
 	}
 	
@@ -74,13 +75,13 @@ public class ProjekteSeite extends Showcase{
 		this.p1=p2;
 		this.person = person;
 		this.orga=o1;
-		this.mp=markt;
+		this.selectedmarktplatz=markt;
 		person.setId(orga.getId());
 
 	}
 		
 	public ProjekteSeite(Projekt p2, Marktplatz m1, Person projektLeiter){
-		this.mp= m1;
+		this.selectedmarktplatz= m1;
 		this.p1=p2;
 		this.person= projektLeiter;
 		Label lblMarktplatz =  new Label("Sie befinden sich auf folgendem Marktplatz: " +m1.getBezeichnung()+" ");
@@ -90,15 +91,16 @@ public class ProjekteSeite extends Showcase{
 		beforeHere.setSpacing(20);
 	}
 	
-	private RoleManagement rm = null;
-	private Navigator navi = null;
-	
+
+	// NEUER KONSTRUKTOR 
 	public ProjekteSeite(Marktplatz selectedmarktplatz, RoleManagement rm, Navigator navi) {
+	this.selectedmarktplatz = selectedmarktplatz;
 	this.rm = rm;
 	this.navi = navi;
-	this.selectedmarktplatz = selectedmarktplatz;
 	}
 
+
+	
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -108,6 +110,8 @@ public class ProjekteSeite extends Showcase{
 	@Override
 	protected void run() {
 
+		
+		
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		projekttabelle.setWidth("100%", true);
@@ -150,8 +154,9 @@ public class ProjekteSeite extends Showcase{
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				
 				p1= ssmalleprojekte.getSelectedObject();
-				Showcase showcase = new AusschreibungSeite(p1, rm, navi);
+				Showcase showcase = new AusschreibungSeite(selectedmarktplatz, p1, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -161,8 +166,8 @@ public class ProjekteSeite extends Showcase{
 		
 		anlegenprojekt.addClickHandler(new ClickHandler() {		
 			@Override
-			public void onClick(ClickEvent event) {
-				DialogBox dialogbox = new DialogBoxProjektAnlegen(mp, person);
+			public void onClick(ClickEvent event) { 
+				DialogBox dialogbox = new DialogBoxProjektAnlegen(selectedmarktplatz, rm, navi);
 				dialogbox.center();
 			}
 		});
@@ -176,7 +181,7 @@ public class ProjekteSeite extends Showcase{
 				// TODO Auto-generated method stub
 				Projekt p1 = ssmalleprojekte.getSelectedObject();
 				if (p1 != null){
-					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1, mp, person);
+					DialogBox dialogBoxProjektBearbeiten = new DialogBoxProjektBearbeiten(p1, selectedmarktplatz, rm.getUser());
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
 				
@@ -207,7 +212,7 @@ public class ProjekteSeite extends Showcase{
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Das Projekt wurde erfolgreich gelöscht");
-						Showcase showcase = new ProjekteSeite(p1,mp, person);
+						Showcase showcase = new ProjekteSeite(p1,selectedmarktplatz, rm.getUser());
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}

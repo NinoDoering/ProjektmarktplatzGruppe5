@@ -64,7 +64,17 @@ public class AusschreibungSeite extends Showcase {
 	
 	private Button backtoeigenePro = new Button("zrueckzueigenenProjekten");
 
-	public AusschreibungSeite(final Projekt selectedprojekt, final RoleManagement rm, final Navigator navi) {
+	public AusschreibungSeite(final Marktplatz mp, final Projekt selectedprojekt, final Ausschreibung as, final RoleManagement rm, final Navigator navi) {
+		this.mp = mp;
+		this.selectedprojekt = selectedprojekt;
+		this.a1 = as;
+		this.rm = rm;
+		this.navi = navi;
+
+		}
+	
+	public AusschreibungSeite(final Marktplatz mp, final Projekt selectedprojekt, final RoleManagement rm, final Navigator navi) {
+	this.mp = mp;
 	this.selectedprojekt = selectedprojekt;
 	this.rm = rm;
 	this.navi = navi;
@@ -107,6 +117,8 @@ public class AusschreibungSeite extends Showcase {
 
 	@Override
 	protected void run() {
+		
+		
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		ausschreibungtabelle.setWidth("100%", true);
@@ -219,13 +231,13 @@ public class AusschreibungSeite extends Showcase {
 		});
 		
 		
-		
+		// Zurück zu den Projekten
 		backToProjekte.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new ProjekteSeite(p1, mp, projektLeiter);
+				Showcase showcase = new ProjekteSeite(mp, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -238,7 +250,7 @@ public class AusschreibungSeite extends Showcase {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject(), p1, mp, projektLeiter);
+				Showcase showcase = new EigenschaftAusSeite(mp, ssmalleausschreibung.getSelectedObject(), selectedprojekt, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -290,8 +302,9 @@ public class AusschreibungSeite extends Showcase {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				Window.alert(" Projekt" + p1.getBezeichnung());
 				// TODO Auto-generated method stub
-				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(p1, projektLeiter);
+				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(p1, rm, navi, projektLeiter);
 				dialogbox.center();
 			}
 		});
@@ -303,7 +316,9 @@ public class AusschreibungSeite extends Showcase {
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
 //				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
-				DialogBox db1 = new DialogBoxBewerbungAnlegen(a1, rm, navi);
+				DialogBox db1 = new DialogBoxBewerbungAnlegen(a1, rm, navi, mp, selectedprojekt);
+//				db1.setWidth("100%");
+//				RootPanel.get("Anzeige").add(db1);
 				db1.center();
 				}}
 		});

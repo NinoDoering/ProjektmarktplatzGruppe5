@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -38,7 +39,8 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 	private Person projektLeiter = new Person();
 	Button ok = new Button("OK");
 	Button abbrechen = new Button("Abbrechen");
-	
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	Label projektbezeichnung = new Label("Projektbezeichnung");
 	TextArea projektbez = new TextArea();
 	
@@ -60,9 +62,10 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 	
 	FlexTable projektdialogboxtabelle = new FlexTable(); 
 	
-	public DialogBoxProjektAnlegen(final Marktplatz zugehoerigerMarktplatz, final Person proLeiter){
+	public DialogBoxProjektAnlegen(final Marktplatz zugehoerigerMarktplatz, final RoleManagement rm, final Navigator navi){
 		this.mp2= zugehoerigerMarktplatz;
-		this.projektLeiter= proLeiter;
+		this.rm = rm;
+		this.navi = navi;
 		Label zugehMarktplatzBez = new Label(zugehoerigerMarktplatz.getBezeichnung());
 		
 		//Datepicker 
@@ -106,8 +109,8 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 			@Override
 			public void onClick(ClickEvent event) {
 			Window.alert("Marktplatz " + zugehoerigerMarktplatz.getId());
-			Window.alert("Projektleiter " + proLeiter.getId());
-				gwtproxy.anlegenProjekt(proLeiter.getId(), zugehoerigerMarktplatz.getId(), projektbeschr.getText(), projektbez.getText(), startD.getValue(), endD.getValue(), new projektinDB());
+			Window.alert("Projektleiter " + rm.getUser().getId());
+				gwtproxy.anlegenProjekt(rm.getUser().getId(), zugehoerigerMarktplatz.getId(), projektbeschr.getText(), projektbez.getText(), startD.getValue(), endD.getValue(), new projektinDB());
 				
 			}
 		});
@@ -153,7 +156,7 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 //			RootPanel.get("Anzeige").clear();
 //			RootPanel.get("Anzeige").add(showcase);
 			
-			Showcase showcase = new ProjekteSeite(mp2, projektLeiter);
+			Showcase showcase = new ProjekteSeite(mp2, rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			
