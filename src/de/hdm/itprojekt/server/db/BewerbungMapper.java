@@ -122,7 +122,7 @@ public class BewerbungMapper {
 		return vector;
 	}
 	
-	//Bewerbung nach Bewerber ausgeben
+	//Bewerbung nach Bewerber ausgeben						//ist eigt idOrga
 	public Vector<Bewerbung> findBewerbungByBewerber (int idBewerbung) {
 		Connection con = DBConnection.connection();
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -130,8 +130,8 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung " 
-											+ " WHERE idBewerbung= " + idBewerbung 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung " 			//ist eigt idOrga
+											+ " WHERE idOrganisationseinheit = " + idBewerbung 
 											+ " ORDER BY idBewerbung");
 			
 			while (rs.next()) {
