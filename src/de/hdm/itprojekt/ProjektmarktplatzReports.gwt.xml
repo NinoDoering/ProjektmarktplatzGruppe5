@@ -11,3 +11,4 @@
 	<add-linker name="xsiframe"/>
 	<inherits name="com.google.gwt.logging.Logging"/>
 </module>
+
