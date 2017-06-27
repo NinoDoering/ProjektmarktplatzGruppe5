@@ -21,6 +21,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -39,6 +40,10 @@ public class AusschreibungSeite extends Showcase {
 	private Ausschreibung a1 = new Ausschreibung();
 	private Ausschreibung pp1 = new Ausschreibung();
 	private Marktplatz mp = new Marktplatz();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
+	private Projekt selectedprojekt = null;
+	private Ausschreibung ausschreibung = null;
 	private Person projektLeiter = new Person();
 	CellTable<Ausschreibung> ausschreibungtabelle = new CellTable<Ausschreibung>();
 	//private Label lblPro = new Label("hallo " +p1.getIdMarktplatz() );
@@ -55,11 +60,15 @@ public class AusschreibungSeite extends Showcase {
 	private Button loeschenAusschreibung = new Button("gewählte Ausschreibung löschen");
 	private Button bearbeitenAusschreibung = new Button("gewählte Ausschreibung bearbeiten");
 	private Button backToProjekte = new Button("Zurück zu den Projekten");
+
 	
 	private Button backtoeigenePro = new Button("zrueckzueigenenProjekten");
-	
-	 public AusschreibungSeite() {
-		
+
+	public AusschreibungSeite(final Projekt selectedprojekt, final RoleManagement rm, final Navigator navi) {
+	this.selectedprojekt = selectedprojekt;
+	this.rm = rm;
+	this.navi = navi;
+
 	}
 	 // konstruktor um fremdschl�ssel zu �bergeben
 	 // damit die ausschreibungen zum passenden projekt angezeigt werden 
@@ -77,7 +86,6 @@ public class AusschreibungSeite extends Showcase {
 	 public AusschreibungSeite(Bewerbung b){
 		 this.bwerb=b;
 	 }
-	 
 	 public AusschreibungSeite(Projekt projekt, Person person){
 		 this.p1=projekt;
 		 this.projektLeiter=person;
@@ -191,7 +199,7 @@ public class AusschreibungSeite extends Showcase {
 		ausschreibungtabelle.addColumn(ausschrBeschr, "Beschreibung");
 		ausschreibungtabelle.addColumn(ausschrBefrist,"Bewerbungsfrist");
 		ausschreibungtabelle.addColumn(ausschrStatus, "Status der Ausschreibung");
-		gwtproxy.getAusschreibungByProjekt(p1, new getAusschreibungAusDB());
+		gwtproxy.getAusschreibungByProjekt(selectedprojekt, new getAusschreibungAusDB());
 		
 		
 		//START der Clickhandler 
@@ -243,7 +251,7 @@ public class AusschreibungSeite extends Showcase {
 				// TODO Auto-generated method stub
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
-					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(a1, p1, mp, projektLeiter);
+					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(ssmalleausschreibung.getSelectedObject(), rm, navi, p1, mp, projektLeiter);
 					RootPanel.get("Anzeige").add(dialogBoxAusschreibungBearbeiten);
 					Window.alert(a1.getBeschreibung()+ "  jaajaaa");
 				}
@@ -295,7 +303,7 @@ public class AusschreibungSeite extends Showcase {
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
 //				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
-				DialogBox db1 = new DialogBoxBewerbungAnlegen(ssmalleausschreibung.getSelectedObject(), projektLeiter);
+				DialogBox db1 = new DialogBoxBewerbungAnlegen(a1, rm, navi);
 				db1.center();
 				}}
 		});
