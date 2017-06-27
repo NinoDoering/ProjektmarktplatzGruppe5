@@ -196,7 +196,7 @@ public class NavigatorReport extends StackPanel {
 		});
 		
 		//Zürück zur Startseite wird noch eingefügt
-		meetProjectsLink.addClickHandler(new ClickHandler() {
+		meetProjectsButton.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
