@@ -7,6 +7,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.gui.RoleManagement;
 import de.hdm.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm.itprojekt.shared.report.AllBewerbungenByOrganisationseinheitReport;
+import de.hdm.itprojekt.shared.report.AllBewerbungenWithAusschreibungenReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
 public class AlleBewerbungenByOrganisationseinheitShowcase extends Showcase {
@@ -29,7 +30,7 @@ public class AlleBewerbungenByOrganisationseinheitShowcase extends Showcase {
 		final Showcase scase = this;
 		ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		reportGenerator.createAllBewerbungenByOrganisationseinheitReport(rolemanagementReport.getSelectedRoleID(), new AsyncCallback<AllBewerbungenByOrganisationseinheitReport>(){
+		reportGenerator.createAllBewerbungenWithAusschreibungenReport(rolemanagementReport.getSelectedRoleAsObject(), new AsyncCallback<AllBewerbungenWithAusschreibungenReport>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -38,7 +39,7 @@ public class AlleBewerbungenByOrganisationseinheitShowcase extends Showcase {
 			}
 
 			@Override
-			public void onSuccess(AllBewerbungenByOrganisationseinheitReport result) {
+			public void onSuccess(AllBewerbungenWithAusschreibungenReport result) {
 				// TODO Auto-generated method stub
 				if(result!=null){
 					HTMLReportWriter writerHTML = new HTMLReportWriter();

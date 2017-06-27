@@ -55,7 +55,12 @@ public class EigeneProjekte extends Showcase {
 	
 	 public EigeneProjekte(final Organisationseinheit o1) {
 		// TODO Auto-generated constructor stub
+		
+		 //Damit man von den Ausschreibungen zurück zu den eigenen Ausschreibungen kommt.
 		 this.o=o1;
+		Person person = new Person();
+		person.setId(o1.getId());
+		pers1 = person;
 	}
 	
 	 public EigeneProjekte(final Projekt projekt, final Person person) {
@@ -90,7 +95,7 @@ public class EigeneProjekte extends Showcase {
 	@Override
 	protected void run() {
 		
-	
+		
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		eigeneprojektetabelle.setWidth("100%", true);
