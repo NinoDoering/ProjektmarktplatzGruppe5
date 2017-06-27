@@ -41,10 +41,12 @@ public class DialogBoxAusschreibungAnlegen extends DialogBox {
 
 private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
+// Panels erstellen
 	private VerticalPanel ausschreibungVP = new VerticalPanel();
 	private HorizontalPanel qualiHP = new HorizontalPanel();
 	private HorizontalPanel ausschreibungHP = new HorizontalPanel();
 	
+// Objekte für die Parameterübergabe
 	private Projekt p2 = new Projekt();
 	private Marktplatz mp = new Marktplatz();
 	private Person projektLeiter = new Person();
