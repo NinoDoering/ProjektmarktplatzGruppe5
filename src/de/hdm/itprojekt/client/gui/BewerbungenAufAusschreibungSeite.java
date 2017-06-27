@@ -24,6 +24,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.ListDataProvider;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.Navigator;
+import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
@@ -37,7 +38,7 @@ import de.hdm.itprojekt.shared.bo.Unternehmen;
 //Hybridklasse Bewertung und Bewerbung
 public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 
-		GreetingServiceAsync greetingService = ClientSideSettings.getMarktplatzVerwaltung();
+		 GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		/**
 		 * GUI-Elemente und globale Variablen und Objekte deklarieren.
 		 * 
@@ -69,7 +70,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 			this.navigator=navigator;
 			RootPanel.get("Details").setWidth("70%");
 			bewertungBewerbungCt.setWidth("100%", true);
-			greetingService.getBewerbungByAusschreibungId(idAusschreibung, new GetBewerbungenCallback());
+			gwtproxy.getBewerbungByAusschreibungId(idAusschreibung, new GetBewerbungenCallback());
 			
 			
 			
@@ -364,7 +365,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 					 */
 	
 	
-					greetingService.getBewertungByBewerbung(bewerbungen.get(i), new AsyncCallback<Bewertung>(){
+					gwtproxy.getBewertungByBewerbung(bewerbungen.get(i), new AsyncCallback<Bewertung>(){
 	
 						public void onFailure(Throwable caught) {
 							Window.alert("Fehler: " + caught.toString());
@@ -387,7 +388,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 					 * Die Organisationseinheit wird zu der übergebenen Bewerbung als
 					 * result zurückgegeben
 					 */
-					greetingService.getOrganisationseinheitById(bewerbungen.get(i).getIdOrganisationseinheit(), new AsyncCallback<Organisationseinheit>() {
+					gwtproxy.getOrganisationseinheitById(bewerbungen.get(i).getIdOrganisationseinheit(), new AsyncCallback<Organisationseinheit>() {
 						public void onFailure(Throwable caught) {
 							Window.alert("Fehler: " + caught.toString());
 						}

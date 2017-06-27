@@ -22,7 +22,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.Navigator;
-
+import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
@@ -30,7 +30,7 @@ import de.hdm.itprojekt.client.gui.BewerbungenAufAusschreibungSeite.BewertungBew
 
 public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 	
-	GreetingServiceAsync greetingService = ClientSideSettings.getMarktplatzVerwaltung();
+	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);;
 
 	CellTable<Eigenschaft> partnerprofilByAusschreibungCt = new CellTable<Eigenschaft>();
 	Button loeschenButton = new Button("Löschen");
@@ -54,7 +54,7 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 		partnerprofilByAusschreibungCt.setWidth("100%", true);
 	
 	//Partnerprofil mit Callback aufrufen
-	greetingService.getPartnerprofilbyId(idPartnerprofil, new AsyncCallback<Partnerprofil>(){
+	gwtproxy.getPartnerprofilbyId(idPartnerprofil, new AsyncCallback<Partnerprofil>(){
 		
 		public void onFailure(Throwable caught) {
 		}
@@ -62,7 +62,7 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 		// Callback um Eigenschaften des Partnerprofils zu holen
 	
 		public void onSuccess(Partnerprofil result) {
-			greetingService.getEigenschaftByPartnerprofil(result,new AsyncCallback<Vector<Eigenschaft>>(){
+			gwtproxy.getEigenschaftByPartnerprofil(result,new AsyncCallback<Vector<Eigenschaft>>(){
 
 				public void onFailure(Throwable caught) {
 					Window.alert("Das Laden des Partnerprofils ist fehlgeschlagen.");
@@ -196,7 +196,7 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 	loeschenButton.addClickHandler(new ClickHandler(){
 		public void onClick(ClickEvent event) {
 			Eigenschaft selectedEigenschaft = selectionModel.getSelectedObject();
-			greetingService.loeschenEigenschaft(selectedEigenschaft, new AsyncCallback<Void>() {
+			gwtproxy.loeschenEigenschaft(selectedEigenschaft, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					Window.alert("Fehler: Die Eigenschaft konnte nicht gelöscht werden.");
 				}
