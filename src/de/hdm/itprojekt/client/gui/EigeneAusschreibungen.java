@@ -67,10 +67,18 @@ public class EigeneAusschreibungen extends Showcase {
 	private HorizontalPanel  hpanelEigeneAusschreibung = new HorizontalPanel();
 	private VerticalPanel vpanelEigeneAusschreibung = new VerticalPanel();
 	
+	// Konstruktoren
+	
+	 public EigeneAusschreibungen( Person person) {
+		// TODO Auto-generated constructor stub
+		 
+		 this.pers1= person;
+	}
+	
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "<h1> Ihre eigenen Projekte </h1>";
+		return "<h1> Ihre eigenen Ausschreibung </h1>";
 	}
 
 	@Override
