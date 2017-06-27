@@ -46,14 +46,14 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	public ReportGeneratorImpl() throws IllegalArgumentException{	
 	}
 	
-	// GreetingServiceImpl Instanz erzeugt um auf Methoden zugreifen zu können
+	// GreetingServiceImpl Instanz erzeugt um auf Methoden zugreifen zu kï¿½nnen
 	public void init() throws IllegalArgumentException{
 		GreetingServiceImpl pm = new GreetingServiceImpl();
 		pm.init();
 		this.greetingservice = pm;
 	}
 	
-	//Auslesen der zugehörigen greetingservice
+	//Auslesen der zugehï¿½rigen greetingservice
 	public GreetingService getGreetingService(){
 		 return this.greetingservice;
 	}
@@ -79,11 +79,12 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		
 		Row headline = new Row();
 		headline.addColumn(new Column("Ausschreibender"));
-		headline.addColumn(new Column("Zugehöriges Projekt"));
+		headline.addColumn(new Column("ZugehÃ¶riges Projekt"));
 		headline.addColumn(new Column("Bezeichnung"));
 		headline.addColumn(new Column("Beschreibung"));
-		headline.addColumn(new Column("Enddatum"));
+		headline.addColumn(new Column("EndDatum"));
 		headline.addColumn(new Column("Ausschreibungsstatus"));
+
 		
 		result.addRow(headline);
 		
@@ -92,15 +93,15 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		for(Ausschreibung a: allAusschreibungen){
 			Row ausschreibungRow = new Row();
 			
-			/** Ausschreibender mit idOrganisationseinheit erhält zusätzlich idAusschreibender
-			 *  Referenz zu idProjekt in Variable zugehörigesProjekt
+			/** Ausschreibender mit idOrganisationseinheit erhï¿½lt zusï¿½tzlich idAusschreibender
+			 *  Referenz zu idProjekt in Variable zugehï¿½rigesProjekt
 			 */
 			Organisationseinheit ausschreibender = greetingservice.getOrganisationseinheitById(a.getIdAusschreibender());
 			Projekt zugehoerigesProjekt = greetingservice.getProjektbyId(a.getIdProjekt());
 			
 			
 			if(ausschreibender instanceof Person){
-				ausschreibungRow.addColumn(new Column(((Person)ausschreibender).getVorname()+""+((Person)ausschreibender).getNachname()));
+				ausschreibungRow.addColumn(new Column(((Person)ausschreibender).getVorname()+" "+((Person)ausschreibender).getNachname()));
 				
 			}	else if (ausschreibender instanceof Team){
 					ausschreibungRow.addColumn(new Column(((Team)ausschreibender).getTeamName()));
@@ -109,22 +110,22 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 					ausschreibungRow.addColumn(new Column(((Unternehmen)ausschreibender).getFirmenName()));
 			}
 			
-			//Neue Spalte: Zugehörige Projektbezeichnung  
+			//Neue Spalte: Zugehï¿½rige Projektbezeichnung  
 			ausschreibungRow.addColumn(new Column(zugehoerigesProjekt.getBezeichnung()));
 			
 			//Ausschreibungbezeichnung
 			ausschreibungRow.addColumn(new Column(a.getBezeichnung()));
 			
-			//Enddatum
-			ausschreibungRow.addColumn(new Column(a.getEndDatum().toString()));
-			
 			//Ausschreibungstext
 			ausschreibungRow.addColumn(new Column(a.getBeschreibung()));
+			
+			//Enddatum
+			ausschreibungRow.addColumn(new Column(a.getEndDatum().toString()));
 			
 			//Status der Ausschreibung
 			ausschreibungRow.addColumn(new Column(a.getAusschreibungsstatus().toString()));
 			
-			//Hinzufügen der Zeile
+			//Hinzufï¿½gen der Zeile
 			result.addRow(ausschreibungRow);
 			}
 		return result;
@@ -174,7 +175,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	headline.addColumn(new Column("Erstelldatum der Bewerbung"));
 	headline.addColumn(new Column("Anschreiben"));
 	headline.addColumn(new Column("Bewerbungsstatus"));
-	headline.addColumn(new Column("Zugehörige Ausschreibung"));
+	headline.addColumn(new Column("ZugehÃ¶rige Ausschreibung"));
 	headline.addColumn(new Column("Bewerbungsstatus"));
 	
 	result.addRow(headline);
@@ -274,7 +275,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 }
 	AllBewerbungenWithAusschreibungenReport result = new AllBewerbungenWithAusschreibungenReport();
 	
-	result.setTitel("Alle Bewerbungen mit den zugehörigen Ausschreibungen");
+	result.setTitel("Alle Bewerbungen mit den zugehÃ¶rigen Ausschreibungen");
 	
 	result.setErstelldatum(new Date());
 	
@@ -283,7 +284,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 	headline.addColumn(new Column("Anschreiben"));
 	headline.addColumn(new Column("Erstelldatum"));
 	headline.addColumn(new Column("Ausschreibender"));
-	headline.addColumn(new Column("Zugehörige Ausschreibung"));
+	headline.addColumn(new Column("ZugehÃ¶rige Ausschreibung"));
 	headline.addColumn(new Column("Ausschreibungstext"));
 	headline.addColumn(new Column("Bewerbungsstatus"));
 	headline.addColumn(new Column("Enddatum"));
@@ -432,7 +433,7 @@ throws IllegalArgumentException {
 		
 		result.addRow(headline);
 		/** alle Bewerbungen der Organisationseinheit
-		 * werden in einen Vector übergeben
+		 * werden in einen Vector ï¿½bergeben
 		 */
 		Vector<Organisationseinheit> allOrganisationseinheiten = greetingservice.getAllOrganisationseinheiten();
 		
@@ -634,7 +635,7 @@ throws IllegalArgumentException {
 		Person personOfProjekt = this.findPersonByKey(projektByAusschreibung.getIdPerson());
 		if(matchCounter==e.size()){
 			if(personOfProjekt.getIdPartnerprofil()!=pp.getId()){
-				System.out.println("Partnerprofil passt überein");
+				System.out.println("Partnerprofil passt ï¿½berein");
 				passendeAusschreibungen.add(a);
 			}
 		}
@@ -662,7 +663,7 @@ public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationsei
 		
 		/**
 		 * @param Organisationseinheit o
-		 * @return Vector mit allen Ausschreibung zu dem übergebenen Organisationseinheit-Objekt
+		 * @return Vector mit allen Ausschreibung zu dem ï¿½bergebenen Organisationseinheit-Objekt
 		 */
 		Vector<Ausschreibung> meineAusschreibungen = greetingservice.getAusschreibungByAusschreibender(o);
 		
@@ -670,7 +671,7 @@ public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationsei
 			
 			/**
 			 * @param id der Ausschreibung, welche aus dem Ausschreibung-Objekt gelesen wird
-			 * @return Vector mit allen Bewerbungen zur übergebenen Ausschreibung 
+			 * @return Vector mit allen Bewerbungen zur ï¿½bergebenen Ausschreibung 
 			 */
 			Vector<Bewerbung> bewerbungen =  greetingservice.getBewerbungByAusschreibungId(a.getId());
 			

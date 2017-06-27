@@ -1,17 +1,23 @@
 package de.hdm.itprojekt.client.gui.report;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.Projektmarktplatz;
 import de.hdm.itprojekt.client.Showcase;
+import de.hdm.itprojekt.client.gui.EigeneBewerbungenSeite;
 import de.hdm.itprojekt.client.gui.ImpressumMeetProjects;
 import de.hdm.itprojekt.client.gui.RoleManagement;
 import de.hdm.itprojekt.client.gui.Startseite;
+import de.hdm.itprojekt.shared.bo.Person;
 
 public class NavigatorReport extends StackPanel {
 	
@@ -21,6 +27,7 @@ public class NavigatorReport extends StackPanel {
 
 	private ClickHandler clickHandler = null;
 	private ClickEvent clickEvent = null;
+	private Person p = new Person();
 	
 	private Anchor meetProjectsLink = new Anchor();
 	
@@ -83,7 +90,7 @@ public class NavigatorReport extends StackPanel {
 		
 		this.setWidth("250px");
 		this.addStyleName("gwt-StackPanel");
-		this.add(panelReport, "Startseite");
+		this.add(panelReport, "Reports");
 		this.add(panelNavigator, "Administrationsbereich");
 		
 		//ClickHandler für die ganzen Button
@@ -118,7 +125,8 @@ public class NavigatorReport extends StackPanel {
 				RootPanel.get("AnzeigeReport").clear();
 				RootPanel.get("AnzeigeReport").add(reportScase);
 				clickHandler= this;
-				clickEvent=event;	
+				clickEvent=event;
+			
 			}	
 		});
 		
@@ -188,7 +196,14 @@ public class NavigatorReport extends StackPanel {
 		});
 		
 		//Zürück zur Startseite wird noch eingefügt
-		
+		meetProjectsLink.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				meetProjectsLink.setHref(GWT.getHostPageBaseURL()+"Projektmarktplatz.html");
+				Window.open(meetProjectsLink.getHref(), "_self", "");
+			}
+		});
 	}
 	
 	//getter und setter methoden
