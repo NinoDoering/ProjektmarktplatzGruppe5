@@ -2,6 +2,9 @@ package de.hdm.itprojekt.client.gui;
 
 import java.util.Vector;
 
+import org.apache.jasper.tagplugins.jstl.core.Catch;
+import org.objectweb.asm.tree.TryCatchBlockNode;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -63,6 +66,7 @@ private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 RootPanel.get("Anzeige").setWidth("100%");
 		
 	eigenebewerbungentabelle.setWidth("100%", true);
+	eigenebewerbungentabelle.setStylePrimaryName("celltable");
 		
 		vpanelBewerbung.add(eigenebewerbungentabelle);
 		//hpanelBewerbung.add(anlegenbutton);
@@ -123,12 +127,14 @@ RootPanel.get("Anzeige").setWidth("100%");
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			
+		
 		}
 
 		@Override
 		public void onSuccess(Vector<Bewerbung> result) {
 			// TODO Auto-generated method stub
+			
+		
 			eigenebewerbungentabelle.setRowData(0, result);
 			eigenebewerbungentabelle.setRowCount(result.size(), true);
 		}

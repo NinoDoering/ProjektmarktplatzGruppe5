@@ -361,6 +361,7 @@ public class PersonSeite extends Showcase{
 						// TODO Auto-generated method stub
 						
 						Showcase showcase = new EigeneProjekte(p);
+					
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -390,7 +391,7 @@ public class PersonSeite extends Showcase{
 					@Override
 					public void onSuccess(Vector<Ausschreibung> result) {
 						// TODO Auto-generated method stub
-						Window.alert("Esklappt anscheinend" + p.getVorname());
+						
 						Showcase showcase = new EigeneAusschreibungen(p);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
