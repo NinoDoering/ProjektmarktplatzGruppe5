@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 
 import de.hdm.itprojekt.shared.GreetingService;
@@ -51,15 +52,17 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 	private Label bewerbungsfrist = new Label("Bewerbungsfrist");
 	private DatePicker aussbefrist = new DatePicker();
 	private Label textBewerbungsfrist = new Label();
-	
+	private Ausschreibung ausschreibung = null;
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	
 	private FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
 	//Konstruktor mit benötigten Übergabeparameter Fremdschlüsselübergabe
-	public DialogBoxAusschreibungBearbeiten(final Ausschreibung selectedObjectA, final Projekt p1, final Marktplatz m1, final Person projektLeiter){
-		aussbez.setValue(selectedObjectA.getBezeichnung());
-		aussbeschr.setValue(selectedObjectA.getBeschreibung());
-		aussbefrist.setValue(selectedObjectA.getEndDatum(), true);
+	public DialogBoxAusschreibungBearbeiten(final Ausschreibung ausschreibung, RoleManagement rm, Navigator navi, final Projekt p1, final Marktplatz m1, final Person projektLeiter){
+		aussbez.setValue(ausschreibung.getBezeichnung());
+		aussbeschr.setValue(ausschreibung.getBeschreibung());
+		aussbefrist.setValue(ausschreibung.getEndDatum(), true);
 		
 		this.setText("Ausschreibung bearbeiten");
 		this.setAnimationEnabled(false);
@@ -67,7 +70,10 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		this.p2 = p1 ;
 		this.mp= m1;
 		this.projektLeiter=projektLeiter;
-
+		this.ausschreibung = ausschreibung;
+		this.rm = rm;
+		this.navi = navi;
+		
 		ausschreibungHP.add(ok);
 		ausschreibungHP.add(abbrechen);
 		
@@ -81,10 +87,10 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 					Window.alert("Bitte Geben Sie einen Ausschreibungsnamen ein");	
 				}
 				else{
-					selectedObjectA.setBezeichnung(aussbez.getText());
-					selectedObjectA.setBeschreibung(aussbeschr.getText());
-					selectedObjectA.setEndDatum(aussbefrist.getValue());
-					gwtproxy.saveAusschreibung(selectedObjectA, new ausschreibungBearbeiten() );
+					ausschreibung.setBezeichnung(aussbez.getText());
+					ausschreibung.setBeschreibung(aussbeschr.getText());
+					ausschreibung.setEndDatum(aussbefrist.getValue());
+					gwtproxy.saveAusschreibung(ausschreibung, new ausschreibungBearbeiten() );
 					
 				}
 			}
@@ -95,9 +101,9 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new AusschreibungSeite();
-				RootPanel.get("Anzeige").clear();
-				RootPanel.get("Anzeige").add(showcase);
+//				Showcase showcase = new AusschreibungSeite(ausschreibung, rm, navi);
+//				RootPanel.get("Anzeige").clear();
+//				RootPanel.get("Anzeige").add(showcase);
 			}
 		});
 		

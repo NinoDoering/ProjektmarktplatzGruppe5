@@ -72,7 +72,7 @@ private static RoleManagement navigator=null;
 	}
 	
 	
-	public RoleManagement (Person person, final TopBar tb){
+	public RoleManagement (Person person, final Navigator navi){
 	
 		this.setWidget(1, 0, new Label("Rolle: "));		
 		this.setWidget(1, 1, orgEinheit);
@@ -87,10 +87,10 @@ private static RoleManagement navigator=null;
 	    cellFormatter.setHorizontalAlignment(2, 1, HasHorizontalAlignment.ALIGN_RIGHT);
 		orgEinheit.setWidth("250px");
 //		Listbox2.setWidth("250px");
-		
-	
-		
-		
+
+
+
+
 		gwtproxy2.getPersonById(person.getId(), new getUser());
 
 //		orgEinheit.addItem(person.getName());
@@ -103,7 +103,7 @@ private static RoleManagement navigator=null;
 
 			@Override
 			public void onChange(ChangeEvent event) {
-				tb.reload();
+				navi.reload();
 				
 			}
 
@@ -230,7 +230,7 @@ private class getUser implements AsyncCallback<Person>{
 	@Override
 	public void onFailure(Throwable caught) {
 		Window.alert("Die Person konnte nicht gefunden werden");
-//		Window.alert("wegen des folgenden Fehlers: " + caught.toString());
+
 		
 	}
 

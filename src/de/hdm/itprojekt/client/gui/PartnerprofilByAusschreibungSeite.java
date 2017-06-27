@@ -33,8 +33,8 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);;
 
 	CellTable<Eigenschaft> partnerprofilByAusschreibungCt = new CellTable<Eigenschaft>();
-	Button loeschenButton = new Button("Löschen");
-	Button zurueckButton = new Button("Zurück");
+	Button loeschenButton = new Button("Lï¿½schen");
+	Button zurueckButton = new Button("Zurï¿½ck");
 	HorizontalPanel buttonPanel = new HorizontalPanel();
 
 	private RoleManagement roleManagement=null;
@@ -97,7 +97,7 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 });
 	partnerprofilByAusschreibungCt.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 	
-	// TextColumns für Celltable
+	// TextColumns fï¿½r Celltable
 	
 	TextColumn<Eigenschaft> abschlussColumn = new TextColumn<Eigenschaft>(){
 
@@ -192,16 +192,16 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 		}
 });
 	
-	//ClickHandler um Eigenschaft zu löschen
+	//ClickHandler um Eigenschaft zu lï¿½schen
 	loeschenButton.addClickHandler(new ClickHandler(){
 		public void onClick(ClickEvent event) {
 			Eigenschaft selectedEigenschaft = selectionModel.getSelectedObject();
 			gwtproxy.loeschenEigenschaft(selectedEigenschaft, new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
-					Window.alert("Fehler: Die Eigenschaft konnte nicht gelöscht werden.");
+					Window.alert("Fehler: Die Eigenschaft konnte nicht gelï¿½scht werden.");
 				}
 				public void onSuccess(Void result) {
-					Window.alert("Die Eigenschaft wurde erfolgreich gelöscht.");
+					Window.alert("Die Eigenschaft wurde erfolgreich gelï¿½scht.");
 
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(EigeneAusschreibungen.getIdPartnerprofilOfSelectedAusschreibung(), roleManagement, navigator));
