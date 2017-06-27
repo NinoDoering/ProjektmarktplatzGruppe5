@@ -52,9 +52,9 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 
 		Button bewerbungBewertenButton = new Button("Bewerbung bewerten");
 		Button partnerprofilAnzeigen = new Button("Partnerprofil des Bewerbers");
-		Button zurueckButton = new Button("Zurück");
+		Button zurueckButton = new Button("Zurï¿½ck");
 		Navigator navigator = null;
-		private RoleManagement roleManagement;
+		private RoleManagement roleManagement = null;
 
 		HorizontalPanel buttonPanel = new HorizontalPanel();
 		
@@ -75,7 +75,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 			
 			
 			/**
-			 * TextColumns anlegen und der Celltable hinzufügen		
+			 * TextColumns anlegen und der Celltable hinzufï¿½gen		
 			 */
 			TextColumn<BewertungBewerbung> erstelldatumColumn = new TextColumn<BewertungBewerbung>(){
 
@@ -120,14 +120,14 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 	
 	/**
 	 * Anlegen der SingleSelection der CellTable
-	 * Speichert die ausgewählte Zeile des Celltables
+	 * Speichert die ausgewï¿½hlte Zeile des Celltables
 	 */
 	final SingleSelectionModel<BewertungBewerbung> selectionModel = new SingleSelectionModel<>();
 	bewertungBewerbungCt.setSelectionModel(selectionModel);	
 	bewertungBewerbungCt.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 	
 	/**
-	 * Hinzufügen der Buttons zum ButtonPanel
+	 * Hinzufï¿½gen der Buttons zum ButtonPanel
 	 */
 	buttonPanel.add(zurueckButton);
 	buttonPanel.add(partnerprofilAnzeigen);
@@ -145,12 +145,12 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 	
 	/**
 	 * ClickHandler der Buttons anlegen
-	 * Öffnen der DialogBox BewerbungBewerten
+	 * ï¿½ffnen der DialogBox BewerbungBewerten
 	 */
 	bewerbungBewertenButton.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if(selectionModel.getSelectedObject() == null){
-				Window.alert("Bitte wähle zuerst eine Bewerbung aus.");
+				Window.alert("Bitte wï¿½hle zuerst eine Bewerbung aus.");
 			} else{
 			DialogBoxBewerbungBewerten dbb = new DialogBoxBewerbungBewerten(selectionModel.getSelectedObject(), roleManagement, navigator);
 			dbb.center();
@@ -159,12 +159,12 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 		}
 });
 	/**
-	 * Click Handler um zur Hauptseite zurück zu gelangen		
+	 * Click Handler um zur Hauptseite zurï¿½ck zu gelangen		
 	 */
 	zurueckButton.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			RootPanel.get("Anzeige").clear();
-			RootPanel.get("Anzeige").add(new EigeneAusschreibungen(roleManagement, navigator));	
+//			RootPanel.get("Anzeige").add(new EigeneAusschreibungen(roleManagement, navigator));	
 		}
 });
 	
@@ -182,13 +182,13 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 				RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(idPartnerprofil, roleManagement, navigator));
 				
 				} else {
-					Window.alert("Bitte wähle zuerst eine Bewerbung aus.");
+					Window.alert("Bitte wÃ¤hle zuerst eine Bewerbung aus.");
 			}
 		}
 	});
 }
 		/**
-		 * Impelemtierung der Inneren privaten Klasse um Celltable mit einheitlichem Datensatz zu befüllen
+		 * Impelemtierung der Inneren privaten Klasse um Celltable mit einheitlichem Datensatz zu befï¿½llen
 		 *
 		 */
 		public class BewertungBewerbung{
@@ -338,7 +338,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 	
 		/**
 		 * Anlegen der Callbacks
-		 * Bei erfolgreichem Callback wird ein Vector mit Bewerbungen als result zurückgibt.
+		 * Bei erfolgreichem Callback wird ein Vector mit Bewerbungen als result zurï¿½ckgibt.
 		 * 
 		 * @author Tom 
 		 *
@@ -359,8 +359,8 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 					final BewertungBewerbung localMix = new BewertungBewerbung();
 					localMix.setIdBewerber(bewerbungen.get(i).getIdOrganisationseinheit());
 					/**
-					 *  Die Bewertung wird beim Callback zu der übergebenen Bewerbung als
-					 * result zurückgegeben
+					 *  Die Bewertung wird beim Callback zu der ï¿½bergebenen Bewerbung als
+					 * result zurï¿½ckgegeben
 					 */
 	
 	
@@ -374,8 +374,8 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 							localMix.setWert(result.getFliesskommaBewertung());
 							localMix.setIdBewertung(result.getId());
 							/**
-							 * Die Organisationseinheit wird zu der übergebenen Beteiligung als
-							 * result zurückgegeben
+							 * Die Organisationseinheit wird zu der ï¿½bergebenen Beteiligung als
+							 * result zurï¿½ckgegeben
 							 *
 							 */
 							bewertungBewerbungCt.setRowCount(mix.size(), true);
@@ -384,8 +384,8 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 					});
 	
 					/**
-					 * Die Organisationseinheit wird zu der übergebenen Bewerbung als
-					 * result zurückgegeben
+					 * Die Organisationseinheit wird zu der ï¿½bergebenen Bewerbung als
+					 * result zurï¿½ckgegeben
 					 */
 					greetingService.getOrganisationseinheitById(bewerbungen.get(i).getIdOrganisationseinheit(), new AsyncCallback<Organisationseinheit>() {
 						public void onFailure(Throwable caught) {
@@ -393,7 +393,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 						}
 						public void onSuccess(Organisationseinheit result) {
 							/**
-							 * Prüfung ob die Organisationseinheit eine Person, ein Team oder ein Unternehmen ist.
+							 * Prï¿½fung ob die Organisationseinheit eine Person, ein Team oder ein Unternehmen ist.
 							 * Demnach werden die Attribute gesetzt
 							 */
 							if(result instanceof Person){
@@ -418,7 +418,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 					localMix.setErstellDatum(bewerbungen.get(i).getErstellDatum());
 					localMix.setBewerbungsstatus(bewerbungen.get(i).getBewerbungsStatus());
 					/**
-					 * Das localMix-Objekt wird dem Vector hinzugefügt
+					 * Das localMix-Objekt wird dem Vector hinzugefï¿½gt
 					 */
 					mix.add(localMix);
 					
@@ -428,7 +428,7 @@ public class BewerbungenAufAusschreibungSeite extends VerticalPanel{
 				}	
 					final ListDataProvider dataProvider = new ListDataProvider();
 
-					// Panel hinzufügen
+					// Panel hinzufï¿½gen
 					SimplePager pager;
 					SimplePager.Resources pagerResources = GWT.create(SimplePager.Resources.class);
 					pager = new SimplePager(TextLocation.CENTER, pagerResources, false, 0, true);

@@ -23,7 +23,7 @@ public class Navigator extends StackPanel{
 	
 	VerticalPanel personalNavigator = new VerticalPanel();
 	HorizontalPanel rechtsUnten = new HorizontalPanel();
-	
+	RoleManagement rm = new RoleManagement();
 	//Anlegen der Hyperlinks
 	Hyperlink home = new Hyperlink();
 	Anchor reportLink= new Anchor("ReportGenerator");
@@ -105,7 +105,7 @@ public class Navigator extends StackPanel{
 //				identityMarketChoice.setOwnOrgUnitToZero();
 //				identityMarketChoice.deactivateProjectMarkets();
 //				identityMarketChoice.deactivateOrgUnits();
-				Showcase showcase = new ProjektmarktplatzSeite(person);
+				Showcase showcase = new ProjektmarktplatzSeite(rm, getNavigator());
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				currentClickHandler=this;
@@ -170,6 +170,16 @@ public class Navigator extends StackPanel{
 		public void reload(){
 			currentClickHandler.onClick(currentClickEvent);
 		}
+		
+		public RoleManagement getIdRole() {
+			return rm;
+		}
+
+
+		public void setIdRole(RoleManagement idRole) {
+			this.rm = idRole;
+		}
+		
 	
 		public Navigator getNavigator(){
 			return this;

@@ -19,6 +19,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -53,6 +54,8 @@ public class ProjekteSeite extends Showcase{
 	
 	private Button loeschenProjekt = new Button("Gewähltes Projekt löschen");
 
+	private Marktplatz selectedmarktplatz = null;
+	
 	public ProjekteSeite(){
 	
 	}
@@ -87,8 +90,15 @@ public class ProjekteSeite extends Showcase{
 		beforeHere.setSpacing(20);
 	}
 	
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	
-	
+	public ProjekteSeite(Marktplatz selectedmarktplatz, RoleManagement rm, Navigator navi) {
+	this.rm = rm;
+	this.navi = navi;
+	this.selectedmarktplatz = selectedmarktplatz;
+	}
+
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -140,7 +150,8 @@ public class ProjekteSeite extends Showcase{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				Showcase showcase = new AusschreibungSeite(p1,mp, person);
+				p1= ssmalleprojekte.getSelectedObject();
+				Showcase showcase = new AusschreibungSeite(p1, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -253,7 +264,7 @@ public class ProjekteSeite extends Showcase{
 		projekttabelle.addColumn(projektBeschr, "Beschreibung");
 		projekttabelle.addColumn(projektStartD, "Startdatum");
 		projekttabelle.addColumn(projektEndD, "Enddatum");
-		gwtproxy.getProjektbyMarktplatz(mp, new getProjekteAusDB());		
+		gwtproxy.getProjektbyMarktplatz(selectedmarktplatz, new getProjekteAusDB());		
 		
 		
 		

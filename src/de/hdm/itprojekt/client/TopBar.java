@@ -33,7 +33,7 @@ import de.hdm.itprojekt.client.LoginInfo;
 
 			private static ClickHandler currentClickHandler = null;
 			private static ClickEvent currentClickEvent = null;
-			
+//			RoleManagement rm = new RoleManagement();
 			
 			HorizontalPanel TopBarPanel = new HorizontalPanel();
 			Button LogOUT = new Button("Ausloggen");
@@ -106,6 +106,17 @@ import de.hdm.itprojekt.client.LoginInfo;
 			public void reload(){
 				currentClickHandler.onClick(currentClickEvent);
 			}
+			
+//			public RoleManagement getIdRole() {
+//				return rm;
+//			}
+//
+//
+//			public void setIdRole(RoleManagement idRole) {
+//				this.rm = idRole;
+//			}
+			
+			
 			
 		public TopBar(){
 				
