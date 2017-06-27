@@ -3,6 +3,7 @@ package de.hdm.itprojekt.client.gui;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -17,19 +18,22 @@ import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.bo.Projekt;
 
-public class DialogBoxEigenschaftenAendern extends DialogBox{
-
+public class DialogBoxAusschreibungEigBearbeiten extends DialogBox {
+	
 GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private VerticalPanel vpanel = new VerticalPanel();
 	private HorizontalPanel hpanel = new HorizontalPanel();
-	private Button ok = new Button("Ok");
+	private Button speichern = new Button("Speichern");
 	private Button abbrechen = new Button("Abbrechen");
-
+private String bez,beschr;
 	private ListBox arbeitsgebietEigenschaften = new ListBox();
 	private ListBox ausbildungEigenschaften = new ListBox();
 	private ListBox berufserfahrungsjahreEigenschaften = new ListBox();
@@ -45,12 +49,17 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Label abschlussLabel = new Label ("Abschluss:");
 	
 	private FlexTable eigenschaftaendern = new FlexTable();
+	
+	private Projekt p = new Projekt();
+	private Person pe= new Person();
 
-	public DialogBoxEigenschaftenAendern(final Person person, final Partnerprofil pp, final Eigenschaft eigenschaft){
+	public DialogBoxAusschreibungEigBearbeiten(final Ausschreibung a, final Eigenschaft e,String artikelbez, String artikelbesch){
+		this.bez = artikelbez;
+		this.beschr = artikelbesch;
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
-		this.setText("Eigenschaften ändern");
-		ok.setStylePrimaryName("profilButton");
+		this.setText("Qualifikationen bearbeiten");
+		speichern.setStylePrimaryName("profilButton");
 		abbrechen.setStylePrimaryName("profilButton");
 		
 
@@ -84,33 +93,34 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		abschlussEigenschaften.addItem("Bachelor");
 		abschlussEigenschaften.addItem("Master");
 		
-		ok.addClickHandler(new ClickHandler(){
+		speichern.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				eigenschaft.setArbeitsgebiet(arbeitsgebietEigenschaften.getSelectedValue());
-				eigenschaft.setAusbildung(ausbildungEigenschaften.getSelectedValue());
-				eigenschaft.setBerufserfahrungsJahre(berufserfahrungsjahreEigenschaften.getSelectedValue());
-				eigenschaft.setSprachkenntnisse(sprachkenntnisseEigenschaften.getSelectedValue());
-				eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
-				eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
+				e.setArbeitsgebiet(arbeitsgebietEigenschaften.getSelectedValue());
+				e.setAusbildung(ausbildungEigenschaften.getSelectedValue());
+				e.setBerufserfahrungsJahre(berufserfahrungsjahreEigenschaften.getSelectedValue());
+				e.setSprachkenntnisse(sprachkenntnisseEigenschaften.getSelectedValue());
+				e.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
+				e.setAbschluss(abschlussEigenschaften.getSelectedValue());
 			
-			     gwtproxy.saveEigenschaft(eigenschaft, new AsyncCallback<Void>(){
+			     gwtproxy.saveEigenschaft(e, new AsyncCallback<Void>(){
 
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+						Window.alert("Fehler beim Speichern!");
 					}
 
 					@Override
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
-						hide();
-						Showcase showcase = new PersonSeite(person);
+					
+						Window.alert("geht angeblich");
+						DialogBox dialogBoxAusschreibungAnlegen = new DialogBoxAusschreibungAnlegen(p,pe,bez,beschr);
 						RootPanel.get("Anzeige").clear();
-						RootPanel.get("Anzeige").add(showcase);
+						RootPanel.get("Anzeige").add(dialogBoxAusschreibungAnlegen);
 					}
 			     });
 			}
@@ -138,30 +148,12 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		eigenschaftaendern.setWidget(5, 0, abschlussLabel);
 		eigenschaftaendern.setWidget(5, 1, abschlussEigenschaften);
 		
-		eigenschaftaendern.setWidget(8, 0, ok);
+		eigenschaftaendern.setWidget(8, 0, speichern);
 		eigenschaftaendern.setWidget(8, 1, abbrechen);
 		
 		vpanel.add(eigenschaftaendern);
 		this.add(vpanel);
 		
 	}		
+
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

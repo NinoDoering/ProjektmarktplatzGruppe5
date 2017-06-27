@@ -34,7 +34,18 @@ public class TestMapper {
 		
 		
 		
-		System.out.println(MarktplatzMapper.marktplatzMapper().findAllMarktplatz());
+//		System.out.println(MarktplatzMapper.marktplatzMapper().findAllMarktplatz());
+		
+		
+		Eigenschaft eigt = new Eigenschaft();
+		
+		eigt.setAbschluss("abui");
+		eigt.setArbeitsgebiet("IT");
+		eigt.setBerufserfahrungsJahre("2");
+		eigt.setIdPartnerprofil(2);
+		eigt.setSprachkenntnisse("french");
+		
+		EigenschaftMapper.eigenschaftMapper().insertEigenschaft(eigt);
 	}
 	
 }

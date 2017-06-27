@@ -46,7 +46,7 @@ public class EigenschaftMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, employmentStatus, idPartnerprofil)"
+				stmt.executeUpdate("INSERT INTO eigenschaft (idEigenschaft, ausbildung, abschluss, berufserfahrungsJahre, arbeitsgebiet, sprachkenntnisse, idPartnerprofil, employmentStatus)"
 									+ " VALUES ('" + e.getId() + "','" 
 									+ e.getAusbildung() + "','" 
 									+ e.getAbschluss()+ "','" 

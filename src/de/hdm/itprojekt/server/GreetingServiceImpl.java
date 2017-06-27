@@ -115,6 +115,7 @@ public void init() throws IllegalArgumentException {
 		Eigenschaft e = new Eigenschaft();
 
 		e.setId(1);
+		e.setIdPartnerprofil(idPartnerprofil);
 		e.setArbeitsgebiet(arbeitsgebiet);
 		e.setAusbildung(ausbildung);
 		e.setBerufserfahrungsJahre(berufserfahrungsJahre);
@@ -157,6 +158,7 @@ public void init() throws IllegalArgumentException {
 @Override
 public Partnerprofil anlegenPartnerprofil()
 		throws IllegalArgumentException {
+	
 	Partnerprofil pp = new Partnerprofil();
 
 	return this.ppMapper.insert(pp);
