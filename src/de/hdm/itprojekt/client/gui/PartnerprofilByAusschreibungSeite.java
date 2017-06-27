@@ -204,7 +204,7 @@ public class PartnerprofilByAusschreibungSeite extends VerticalPanel {
 					Window.alert("Die Eigenschaft wurde erfolgreich gel�scht.");
 
 					RootPanel.get("Anzeige").clear();
-					RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(EigeneAusschreibungen.getIdPartnerprofilOfSelectedAusschreibung(), roleManagement, navigator));
+//					RootPanel.get("Anzeige").add(new PartnerprofilByAusschreibungSeite(EigeneAusschreibungen.getIdPartnerprofilOfSelectedAusschreibung(), roleManagement, navigator));
 					
 					
 				}
