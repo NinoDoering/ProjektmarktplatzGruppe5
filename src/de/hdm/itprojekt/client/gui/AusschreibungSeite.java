@@ -51,7 +51,7 @@ public class AusschreibungSeite extends Showcase {
 	
 	private Button anlegenAusschreibung = new Button("Neue Ausschreibung anlegen");
 	private Button bewerbenAusschreibung = new Button("Auf diese Ausschreibung bewerben");
-	private Button anzeigenAusschribung = new Button("Qualifikationen anzeigen");
+	private Button anzeigenAusschreibung = new Button("Qualifikationen anzeigen");
 	private Button loeschenAusschreibung = new Button("gewählte Ausschreibung löschen");
 	private Button bearbeitenAusschreibung = new Button("gewählte Ausschreibung bearbeiten");
 	private Button backToProjekte = new Button("Zurück zu den Projekten");
@@ -103,7 +103,7 @@ public class AusschreibungSeite extends Showcase {
 		ausschreibungtabelle.setStylePrimaryName("celltable");
 		vpanelAusschreibung.add(ausschreibungtabelle);
 		hpanelAusschreibung.add(backToProjekte);
-		hpanelAusschreibung.add(anzeigenAusschribung);		
+		hpanelAusschreibung.add(anzeigenAusschreibung);		
 		hpanelAusschreibung.add(bewerbenAusschreibung);
 		hpanelAusschreibung.add(bearbeitenAusschreibung);
 		hpanelAusschreibung.add(loeschenAusschreibung);
@@ -204,7 +204,7 @@ public class AusschreibungSeite extends Showcase {
 			}
 		});
 		
-		anzeigenAusschribung.addClickHandler(new ClickHandler() {
+		anzeigenAusschreibung.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
