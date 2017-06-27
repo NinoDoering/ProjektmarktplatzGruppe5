@@ -24,7 +24,6 @@ public class NavigatorReport extends StackPanel {
 	private VerticalPanel panelStartseite = new VerticalPanel();
 	private VerticalPanel panelReport = new VerticalPanel();
 	private VerticalPanel panelNavigator = new VerticalPanel();
-	private HorizontalPanel anzeigen = new HorizontalPanel();
 
 	private ClickHandler clickHandler = null;
 	private ClickEvent clickEvent = null;
@@ -126,7 +125,8 @@ public class NavigatorReport extends StackPanel {
 				RootPanel.get("AnzeigeReport").clear();
 				RootPanel.get("AnzeigeReport").add(reportScase);
 				clickHandler= this;
-				clickEvent=event;	
+				clickEvent=event;
+			
 			}	
 		});
 		

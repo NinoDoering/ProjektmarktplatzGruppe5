@@ -81,9 +81,10 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		headline.addColumn(new Column("Ausschreibender"));
 		headline.addColumn(new Column("Zugehöriges Projekt"));
 		headline.addColumn(new Column("Bezeichnung"));
-		headline.addColumn(new Column("EndDatum"));
 		headline.addColumn(new Column("Beschreibung"));
+		headline.addColumn(new Column("EndDatum"));
 		headline.addColumn(new Column("Ausschreibungsstatus"));
+
 		
 		result.addRow(headline);
 		
@@ -115,11 +116,11 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			//Ausschreibungbezeichnung
 			ausschreibungRow.addColumn(new Column(a.getBezeichnung()));
 			
-			//Enddatum
-			ausschreibungRow.addColumn(new Column(a.getEndDatum().toString()));
-			
 			//Ausschreibungstext
 			ausschreibungRow.addColumn(new Column(a.getBeschreibung()));
+			
+			//Enddatum
+			ausschreibungRow.addColumn(new Column(a.getEndDatum().toString()));
 			
 			//Status der Ausschreibung
 			ausschreibungRow.addColumn(new Column(a.getAusschreibungsstatus().toString()));
@@ -174,7 +175,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	headline.addColumn(new Column("Erstelldatum der Bewerbung"));
 	headline.addColumn(new Column("Anschreiben"));
 	headline.addColumn(new Column("Bewerbungsstatus"));
-	headline.addColumn(new Column("Zugeh�rige Ausschreibung"));
+	headline.addColumn(new Column("Zugehörige Ausschreibung"));
 	headline.addColumn(new Column("Bewerbungsstatus"));
 	
 	result.addRow(headline);
@@ -274,7 +275,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 }
 	AllBewerbungenWithAusschreibungenReport result = new AllBewerbungenWithAusschreibungenReport();
 	
-	result.setTitel("Alle Bewerbungen mit den zugeh�rigen Ausschreibungen");
+	result.setTitel("Alle Bewerbungen mit den zugehörigen Ausschreibungen");
 	
 	result.setErstelldatum(new Date());
 	
@@ -283,7 +284,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 	headline.addColumn(new Column("Anschreiben"));
 	headline.addColumn(new Column("Erstelldatum"));
 	headline.addColumn(new Column("Ausschreibender"));
-	headline.addColumn(new Column("Zugeh�rige Ausschreibung"));
+	headline.addColumn(new Column("Zugehörige Ausschreibung"));
 	headline.addColumn(new Column("Ausschreibungstext"));
 	headline.addColumn(new Column("Bewerbungsstatus"));
 	headline.addColumn(new Column("Enddatum"));
