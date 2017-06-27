@@ -27,6 +27,7 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
+import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
@@ -44,6 +45,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Projekt p2 = new Projekt();
 	private Marktplatz mp = new Marktplatz();
 	private Person projektLeiter = new Person();
+	private int partnerprofil ;
 	
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
@@ -62,8 +64,6 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Label idPartnerprofil = new Label("Id des Partnerprofil");
 	private TextArea idPP = new TextArea();
 	
-	private Label idAusschreibender = new Label("Id des Ausschreibenden");
-	private TextArea idASD = new TextArea();
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 	
@@ -99,15 +99,31 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		ausschreibungHP.add(ok);
 		ausschreibungHP.add(abbrechen);
 		
+		// Neues Partnerprofil anlegen 
+		gwtproxy.anlegenPartnerprofil(new AsyncCallback<Partnerprofil>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Partnerprofil result) {
+				// TODO Auto-generated method stub
+				partnerprofil= result.getId();
+			}
+		});
+		
 		ok.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				gwtproxy.anlegenAusschreibung(Integer.parseInt(idASD.getText()), zugehoerigesProjekt.getId(),
-						aussbez.getText(), aussbeschr.getText(), aussbefrist.getValue(),
-						Integer.parseInt(idPP.getText()), Status.laufend, new ausschreibungInDB());
-														// Ausschreibungen werden beim erstellen auf laufend gesetzt 
+		
+				gwtproxy.anlegenAusschreibung(projektLeiter.getId(), zugehoerigesProjekt.getId(), aussbez.getText(),
+						aussbeschr.getText(), aussbefrist.getValue(), partnerprofil,
+						Status.laufend, new ausschreibungInDB());
 			}
 		});
 		
@@ -123,17 +139,16 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		ausschreibungVP.add(ausschreibungdialogboxtabelle);
 		ausschreibungVP.add(ausschreibungHP);
 		this.add(ausschreibungVP);
-		ausschreibungdialogboxtabelle.setWidget(1, 0, ausschreibungbezeichnung);
-		ausschreibungdialogboxtabelle.setWidget(1, 1, aussbez);
-		ausschreibungdialogboxtabelle.setWidget(2, 0, ausschreibungsbeschreibung);
-		ausschreibungdialogboxtabelle.setWidget(2, 1, aussbeschr);
-		ausschreibungdialogboxtabelle.setWidget(3, 0, bewerbungsfrist);
-		ausschreibungdialogboxtabelle.setWidget(3, 1, aussbefrist);
-		ausschreibungdialogboxtabelle.setWidget(4, 0, idAusschreibender);
-		ausschreibungdialogboxtabelle.setWidget(4, 1, idASD);
-		ausschreibungdialogboxtabelle.setWidget(5, 0, idPartnerprofil);
-		ausschreibungdialogboxtabelle.setWidget(5, 1, idPP);
-		ausschreibungdialogboxtabelle.setWidget(6, 0, zugehProjektBez);
+		ausschreibungdialogboxtabelle.setWidget(1, 0, zugehProjektBez);
+		ausschreibungdialogboxtabelle.setWidget(2, 0, ausschreibungbezeichnung);
+		ausschreibungdialogboxtabelle.setWidget(2, 1, aussbez);
+		ausschreibungdialogboxtabelle.setWidget(3, 0, ausschreibungsbeschreibung);
+		ausschreibungdialogboxtabelle.setWidget(3, 1, aussbeschr);
+		ausschreibungdialogboxtabelle.setWidget(4, 0, bewerbungsfrist);
+		ausschreibungdialogboxtabelle.setWidget(4, 1, aussbefrist);
+//		ausschreibungdialogboxtabelle.setWidget(5, 0, idPartnerprofil);
+//		ausschreibungdialogboxtabelle.setWidget(5, 1, idPP);
+	
 	
 	}
 	

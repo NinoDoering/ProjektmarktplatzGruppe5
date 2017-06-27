@@ -55,7 +55,9 @@ public class AusschreibungSeite extends Showcase {
 	private Button loeschenAusschreibung = new Button("gewählte Ausschreibung löschen");
 	private Button bearbeitenAusschreibung = new Button("gewählte Ausschreibung bearbeiten");
 	private Button backToProjekte = new Button("Zurück zu den Projekten");
-
+	
+	private Button backtoeigenePro = new Button("zrueckzueigenenProjekten");
+	
 	 public AusschreibungSeite() {
 		
 	}
@@ -102,6 +104,7 @@ public class AusschreibungSeite extends Showcase {
 		ausschreibungtabelle.setWidth("100%", true);
 		ausschreibungtabelle.setStylePrimaryName("celltable");
 		vpanelAusschreibung.add(ausschreibungtabelle);
+		hpanelAusschreibung.add(backtoeigenePro);
 		hpanelAusschreibung.add(backToProjekte);
 		hpanelAusschreibung.add(anzeigenAusschreibung);		
 		hpanelAusschreibung.add(bewerbenAusschreibung);
@@ -193,6 +196,22 @@ public class AusschreibungSeite extends Showcase {
 		
 		//START der Clickhandler 
 		
+		
+		
+		backtoeigenePro.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				
+				Showcase showcase = new EigeneProjekte(projektLeiter);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
+		
+		
 		backToProjekte.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -203,6 +222,8 @@ public class AusschreibungSeite extends Showcase {
 				RootPanel.get("Anzeige").add(showcase);
 			}
 		});
+		
+		
 		
 		anzeigenAusschreibung.addClickHandler(new ClickHandler() {
 			
