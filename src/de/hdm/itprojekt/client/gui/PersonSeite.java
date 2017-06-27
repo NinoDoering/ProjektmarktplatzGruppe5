@@ -27,6 +27,7 @@ import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
@@ -41,6 +42,7 @@ public class PersonSeite extends Showcase{
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person p = new Person();
 	private Organisationseinheit o1 = new Organisationseinheit();
+	private Ausschreibung auss1 = new Ausschreibung();	
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
@@ -89,6 +91,11 @@ public class PersonSeite extends Showcase{
 	public PersonSeite(Person p ){
 		this.p = p;
 	}
+	public PersonSeite(Person p, Ausschreibung auss ){
+		this.p = p;
+		this.auss1=auss;
+	}
+	
 	private VerticalPanel personVP = new VerticalPanel();	
 	private VerticalPanel hinzuVP = new VerticalPanel();
 	private HorizontalPanel personHP = new HorizontalPanel();
@@ -333,6 +340,69 @@ public class PersonSeite extends Showcase{
 			}
 		});
 	
+		
+		// eigene Projekte anzeigen lassen
+		
+		eigeneProjekte.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+		
+				gwtproxy.getProjektByPerson(p, new AsyncCallback<Vector<Projekt>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("projektebyPerson geht NICHT");
+					}
+
+					public void onSuccess(Vector<Projekt> result) {
+						// TODO Auto-generated method stub
+						
+						Showcase showcase = new EigeneProjekte(p);
+						RootPanel.get("Anzeige").clear();
+						RootPanel.get("Anzeige").add(showcase);
+					}
+				});
+			}
+		
+		});
+		
+		
+		
+		// Eigene Ausschreibungen anzeigen 
+		
+		eigeneAusschreibungen.addClickHandler(new ClickHandler(){
+			
+	
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				gwtproxy.getAusschreibungByAusschreibender(p, new AsyncCallback<Vector<Ausschreibung>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Vector<Ausschreibung> result) {
+						// TODO Auto-generated method stub
+						Window.alert("Esklappt anscheinend" + p.getVorname());
+						Showcase showcase = new EigeneAusschreibungen(p);
+						RootPanel.get("Anzeige").clear();
+						RootPanel.get("Anzeige").add(showcase);
+					}
+				});
+				
+				
+			}
+		
+		});
+		
+		
 	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
 
 		@Override
@@ -404,44 +474,9 @@ public class PersonSeite extends Showcase{
 	});
 	
 	
-	eigeneProjekte.addClickHandler(new ClickHandler() {
-		
-		@Override
-		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
 	
-			gwtproxy.getProjektByPerson(p, new AsyncCallback<Vector<Projekt>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					Window.alert("projektebyPerson geht NICHT");
-				}
-
-				public void onSuccess(Vector<Projekt> result) {
-					// TODO Auto-generated method stub
-					
-					Showcase showcase = new EigeneProjekte(p);
-					RootPanel.get("Anzeige").clear();
-					RootPanel.get("Anzeige").add(showcase);
-				}
-			});
-		}
 	
-	});
 	
-	// Eigene Ausschreibungen anzeigen 
-	
-	eigeneAusschreibungen.addClickHandler(new ClickHandler(){
-
-		@Override
-		public void onClick(ClickEvent event) {
-			Showcase showcase = new EigeneAusschreibungen();
-			RootPanel.get("Anzeige").clear();
-			RootPanel.get("Anzeige").add(showcase);
-		}
-	
-	});
 	
 	eigeneBewerbungen.addClickHandler(new ClickHandler() {
 		
@@ -466,18 +501,7 @@ public class PersonSeite extends Showcase{
 		}
 	});
 	
-	eigeneAusschreibungen.addClickHandler(new ClickHandler() {
 	
-
-		@Override
-		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
-//			Showcase showcase = new EigeneAusschreibungen(roleManagement, ng);
-//			RootPanel.get("Anzeige").clear();
-//			RootPanel.get("Anzeige").add(showcase);
-		}
-		
-	});
 	}
 	
 
@@ -508,7 +532,7 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 
 	@Override
 	public void onSuccess(Void result) {
-		p.setVorname(boxTitel.getText());
+		p.setVorname(boxName.getText());
 		p.setNachname(boxNachname.getText());
 		p.setAdresse(boxAdresse.getText());
 		p.setStandort(boxStandort.getText());
@@ -521,6 +545,11 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 		boxTeamName.setReadOnly(true);
 		boxFirmenName.setReadOnly(true);
 		boxEmail.setReadOnly(true);
+		
+		bearbeitenbutton.setVisible(true);
+		deletebutton.setVisible(true);
+		
+		
 	}
 }
 
