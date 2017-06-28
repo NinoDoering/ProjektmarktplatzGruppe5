@@ -158,7 +158,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
 
 
-//auf eigene Bewerbungen
+//auf eigene Bewerbungen ...
 @Override
 	public AllBewerbungenByOrganisationseinheitReport createAllBewerbungenByOrganisationseinheitReport(int id){
 			
