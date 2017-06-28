@@ -316,6 +316,8 @@ public void Qualimethode(final Ausschreibung a, final Eigenschaft e,String artik
 	arbeitsgebietEigenschaften.addItem("Versicherungen");
 	arbeitsgebietEigenschaften.addItem("Finanzen");
 	arbeitsgebietEigenschaften.addItem("Immobilien");
+	arbeitsgebietEigenschaften.addItem("Pharmaindustrie");
+	arbeitsgebietEigenschaften.addItem("Luft- und Raumfahrt");
 
 	
 	
@@ -324,22 +326,33 @@ public void Qualimethode(final Ausschreibung a, final Eigenschaft e,String artik
 	ausbildungEigenschaften.addItem("Versicherungskaufmann"); 
 	ausbildungEigenschaften.addItem("Finanzkaufmann"); 
 	ausbildungEigenschaften.addItem("Immobilienkaufmann");
+	ausbildungEigenschaften.addItem("Pharmazeut");
+	ausbildungEigenschaften.addItem("Luft- und Raumfahrt Ingenieur");
 	
 	berufserfahrungsjahreEigenschaften.addItem("1 bis 5 Jahre");
-	berufserfahrungsjahreEigenschaften.addItem("5 bis 10");
-	berufserfahrungsjahreEigenschaften.addItem("10  bis 20");
+	berufserfahrungsjahreEigenschaften.addItem("5 bis 10 Jahre");
+	berufserfahrungsjahreEigenschaften.addItem("10  bis 20 Jahre");
+	berufserfahrungsjahreEigenschaften.addItem("20  bis 50 Jahre");
 
 	sprachkenntnisseEigenschaften.addItem("Französisch");
 	sprachkenntnisseEigenschaften.addItem("Englisch");
 	sprachkenntnisseEigenschaften.addItem("Spanisch");
+	sprachkenntnisseEigenschaften.addItem("Englisch + Französisch ");
+	sprachkenntnisseEigenschaften.addItem("Englisch + Spanisch ");
+	sprachkenntnisseEigenschaften.addItem("Französisch + Spanisch");
+	sprachkenntnisseEigenschaften.addItem("Englisch + Französisch + Spanisch ");
+
 	
 	employmentstatusEigenschaften.addItem("Student");
 	employmentstatusEigenschaften.addItem("Angestellter");
+	employmentstatusEigenschaften.addItem("Selbstständig");
 	
+	abschlussEigenschaften.addItem("Hauptschulabschluss");
 	abschlussEigenschaften.addItem("Mittlere Reife");
 	abschlussEigenschaften.addItem("Abitur");
 	abschlussEigenschaften.addItem("Bachelor");
 	abschlussEigenschaften.addItem("Master");
+	abschlussEigenschaften.addItem("Doktor");
 	
 	
 

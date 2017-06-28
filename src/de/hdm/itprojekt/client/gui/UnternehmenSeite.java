@@ -3,10 +3,14 @@ package de.hdm.itprojekt.client.gui;
 import java.util.Vector;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -14,6 +18,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -22,19 +27,26 @@ import de.hdm.itprojekt.shared.bo.Unternehmen;
 
 public class UnternehmenSeite extends Showcase {
 
+	
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private CellTable<Unternehmen> unternehmentabelle = new CellTable<Unternehmen>();
-	
-	private HorizontalPanel hanelUnternehmen = new HorizontalPanel();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
+	private HorizontalPanel hpanelUnternehmen = new HorizontalPanel();
 	private VerticalPanel vpanelUnternehmen = new VerticalPanel();
 	
 	private Unternehmen u1 = new Unternehmen();
 	private Person p1 = new Person();
-	
+	private Button unternehmenAnlegen = new Button("Neues Unternehmen anlegen");
 	final SingleSelectionModel<Unternehmen> ssmallunternehmen = new SingleSelectionModel<Unternehmen>();
 	
 	public UnternehmenSeite(final Person person) {
 		this.p1= person; 
+	}
+	
+	public UnternehmenSeite(final RoleManagement rm, final Navigator navi){
+		this.rm=rm;
+		this.navi=navi;
 	}
 	
 	@Override
@@ -45,13 +57,16 @@ public class UnternehmenSeite extends Showcase {
 
 	@Override
 	protected void run() {
+		
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		unternehmentabelle.setWidth("100%", true);
 		unternehmentabelle.setStylePrimaryName("celltable");
 		vpanelUnternehmen.add(unternehmentabelle);
 		
+		hpanelUnternehmen.add(unternehmenAnlegen);
 		this.add(vpanelUnternehmen);
+		this.add(hpanelUnternehmen);
 		
 		unternehmentabelle.setSelectionModel(ssmallunternehmen);
 		
@@ -76,7 +91,7 @@ public class UnternehmenSeite extends Showcase {
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Unternehmen geändert");
-						Showcase showcase = new PersonSeite(p1);
+						Showcase showcase = new PersonSeite(rm, navi);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -122,6 +137,17 @@ public class UnternehmenSeite extends Showcase {
 		
 		};
 		
+		
+		unternehmenAnlegen.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				DialogBox dialogbox = new DialogBoxFirmaAnlegen(rm, navi);
+				dialogbox.center();
+			}
+			
+		});
+		
 			// Spalten Ende
 		
 			//Spalten der Tabele hinzufügen
@@ -133,6 +159,8 @@ public class UnternehmenSeite extends Showcase {
 			gwtproxy.getAllUnternehmen(new getAlleUnternehmenausDB());
 	}		
 	
+	
+			
 	
 			// Callback um Unternehmen aus der DB zu erhalten 
 			private class getAlleUnternehmenausDB implements AsyncCallback<Vector<Unternehmen>>{
@@ -146,6 +174,7 @@ public class UnternehmenSeite extends Showcase {
 				@Override
 				public void onSuccess(Vector<Unternehmen> result) {
 					// TODO Auto-generated method stub
+					
 					unternehmentabelle.setRowData(0, result);
 					unternehmentabelle.setRowCount(result.size(), true);
 				}

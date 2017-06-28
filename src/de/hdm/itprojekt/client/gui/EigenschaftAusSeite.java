@@ -52,7 +52,7 @@ public class EigenschaftAusSeite extends Showcase{
 		this.p1 =p1;
 		this.rm=rm;
 		this.navi=navi;
-		Label lblAUsschreibung = new Label("Sie befinden sich auf den Qualifikationen folgender Ausschreibung" +a1.getBezeichnung());
+		Label lblAUsschreibung = new Label("Sie befinden sich auf den Qualifikationen folgender Ausschreibung: " +a1.getBezeichnung());
 		beforeHere.add(lblAUsschreibung);
 	}
 	
