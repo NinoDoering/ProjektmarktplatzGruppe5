@@ -146,6 +146,8 @@ public interface GreetingServiceAsync {
 
 		void saveEigenschaft(Eigenschaft e, AsyncCallback<Void> callback);
 		
+		void saveEigenschaftnachPP(Eigenschaft e, AsyncCallback<Void> callback);
+		
 		void getEigenschaftByPartnerprofil(Partnerprofil pp, AsyncCallback<Vector<Eigenschaft>> callback);
 		
 		void getEigenschaftByIdPartnerprofil(int idPartnerprofil, AsyncCallback<Vector<Eigenschaft>> callback);
@@ -249,6 +251,9 @@ public interface GreetingServiceAsync {
 		void getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung, AsyncCallback<Vector<Projekt>> callback);
 
 		void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
+
+
+
 	
 
 	}

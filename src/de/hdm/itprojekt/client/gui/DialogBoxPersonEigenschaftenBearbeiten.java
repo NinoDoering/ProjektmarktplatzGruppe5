@@ -21,7 +21,7 @@ import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 
-public class DialogBoxEigenschaftenAendern extends DialogBox{
+public class DialogBoxPersonEigenschaftenBearbeiten extends DialogBox{
 
 GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
@@ -45,10 +45,14 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Label abschlussLabel = new Label ("Abschluss:");
 	
 	private FlexTable eigenschaftaendern = new FlexTable();
+	private Person pe = new Person();
+	private Partnerprofil pp = new Partnerprofil();
 
-	public DialogBoxEigenschaftenAendern(final Person person, final Partnerprofil pp, final Eigenschaft eigenschaft){
+	public DialogBoxPersonEigenschaftenBearbeiten(final Person person, final Partnerprofil pp, final Eigenschaft eigenschaft){
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
+		this.pe = person;
+		this.pp = pp;
 		this.setText("Eigenschaften ändern");
 		ok.setStylePrimaryName("profilButton");
 		abbrechen.setStylePrimaryName("profilButton");
