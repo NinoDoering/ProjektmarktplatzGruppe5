@@ -20,7 +20,7 @@ public class AlleAusschreibungenByPartnerprofilShowcase extends Showcase {
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Report von allen Ausschreibungen zu einem Partnerprofil entsprechen";
+		return "<h1>Report von allen Ausschreibungen zu einem Partnerprofil entsprechen</h1>";
 	}
 
 	@Override

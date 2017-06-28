@@ -14,7 +14,7 @@ public class FanInFanOutShowcase extends Showcase {
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Report der FanInFanOut Analyse";
+		return "<h1>Report der FanInFanOut Analyse</h1>";
 	}
 
 	@Override

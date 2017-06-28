@@ -56,6 +56,8 @@ public class EigeneAusschreibungen extends Showcase {
 	private Marktplatz markt1 = new Marktplatz();
 	private Organisationseinheit orga = new Organisationseinheit();
 	private Ausschreibung ausschr1 = new Ausschreibung();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	
 	
 	// Buttons 
@@ -114,7 +116,7 @@ public class EigeneAusschreibungen extends Showcase {
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-					Showcase showcase = new EigenschaftAusSeite(ausschr1, p1, markt1, pers1);
+					Showcase showcase = new EigenschaftAusSeite(markt1,ausschr1, p1, rm, navi);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
 				}

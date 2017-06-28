@@ -166,6 +166,7 @@ public class Projektmarktplatz implements EntryPoint {
 //			Button LogOUT = new Button("Ausloggen");
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
+			
 //			HorizontalPanel rechtsOben = new HorizontalPanel();
 			Showcase showcase = new Startseite();
 			TopBar topbar = new TopBar();
@@ -174,15 +175,20 @@ public class Projektmarktplatz implements EntryPoint {
 //			rechtsOben.add(meinProfil);
 //			rechtsOben.add(manageRole);
 //			rechtsOben.add(LogOUT);
-			
+			Navigator navi = new Navigator(person);
+			RoleManagement rm = new RoleManagement(person, navi);
+			navi.setIdRole(rm);
+//			topbar.setIdRole(rm);
 			mainPanel.add(addPanel);
 			mainPanel.add(showcase);
 //			RootPanel.get("RechtsOben").add(rechtsOben);
 			RootPanel.get("Anzeige").add(mainPanel);
-			RootPanel.get("Navigator").add(new Navigator(person));
+//			RootPanel.get("Navigator").add(new Navigator(person));
+			
 			RootPanel.get("TopBar").add(new TopBar(person));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
 //			RootPanel.get("TopBar").add(LogOUT);
-			RootPanel.get("TopBar").add(new RoleManagement(person, topbar));
+			RootPanel.get("TopBar").add(navi.getIdRole());
+			RootPanel.get("Navigator").add(navi);
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 //			LogOUT.setWidth("150px");
 //			LogOUT.setStylePrimaryName("loginbutton");

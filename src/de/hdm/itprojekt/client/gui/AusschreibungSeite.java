@@ -21,6 +21,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -39,6 +40,10 @@ public class AusschreibungSeite extends Showcase {
 	private Ausschreibung a1 = new Ausschreibung();
 	private Ausschreibung pp1 = new Ausschreibung();
 	private Marktplatz mp = new Marktplatz();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
+	private Projekt selectedprojekt = null;
+	private Ausschreibung ausschreibung = null;
 	private Person projektLeiter = new Person();
 	CellTable<Ausschreibung> ausschreibungtabelle = new CellTable<Ausschreibung>();
 	//private Label lblPro = new Label("hallo " +p1.getIdMarktplatz() );
@@ -55,11 +60,25 @@ public class AusschreibungSeite extends Showcase {
 	private Button loeschenAusschreibung = new Button("gewählte Ausschreibung löschen");
 	private Button bearbeitenAusschreibung = new Button("gewählte Ausschreibung bearbeiten");
 	private Button backToProjekte = new Button("Zurück zu den Projekten");
+
 	
 	private Button backtoeigenePro = new Button("zrueckzueigenenProjekten");
+
+	public AusschreibungSeite(final Marktplatz mp, final Projekt selectedprojekt, final Ausschreibung as, final RoleManagement rm, final Navigator navi) {
+		this.mp = mp;
+		this.selectedprojekt = selectedprojekt;
+		this.a1 = as;
+		this.rm = rm;
+		this.navi = navi;
+
+		}
 	
-	 public AusschreibungSeite() {
-		
+	public AusschreibungSeite(final Marktplatz mp, final Projekt selectedprojekt, final RoleManagement rm, final Navigator navi) {
+	this.mp = mp;
+	this.selectedprojekt = selectedprojekt;
+	this.rm = rm;
+	this.navi = navi;
+
 	}
 	 // konstruktor um fremdschl�ssel zu �bergeben
 	 // damit die ausschreibungen zum passenden projekt angezeigt werden 
@@ -77,7 +96,6 @@ public class AusschreibungSeite extends Showcase {
 	 public AusschreibungSeite(Bewerbung b){
 		 this.bwerb=b;
 	 }
-	 
 	 public AusschreibungSeite(Projekt projekt, Person person){
 		 this.p1=projekt;
 		 this.projektLeiter=person;
@@ -99,6 +117,8 @@ public class AusschreibungSeite extends Showcase {
 
 	@Override
 	protected void run() {
+		
+		
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		ausschreibungtabelle.setWidth("100%", true);
@@ -191,7 +211,7 @@ public class AusschreibungSeite extends Showcase {
 		ausschreibungtabelle.addColumn(ausschrBeschr, "Beschreibung");
 		ausschreibungtabelle.addColumn(ausschrBefrist,"Bewerbungsfrist");
 		ausschreibungtabelle.addColumn(ausschrStatus, "Status der Ausschreibung");
-		gwtproxy.getAusschreibungByProjekt(p1, new getAusschreibungAusDB());
+		gwtproxy.getAusschreibungByProjekt(selectedprojekt, new getAusschreibungAusDB());
 		
 		
 		//START der Clickhandler 
@@ -211,13 +231,13 @@ public class AusschreibungSeite extends Showcase {
 		});
 		
 		
-		
+		// Zurück zu den Projekten
 		backToProjekte.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new ProjekteSeite(p1, mp, projektLeiter);
+				Showcase showcase = new ProjekteSeite(mp, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -230,7 +250,7 @@ public class AusschreibungSeite extends Showcase {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new EigenschaftAusSeite(ssmalleausschreibung.getSelectedObject(), p1, mp, projektLeiter);
+				Showcase showcase = new EigenschaftAusSeite(mp, ssmalleausschreibung.getSelectedObject(), selectedprojekt, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
@@ -243,9 +263,8 @@ public class AusschreibungSeite extends Showcase {
 				// TODO Auto-generated method stub
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
-					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(a1, p1, mp, projektLeiter);
-					RootPanel.get("Anzeige").add(dialogBoxAusschreibungBearbeiten);
-					Window.alert(a1.getBeschreibung()+ "  jaajaaa");
+					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(ssmalleausschreibung.getSelectedObject(), rm, navi, selectedprojekt, mp);
+					dialogBoxAusschreibungBearbeiten.center();
 				}
 				}
 		});
@@ -269,7 +288,7 @@ public class AusschreibungSeite extends Showcase {
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Die Ausschreibung wurde erfolgreich gelöscht");
-						Showcase showcase = new AusschreibungSeite(p1,mp, projektLeiter);
+						Showcase showcase = new AusschreibungSeite(mp, selectedprojekt, a1, rm, navi);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -282,8 +301,9 @@ public class AusschreibungSeite extends Showcase {
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				Window.alert(" Projekt" + p1.getBezeichnung());
 				// TODO Auto-generated method stub
-				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(p1, projektLeiter);
+				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(mp, selectedprojekt, rm, navi);
 				dialogbox.center();
 			}
 		});
@@ -295,7 +315,9 @@ public class AusschreibungSeite extends Showcase {
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
 //				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
-				DialogBox db1 = new DialogBoxBewerbungAnlegen(ssmalleausschreibung.getSelectedObject(), projektLeiter);
+				DialogBox db1 = new DialogBoxBewerbungAnlegen(a1, rm, navi, mp, selectedprojekt);
+//				db1.setWidth("100%");
+//				RootPanel.get("Anzeige").add(db1);
 				db1.center();
 				}}
 		});

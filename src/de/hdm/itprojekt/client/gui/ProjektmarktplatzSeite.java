@@ -21,6 +21,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -44,6 +45,8 @@ public class ProjektmarktplatzSeite extends Showcase{
 	
 	String deleteMarktplatz = new String("Löschen");
 	Button deleteM	 = new Button();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	
 	@Override
 	protected String getHeadlineText() {
@@ -53,6 +56,10 @@ public class ProjektmarktplatzSeite extends Showcase{
 	private Person person = new Person();
 	public ProjektmarktplatzSeite(Person person){
 		this.person = person;
+	}
+	public ProjektmarktplatzSeite(RoleManagement rm, Navigator navi) {
+		this.rm = rm;
+		this.navi = navi;
 	}
 	@Override
 	protected void run() {
@@ -74,7 +81,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
 				m1 = ssmalleprojektmarktplaetze.getSelectedObject();
-				Showcase showcase = new ProjekteSeite(m1, person);
+				Showcase showcase = new ProjekteSeite(m1, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				

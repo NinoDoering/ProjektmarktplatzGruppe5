@@ -7,7 +7,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.gui.RoleManagement;
 import de.hdm.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm.itprojekt.shared.report.AllBewerbungenByAusschreibungReport;
-import de.hdm.itprojekt.shared.report.AllBewerbungenToOneAusschreibungReport;
+//import de.hdm.itprojekt.shared.report.AllBewerbungenToOneAusschreibungReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
 public class AlleBewerbungenByAusschreibungShowcase extends Showcase{
@@ -21,7 +21,7 @@ public class AlleBewerbungenByAusschreibungShowcase extends Showcase{
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Report von allen Bewerbungen die auf eine eigene Ausschreibung eingegangen sind";
+		return "<h1>Report von allen Bewerbungen die auf eine eigene Ausschreibung eingegangen sind</h1>";
 	}
 
 	@Override

@@ -31,6 +31,7 @@ import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
+import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
@@ -41,6 +42,8 @@ public class PersonSeite extends Showcase{
 
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person p = new Person();
+	private Eigenschaft e = new Eigenschaft();
+	private Partnerprofil pp = new Partnerprofil();
 	private Organisationseinheit o1 = new Organisationseinheit();
 	private Ausschreibung auss1 = new Ausschreibung();	
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
@@ -50,7 +53,7 @@ public class PersonSeite extends Showcase{
 	
 	
 	
-	private Button pp = new Button("Nächste Seite zum Partnerprofil");
+	private Button pp1 = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
 
@@ -66,7 +69,8 @@ public class PersonSeite extends Showcase{
 	
 	private Button teambutton = new Button ("Team Hinzufügen");
 	private Button unternehmenbutton = new Button ("Unternehmen Hinzufügen");
-	private Button eigenschaftButton = new Button ("Eigenschaften Hinzufügen");
+
+	private Button eigenschaftenAendern = new Button ("Eigenschaften ändern");
 
 	private FlexTable tablePerson = new FlexTable();
 	private FlexTable flexTableButtons = new FlexTable();
@@ -173,10 +177,11 @@ public class PersonSeite extends Showcase{
 		boxFirmenName.setReadOnly(true);
 		boxEmail.setReadOnly(true);
 		
-		this.add(pp);
+		this.add(pp1);
 		this.add(eigeneProjekte);
 		this.add(eigeneBewerbungen);
 		this.add(eigeneAusschreibungen);
+		this.add(eigenschaftenAendern);
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -189,7 +194,7 @@ public class PersonSeite extends Showcase{
 		unternehmenBearbeiten.setStylePrimaryName("profilButton");
 		unternehmenSpeichern.setStylePrimaryName("profilButton");
 		unternehmenAbbrechen.setStylePrimaryName("profilButton");
-		eigenschaftButton.setStylePrimaryName("profilButton");
+		eigenschaftenAendern.setStylePrimaryName("profilButton");
 
 		listeAnrede.addItem("Frau");
 		listeAnrede.addItem("Herr");
@@ -246,7 +251,7 @@ public class PersonSeite extends Showcase{
 //		personVP.add(tablePerson);
 //		personVP.add(unternehmenTable);
 		
-		hinzuVP.add(eigenschaftButton);
+//		hinzuVP.add(eigenschaftenAendern);
 		hinzuVP.add(personEigenschaftTabelle);
 
 //		ppVP.add(teamTable);
@@ -464,7 +469,7 @@ public class PersonSeite extends Showcase{
 
 	
 
-	pp.addClickHandler(new ClickHandler(){
+	pp1.addClickHandler(new ClickHandler(){
 		
 		@Override
 		public void onClick(ClickEvent event){
@@ -475,6 +480,18 @@ public class PersonSeite extends Showcase{
 	});
 	
 	
+	eigenschaftenAendern.addClickHandler(new ClickHandler(){
+
+	@Override
+	public void onClick(ClickEvent event) {
+		
+		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxEigenschaftenAendern(p,pp,e);
+		RootPanel.get("Anzeige").clear();
+		RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
+		
+		}
+	
+	});
 	
 	
 	
@@ -502,8 +519,7 @@ public class PersonSeite extends Showcase{
 		}
 	});
 	
-	
-	}
+}
 	
 
 	

@@ -21,7 +21,9 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
+import de.hdm.itprojekt.client.TopBar;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
@@ -55,14 +57,28 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 	private Bewerbung bewerbungsSchreiben = new Bewerbung ();
 	private Person person1 = new Person();
 	private Organisationseinheit orga = new Organisationseinheit();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	
 	private DatePicker datumBewerbung = new DatePicker();
 	private Label lblDatum = new Label();
 	
-	public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final Person personBewerber){
+public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final RoleManagement rm, Navigator navi){
+		this.ausschreibungAuswaehlen=ausschreibungAuswahl;
+		this.rm = rm ;
+		this.navi = navi;
+//		this.marktplatz1=mp;
+//		this.projekt1=projekt;
+		}
+	
+	public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final RoleManagement rm, Navigator navi, Marktplatz mp, Projekt projekt){
 		
 		this.ausschreibungAuswaehlen=ausschreibungAuswahl;
-		this.person1=personBewerber;
+		this.rm = rm ;
+		this.navi = navi;
+		this.marktplatz1=mp;
+		this.projekt1=projekt;
+		
 		
 		this.setText("Bewerbung anlegen");
 		this.setAnimationEnabled(false);
@@ -71,6 +87,7 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 		bewerbungHP.add(bewerbungSenden);
 		bewerbungHP.add(bewerbungAbbrechen);
 		
+		Window.alert("Projekt :              "+ausschreibungAuswahl.getBezeichnung());
 		
 		// Datepicker
 		datumBewerbung.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -89,9 +106,10 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				Window.alert("DIESE :"+ ausschreibungAuswaehlen.getBezeichnung()+"  "+ projekt1.getId());
-			gwtproxy.anlegenBewerbung(person1.getId(), ausschreibungAuswaehlen.getId(), bewerbungsText.getText(), datumBewerbung.getValue(), BewerbungsStatus.eingereicht, new bewerbungInDB());
+//				Window.alert("" + rm.getSelectedRoleID());
+//				Window.alert("DIESE :"+ ausschreibungAuswahl.getBezeichnung());
+//				Window.alert("vor proxy");
+			gwtproxy.anlegenBewerbung(rm.getSelectedRoleID(), ausschreibungAuswahl.getId(), bewerbungsText.getText(), datumBewerbung.getValue(), BewerbungsStatus.eingereicht, new bewerbungInDB());
 			}
 		});
 		
@@ -128,7 +146,7 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 				// TODO Auto-generated method stub
 				hide();
 				Window.alert("Anscheinend funkts es   "+projekt1.getId()+"  " +marktplatz1.getId() + "  "+ person1.getId());
-				Showcase showcase = new AusschreibungSeite(projekt1, marktplatz1, person1);
+				Showcase showcase = new AusschreibungSeite(marktplatz1, projekt1, ausschreibungAuswaehlen, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 			}
