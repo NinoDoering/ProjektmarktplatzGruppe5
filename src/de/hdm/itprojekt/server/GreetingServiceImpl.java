@@ -138,6 +138,12 @@ public void init() throws IllegalArgumentException {
 		eigMapper.updateEigenschaft(e);
 
 	}
+	@Override
+	public void saveEigenschaftnachPP(Eigenschaft e) throws IllegalArgumentException {
+		eigMapper.updateEigenschaftnachPP(e);
+
+	}
+	
 
 	public Eigenschaft getEigenschaftById(int idEigenschaft) throws IllegalArgumentException {
 		return this.eigMapper.findEigenschaftByKey(idEigenschaft);

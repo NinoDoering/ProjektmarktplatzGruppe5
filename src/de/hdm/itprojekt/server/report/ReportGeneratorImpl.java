@@ -158,7 +158,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
 
 
-//auf eigene Bewerbungen
+//auf eigene Bewerbungen ...
 @Override
 	public AllBewerbungenByOrganisationseinheitReport createAllBewerbungenByOrganisationseinheitReport(int id){
 			
@@ -229,6 +229,7 @@ public AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschrei
 	headline.addColumn(new Column("Bewerbungsstatus"));
 	
 	result.addRow(headline);
+	
 	
 	Vector<Bewerbung> bewerbungen = greetingservice.getBewerbungByAusschreibungId(idAusschreibung);
 	

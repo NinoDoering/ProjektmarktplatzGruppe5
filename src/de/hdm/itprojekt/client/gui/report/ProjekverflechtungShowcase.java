@@ -21,9 +21,9 @@ import de.hdm.itprojekt.shared.report.ProjektverflechtungReport;
 
 public class ProjekverflechtungShowcase extends Showcase {
 
-	private RoleManagement rolemanagementReport = null;
+	private RoleManagementReport rolemanagementReport = null;
 
-	public ProjekverflechtungShowcase(RoleManagement rolemanagementReport){
+	public ProjekverflechtungShowcase(RoleManagementReport rolemanagementReport){
 		this.rolemanagementReport=rolemanagementReport;
 	}
 	
@@ -45,7 +45,7 @@ public class ProjekverflechtungShowcase extends Showcase {
 	
 		boxBewerbung.addItem("Wählen Sie bitte einen Bewerber aus.");
 		
-		reportGenerator.getBewerberByAusschreibungen(rolemanagementReport.getSelectedRoleAsObject(), new AsyncCallback<Vector<Organisationseinheit>>(){
+		reportGenerator.getBewerberByAusschreibungen(rolemanagementReport.getSelectedRoleManagementAsObjectReport(), new AsyncCallback<Vector<Organisationseinheit>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {

@@ -53,8 +53,10 @@ public class PersonSeite extends Showcase{
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
+
 	private Navigator navi = null;
 	private RoleManagement rm= null;
+
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
 	private Button speichernbutton = new Button ("Profil Speichern");
 	private Button abbrechenbutton = new Button ("Profil Abbrechen");
@@ -181,6 +183,7 @@ public class PersonSeite extends Showcase{
 		this.add(eigeneBewerbungen);
 		this.add(eigeneAusschreibungen);
 		this.add(eigenschaftenAendern);
+	
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -250,7 +253,7 @@ public class PersonSeite extends Showcase{
 //		personVP.add(tablePerson);
 //		personVP.add(unternehmenTable);
 		
-//		hinzuVP.add(eigenschaftenAendern);
+
 		hinzuVP.add(personEigenschaftTabelle);
 
 //		ppVP.add(teamTable);
@@ -376,8 +379,7 @@ public class PersonSeite extends Showcase{
 		
 		});
 		
-		
-		
+	
 		// Eigene Ausschreibungen anzeigen 
 		
 		eigeneAusschreibungen.addClickHandler(new ClickHandler(){
@@ -486,10 +488,10 @@ public class PersonSeite extends Showcase{
 	@Override
 	public void onClick(ClickEvent event) {
 		
-		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxEigenschaftenAendern(p,pp,e);
-		RootPanel.get("Anzeige").clear();
-		RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
-		
+		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxPersonEigenschaftenBearbeiten(p,pp,e);
+		//RootPanel.get("Anzeige").clear();
+		//RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
+		dialogBoxEigenschaftenAendern.center();
 		}
 	
 	});
