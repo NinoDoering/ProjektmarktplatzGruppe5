@@ -87,7 +87,6 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private ListBox ausbildungEigenschaften = new ListBox();
 	private ListBox berufserfahrungsjahreEigenschaften = new ListBox();
 	private ListBox sprachkenntnisseEigenschaften = new ListBox();
-
 	private ListBox employmentstatusEigenschaften = new ListBox();
 	private ListBox abschlussEigenschaften = new ListBox();
 	
