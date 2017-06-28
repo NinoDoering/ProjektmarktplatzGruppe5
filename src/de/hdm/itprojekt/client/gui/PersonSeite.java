@@ -292,7 +292,7 @@ public class PersonSeite extends Showcase{
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
 			
-			Showcase showcase = new UnternehmenSeite(p);
+			Showcase showcase = new UnternehmenSeite(rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			
