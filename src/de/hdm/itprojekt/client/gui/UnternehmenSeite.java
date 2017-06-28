@@ -38,6 +38,8 @@ public class UnternehmenSeite extends Showcase {
 	private Unternehmen u1 = new Unternehmen();
 	private Person p1 = new Person();
 	private Button unternehmenAnlegen = new Button("Neues Unternehmen anlegen");
+	private Button unternehmenBearbeiten = new Button("Unternehmen bearbeiten");
+	private Button unternehmenBeitreten = new Button("Unternehmen beitreten");
 	final SingleSelectionModel<Unternehmen> ssmallunternehmen = new SingleSelectionModel<Unternehmen>();
 	
 	public UnternehmenSeite(final Person person) {
@@ -65,6 +67,8 @@ public class UnternehmenSeite extends Showcase {
 		vpanelUnternehmen.add(unternehmentabelle);
 		
 		hpanelUnternehmen.add(unternehmenAnlegen);
+		hpanelUnternehmen.add(unternehmenBearbeiten);
+		hpanelUnternehmen.add(unternehmenBeitreten);
 		this.add(vpanelUnternehmen);
 		this.add(hpanelUnternehmen);
 		
@@ -75,28 +79,28 @@ public class UnternehmenSeite extends Showcase {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
-				u1 = ssmallunternehmen.getSelectedObject();
-				ssmallunternehmen.getSelectedObject().getId();
-				p1.setIdUnternehmen(ssmallunternehmen.getSelectedObject().getId());
-				
-				gwtproxy.savePerson(p1, new AsyncCallback<Void>() {
+//				u1 = ssmallunternehmen.getSelectedObject();
+//				ssmallunternehmen.getSelectedObject().getId();
+//				rm.getUser().setIdUnternehmen(ssmallunternehmen.getSelectedObject().getId());
 					
-			
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("Unternehmen-ADD ging nicht");
-					}
-					
-					
-					public void onSuccess(Void result) {
-						// TODO Auto-generated method stub
-						Window.alert("Unternehmen geändert");
-						Showcase showcase = new PersonSeite(rm, navi);
-						RootPanel.get("Anzeige").clear();
-						RootPanel.get("Anzeige").add(showcase);
-					}
-				});
-				
+//				gwtproxy.savePerson(rm.getUser(), new AsyncCallback<Void>() {
+//					
+//					
+//					public void onFailure(Throwable caught) {
+//						// TODO Auto-generated method stub
+//						Window.alert("Unternehmen-ADD ging nicht");
+//					}
+//					
+//					
+//					public void onSuccess(Void result) {
+//						// TODO Auto-generated method stub
+//						Window.alert("Unternehmen geändert");
+//						Showcase showcase = new PersonSeite(rm, navi);
+//						RootPanel.get("Anzeige").clear();
+//						RootPanel.get("Anzeige").add(showcase);
+//					}
+//				});
+				u1= ssmallunternehmen.getSelectedObject();
 			}
 		});
 		
@@ -144,6 +148,45 @@ public class UnternehmenSeite extends Showcase {
 			public void onClick(ClickEvent event) {
 				DialogBox dialogbox = new DialogBoxFirmaAnlegen(rm, navi);
 				dialogbox.center();
+			}
+			
+		});
+		
+		unternehmenBeitreten.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				u1 = ssmallunternehmen.getSelectedObject();
+				ssmallunternehmen.getSelectedObject().getId();
+				rm.getUser().setIdUnternehmen(ssmallunternehmen.getSelectedObject().getId());
+					
+				gwtproxy.savePerson(rm.getUser(), new AsyncCallback<Void>() {
+					
+					
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("Unternehmen-ADD ging nicht");
+					}
+					
+					
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						Window.alert("Unternehmen geändert");
+						Showcase showcase = new PersonSeite(rm, navi);
+						RootPanel.get("Anzeige").clear();
+						RootPanel.get("Anzeige").add(showcase);
+					}
+				
+			});
+			
+		}});
+		
+		unternehmenBearbeiten.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				
 			}
 			
 		});
