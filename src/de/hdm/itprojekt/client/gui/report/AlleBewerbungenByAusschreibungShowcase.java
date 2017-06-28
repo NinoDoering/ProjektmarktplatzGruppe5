@@ -10,18 +10,21 @@ import de.hdm.itprojekt.shared.report.AllBewerbungenByAusschreibungReport;
 //import de.hdm.itprojekt.shared.report.AllBewerbungenToOneAusschreibungReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
+// EIGENTLICH IST DAS EIGENE BEWERBUNGEN
+
 public class AlleBewerbungenByAusschreibungShowcase extends Showcase{
 
-	private RoleManagement rolemanagementReport = null;
+	private RoleManagementReport rolemanagementReport = null;
 	
-	public AlleBewerbungenByAusschreibungShowcase(RoleManagement rolemanagementReport){
+	public AlleBewerbungenByAusschreibungShowcase(RoleManagementReport rolemanagementReport){
 		this.rolemanagementReport=rolemanagementReport;
 	}
 	
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "<h1>Report von allen Bewerbungen die auf eine eigene Ausschreibung eingegangen sind</h1>";
+		return "<h1> Eingegangene Bewerbungen auf eigene Ausschreibungen </h1>";
+		
 	}
 
 	@Override
@@ -30,7 +33,7 @@ public class AlleBewerbungenByAusschreibungShowcase extends Showcase{
 		final Showcase scase = this;
 		ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		reportGenerator.createAllBewerbungenByAusschreibungReport(rolemanagementReport.getSelectedRoleAsObject(), new AsyncCallback<AllBewerbungenByAusschreibungReport>(){
+		reportGenerator.createAllBewerbungenByAusschreibungReport(rolemanagementReport.getSelectedRoleManagementAsObjectReport(), new AsyncCallback<AllBewerbungenByAusschreibungReport>(){
 
 			@Override
 			public void onFailure(Throwable caught) {

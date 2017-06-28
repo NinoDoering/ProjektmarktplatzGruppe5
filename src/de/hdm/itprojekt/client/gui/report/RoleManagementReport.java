@@ -11,6 +11,9 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.client.gui.RoleManagement;
+
+import de.hdm.itprojekt.shared.GreetingServiceAsync;
 //import de.hdm.itprojekt.client.gui.RoleManagement.getUser;
 import de.hdm.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
@@ -21,7 +24,7 @@ import de.hdm.itprojekt.shared.bo.Unternehmen;
 public class RoleManagementReport extends FlexTable {
 	
 	//Ermöglicht den Zugriff auf die Servermethoden
-	private static ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
+	private ReportGeneratorAsync reportGenerator; //= ClientSideSettings.getReportGenerator();
 	
 	private FlexCellFormatter cellFormatter = this.getFlexCellFormatter();
 
@@ -29,33 +32,38 @@ public class RoleManagementReport extends FlexTable {
 	private static ListBox orgEinheit = new ListBox();
 	
 	//Speichern der einzelnen Rollen
+	private GreetingServiceAsync gwtproxyReport;
 	private static Unternehmen unternehmen;
 	private static Person person;
 	private static Team team;
 	private NavigatorReport navigatorReport;
 	
-	public RoleManagementReport(final NavigatorReport navigatorReport, int idOrga){
+	public RoleManagementReport(final Person person, final NavigatorReport navigatorReport){
 		this.navigatorReport=navigatorReport;
 		this.setWidget(1, 0, new Label("Organisationseinheiten: "));
 		this.setWidget(1, 1, orgEinheit);
 		this.setStylePrimaryName("IdentityPanel");
 		
+		this.reportGenerator= ClientSideSettings.getReportGenerator();
+		this.gwtproxyReport = ClientSideSettings.getMarktplatzVerwaltung();
+		
+		
 		cellFormatter.setHorizontalAlignment(1, 1, HasHorizontalAlignment.ALIGN_RIGHT);
 	    cellFormatter.setHorizontalAlignment(2, 1, HasHorizontalAlignment.ALIGN_RIGHT);
 		orgEinheit.setWidth("250px");
 		
-		reportGenerator.findPersonByKey(idOrga, new getPerson());
+		reportGenerator.findPersonByKey(person.getId(), new getPerson());
 		
 		orgEinheit.addChangeHandler(new ChangeHandler(){
 
 			@Override
 			public void onChange(ChangeEvent event) {
 				// TODO Auto-generated method stub
-				navigatorReport.reload();
+				navigatorReport.reloadReport();
 			}
 		});	
 	}
-		public static int getSelectedRoleManagementId(){
+		public static int getSelectedRoleManagementIdReport(){
 			if(person.getIdTeam()!=null){
 				if(orgEinheit.getSelectedIndex()==0){
 					return person.getId();
@@ -78,7 +86,7 @@ public class RoleManagementReport extends FlexTable {
 			return 0;	
 		}
 		
-		public Organisationseinheit getSelectedRoleManagementAsObject(){
+		public Organisationseinheit getSelectedRoleManagementAsObjectReport(){
 			if(person.getIdTeam()!=null){
 				if(orgEinheit.getSelectedIndex()==0){
 					return person;
@@ -100,6 +108,44 @@ public class RoleManagementReport extends FlexTable {
 			}
 			return null;
 		}
+		
+		public Person getUser(){
+			return person;
+		}
+		
+		public Team getTeamOfUser(){
+			return team;
+		}
+		
+		public Unternehmen getUnternehmenOfUser(){
+			return unternehmen;
+		}
+		
+		public  ListBox getOwnOrgUnits(){
+			return orgEinheit;
+		}
+		
+		public void deactivateOrgUnits(){
+			orgEinheit.setEnabled(false);
+		}
+		
+		public void activateOrgUnits(){
+			orgEinheit.setEnabled(true);
+		}
+		
+		public void setOwnOrgUnitToZero(){
+			orgEinheit.setSelectedIndex(0);
+		}
+		
+		public void reinitialize(){
+			reportGenerator.findPersonByKey(person.getId(), new getPerson());
+			
+		}
+		
+		private RoleManagementReport getThis(){
+			return this;
+		}
+		
 		
 private class getPerson implements AsyncCallback<Person>{
 
