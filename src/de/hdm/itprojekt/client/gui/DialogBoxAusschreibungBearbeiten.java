@@ -267,7 +267,9 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		arbeitsgebietEigenschaften.addItem("Versicherungen");
 		arbeitsgebietEigenschaften.addItem("Finanzen");
 		arbeitsgebietEigenschaften.addItem("Immobilien");
-
+		ausbildungEigenschaften.addItem("Pharmazeut");
+		ausbildungEigenschaften.addItem("Luft- und Raumfahrt Ingenieur");
+		
 		ausbildungEigenschaften.addItem("Softwareentwickler");
 		ausbildungEigenschaften.addItem("Automobilkaufmann");
 		ausbildungEigenschaften.addItem("Versicherungskaufmann"); 
@@ -277,18 +279,26 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		berufserfahrungsjahreEigenschaften.addItem("1 bis 5 Jahre");
 		berufserfahrungsjahreEigenschaften.addItem("5 bis 10");
 		berufserfahrungsjahreEigenschaften.addItem("10  bis 20");
+		berufserfahrungsjahreEigenschaften.addItem("20  bis 50 Jahre");
 
 		sprachkenntnisseEigenschaften.addItem("Französisch");
 		sprachkenntnisseEigenschaften.addItem("Englisch");
 		sprachkenntnisseEigenschaften.addItem("Spanisch");
+		sprachkenntnisseEigenschaften.addItem("Englisch + Französisch ");
+		sprachkenntnisseEigenschaften.addItem("Englisch + Spanisch ");
+		sprachkenntnisseEigenschaften.addItem("Französisch + Spanisch");
+		sprachkenntnisseEigenschaften.addItem("Englisch + Französisch + Spanisch ");
 		
 		employmentstatusEigenschaften.addItem("Student");
 		employmentstatusEigenschaften.addItem("Angestellter");
+		employmentstatusEigenschaften.addItem("Selbstständig");
 		
+		abschlussEigenschaften.addItem("Hauptschulabschluss");
 		abschlussEigenschaften.addItem("Mittlere Reife");
 		abschlussEigenschaften.addItem("Abitur");
 		abschlussEigenschaften.addItem("Bachelor");
 		abschlussEigenschaften.addItem("Master");
+		abschlussEigenschaften.addItem("Doktor");
 		
 		// speichern des eigenschafts objektes 
 		speichern.addClickHandler(new ClickHandler(){
