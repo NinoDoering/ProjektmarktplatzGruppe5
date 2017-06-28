@@ -79,31 +79,9 @@ public class UnternehmenSeite extends Showcase {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
-//				u1 = ssmallunternehmen.getSelectedObject();
-//				ssmallunternehmen.getSelectedObject().getId();
-//				rm.getUser().setIdUnternehmen(ssmallunternehmen.getSelectedObject().getId());
-					
-//				gwtproxy.savePerson(rm.getUser(), new AsyncCallback<Void>() {
-//					
-//					
-//					public void onFailure(Throwable caught) {
-//						// TODO Auto-generated method stub
-//						Window.alert("Unternehmen-ADD ging nicht");
-//					}
-//					
-//					
-//					public void onSuccess(Void result) {
-//						// TODO Auto-generated method stub
-//						Window.alert("Unternehmen geändert");
-//						Showcase showcase = new PersonSeite(rm, navi);
-//						RootPanel.get("Anzeige").clear();
-//						RootPanel.get("Anzeige").add(showcase);
-//					}
-//				});
 				u1= ssmallunternehmen.getSelectedObject();
 			}
-		});
-		
+		});		
 			//Spalten für die Unternhemen Tabelle	
 		
 		TextColumn<Unternehmen> firmenName = new TextColumn<Unternehmen>() {
@@ -185,7 +163,8 @@ public class UnternehmenSeite extends Showcase {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
+				DialogBox dialogbox = new DialogBoxUnternehmenBearbeiten(rm, navi, u1);
+				dialogbox.center();
 				
 			}
 			
@@ -201,9 +180,6 @@ public class UnternehmenSeite extends Showcase {
 			//Alle Unternehmen anzeigen lassen inder Tabelle 
 			gwtproxy.getAllUnternehmen(new getAlleUnternehmenausDB());
 	}		
-	
-	
-			
 	
 			// Callback um Unternehmen aus der DB zu erhalten 
 			private class getAlleUnternehmenausDB implements AsyncCallback<Vector<Unternehmen>>{
