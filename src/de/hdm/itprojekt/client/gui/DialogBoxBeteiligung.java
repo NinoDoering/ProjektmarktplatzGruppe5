@@ -100,6 +100,24 @@ public class DialogBoxBeteiligung extends DialogBox {
 		this.add(hPanelBewertung);
 		
 		
+
+		beteiligungAnlegen.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				
+				beteiligung.setBeteiligungszeit(beteiligungsZeit.getText());
+				beteiligung.setIdBeteiligter(ausschreibung.getIdAusschreibender());
+				beteiligung.setIdProjekt(ausschreibung.getIdProjekt());
+				
+//				bewerbung.setBewerbungsStatus("zusage");
+			
+				
+			}
+		
+	});
+
 }
 
 

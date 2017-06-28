@@ -142,6 +142,9 @@ public class AusschreibungSeite extends Showcase {
 		this.add(hpanelAusschreibung);
 		this.add(vpanelAusschreibung);
 		
+		backtoeigenePro.setVisible(false);
+		bearbeitenAusschreibung.setVisible(false);
+		loeschenAusschreibung.setVisible(false);
 		ausschreibungtabelle.setSelectionModel(ssmalleausschreibung);
 		
 		ssmalleausschreibung.addSelectionChangeHandler(new Handler() {
