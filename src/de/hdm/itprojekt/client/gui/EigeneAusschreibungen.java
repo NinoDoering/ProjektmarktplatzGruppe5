@@ -55,7 +55,7 @@ public class EigeneAusschreibungen extends Showcase {
 	private Person pers1 = new Person();
 	private Marktplatz markt1 = new Marktplatz();
 	private Organisationseinheit orga = new Organisationseinheit();
-	private Ausschreibung ausschr1 = new Ausschreibung();
+	private Ausschreibung ausschr1 = null;
 	private RoleManagement rm = null;
 	private Navigator navi = null;
 	
@@ -128,9 +128,10 @@ public class EigeneAusschreibungen extends Showcase {
 		};
 			
 			eigeneAusschreibungtabelle.addColumn(ausschrBez, "Bezeichnung ihrer Ausschreibung");
-			Window.alert(" " + rm.getSelectedRoleAsObject().getId());
+			
+			
 			gwtproxy.getAusschreibungByAusschreibender(rm.getUser(), new getAusschreibungByLeiterAusDB());
-			Window.alert(rm.getSelectedRoleID()+"");
+			
 			
 			
 			//ClickHandler 
@@ -145,6 +146,17 @@ public class EigeneAusschreibungen extends Showcase {
 					RootPanel.get("Anzeige").add(showcase);
 				}
 			});
+			
+			bewerbungenAnsehen.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					Showcase showcase = new EingegangeneBewerbungenSeite(rm, navi, p1, ausschr1);
+					RootPanel.get("Anzeige").clear();
+					RootPanel.get("Anzeige").add(showcase);
+				}
+			});
 		
 	}
 	
@@ -153,12 +165,12 @@ public class EigeneAusschreibungen extends Showcase {
 		@Override
 		public void onFailure(Throwable caught) {
 			// TODO Auto-generated method stub
-			Window.alert("leider etwas schief eigene Ausschreibungen gelaufen");
+			
 		}
 
 		@Override
 		public void onSuccess(Vector<Ausschreibung> result) {
-				Window.alert("asdasd" + result.size());
+			
 			// TODO Auto-generated method stub
 			eigeneAusschreibungtabelle.setRowData(0, result);
 			eigeneAusschreibungtabelle.setRowCount(result.size(), true);
