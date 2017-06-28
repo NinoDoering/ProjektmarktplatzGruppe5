@@ -63,13 +63,18 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		aussbez.setValue(ausschreibung.getBezeichnung());
 		aussbeschr.setValue(ausschreibung.getBeschreibung());
 		aussbefrist.setValue(ausschreibung.getEndDatum(), true);
+	}
+	
+	public DialogBoxAusschreibungBearbeiten(final Ausschreibung ausschreibung, final RoleManagement rm, final Navigator navi, final Projekt p1, final Marktplatz m1){
+		aussbez.setValue(ausschreibung.getBezeichnung());
+		aussbeschr.setValue(ausschreibung.getBeschreibung());
+		aussbefrist.setValue(ausschreibung.getEndDatum(), true);
 		
 		this.setText("Ausschreibung bearbeiten");
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
-		this.p2 = p1 ;
+		this.p2 = p1;
 		this.mp= m1;
-		this.projektLeiter=projektLeiter;
 		this.ausschreibung = ausschreibung;
 		this.rm = rm;
 		this.navi = navi;
@@ -100,10 +105,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-//				Showcase showcase = new AusschreibungSeite(ausschreibung, rm, navi);
-//				RootPanel.get("Anzeige").clear();
-//				RootPanel.get("Anzeige").add(showcase);
+				hide();
 			}
 		});
 		
@@ -146,7 +148,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			Window.alert("Veränderung wurden gespeichert !");
-			Showcase showcase = new AusschreibungSeite(p2,mp, projektLeiter);
+			Showcase showcase = new AusschreibungSeite(mp, p2, ausschreibung, rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}

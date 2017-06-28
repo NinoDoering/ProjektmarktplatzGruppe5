@@ -113,9 +113,9 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	FlexTable ausschreibungdialogboxtabelle = new FlexTable();
 	
-	public DialogBoxAusschreibungAnlegen(final Projekt zugehoerigesProjekt,final RoleManagement rm, final Navigator navi, final Person projektLeiter){
+	public DialogBoxAusschreibungAnlegen(final Marktplatz mp, final Projekt zugehoerigesProjekt,final RoleManagement rm, final Navigator navi){
+		this.mp=mp;
 		this.p2=zugehoerigesProjekt;
-		this.projektLeiter =projektLeiter;
 		Label zugehProjektBez = new Label("Ausschreibung für folgendes Projekt: "+ zugehoerigesProjekt.getBezeichnung());
 		this.rm = rm;
 		this.navi = navi;
@@ -195,6 +195,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 						aussbeschr.getText(), aussbefrist.getValue(), partnerprofil,
 						Status.laufend, new ausschreibungInDB());
 				
+			
 			}
 		});
 		
@@ -294,7 +295,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		public void onSuccess(Ausschreibung result) {
 			// TODO Auto-generated method stub
 			hide();
-			Showcase showcase = new AusschreibungSeite(p2, mp, projektLeiter);
+			Showcase showcase = new AusschreibungSeite(mp, p2, rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 			

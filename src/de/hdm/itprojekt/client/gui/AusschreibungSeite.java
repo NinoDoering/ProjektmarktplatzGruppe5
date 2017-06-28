@@ -263,9 +263,8 @@ public class AusschreibungSeite extends Showcase {
 				// TODO Auto-generated method stub
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
-					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(ssmalleausschreibung.getSelectedObject(), rm, navi, p1, mp, projektLeiter);
-					RootPanel.get("Anzeige").add(dialogBoxAusschreibungBearbeiten);
-					Window.alert(a1.getBeschreibung()+ "  jaajaaa");
+					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(ssmalleausschreibung.getSelectedObject(), rm, navi, selectedprojekt, mp);
+					dialogBoxAusschreibungBearbeiten.center();
 				}
 				}
 		});
@@ -289,7 +288,7 @@ public class AusschreibungSeite extends Showcase {
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Die Ausschreibung wurde erfolgreich gelöscht");
-						Showcase showcase = new AusschreibungSeite(p1,mp, projektLeiter);
+						Showcase showcase = new AusschreibungSeite(mp, selectedprojekt, a1, rm, navi);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -304,7 +303,7 @@ public class AusschreibungSeite extends Showcase {
 			public void onClick(ClickEvent event) {
 				Window.alert(" Projekt" + p1.getBezeichnung());
 				// TODO Auto-generated method stub
-				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(p1, rm, navi, projektLeiter);
+				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(mp, selectedprojekt, rm, navi);
 				dialogbox.center();
 			}
 		});
