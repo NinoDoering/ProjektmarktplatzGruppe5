@@ -381,7 +381,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 			Row beteiligungRow = new Row();
 			
 			beteiligungRow.addColumn(new Column(p.getBezeichnung()));
-			beteiligungRow.addColumn(new Column(Double.toString(beteiligung.getBeteiligungszeit())));
+			beteiligungRow.addColumn(new Column(beteiligung.getBeteiligungszeit()));
 		
 			result.addRow(beteiligungRow);
 		}
