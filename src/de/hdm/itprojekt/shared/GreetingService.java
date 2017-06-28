@@ -158,6 +158,9 @@ public interface GreetingService extends RemoteService  {
 		
 		public void saveEigenschaft (Eigenschaft e)throws IllegalArgumentException;
 		
+		void saveEigenschaftnachPP(Eigenschaft e) throws IllegalArgumentException;
+
+		
 
 		// Bewertung bewertung
 		
@@ -256,6 +259,8 @@ public interface GreetingService extends RemoteService  {
 		
 		// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
 		public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) throws IllegalArgumentException;
+
+
 
 
 

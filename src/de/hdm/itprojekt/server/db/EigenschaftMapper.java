@@ -170,15 +170,11 @@ public class EigenschaftMapper {
 			Statement stmt = con.createStatement();
 
 					stmt.executeUpdate("UPDATE eigenschaft " 
-					+ "SET idEigenschaft='" + e.getId() + "' ,'" 
-					+ "ausbildung='" + e.getAusbildung() + "' ,'" 
-					+ "abschluss='" + e.getAbschluss() + "' ,'" 
-					+ "berufserfahrungsJahre='" + e.getBerufserfahrungsJahre() + "' ,'" 
-					+ "arbeitsgebiet='" + e.getArbeitsgebiet() + "' ,'" 
-					+ "sprachkenntnisse='" + e.getSprachkenntnisse() + "' ,'" 		
-					+ "employmentStatus='" + e.getEmploymentStatus() + "' ,'" 
-					+ "idPartnerprofil='" + e.getIdPartnerprofil() + "' ,'" 
-					+ " WHERE idEigenschaft= '"+ e.getId());
+					+ "SET ausbildung='" + e.getAusbildung() + "', abschluss='" 
+					+ e.getAbschluss() + "', berufserfahrungsJahre='" + e.getBerufserfahrungsJahre() + "', arbeitsgebiet='" 
+					+ e.getArbeitsgebiet()+ "', sprachkenntnisse='" 
+					+ e.getSprachkenntnisse()+ "', employmentStatus='" 
+					+ e.getEmploymentStatus()+ "', idPartnerprofil='" + e.getIdPartnerprofil() + "'WHERE idEigenschaft=" + e.getId());
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -187,6 +183,28 @@ public class EigenschaftMapper {
 		return e;
 	}
 
+	// test update Eigenschaft nach PP 
+	public Eigenschaft updateEigenschaftnachPP (Eigenschaft e) {
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+
+					stmt.executeUpdate("UPDATE eigenschaft " 
+					+ "SET ausbildung='" + e.getAusbildung() + "', abschluss='" 
+					+ e.getAbschluss() + "', berufserfahrungsJahre='" + e.getBerufserfahrungsJahre() + "', arbeitsgebiet='" 
+					+ e.getArbeitsgebiet()+ "', sprachkenntnisse='" 
+					+ e.getSprachkenntnisse()+ "', employmentStatus='" 
+					+ e.getEmploymentStatus()+ "', idPartnerprofil='" + e.getIdPartnerprofil() + "'WHERE idPartnerprofil=" + e.getIdPartnerprofil());
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+		return e;
+	}
+	
+	
 	//delete
 	public void deleteEigenschaft (Eigenschaft e) {
 

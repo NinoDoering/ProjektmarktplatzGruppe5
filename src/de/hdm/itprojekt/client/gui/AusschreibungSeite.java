@@ -27,6 +27,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -40,6 +41,7 @@ public class AusschreibungSeite extends Showcase {
 	private Ausschreibung a1 = new Ausschreibung();
 	private Ausschreibung pp1 = new Ausschreibung();
 	private Marktplatz mp = new Marktplatz();
+	private Eigenschaft eig = new Eigenschaft();
 	private RoleManagement rm = null;
 	private Navigator navi = null;
 	private Projekt selectedprojekt = null;
@@ -70,6 +72,8 @@ public class AusschreibungSeite extends Showcase {
 		this.a1 = as;
 		this.rm = rm;
 		this.navi = navi;
+		this.eig = eig;
+		
 
 		}
 	
@@ -263,7 +267,8 @@ public class AusschreibungSeite extends Showcase {
 				// TODO Auto-generated method stub
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
-					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(ssmalleausschreibung.getSelectedObject(), rm, navi, selectedprojekt, mp);
+					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(ssmalleausschreibung.getSelectedObject(),eig, rm, navi, 
+							selectedprojekt, mp);
 					dialogBoxAusschreibungBearbeiten.center();
 				}
 				}
