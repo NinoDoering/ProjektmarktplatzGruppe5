@@ -239,9 +239,9 @@ private class getUser implements AsyncCallback<Person>{
 			orgEinheit.clear();
 //			Listbox2.clear();
 			person = result;
-			Integer personID = result.getId();
+			Integer idPerson = result.getId();
 			orgEinheit.addItem("Person: " + result.getVorname() + " " +
-												result.getNachname() , personID.toString());
+												result.getNachname() , idPerson.toString());
 			
 			if (person.getIdTeam() !=null) {
 				gwtproxy2.getTeamById(result.getIdTeam(), new getTeam());

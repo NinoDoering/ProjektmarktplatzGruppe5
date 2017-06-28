@@ -42,13 +42,16 @@ public class DialogBoxUnternehmenBearbeiten extends DialogBox {
 	private Label firmaORTLabel = new Label ("Ort ");
 	private TextArea firmaORTArea = new TextArea();
 	
-	public DialogBoxUnternehmenBearbeiten(final RoleManagement rm, final Navigator navi){
+	public DialogBoxUnternehmenBearbeiten(final RoleManagement rm, final Navigator navi, Unternehmen u){
 		this.rm=rm;
 		this.navi=navi;
+		this.unternehmen=u;
 		this.setText("Unternehmen bearbeiten");
 		this.setAnimationEnabled(true);
 		this.setGlassEnabled(true);
-		
+		firmaArea.setValue(unternehmen.getFirmenName());
+		firmaAdresseArea.setValue(unternehmen.getAdresse());
+		firmaORTArea.setValue(unternehmen.getStandort());
 		firmaSpeichern.setStylePrimaryName("firmabtn");
 		firmaAbbrechen.setStylePrimaryName("firmabtn");
 		unterHP.add(firmaSpeichern);
@@ -76,9 +79,9 @@ public class DialogBoxUnternehmenBearbeiten extends DialogBox {
 		firmaBearbeitenTabelle.setWidget(1, 0, firmaLabel);
 		firmaBearbeitenTabelle.setWidget(1, 1, firmaArea);
 		firmaBearbeitenTabelle.setWidget(2, 0, firmaAdresseLabel);
-		firmaBearbeitenTabelle.setWidget(2, 0, firmaAdresseArea);
-		firmaBearbeitenTabelle.setWidget(2, 0, firmaORTLabel);
-		firmaBearbeitenTabelle.setWidget(2, 0, firmaORTArea);
+		firmaBearbeitenTabelle.setWidget(2, 1, firmaAdresseArea);
+		firmaBearbeitenTabelle.setWidget(3, 0, firmaORTLabel);
+		firmaBearbeitenTabelle.setWidget(3, 1, firmaORTArea);
 		unterVP.add(firmaBearbeitenTabelle);
 		unterVP.add(unterHP);
 		this.add(unterVP);
