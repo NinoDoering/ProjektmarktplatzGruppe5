@@ -4,6 +4,7 @@ package de.hdm.itprojekt.client;
 import de.hdm.itprojekt.client.gui.*;
 import de.hdm.itprojekt.client.gui.report.NavigatorReport;
 import de.hdm.itprojekt.client.gui.report.RoleManagementReport;
+import de.hdm.itprojekt.client.gui.report.TopBarReport;
 import de.hdm.itprojekt.shared.FieldVerifier;
 import de.hdm.itprojekt.shared.LoginServiceAsync;
 import de.hdm.itprojekt.shared.GreetingService;
@@ -137,6 +138,7 @@ public class Reportmarktplatz implements EntryPoint {
 			
 			RootPanel.get("AnzeigeReport").add(loginPanel);
 			RootPanel.get("NavigatorReport").add(loginButton);
+		//	RootPanel.get("TopBarReport").add(na);
 			loginButton.addClickHandler(new ClickHandler(){
 				
 				
@@ -159,6 +161,7 @@ public class Reportmarktplatz implements EntryPoint {
 			
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
+			TopBarReport topbarreport = new TopBarReport();
 			NavigatorReport navigatorReport = new NavigatorReport(person);
 //			RoleManagement rm = new RoleManagement(person);
 		//	RoleManagementReport roleManagementReport = new RoleManagementReport(navigatorReport,person.getId());
@@ -169,8 +172,9 @@ public class Reportmarktplatz implements EntryPoint {
 
 //			RootPanel.get("Anzeige").add(mainPanel);
 			RootPanel.get("NavigatorReport").add(navigatorReport);
-			RootPanel.get("TopBar").add(new TopBar(person));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
-			RootPanel.get("RechtsObenReport").add(navigatorReport.getIdRoleReport());
+			RootPanel.get("TopBarReport").add(new TopBarReport(person));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
+			RootPanel.get("TopBarReport").add(navigatorReport.getIdRoleReport());
+			
 //			RootPanel.get("TopBar").add(new RoleManagement(person));
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 

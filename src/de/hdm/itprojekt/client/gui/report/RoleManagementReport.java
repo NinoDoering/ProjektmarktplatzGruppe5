@@ -11,6 +11,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.client.gui.RoleManagement;
+
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 //import de.hdm.itprojekt.client.gui.RoleManagement.getUser;
 import de.hdm.itprojekt.shared.ReportGeneratorAsync;
@@ -106,6 +108,44 @@ public class RoleManagementReport extends FlexTable {
 			}
 			return null;
 		}
+		
+		public Person getUser(){
+			return person;
+		}
+		
+		public Team getTeamOfUser(){
+			return team;
+		}
+		
+		public Unternehmen getUnternehmenOfUser(){
+			return unternehmen;
+		}
+		
+		public  ListBox getOwnOrgUnits(){
+			return orgEinheit;
+		}
+		
+		public void deactivateOrgUnits(){
+			orgEinheit.setEnabled(false);
+		}
+		
+		public void activateOrgUnits(){
+			orgEinheit.setEnabled(true);
+		}
+		
+		public void setOwnOrgUnitToZero(){
+			orgEinheit.setSelectedIndex(0);
+		}
+		
+		public void reinitialize(){
+			reportGenerator.findPersonByKey(person.getId(), new getPerson());
+			
+		}
+		
+		private RoleManagementReport getThis(){
+			return this;
+		}
+		
 		
 private class getPerson implements AsyncCallback<Person>{
 
