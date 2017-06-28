@@ -58,6 +58,7 @@ public class PersonSeite extends Showcase{
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
 
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
+	private Button eingegangeneBewerbungenAufMeineAusschr = new Button("Eingegangene Bewerbungen");
 	
 
 	private Navigator ng = null;
@@ -182,6 +183,7 @@ public class PersonSeite extends Showcase{
 		this.add(eigeneBewerbungen);
 		this.add(eigeneAusschreibungen);
 		this.add(eigenschaftenAendern);
+		this.add(eingegangeneBewerbungenAufMeineAusschr);
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -251,7 +253,7 @@ public class PersonSeite extends Showcase{
 //		personVP.add(tablePerson);
 //		personVP.add(unternehmenTable);
 		
-//		hinzuVP.add(eigenschaftenAendern);
+
 		hinzuVP.add(personEigenschaftTabelle);
 
 //		ppVP.add(teamTable);
@@ -375,7 +377,17 @@ public class PersonSeite extends Showcase{
 		
 		});
 		
-		
+		// FÜR tony Eingegange Bewerbungen 
+		eingegangeneBewerbungenAufMeineAusschr.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+			//	Showcase showcase = new BewerbungenAufAusschreibungSeite(idAusschreibung, navigator, roleManagement)
+			//			RootPanel.get("Anzeige").clear();
+			//	RootPanel.get("Anzeige").add(showcase);
+			}
+		});
 		
 		// Eigene Ausschreibungen anzeigen 
 		
@@ -486,9 +498,9 @@ public class PersonSeite extends Showcase{
 	public void onClick(ClickEvent event) {
 		
 		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxEigenschaftenAendern(p,pp,e);
-		RootPanel.get("Anzeige").clear();
-		RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
-		
+		//RootPanel.get("Anzeige").clear();
+		//RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
+		dialogBoxEigenschaftenAendern.center();
 		}
 	
 	});
