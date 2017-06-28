@@ -26,9 +26,11 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 		try {
 			Statement stmt = con.createStatement();
-
+			
+			t.setId(super.insertOrganisationseinheit(t));
+			
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM projekt ");
-
+			
 			if (rs.next()) {
 
 				t.setId(rs.getInt("maxid") + 1);

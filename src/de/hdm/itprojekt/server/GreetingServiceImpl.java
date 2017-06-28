@@ -698,13 +698,15 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	// anlegenUnternehmen
 	@Override
-	public Unternehmen anlegenUnternehmen(int idPartnerprofil, String firmenName) throws IllegalArgumentException {
+	public Unternehmen anlegenUnternehmen(int idPartnerprofil, String firmenName, String adresse, String standort) throws IllegalArgumentException {
 
 		Unternehmen u = new Unternehmen();
 
 		u.setId(1);
 		u.setFirmenName(firmenName);
 		u.setIdPartnerprofil(idPartnerprofil);
+		u.setAdresse(adresse);
+		u.setStandort(standort);
 
 		return this.unternehmenMapper.insertUnternehmen(u);
 	}

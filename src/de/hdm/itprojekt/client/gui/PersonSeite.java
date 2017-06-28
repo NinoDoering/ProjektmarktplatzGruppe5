@@ -49,20 +49,14 @@ public class PersonSeite extends Showcase{
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
-	
-	
-	
-	
 	private Button pp1 = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
-
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
-	private Button eingegangeneBewerbungenAufMeineAusschr = new Button("Eingegangene Bewerbungen");
-	
 
-	private Navigator ng = null;
-	private RoleManagement roleManagement= null;
+	private Navigator navi = null;
+	private RoleManagement rm= null;
+
 	private Button bearbeitenbutton = new Button ("Profil Bearbeiten");
 	private Button speichernbutton = new Button ("Profil Speichern");
 	private Button abbrechenbutton = new Button ("Profil Abbrechen");
@@ -99,6 +93,11 @@ public class PersonSeite extends Showcase{
 	public PersonSeite(Person p, Ausschreibung auss ){
 		this.p = p;
 		this.auss1=auss;
+	}
+	
+	public PersonSeite(final RoleManagement rm, final Navigator navi){
+		this.rm=rm;
+		this.navi=navi;
 	}
 	
 	private VerticalPanel personVP = new VerticalPanel();	
@@ -138,6 +137,7 @@ public class PersonSeite extends Showcase{
 	
 	@Override
 	protected void run() {
+		
 //	personloeschen.addClickHandler(new ClickHandler() {
 //		
 //		@Override
@@ -183,7 +183,7 @@ public class PersonSeite extends Showcase{
 		this.add(eigeneBewerbungen);
 		this.add(eigeneAusschreibungen);
 		this.add(eigenschaftenAendern);
-		this.add(eingegangeneBewerbungenAufMeineAusschr);
+	
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
 		speichernbutton.setStylePrimaryName("profilButton");
@@ -291,9 +291,11 @@ public class PersonSeite extends Showcase{
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
+			
 			Showcase showcase = new UnternehmenSeite(p);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
+			
 		}
 	});
 		
@@ -377,18 +379,7 @@ public class PersonSeite extends Showcase{
 		
 		});
 		
-		// FÜR tony Eingegange Bewerbungen 
-		eingegangeneBewerbungenAufMeineAusschr.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-			//	Showcase showcase = new BewerbungenAufAusschreibungSeite(idAusschreibung, navigator, roleManagement)
-			//			RootPanel.get("Anzeige").clear();
-			//	RootPanel.get("Anzeige").add(showcase);
-			}
-		});
-		
+	
 		// Eigene Ausschreibungen anzeigen 
 		
 		eigeneAusschreibungen.addClickHandler(new ClickHandler(){
