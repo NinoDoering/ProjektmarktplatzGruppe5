@@ -3,6 +3,7 @@ package de.hdm.itprojekt.client.gui;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -27,8 +28,10 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private VerticalPanel vpanel = new VerticalPanel();
 	private HorizontalPanel hpanel = new HorizontalPanel();
-	private Button ok = new Button("Ok");
+	private Button eigtAnlegen = new Button("Eigenschaft anlegen");
+	private Button eigtBearbeit = new Button("persönliche Eigenschaft ändern");
 	private Button abbrechen = new Button("Abbrechen");
+	private Button eigtBearbeitSave = new Button("Änderungen speichern");
 
 	private ListBox arbeitsgebietEigenschaften = new ListBox();
 	private ListBox ausbildungEigenschaften = new ListBox();
@@ -44,6 +47,9 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Label employmentstatusLabel = new Label("Employmentstatus");
 	private Label abschlussLabel = new Label ("Abschluss:");
 	
+	private Label eigtAngelegt = new Label("Sie haben ihre Eigenschaft angelegt");
+	private Button ok = new Button("OK!");
+	
 	private FlexTable eigenschaftaendern = new FlexTable();
 	private Person pe = new Person();
 	private Partnerprofil pp = new Partnerprofil();
@@ -54,9 +60,15 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		this.pe = person;
 		this.pp = pp;
 		this.setText("Eigenschaften ändern");
-		ok.setStylePrimaryName("profilButton");
+		eigtAnlegen.setStylePrimaryName("profilButton");
 		abbrechen.setStylePrimaryName("profilButton");
+		eigtBearbeit.setStylePrimaryName("profilButton");
+		eigtBearbeitSave.setStylePrimaryName("profilButton");
 		
+		eigtAngelegt.setVisible(false);
+		ok.setVisible(false);
+		
+	
 
 		arbeitsgebietEigenschaften.addItem("IT");
 		arbeitsgebietEigenschaften.addItem("Automobil");
@@ -88,7 +100,7 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		abschlussEigenschaften.addItem("Bachelor");
 		abschlussEigenschaften.addItem("Master");
 		
-		ok.addClickHandler(new ClickHandler(){
+		eigtAnlegen.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
@@ -100,7 +112,100 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 				eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
 				eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
 			
-			     gwtproxy.saveEigenschaft(eigenschaft, new AsyncCallback<Void>(){
+			    gwtproxy.anlegenEigenschaft(pe.getIdPartnerprofil(), arbeitsgebietEigenschaften.getSelectedValue(),
+			    		berufserfahrungsjahreEigenschaften.getSelectedValue(),
+			    		employmentstatusEigenschaften.getSelectedValue(),
+			    		ausbildungEigenschaften.getSelectedValue(), abschlussEigenschaften.getSelectedValue(),
+			    		sprachkenntnisseEigenschaften.getSelectedValue(), new AsyncCallback<Eigenschaft>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								Window.alert("Etwas BEI der eigenschaft schief gelaufen ");
+							}
+
+							@Override
+							public void onSuccess(Eigenschaft result) {
+								// TODO Auto-generated method stub
+							
+								arbeitsgebietEigenschaften.setVisible(false);
+								ausbildungEigenschaften.setVisible(false);
+								berufserfahrungsjahreEigenschaften.setVisible(false);
+								sprachkenntnisseEigenschaften.setVisible(false);
+								employmentstatusEigenschaften.setVisible(false);
+								abschlussEigenschaften.setVisible(false);
+								
+								arbeitsgebietLabel.setVisible(false);
+								ausbildungLabel.setVisible(false);
+								berufserfahrungsjahreLabel.setVisible(false);
+								sprachkenntnisseLabel.setVisible(false);
+								employmentstatusLabel.setVisible(false);
+								abschlussLabel.setVisible(false);
+							
+								eigtAngelegt.setVisible(true);
+								ok.setVisible(true);
+								
+							}
+						});
+			}
+				
+		
+			
+		});
+		
+		ok.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				hide();
+			}
+		});
+		
+		abbrechen.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				hide();
+			}
+		});
+		
+		
+		eigtBearbeit.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				arbeitsgebietEigenschaften.setVisible(true);
+				ausbildungEigenschaften.setVisible(true);
+				berufserfahrungsjahreEigenschaften.setVisible(true);
+				sprachkenntnisseEigenschaften.setVisible(true);
+				employmentstatusEigenschaften.setVisible(true);
+				abschlussEigenschaften.setVisible(true);
+				
+				arbeitsgebietLabel.setVisible(true);
+				ausbildungLabel.setVisible(true);
+				berufserfahrungsjahreLabel.setVisible(true);
+				sprachkenntnisseLabel.setVisible(true);
+				employmentstatusLabel.setVisible(true);
+				abschlussLabel.setVisible(true);
+				
+				eigtAngelegt.setVisible(false);
+				ok.setVisible(false);
+				
+				eigenschaft.setArbeitsgebiet(arbeitsgebietEigenschaften.getSelectedValue());
+				eigenschaft.setSprachkenntnisse(sprachkenntnisseEigenschaften.getSelectedValue());
+				eigenschaft.setAusbildung(ausbildungEigenschaften.getSelectedValue());
+				eigenschaft.setBerufserfahrungsJahre(berufserfahrungsjahreEigenschaften.getSelectedValue());
+				eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
+				eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
+				
+				
+				
+				
+				eigenschaft.setIdPartnerprofil(pe.getIdPartnerprofil());
+				gwtproxy.saveEigenschaftnachPP(eigenschaft, new AsyncCallback<Void>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -111,21 +216,29 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 					@Override
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
-						hide();
-						Showcase showcase = new PersonSeite(person);
-						RootPanel.get("Anzeige").clear();
-						RootPanel.get("Anzeige").add(showcase);
+						
+						
+						
+						
+						arbeitsgebietEigenschaften.setVisible(false);
+						ausbildungEigenschaften.setVisible(false);
+						berufserfahrungsjahreEigenschaften.setVisible(false);
+						sprachkenntnisseEigenschaften.setVisible(false);
+						employmentstatusEigenschaften.setVisible(false);
+						abschlussEigenschaften.setVisible(false);
+						
+						arbeitsgebietLabel.setVisible(false);
+						ausbildungLabel.setVisible(false);
+						berufserfahrungsjahreLabel.setVisible(false);
+						sprachkenntnisseLabel.setVisible(false);
+						employmentstatusLabel.setVisible(false);
+						abschlussLabel.setVisible(false);
+						
+						
+						eigtAngelegt.setVisible(true);
+						ok.setVisible(true);
 					}
-			     });
-			}
-					
-		});
-		abbrechen.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				hide();
+				});
 			}
 		});
 
@@ -142,9 +255,13 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		eigenschaftaendern.setWidget(5, 0, abschlussLabel);
 		eigenschaftaendern.setWidget(5, 1, abschlussEigenschaften);
 		
-		eigenschaftaendern.setWidget(8, 0, ok);
+		eigenschaftaendern.setWidget(8, 0, eigtAnlegen);
 		eigenschaftaendern.setWidget(8, 1, abbrechen);
+		eigenschaftaendern.setWidget(8, 2, eigtBearbeit);
+		eigenschaftaendern.setWidget(8, 3, eigtBearbeitSave);
 		
+		eigenschaftaendern.setWidget(2, 2, eigtAngelegt);
+		eigenschaftaendern.setWidget(4, 2, ok);
 		vpanel.add(eigenschaftaendern);
 		this.add(vpanel);
 		

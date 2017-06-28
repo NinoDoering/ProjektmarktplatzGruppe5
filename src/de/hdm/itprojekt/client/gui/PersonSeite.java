@@ -497,7 +497,7 @@ public class PersonSeite extends Showcase{
 	@Override
 	public void onClick(ClickEvent event) {
 		
-		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxEigenschaftenAendern(p,pp,e);
+		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxPersonEigenschaftenBearbeiten(p,pp,e);
 		//RootPanel.get("Anzeige").clear();
 		//RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
 		dialogBoxEigenschaftenAendern.center();
