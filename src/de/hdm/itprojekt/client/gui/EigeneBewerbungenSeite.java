@@ -21,7 +21,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
 import de.hdm.itprojekt.client.Showcase;
-import de.hdm.itprojekt.client.gui.BewerbungenSeite.getBewerbungenAusDB;
+
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
