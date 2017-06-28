@@ -82,6 +82,11 @@ public class AusschreibungSeite extends Showcase {
 	this.selectedprojekt = selectedprojekt;
 	this.rm = rm;
 	this.navi = navi;
+	 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+selectedprojekt.getBezeichnung()+" ");
+	 Label lblMarktplatz = new Label("Sie befinden sich auf folgendem Marktplatz: "+mp.getBezeichnung());
+	 beforeHereProjekt.add(lblMarktplatz);
+	 beforeHereProjekt.add(lblProjekt);
+	 beforeHereProjekt.setSpacing(20);
 
 	}
 	 // konstruktor um fremdschl�ssel zu �bergeben
@@ -90,11 +95,7 @@ public class AusschreibungSeite extends Showcase {
 			this.p1=p1;
 			this.mp=mp1;
 			this.projektLeiter = projektLeiter;
-			 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+p1.getBezeichnung()+" ");
-			 Label lblMarktplatz = new Label("Sie befinden sich auf folgendem Marktplatz "+mp.getBezeichnung());
-			 beforeHereProjekt.add(lblMarktplatz);
-			 beforeHereProjekt.add(lblProjekt);
-			 beforeHereProjekt.setSpacing(20);
+	
 	 }
 	 
 	 public AusschreibungSeite(Bewerbung b){
