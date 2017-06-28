@@ -129,7 +129,7 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 
 			if (rs.next()) {
 				
-				u.setId(rs.getInt("maxid") + 1);
+//				u.setId(rs.getInt("maxid") + 1);
 				
 
 				stmt = con.createStatement();	
