@@ -84,19 +84,20 @@ public class ProjekteSeite extends Showcase{
 		this.selectedmarktplatz= m1;
 		this.p1=p2;
 		this.person= projektLeiter;
-		Label lblMarktplatz =  new Label("Sie befinden sich auf folgendem Marktplatz: " +m1.getBezeichnung()+" ");
-		Label hilfeBedienung = new Label("   Bitte wählen sie ein Projekt aus um danach darauf zu greifen zu können");
-		beforeHere.add(lblMarktplatz);
-		beforeHere.add(hilfeBedienung);
-		beforeHere.setSpacing(20);
+		
 	}
 	
 
-	// NEUER KONSTRUKTOR 
+	// NEUER KONSTRUKTOR mit BaumStruktur
 	public ProjekteSeite(Marktplatz selectedmarktplatz, RoleManagement rm, Navigator navi) {
 	this.selectedmarktplatz = selectedmarktplatz;
 	this.rm = rm;
 	this.navi = navi;
+	Label lblMarktplatz =  new Label("Sie befinden sich auf folgendem Marktplatz: " +selectedmarktplatz.getBezeichnung()+" ");
+	Label hilfeBedienung = new Label("   Bitte wählen sie ein Projekt aus um danach darauf zu greifen zu können");
+	beforeHere.add(lblMarktplatz);
+	beforeHere.add(hilfeBedienung);
+	beforeHere.setSpacing(20);
 	}
 
 
