@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.client.gui.report.*;
 import de.hdm.itprojekt.client.ClientSideSettings;
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Projektmarktplatz;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.gui.EigeneBewerbungenSeite;
@@ -39,13 +40,13 @@ public class NavigatorReport extends StackPanel {
 	
 	private Button ausschreibungenButton = new Button("Alle Ausschreibungen aufrufen");
 	private Button ausschreibungToPartnerprofilButton = new Button("Ausschreibungen zu Partnerprofil aufrufen");
-	private Button bewerbungenByAusschreibungenButton = new Button("Bewerbungen zu eigenen Ausschreibungen aufrufen");
-	private Button bewerbungenByOrganisationseinheitButton = new Button("Eigene Bewerbungen aufrufen");
+	private Button bewerbungenByAusschreibungenButton = new Button("Eigene Bewerbungen aufrufen");
+	private Button bewerbungenByOrganisationseinheitButton = new Button("Bewerbungen zu eigenen Ausschreibungen aufrufen");
 	private Button projektverflechtungenButton = new Button("Projektverflechtungen aufrufen");
 	private Button fanInFanOutAnalyseButton = new Button("Fan-in/Fan-out Analyse aufrufen");
-	private RoleManagement roleManagement = null;
+	private RoleManagementReport roleManagementReport = null;
 	
-	public NavigatorReport(){
+	public NavigatorReport(final Person person){
 		//startseite der Panels
 		panelStartseite.add(startseiteButton);
 		startseiteButton.setWidth("200px");
@@ -137,7 +138,7 @@ public class NavigatorReport extends StackPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase reportScase = new AlleAusschreibungenByPartnerprofilShowcase(roleManagement);
+				Showcase reportScase = new AlleAusschreibungenByPartnerprofilShowcase(roleManagementReport);
 				RootPanel.get("AnzeigeReport").clear();
 				RootPanel.get("AnzeigeReport").add(reportScase);
 				clickHandler= this;
@@ -150,7 +151,7 @@ public class NavigatorReport extends StackPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase reportScase = new AlleBewerbungenByOrganisationseinheitShowcase(roleManagement);
+				Showcase reportScase = new AlleBewerbungenByOrganisationseinheitShowcase(roleManagementReport);
 				RootPanel.get("AnzeigeReport").clear();
 				RootPanel.get("AnzeigeReport").add(reportScase);
 				clickHandler= this;
@@ -163,7 +164,7 @@ public class NavigatorReport extends StackPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase reportScase = new AlleBewerbungenByAusschreibungShowcase(roleManagement);
+				Showcase reportScase = new AlleBewerbungenByAusschreibungShowcase(roleManagementReport);
 				RootPanel.get("AnzeigeReport").clear();
 				RootPanel.get("AnzeigeReport").add(reportScase);
 				clickHandler= this;
@@ -176,7 +177,7 @@ public class NavigatorReport extends StackPanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase reportScase = new ProjekverflechtungShowcase(roleManagement);
+				Showcase reportScase = new ProjekverflechtungShowcase(roleManagementReport);
 				RootPanel.get("AnzeigeReport").clear();
 				RootPanel.get("AnzeigeReport").add(reportScase);
 				clickHandler= this;
@@ -209,29 +210,43 @@ public class NavigatorReport extends StackPanel {
 	}
 	
 	//getter und setter methoden
-	public ClickHandler getCurrentClickHandler(){
+	public ClickHandler getCurrentClickHandlerReport(){
 		return clickHandler;
 	}
 
-	public void setCurrentClickHandler(ClickHandler clickHandler){
+	public void setCurrentClickHandlerReport(ClickHandler clickHandler){
 		this.clickHandler=clickHandler;
 	}
 	
-	public ClickEvent getCurrentClickHandlerEvent(){
+	public ClickEvent getCurrentClickHandlerEventReport(){
 		return clickEvent;
 	}
 	
-	public void setCurrentClickHandlerEvent(ClickEvent clickEvent){
+	public void setCurrentClickHandlerEventReport(ClickEvent clickEvent){
 		this.clickEvent=clickEvent;
 	}
 	
-	public void setRoleManagement(RoleManagement roleManagement){
-		this.roleManagement=roleManagement;
+	public void setRoleManagementReport(RoleManagementReport roleManagementReport){
+		this.roleManagementReport=roleManagementReport;
 	}
 	
+	
 	//reload(aktualisiert) den letzten Showcase Butten der geklickt wurde
-	public void reload(){
+	public void reloadReport(){
 		clickHandler.onClick(clickEvent);
+	}
+	public RoleManagementReport getIdRoleReport() {
+		return roleManagementReport;
+	}
+
+
+	public void setIdRoleReport(RoleManagementReport idRoleReport) {
+		this.roleManagementReport = idRoleReport;
+	}
+	
+
+	public NavigatorReport getNavigatorReport(){
+		return this;
 	}
 	
 }

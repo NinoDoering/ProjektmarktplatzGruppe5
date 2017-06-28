@@ -156,21 +156,21 @@ public class Reportmarktplatz implements EntryPoint {
 //			RootPanel.get("Navigator").clear();
 			
 			signOutLink.setHref(loginInfo.getLogoutUrl());
-
+			
 			HorizontalPanel addPanel = new HorizontalPanel();
 			VerticalPanel mainPanel = new VerticalPanel();
-			NavigatorReport navigatorReport = new NavigatorReport();
+			NavigatorReport navigatorReport = new NavigatorReport(person);
 //			RoleManagement rm = new RoleManagement(person);
-			RoleManagementReport roleManagementReport = new RoleManagementReport(navigatorReport,person.getId());
+		//	RoleManagementReport roleManagementReport = new RoleManagementReport(navigatorReport,person.getId());
 //			navigatorReport.setRoleManagement(rm);
-
-			
+			RoleManagementReport roleManagementReport = new RoleManagementReport(person, navigatorReport);
+			navigatorReport.setIdRoleReport(roleManagementReport);
 			mainPanel.add(addPanel);
 
 //			RootPanel.get("Anzeige").add(mainPanel);
 			RootPanel.get("NavigatorReport").add(navigatorReport);
 			RootPanel.get("TopBar").add(new TopBar(person));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
-
+			RootPanel.get("RechtsObenReport").add(navigatorReport.getIdRoleReport());
 //			RootPanel.get("TopBar").add(new RoleManagement(person));
 			signOutLink.setHref(loginInfo.getLogoutUrl());
 

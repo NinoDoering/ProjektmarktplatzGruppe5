@@ -11,9 +11,9 @@ import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
 public class AlleAusschreibungenByPartnerprofilShowcase extends Showcase {
 	
-	private RoleManagement rolemanagementReport = null;
+	private RoleManagementReport rolemanagementReport = null;
 
-	public AlleAusschreibungenByPartnerprofilShowcase(RoleManagement rolemanagementReport){
+	public AlleAusschreibungenByPartnerprofilShowcase(RoleManagementReport rolemanagementReport){
 		this.rolemanagementReport=rolemanagementReport;
 	}
 	
@@ -29,7 +29,7 @@ public class AlleAusschreibungenByPartnerprofilShowcase extends Showcase {
 		final Showcase scase = this;
 		ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		reportGenerator.createAllAusschreibungenByPartnerprofilReport(rolemanagementReport.getSelectedRoleAsObject(), new AsyncCallback<AllAusschreibungenByPartnerprofilReport>(){
+		reportGenerator.createAllAusschreibungenByPartnerprofilReport(rolemanagementReport.getSelectedRoleManagementAsObjectReport(), new AsyncCallback<AllAusschreibungenByPartnerprofilReport>(){
 
 			@Override
 			public void onFailure(Throwable caught) {

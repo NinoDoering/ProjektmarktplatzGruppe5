@@ -74,7 +74,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		return null;
 	}
 		AllAusschreibungenReport result = new AllAusschreibungenReport();
-		result.setTitel("Alle Ausschreibungen");
+		result.setTitel("");
 		result.setErstelldatum(new Date());
 		
 		Row headline = new Row();
@@ -143,7 +143,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		return null;
 	}
 		AllBewerbungenByAusschreibungReport  result = new AllBewerbungenByAusschreibungReport();
-		result.setTitel("Alle Bewerbungen auf eigenerstellte Ausschreibungen");
+		result.setTitel("");
 		result.setErstelldatum(new Date());
 		
 		Vector<Ausschreibung> allAusschreibungen = greetingservice.getAllAusschreibungen();
@@ -168,7 +168,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	
 	AllBewerbungenByOrganisationseinheitReport result = new AllBewerbungenByOrganisationseinheitReport();
 	
-	result.setTitel("Alle Bewerbungen");
+	result.setTitel("");
 	result.setErstelldatum(new Date());
 	
 	Row headline = new Row();
@@ -218,7 +218,7 @@ public AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschrei
 	
 	AllBewerbungenToOneAusschreibungReport result = new AllBewerbungenToOneAusschreibungReport();
 
-	result.setTitel("Alle Bewerbungen auf die Ausschreibung: " + a.getBezeichnung() + ", mit der ID" + a.getId());
+	result.setTitel(" ");
 	
 	result.setErstelldatum(new Date());
 	
@@ -275,7 +275,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 }
 	AllBewerbungenWithAusschreibungenReport result = new AllBewerbungenWithAusschreibungenReport();
 	
-	result.setTitel("Alle Bewerbungen mit den zugehörigen Ausschreibungen");
+	result.setTitel(" ");
 	
 	result.setErstelldatum(new Date());
 	
@@ -358,7 +358,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 		
 		AllBeteiligungenToProjectReport result = new AllBeteiligungenToProjectReport();
 		
-		result.setTitel("Alle Beteiligungen");
+		result.setTitel(" ");
 		
 		result.setErstelldatum(new Date());
 		
@@ -398,7 +398,7 @@ throws IllegalArgumentException {
 		}
 		ProjektverflechtungReport result = new ProjektverflechtungReport();
 		
-		result.setTitel("Projektverflechtungen");
+		result.setTitel(" ");
 		
 		result.setErstelldatum(new Date());
 		
@@ -420,7 +420,7 @@ throws IllegalArgumentException {
 		
 		FanIn result = new FanIn();
 		
-		result.setTitel("Anzahl der Bewerbungen");
+		result.setTitel(" ");
 		
 		result.setErstelldatum(new Date());
 		
@@ -486,7 +486,7 @@ throws IllegalArgumentException {
 	
 	FanOut result = new FanOut();
 	
-	result.setTitel("Anzahl der Ausschreibungen");
+	result.setTitel(" ");
 	result.setErstelldatum(new Date());
 	
 	Row headline = new Row();
