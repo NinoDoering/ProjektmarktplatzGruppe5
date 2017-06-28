@@ -230,6 +230,7 @@ public AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschrei
 	
 	result.addRow(headline);
 	
+	
 	Vector<Bewerbung> bewerbungen = greetingservice.getBewerbungByAusschreibungId(idAusschreibung);
 	
 	for (Bewerbung b: bewerbungen){
