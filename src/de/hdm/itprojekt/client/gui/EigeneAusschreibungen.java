@@ -64,7 +64,7 @@ public class EigeneAusschreibungen extends Showcase {
 	private Button bearbeitenAusschreibung = new Button("Gewähltes Ausschreibung bearbeiten");
 	private Button anzeigenAusschreibung = new Button("Gewähltes Ausschreibung anzeigen");
 	private Button loeschenAusschreibung = new Button("Gewählte Ausschreibung löschen");
-	
+	private Button bewerbungenAnsehen = new Button("Eingeganngene Bewerbungen einsehen"); 
 	//Panels 
 	private HorizontalPanel  hpanelEigeneAusschreibung = new HorizontalPanel();
 	private VerticalPanel vpanelEigeneAusschreibung = new VerticalPanel();
@@ -76,6 +76,11 @@ public class EigeneAusschreibungen extends Showcase {
 		 
 		 this.pers1= person;
 	}
+	 public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi, final Projekt projekt){
+		 this.rm=rm;
+		 this.navi=navi;
+		 this.p1=projekt;
+	 }
 	
 	@Override
 	protected String getHeadlineText() {
@@ -85,6 +90,7 @@ public class EigeneAusschreibungen extends Showcase {
 
 	@Override
 	protected void run() {
+
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		eigeneAusschreibungtabelle.setWidth("100%", true);
@@ -94,6 +100,7 @@ public class EigeneAusschreibungen extends Showcase {
 			hpanelEigeneAusschreibung.add(anzeigenAusschreibung);
 			hpanelEigeneAusschreibung.add(bearbeitenAusschreibung);
 			hpanelEigeneAusschreibung.add(loeschenAusschreibung);
+			hpanelEigeneAusschreibung.add(bewerbungenAnsehen);
 			
 			this.add(hpanelEigeneAusschreibung);
 			this.add(vpanelEigeneAusschreibung);
@@ -109,6 +116,23 @@ public class EigeneAusschreibungen extends Showcase {
 				}
 			});
 			
+			TextColumn<Ausschreibung> ausschrBez = new TextColumn<Ausschreibung>(){
+
+				@Override
+				public String getValue(Ausschreibung object) {
+					// TODO Auto-generated method stub
+					return object.getBezeichnung();
+				}
+			
+			
+		};
+			
+			eigeneAusschreibungtabelle.addColumn(ausschrBez, "Bezeichnung ihrer Ausschreibung");
+			Window.alert(" " + rm.getSelectedRoleAsObject().getId());
+			gwtproxy.getAusschreibungByAusschreibender(rm.getUser(), new getAusschreibungByLeiterAusDB());
+			Window.alert(rm.getSelectedRoleID()+"");
+			
+			
 			//ClickHandler 
 			
 			anzeigenAusschreibung.addClickHandler(new ClickHandler() {
@@ -123,4 +147,20 @@ public class EigeneAusschreibungen extends Showcase {
 			});
 		
 	}
+	
+	private class getAusschreibungByLeiterAusDB implements AsyncCallback<Vector<Ausschreibung>>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			Window.alert("leider etwas schief eigene Ausschreibungen gelaufen");
+		}
+
+		@Override
+		public void onSuccess(Vector<Ausschreibung> result) {
+				Window.alert("asdasd" + result.size());
+			// TODO Auto-generated method stub
+			eigeneAusschreibungtabelle.setRowData(0, result);
+			eigeneAusschreibungtabelle.setRowCount(result.size(), true);
+		}}
 }

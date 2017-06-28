@@ -46,6 +46,7 @@ public class PersonSeite extends Showcase{
 	private Partnerprofil pp = new Partnerprofil();
 	private Organisationseinheit o1 = new Organisationseinheit();
 	private Ausschreibung auss1 = new Ausschreibung();	
+	private Projekt projekt = new Projekt();
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
@@ -157,15 +158,15 @@ public class PersonSeite extends Showcase{
 	
 	
 		
-		gwtproxy.getPersonById(p.getId(), new GetPersonAusDB());
+		gwtproxy.getPersonById(rm.getUser().getId(), new GetPersonAusDB());
 
 		
 		
 		if(p.getIdTeam()!=null){
-			gwtproxy.getTeamById(p.getIdTeam(), new GetTeamAusDB());
+			gwtproxy.getTeamById(rm.getUser().getIdTeam(), new GetTeamAusDB());
 		}
 		if(p.getIdUnternehmen()!=null){
-			gwtproxy.getUnternehmenById(p.getIdUnternehmen(), new GetUnternehmenAusDB());
+			gwtproxy.getUnternehmenById(rm.getUser().getIdUnternehmen(), new GetUnternehmenAusDB());
 		}
 
 		
@@ -329,7 +330,7 @@ public class PersonSeite extends Showcase{
 				
 				@Override
 				public void onClick(ClickEvent event){
-					gwtproxy.savePerson(p, new SpeichernProfilCallback());
+					gwtproxy.savePerson(rm.getUser(), new SpeichernProfilCallback());
 					
 					
 					
@@ -343,7 +344,7 @@ public class PersonSeite extends Showcase{
 			
 			@Override
 			public void onClick(ClickEvent event){
-				Showcase scase = new PersonSeite(p);
+				Showcase scase = new PersonSeite(rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(scase);
 			}
@@ -358,7 +359,7 @@ public class PersonSeite extends Showcase{
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 		
-				gwtproxy.getProjektByPerson(p, new AsyncCallback<Vector<Projekt>>() {
+				gwtproxy.getProjektByPerson(rm.getUser(), new AsyncCallback<Vector<Projekt>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -368,7 +369,7 @@ public class PersonSeite extends Showcase{
 
 					public void onSuccess(Vector<Projekt> result) {
 						// TODO Auto-generated method stub
-						
+				
 						Showcase showcase = new EigeneProjekte(p);
 					
 						RootPanel.get("Anzeige").clear();
@@ -388,30 +389,12 @@ public class PersonSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				gwtproxy.getAusschreibungByAusschreibender(p, new AsyncCallback<Vector<Ausschreibung>>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void onSuccess(Vector<Ausschreibung> result) {
-						// TODO Auto-generated method stub
-						
-						Showcase showcase = new EigeneAusschreibungen(p);
+						Showcase showcase = new EigeneAusschreibungen(rm, navi, projekt);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
 				});
 				
-				
-			}
-		
-		});
-		
-		
 	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
 
 		@Override
@@ -451,7 +434,7 @@ public class PersonSeite extends Showcase{
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
-			Showcase scase = new PersonSeite(p);
+			Showcase scase = new PersonSeite(rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(scase);
 		}
@@ -462,7 +445,7 @@ public class PersonSeite extends Showcase{
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
-			Showcase scase = new PersonSeite(p);
+			Showcase scase = new PersonSeite(rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(scase);
 		}	
@@ -504,7 +487,7 @@ public class PersonSeite extends Showcase{
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
-			gwtproxy.getBewerbungByBewerber(p, new AsyncCallback<Vector<Bewerbung>>() {
+			gwtproxy.getBewerbungByBewerber(rm.getUser(), new AsyncCallback<Vector<Bewerbung>>() {
 
 				@Override
 				public void onFailure(Throwable caught) {

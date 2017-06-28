@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 
-import de.hdm.itprojekt.client.gui.PersonSeite;
 import de.hdm.itprojekt.shared.bo.Person;
 
 
@@ -39,8 +38,7 @@ import de.hdm.itprojekt.client.LoginInfo;
 			Button LogOUT = new Button("Ausloggen");
 			Button meinProfil = new Button("Mein Profil");
 //			Button manageRole = new Button("Identität verwalten");
-			
-			public TopBar(final Person person){
+			public TopBar(final Person person, final RoleManagement rm, final Navigator navi){
 			
 			
 			TopBarPanel.add(meinProfil);
@@ -77,9 +75,8 @@ import de.hdm.itprojekt.client.LoginInfo;
 				
 				@Override
 				public void onClick(ClickEvent event) {
-		
 					RootPanel.get("Anzeige").clear();
-					Showcase sh = new PersonSeite(person);
+					Showcase sh = new PersonSeite(rm, navi);
 					RootPanel.get("Anzeige").add(sh);
 				
 				}
