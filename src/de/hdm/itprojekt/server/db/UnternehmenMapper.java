@@ -96,13 +96,13 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idUnternehmen, firmenName FROM unternehmen " 
+					.executeQuery("SELECT * FROM unternehmen " 
 			+ " ORDER BY firmenName");
 
 			while (rs.next()) {
 				Unternehmen u = new Unternehmen();
 				u.setId(rs.getInt("idUnternehmen"));
-				u.setFirmenName(rs.getString("FirmenName"));
+				u.setFirmenName(rs.getString("firmenName"));
 				u.setAdresse(super.findByOrganisationseinheit(u).getAdresse());
 				u.setStandort(super.findByOrganisationseinheit(u).getStandort());
 				u.setIdPartnerprofil(super.findByOrganisationseinheit(u).getIdPartnerprofil());
@@ -123,18 +123,19 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-
+			u.setId(super.insertOrganisationseinheit(u));
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idUnternehmen) AS maxid " + "FROM unternehmen ");
 			// Id wird wom�glich ben�tigt!
 
 			if (rs.next()) {
-
+				
 				u.setId(rs.getInt("maxid") + 1);
+				
 
-				stmt = con.createStatement();
+				stmt = con.createStatement();	
 
 				stmt.executeUpdate("INSERT INTO unternehmen (idUnternehmen, firmenName) " 
-				+ "VALUES ('" + u.getId() + "','" + u.getFirmenName() + "')");
+				+ "VALUES (" + u.getId() + ",'" + u.getFirmenName() + "')");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

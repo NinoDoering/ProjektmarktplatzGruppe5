@@ -220,7 +220,7 @@ public interface GreetingService extends RemoteService  {
 		public Vector<Team> getAllTeams() throws IllegalArgumentException;
 		// Unternehmen u
 		
-		public Unternehmen anlegenUnternehmen(/*Integer ganz ausgeschrieben??*/int idPartnerprofil, String firmenName) throws IllegalArgumentException;
+		public Unternehmen anlegenUnternehmen(/*Integer ganz ausgeschrieben??*/int idPartnerprofil, String firmenName, String adresse, String standort) throws IllegalArgumentException;
 
 		public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException;
 
