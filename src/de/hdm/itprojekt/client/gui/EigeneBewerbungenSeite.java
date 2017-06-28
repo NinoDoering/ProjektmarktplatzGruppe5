@@ -20,6 +20,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.gui.BewerbungenSeite.getBewerbungenAusDB;
 import de.hdm.itprojekt.shared.GreetingService;
@@ -39,15 +40,18 @@ private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private Bewerbung b1 = new Bewerbung();
 	private Person p = new  Person();
+	private RoleManagement rm  = null;
+	private Navigator navi = null;
 	
 	final SingleSelectionModel<Bewerbung> ssmalleBerwerbungen = new SingleSelectionModel<Bewerbung>();
 	
 	String deleteBewerbung = new String("L�schen");
 	Button deleteBew	 = new Button();
 	
-	public EigeneBewerbungenSeite(Person p) {
+	public EigeneBewerbungenSeite(RoleManagement rm, Navigator navi) {
 		// TODO Auto-generated constructor stub
-		this.p =p; 
+		this.rm =rm;
+		this.navi = navi;
 	}
 
 
@@ -72,7 +76,7 @@ RootPanel.get("Anzeige").setWidth("100%");
 		//hpanelBewerbung.add(anlegenbutton);
 		this.add(hpanelBewerbung);
 		this.add(vpanelBewerbung);
-		
+	
 		eigenebewerbungentabelle.setSelectionModel(ssmalleBerwerbungen);
 		
 		ssmalleBerwerbungen.addSelectionChangeHandler(new Handler() {
@@ -111,7 +115,7 @@ RootPanel.get("Anzeige").setWidth("100%");
 		eigenebewerbungentabelle.addColumn(bewerbungtabellebewerbungstext, "Bewerbungstext");
 		eigenebewerbungentabelle.addColumn(bewerbungtabellestatus, "Bewerbungsstatus");
 		
-		gwtproxy.getBewerbungByBewerber(p, new getEigeneBewerbung());
+		gwtproxy.getBewerbungByBewerber(rm.getUser(), new getEigeneBewerbung());
 		
 		
 		deleteBew.addClickHandler(new ClickHandler() {

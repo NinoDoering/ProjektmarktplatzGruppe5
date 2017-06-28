@@ -279,7 +279,7 @@ public class PersonSeite extends Showcase{
 					// TODO Auto-generated method stub
 					
 					//DialogBox dialoxBoxTeamAnlegen = new DialogBoxTeamAnlegen(p);
-					Showcase showcase = new TeamSeite(p);
+					Showcase showcase = new TeamSeite(rm, navi);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
 				}
@@ -459,7 +459,7 @@ public class PersonSeite extends Showcase{
 		
 		@Override
 		public void onClick(ClickEvent event){
-			Showcase scase = new EigeneBewerbungenSeite(p);
+			Showcase scase = new EigeneBewerbungenSeite(rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(scase);
 		}
@@ -497,7 +497,7 @@ public class PersonSeite extends Showcase{
 
 				public void onSuccess(Vector<Bewerbung> result) {
 					// TODO Auto-generated method stub
-					Showcase showcase = new EigeneBewerbungenSeite(p);
+					Showcase showcase = new EigeneBewerbungenSeite(rm, navi);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
 				}
