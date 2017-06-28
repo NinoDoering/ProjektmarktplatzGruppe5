@@ -82,7 +82,7 @@ public class DialogBoxBeteiligung extends DialogBox {
 				beteiligung.setIdBeteiligter(ausschreibung.getIdAusschreibender());
 				beteiligung.setIdProjekt(ausschreibung.getIdProjekt());
 				
-				bewerbung.setBewerbungsStatus("zusage");
+//				bewerbung.setBewerbungsStatus("zusage");
 			
 				
 			}
