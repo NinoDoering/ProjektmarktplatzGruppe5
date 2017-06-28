@@ -26,7 +26,7 @@ public class Navigator extends StackPanel{
 	RoleManagement rm = new RoleManagement();
 	//Anlegen der Hyperlinks
 	Hyperlink home = new Hyperlink();
-	Anchor reportLink= new Anchor("ReportGenerator");
+	Anchor reportLink= new Anchor();
 	
 	Button btnBack = new Button ("Zurück zur Startseite");
 	
@@ -60,9 +60,13 @@ public class Navigator extends StackPanel{
 		homeNavigator.setSpacing(5);
 		homeNavigator.setWidth("100%");
 		
-		personalNavigator.add(meineBewerbungen);
-		meineBewerbungen.setWidth("200px");
-		meineBewerbungen.setStylePrimaryName("navi-button");
+//		personalNavigator.add(meineBewerbungen);
+//		meineBewerbungen.setWidth("200px");
+//		meineBewerbungen.setStylePrimaryName("navi-button");
+		
+		personalNavigator.add(reportButton);
+		reportButton.setWidth("200px");
+		reportButton.setStylePrimaryName("navi-button");
 		
 		RootPanel.get("RechtsUnten").add(rechtsUnten);
 
@@ -70,7 +74,7 @@ public class Navigator extends StackPanel{
 		this.setWidth("250px");
 		this.addStyleName("gwt-StackPanel");
 		this.add(homeNavigator, "Startseite");
-		this.add(personalNavigator, "Persönliche Funktionen");
+		this.add(personalNavigator, "Administrationsbereich");
 		
 		agb.addClickHandler(new ClickHandler() {
 			

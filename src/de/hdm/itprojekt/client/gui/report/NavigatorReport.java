@@ -6,18 +6,20 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.shared.bo.*;
+import de.hdm.itprojekt.client.gui.report.*;
+import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.Projektmarktplatz;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.gui.EigeneBewerbungenSeite;
 import de.hdm.itprojekt.client.gui.ImpressumMeetProjects;
 import de.hdm.itprojekt.client.gui.RoleManagement;
 import de.hdm.itprojekt.client.gui.Startseite;
-import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.GreetingServiceAsync;
 
 public class NavigatorReport extends StackPanel {
 	
@@ -25,9 +27,9 @@ public class NavigatorReport extends StackPanel {
 	private VerticalPanel panelReport = new VerticalPanel();
 	private VerticalPanel panelNavigator = new VerticalPanel();
 
+	GreetingServiceAsync gwtproxy2 = ClientSideSettings.getMarktplatzVerwaltung();
 	private ClickHandler clickHandler = null;
 	private ClickEvent clickEvent = null;
-	private Person p = new Person();
 	
 	private Anchor meetProjectsLink = new Anchor();
 	

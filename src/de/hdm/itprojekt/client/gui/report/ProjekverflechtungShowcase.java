@@ -30,7 +30,7 @@ public class ProjekverflechtungShowcase extends Showcase {
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
-		return "Report für die Projektverflechtungen";
+		return "<h1>Report für die Projektverflechtungen</h1>";
 	}
 
 	@Override

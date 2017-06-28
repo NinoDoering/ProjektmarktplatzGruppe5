@@ -28,7 +28,7 @@ public class AGBMeetProjects extends Showcase {
 		+ "Der Schutz und die Sicherheit von persönlichen Daten hat bei uns eine hohe Priorität."
 		+ "Daher halten wir uns strikt an die Regeln des deutschen Bundesdatenschutzgesetzes (BDSG)."
 		+ "Nachfolgend werden Sie darüber informiert, welche Art von Daten erfasst und zu welchem Zweck sie erhoben werden:"
-
+		+"<br></br>"
 		+ "1. Datenübermittlung /Datenprotokollierung"
 		+"Beim Besuch dieser Seite verzeichnet der Web-Server automatisch Log-Files, die keiner bestimmten Person zugeordnet werden können." 
 		+"Diese Daten beinhalten z. B. den Browsertyp und -version, verwendetes Betriebssystem, Referrer URL (die zuvor besuchte Seite),"
