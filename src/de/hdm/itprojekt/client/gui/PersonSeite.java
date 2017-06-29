@@ -325,19 +325,7 @@ public class PersonSeite extends Showcase{
 				}
 		});
 	
-		// Profil-änderungen speichern
-		speichernbutton.addClickHandler(new ClickHandler(){
-				
-				@Override
-				public void onClick(ClickEvent event){
-					gwtproxy.savePerson(rm.getUser(), new SpeichernProfilCallback());
-					
-					
-					
-					
-					
-				}
-			});
+	
 		
 		// Profilbeabreiten abbrechen
 		abbrechenbutton.addClickHandler(new ClickHandler(){
@@ -506,6 +494,30 @@ public class PersonSeite extends Showcase{
 		}
 	});
 	
+	
+	
+	// Profil-änderungen speichern
+	speichernbutton.addClickHandler(new ClickHandler(){
+			
+			@Override
+			public void onClick(ClickEvent event){
+				
+				Person px = rm.getUser();
+				px.setVorname(boxName.getText());
+				px.setNachname(boxNachname.getText());
+				px.setAdresse(boxAdresse.getText());
+				px.setStandort(boxStandort.getText());
+				
+				gwtproxy.savePerson(px, new SpeichernProfilCallback());
+				
+				
+				
+				
+				
+			}
+		});
+	
+	
 }
 	
 
@@ -525,6 +537,8 @@ private class BearbeitenvomProfilCallback implements AsyncCallback<Person>{
 	
 	}
 	
+	
+
 }
 	
 private class SpeichernProfilCallback implements AsyncCallback<Void>{
@@ -536,10 +550,10 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 
 	@Override
 	public void onSuccess(Void result) {
-		p.setVorname(boxName.getText());
-		p.setNachname(boxNachname.getText());
-		p.setAdresse(boxAdresse.getText());
-		p.setStandort(boxStandort.getText());
+//		p.setVorname(boxName.getText());
+//		p.setNachname(boxNachname.getText());
+//		p.setAdresse(boxAdresse.getText());
+//		p.setStandort(boxStandort.getText());
 		
 		boxTitel.setReadOnly(true);
 		boxName.setReadOnly(true);
