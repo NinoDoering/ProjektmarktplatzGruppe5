@@ -33,6 +33,7 @@ public class EigenschaftAusSeite extends Showcase{
 	private Ausschreibung a1 = new Ausschreibung();
 	private Projekt p1 = new Projekt();
 	private Marktplatz m1 = new Marktplatz();
+	private Eigenschaft eig = new Eigenschaft();
 	private Person projektLeiter = new Person();
 	private RoleManagement rm = null;
 	private Navigator navi = null;
@@ -41,11 +42,12 @@ public class EigenschaftAusSeite extends Showcase{
 	private HorizontalPanel hpanelEigenschaft = new HorizontalPanel();
 	private VerticalPanel vpanelEigenschaft = new VerticalPanel(); 
 	private HorizontalPanel beforeHere = new HorizontalPanel();
-	private Button backToAusschreibung = new Button ("Zurück zu den Ausschreibungen");
+	private Button backToAusschreibung = new Button ("Zurück zu den eigenerstellten Ausschreibungen");
+	private Button backToAusschreibung1 = new Button ("Zurück zu den Ausschreibungen als Bewerber");
 	public EigenschaftAusSeite() {
 		// TODO Auto-generated constructor stub
 	}
-	
+ 
 	public EigenschaftAusSeite(Marktplatz m1, Ausschreibung a1, Projekt p1, final RoleManagement rm, final Navigator navi){
 		this.m1=m1;
 		this.a1=a1;
@@ -72,6 +74,7 @@ public class EigenschaftAusSeite extends Showcase{
 		eigenschafttabelle.setStylePrimaryName("celltable");
 		vpanelEigenschaft.add(eigenschafttabelle);
 		hpanelEigenschaft.add(backToAusschreibung);
+		hpanelEigenschaft.add(backToAusschreibung1);
 		
 		this.add(beforeHere);
 		this.add(hpanelEigenschaft);
@@ -185,7 +188,19 @@ public class EigenschaftAusSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new AusschreibungSeite(m1, p1, rm, navi);
+				Showcase showcase = new EigeneAusschreibungen(a1, eig, rm, navi, p1, m1);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+				
+			}
+		});
+		
+	backToAusschreibung1.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new AusschreibungSeite(m1, p1, a1, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				
@@ -211,9 +226,7 @@ public class EigenschaftAusSeite extends Showcase{
 				
 				
 			}
-			
-			
-			
+
 		} }
 	
 		

@@ -74,7 +74,6 @@ public class AusschreibungSeite extends Showcase {
 		this.navi = navi;
 		this.eig = eig;
 		
-
 		}
 	
 	public AusschreibungSeite(final Marktplatz mp, final Projekt selectedprojekt, final RoleManagement rm, final Navigator navi) {
