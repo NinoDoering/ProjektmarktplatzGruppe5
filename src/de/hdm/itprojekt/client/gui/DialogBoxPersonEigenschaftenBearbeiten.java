@@ -75,7 +75,9 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		arbeitsgebietEigenschaften.addItem("Versicherungen");
 		arbeitsgebietEigenschaften.addItem("Finanzen");
 		arbeitsgebietEigenschaften.addItem("Immobilien");
-	
+		arbeitsgebietEigenschaften.addItem("Pharmaindustrie");
+		arbeitsgebietEigenschaften.addItem("Luft- und Raumfahrt");
+		
 		
 		
 		ausbildungEigenschaften.addItem("Softwareentwickler");
@@ -83,22 +85,32 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		ausbildungEigenschaften.addItem("Versicherungskaufmann"); 
 		ausbildungEigenschaften.addItem("Finanzkaufmann"); 
 		ausbildungEigenschaften.addItem("Immobilienkaufmann");
+		ausbildungEigenschaften.addItem("Pharmazeut");
+		ausbildungEigenschaften.addItem("Luft- und Raumfahrt Ingenieur");
 		
 		berufserfahrungsjahreEigenschaften.addItem("1 bis 5 Jahre");
 		berufserfahrungsjahreEigenschaften.addItem("5 bis 10");
 		berufserfahrungsjahreEigenschaften.addItem("10  bis 20");
+		berufserfahrungsjahreEigenschaften.addItem("20  bis 50 Jahre");
 
 		sprachkenntnisseEigenschaften.addItem("Französisch");
 		sprachkenntnisseEigenschaften.addItem("Englisch");
 		sprachkenntnisseEigenschaften.addItem("Spanisch");
+		sprachkenntnisseEigenschaften.addItem("Englisch + Französisch ");
+		sprachkenntnisseEigenschaften.addItem("Englisch + Spanisch ");
+		sprachkenntnisseEigenschaften.addItem("Französisch + Spanisch");
+		sprachkenntnisseEigenschaften.addItem("Englisch + Französisch + Spanisch ");
 		
 		employmentstatusEigenschaften.addItem("Student");
 		employmentstatusEigenschaften.addItem("Angestellter");
+		employmentstatusEigenschaften.addItem("Selbstständig");
 		
+		abschlussEigenschaften.addItem("Hauptschulabschluss");
 		abschlussEigenschaften.addItem("Mittlere Reife");
 		abschlussEigenschaften.addItem("Abitur");
 		abschlussEigenschaften.addItem("Bachelor");
 		abschlussEigenschaften.addItem("Master");
+		abschlussEigenschaften.addItem("Doktor");
 		
 		eigtAnlegen.addClickHandler(new ClickHandler(){
 
@@ -121,7 +133,7 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 							@Override
 							public void onFailure(Throwable caught) {
 								// TODO Auto-generated method stub
-								Window.alert("Etwas BEI der eigenschaft schief gelaufen ");
+								Window.alert("Es ist ein Fehler unterlaufen ");
 							}
 
 							@Override
@@ -204,7 +216,7 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 				
 				
 				
-				eigenschaft.setIdPartnerprofil(pe.getIdPartnerprofil());
+		
 				gwtproxy.saveEigenschaftnachPP(eigenschaft, new AsyncCallback<Void>() {
 
 					@Override
