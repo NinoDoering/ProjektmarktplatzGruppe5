@@ -389,6 +389,10 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 	
 	// savePerson
+	
+	public Person savePersonPers(Person pe) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return this.persMapper.updatePerson(pe);}
 
 	// getPersonById
 	@Override
@@ -675,6 +679,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	public void saveTeam(Team t) throws IllegalArgumentException {
 		teamMapper.updateTeam(t);
 
+	}
+	
+	// saveTeamt
+	public Team saveTeamt(Team t) throws IllegalArgumentException {
+		return this.teamMapper.updateTeam(t);
 	}
 
 	// getTeamById
