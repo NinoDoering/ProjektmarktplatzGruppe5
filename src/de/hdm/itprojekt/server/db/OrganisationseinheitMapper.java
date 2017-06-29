@@ -131,12 +131,21 @@ public class OrganisationseinheitMapper {
 		Connection con = DBConnection.connection();
 		int id = 0;
 		try {
+			id = o.getId();
+			
 			Statement stmt = con.createStatement();
-				
+				if(o.getIdPartnerprofil() != null){
 			stmt.executeUpdate("UPDATE organisationseinheit "
 					+ "SET adresse='" + o.getAdresse() + "'," 
-					+ "standort='" + o.getStandort() + "'," 						+ "idPartnerprofil=" + o.getIdPartnerprofil()  
-					+ "' WHERE idOrganisationseinheit= "+ o.getId());
+					+ "standort='" + o.getStandort() + "'," 						
+					+ "idPartnerprofil=" + o.getIdPartnerprofil()  
+					+ " WHERE idOrganisationseinheit="+o.getId());
+				}else{
+					stmt.executeUpdate("UPDATE organisationseinheit "
+							+ "SET adresse='" + o.getAdresse() + "'," 
+							+ "standort='" + o.getStandort() + "'," 						
+							+ "idPartnerprofil = NULL WHERE idOrganisationseinheit= "+ o.getId());
+				}
 				
 		} catch (SQLException e2) {
 			e2.printStackTrace();
