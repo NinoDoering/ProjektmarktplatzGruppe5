@@ -57,12 +57,22 @@ public class BewertungMapper {
 		
 		try{
 			Statement stmt = con.createStatement();
-			stmt.executeUpdate("INSERT INTO bewertung (idBewerbung, textuelleBewertung, fliesskommaBewertung) " 
+			
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idBewertung) AS maxid " + " FROM bewertung ");
+
+			if (rs.next()) {
+
+				bewertung.setId(rs.getInt("maxid") + 1);
+
+				stmt = con.createStatement();
+			
+			stmt.executeUpdate("INSERT INTO bewertung (idBewertung, idBewerbung, textuelleBewertung, fliesskommaBewertung) " 
 					+ "VALUES ('"
 					+ bewertung.getId() + "','" 
 					+ bewertung.getIdBewerbung() + "','" 
 					+ bewertung.getTextuelleBewertung() + "','"
 					+ bewertung.getFliesskommaBewertung() + "')");
+			}
 		}
 		catch(SQLException e){
 			e.printStackTrace();

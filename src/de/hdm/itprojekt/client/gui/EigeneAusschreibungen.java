@@ -40,6 +40,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -56,6 +57,7 @@ public class EigeneAusschreibungen extends Showcase {
 	private Marktplatz markt1 = new Marktplatz();
 	private Organisationseinheit orga = new Organisationseinheit();
 	private Ausschreibung ausschr1 = null;
+	private Bewerbung bewerbung1 = null;
 	private RoleManagement rm = null;
 	private Navigator navi = null;
 	
@@ -76,10 +78,11 @@ public class EigeneAusschreibungen extends Showcase {
 		 
 		 this.pers1= person;
 	}
-	 public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi, final Projekt projekt){
+	// public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi, final Projekt projekt
+	 public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi){
 		 this.rm=rm;
 		 this.navi=navi;
-		 this.p1=projekt;
+		// this.p1=projekt;
 	 }
 	
 	@Override
@@ -152,7 +155,7 @@ public class EigeneAusschreibungen extends Showcase {
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-					Showcase showcase = new EingegangeneBewerbungenSeite(rm, navi, p1, ausschr1);
+					Showcase showcase = new EingegangeneBewerbungenSeite(rm, navi, ausschr1, bewerbung1);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
 				}

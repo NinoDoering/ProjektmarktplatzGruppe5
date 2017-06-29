@@ -389,7 +389,7 @@ public class PersonSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				
-						Showcase showcase = new EigeneAusschreibungen(rm, navi, projekt);
+						Showcase showcase = new EigeneAusschreibungen(rm, navi);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}

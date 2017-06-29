@@ -994,7 +994,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		bewertung.setIdBewerbung(idBewerbung);
 		bewertung.setTextuelleBewertung(textuelleBewertung);
 		bewertung.setFliesskommaBewertung(fliessKommaBewertung);
-
+		
 		return this.bewertungMapper.insertBewertung(bewertung);
 	}
 
