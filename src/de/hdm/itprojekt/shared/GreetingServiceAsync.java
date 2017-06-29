@@ -171,7 +171,7 @@ public interface GreetingServiceAsync {
 		// Beteiligung Asynch
 		
 		
-		void anlegenBeteiligung(String beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung,
+		void anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung,
 				AsyncCallback<Beteiligung> callback);
 
 		void loeschenBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);

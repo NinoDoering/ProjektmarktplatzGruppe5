@@ -330,7 +330,13 @@ public class PersonSeite extends Showcase{
 				
 				@Override
 				public void onClick(ClickEvent event){
-					gwtproxy.savePerson(rm.getUser(), new SpeichernProfilCallback());
+					
+					Person pUser =  rm.getUser();
+					pUser.setVorname(boxName.getText());
+					pUser.setNachname(boxNachname.getText());
+					pUser.setAdresse(boxAdresse.getText());
+					pUser.setStandort(boxStandort.getText());
+					gwtproxy.savePerson(pUser, new SpeichernProfilCallback());
 					
 					
 					
@@ -390,7 +396,7 @@ public class PersonSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				
-						Showcase showcase = new EigeneAusschreibungen(rm, navi);
+						Showcase showcase = new EigeneAusschreibungen(rm, navi,projekt, auss1);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -536,10 +542,7 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 
 	@Override
 	public void onSuccess(Void result) {
-		p.setVorname(boxName.getText());
-		p.setNachname(boxNachname.getText());
-		p.setAdresse(boxAdresse.getText());
-		p.setStandort(boxStandort.getText());
+
 		
 		boxTitel.setReadOnly(true);
 		boxName.setReadOnly(true);

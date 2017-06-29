@@ -8,18 +8,18 @@ public class Beteiligung extends BusinessObject {
 	
 	
 	private static final long serialVersionUID = 1L;
-	private String beteiligungszeit;
+	private int beteiligungszeit;
 	private int idBeteiligter;
 	private int idProjekt;
 	private int idBewertung;
 	
 	
 	
-	public String getBeteiligungszeit() {
+	public int getBeteiligungszeit() {
 		return beteiligungszeit;
 	}
-	public void setBeteiligungszeit(String beteiligungszeit) {
-		this.beteiligungszeit = beteiligungszeit;
+	public void setBeteiligungszeit(int i) {
+		this.beteiligungszeit = i;
 	}
 	public int getIdBeteiligter() {
 		return idBeteiligter;

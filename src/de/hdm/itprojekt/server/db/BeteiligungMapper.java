@@ -46,7 +46,7 @@ public class BeteiligungMapper {
 				beteiligung.setIdProjekt(rs.getInt("idProjekt"));
 				beteiligung.setIdBewertung(rs.getInt("idBewertung"));
 				beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
-				beteiligung.setBeteiligungszeit(rs.getString("beteiligungszeit"));
+				beteiligung.setBeteiligungszeit(rs.getInt("beteiligungszeit"));
 						
 				return beteiligung;
 			}
@@ -73,7 +73,7 @@ public class BeteiligungMapper {
 				beteiligung.setIdProjekt(rs.getInt("idProjekt"));
 				beteiligung.setIdBewertung(rs.getInt("idBewertung"));
 				beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
-				beteiligung.setBeteiligungszeit(rs.getString("beteiligungszeit"));
+				beteiligung.setBeteiligungszeit(rs.getInt("beteiligungszeit"));
 						
 				result.addElement(beteiligung);
 			}
@@ -102,7 +102,7 @@ public class BeteiligungMapper {
 		        beteiligung.setIdProjekt(rs.getInt("idProjekt"));
 		        beteiligung.setIdBewertung(rs.getInt("idBewertung"));
 		        beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
-		        beteiligung.setBeteiligungszeit(rs.getString("beteiligungszeit"));
+		        beteiligung.setBeteiligungszeit(rs.getInt("beteiligungszeit"));
 		        
 		        result.add(beteiligung);
 		      }
@@ -133,7 +133,7 @@ public class BeteiligungMapper {
 	        beteiligung.setIdProjekt(rs.getInt("idProjekt"));
 	        beteiligung.setIdBewertung(rs.getInt("idBewertung"));
 	        beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
-	        beteiligung.setBeteiligungszeit(rs.getString("beteiligungszeit"));
+	        beteiligung.setBeteiligungszeit(rs.getInt("beteiligungszeit"));
 	        
 	        
 	      }
@@ -164,7 +164,7 @@ public class BeteiligungMapper {
 	        beteiligung.setIdProjekt(rs.getInt("idProjekt"));
 	        beteiligung.setIdBewertung(rs.getInt("idBewertung"));
 	        beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
-	        beteiligung.setBeteiligungszeit(rs.getString("beteiligungszeit"));
+	        beteiligung.setBeteiligungszeit(rs.getInt("beteiligungszeit"));
 	        
 	        result.add(beteiligung);
 	      }
@@ -189,12 +189,12 @@ public class BeteiligungMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO beteiligung (idBeteiligung, idProjekt, idBewertung, beteiligungszeit, idBeteiligter) " 
-									+ "VALUES ('" 
-									+ beteiligung.getId() + "','"
+				stmt.executeUpdate("INSERT INTO beteiligung (idBeteiligung, idBewertung, idProjekt, beteiligungszeit, idBeteiligter) " 
+									+ "VALUES (" 
+									+ beteiligung.getId() + " ,'"
 									+ beteiligung.getIdBewertung() + "','"
 									+ beteiligung.getIdProjekt() + "','" 
-									+ format.format(beteiligung.getBeteiligungszeit()) + "','" 
+									+ beteiligung.getBeteiligungszeit() + "','" 
 									+ beteiligung.getIdBeteiligter() + "')");
 			}
 			

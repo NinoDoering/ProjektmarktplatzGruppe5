@@ -42,7 +42,8 @@ public class EigenschaftAusSeite extends Showcase{
 	private HorizontalPanel hpanelEigenschaft = new HorizontalPanel();
 	private VerticalPanel vpanelEigenschaft = new VerticalPanel(); 
 	private HorizontalPanel beforeHere = new HorizontalPanel();
-	private Button backToAusschreibung = new Button ("Zurück zu den Ausschreibungen");
+	private Button backToAusschreibung = new Button ("Zurück zu den eigenerstellten Ausschreibungen");
+	private Button backToAusschreibung1 = new Button ("Zurück zu den Ausschreibungen als Bewerber");
 	public EigenschaftAusSeite() {
 		// TODO Auto-generated constructor stub
 	}
@@ -73,6 +74,7 @@ public class EigenschaftAusSeite extends Showcase{
 		eigenschafttabelle.setStylePrimaryName("celltable");
 		vpanelEigenschaft.add(eigenschafttabelle);
 		hpanelEigenschaft.add(backToAusschreibung);
+		hpanelEigenschaft.add(backToAusschreibung1);
 		
 		this.add(beforeHere);
 		this.add(hpanelEigenschaft);
@@ -193,6 +195,18 @@ public class EigenschaftAusSeite extends Showcase{
 			}
 		});
 		
+	backToAusschreibung1.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new AusschreibungSeite(m1, p1, a1, rm, navi);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+				
+			}
+		});
+		
 	}
 	
 	
@@ -212,9 +226,7 @@ public class EigenschaftAusSeite extends Showcase{
 				
 				
 			}
-			
-			
-			
+
 		} }
 	
 		
