@@ -22,6 +22,7 @@ import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 
@@ -40,6 +41,7 @@ public class UnternehmenSeite extends Showcase {
 	private Button unternehmenAnlegen = new Button("Neues Unternehmen anlegen");
 	private Button unternehmenBearbeiten = new Button("Unternehmen bearbeiten");
 	private Button unternehmenBeitreten = new Button("Unternehmen beitreten");
+	private Button unternehmenLoeschen = new Button("Unternehmen löschen");
 	final SingleSelectionModel<Unternehmen> ssmallunternehmen = new SingleSelectionModel<Unternehmen>();
 	
 	public UnternehmenSeite(final Person person) {
@@ -69,6 +71,7 @@ public class UnternehmenSeite extends Showcase {
 		hpanelUnternehmen.add(unternehmenAnlegen);
 		hpanelUnternehmen.add(unternehmenBearbeiten);
 		hpanelUnternehmen.add(unternehmenBeitreten);
+		hpanelUnternehmen.add(unternehmenLoeschen);
 		this.add(vpanelUnternehmen);
 		this.add(hpanelUnternehmen);
 		
@@ -170,6 +173,57 @@ public class UnternehmenSeite extends Showcase {
 			
 		});
 		
+		unternehmenLoeschen.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				u1.setId(rm.getUser().getIdUnternehmen());
+				if (rm.getUser().getIdTeam() == null){
+					rm.getUser().setIdUnternehmen(0);
+				}
+				gwtproxy.getPartnerprofilByOrganisationseinheit(rm.getSelectedRoleAsObject(), new AsyncCallback<Partnerprofil>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Partnerprofil result) {
+						// TODO Auto-generated method stub
+						u1.setIdPartnerprofil(result.getId());
+						
+						gwtproxy.savePerson(rm.getUser(), new AsyncCallback<Void>(){
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+
+							@Override
+							public void onSuccess(Void result) {
+								// TODO Auto-generated method stub
+								
+							}
+
+					
+							
+						});
+					}
+					
+				});
+				
+				
+				
+				
+				
+				
+			}
+//			
+		});
+		
 			// Spalten Ende
 		
 			//Spalten der Tabele hinzufügen
@@ -201,3 +255,24 @@ public class UnternehmenSeite extends Showcase {
 				
 			}
 }
+
+
+//gwtproxy.loeschenUnternehmen(u1, new AsyncCallback<Void>(){
+//
+//	@Override
+//	public void onFailure(Throwable caught) {
+//		// TODO Auto-generated method stub
+//		Window.alert("Fehler beim Löschen des Unternehmens");
+//	}
+//
+//	@Override
+//	public void onSuccess(Void result) {
+//		// TODO Auto-generated method stub
+//		Window.alert("Das Unternehmen wurde erfolgreich gelöscht");
+//		Showcase showcase = new UnternehmenSeite(rm, navi);
+//		RootPanel.get("Anzeige").clear();
+//		RootPanel.get("Anzeige").add(showcase);
+//	}
+//	
+//});
+//

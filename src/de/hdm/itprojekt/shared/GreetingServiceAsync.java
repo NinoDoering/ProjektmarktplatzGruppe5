@@ -224,6 +224,8 @@ public interface GreetingServiceAsync {
 
 		void loeschenUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
 		
+		void loeschenUnternehmenInteger(Integer u, AsyncCallback<Void> callback);
+		
 		void getUnternehmenById(int idUnternehmen, AsyncCallback<Unternehmen> callback);
 
 		void saveUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
@@ -252,8 +254,5 @@ public interface GreetingServiceAsync {
 
 		void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
 
-
-
-	
 
 	}

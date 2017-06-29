@@ -2,7 +2,7 @@ package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
 import java.util.Vector;
-
+import de.hdm.itprojekt.server.db.PersonMapper;
 import de.hdm.itprojekt.shared.bo.*;
 
 //Alle Mappermethoden in dieser Klasse funktionieren!
@@ -163,16 +163,24 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 	}
 
 	// DELETE
-	public void deleteUnternehmen(Unternehmen u) {
+	public void deleteUnternehmenInteger(Integer u) {
+		Unternehmen u1 = new Unternehmen();
+		u1.setId(u);
+		
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
-			// Schon wieder wird id verwendet --> sollten Id als Attribut
-			// hinzuf�gen
-			stmt.executeUpdate("DELETE * FROM unternehmen " + " WHERE idUnternehmen= " + u.getId());
+			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE idUnternehmen= " + u);
+			super.deleteOrganisationseinheit(u1);
 		} catch (SQLException e3) {
 			e3.printStackTrace();
 		}
 	}
+	
+	public void deleteUnternehmen(Unternehmen u) {
+		this.deleteUnternehmenInteger(u.getId());
+	}
+	
+	
 }

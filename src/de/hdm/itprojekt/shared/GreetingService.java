@@ -226,6 +226,8 @@ public interface GreetingService extends RemoteService  {
 		public Unternehmen anlegenUnternehmen(/*Integer ganz ausgeschrieben??*/int idPartnerprofil, String firmenName, String adresse, String standort) throws IllegalArgumentException;
 
 		public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException;
+		
+		public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException;
 
 		public Unternehmen getUnternehmenById (int idUnternehmen);
 		

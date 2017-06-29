@@ -294,5 +294,17 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 			e6.printStackTrace();
 		}
 	}
+	
+	public void deletePersonfromUnternehmen(Integer i){
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+
+			stmt.executeUpdate("UPDATE person SET " + "idUnternehmen= NULL WHERE idUnternehmen= " + i);
+		} catch (SQLException e6) {
+			e6.printStackTrace();
+		}
+		
+	}
 
 }

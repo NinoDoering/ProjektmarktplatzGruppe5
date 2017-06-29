@@ -387,6 +387,8 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		persMapper.updatePerson(pe);
 
 	}
+	
+	// savePerson
 
 	// getPersonById
 	@Override
@@ -736,6 +738,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		}
 
 		this.unternehmenMapper.deleteUnternehmen(u);
+	}
+	
+	// loeschenUnternehmenByInteger
+	public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException {
+		this.unternehmenMapper.deleteUnternehmenInteger(u);
 	}
 
 	// getUnternehmenById
