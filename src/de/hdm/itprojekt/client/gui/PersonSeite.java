@@ -350,6 +350,7 @@ public class PersonSeite extends Showcase{
 			}
 		});
 	
+	
 		
 		// eigene Projekte anzeigen lassen
 		
@@ -370,7 +371,7 @@ public class PersonSeite extends Showcase{
 					public void onSuccess(Vector<Projekt> result) {
 						// TODO Auto-generated method stub
 				
-						Showcase showcase = new EigeneProjekte(p);
+						Showcase showcase = new EigeneProjekte(rm, navi);
 					
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
@@ -389,7 +390,7 @@ public class PersonSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				
-						Showcase showcase = new EigeneAusschreibungen(rm, navi, projekt);
+						Showcase showcase = new EigeneAusschreibungen(rm, navi);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}

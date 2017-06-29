@@ -40,6 +40,9 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
+
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -56,9 +59,10 @@ public class EigeneAusschreibungen extends Showcase {
 	private Marktplatz markt1 = new Marktplatz();
 	private Organisationseinheit orga = new Organisationseinheit();
 	private Ausschreibung ausschr1 = null;
+	private Bewerbung bewerbung1 = null;
 	private RoleManagement rm = null;
 	private Navigator navi = null;
-	
+	private Eigenschaft eig = new Eigenschaft();
 	
 	// Buttons 
 	private Button bearbeitenAusschreibung = new Button("Gewähltes Ausschreibung bearbeiten");
@@ -76,12 +80,22 @@ public class EigeneAusschreibungen extends Showcase {
 		 
 		 this.pers1= person;
 	}
-	 public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi, final Projekt projekt){
+	// public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi, final Projekt projekt
+	 public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi){
 		 this.rm=rm;
 		 this.navi=navi;
-		 this.p1=projekt;
+		// this.p1=projekt;
 	 }
-	
+	 
+	 public EigeneAusschreibungen(final Ausschreibung ausschr1, final Eigenschaft eig, final RoleManagement rm, final Navigator navi, final Projekt p1, final Marktplatz markt1){
+		 this.ausschr1=ausschr1;
+		 this.eig=eig;
+		 this.rm=rm;
+		 this.navi=navi;
+		 this.p1=p1;
+		 this.markt1=markt1;
+	 } 
+	 
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -147,12 +161,24 @@ public class EigeneAusschreibungen extends Showcase {
 				}
 			});
 			
+			bearbeitenAusschreibung.addClickHandler(new ClickHandler(){
+
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					DialogBox dialogBoxAusschreibungBearbeiten = new DialogBoxAusschreibungBearbeiten(ausschr1, eig, rm, navi, p1, markt1);
+//					RootPanel.get("Anzeige").clear();
+//					RootPanel.get("Anzeige").add(dialogBoxAusschreibungBearbeiten);
+					dialogBoxAusschreibungBearbeiten.center();
+				}
+			});
+			
 			bewerbungenAnsehen.addClickHandler(new ClickHandler() {
 				
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-					Showcase showcase = new EingegangeneBewerbungenSeite(rm, navi, p1, ausschr1);
+					Showcase showcase = new EingegangeneBewerbungenSeite(rm, navi, ausschr1, bewerbung1);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
 				}

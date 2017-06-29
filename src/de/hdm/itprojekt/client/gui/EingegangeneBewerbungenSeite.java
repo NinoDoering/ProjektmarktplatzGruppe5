@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
@@ -59,13 +60,24 @@ public class EingegangeneBewerbungenSeite extends Showcase{
 	String deleteBewerbung = new String("L�schen");
 	Button deleteBew	 = new Button();
 	
-	 public EingegangeneBewerbungenSeite(final RoleManagement rm, final Navigator navi, final Projekt projekt, final Ausschreibung aus1) {
+//	public EingegangeneBewerbungenSeite(final RoleManagement rm, final Navigator navi, final Projekt projekt, final Ausschreibung aus1
+	 public EingegangeneBewerbungenSeite(final RoleManagement rm, final Navigator navi, final Ausschreibung aus1, final Bewerbung bewerbung1) {
 		// TODO Auto-generated constructor stub
 		 this.rm=rm;
 		 this.navi=navi;
-		 this.projekt=projekt;
+		// this.projekt=projekt;
 		 this.ausschreibung=aus1;
+		 this.bewerbung=bewerbung1;
 	}
+	 
+	 public EingegangeneBewerbungenSeite(final RoleManagement rm, final Navigator navi, final Ausschreibung aus1) {
+			// TODO Auto-generated constructor stub
+			 this.rm=rm;
+			 this.navi=navi;
+			// this.projekt=projekt;
+			 this.ausschreibung=aus1;
+			
+		}
 	
 	@Override
 	protected String getHeadlineText() {
@@ -96,6 +108,7 @@ public class EingegangeneBewerbungenSeite extends Showcase{
 			public void onSelectionChange(SelectionChangeEvent event) {
 				
 				bewerbung=ssmalleExterneBerwerbungen.getSelectedObject();
+				Window.alert("ID BEWERBUNG"+ ssmalleExterneBerwerbungen.getSelectedObject().getId() + ssmalleExterneBerwerbungen.getSelectedObject().getBewerbungsText() );
 				
 		}
 		});
@@ -120,19 +133,23 @@ public class EingegangeneBewerbungenSeite extends Showcase{
 			
 		};
 	
+		externeBewerbungentabelle.addColumn(bewerbungtabellebewerbungstext, "Bewerbungstext");
+		externeBewerbungentabelle.addColumn(bewerbungsdatum, "Datum der Bewerbung");
+		gwtproxy.getBewerbungByAusschreibung(ausschreibung, new getExterneBewerbungenAusDB());
+		
 		bewerten.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				DialogBox dialogBoxBewertung = new DialogBoxBeteiligung();
+//				Window.alert(""+ rm.getUser().getId()+ ausschreibung.getId()+ bewerbung.getId());
+				
+				DialogBox dialogBoxBewertung = new DialogBoxBeteiligung(rm, navi, ausschreibung, bewerbung);
 				dialogBoxBewertung.center();
 			}
 		});
 		
-		externeBewerbungentabelle.addColumn(bewerbungtabellebewerbungstext, "Bewerbungstext");
-		externeBewerbungentabelle.addColumn(bewerbungsdatum, "Datum der Bewerbung");
-		gwtproxy.getBewerbungByAusschreibung(ausschreibung, new getExterneBewerbungenAusDB());
+		
 		
 	
 		

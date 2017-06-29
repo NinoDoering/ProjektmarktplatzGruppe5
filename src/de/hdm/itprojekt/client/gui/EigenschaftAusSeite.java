@@ -33,6 +33,7 @@ public class EigenschaftAusSeite extends Showcase{
 	private Ausschreibung a1 = new Ausschreibung();
 	private Projekt p1 = new Projekt();
 	private Marktplatz m1 = new Marktplatz();
+	private Eigenschaft eig = new Eigenschaft();
 	private Person projektLeiter = new Person();
 	private RoleManagement rm = null;
 	private Navigator navi = null;
@@ -45,7 +46,7 @@ public class EigenschaftAusSeite extends Showcase{
 	public EigenschaftAusSeite() {
 		// TODO Auto-generated constructor stub
 	}
-	
+ 
 	public EigenschaftAusSeite(Marktplatz m1, Ausschreibung a1, Projekt p1, final RoleManagement rm, final Navigator navi){
 		this.m1=m1;
 		this.a1=a1;
@@ -185,7 +186,7 @@ public class EigenschaftAusSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new AusschreibungSeite(m1, p1, rm, navi);
+				Showcase showcase = new EigeneAusschreibungen(a1, eig, rm, navi, p1, m1);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				
