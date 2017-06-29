@@ -387,6 +387,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		persMapper.updatePerson(pe);
 
 	}
+	
+	// savePerson
+	
+	public Person savePersonPers(Person pe) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return this.persMapper.updatePerson(pe);}
 
 	// getPersonById
 	@Override
@@ -674,6 +680,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		teamMapper.updateTeam(t);
 
 	}
+	
+	// saveTeamt
+	public Team saveTeamt(Team t) throws IllegalArgumentException {
+		return this.teamMapper.updateTeam(t);
+	}
 
 	// getTeamById
 	@Override
@@ -736,6 +747,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		}
 
 		this.unternehmenMapper.deleteUnternehmen(u);
+	}
+	
+	// loeschenUnternehmenByInteger
+	public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException {
+		this.unternehmenMapper.deleteUnternehmenInteger(u);
 	}
 
 	// getUnternehmenById

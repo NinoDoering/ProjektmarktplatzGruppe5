@@ -246,8 +246,8 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 //					+ "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", " 
 //					+ "idTeam=\""+ pe.getIdTeam() + "\" " 
 //					+ " WHERE idPerson= " + pe.getId());
-			
-			
+		
+//			super.organisationseinheitMapper().updateOrganisationseinheit(pe);
 			
 			 Statement stmt = con.createStatement();
 			
@@ -268,10 +268,13 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 				          "\", " + "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", " + "idTeam=NULL" + " WHERE idPerson=" + pe.getId());
 			      
 	        }else if(pe.getIdTeam()!=null && pe.getIdUnternehmen()!=null){
-			      stmt.executeUpdate("UPDATE person, organisationseinheit " + "SET vorname=\""
+			      stmt.executeUpdate("UPDATE person " + "SET vorname=\""
 				          + pe.getVorname() + "\", " + "nachname=\"" + pe.getNachname() + "\", " + "titel=\""+ pe.getTitel() +
-				          "\", " + "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", "+ "standort=\"" + pe.getStandort() +"\"," +"adresse=\""+ pe.getAdresse() + "\"," + "idTeam=\""+ pe.getIdTeam() + "\" "
+				          "\", " + "idUnternehmen=\"" + pe.getIdUnternehmen() + "\", " + "idTeam=\""+ pe.getIdTeam() + "\" "
 				          + "WHERE idPerson=" + pe.getId());
+			      
+//			      stmt.executeUpdate("UPDATE organisationseinheit " + "SET standort=\"" + pe.getStandort() +"\"," +"adresse=\""+ pe.getAdresse() +"\" "
+//				          + "WHERE idOrganisationseinheit=" + pe.getId());
 } 
 			
 			
@@ -294,5 +297,22 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 			e6.printStackTrace();
 		}
 	}
+	
+	public void deletePersonfromUnternehmen(Integer i){
+		Connection con = DBConnection.connection();
+		try {
+			Statement stmt = con.createStatement();
+
+			stmt.executeUpdate("UPDATE person SET " + "idUnternehmen= NULL WHERE idUnternehmen= " + i);
+		} catch (SQLException e6) {
+			e6.printStackTrace();
+		}
+		
+	}
 
 }
+
+//stmt.executeUpdate("UPDATE person" + "SET vorname=\""
+//        + pe.getVorname() + "\", " + "nachname=\"" + pe.getNachname() + "\", " + "titel=\""+ pe.getTitel() +
+//        "\", " + "idUnternehmen=\"" + 5 + "\", "+ "standort=\"" + pe.getStandort() +"\"," +"adresse=\""+ pe.getAdresse() + "\"," + "idTeam=\""+ pe.getIdTeam() + "\" "
+//        + "WHERE idPerson=" + pe.getId());
