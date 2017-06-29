@@ -357,7 +357,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 			// TODO Auto-generated method stub
 			hide();
 			Window.alert("Ausschreibung wurde gespeichert !");
-			Showcase showcase = new AusschreibungSeite(mp, p, ausschreibung, rm, navi);
+			Showcase showcase = new EigeneAusschreibungen(ausschreibung, eig, rm, navi, p, mp);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}
