@@ -38,6 +38,8 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 
+	//TONY
+	
 	// Panels erstellen
 	private VerticalPanel ausschreibungVP = new VerticalPanel();
 	private VerticalPanel vpanel = new VerticalPanel();
