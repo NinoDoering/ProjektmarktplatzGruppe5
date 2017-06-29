@@ -33,6 +33,8 @@ public class ProjekteSeite extends Showcase{
 	private static final String ssmalleprojektmarktplaetze = null;
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person person = new Person();
+
+
 	private Organisationseinheit orga = new Organisationseinheit();
 	CellTable<Projekt> projekttabelle = new CellTable<Projekt>();
 	
@@ -59,6 +61,12 @@ public class ProjekteSeite extends Showcase{
 	
 	public ProjekteSeite(){
 	
+	}
+	public ProjekteSeite(Marktplatz m1, Projekt p1, RoleManagement rm, Navigator navi){
+		this.selectedmarktplatz = m1;
+		this.p1 = p1;
+		this.rm = rm;
+		this.navi = navi;
 	}
 	
 	public ProjekteSeite(Marktplatz m1, Person person){
