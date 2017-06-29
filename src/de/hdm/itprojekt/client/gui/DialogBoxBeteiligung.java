@@ -10,7 +10,9 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
@@ -27,8 +29,8 @@ public class DialogBoxBeteiligung extends DialogBox {
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	// Panels und weitere GUI Elemente erstellen
-	private VerticalPanel vPanel = new VerticalPanel();
-	private HorizontalPanel hPanel = new HorizontalPanel();
+	private VerticalPanel vPanelBewertung = new VerticalPanel();
+	private HorizontalPanel hPanelBewertung = new HorizontalPanel();
 	
 	
 	private FlexTable beteiligungstabelle = new FlexTable();
@@ -37,9 +39,15 @@ public class DialogBoxBeteiligung extends DialogBox {
 	
 	private Label beteiligungsZeit = new Label("Beteiligungszeit");
 	private Label zugehoerigesProjekt = new Label ("Beteiligung wird zu folgendem Projekt erstellt: ");
+	private Label lbltextBewertung = new Label("Ihre textuelle Bewerbung: ");
+	private Label lblfloatBewertung = new Label("Fliesskommabewertung: ");
+	private ListBox floatBewertung = new ListBox();
 	
-	private TextArea beteiligungsZeitTxta = new TextArea();
-	private TextArea zugehoerigesProjektTxta = new TextArea();
+	
+	
+	private TextBox beteiligungsZeitTxta = new TextBox();
+	private TextArea textuelleBewertung = new TextArea();
+	
 	
 	private Beteiligung beteiligung = new Beteiligung();
 	private Ausschreibung ausschreibung;
@@ -49,6 +57,11 @@ public class DialogBoxBeteiligung extends DialogBox {
 	
 	
 	//Konstruktor mit Paremeter zur Übergabe
+	public DialogBoxBeteiligung() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	public DialogBoxBeteiligung(final Bewerbung bewerbung, final Ausschreibung ausschreibung, Bewertung bewertung, Person person){
 		this.bewerbung = bewerbung;
 		this.ausschreibung = ausschreibung;
@@ -59,19 +72,35 @@ public class DialogBoxBeteiligung extends DialogBox {
 		this.setAnimationEnabled(true);
 		this.setGlassEnabled(true);
 		
+		floatBewertung.addItem("0.0");
+		floatBewertung.addItem("0.1");
+		floatBewertung.addItem("0.2");
+		floatBewertung.addItem("0.3");
+		floatBewertung.addItem("0.4");
+		floatBewertung.addItem("0.5");
+		floatBewertung.addItem("0.6");
+		floatBewertung.addItem("0.7");
+		floatBewertung.addItem("0.8");
+		floatBewertung.addItem("0.9");
+		floatBewertung.addItem("1.0");
 		
 		beteiligungstabelle.setWidget(0, 0, beteiligungsZeit);
-		beteiligungstabelle.setWidget(1, 0, beteiligungsZeitTxta);
+		beteiligungstabelle.setWidget(0, 1, beteiligungsZeitTxta);
+		beteiligungstabelle.setWidget(1, 0, lbltextBewertung);
+		beteiligungstabelle.setWidget(1, 1, textuelleBewertung);
+		beteiligungstabelle.setWidget(2, 0, lblfloatBewertung);
+		beteiligungstabelle.setWidget(2, 1, floatBewertung);
 		
-		vPanel.add(beteiligungstabelle);
-		vPanel.add(beteiligungAnlegen);
-		hPanel.add(vPanel);
+		
+		vPanelBewertung.add(beteiligungstabelle);
+		vPanelBewertung.add(beteiligungAnlegen);
+		hPanelBewertung.add(vPanelBewertung);
 		
 	
-		this.add(hPanel);
+		this.add(hPanelBewertung);
 		
-		// Beginn der ClickHandler
 		
+
 		beteiligungAnlegen.addClickHandler(new ClickHandler(){
 
 			@Override
@@ -88,7 +117,11 @@ public class DialogBoxBeteiligung extends DialogBox {
 			}
 		
 	});
+
 }
+
+
+	
 	
 	
 }

@@ -12,7 +12,7 @@ public class Organisationseinheit extends BusinessObject {
 	private String standort;
 	
 	
-	private int idPartnerprofil;
+	private Integer idPartnerprofil = 0;
 
 
 	public String getAdresse() {
@@ -35,7 +35,7 @@ public class Organisationseinheit extends BusinessObject {
 	}
 
 
-	public int getIdPartnerprofil() {
+	public Integer getIdPartnerprofil() {
 		return idPartnerprofil;
 	}
 

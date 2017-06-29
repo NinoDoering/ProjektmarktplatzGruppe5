@@ -30,6 +30,8 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 	private Person person = new Person ();
 	private Unternehmen unter = new Unternehmen();
 	private Team team = new Team();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	private FlexTable teamTable = new FlexTable();
 	private HorizontalPanel teamHP = new HorizontalPanel();
 	private VerticalPanel teamVP = new VerticalPanel();
@@ -47,9 +49,11 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 	private TextArea teamUnternehemenArea = new TextArea();
 	
 	
-	public DialogBoxTeamAnlegen(final Person person){
+	public DialogBoxTeamAnlegen(final RoleManagement rm, final Navigator navi){
 		teamNameArea.setValue(person.getIdTeam()+"");
 		
+		this.rm=rm;
+		this.navi=navi;
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
 		this.setText("Team");

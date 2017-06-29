@@ -150,10 +150,10 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-
-			stmt.executeUpdate("UPDATE unternehmen " 
-			+ "SET firmenName=\"" + u.getFirmenName()  
-			+ "\" " + " WHERE idUnternehmen= " + u.getId());
+			u.setId(super.updateOrganisationseinheit(u));
+			super.organisationseinheitMapper().updateOrganisationseinheit(u);
+			stmt.executeUpdate("UPDATE unternehmen SET " + "firmenName=\"" 
+			+ u.getFirmenName()  + "\"" + "WHERE idUnternehmen=" + u.getId());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
