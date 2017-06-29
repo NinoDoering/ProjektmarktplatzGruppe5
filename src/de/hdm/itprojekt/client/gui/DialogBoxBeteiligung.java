@@ -46,7 +46,7 @@ public class DialogBoxBeteiligung extends DialogBox {
 	private Button abbrechen = new Button("Abbrechen");
 	private Button noBeteiligung = new Button("Beteiligung verweigern");
 	
-	private Label beteiligungsZeit = new Label("Beteiligungszeit");
+	private Label beteiligungsZeit = new Label("Beteiligungszeit in Tagen: ");
 	private Label zugehoerigesProjekt = new Label ("Beteiligung wird zu folgendem Projekt erstellt: ");
 	private Label lbltextBewertung = new Label("Ihre textuelle Bewerbung: ");
 	private Label lblfloatBewertung = new Label("Fliesskommabewertung: ");
@@ -65,6 +65,7 @@ public class DialogBoxBeteiligung extends DialogBox {
 	private Bewerbung bewerbung;
 	private Ausschreibung ausschreibung1;
 	private Projekt projekt1;
+	private int bewertungsID;
 	
 	private RoleManagement rm = null;
 	private Navigator navi = null;
@@ -79,6 +80,7 @@ public class DialogBoxBeteiligung extends DialogBox {
 		this.setText("Beteiligung und Bewertung anlegen");
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
+		beteiligungAnlegen.setVisible(false);
 		
 		hPanelBewertung.add(bewertungAnlegen);
 		hPanelBewertung.add(beteiligungAnlegen);
@@ -120,7 +122,10 @@ public class DialogBoxBeteiligung extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Window.alert("final RoleManagement rm,"+ rm.getUser().getId() + " final Ausschreibung ausschreibung ," +ausschreibung.getId()+"final Bewerbung bewerbung"+ bewerbung.getId());
+				Window.alert(""+bewertungsID);
+			
+				gwtproxy.anlegenBeteiligung(Integer.parseInt(beteiligungsZeitTxta.getText()), bewerbung.getIdOrganisationseinheit(), ausschreibung1.getIdProjekt(), bewertungsID, new insertBeteiligungInDB());
+				
 			}
 		});
 		
@@ -131,7 +136,7 @@ public class DialogBoxBeteiligung extends DialogBox {
 				// TODO Auto-generated method stub
 				
 				gwtproxy.anlegenBewertung(bewerbung.getId(), textuelleBewertung.getText(), Float.parseFloat(floatBewertung.getSelectedValue()), new insertBewertungInDB());
-				hide();
+				
 			}
 		});
 		
@@ -165,14 +170,33 @@ public class DialogBoxBeteiligung extends DialogBox {
 		@Override
 		public void onSuccess(Bewertung result) {
 			// TODO Auto-generated method stub
-			Window.alert("Bewertung erstellt");
 			
+			bewertungsID=result.getId();
+			Window.alert("Bewertung erstellt ds scheiss ding bewertung" + bewertungsID + result.getTextuelleBewertung());
 			Showcase showcase = new EingegangeneBewerbungenSeite(rm, navi, ausschreibung1);
-			RootPanel.get("Anzeige").clear();
-			RootPanel.get("Anzeige").add(showcase);
+			beteiligungAnlegen.setVisible(true);
+			abbrechen.setVisible(false);
+			bewertungAnlegen.setVisible(false);
 			
 		}
 	}
+	
+	private class insertBeteiligungInDB implements AsyncCallback<Beteiligung>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			Window.alert("stier beteilgigung nicht ");
+		}
+
+		@Override
+		public void onSuccess(Beteiligung result) {
+			// TODO Auto-generated method stub
+			Window.alert("Hallo 2mal nino da");
+			hide();
+		
+		}}
+	
 }
 	
 
