@@ -18,6 +18,7 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 
 import de.hdm.itprojekt.shared.GreetingService;
@@ -38,6 +39,8 @@ public class EigeneProjekte extends Showcase {
 	final SingleSelectionModel<Projekt> ssmallEigeneProjekte = new SingleSelectionModel<Projekt>();
 	private Projekt p1 = new Projekt();
 	private Person pers1 = new Person();
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	private Marktplatz markt1 = new Marktplatz();
 	private Organisationseinheit orga = new Organisationseinheit();
 	
@@ -68,12 +71,18 @@ public class EigeneProjekte extends Showcase {
 			 this.p1= projekt;
 			 this.pers1= person;
 		}
-	
-	 public EigeneProjekte(final Projekt projekt,final  Marktplatz mp,  final Person person) {
+	 public EigeneProjekte(RoleManagement rm,  Navigator navi) {
 			// TODO Auto-generated constructor stub
-			 this.p1= projekt;
-			 this.pers1= person;
+		 this.rm=rm;
+		 this.navi=navi;
+		}
+	
+	
+	 public EigeneProjekte(final  Marktplatz mp,  RoleManagement rm,  Navigator navi) {
+			// TODO Auto-generated constructor stub
 			 this.markt1=mp;
+			 this.rm=rm;
+			 this.navi=navi;
 		}
 	 
 	public EigeneProjekte(Projekt p12, Marktplatz markt12, Organisationseinheit o2, Person pers12) {
@@ -181,9 +190,9 @@ public class EigeneProjekte extends Showcase {
 					// TODO Auto-generated method stub
 					
 					Window.alert("Das Projekt wurde erfolgreich gelöscht");
-					Showcase showcase = new EigeneProjekte(p1,markt1, o, pers1);
+					Showcase showcase = new EigeneProjekte(o);
 					RootPanel.get("Anzeige").clear();
-					RootPanel.get("Anzeige").add(showcase);
+				RootPanel.get("Anzeige").add(showcase);
 				}
 			});
 		
@@ -242,7 +251,7 @@ public class EigeneProjekte extends Showcase {
 			eigeneprojektetabelle.addColumn(projektBeschr, "Beschreibung");
 			eigeneprojektetabelle.addColumn(projektStartD, "Startdatum");
 			eigeneprojektetabelle.addColumn(projektEndD, "Enddatum");
-			gwtproxy.getProjektByPerson(o, new getEigeneProjekte());
+			gwtproxy.getProjektByPerson(rm.getUser(), new getEigeneProjekte());
 	}
 	
 			private class getEigeneProjekte implements AsyncCallback<Vector<Projekt>>{
@@ -256,6 +265,7 @@ public class EigeneProjekte extends Showcase {
 				@Override
 				public void onSuccess(Vector<Projekt> result) {
 					// TODO Auto-generated method stub
+					Window.alert("Funktioniert");
 					eigeneprojektetabelle.setRowData(0, result);
 					eigeneprojektetabelle.setRowCount(result.size(), true);
 				}

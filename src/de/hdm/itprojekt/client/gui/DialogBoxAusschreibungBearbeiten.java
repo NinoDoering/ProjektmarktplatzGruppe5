@@ -267,14 +267,16 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		arbeitsgebietEigenschaften.addItem("Versicherungen");
 		arbeitsgebietEigenschaften.addItem("Finanzen");
 		arbeitsgebietEigenschaften.addItem("Immobilien");
-		ausbildungEigenschaften.addItem("Pharmazeut");
-		ausbildungEigenschaften.addItem("Luft- und Raumfahrt Ingenieur");
+		arbeitsgebietEigenschaften.addItem("Pharmaindustrie");
+		arbeitsgebietEigenschaften.addItem("Luft- und Raumfahrt");
 		
 		ausbildungEigenschaften.addItem("Softwareentwickler");
 		ausbildungEigenschaften.addItem("Automobilkaufmann");
 		ausbildungEigenschaften.addItem("Versicherungskaufmann"); 
 		ausbildungEigenschaften.addItem("Finanzkaufmann"); 
 		ausbildungEigenschaften.addItem("Immobilienkaufmann");
+		ausbildungEigenschaften.addItem("Pharmazeut");
+		ausbildungEigenschaften.addItem("Luft- und Raumfahrt Ingenieur");
 		
 		berufserfahrungsjahreEigenschaften.addItem("1 bis 5 Jahre");
 		berufserfahrungsjahreEigenschaften.addItem("5 bis 10");
