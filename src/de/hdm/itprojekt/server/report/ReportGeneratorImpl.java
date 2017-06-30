@@ -382,6 +382,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 			
 			beteiligungRow.addColumn(new Column(p.getBezeichnung()));
 			beteiligungRow.addColumn(new Column(beteiligung.getBeteiligungszeit()));
+			// beteiligungszeit ist nun int
 		
 			result.addRow(beteiligungRow);
 		}

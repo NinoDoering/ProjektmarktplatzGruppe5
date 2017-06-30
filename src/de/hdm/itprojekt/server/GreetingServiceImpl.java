@@ -189,7 +189,7 @@ public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentExcept
 } 
 
 // getEigenschaftByPartnerprofil()
-public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) {
+public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 
 	Vector<Eigenschaft> result = new Vector<Eigenschaft>();
 
@@ -205,7 +205,7 @@ public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) {
 }
 
 // getEigenschaftByPartnerprofil
-public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) {
+public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
 	
 	Vector<Eigenschaft> result = new Vector<Eigenschaft>();
 
@@ -318,7 +318,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getProjektByPerson
-	public Vector<Projekt> getProjektByPerson(Organisationseinheit o) {
+	public Vector<Projekt> getProjektByPerson(Organisationseinheit o) throws IllegalArgumentException {
 
 		Vector<Projekt> result = new Vector<Projekt>();
 
@@ -334,7 +334,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getBeteiligungByBeteiligter
-	public Vector<Beteiligung> getBeteiligungByBeteiligter(Organisationseinheit o) {
+	public Vector<Beteiligung> getBeteiligungByBeteiligter(Organisationseinheit o) throws IllegalArgumentException {
 
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
@@ -366,6 +366,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 	
 	// getBewerbungByBewerber(Organisationseinheit o)
+
 	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException {
 
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -465,7 +466,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getAusschreibungByProjekt
-	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) {
+	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) throws IllegalArgumentException {
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 
 		if (p != null && this.ausschreibungMapper != null) {
@@ -545,7 +546,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getProjektbyMarktplatz
-	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) {
+	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) throws IllegalArgumentException {
 
 		Vector<Projekt> result = new Vector<Projekt>();
 
@@ -756,7 +757,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	// getUnternehmenById
 	@Override
-	public Unternehmen getUnternehmenById(int idUnternehmen) {
+	public Unternehmen getUnternehmenById(int idUnternehmen) throws IllegalArgumentException {
 		return this.unternehmenMapper.findUnternehmenByKey(idUnternehmen);
 	}
 
@@ -829,7 +830,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getBeteiligungByProjekt
-	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) {
+	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) throws IllegalArgumentException {
 		return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
 	}
 
@@ -958,7 +959,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getBewertungByBewerbung
-	public Bewertung getBewertungByBewerbung(Bewerbung b) {
+	public Bewertung getBewertungByBewerbung(Bewerbung b) throws IllegalArgumentException {
 
 		if (b != null && this.bewertungMapper != null) {
 			Bewertung bewertung = this.bewertungMapper.findBewertungByBewerbung(b.getId());
@@ -1007,7 +1008,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	// anlegenBewertung
 	@Override
-	public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung) {
+	public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung) throws IllegalArgumentException {
 		Bewertung bewertung = new Bewertung();
 
 		bewertung.setId(1);
@@ -1033,7 +1034,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getBeteiligungByBewertung
-	public Beteiligung getBeteiligungByBewertung(Bewertung bewertung) {
+	public Beteiligung getBeteiligungByBewertung(Bewertung bewertung) throws IllegalArgumentException {
 		return this.beteiligungMapper.findBeteiligungByBewertung(bewertung.getId());
 	}
 
@@ -1055,7 +1056,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	 #########################################################*/
 
 	// getOrganisationseinheitById
-	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) {
+	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) throws IllegalArgumentException {
 
 		Person pe = persMapper.findPersonByKey(idOrganisationseinheit);
 		Unternehmen u = unternehmenMapper.findUnternehmenByKey(idOrganisationseinheit);
@@ -1155,7 +1156,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	// }
 
 	// getAllBeteiligungenToProjekt
-	public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) {
+	public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) throws IllegalArgumentException {
 
 		Vector<Projekt> projects = new Vector<Projekt>();
 		for (Beteiligung b : beteiligung) {

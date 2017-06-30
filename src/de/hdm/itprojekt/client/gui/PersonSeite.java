@@ -50,7 +50,7 @@ public class PersonSeite extends Showcase{
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
-	private Button pp1 = new Button("Nächste Seite zum Partnerprofil");
+//	private Button pp1 = new Button("Nächste Seite zum Partnerprofil");
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
@@ -104,7 +104,7 @@ public class PersonSeite extends Showcase{
 	private VerticalPanel personVP = new VerticalPanel();	
 	private VerticalPanel hinzuVP = new VerticalPanel();
 	private HorizontalPanel personHP = new HorizontalPanel();
-	private ListBox listeAnrede = new ListBox();
+//	private ListBox listeAnrede = new ListBox();
 	private TextBox boxTitel = new TextBox();
 	private TextBox boxName = new TextBox();
 	private TextBox boxNachname = new TextBox();
@@ -114,7 +114,7 @@ public class PersonSeite extends Showcase{
 	private TextBox boxFirmenName = new TextBox();
 	private TextBox boxEmail = new TextBox();
 	
-	private Label labelAnrede = new Label("Anrede");
+//	private Label labelAnrede = new Label("Anrede");
 	private Label labelTitel = new Label("Titel");
 	private Label labelName = new Label ("Vorname");
 	private Label labelNachname = new Label("Nachname");
@@ -179,7 +179,7 @@ public class PersonSeite extends Showcase{
 		boxFirmenName.setReadOnly(true);
 		boxEmail.setReadOnly(true);
 		
-		this.add(pp1);
+//		this.add(pp1);
 		this.add(eigeneProjekte);
 		this.add(eigeneBewerbungen);
 		this.add(eigeneAusschreibungen);
@@ -198,14 +198,14 @@ public class PersonSeite extends Showcase{
 		unternehmenSpeichern.setStylePrimaryName("profilButton");
 		unternehmenAbbrechen.setStylePrimaryName("profilButton");
 		eigenschaftenAendern.setStylePrimaryName("profilButton");
-
-		listeAnrede.addItem("Frau");
-		listeAnrede.addItem("Herr");
-		
+//	keine Setter Methode mit Anrede in BO und Mapper
+//		listeAnrede.addItem("Frau");
+//		listeAnrede.addItem("Herr");
+//		
 		personVP.setSpacing(8);
 		
-		tablePerson.setWidget(0, 1, listeAnrede);
-		tablePerson.setWidget(0, 0, labelAnrede);
+//		tablePerson.setWidget(0, 1, listeAnrede);
+//		tablePerson.setWidget(0, 0, labelAnrede);
 		tablePerson.setWidget(1, 1, boxTitel);
 		tablePerson.setWidget(1, 0, labelTitel);
 		tablePerson.setWidget(2, 1, boxName);
@@ -315,7 +315,7 @@ public class PersonSeite extends Showcase{
 				boxStandort.setReadOnly(false);
 				boxTeamName.setReadOnly(false);
 				boxFirmenName.setReadOnly(false);
-				boxEmail.setReadOnly(true);
+				boxEmail.setReadOnly(false);
 				
 				bearbeitenbutton.setVisible(false);
 				deletebutton.setVisible(false);
@@ -333,10 +333,13 @@ public class PersonSeite extends Showcase{
 				public void onClick(ClickEvent event){
 					
 					Person pUser =  rm.getUser();
+					pUser.setTitel(boxTitel.getText());
 					pUser.setVorname(boxName.getText());
 					pUser.setNachname(boxNachname.getText());
 					pUser.setAdresse(boxAdresse.getText());
 					pUser.setStandort(boxStandort.getText());
+					// Email Adresse muss in PersonMapper noch hinzugefügt werden
+					pUser.setEmailAddresse(boxEmail.getText());
 					gwtproxy.savePerson(pUser, new SpeichernProfilCallback());
 					
 					
@@ -463,15 +466,15 @@ public class PersonSeite extends Showcase{
 
 	
 
-	pp1.addClickHandler(new ClickHandler(){
-		
-		@Override
-		public void onClick(ClickEvent event){
-			Showcase scase = new EigeneBewerbungenSeite(rm, navi);
-			RootPanel.get("Anzeige").clear();
-			RootPanel.get("Anzeige").add(scase);
-		}
-	});
+//	pp1.addClickHandler(new ClickHandler(){
+//		
+//		@Override
+//		public void onClick(ClickEvent event){
+//			Showcase scase = new EigeneBewerbungenSeite(rm, navi);
+//			RootPanel.get("Anzeige").clear();
+//			RootPanel.get("Anzeige").add(scase);
+//		}
+//	});
 	
 	
 	eigenschaftenAendern.addClickHandler(new ClickHandler(){

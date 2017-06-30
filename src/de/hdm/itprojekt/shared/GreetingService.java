@@ -54,7 +54,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public void saveMarktplatz (Marktplatz pm) throws IllegalArgumentException;
 		
-		Vector<Marktplatz> getAllMarktplaetze();
+		public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException;
 		
 		
 		
@@ -102,9 +102,7 @@ public interface GreetingService extends RemoteService  {
 		
 		// Partnerprofil pp
 		
-		public Partnerprofil anlegenPartnerprofil()
-				throws IllegalArgumentException;
-
+		public Partnerprofil anlegenPartnerprofil() throws IllegalArgumentException;
 
 		public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException;
 
@@ -164,7 +162,7 @@ public interface GreetingService extends RemoteService  {
 
 		// Bewertung bewertung
 		
-		Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung);
+		public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung) throws IllegalArgumentException;
 
 
 		public void loeschenBewertung(Bewertung bewertung)throws IllegalArgumentException;
@@ -205,7 +203,7 @@ public interface GreetingService extends RemoteService  {
 
 		public Person getPersonById(int idPerson) throws IllegalArgumentException;
 		
-		public void savePerson (Person pe)throws IllegalArgumentException;
+		public void savePerson (Person pe) throws IllegalArgumentException;
 		
 		public Vector<Person> getAllPersons() throws IllegalArgumentException;
 		
@@ -234,7 +232,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException;
 
-		public Unternehmen getUnternehmenById (int idUnternehmen);
+		public Unternehmen getUnternehmenById (int idUnternehmen) throws IllegalArgumentException;;
 		
 		public void saveUnternehmen (Unternehmen u) throws IllegalArgumentException;
 		
