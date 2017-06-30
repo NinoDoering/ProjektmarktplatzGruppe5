@@ -10,6 +10,7 @@ import de.hdm.itprojekt.shared.bo.*;
 
 public class EigenschaftMapper {
 
+	
 	//TONY
 	
 	private static EigenschaftMapper eigenschaftMapper = null;

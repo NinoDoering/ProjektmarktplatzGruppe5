@@ -35,6 +35,7 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class AusschreibungSeite extends Showcase {
 
+	
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Projekt p1 = new Projekt();
 	private Bewerbung bwerb = new Bewerbung();

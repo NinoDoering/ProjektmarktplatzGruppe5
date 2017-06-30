@@ -155,7 +155,7 @@ public class BeteiligungMapper {
 	      Statement stmt = con.createStatement();
 
 	      ResultSet rs = stmt.executeQuery("SELECT * FROM beteiligung "
-	          + " WHERE idProjekt= " + idBeteiligter);
+	          + " WHERE idBeteiligter= " + idBeteiligter);
 
 	     
 	      while (rs.next()) {

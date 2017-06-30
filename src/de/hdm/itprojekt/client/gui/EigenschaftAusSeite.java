@@ -28,6 +28,8 @@ import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
 public class EigenschaftAusSeite extends Showcase{
+	
+	//test123
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Ausschreibung a1 = new Ausschreibung();
