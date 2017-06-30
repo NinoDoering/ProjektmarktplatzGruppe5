@@ -536,11 +536,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		Vector<Projekt> p = this.getProjektbyMarktplatz(pm);
 
 		// zugehoerige Projekte loeschen
-		if (p != null) {
+		
 			for (Projekt projekt : p) {
 				this.loeschenProjekt(projekt);
 			}
-		}
+		
 
 		this.mpMapper.deleteMarktplatz(pm);
 
@@ -579,7 +579,22 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException {
 		return this.mpMapper.findAllMarktplatz();
 	}
-
+	
+	// getMarktplaetzeByPerson
+	public Vector<Marktplatz> getMarktplaetzeByPerson(Organisationseinheit o) throws IllegalArgumentException {
+		Vector<Marktplatz> result = new Vector<Marktplatz>();
+		
+		if (o != null && this.mpMapper != null) {
+			Vector<Marktplatz> mp = this.mpMapper.findMarktplatzByPerson(o.getId());
+			
+			if(o != null){
+				result.addAll(mp);
+			}
+		}
+		return result;
+	}
+	
+	
 	//// getMarktplatzByBezeichnung
 	// public Vector<Marktplatz> getMarktplatzByBezeichnung(String bezeichnung)
 	// throws IllegalArgumentException {

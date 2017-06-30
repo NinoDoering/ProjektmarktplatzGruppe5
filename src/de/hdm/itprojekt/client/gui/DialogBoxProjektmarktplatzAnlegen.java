@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Projektmarktplatz;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
@@ -25,9 +26,14 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 		
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
+//	public DialogBoxProjektmarktplatzAnlegen(final RoleManagement rm, final Navigator navi) {
+//		this.rm=rm;
+//		this.navi=navi;
+//	}
 	VerticalPanel vpanel = new VerticalPanel();
 	HorizontalPanel hpanel = new HorizontalPanel();
-	
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	Button ok = new Button("OK");
 	Button abbrechen = new Button("Abbrechen");
 	
@@ -39,12 +45,13 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 	private Person person = new Person();
 	
 	FlexTable marktplatzdialogboxtabelle = new FlexTable();
-	public DialogBoxProjektmarktplatzAnlegen(final Person person){
+	public DialogBoxProjektmarktplatzAnlegen(final RoleManagement rm, final Navigator navi){
 		this.setText("Projektmarktplatz anlegen");
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
 		this.person = person;
-		
+		this.rm=rm;
+		this.navi=navi;
 		hpanel.add(ok);
 		hpanel.add(abbrechen);
 		

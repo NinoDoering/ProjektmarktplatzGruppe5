@@ -1,9 +1,6 @@
 package de.hdm.itprojekt.server.db;
 
 import java.sql.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
@@ -145,6 +142,36 @@ public class MarktplatzMapper {
 		}
 		return vector;
 	}
+	
+	// Person mit zugehoerigen Projekten ausgeben
+	public Vector<Marktplatz> findMarktplatzByPerson(int idPerson) {
+		Connection con = DBConnection.connection();
+		Vector<Marktplatz> result = new Vector<Marktplatz>();
+		
+		try {
+			Statement stmt = con.createStatement();
+			/*
+			 * SQL-Statement gibt Eintraege aus, welche die eingegebenen
+			 * Bezeichnungen enthalten
+			 */
+			ResultSet rs = stmt
+					.executeQuery("SELECT idMarktplatz, geschaeftsgebiet, bezeichnung FROM Marktplatz "
+							+ "WHERE idPerson= '" + idPerson + "' ORDER BY idMarktplatz DESC");
+			
+			while (rs.next()) {
+				Marktplatz mp = new Marktplatz();
+				mp.setId(rs.getInt("idMarktplatz"));
+				mp.setGeschaeftsgebiet("geschaeftsgebiet");
+				mp.setBezeichnung("bezeichnung");
+				
+				result.addElement(mp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 
 	//update
 	public Marktplatz updateMarktplatz (Marktplatz pm) {
@@ -166,14 +193,14 @@ public class MarktplatzMapper {
 	}
 
 	//delete
-	public void deleteMarktplatz (Marktplatz pm) {
+	public void deleteMarktplatz(Marktplatz pm) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery(
-					"DELETE * from marktplatz " 
-			+ " WHERE idMarktplatz= " + pm.getId());
+			stmt.executeUpdate(
+					"DELETE FROM marktplatz " 
+			+ "WHERE idMarktplatz=" + pm.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

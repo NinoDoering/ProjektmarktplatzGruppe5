@@ -56,6 +56,8 @@ public interface GreetingService extends RemoteService  {
 		
 		public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException;
 		
+		public Vector<Marktplatz> getMarktplaetzeByPerson(Organisationseinheit o) throws IllegalArgumentException;
+		
 		
 		
 		

@@ -30,6 +30,7 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
+import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -50,6 +51,7 @@ public class PersonSeite extends Showcase{
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
+	private Marktplatz m1 = new Marktplatz(); 
 
 	//Buttons
 
@@ -58,6 +60,7 @@ public class PersonSeite extends Showcase{
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
 	private Button eigeneBeteiligung = new Button("Meine Beteiligungen");
+//	private Button eigeneMarktplaetze = new Button("Meine Marktplätze");
 
 	private Navigator navi = null;
 	private RoleManagement rm= null;
@@ -78,6 +81,7 @@ public class PersonSeite extends Showcase{
 	private FlexTable buttonTable = new FlexTable();
 	private FlexTable teamTable = new FlexTable();
 	private FlexTable unternehmenTable = new FlexTable();
+//	private FlexTable marktplatzTable = new FlexTable();
 	
 	private static DialogBox team = new DialogBox();
 	private Button teamBearbeiten = new Button("Team Bearbeiten");
@@ -190,6 +194,7 @@ public class PersonSeite extends Showcase{
 		this.add(eigeneProjekte);
 		this.add(eigeneAusschreibungen);
 		this.add(eigenschaftenAendern);
+//		this.add(eigeneMarktplaetze);
 	
 		
 		bearbeitenbutton.setStylePrimaryName("profilButton");
@@ -254,6 +259,7 @@ public class PersonSeite extends Showcase{
 		unternehmenTable.setCellSpacing(10);
 	
 		
+		
 //		personVP.add(personloeschen);
 //		personVP.add(klickFunktion);
 //		personVP.add(flexTableButtons);
@@ -274,7 +280,7 @@ public class PersonSeite extends Showcase{
 
 		this.setSpacing(8);
 
-	
+		
 		
 	// Teamhinzufügen oder ändern
 		
@@ -367,6 +373,36 @@ public class PersonSeite extends Showcase{
 		});
 	
 	
+//		eigeneMarktplaetze.addClickHandler(new ClickHandler() {
+//
+//				@Override
+//				public void onClick(ClickEvent event) {
+//					// TODO Auto-generated method stub
+//			
+//					gwtproxy.getMarktplaetzeByPerson(rm.getUser(), new AsyncCallback<Vector<Marktplatz>>() {
+//
+//						@Override
+//						public void onFailure(Throwable caught) {
+//							// TODO Auto-generated method stub
+//							Window.alert("projektebyPerson geht NICHT");
+//						}
+//
+//						public void onSuccess(Vector<Marktplatz> result) {
+//							// TODO Auto-generated method stub
+//					
+//							Showcase showcase = new EigeneMarktplaetze(m1, rm, navi);
+//						
+//							RootPanel.get("Anzeige").clear();
+//							RootPanel.get("Anzeige").add(showcase);
+//						}
+//					});
+//				}
+//			
+//			});
+//			
+	
+		
+		
 		
 		// eigene Projekte anzeigen lassen
 		
