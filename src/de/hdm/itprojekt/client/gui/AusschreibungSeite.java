@@ -73,6 +73,11 @@ public class AusschreibungSeite extends Showcase {
 		this.rm = rm;
 		this.navi = navi;
 		this.eig = eig;
+		 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+selectedprojekt.getBezeichnung()+" ");
+		 Label lblMarktplatz = new Label("Sie befinden sich auf folgendem Marktplatz: "+mp.getBezeichnung());
+		 beforeHereProjekt.add(lblMarktplatz);
+		 beforeHereProjekt.add(lblProjekt);
+		 beforeHereProjekt.setSpacing(20);
 		
 		}
 	
