@@ -192,7 +192,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Window.alert("Die Ausschreibung wurde erfolgreich gespeichert! "+rm.getSelectedRoleID() +" " + zugehoerigesProjekt.getBezeichnung());
+				Window.alert("Die Ausschreibung wurde erfolgreich beim Projekt " + zugehoerigesProjekt.getBezeichnung()+ " gespeichert!");
 				gwtproxy.anlegenAusschreibung(rm.getSelectedRoleID(), zugehoerigesProjekt.getId(), aussbez.getText(),
 						aussbeschr.getText(), aussbefrist.getValue(), partnerprofil,
 						Status.laufend, new ausschreibungInDB());
