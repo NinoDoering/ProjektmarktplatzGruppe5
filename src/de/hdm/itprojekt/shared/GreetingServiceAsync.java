@@ -208,7 +208,7 @@ public interface GreetingServiceAsync {
 
 		// Team Asynch
 
-		void anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, int mitgliederAnzahl,
+		void anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, 
 				AsyncCallback<Team> callback);
 
 
@@ -235,7 +235,7 @@ public interface GreetingServiceAsync {
 
 		void saveUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
 		
-		void getUnternehmenByFirmenName(String firmenName, AsyncCallback<Vector<Unternehmen>> callback);
+		void getUnternehmenByFirmenName(String firmenName, AsyncCallback <Unternehmen> callback);
 
 		void getAllUnternehmen(AsyncCallback<Vector<Unternehmen>> callback);
 

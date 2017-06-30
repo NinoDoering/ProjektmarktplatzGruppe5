@@ -9,6 +9,7 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -85,16 +86,16 @@ public class TeamSeite extends Showcase {
 		
 	};
 
-	teamAnlegen.addClickHandler(new ClickHandler(){
+	teamBeitreten.addClickHandler(new ClickHandler(){
 
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
 			t1 = ssmallteams.getSelectedObject();
 			ssmallteams.getSelectedObject().getId();
-			p1.setIdTeam(ssmallteams.getSelectedObject().getId());
+			rm.getUser().setIdTeam(ssmallteams.getSelectedObject().getId());
 		
-				gwtproxy.savePerson(p1, new AsyncCallback<Void>() {
+				gwtproxy.savePerson(rm.getUser(), new AsyncCallback<Void>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -108,7 +109,7 @@ public class TeamSeite extends Showcase {
 						
 						// TODO Auto-generated method stub
 						Window.alert("team geändert");
-						Showcase showcase = new PersonSeite(p1);
+						Showcase showcase = new PersonSeite(rm, navi);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -116,7 +117,16 @@ public class TeamSeite extends Showcase {
 			}
 			
 		});
-	
+	teamAnlegen.addClickHandler(new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+				DialogBox dialogbox = new DialogBoxTeamAnlegen(rm, navi);
+				dialogbox.center();
+			
+		}
+		
+	});
 		teamtabelle.addColumn(teamName, "Team-Name");
 		gwtproxy.getAllTeams(new getAlleTeamsausDB());
 }

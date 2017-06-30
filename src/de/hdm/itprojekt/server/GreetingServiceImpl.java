@@ -604,13 +604,13 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	// anlegenTeam
 	@Override
-	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, int mitgliederAnzahl)
+	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName)
 			throws IllegalArgumentException {
 		Team t = new Team();
 
 		t.setId(1);
 		t.setTeamName(teamName);
-		t.setMitgliederAnzahl(mitgliederAnzahl);
+//		t.setMitgliederAnzahl(mitgliederAnzahl);
 		t.setIdUnternehmen(idUnternehmen);
 		t.setIdPartnerprofil(idPartnerprofil);
 
@@ -768,7 +768,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getUnternehmenByFirmenName
-	public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
+	public Unternehmen getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
 
 		return this.unternehmenMapper.findUnternehmenByFirmenName(firmenName);
 	}

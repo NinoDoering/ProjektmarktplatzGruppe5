@@ -37,8 +37,8 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO team (idTeam, teamName, mitgliederAnzahl, idUnternehmen )" 
-				+ "VALUES ( " + t.getId() + " ,'" + t.getTeamName() + "','" + t.getMitgliederAnzahl() + "','" + t.getIdUnternehmen() +"')");
+				stmt.executeUpdate(" INSERT INTO team (idTeam, teamName, idUnternehmen)" 
+				+ "VALUES ( " + t.getId() + " ,'" + t.getTeamName() + "','"  + t.getIdUnternehmen() +"')");
 			}
 		}
 
@@ -155,7 +155,6 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 			stmt.executeUpdate("UPDATE team " 
 			+ "SET teamName=\"" + t.getTeamName() + "\", " 
-			+ "mitgliederAnzahl=\"" + t.getMitgliederAnzahl() + "\" " 
 			+ "idUnternehmen=\"" + t.getIdUnternehmen() + "\" "
 			+ " WHERE idTeam= " + t.getId());
 		}

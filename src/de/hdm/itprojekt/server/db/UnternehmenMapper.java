@@ -52,10 +52,10 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 	}
 	
 	// FindByFirmenName 
-	public Vector <Unternehmen> findUnternehmenByFirmenName(String firmenName) {
+	public Unternehmen findUnternehmenByFirmenName(String firmenName) {
 		Connection con = DBConnection.connection();
-		Vector<Unternehmen> result = new Vector<Unternehmen>();
-
+		Unternehmen result = new Unternehmen();
+		
 
 		//WICHTIG: In TestMapper muss abfrage folgenderma�en aussehen:
 		//System.out.println(UnternehmenMapper.unternehmenMapper().findByFirmenName("'Name'"));
@@ -74,7 +74,7 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 				u.setStandort(super.findByOrganisationseinheit(u).getStandort());
 				u.setIdPartnerprofil(super.findByOrganisationseinheit(u).getIdPartnerprofil());
 				
-				result.addElement(u);
+				result=u;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
