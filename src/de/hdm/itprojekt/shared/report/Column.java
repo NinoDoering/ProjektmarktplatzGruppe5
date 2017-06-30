@@ -15,6 +15,7 @@ private static final long serialVersionUID = 1L;
 
 	// Wert des Row Objekts entspricht dem Eintrag eines Rows
 	private String value = "";
+	private int valueInt;
 
 	/**No-Argument Konstruktor implementieren in Serialisierbare Klassen 
 	 * Sonst würde der Default-Konstruktor gelten
@@ -28,6 +29,12 @@ private static final long serialVersionUID = 1L;
 		this.value = v;
 	}
 	
+	// Int für Beteiligungszeit int
+	public Column(int vi){
+		this.valueInt = vi;
+	}
+
+
 	// Auslesen
 	public String getValue() {
 		return value;
