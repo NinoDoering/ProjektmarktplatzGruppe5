@@ -247,7 +247,8 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 //					+ "idTeam=\""+ pe.getIdTeam() + "\" " 
 //					+ " WHERE idPerson= " + pe.getId());
 		
-//			super.organisationseinheitMapper().updateOrganisationseinheit(pe);
+			pe.setId(super.updateOrganisationseinheit(pe));
+			super.organisationseinheitMapper().updateOrganisationseinheit(pe);
 			
 			 Statement stmt = con.createStatement();
 			
