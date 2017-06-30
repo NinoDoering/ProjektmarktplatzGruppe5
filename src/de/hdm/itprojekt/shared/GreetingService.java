@@ -39,7 +39,7 @@ public interface GreetingService extends RemoteService  {
 
 		
 		//test 
-		
+		public Projekt getProjektByBeteiligung(Beteiligung b) throws IllegalArgumentException;
 				public Ausschreibung getAusschreibungByPartnerprofilId(Partnerprofil p) throws IllegalArgumentException;
 				
 				public Ausschreibung getpartnerprofilIdbyAusschreibung (Ausschreibung a) throws IllegalArgumentException;

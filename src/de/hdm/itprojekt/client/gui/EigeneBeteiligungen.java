@@ -1,5 +1,6 @@
 package de.hdm.itprojekt.client.gui;
 
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.core.client.GWT;
@@ -28,11 +29,15 @@ public class EigeneBeteiligungen extends Showcase {
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
-	private CellTable<Beteiligung> eigeneBeteiligungTabelle = new CellTable<Beteiligung>();
-	final SingleSelectionModel<Beteiligung> ssmallEigeneEigenschaft = new SingleSelectionModel<Beteiligung>();
+	private CellTable<BeteiligungMixProjekt> eigeneBeteiligungTabelle = new CellTable<BeteiligungMixProjekt>();
+	
+	final SingleSelectionModel<BeteiligungMixProjekt> ssmallEigeneEigenschaft = new SingleSelectionModel<BeteiligungMixProjekt>();
+	
 	private HorizontalPanel hpanelEigBet = new HorizontalPanel();
 	private VerticalPanel vpanelEigBet = new VerticalPanel();
 	private Beteiligung beteiligung;
+	
+	Vector<BeteiligungMixProjekt> mix = new Vector<EigeneBeteiligungen.BeteiligungMixProjekt>();
 	
 	private CellTable<Projekt> zugehörigesProjektTabelle = new CellTable<Projekt>();
 	
@@ -85,48 +90,44 @@ public class EigeneBeteiligungen extends Showcase {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
-				beteiligung= ssmallEigeneEigenschaft.getSelectedObject();
+				
+			
 			}
 		});
 	
-		TextColumn<Beteiligung> beteiligungsZeit = new TextColumn<Beteiligung>() {
+		TextColumn<BeteiligungMixProjekt> beteiligungsZeit = new TextColumn<BeteiligungMixProjekt>() {
 			
 			@Override
-			public String getValue(Beteiligung object) {
+			public String getValue(BeteiligungMixProjekt object) {
 				// TODO Auto-generated method stub
 				return object.getBeteiligungszeit()+"";
 			}
 		};
 		
-TextColumn<Beteiligung> proid = new TextColumn<Beteiligung>() {
-			
-			@Override
-			public String getValue(Beteiligung object) {
-				// TODO Auto-generated method stub
-				return object.getIdProjekt()+"";
-			}
-		};
-	
-	TextColumn<Projekt> zugehörigesProjekt = new TextColumn<Projekt>() {
+	TextColumn<BeteiligungMixProjekt> proName = new TextColumn<BeteiligungMixProjekt>() {
 				
 				@Override
-				public String getValue(Projekt object) {
+				public String getValue(BeteiligungMixProjekt object) {
 					// TODO Auto-generated method stub
-					return object.getBezeichnung();
+					return object.getProjektbezeichnung();
 				}
 			};
+	
+
 			
 			
 		
 		
+		
+		eigeneBeteiligungTabelle.addColumn(proName, "Projektbezeichnung");
 		eigeneBeteiligungTabelle.addColumn(beteiligungsZeit, "Beteiligungszeit in Tagen: ");
-		eigeneBeteiligungTabelle.addColumn(proid, "PROJEKTID");
-		
 		
 		gwtproxy.getBeteiligungByBeteiligter(rm.getUser(), new getEigeneBeteiligung());
 		
+		
 	
 	}
+	
 	
 	private class getEigeneBeteiligung implements AsyncCallback<Vector<Beteiligung>>{
 
@@ -138,11 +139,78 @@ TextColumn<Beteiligung> proid = new TextColumn<Beteiligung>() {
 
 		@Override
 		public void onSuccess(Vector<Beteiligung> result) {
-			// TODO Auto-generated method stub
-			Window.alert("Funktioniert" + rm.getUser().getId());
+			for (Beteiligung beteiligung : result) {
+				final BeteiligungMixProjekt betUndPro = new BeteiligungMixProjekt(); 
+				betUndPro.setBeteiligungszeit(beteiligung.getBeteiligungszeit());
+
+				gwtproxy.getProjektByBeteiligung(beteiligung, new AsyncCallback<Projekt>() {
+					
+					@Override
+					public void onSuccess(Projekt result) {
+						betUndPro.setProjektbezeichnung(result.getBezeichnung());
+						
+						mix.add(betUndPro);
+					
+						
+						eigeneBeteiligungTabelle.setRowData(mix);
+						eigeneBeteiligungTabelle.setRowCount(mix.size(), true);
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						
+						
+					}
+				});
+				
+			}
 			
-			eigeneBeteiligungTabelle.setRowData(0, result);
-			eigeneBeteiligungTabelle.setRowCount(result.size(), true);
 		}
 
-}}
+}
+	
+	
+private class BeteiligungMixProjekt{
+		
+		private int beteiligungszeit ;
+		private String projektbezeichnung ;
+		private Date projektStartdatum;
+		private int idBeteiligung;
+		private int idProjekt;
+		
+		
+		public int getIdBeteiligung() {
+			return idBeteiligung;
+		}
+		public void setIdBeteiligung(int idBeteiligung) {
+			this.idBeteiligung = idBeteiligung;
+		}
+		public int getIdProjekt() {
+			return idProjekt;
+		}
+		public void setIdProjekt(int idProjekt) {
+			this.idProjekt = idProjekt;
+		}
+		public Date getProjektStartdatum() {
+			return projektStartdatum;
+		}
+		public void setProjektStartdatum(Date projektStartdatum) {
+			this.projektStartdatum = projektStartdatum;
+		}
+		public int getBeteiligungszeit() {
+			return beteiligungszeit;
+		}
+		public void setBeteiligungszeit(int beteiligungszeit) {
+			this.beteiligungszeit = beteiligungszeit;
+		}
+		public String getProjektbezeichnung() {
+			return projektbezeichnung;
+		}
+		public void setProjektbezeichnung(String projektbezeichnung) {
+			this.projektbezeichnung = projektbezeichnung;
+		}
+		
+		
+	}
+	
+}

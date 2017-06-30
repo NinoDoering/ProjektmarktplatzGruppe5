@@ -334,6 +334,18 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
+//	// Beteiligung 
+//	
+//	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt projekt) throws IllegalArgumentException {
+//		Vector<Beteiligung> result = this.geta
+//		
+//		for (Beteiligung beteiligung : result) {
+//			beteiligung.setIdProjek
+//		}
+//		
+//	}
+	
+	
 	// getBeteiligungByBeteiligter
 	public Vector<Beteiligung> getBeteiligungByBeteiligter(Organisationseinheit o) throws IllegalArgumentException {
 
@@ -1173,7 +1185,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 
 
-
+	public Projekt getProjektByBeteiligung(Beteiligung b){
+		
+		Projekt p = this.getProjektbyId(b.getIdProjekt());
+		return p;
+	}
 	
 
 
