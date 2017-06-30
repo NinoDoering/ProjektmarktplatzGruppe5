@@ -80,6 +80,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Label idPartnerprofil = new Label("Id des Partnerprofil");
 	private TextArea idPP = new TextArea();
 	
+	
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 
