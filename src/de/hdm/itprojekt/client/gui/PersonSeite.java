@@ -325,7 +325,26 @@ public class PersonSeite extends Showcase{
 				}
 		});
 	
-	
+
+		// Profil-änderungen speichern
+		speichernbutton.addClickHandler(new ClickHandler(){
+				
+				@Override
+				public void onClick(ClickEvent event){
+					
+					Person pUser =  rm.getUser();
+					pUser.setVorname(boxName.getText());
+					pUser.setNachname(boxNachname.getText());
+					pUser.setAdresse(boxAdresse.getText());
+					pUser.setStandort(boxStandort.getText());
+					gwtproxy.savePerson(pUser, new SpeichernProfilCallback());
+					
+					
+					
+					
+					
+				}
+			});
 		
 		// Profilbeabreiten abbrechen
 		abbrechenbutton.addClickHandler(new ClickHandler(){
@@ -378,7 +397,7 @@ public class PersonSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				
-						Showcase showcase = new EigeneAusschreibungen(rm, navi);
+						Showcase showcase = new EigeneAusschreibungen(rm, navi,projekt, auss1);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
@@ -554,6 +573,7 @@ private class SpeichernProfilCallback implements AsyncCallback<Void>{
 //		p.setNachname(boxNachname.getText());
 //		p.setAdresse(boxAdresse.getText());
 //		p.setStandort(boxStandort.getText());
+
 		
 		boxTitel.setReadOnly(true);
 		boxName.setReadOnly(true);

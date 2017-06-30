@@ -171,7 +171,7 @@ public interface GreetingServiceAsync {
 		// Beteiligung Asynch
 		
 		
-		void anlegenBeteiligung(String beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung,
+		void anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung,
 				AsyncCallback<Beteiligung> callback);
 
 		void loeschenBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);
@@ -201,6 +201,9 @@ public interface GreetingServiceAsync {
 		void savePerson(Person pe, AsyncCallback<Void> callback);
 		
 		void getAllPersons(AsyncCallback<Vector<Person>> callback);
+		
+		void savePersonPers(Person pe, AsyncCallback<Person> callback);
+
 
 
 		// Team Asynch
@@ -214,6 +217,8 @@ public interface GreetingServiceAsync {
 		void getTeamById(int idTeam, AsyncCallback<Team> callback);
 
 		void saveTeam(Team t, AsyncCallback<Void> callback);
+		
+		void saveTeamt(Team t, AsyncCallback<Team> callback);
 		
 		void getAllTeams(AsyncCallback<Vector<Team>> callback);
 
@@ -253,6 +258,5 @@ public interface GreetingServiceAsync {
 		void getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung, AsyncCallback<Vector<Projekt>> callback);
 
 		void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
-
 
 	}

@@ -37,6 +37,7 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 // --------------------------------ENUM STATUS FEHLT-----------------------
 
 
+//TONY
 
 public class DialogBoxAusschreibungAnlegen extends DialogBox {
 
@@ -394,8 +395,7 @@ public void Qualimethode(final Ausschreibung a, final Eigenschaft e,String artik
 				@Override
 				public void onSuccess(Eigenschaft result) {
 					// TODO Auto-generated method stub
-					Window.alert("klappt" + partnerprofil+ arbeitsgebietEigenschaften.getSelectedValue()+ berufserfahrungsjahreEigenschaften.getSelectedValue() + sprachkenntnisseEigenschaften.getSelectedValue() + employmentstatusEigenschaften.getSelectedValue() + ausbildungEigenschaften.getSelectedValue() + abschlussEigenschaften.getSelectedValue());
-
+					Window.alert("Das Speichern lief erfolgreich");
 					gwtproxy.anlegenPartnerprofil(new AsyncCallback<Partnerprofil>() {
 						
 						@Override

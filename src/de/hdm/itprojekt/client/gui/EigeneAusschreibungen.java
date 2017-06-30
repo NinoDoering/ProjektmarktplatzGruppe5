@@ -81,10 +81,11 @@ public class EigeneAusschreibungen extends Showcase {
 		 this.pers1= person;
 	}
 	// public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi, final Projekt projekt
-	 public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi){
+	 public EigeneAusschreibungen(final RoleManagement rm, final Navigator navi, final Projekt projekt, final Ausschreibung ausschreibung){
 		 this.rm=rm;
 		 this.navi=navi;
-		// this.p1=projekt;
+		 this.p1=projekt;
+		 this.ausschr1=ausschreibung;
 	 }
 	 
 	 public EigeneAusschreibungen(final Ausschreibung ausschr1, final Eigenschaft eig, final RoleManagement rm, final Navigator navi, final Projekt p1, final Marktplatz markt1){
@@ -104,7 +105,8 @@ public class EigeneAusschreibungen extends Showcase {
 
 	@Override
 	protected void run() {
-
+		
+		
 		// TODO Auto-generated method stub
 		RootPanel.get("Anzeige").setWidth("100%");
 		eigeneAusschreibungtabelle.setWidth("100%", true);
@@ -158,6 +160,7 @@ public class EigeneAusschreibungen extends Showcase {
 					Showcase showcase = new EigenschaftAusSeite(markt1,ausschr1, p1, rm, navi);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
+					Window.alert(""+ ausschr1.getId() + ausschr1.getIdProjekt());
 				}
 			});
 			

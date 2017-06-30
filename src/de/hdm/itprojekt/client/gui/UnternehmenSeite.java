@@ -24,6 +24,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
+import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 
 public class UnternehmenSeite extends Showcase {
@@ -35,9 +36,10 @@ public class UnternehmenSeite extends Showcase {
 	private Navigator navi = null;
 	private HorizontalPanel hpanelUnternehmen = new HorizontalPanel();
 	private VerticalPanel vpanelUnternehmen = new VerticalPanel();
-	
+	private Partnerprofil pp = new Partnerprofil();
 	private Unternehmen u1 = new Unternehmen();
 	private Person p1 = new Person();
+	private Team t1 = new Team();
 	private Button unternehmenAnlegen = new Button("Neues Unternehmen anlegen");
 	private Button unternehmenBearbeiten = new Button("Unternehmen bearbeiten");
 	private Button unternehmenBeitreten = new Button("Unternehmen beitreten");
@@ -181,7 +183,7 @@ public class UnternehmenSeite extends Showcase {
 				if (rm.getUser().getIdTeam() == null){
 					rm.getUser().setIdUnternehmen(0);
 				}
-				gwtproxy.getPartnerprofilByOrganisationseinheit(rm.getSelectedRoleAsObject(), new AsyncCallback<Partnerprofil>(){
+				gwtproxy.getPartnerprofilByOrganisationseinheit(rm.getUnternehmenOfUser(), new AsyncCallback<Partnerprofil>(){
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -192,9 +194,11 @@ public class UnternehmenSeite extends Showcase {
 					@Override
 					public void onSuccess(Partnerprofil result) {
 						// TODO Auto-generated method stub
+						pp=result;
 						u1.setIdPartnerprofil(result.getId());
+//						t1.setIdPartnerprofil(pp.getId());
 						
-						gwtproxy.savePerson(rm.getUser(), new AsyncCallback<Void>(){
+						gwtproxy.savePersonPers(rm.getUser(), new AsyncCallback<Person>(){
 
 							@Override
 							public void onFailure(Throwable caught) {
@@ -203,11 +207,44 @@ public class UnternehmenSeite extends Showcase {
 							}
 
 							@Override
-							public void onSuccess(Void result) {
-								// TODO Auto-generated method stub
+							public void onSuccess(Person result) {
+								gwtproxy.loeschenUnternehmenInteger(u1.getId(), new AsyncCallback<Void>(){
+
+									@Override
+									public void onFailure(Throwable caught) {
+										// TODO Auto-generated method stub
+										
+									}
+
+									@Override
+									public void onSuccess(Void result) {
+										// TODO Auto-generated method stub
+										gwtproxy.loeschenPartnerprofil(pp, new AsyncCallback<Void>(){
+
+											@Override
+											public void onFailure(Throwable caught) {
+												// TODO Auto-generated method stub
+												
+											}
+
+											@Override
+											public void onSuccess(Void result) {
+												Window.alert("bis232");
+												
+											}
+											
+										});
+									}
+
+								
+								
+							});
 								
 							}
 
+							
+											
+						
 					
 							
 						});

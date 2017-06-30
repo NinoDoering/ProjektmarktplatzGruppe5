@@ -18,6 +18,7 @@ import de.hdm.itprojekt.client.ClientSideSettings;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -53,7 +54,8 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private FlexTable eigenschaftaendern = new FlexTable();
 	private Person pe = new Person();
 	private Partnerprofil pp = new Partnerprofil();
-
+	private Ausschreibung a = new Ausschreibung();
+	
 	public DialogBoxPersonEigenschaftenBearbeiten(final Person person, final Partnerprofil pp, final Eigenschaft eigenschaft){
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
@@ -123,7 +125,7 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 				eigenschaft.setSprachkenntnisse(sprachkenntnisseEigenschaften.getSelectedValue());
 				eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
 				eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
-			
+				eigenschaft.setIdPartnerprofil(a.getIdPartnerprofil());
 			    gwtproxy.anlegenEigenschaft(pe.getIdPartnerprofil(), arbeitsgebietEigenschaften.getSelectedValue(),
 			    		berufserfahrungsjahreEigenschaften.getSelectedValue(),
 			    		employmentstatusEigenschaften.getSelectedValue(),
@@ -212,10 +214,6 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 				eigenschaft.setBerufserfahrungsJahre(berufserfahrungsjahreEigenschaften.getSelectedValue());
 				eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
 				eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
-				
-				
-				
-				
 		
 				gwtproxy.saveEigenschaftnachPP(eigenschaft, new AsyncCallback<Void>() {
 

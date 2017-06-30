@@ -45,7 +45,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
-
+//TONY
 		
 		//this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird geloescht)
 	
@@ -389,6 +389,10 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 	
 	// savePerson
+	
+	public Person savePersonPers(Person pe) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return this.persMapper.updatePerson(pe);}
 
 	// getPersonById
 	@Override
@@ -676,6 +680,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		teamMapper.updateTeam(t);
 
 	}
+	
+	// saveTeamt
+	public Team saveTeamt(Team t) throws IllegalArgumentException {
+		return this.teamMapper.updateTeam(t);
+	}
 
 	// getTeamById
 	@Override
@@ -776,11 +785,13 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	
 	
 	// anlegenBeteiligung
-	@Override
-	public Beteiligung anlegenBeteiligung(String beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung)
-			throws IllegalArgumentException {
-		Beteiligung b = new Beteiligung();
+	
 
+	public Beteiligung anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt,
+			int idBewertung) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		Beteiligung b = new Beteiligung();
+		
 		b.setId(1);
 		b.setBeteiligungszeit(beteiligungszeit);
 		b.setIdBeteiligter(idOrganisationseinheit);
@@ -788,8 +799,10 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		b.setIdBewertung(idBewertung);
 		
 		return this.beteiligungMapper.insertBeteiligung(b);
-
 	}
+
+	
+	
 
 	// loeschenBeteiligung
 	@Override
@@ -1154,6 +1167,15 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 		// return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
 	}
+
+
+
+
+
+	
+
+
+
 
 
 

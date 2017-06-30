@@ -99,8 +99,15 @@ public class BewerbungMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung "
-					+ " WHERE idAusschreibung= " + idAusschreibung);
+			
+			//Hole alle Bewerbungen, deren Ids nicht bereits bei der Tabelle Bewertungen in der Spalte idBewerbung sind.
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung WHERE idAusschreibung= " + idAusschreibung 
+					+  " having idBewerbung not in (select idBewerbung from bewertung)");
+			
+			
+			//DAS ALTE STATEMENT
+//			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung "
+//					+ " WHERE idAusschreibung= " + idAusschreibung);
 			
 			while (rs.next()){
 				
