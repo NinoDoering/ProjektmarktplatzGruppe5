@@ -74,6 +74,11 @@ public class AusschreibungSeite extends Showcase {
 		this.rm = rm;
 		this.navi = navi;
 		this.eig = eig;
+		 Label lblProjekt = new Label("Sie befinden sich auf folgendem Projekt: "+selectedprojekt.getBezeichnung()+" ");
+		 Label lblMarktplatz = new Label("Sie befinden sich auf folgendem Marktplatz: "+mp.getBezeichnung());
+		 beforeHereProjekt.add(lblMarktplatz);
+		 beforeHereProjekt.add(lblProjekt);
+		 beforeHereProjekt.setSpacing(20);
 		
 		}
 	
@@ -310,7 +315,7 @@ public class AusschreibungSeite extends Showcase {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				Window.alert(" Projekt" + p1.getBezeichnung());
+//				Window.alert(" Projekt" + p1.getBezeichnung());
 				// TODO Auto-generated method stub
 				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(mp, selectedprojekt, rm, navi);
 				dialogbox.center();

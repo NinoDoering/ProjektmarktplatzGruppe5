@@ -334,6 +334,18 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
+//	// Beteiligung 
+//	
+//	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt projekt) throws IllegalArgumentException {
+//		Vector<Beteiligung> result = this.geta
+//		
+//		for (Beteiligung beteiligung : result) {
+//			beteiligung.setIdProjek
+//		}
+//		
+//	}
+	
+	
 	// getBeteiligungByBeteiligter
 	public Vector<Beteiligung> getBeteiligungByBeteiligter(Organisationseinheit o) throws IllegalArgumentException {
 
@@ -621,15 +633,17 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	// anlegenTeam
 	@Override
-	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, int mitgliederAnzahl)
+	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, String adresse, String standort)
 			throws IllegalArgumentException {
 		Team t = new Team();
 
 		t.setId(1);
 		t.setTeamName(teamName);
-		t.setMitgliederAnzahl(mitgliederAnzahl);
+//		t.setMitgliederAnzahl(mitgliederAnzahl);
 		t.setIdUnternehmen(idUnternehmen);
 		t.setIdPartnerprofil(idPartnerprofil);
+		t.setAdresse(adresse);
+		t.setStandort(standort);
 
 		return this.teamMapper.insertTeam(t);
 	}
@@ -785,7 +799,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 	// getUnternehmenByFirmenName
-	public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
+	public Unternehmen getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
 
 		return this.unternehmenMapper.findUnternehmenByFirmenName(firmenName);
 	}
@@ -1188,7 +1202,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 
 
-
+	public Projekt getProjektByBeteiligung(Beteiligung b){
+		
+		Projekt p = this.getProjektbyId(b.getIdProjekt());
+		return p;
+	}
 	
 
 

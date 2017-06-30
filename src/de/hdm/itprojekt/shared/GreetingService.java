@@ -39,7 +39,7 @@ public interface GreetingService extends RemoteService  {
 
 		
 		//test 
-		
+		public Projekt getProjektByBeteiligung(Beteiligung b) throws IllegalArgumentException;
 				public Ausschreibung getAusschreibungByPartnerprofilId(Partnerprofil p) throws IllegalArgumentException;
 				
 				public Ausschreibung getpartnerprofilIdbyAusschreibung (Ausschreibung a) throws IllegalArgumentException;
@@ -213,7 +213,7 @@ public interface GreetingService extends RemoteService  {
 
 		// Team t
 		
-		public Team anlegenTeam(/*Integer ganz ausgeschrieben??*/int idUnternehmen, int idPartnerprofil, String teamName, int mitgliederAnzahl) throws IllegalArgumentException;
+		public Team anlegenTeam(/*Integer ganz ausgeschrieben??*/int idUnternehmen, int idPartnerprofil, String teamName, String adresse, String standort) throws IllegalArgumentException;
 
 		public void loeschenTeam(Team t) throws IllegalArgumentException;
 
@@ -238,7 +238,7 @@ public interface GreetingService extends RemoteService  {
 		
 		public void saveUnternehmen (Unternehmen u) throws IllegalArgumentException;
 		
-		public Vector<Unternehmen> getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException;
+		public Unternehmen getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException;
 		
 		public Vector<Unternehmen> getAllUnternehmen() throws IllegalArgumentException;
 

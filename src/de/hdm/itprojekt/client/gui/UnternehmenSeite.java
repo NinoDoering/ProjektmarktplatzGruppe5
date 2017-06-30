@@ -176,90 +176,71 @@ public class UnternehmenSeite extends Showcase {
 		});
 		
 		unternehmenLoeschen.addClickHandler(new ClickHandler(){
-
+			
 			@Override
 			public void onClick(ClickEvent event) {
-				u1.setId(rm.getUser().getIdUnternehmen());
+				u1 = ssmallunternehmen.getSelectedObject();
 				if (rm.getUser().getIdTeam() == null){
 					rm.getUser().setIdUnternehmen(0);
 				}
 				gwtproxy.getPartnerprofilByOrganisationseinheit(rm.getUnternehmenOfUser(), new AsyncCallback<Partnerprofil>(){
-
+					
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
+						Window.alert("pp wurde nicht gefunden");
 						
 					}
-
+		
 					@Override
 					public void onSuccess(Partnerprofil result) {
 						// TODO Auto-generated method stub
 						pp=result;
 						u1.setIdPartnerprofil(result.getId());
 //						t1.setIdPartnerprofil(pp.getId());
-						
+						Window.alert("uId: "+u1.getId());
+						Window.alert("pp id: "+result.getId());
 						gwtproxy.savePersonPers(rm.getUser(), new AsyncCallback<Person>(){
-
+		
 							@Override
 							public void onFailure(Throwable caught) {
-								// TODO Auto-generated method stub
+								Window.alert("savepersonpers ging nicht");
 								
 							}
-
+		
 							@Override
 							public void onSuccess(Person result) {
 								gwtproxy.loeschenUnternehmenInteger(u1.getId(), new AsyncCallback<Void>(){
-
+		
 									@Override
 									public void onFailure(Throwable caught) {
-										// TODO Auto-generated method stub
+										Window.alert("loeschenunternehmeninteger ging nicht");
 										
 									}
-
+		
 									@Override
 									public void onSuccess(Void result) {
 										// TODO Auto-generated method stub
 										gwtproxy.loeschenPartnerprofil(pp, new AsyncCallback<Void>(){
-
+		
 											@Override
 											public void onFailure(Throwable caught) {
-												// TODO Auto-generated method stub
+												Window.alert("pploeschen ging nicht");
 												
 											}
-
+		
 											@Override
 											public void onSuccess(Void result) {
 												Window.alert("bis232");
-												
+												Showcase sc = new UnternehmenSeite(rm, navi);
+												RootPanel.get("Anzeige").clear();
+												RootPanel.get("Anzeige").add(sc);
 											}
 											
 										});
-									}
+									}});}});}});}});
+				
+			
 
-								
-								
-							});
-								
-							}
-
-							
-											
-						
-					
-							
-						});
-					}
-					
-				});
-				
-				
-				
-				
-				
-				
-			}
-//			
-		});
 		
 			// Spalten Ende
 		
@@ -313,3 +294,12 @@ public class UnternehmenSeite extends Showcase {
 //	
 //});
 //
+	
+	
+	
+	
+	
+	
+	
+//	@Override
+//	

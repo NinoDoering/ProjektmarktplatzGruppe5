@@ -238,4 +238,7 @@ public class BeteiligungMapper {
 			e2.printStackTrace();
 		}
 	}
+	
+	
+
 }

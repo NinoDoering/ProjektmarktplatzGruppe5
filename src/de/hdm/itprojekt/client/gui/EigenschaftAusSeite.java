@@ -45,7 +45,7 @@ public class EigenschaftAusSeite extends Showcase{
 	private VerticalPanel vpanelEigenschaft = new VerticalPanel(); 
 	private HorizontalPanel beforeHere = new HorizontalPanel();
 	private Button backToAusschreibung = new Button ("Zurück zu den eigenerstellten Ausschreibungen");
-	private Button backToAusschreibung1 = new Button ("Zurück zu den Ausschreibungen als Bewerber");
+	private Button backToAusschreibung1 = new Button ("Zurück zum Projektmarktplatz");
 	public EigenschaftAusSeite() {
 		// TODO Auto-generated constructor stub
 	}
@@ -202,7 +202,7 @@ public class EigenschaftAusSeite extends Showcase{
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new AusschreibungSeite(m1, p1, a1, rm, navi);
+				Showcase showcase = new ProjektmarktplatzSeite(rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);
 				

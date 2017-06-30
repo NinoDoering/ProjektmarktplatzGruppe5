@@ -97,7 +97,7 @@ public class DialogBoxFirmaAnlegen extends DialogBox {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("partnerprofil of failure");
+						
 						
 					}
 

@@ -23,22 +23,20 @@ public class TeamMapper extends OrganisationseinheitMapper{
 	//insert
 	public Team insertTeam(Team t) {
 		Connection con = DBConnection.connection();
-
+		
 		try {
 			Statement stmt = con.createStatement();
-			
 			t.setId(super.insertOrganisationseinheit(t));
-			
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM projekt ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM team");
 			
 			if (rs.next()) {
 
-				t.setId(rs.getInt("maxid") + 1);
+//				t.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO team (idTeam, teamName, mitgliederAnzahl, idUnternehmen )" 
-				+ "VALUES ( " + t.getId() + " ,'" + t.getTeamName() + "','" + t.getMitgliederAnzahl() + "','" + t.getIdUnternehmen() +"')");
+				stmt.executeUpdate("INSERT INTO team (idTeam, teamName, idUnternehmen) " 
+				+ "VALUES (" + t.getId() + ",'" + t.getTeamName() + "',"  + t.getIdUnternehmen() +")");
 			}
 		}
 
@@ -63,7 +61,6 @@ public class TeamMapper extends OrganisationseinheitMapper{
 				Team t = new Team();
 				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
-				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 				t.setIdUnternehmen(rs.getInt("idUnternehmen"));
 				t.setAdresse(super.findOrganisationseinheitByKey(id).getAdresse());
 				t.setStandort(super.findOrganisationseinheitByKey(id).getStandort());
@@ -88,14 +85,13 @@ public class TeamMapper extends OrganisationseinheitMapper{
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen FROM team " 
+					.executeQuery("SELECT idTeam, teamName, idUnternehmen FROM team " 
 			+ " ORDER BY teamName");
 
 			while (rs.next()) {
 				Team t = new Team();
 				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
-				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 				t.setIdUnternehmen(rs.getInt("idUnternehmen"));
 				t.setAdresse(super.findByOrganisationseinheit(t).getAdresse());
 				t.setStandort(super.findByOrganisationseinheit(t).getStandort());
@@ -124,14 +120,13 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen FROM team "
+			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName,  idUnternehmen FROM team "
 					+ " WHERE teamName= '" + teamName + "' ORDER BY teamName ");
 
 			while (rs.next()) {
 				Team t = new Team();
 				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
-				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 				t.setAdresse(super.findByOrganisationseinheit(t).getAdresse());
 				t.setStandort(super.findByOrganisationseinheit(t).getStandort());
 				t.setIdPartnerprofil(super.findByOrganisationseinheit(t).getIdPartnerprofil());
@@ -155,7 +150,6 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 			stmt.executeUpdate("UPDATE team " 
 			+ "SET teamName=\"" + t.getTeamName() + "\", " 
-			+ "mitgliederAnzahl=\"" + t.getMitgliederAnzahl() + "\" " 
 			+ "idUnternehmen=\"" + t.getIdUnternehmen() + "\" "
 			+ " WHERE idTeam= " + t.getId());
 		}
