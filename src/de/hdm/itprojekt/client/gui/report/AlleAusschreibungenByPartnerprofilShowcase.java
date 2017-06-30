@@ -17,6 +17,9 @@ public class AlleAusschreibungenByPartnerprofilShowcase extends Showcase {
 		this.rolemanagementReport=rolemanagementReport;
 	}
 	
+	public AlleAusschreibungenByPartnerprofilShowcase(){
+		
+	}
 	@Override
 	protected String getHeadlineText() {
 		// TODO Auto-generated method stub
@@ -29,7 +32,7 @@ public class AlleAusschreibungenByPartnerprofilShowcase extends Showcase {
 		final Showcase scase = this;
 		ReportGeneratorAsync reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		reportGenerator.createAllAusschreibungenByPartnerprofilReport(rolemanagementReport.getSelectedRoleManagementAsObjectReport(), new AsyncCallback<AllAusschreibungenByPartnerprofilReport>(){
+		reportGenerator.getAusschreibungByMatchingPartnerprofil(rolemanagementReport.getSelectedRoleManagementAsObjectReport(), new AsyncCallback<AllAusschreibungenByPartnerprofilReport>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
