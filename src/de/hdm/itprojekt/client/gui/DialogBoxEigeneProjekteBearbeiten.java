@@ -22,10 +22,13 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 //import de.hdm.itprojekt.client.gui.DialogBoxProjektAnlegen.projektinDB;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -38,6 +41,11 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private HorizontalPanel projektHP = new HorizontalPanel();
 	private Marktplatz mp2 = new Marktplatz();
 	private Person person = new Person();
+	private Navigator navi;
+	private RoleManagement rm;
+	private Projekt p = new Projekt();
+	private Ausschreibung ausschr1 = new Ausschreibung();
+	
 	private Organisationseinheit orga = new Organisationseinheit();
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
@@ -72,6 +80,14 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		this.person=projektLeiter;
 	}
 	
+//	public DialogBoxEigeneProjekteBearbeiten(final Projekt p, final RoleManagement rm, final Navigator navi, final Marktplatz mp2){
+////		this.eig=eig;
+//		this.navi=navi;
+//		this.rm=rm;
+//		this.p=p;
+//		this.mp2=mp2;
+//	}
+//	
 //	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Marktplatz m1, Organisationseinheit o1,  final Person projektLeiter){
 //		projektbez.setValue(selectedObject.getBezeichnung());	
 //		projektbeschr.setValue(selectedObject.getBeschreibung());
@@ -84,22 +100,20 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 //	}
 	
 	
-	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Marktplatz m1, Organisationseinheit o1, final Person projektLeiter){
+	public DialogBoxEigeneProjekteBearbeiten(final Projekt selectedObject, final Marktplatz m1, final RoleManagement rm, Navigator navi){
 		projektbez.setValue(selectedObject.getBezeichnung());	
 		projektbeschr.setValue(selectedObject.getBeschreibung());
 		startD.setValue(selectedObject.getStartDatum(), true);
 		endD.setValue(selectedObject.getEndDatum(), true);
-		
-	
-		
-		
 			this.setText("Projektmarktplatz anlegen");
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(true);
 			this.mp2 = m1 ;
-			this.person= projektLeiter;
-			this.orga= o1;
-			person.setId(orga.getId());
+			this.p=selectedObject;
+			this.rm=rm;
+			this.navi=navi;
+			
+
 			
 			projektHP.add(ok);
 			projektHP.add(abbrechen);
@@ -134,9 +148,10 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Showcase showcase = new ProjekteSeite();
-				RootPanel.get("Anzeige").clear();
-				RootPanel.get("Anzeige").add(showcase);
+//				Showcase showcase = new ProjekteSeite();
+//				RootPanel.get("Anzeige").clear();
+//				RootPanel.get("Anzeige").add(showcase);
+				hide();
 			}
 		});
 		startD.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -192,15 +207,14 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		@Override
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
-			Window.alert("Veränderung wurden gespeichert !");
-			Showcase showcase = new EigeneProjekte(person);
-			
+			hide();
+			Showcase showcase = new EigeneProjekte(mp2, rm, navi, p);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		
 			
 		}
-
+		
 		
 		
 		
