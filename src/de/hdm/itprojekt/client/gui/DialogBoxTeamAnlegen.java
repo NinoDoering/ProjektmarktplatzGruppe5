@@ -81,68 +81,77 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 			
 		});
 		gwtproxy.getAllUnternehmen(new getAllUnternehmen());
+
+		
+		
+		
 		speichernTeam.addClickHandler(new ClickHandler(){
 
 			@Override
-			public void onClick(ClickEvent event) {
+	public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				final GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 				
-				gwtproxy.anlegenPartnerprofil(new AsyncCallback<Partnerprofil>(){
+		gwtproxy.anlegenPartnerprofil(new AsyncCallback<Partnerprofil>(){
+
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("kein partnerprofil");
+							
+						}
 
 					@Override
-					public void onFailure(Throwable caught) {
-						Window.alert("kein partnerprofil");
+			public void onSuccess(final Partnerprofil result1) {
 						
-					}
-
-					@Override
-					public void onSuccess(final Partnerprofil result1) {
-						
-						Window.alert("bis 1.onSuccess");
+						Window.alert("ppID ist:" + result1.getId());
 						lb.addClickHandler(new ClickHandler() {
 							
 							@Override
 							public void onClick(ClickEvent event) {
-								String name = lb.getSelectedItemText();
-								gwtproxy.getUnternehmenByFirmenName(name, new AsyncCallback<Unternehmen>() {
-									
-									@Override
-									public void onSuccess (Unternehmen result2) {
-										u.setId(result2.getId());
-																				
-									}
-									
-									@Override
-									public void onFailure(Throwable caught) {
-										Window.alert("unternehmen by firmenname nicht funktioniert");
-										
-									}
-								});
-							}
-						});
+//								String name = lb.getSelectedItemText();
+								
+							}});	
+String name= lb.getSelectedItemText();
+				//						String name1 = lb.getSelectedItemText();
+				gwtproxy.getUnternehmenByFirmenName(name= lb.getSelectedItemText(), new AsyncCallback<Unternehmen>() {
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("unternehmen by firmenname nicht funktioniert");
 						
+					}
+							@Override
+							public void onSuccess (Unternehmen result2) {
+								Window.alert("id des unternehmens ist: "+ result2.getId());
+								u.setId(result2.getId());
+																		
+								
 						
-						gwtproxy.anlegenTeam(u.getId(), result1.getId(), teamNameArea.getText(),new AsyncCallback<Team>() {
+				gwtproxy.anlegenTeam(u.getId(), result1.getId(), teamNameArea.getText(),new AsyncCallback<Team>() {
 							
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("uId: "+ u.getId()+ " PartnerId: "+ result1.getId());
+						Window.alert("anlegen team failure");
+						
+					}
 							@Override
 							public void onSuccess(Team result) {
+								Window.alert("uId: "+ u.getId()+ " PartnerId: "+ result1.getId());
 								Window.alert("team wurde angelegt");
 								hide();
 								
 							}
 							
-							@Override
-							public void onFailure(Throwable caught) {
-								Window.alert("uId: "+ u.getId()+ " PartnerId: "+ result1.getId());
-								Window.alert("anlegen team failure");
-								
-							}
+							
 						});
-						
+							
+		
 					}
+				
 					
-				});}});
+					
+			});}});}});
 			
 			
 		
