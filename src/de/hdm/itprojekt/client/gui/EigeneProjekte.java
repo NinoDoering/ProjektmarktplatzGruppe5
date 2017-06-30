@@ -265,7 +265,7 @@ public class EigeneProjekte extends Showcase {
 				@Override
 				public void onSuccess(Vector<Projekt> result) {
 					// TODO Auto-generated method stub
-					Window.alert("Funktioniert");
+//					Window.alert("Funktioniert");
 					eigeneprojektetabelle.setRowData(0, result);
 					eigeneprojektetabelle.setRowCount(result.size(), true);
 				}
