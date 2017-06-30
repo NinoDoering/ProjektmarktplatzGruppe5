@@ -23,22 +23,20 @@ public class TeamMapper extends OrganisationseinheitMapper{
 	//insert
 	public Team insertTeam(Team t) {
 		Connection con = DBConnection.connection();
-
+		
 		try {
 			Statement stmt = con.createStatement();
-			
 			t.setId(super.insertOrganisationseinheit(t));
-			
-			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM projekt ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM team");
 			
 			if (rs.next()) {
 
-				t.setId(rs.getInt("maxid") + 1);
+//				t.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(" INSERT INTO team (idTeam, teamName, idUnternehmen)" 
-				+ "VALUES (" + t.getId() + " ,'" + t.getTeamName() + "','"  + t.getIdUnternehmen() +"')");
+				stmt.executeUpdate("INSERT INTO team (idTeam, teamName, idUnternehmen) " 
+				+ "VALUES (" + t.getId() + ",'" + t.getTeamName() + "',"  + t.getIdUnternehmen() +")");
 			}
 		}
 

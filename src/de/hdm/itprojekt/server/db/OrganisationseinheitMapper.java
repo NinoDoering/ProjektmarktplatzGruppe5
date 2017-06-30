@@ -39,8 +39,8 @@ public class OrganisationseinheitMapper {
 				stmt = con.createStatement();
 
 				stmt.executeUpdate("INSERT INTO organisationseinheit (idOrganisationseinheit, adresse, standort, idPartnerprofil)" 
-								+ " VALUES ('" 
-								+ o.getId()+ "','" + o.getAdresse()+ "','" + o.getStandort()+ "','" + o.getIdPartnerprofil()+ "')");
+								+ " VALUES (" 
+								+ o.getId()+ ",'" + o.getAdresse()+ "','" + o.getStandort()+ "'," + o.getIdPartnerprofil()+ ")");
 
 			}
 		} catch (SQLException e) {

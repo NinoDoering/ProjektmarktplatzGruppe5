@@ -208,7 +208,7 @@ public interface GreetingServiceAsync {
 
 		// Team Asynch
 
-		void anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, 
+		void anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, String adresse, String standort,
 				AsyncCallback<Team> callback);
 
 

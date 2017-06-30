@@ -618,7 +618,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	// anlegenTeam
 	@Override
-	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName)
+	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, String adresse, String standort)
 			throws IllegalArgumentException {
 		Team t = new Team();
 
@@ -627,6 +627,8 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 //		t.setMitgliederAnzahl(mitgliederAnzahl);
 		t.setIdUnternehmen(idUnternehmen);
 		t.setIdPartnerprofil(idPartnerprofil);
+		t.setAdresse(adresse);
+		t.setStandort(standort);
 
 		return this.teamMapper.insertTeam(t);
 	}

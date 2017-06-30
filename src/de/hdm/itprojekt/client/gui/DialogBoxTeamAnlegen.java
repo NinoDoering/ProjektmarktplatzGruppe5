@@ -96,7 +96,7 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("kein partnerprofil");
+							
 							
 						}
 
@@ -111,36 +111,36 @@ public class DialogBoxTeamAnlegen extends DialogBox {
 //								String name = lb.getSelectedItemText();
 								
 							}});	
-String name= lb.getSelectedItemText();
+						String name= lb.getSelectedItemText();
 				//						String name1 = lb.getSelectedItemText();
 				gwtproxy.getUnternehmenByFirmenName(name= lb.getSelectedItemText(), new AsyncCallback<Unternehmen>() {
 					
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("unternehmen by firmenname nicht funktioniert");
+						
 						
 					}
 							@Override
 							public void onSuccess (Unternehmen result2) {
-								Window.alert("id des unternehmens ist: "+ result2.getId());
+								
 								u.setId(result2.getId());
 																		
 								
 						
-				gwtproxy.anlegenTeam(u.getId(), result1.getId(), teamNameArea.getText(),new AsyncCallback<Team>() {
+				gwtproxy.anlegenTeam(u.getId(), result1.getId(), teamNameArea.getText(), teamAdresseArea.getText(), teamORTArea.getText(), new AsyncCallback<Team>() {
 							
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("uId: "+ u.getId()+ " PartnerId: "+ result1.getId());
-						Window.alert("anlegen team failure");
 						
+						hide();
 					}
 							@Override
 							public void onSuccess(Team result) {
-								Window.alert("uId: "+ u.getId()+ " PartnerId: "+ result1.getId());
-								Window.alert("team wurde angelegt");
+								Window.alert("team " +teamNameArea.getText()+  " wurde dem Unternehmen "+ u.getFirmenName()+ " hinzugefügt");
+								Showcase sc = new TeamSeite(rm,navi);
+								RootPanel.get("Anzeige").clear();
+								RootPanel.get("Anzeige").add(sc);
 								hide();
-								
 							}
 							
 							
