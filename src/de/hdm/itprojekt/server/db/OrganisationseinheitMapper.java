@@ -117,8 +117,7 @@ public class OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE * FROM organisationseinheit " 
-							+ " WHERE idOrganisationseinheit= " + o.getId());
+			stmt.executeUpdate("DELETE FROM `organisationseinheit` WHERE `idOrganisationseinheit` =" + o.getId());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -64,7 +64,7 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idUnternehmen, firmenName FROM unternehmen " + " WHERE firmenName= '" + firmenName + "' ORDER BY idUnternehmen");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM unternehmen WHERE firmenName = '" + firmenName + "' ORDER BY idUnternehmen");
 
 			while (rs.next()) {
 				Unternehmen u = new Unternehmen();
@@ -171,7 +171,7 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeUpdate("DELETE FROM unternehmen " + "WHERE idUnternehmen= " + u);
+			stmt.executeUpdate("DELETE FROM `unternehmen` WHERE `idUnternehmen` =" + u1.getId());
 			super.deleteOrganisationseinheit(u1);
 		} catch (SQLException e3) {
 			e3.printStackTrace();

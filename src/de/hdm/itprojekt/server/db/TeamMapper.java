@@ -38,7 +38,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 				stmt = con.createStatement();
 
 				stmt.executeUpdate(" INSERT INTO team (idTeam, teamName, idUnternehmen)" 
-				+ "VALUES ( " + t.getId() + " ,'" + t.getTeamName() + "','"  + t.getIdUnternehmen() +"')");
+				+ "VALUES (" + t.getId() + " ,'" + t.getTeamName() + "','"  + t.getIdUnternehmen() +"')");
 			}
 		}
 
@@ -63,7 +63,6 @@ public class TeamMapper extends OrganisationseinheitMapper{
 				Team t = new Team();
 				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
-				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 				t.setIdUnternehmen(rs.getInt("idUnternehmen"));
 				t.setAdresse(super.findOrganisationseinheitByKey(id).getAdresse());
 				t.setStandort(super.findOrganisationseinheitByKey(id).getStandort());
@@ -88,14 +87,13 @@ public class TeamMapper extends OrganisationseinheitMapper{
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen FROM team " 
+					.executeQuery("SELECT idTeam, teamName, idUnternehmen FROM team " 
 			+ " ORDER BY teamName");
 
 			while (rs.next()) {
 				Team t = new Team();
 				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
-				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 				t.setIdUnternehmen(rs.getInt("idUnternehmen"));
 				t.setAdresse(super.findByOrganisationseinheit(t).getAdresse());
 				t.setStandort(super.findByOrganisationseinheit(t).getStandort());
@@ -124,14 +122,13 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName, mitgliederAnzahl, idUnternehmen FROM team "
+			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName,  idUnternehmen FROM team "
 					+ " WHERE teamName= '" + teamName + "' ORDER BY teamName ");
 
 			while (rs.next()) {
 				Team t = new Team();
 				t.setId(rs.getInt("idTeam"));
 				t.setTeamName(rs.getString("teamName"));
-				t.setMitgliederAnzahl(rs.getInt("mitgliederAnzahl"));
 				t.setAdresse(super.findByOrganisationseinheit(t).getAdresse());
 				t.setStandort(super.findByOrganisationseinheit(t).getStandort());
 				t.setIdPartnerprofil(super.findByOrganisationseinheit(t).getIdPartnerprofil());
