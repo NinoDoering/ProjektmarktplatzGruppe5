@@ -192,7 +192,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				Window.alert(" Projekt ?? :   "+rm.getSelectedRoleID() +" " + zugehoerigesProjekt.getBezeichnung());
+				Window.alert("Die Ausschreibung wurde erfolgreich gespeichert! "+rm.getSelectedRoleID() +" " + zugehoerigesProjekt.getBezeichnung());
 				gwtproxy.anlegenAusschreibung(rm.getSelectedRoleID(), zugehoerigesProjekt.getId(), aussbez.getText(),
 						aussbeschr.getText(), aussbefrist.getValue(), partnerprofil,
 						Status.laufend, new ausschreibungInDB());
@@ -396,7 +396,7 @@ public void Qualimethode(final Ausschreibung a, final Eigenschaft e,String artik
 				@Override
 				public void onSuccess(Eigenschaft result) {
 					// TODO Auto-generated method stub
-					Window.alert("Das Speichern lief erfolgreich");
+					Window.alert("Qualifikationen erfolgreich gespeichert!");
 					gwtproxy.anlegenPartnerprofil(new AsyncCallback<Partnerprofil>() {
 						
 						@Override

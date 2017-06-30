@@ -315,7 +315,7 @@ public class AusschreibungSeite extends Showcase {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				Window.alert(" Projekt" + p1.getBezeichnung());
+//				Window.alert(" Projekt" + p1.getBezeichnung());
 				// TODO Auto-generated method stub
 				DialogBox dialogbox = new DialogBoxAusschreibungAnlegen(mp, selectedprojekt, rm, navi);
 				dialogbox.center();
