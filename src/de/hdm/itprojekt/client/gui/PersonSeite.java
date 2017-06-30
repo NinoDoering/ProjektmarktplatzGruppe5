@@ -338,6 +338,7 @@ public class PersonSeite extends Showcase{
 					pUser.setNachname(boxNachname.getText());
 					pUser.setAdresse(boxAdresse.getText());
 					pUser.setStandort(boxStandort.getText());
+					// Email Adresse muss in PersonMapper noch hinzugefügt werden
 					pUser.setEmailAddresse(boxEmail.getText());
 					gwtproxy.savePerson(pUser, new SpeichernProfilCallback());
 					
