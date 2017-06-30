@@ -108,8 +108,8 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-			Window.alert("Marktplatz " + zugehoerigerMarktplatz.getId());
-			Window.alert("Projektleiter " + rm.getUser().getId());
+			Window.alert("Neues Projekt gehört zum " + zugehoerigerMarktplatz.getBezeichnung()+" Marktplatz");
+//			Window.alert("Projektleiter hat die ID: " + rm.getUser().getId());
 				gwtproxy.anlegenProjekt(rm.getUser().getId(), zugehoerigerMarktplatz.getId(), projektbeschr.getText(), projektbez.getText(), startD.getValue(), endD.getValue(), new projektinDB());
 				
 			}
@@ -150,7 +150,7 @@ public class DialogBoxProjektAnlegen extends DialogBox{
 
 		@Override
 		public void onSuccess(Projekt result) {
-			Window.alert("Ein neues Projekt wurde erstellt.");
+			Window.alert("Ein neues Projekt wurde erfolgreich erstellt!");
 			hide();
 //			Showcase showcase = new ProjekteSeite(result, mp2);
 //			RootPanel.get("Anzeige").clear();

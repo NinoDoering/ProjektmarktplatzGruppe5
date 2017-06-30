@@ -145,7 +145,8 @@ public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final
 			public void onSuccess(Bewerbung result) {
 				// TODO Auto-generated method stub
 				hide();
-				Window.alert("Anscheinend funkts es   "+projekt1.getId()+"  " +marktplatz1.getId() + "  "+ person1.getId());
+				Window.alert("Die Bewerbung wurde erfolgreich erstellt!"); 
+//						+ " "+projekt1.getId()+"  " +marktplatz1.getId() + "  "+ person1.getId());
 				Showcase showcase = new AusschreibungSeite(marktplatz1, projekt1, ausschreibungAuswaehlen, rm, navi);
 				RootPanel.get("Anzeige").clear();
 				RootPanel.get("Anzeige").add(showcase);

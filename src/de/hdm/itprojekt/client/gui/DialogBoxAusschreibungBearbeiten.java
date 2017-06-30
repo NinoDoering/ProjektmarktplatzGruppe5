@@ -67,6 +67,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 	private Button eigenschaftenAbbrechen = new Button("Abbrechen");
 	private Button speichern = new Button("Speichern");
 	
+	
 	// Labels und TextAreas erstellt
 	private Label ausschreibungbezeichnung = new Label("Ausschreibungsbezeichnung");
 	private TextArea aussbez = new TextArea();

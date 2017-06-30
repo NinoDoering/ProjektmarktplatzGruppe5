@@ -259,4 +259,7 @@ public interface GreetingServiceAsync {
 
 		void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
 
+
+		void getProjektByBeteiligung(Beteiligung b, AsyncCallback<Projekt> callback);
+
 	}

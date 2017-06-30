@@ -50,10 +50,14 @@ public class PersonSeite extends Showcase{
 	private CellTable<Eigenschaft> personEigenschaftTabelle = new CellTable <Eigenschaft>();
 	private Eigenschaft eig = new Eigenschaft();
 	final SingleSelectionModel<Eigenschaft> selectionEigenschaft = new SingleSelectionModel();
-//	private Button pp1 = new Button("Nächste Seite zum Partnerprofil");
+
+	//Buttons
+
+
 	private Button eigeneProjekte = new Button("Zu meinen Projekten");
 	private Button eigeneBewerbungen = new Button("Meine Bewerbungen");
 	private Button eigeneAusschreibungen = new Button ("Meine Ausschreibungen");
+	private Button eigeneBeteiligung = new Button("Meine Beteiligungen");
 
 	private Navigator navi = null;
 	private RoleManagement rm= null;
@@ -179,9 +183,11 @@ public class PersonSeite extends Showcase{
 		boxFirmenName.setReadOnly(true);
 		boxEmail.setReadOnly(true);
 		
-//		this.add(pp1);
+
 		this.add(eigeneProjekte);
 		this.add(eigeneBewerbungen);
+		this.add(eigeneBeteiligung);
+		this.add(eigeneProjekte);
 		this.add(eigeneAusschreibungen);
 		this.add(eigenschaftenAendern);
 	
@@ -370,7 +376,8 @@ public class PersonSeite extends Showcase{
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 		
-				gwtproxy.getProjektByPerson(rm.getUser(), new AsyncCallback<Vector<Projekt>>() {
+				Person px = rm.getUser();
+				gwtproxy.getProjektByPerson(px, new AsyncCallback<Vector<Projekt>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -406,6 +413,19 @@ public class PersonSeite extends Showcase{
 					}
 				});
 				
+		
+		
+		eigeneBeteiligung.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				Showcase showcase = new EigeneBeteiligungen(rm, navi);
+				RootPanel.get("Anzeige").clear();
+				RootPanel.get("Anzeige").add(showcase);
+			}
+		});
+		
 	unternehmenBearbeiten.addClickHandler(new ClickHandler(){
 
 		@Override
@@ -466,15 +486,7 @@ public class PersonSeite extends Showcase{
 
 	
 
-//	pp1.addClickHandler(new ClickHandler(){
-//		
-//		@Override
-//		public void onClick(ClickEvent event){
-//			Showcase scase = new EigeneBewerbungenSeite(rm, navi);
-//			RootPanel.get("Anzeige").clear();
-//			RootPanel.get("Anzeige").add(scase);
-//		}
-//	});
+
 	
 	
 	eigenschaftenAendern.addClickHandler(new ClickHandler(){

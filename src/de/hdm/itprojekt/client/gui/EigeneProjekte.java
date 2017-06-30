@@ -23,6 +23,7 @@ import de.hdm.itprojekt.client.Showcase;
 
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -78,12 +79,20 @@ public class EigeneProjekte extends Showcase {
 		}
 	
 	
-	 public EigeneProjekte(final  Marktplatz mp,  RoleManagement rm,  Navigator navi) {
+	 public EigeneProjekte(final  Marktplatz mp,  final RoleManagement rm, final Navigator navi) {
 			// TODO Auto-generated constructor stub
 			 this.markt1=mp;
 			 this.rm=rm;
 			 this.navi=navi;
 		}
+	 
+	 public EigeneProjekte(final Marktplatz mp2, final RoleManagement rm, final Navigator navi, final Projekt p){
+		 this.markt1=mp2;
+		 this.rm=rm;
+		 this.navi=navi;
+		 this.p1=p;
+	
+	 }
 	 
 	public EigeneProjekte(Projekt p12, Marktplatz markt12, Organisationseinheit o2, Person pers12) {
 		// TODO Auto-generated constructor stub
@@ -158,13 +167,10 @@ public class EigeneProjekte extends Showcase {
 			
 				Projekt p1 = ssmallEigeneProjekte.getSelectedObject();
 				if (p1 != null){
-					DialogBox dialogBoxProjektBearbeiten = new DialogBoxEigeneProjekteBearbeiten(p1,markt1, o, pers1);
-					RootPanel.get("Anzeige").clear();
-					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
-					
-					
-				
-					
+					DialogBox dialogBoxProjektBearbeiten = new DialogBoxEigeneProjekteBearbeiten(p1,markt1, rm, navi);
+//					RootPanel.get("Anzeige").clear();
+//					RootPanel.get("Anzeige").add(dialogBoxProjektBearbeiten);
+					dialogBoxProjektBearbeiten.center();					
 				}
 			}
 		});
@@ -265,7 +271,7 @@ public class EigeneProjekte extends Showcase {
 				@Override
 				public void onSuccess(Vector<Projekt> result) {
 					// TODO Auto-generated method stub
-					Window.alert("Funktioniert");
+//					Window.alert("Funktioniert");
 					eigeneprojektetabelle.setRowData(0, result);
 					eigeneprojektetabelle.setRowCount(result.size(), true);
 				}
