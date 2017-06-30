@@ -168,7 +168,7 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		@Override
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
-			Window.alert("Projekt wurde erfolgreich bearbeitet!");
+			Window.alert("Das Projekt wurde erfolgreich bearbeitet!");
 			Showcase showcase = new EigeneProjekte(rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
