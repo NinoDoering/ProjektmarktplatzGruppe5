@@ -376,7 +376,8 @@ public class PersonSeite extends Showcase{
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 		
-				gwtproxy.getProjektByPerson(rm.getUser(), new AsyncCallback<Vector<Projekt>>() {
+				Person px = rm.getUser();
+				gwtproxy.getProjektByPerson(px, new AsyncCallback<Vector<Projekt>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {

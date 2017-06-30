@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
+import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 //import de.hdm.itprojekt.client.gui.DialogBoxProjektAnlegen.projektinDB;
 import de.hdm.itprojekt.shared.GreetingService;
@@ -34,8 +35,11 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private VerticalPanel projektVP = new VerticalPanel();
 	private HorizontalPanel projektHP = new HorizontalPanel();
-	private Marktplatz mp2 = new Marktplatz();
+	private Marktplatz mp = new Marktplatz();
 	private Person projektLeiter = new Person();
+	private Projekt p = null;
+	private RoleManagement rm = null;
+	private Navigator navi = null;
 	private Button ok = new Button("OK");
 	private Button abbrechen = new Button("Abbrechen");
 	
@@ -71,10 +75,10 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		startD.setValue(selectedObject.getStartDatum(), true);
 		endD.setValue(selectedObject.getEndDatum(), true);
 		
-			this.setText("Projektmarktplatz anlegen");
+			this.setText("Projektmarktplatz bearbeiten");
 			this.setAnimationEnabled(false);
 			this.setGlassEnabled(true);
-			this.mp2 = m1 ;
+			this.mp = m1 ;
 			this.projektLeiter= projektLeiter;
 			projektHP.add(ok);
 			projektHP.add(abbrechen);
@@ -164,15 +168,12 @@ private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 		@Override
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
-			Window.alert("Veränderung wurden gespeichert !");
-			Showcase showcase = new ProjekteSeite(null, mp2, null);
+			Window.alert("Projekt wurde erfolgreich bearbeitet!");
+			Showcase showcase = new EigeneProjekte(rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
 		}
 
-		
-		
-		
-		
+
 	
 }}
