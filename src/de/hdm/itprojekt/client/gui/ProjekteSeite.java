@@ -221,7 +221,7 @@ public class ProjekteSeite extends Showcase{
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Das Projekt wurde erfolgreich gelöscht");
-						Showcase showcase = new EigeneProjekte(selectedmarktplatz, rm, navi);
+						Showcase showcase = new EigeneProjekte(rm, navi);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
