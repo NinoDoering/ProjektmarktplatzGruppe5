@@ -7,27 +7,28 @@ public class Bewerbung extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	/*
+
+/*
 	 * Beziehung zu Organisationseinheit ueber Fremdschl�ssel
 	 */
 	private int idOrganisationseinheit;
 	
-	/*
+	/**
 	 * Bewerbungstext
 	 */
 	private String bewerbungsText;
 	
-	/*
+	/**
 	 * Erstellungsdatum der Bewerbung
 	 */
 	private Date erstellDatum;
 	
-	/*
+	/**
 	 * ID der Ausschreibung
 	 */
 	private int idAusschreibung;
 	
-	/*
+	/**
 	 * Status der Bewerbung. Dieser kann "eingereicht", "zusage" oder "absage" annehmen.
 	 */
 	
@@ -56,12 +57,12 @@ public class Bewerbung extends BusinessObject {
 	}	
 	} }
 	
-	/*
+	/**
 	 * Bewerbungsstatus wird im Voraus auf "eingereicht" gesetzt
 	 */
 	private BewerbungsStatus bewerbungsStatus = BewerbungsStatus.eingereicht;
 	
-	/*
+	/**
 	 * Ausgabe der Organisationseinheits-ID
 	 * @return idOrganisationseinheit
 	 */
@@ -69,7 +70,7 @@ public class Bewerbung extends BusinessObject {
 		return idOrganisationseinheit;
 	}
 	
-	/*
+	/**
 	 * Festlegen der Organisationseinheits-ID
 	 * @param idOrganisationseinheit
 	 */
@@ -77,7 +78,7 @@ public class Bewerbung extends BusinessObject {
 		this.idOrganisationseinheit = idOrganisationseinheit;
 	}
 	
-	/*
+	/**
 	 * Ausgabe des Bewerbungstextes
 	 * @return bewerbungsText
 	 */
@@ -85,7 +86,7 @@ public class Bewerbung extends BusinessObject {
 		return bewerbungsText;
 	}
 	
-	/*
+	/**
 	 * Festlegen des Bewerbungstextes
 	 * @param bewerbungsText
 	 */
@@ -93,7 +94,7 @@ public class Bewerbung extends BusinessObject {
 		this.bewerbungsText = bewerbungsText;
 	}
 	
-	/*
+	/**
 	 * Augabe des Erstellungsdatums
 	 * @return erstellDatum
 	 */
@@ -101,7 +102,7 @@ public class Bewerbung extends BusinessObject {
 		return erstellDatum;
 	}
 	
-	/*
+	/**
 	 * Festlegen des Erstelldatums
 	 * @param erstellDatum
 	 */
@@ -109,7 +110,7 @@ public class Bewerbung extends BusinessObject {
 		this.erstellDatum = erstellDatum;
 	}
 	
-	/*
+	/**
 	 * Ausgabe der Ausschreibungs-ID
 	 * @return idAusschreibung
 	 */
@@ -117,7 +118,7 @@ public class Bewerbung extends BusinessObject {
 		return idAusschreibung;
 	}
 	
-	/*
+	/**
 	 * Festlegen der Ausschreibungs-ID
 	 * @param isAusschreibung
 	 */
@@ -125,7 +126,7 @@ public class Bewerbung extends BusinessObject {
 		this.idAusschreibung = idAusschreibung;
 	}
 	
-	/*
+	/**
 	 * Ausgabe des Bewerbungsstatus
 	 * @return bewerbungsStatus 
 	 */
@@ -133,7 +134,7 @@ public class Bewerbung extends BusinessObject {
 		return bewerbungsStatus;
 	}
 	
-	/*
+	/**
 	 * Festlegen des Bewerbungsstatus
 	 * @param bewerbungsStatus
 	 */
@@ -141,9 +142,8 @@ public class Bewerbung extends BusinessObject {
 		this.bewerbungsStatus = bewerbungsStatus;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.hdm.itprojekt.shared.bo.BusinessObject#toString()
+	/**
+	 * Erzeugen einer textuellen Darstellung einer Bewerbung
 	 */
 	@Override
 	public String toString() {

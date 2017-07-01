@@ -55,7 +55,7 @@ public class DialogBoxTeamBearbeiten extends DialogBox {
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	private Person person = new Person();
-	private Team team = new Team();
+	private Team team = null;
 	private RoleManagement rm = null;
 	private Navigator navi = null;
 	private Unternehmen unternehmen = null;
@@ -75,6 +75,7 @@ public class DialogBoxTeamBearbeiten extends DialogBox {
 	private Label teamORTLabel = new Label("Standort ");
 	private TextArea teamORTArea = new TextArea();	
 	private Label teamUnternehmenLabel = new Label("Unternehmen:");	
+//	private TextArea teamUntArea = new TextArea();	
 	private ListBox lb = new ListBox();
 	
 	public DialogBoxTeamBearbeiten(final RoleManagement rm, final Navigator navi, Team t){
@@ -87,8 +88,6 @@ public class DialogBoxTeamBearbeiten extends DialogBox {
 		teamNameArea.setValue(team.getTeamName());
 		teamAdresseArea.setValue(team.getAdresse());
 		teamORTArea.setValue(team.getStandort());
-		lb.setValue(0, getText());
-		
 		speichernTeam.setStylePrimaryName("teambtn");
 		abbrechenTeam.setStylePrimaryName("teambtn");
 		teamHP.add(speichernTeam);
@@ -103,28 +102,21 @@ public class DialogBoxTeamBearbeiten extends DialogBox {
 			}
 			
 		});
-		
 		gwtproxy.getAllUnternehmen(new getAllUnternehmen());
 		
 		speichernTeam.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Window.alert(" team id:"+ team.getId());
-				Window.alert(" unternehmen id:"+ unternehmen.getId());
+			
+				
 				team.setTeamName(teamNameArea.getText());
 				team.setAdresse(teamAdresseArea.getText());
 				team.setStandort(teamORTArea.getText());
 				team.setId(team.getId());
-				lb.addClickHandler(new ClickHandler() {
-					
-					@Override
-					public void onClick(ClickEvent event) {
-						String name = lb.getSelectedItemText();
-						
-					}});	
-				String name= lb.getSelectedItemText();
 				
+			
+														
 				gwtproxy.saveTeam(team, new AsyncCallback<Void>() {
 					
 					@Override
@@ -142,11 +134,10 @@ public class DialogBoxTeamBearbeiten extends DialogBox {
 						
 					}
 				});
-				
-				
 			}
+				
+			});
 			
-		});
 		
 		teamBearbeitenTabelle.setWidget(1, 0, teamNameLabel);
 		teamBearbeitenTabelle.setWidget(1, 1, teamNameArea);
@@ -173,8 +164,7 @@ public class DialogBoxTeamBearbeiten extends DialogBox {
 		public void onSuccess(Vector<Unternehmen> result) {
 			Window.alert("Alle Unternehmen gegettet");
 			for (Unternehmen unternehmen : result) {
-				lb.addItem(unternehmen.getFirmenName());
-				
+				lb.addItem(unternehmen.getFirmenName());				
 			}
 			
 		}

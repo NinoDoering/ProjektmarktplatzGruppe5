@@ -658,8 +658,8 @@ private class GetPersonAusDB implements AsyncCallback<Person> {
 			boxStandort.setText(result.getStandort());
 			boxTitel.setText(result.getTitel());
 			boxEmail.setText(p.getEmailAddresse());
-			
-			
+			boxTeamName.setText(rm.getTeamOfUser().getTeamName());
+			boxFirmenName.setText(rm.getUnternehmenOfUser().getFirmenName());
 		}
 		
 	}

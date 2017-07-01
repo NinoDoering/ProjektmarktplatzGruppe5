@@ -9,37 +9,37 @@ public class Ausschreibung extends BusinessObject  {
 	
 	private static final long serialVersionUID = 1L; 
 	
-	/*
+	/**
 	 * Bezeichnung der Ausschreibung 
 	 */
 	private String bezeichnung;
 	
-	/*
+	/**
 	 * Datum, bis zu dem man sich auf die Ausschreibung bewerben kann.
 	 */
 	private Date endDatum;
 	
-	/*
+	/**
 	 * Beschreibung der Ausschreibung
 	 */
 	private String beschreibung;
 	
-	/*
-	 * Beziehung zu Projekt über Fremdschlüssel
+	/**
+	 * Beziehung zu Projekt ï¿½ber Fremdschlï¿½ssel
 	 */
 	private int idProjekt;
 	
-	/*
-	 * Beziehung zu Partnerprofil über Fremdschlüssel
+	/**
+	 * Beziehung zu Partnerprofil ï¿½ber Fremdschlï¿½ssel
 	 */
 	private int idPartnerprofil;
 	
-	/*
-	 * Beziehung zu Ausschreibendem (Person, Team, Unternehmen) über Fremdschlüssel
+	/**
+	 * Beziehung zu Ausschreibendem (Person, Team, Unternehmen) ï¿½ber Fremdschlï¿½ssel
 	 */
 	private int idAusschreibender;
 	
-	/*
+	/**
 	 * Status der Ausschreibung. Dieser kann besetzt, abgebrochen oder laufend sein.
 	 */
     public enum Status {besetzt, abgebrochen, laufend;
@@ -53,12 +53,12 @@ public class Ausschreibung extends BusinessObject  {
     	}
     }
     
-    /*
+    /**
      * Der Ausschreibungsstatus wird vorerst auf laufend gesetzt.
      */
 	private Status ausschreibungsstatus = Status.laufend;
 	
-    /*
+    /**
      * Id der Ausschreibung wird gesetzt
      * @param idProjekt
      */
@@ -66,7 +66,7 @@ public class Ausschreibung extends BusinessObject  {
 		this.idProjekt = idProjekt;
 	}
 
-    /*
+    /**
      * Auslesen der Id der Ausschreibung
      * @return idProjekt
      */
@@ -74,7 +74,7 @@ public class Ausschreibung extends BusinessObject  {
 		return idProjekt;
 	}
 	
-	/*
+	/**
 	 * Auslesen der Bezeichnung der Ausschreibung
 	 * @return bezeichnung
 	 */
@@ -82,7 +82,7 @@ public class Ausschreibung extends BusinessObject  {
 		return bezeichnung;
 	}
 
-	/*
+	/**
 	 * Festlegen der Bezeichnung
 	 * @param bezeichnung
 	 */
@@ -90,15 +90,15 @@ public class Ausschreibung extends BusinessObject  {
 		this.bezeichnung = bezeichnung;
 	}
 	
-	/*
-	 * Auslesen des Fremdschlüssels idPartnerofil von Partnerprofil
+	/**
+	 * Auslesen des Fremdschlï¿½ssels idPartnerofil von Partnerprofil
 	 * @return idPartnerprofil
 	 */
 	public int getIdPartnerprofil() {
 		return idPartnerprofil;
 	}
 
-	/*
+	/**
 	 * idPartnerprofil festlegen
 	 * @param idPartnerprofil 
 	 */
@@ -106,15 +106,15 @@ public class Ausschreibung extends BusinessObject  {
 		this.idPartnerprofil = idPartnerprofil;
 	}
 
-	/*
-	 * Auslesen von Fremdschlüssel idAusschreibender
+	/**
+	 * Auslesen von Fremdschlï¿½ssel idAusschreibender
 	 * @return idAusschreibender
 	 */
 	public int getIdAusschreibender() {
 		return idAusschreibender;
 	}
 
-	/*
+	/**
 	 * Id des Ausschreibenden festlegen
 	 * @param idAusschreibender
 	 */
@@ -122,7 +122,7 @@ public class Ausschreibung extends BusinessObject  {
 		this.idAusschreibender = idAusschreibender;
 	}
 
-	/*
+	/**
 	 * Auslesen des Enddatums
 	 * @return endDatum 	
 	 */
@@ -130,7 +130,7 @@ public class Ausschreibung extends BusinessObject  {
 		return endDatum;
 	}
 
-	/*
+	/**
 	 * Enddatum festlegen
 	 * @param endDatum
 	 */
@@ -138,7 +138,7 @@ public class Ausschreibung extends BusinessObject  {
 		this.endDatum = endDatum;
 	}
 
-	/*
+	/**
 	 * Auslesen der Ausschreibungsbeschreibung
 	 * @return beschreibung
 	 */
@@ -146,7 +146,7 @@ public class Ausschreibung extends BusinessObject  {
 		return beschreibung;
 	}
 
-	/*
+	/**
 	 * Beschreibung der Ausschreibung festlegen
 	 * @param beschreibung
 	 */
@@ -154,26 +154,25 @@ public class Ausschreibung extends BusinessObject  {
 		this.beschreibung = beschreibung;
 	} 
 	
-	/*
+	/**
 	 * Auslesen ausschreibungsstatus
 	 * @return ausschreibungsstatus
 	 */
-	public Status getAusschreibungsstatus(){
+	public Status getAusschreibungsstatus(){		
 		return ausschreibungsstatus;
 	}
 	
-	/*
+	/**
 	 * Ausschreibungsstatus festlegen
 	 * @param ausschreibungsstatus
-	 */
+	 */	
 	public void setAusschreibungsstatus(Status ausschreibungsstatus){
 		this.ausschreibungsstatus = ausschreibungsstatus;
 	}
 	
 
-	/*
-	 * (non-Javadoc)
-	 * @see de.hdm.itprojekt.shared.bo.BusinessObject#toString()
+	/**
+	 * Erzeugen einer textuellen Darstellung einer Ausschreibung
 	 */
 	@Override
 	public String toString() {

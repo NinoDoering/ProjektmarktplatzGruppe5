@@ -1,7 +1,6 @@
 package de.hdm.itprojekt.shared.bo;
 
 import java.io.Serializable;
-//test
 /** Erzeugung der Superklasse BusinessObjects, vererbt 
 * an alle anderen BO Klassen,  */ 
 
@@ -9,31 +8,49 @@ public abstract class BusinessObject implements Serializable {
 
 	private static final long serialVersionUID = 1L; 
 	
-	// eine eindeutige Id aller BO's 
-	
+	/**
+	 *  Eine eindeutige Id aller BO's 
+	 */
 	private int idBusinessObject = 0;
 	
 	private int id = 0;
 	
-		public int getId() {
+	/**
+	 * Auslesen der ID
+	 * @return id
+	 */
+	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Setzen der ID
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
-		public int getIdBusinessObject() {
-		return this.idBusinessObject; 
+	/**
+	 * Auslesen der ID des BusinessObjects
+	 * @return idBusinessObject
+	 */
+	public int getIdBusinessObject() {
+		return this.idBusinessObject;
 	}
-	
+
+	/**
+	 * Setzen der ID des BusinessObjects
+	 * @param idBusinessObject
+	 */
 	public void setIdBusinessObject(int idBusinessObject) {
-		this.idBusinessObject= idBusinessObject; 
+		this.idBusinessObject = idBusinessObject;
 	}
 	
-	/** eine Instanz dieser Klasse wird textuell dargestellt 
-	*  Die Ausgabe enth�lt den Klassennamen und die Id des Objektes */
-	
+	/**
+	*  eine Instanz dieser Klasse wird textuell dargestellt 
+	*  Die Ausgabe enth�lt den Klassennamen und die Id des Objektes
+	*/
 	public String toString(){
 		
 		return this.getClass().getName() + " " 
@@ -41,7 +58,9 @@ public abstract class BusinessObject implements Serializable {
 		
 	}
 	
-	/** inhaltlicher Abgleich zweier Business Objects anhand der Id*/
+	/**
+	 * inhaltlicher Abgleich zweier Business Objects anhand der Id
+	 */
 	
 	public boolean equals(Object o) {
 	    /*

@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
+import de.hdm.itprojekt.shared.bo.Unternehmen;
 
 public class TeamMapper extends OrganisationseinheitMapper{
 //Alle Mappermethoden in dieser Klasse funktionieren
@@ -147,10 +148,11 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 		try {
 			Statement stmt = con.createStatement();
-
+			t.setId(super.updateOrganisationseinheitVonTeam(t));
+			super.organisationseinheitMapper().updateOrganisationseinheitVonTeam(t);
 			stmt.executeUpdate("UPDATE team " 
 			+ "SET teamName=\"" + t.getTeamName() + "\", " 
-			+ "idUnternehmen=\"" + t.getIdUnternehmen() + "\" "
+			+ "idUnternehmen=\"" + t.getIdUnternehmen() + "\""
 			+ " WHERE idTeam= " + t.getId());
 		}
 
@@ -161,15 +163,21 @@ public class TeamMapper extends OrganisationseinheitMapper{
 	}
 
 	//delete
-	public void deleteTeam(Team t) {
+	public void deleteTeamInteger(Integer t) {
+		Team t1 = new Team();	
+		t1.setId(t);
+		
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("DELETE * FROM team " + " WHERE idTeam= " + t.getId());
-
+			stmt.executeUpdate("DELETE FROM `team` WHERE `idTeam` = " + t1.getId());
+			super.deleteOrganisationseinheit(t1);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}}
+		public void deleteTeam(Team t) {
+			this.deleteTeamInteger(t.getId());
 		}
-	}
+	
 }

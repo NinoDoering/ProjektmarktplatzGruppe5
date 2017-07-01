@@ -45,7 +45,7 @@ public class ProjektmarktplatzSeite extends Showcase{
 	
 	private Button anlegenbutton = new Button("Neuen Markplatz anlegen");
 	private Button auswaehlenMarktplatz = new Button("Projektmarktplatz anzeigen");
-	private Button deleteMarktplatz = new Button("Marktplatz L�schen");
+	private Button deleteMarktplatz = new Button("Marktplatz Löschen");
 	private Button updateMarktplatz = new Button("Marktplatz bearbeiten");
 	private RoleManagement rm = null;
 	private Navigator navi = null;

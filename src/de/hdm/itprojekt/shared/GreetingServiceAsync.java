@@ -216,6 +216,8 @@ public interface GreetingServiceAsync {
 
 		void loeschenTeam(Team t, AsyncCallback<Void> callback);
 		
+		void loeschenTeamInteger(Integer t, AsyncCallback<Void> callback);
+		
 		void getTeamById(int idTeam, AsyncCallback<Team> callback);
 
 		void saveTeam(Team t, AsyncCallback<Void> callback);

@@ -8,27 +8,27 @@ public class Beteiligung extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	/*
+	/**
 	 * Zeitraum einer Beteiligung
 	 */
 	private int beteiligungszeit;
 	
-	/*
-	 * Beziehung zu Beteiligtem über Fremdschlüssel
+	/**
+	 * Beziehung zu Beteiligtem ï¿½ber Fremdschlï¿½ssel
 	 */
 	private int idBeteiligter;
 	
-	/*
-	 * Beziehung zu Projekt über Fremdschlüssel
+	/**
+	 * Beziehung zu Projekt ï¿½ber Fremdschlï¿½ssel
 	 */
 	private int idProjekt;
 	
-	/*
-	 * Beziehung zu Bewertung über Fremdschlüssel
+	/**
+	 * Beziehung zu Bewertung ï¿½ber Fremdschlï¿½ssel
 	 */
 	private int idBewertung;
 	
-	/*
+	/**
 	 * Auslesen der Beteiligungszeit
 	 * @return beteiligungszeit	
 	 */
@@ -36,7 +36,7 @@ public class Beteiligung extends BusinessObject {
 		return beteiligungszeit;
 	}
 	
-	/*
+	/**
 	 * Festlegen der Beteiligungszeit
 	 * @param i
 	 */
@@ -44,7 +44,7 @@ public class Beteiligung extends BusinessObject {
 		this.beteiligungszeit = i;
 	}
 	
-	/*
+	/**
 	 * Auslesen der Id des Beteiligten
 	 * @return idBeteiligter
 	 */
@@ -52,7 +52,7 @@ public class Beteiligung extends BusinessObject {
 		return idBeteiligter;
 	}
 	
-	/*
+	/**
 	 * Festlegen der Id des Beteiligten
 	 * @param idBeteiligter
 	 */
@@ -60,7 +60,7 @@ public class Beteiligung extends BusinessObject {
 		this.idBeteiligter = idBeteiligter;
 	}
 	
-	/*
+	/**
 	 * Auslesen der Id des Projekts
 	 * @param idProjekt
 	 */
@@ -68,7 +68,7 @@ public class Beteiligung extends BusinessObject {
 		return idProjekt;
 	}
 	
-	/*
+	/**
 	 * Festlegen der Id des Projekts
 	 * @param idProjekt
 	 */
@@ -76,7 +76,7 @@ public class Beteiligung extends BusinessObject {
 		this.idProjekt = idProjekt;
 	}
 	
-	/*
+	/**
 	 * Auslesen der Id der zugehoerigen Bewertung
 	 * @return idBewertung
 	 */
@@ -84,7 +84,7 @@ public class Beteiligung extends BusinessObject {
 		return idBewertung;
 	}
 	
-	/*
+	/**
 	 * Festlegen der Bewertungs-Id
 	 * @param idBewertung
 	 */
@@ -92,9 +92,8 @@ public class Beteiligung extends BusinessObject {
 		this.idBewertung = idBewertung;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.hdm.itprojekt.shared.bo.BusinessObject#toString()
+	/**
+	 * Erzeugen einer textuellen Darstellung einer Beteiligung
 	 */
 	@Override
 	public String toString() {
