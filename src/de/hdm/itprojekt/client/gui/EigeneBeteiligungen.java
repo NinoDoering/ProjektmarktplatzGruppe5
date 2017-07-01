@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
@@ -48,6 +50,7 @@ public class EigeneBeteiligungen extends Showcase {
 	
 	//Buttons 
 	private Button anzeignBeteil = new Button("Beteiligung anzeigen");
+	private Button loeschenBeteil = new Button("Beteiligung zurückziehen");
 	
 	//Konstruktoren
 	
@@ -79,17 +82,52 @@ public class EigeneBeteiligungen extends Showcase {
 	
 		
 		hpanelEigBet.add(anzeignBeteil);
+		hpanelEigBet.add(loeschenBeteil);
 		
 		this.add(hpanelEigBet);
 		this.add(vpanelEigBet);
 		
+		 
+		
 		eigeneBeteiligungTabelle.setSelectionModel(ssmallEigeneEigenschaft);
+		
+		
+		loeschenBeteil.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				
+				final Beteiligung neueBeteiligung= new Beteiligung();
+				neueBeteiligung.setId(ssmallEigeneEigenschaft.getSelectedObject().getIdBeteiligung());
+				gwtproxy.loeschenBeteiligung(neueBeteiligung, new AsyncCallback<Void>() {
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						Window.alert("Fehler beim Kündigen");
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						Window.alert("Erfolgreich gekündigt");
+						Showcase showcase = new EigeneBeteiligungen(rm, navi);
+						RootPanel.get("Anzeige").clear();
+						RootPanel.get("Anzeige").add(showcase);
+
+					}
+				});
+			}
+		});
+		
 		
 		ssmallEigeneEigenschaft.addSelectionChangeHandler(new Handler() {
 			
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				// TODO Auto-generated method stub
+				
 				
 			
 			}
@@ -141,6 +179,7 @@ public class EigeneBeteiligungen extends Showcase {
 		public void onSuccess(Vector<Beteiligung> result) {
 			for (Beteiligung beteiligung : result) {
 				final BeteiligungMixProjekt betUndPro = new BeteiligungMixProjekt(); 
+				betUndPro.setIdBeteiligung(beteiligung.getId());
 				betUndPro.setBeteiligungszeit(beteiligung.getBeteiligungszeit());
 
 				gwtproxy.getProjektByBeteiligung(beteiligung, new AsyncCallback<Projekt>() {
@@ -150,7 +189,7 @@ public class EigeneBeteiligungen extends Showcase {
 						betUndPro.setProjektbezeichnung(result.getBezeichnung());
 						
 						mix.add(betUndPro);
-					
+						
 						
 						eigeneBeteiligungTabelle.setRowData(mix);
 						eigeneBeteiligungTabelle.setRowCount(mix.size(), true);
