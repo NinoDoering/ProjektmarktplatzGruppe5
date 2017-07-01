@@ -336,7 +336,7 @@ public class AusschreibungSeite extends Showcase {
 //				RootPanel.get("Anzeige").add(db1);
 				db1.center();
 					} else {
-						Window.alert("Auf diese Stelle kann man sich nicht mehr bewerben!");
+						Window.alert("Auf diese Stelle kann man sich leider nicht mehr bewerben!");
 					}
 					
 //				
