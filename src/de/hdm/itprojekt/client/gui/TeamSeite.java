@@ -21,6 +21,7 @@ import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
@@ -33,13 +34,16 @@ public class TeamSeite extends Showcase {
 	
 	private HorizontalPanel hpanelTeam = new HorizontalPanel();
 	private VerticalPanel vpanelTeam = new VerticalPanel();
-	private Team t1 = new Team();
-	private Person p1 = new Person();
+	private Team t1 = null;
+	private Team team2 = null;
+	private Person p1 = null;
+	private Partnerprofil pp = new Partnerprofil();
 	private RoleManagement rm = null;
 	private Navigator navi = null;
 	private Button teamBeitreten = new Button("Team beitreten");
 	private Button teamBearbeiten = new Button("Team bearbeiten");
 	private Button teamAnlegen = new Button("Team Anlegen");
+	private Button teamLoeschen = new Button("Team löschen");
 	final SingleSelectionModel<Team> ssmallteams = new SingleSelectionModel<Team>();
 	
 	public TeamSeite(final RoleManagement rm, final Navigator navi){
@@ -64,6 +68,7 @@ public class TeamSeite extends Showcase {
 		hpanelTeam.add(teamAnlegen);
 		hpanelTeam.add(teamBearbeiten);
 		hpanelTeam.add(teamBeitreten);
+		hpanelTeam.add(teamLoeschen);
 		
 		this.add(vpanelTeam);
 		this.add(hpanelTeam);
@@ -106,7 +111,8 @@ public class TeamSeite extends Showcase {
 			// TODO Auto-generated method stub
 			return object.getAdresse();
 		}
-			
+		
+		
 	
 	};
 	teamBearbeiten.addClickHandler( new ClickHandler(){
@@ -114,12 +120,85 @@ public class TeamSeite extends Showcase {
 		@Override
 		public void onClick(ClickEvent event) {
 //			Window.alert("idteam" + t1.getTeamName()+ "rm: "+ rm.getUser()+ "navi: " + navi.getTitle());
-			DialogBox dialogbox = new DialogBoxTeamBearbeiten(rm, navi, t1);
+			team2 = ssmallteams.getSelectedObject();
+			DialogBox dialogbox = new DialogBoxTeamBearbeiten(rm, navi, team2);
 			dialogbox.center();
 			
 		}
 		
 	});
+	
+	teamLoeschen.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			team2 = ssmallteams.getSelectedObject();
+			if (rm.getUser().getIdTeam() == null){
+				rm.getUser().setIdUnternehmen(0);
+			}
+			gwtproxy.getPartnerprofilByOrganisationseinheit(rm.getUnternehmenOfUser(), new AsyncCallback<Partnerprofil>(){
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("pp wurde nicht gefunden");
+					
+				}
+	
+				@Override
+				public void onSuccess(Partnerprofil result) {
+					// TODO Auto-generated method stub
+					pp=result;
+					team2.setIdPartnerprofil(result.getId());
+//					t1.setIdPartnerprofil(pp.getId());
+					Window.alert("uId: "+team2.getId());
+					Window.alert("pp id: "+result.getId());
+					gwtproxy.savePersonPers(rm.getUser(), new AsyncCallback<Person>(){
+	
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("savepersonpers ging nicht");
+							
+						}
+	
+						@Override
+						public void onSuccess(Person result) {
+							gwtproxy.loeschenTeamInteger(team2.getId(), new AsyncCallback<Void>(){
+	
+								@Override
+								public void onFailure(Throwable caught) {
+									Window.alert("LoeschenTeamInteger ging nicht");
+									
+								}
+	
+								@Override
+								public void onSuccess(Void result) {
+									// TODO Auto-generated method stub
+									gwtproxy.loeschenPartnerprofil(pp, new AsyncCallback<Void>(){
+	
+										@Override
+										public void onFailure(Throwable caught) {
+											Window.alert("pploeschen ging nicht");
+											
+										}
+	
+										@Override
+										public void onSuccess(Void result) {
+											Window.alert("bis187");
+											Showcase sc = new TeamSeite(rm, navi);
+											RootPanel.get("Anzeige").clear();
+											RootPanel.get("Anzeige").add(sc);
+										}
+										
+									});
+								}});}});}});
+			
+		}
+	});
+	
+	
+	
+	
+	
 	teamBeitreten.addClickHandler(new ClickHandler(){
 
 		@Override

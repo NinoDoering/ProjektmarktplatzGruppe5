@@ -216,6 +216,8 @@ public interface GreetingService extends RemoteService  {
 		public Team anlegenTeam(/*Integer ganz ausgeschrieben??*/int idUnternehmen, int idPartnerprofil, String teamName, String adresse, String standort) throws IllegalArgumentException;
 
 		public void loeschenTeam(Team t) throws IllegalArgumentException;
+		
+		public void loeschenTeamInteger(Integer t) throws IllegalArgumentException;
 
 		public Team getTeamById(int idTeam) throws IllegalArgumentException;
 		
