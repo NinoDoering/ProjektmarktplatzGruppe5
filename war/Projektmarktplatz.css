@@ -7,6 +7,17 @@
 	background-image: url("http://img.kutoo8.com//upload/image/17003522/1367481376306739_960x540.jpg");
 }
 
+#header {
+	
+	color: red;
+	text-align: center;
+	font-size: 2em;
+	font-weight: bolder;
+	font-family: calibri;
+	
+	
+}
+
 .h1{
 	text-align: center;
 	font-weight: bold;
