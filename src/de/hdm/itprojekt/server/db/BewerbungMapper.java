@@ -227,5 +227,17 @@ public class BewerbungMapper {
 			e.printStackTrace();
 		}
 	}
+	public Bewerbung updateBewerbungsstatus(Bewerbung b){
+		Connection con = DBConnection.connection();
+		
+		try{
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate("UPDATE bewerbung " + "SET bewerbungsStatus= " + "'" + b.getStatus() + "'" 
+			+  "WHERE idBewerbung = " +b.getId());
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return b;
+}
 	
 }

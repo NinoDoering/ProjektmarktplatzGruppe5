@@ -177,9 +177,10 @@ public interface GreetingService extends RemoteService  {
 
 		// Beteiligung beteiligung
 		
-		public Beteiligung anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung)
-				throws IllegalArgumentException;
+//		public Beteiligung anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung)
+//				throws IllegalArgumentException;
 
+		Beteiligung anlegenBeteiligung(Beteiligung beteiligung)throws IllegalArgumentException;
 
 		public void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException;
 
@@ -266,6 +267,11 @@ public interface GreetingService extends RemoteService  {
 		
 		// 7. Aufruf von Beteiligungen eines Bewerbers aus Sicht des Projektleiters
 		public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) throws IllegalArgumentException;
+
+
+		public Bewerbung bewerbungsStatusAktualisierne(Bewerbung b);
+
+
 
 
 

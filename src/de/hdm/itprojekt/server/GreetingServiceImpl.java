@@ -817,13 +817,18 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	
 	// anlegenBeteiligung
 	
-
+	@Override
+	
+	public Beteiligung anlegenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {		
+		return this.beteiligungMapper.insertBeteiligung(beteiligung);
+	}
+	
 	public Beteiligung anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt,
 			int idBewertung) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		Beteiligung b = new Beteiligung();
 		
-		b.setId(1);
+		b.setId(1);	
 		b.setBeteiligungszeit(beteiligungszeit);
 		b.setIdBeteiligter(idOrganisationseinheit);
 		b.setIdProjekt(idProjekt);
@@ -1207,7 +1212,14 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		Projekt p = this.getProjektbyId(b.getIdProjekt());
 		return p;
 	}
-	
+
+
+	@Override
+	public Bewerbung bewerbungsStatusAktualisierne(Bewerbung b) {
+		// TODO Auto-generated method stub
+		return this.bewerbungMapper.updateBewerbungsstatus(b);
+	}
+
 
 
 

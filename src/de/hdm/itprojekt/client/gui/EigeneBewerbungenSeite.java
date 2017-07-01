@@ -123,6 +123,7 @@ RootPanel.get("Anzeige").setWidth("100%");
 		deleteBew.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
+				
 				gwtproxy.loeschenBewerbung(b1, new AsyncCallback<Void>() {
 
 					@Override
