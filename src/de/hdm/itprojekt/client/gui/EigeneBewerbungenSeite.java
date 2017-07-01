@@ -109,7 +109,7 @@ RootPanel.get("Anzeige").setWidth("100%");
 			@Override
 			public String getValue(Bewerbung object) {
 				// TODO Auto-generated method stub
-				return object.getBewerbungsStatus().toString2();
+				return object.getStatus();
 			}
 			
 		};

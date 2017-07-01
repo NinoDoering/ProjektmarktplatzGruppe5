@@ -21,7 +21,7 @@ import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
-import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+//import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 
 //Rueckgaengig
 //zweiterVersuch
@@ -126,7 +126,7 @@ public interface GreetingService extends RemoteService  {
 		// Bewerbung b
 		
 		public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
-				Date erstellDatum, BewerbungsStatus bewerbungsStatus) throws IllegalArgumentException;
+				Date erstellDatum, String status) throws IllegalArgumentException;
 
 
 		public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException;

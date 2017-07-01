@@ -28,7 +28,7 @@ import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
-import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
@@ -47,6 +47,7 @@ public class DialogBoxBewerbungAnlegen extends DialogBox {
 	// Widgets für die DialogBox
 	private Label bewerbungsTextLabel = new Label("Bitte tragen sie hier Ihren Bewerbungstext ein: ");
 	private TextArea bewerbungsText = new TextArea();
+	private Label status = new Label("eingereicht");
 	
 	private FlexTable bewerbungsTabelle = new FlexTable();
 	
@@ -109,7 +110,7 @@ public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final
 //				Window.alert("" + rm.getSelectedRoleID());
 //				Window.alert("DIESE :"+ ausschreibungAuswahl.getBezeichnung());
 //				Window.alert("vor proxy");
-			gwtproxy.anlegenBewerbung(rm.getSelectedRoleID(), ausschreibungAuswahl.getId(), bewerbungsText.getText(), datumBewerbung.getValue(), BewerbungsStatus.eingereicht, new bewerbungInDB());
+			gwtproxy.anlegenBewerbung(rm.getSelectedRoleID(), ausschreibungAuswahl.getId(), bewerbungsText.getText(), datumBewerbung.getValue(), status.getText(), new bewerbungInDB());
 			}
 		});
 		
@@ -130,6 +131,8 @@ public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final
 		bewerbungsTabelle.setWidget(1, 0, bewerbungsTextLabel);
 		bewerbungsTabelle.setWidget(1, 1, bewerbungsText);
 		bewerbungsTabelle.setWidget(2, 0, datumBewerbung);
+		bewerbungsTabelle.setWidget(2, 1, status);
+		
 		
 		
 	}
@@ -145,7 +148,7 @@ public DialogBoxBewerbungAnlegen(final Ausschreibung ausschreibungAuswahl, final
 			public void onSuccess(Bewerbung result) {
 				// TODO Auto-generated method stub
 				hide();
-				Window.alert("Die Bewerbung wurde erfolgreich erstellt!"); 
+				Window.alert("Die Bewerbung wurde erfolgreich erstellt!" + result.getStatus() ); 
 //						+ " "+projekt1.getId()+"  " +marktplatz1.getId() + "  "+ person1.getId());
 				Showcase showcase = new AusschreibungSeite(marktplatz1, projekt1, ausschreibungAuswaehlen, rm, navi);
 				RootPanel.get("Anzeige").clear();

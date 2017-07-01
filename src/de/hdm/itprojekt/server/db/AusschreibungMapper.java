@@ -10,7 +10,7 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
-import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+//import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 
 
 public class AusschreibungMapper {
