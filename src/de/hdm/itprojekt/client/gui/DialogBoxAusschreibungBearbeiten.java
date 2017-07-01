@@ -66,7 +66,8 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 	private Button eigenschaftenBearbeiten = new Button("Qualifikationen bearbeiten");
 	private Button eigenschaftenAbbrechen = new Button("Abbrechen");
 	private Button speichern = new Button("Speichern");
-	
+	private Button besetzenStatus = new Button("Ausschreibung besetzen");
+	private Button zurückziehenStatus = new Button("Ausschreibung abbrechen");
 	
 	// Labels und TextAreas erstellt
 	private Label ausschreibungbezeichnung = new Label("Ausschreibungsbezeichnung");
@@ -153,7 +154,8 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		ausschreibungHP.add(ok);
 		ausschreibungHP.add(abbrechen);
 		ausschreibungHP.add(eigenschaftenBearbeiten);
-		
+		ausschreibungHP.add(besetzenStatus);
+		ausschreibungHP.add(zurückziehenStatus);
 		
 		//Datepicker 
 		aussbefrist.addValueChangeHandler(new ValueChangeHandler<Date>() {
@@ -238,6 +240,32 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 				eigenschaftbearbeiten.setVisible(true);
 			}
 		});	
+		
+		
+		besetzenStatus.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				
+			ausschreibung.setAusschreibungsstatus(Status.besetzt);
+				gwtproxy.saveAusschreibung(ausschreibung, new ausschreibungBearbeiten());
+			}
+			});
+
+		zurückziehenStatus.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				
+			ausschreibung.setAusschreibungsstatus(Status.abgebrochen);
+				gwtproxy.saveAusschreibung(ausschreibung, new ausschreibungBearbeiten());
+			}
+			});
+
+			
+		
 			ausschreibungVP.add(ausschreibungdialogboxtabelle);
 			ausschreibungVP.add(eigenschaftenHP);
 			ausschreibungVP.add(ausschreibungHP);	
@@ -359,7 +387,7 @@ public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 		public void onSuccess(Void result) {
 			// TODO Auto-generated method stub
 			hide();
-			Window.alert("Ausschreibung wurde gespeichert !");
+			Window.alert("Ausschreibung wurde erfolgreich bearbeitet!");
 			Showcase showcase = new EigeneAusschreibungen(ausschreibung, eig, rm, navi, p, mp);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
