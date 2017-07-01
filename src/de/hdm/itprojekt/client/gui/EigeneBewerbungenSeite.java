@@ -13,7 +13,10 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -26,6 +29,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Bewertung;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 
@@ -45,8 +49,9 @@ private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	
 	final SingleSelectionModel<Bewerbung> ssmalleBerwerbungen = new SingleSelectionModel<Bewerbung>();
 	
-	String deleteBewerbung = new String("L�schen");
-	Button deleteBew	 = new Button();
+	private String deleteBewerbung = new String("L�schen");
+	private Button deleteBew	 = new Button("Bewerbung zurueckziehen");
+	private Button bewertung = new Button("Bewertung ansehen");
 	
 	public EigeneBewerbungenSeite(RoleManagement rm, Navigator navi) {
 		// TODO Auto-generated constructor stub
@@ -71,7 +76,8 @@ RootPanel.get("Anzeige").setWidth("100%");
 		
 	eigenebewerbungentabelle.setWidth("100%", true);
 	eigenebewerbungentabelle.setStylePrimaryName("celltable");
-		
+		hpanelBewerbung.add(deleteBew);
+		hpanelBewerbung.add(bewertung);
 		vpanelBewerbung.add(eigenebewerbungentabelle);
 		//hpanelBewerbung.add(anlegenbutton);
 		this.add(hpanelBewerbung);
@@ -83,12 +89,8 @@ RootPanel.get("Anzeige").setWidth("100%");
 			
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
-				// TODO Auto-generated method stub
-				//m1 = ssmalleBerwerbungen.getSelectedObject();
-				//Showcase showcase = new ProjekteSeite(b1);
-				//RootPanel.get("Anzeige").clear();
-				//RootPanel.get("Anzeige").add(showcase);
-				Window.alert("erstmal nix");
+				b1= ssmalleBerwerbungen.getSelectedObject();
+			
 		}
 		});
 		
@@ -121,9 +123,96 @@ RootPanel.get("Anzeige").setWidth("100%");
 		deleteBew.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				Window.alert("erstmal nix");
+				gwtproxy.loeschenBewerbung(b1, new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						Window.alert("Loeschen erfolgreich");
+						Showcase showcase = new EigeneBewerbungenSeite(rm, navi);
+						RootPanel.get("Anzeige").clear();
+						RootPanel.get("Anzeige").add(showcase);
+					}
+				});
 			}
 		});
+		
+		bewertung.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				gwtproxy.getBewertungByBewerbung(b1, new AsyncCallback<Bewertung>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Bewertung result) {
+						Bewertung bewertung = result;
+					if (bewertung.getIdBewerbung()!=0) {
+						
+						// TODO Auto-generated method stub
+						final DialogBox dialogbox = new DialogBox();
+						dialogbox.setText("Ihre Bewertung zu Ihrer Bewerbung");
+						dialogbox.setAnimationEnabled(false);
+						dialogbox.setGlassEnabled(true);
+						dialogbox.center();
+						FlexTable bewerttabelle = new FlexTable();
+						Button ok = new Button("Ok");
+						Label lbltextbewert = new Label("Ihre textuelle Bewertung: ");
+						Label lblfliessbewert = new Label("Ihre Bewertung in Kommazahl: ");
+						Label textBewert = new Label(result.getTextuelleBewertung());
+						Label fliess = new Label(result.getFliesskommaBewertung()+"");
+						dialogbox.center();
+						bewerttabelle.setWidget(0, 0, lbltextbewert);
+						bewerttabelle.setWidget(0, 1, textBewert);
+						bewerttabelle.setWidget(1, 0, lblfliessbewert);
+						bewerttabelle.setWidget(1, 1, fliess);
+						bewerttabelle.setWidget(2, 0, ok);
+						dialogbox.add(bewerttabelle);
+						
+						ok.addClickHandler(new ClickHandler() {
+							
+							@Override
+							public void onClick(ClickEvent event) {
+								// TODO Auto-generated method stub
+								dialogbox.hide();
+							}
+						});
+						
+					}
+						else {
+							System.out.println(("Sie haben keine Bewertung auf diese Bewerbung"));
+										}
+						
+						
+						
+					
+					
+					//SUcces
+					}
+					
+					
+					
+				});
+			}
+		});
+		
+		
+		
+		
+		
+		
 	}
 	
 	public class getEigeneBewerbung implements AsyncCallback<Vector<Bewerbung>>{

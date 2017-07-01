@@ -220,7 +220,7 @@ public class BewerbungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE * FROM bewerbung" 
+			stmt.executeUpdate("DELETE FROM bewerbung" 
 								+ " WHERE idBewerbung= " + b.getId());
 
 		} catch (SQLException e) {

@@ -16,57 +16,60 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 
 import de.hdm.itprojekt.client.Navigator;
-import de.hdm.itprojekt.client.Projektmarktplatz;
 import de.hdm.itprojekt.client.Showcase;
+
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 
-public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
-		
+public class DialogBoxMarktplatzBearbeiten extends DialogBox {
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
-	
-//	public DialogBoxProjektmarktplatzAnlegen(final RoleManagement rm, final Navigator navi) {
-//		this.rm=rm;
-//		this.navi=navi;
-//	}
-	VerticalPanel vpanel = new VerticalPanel();
-	HorizontalPanel hpanel = new HorizontalPanel();
+
+	private VerticalPanel vpanel = new VerticalPanel();
+	private HorizontalPanel hpanel = new HorizontalPanel();
 	private RoleManagement rm = null;
 	private Navigator navi = null;
-	Button ok = new Button("OK");
-	Button abbrechen = new Button("Abbrechen");
+	private Marktplatz markt1 = new Marktplatz();
+	private Button ok = new Button("OK");
+	private Button abbrechen = new Button("Abbrechen");
 	
-	Label marktplatzname = new Label("Projektmarktplatzbezeichnung: ");
-	TextArea bezeichnung = new TextArea();
-	Label geschaeftsgebiet = new Label("Geschäftsgebiet: ");
-	TextArea gebiet = new TextArea();
+	private Label marktplatzname = new Label("Projektmarktplatzbezeichnung: ");
+	private TextArea bezeichnung = new TextArea();
+	private Label geschaeftsgebiet = new Label("Geschäftsgebiet: ");
+	private TextArea gebiet = new TextArea();
 	
 	private Person person = new Person();
 	
-	FlexTable marktplatzdialogboxtabelle = new FlexTable();
-	public DialogBoxProjektmarktplatzAnlegen(final RoleManagement rm, final Navigator navi){
+	
+	
+	
+	private FlexTable marktplatzdialogboxtabelle = new FlexTable();
+	public DialogBoxMarktplatzBearbeiten(final Marktplatz m1, final RoleManagement rm, final Navigator navi){
 		this.setText("Projektmarktplatz anlegen");
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
 		this.person = person;
 		this.rm=rm;
 		this.navi=navi;
+		this.markt1=m1;
 		hpanel.add(ok);
 		hpanel.add(abbrechen);
+		
 		
 		ok.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				if (bezeichnung.getText().isEmpty()){
-					Window.alert("Bitte geben Sie ein Projektmarktplatzname ein:");
+			
+				
+					markt1.setBezeichnung(bezeichnung.getText());
+					markt1.setGeschaeftsgebiet(gebiet.getText());
+					
+					
+					gwtproxy.saveMarktplatz(markt1, new  updateMarktplatzinDB());
 				}
-				else{
-					gwtproxy.anlegenMarktplatz(gebiet.getText(), bezeichnung.getText(), new marktplatzinDB());
-				}
-			}
+			
 		});
 		abbrechen.addClickHandler(new ClickHandler() {
 			
@@ -83,22 +86,29 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 		marktplatzdialogboxtabelle.setWidget(2, 0, geschaeftsgebiet);
 		marktplatzdialogboxtabelle.setWidget(2, 1, gebiet);
 	}
-	private class marktplatzinDB implements AsyncCallback<Marktplatz>{
+	private class updateMarktplatzinDB implements  AsyncCallback<Void>{
 
 		@Override
 		public void onFailure(Throwable caught) {
-			Window.alert("Fehler beim Erstellen des Marktplatzes");
+			// TODO Auto-generated method stub
+			Window.alert("Fehler beim bearbeiten");
 		}
 
 		@Override
-		public void onSuccess(Marktplatz result) {
-			Window.alert("Neuer Marktplatz wurde angelegt");
+		public void onSuccess(Void result) {
+			// TODO Auto-generated method stub
 			hide();
-			Showcase showcase = new ProjektmarktplatzSeite(person);
+			Window.alert("Marktplatzbearbeiten erfolgreich");
+			Showcase showcase = new ProjektmarktplatzSeite(rm, navi);
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Anzeige").add(showcase);
+		}
+
+		
+			
 			
 		}
 		
 	}
-}
+
+

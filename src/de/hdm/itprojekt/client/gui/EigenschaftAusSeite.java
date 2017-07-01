@@ -78,6 +78,10 @@ public class EigenschaftAusSeite extends Showcase{
 		hpanelEigenschaft.add(backToAusschreibung);
 		hpanelEigenschaft.add(backToAusschreibung1);
 		
+		
+		// unsichtbar setzen
+		backToAusschreibung.setVisible(false);
+		
 		this.add(beforeHere);
 		this.add(hpanelEigenschaft);
 		this.add(vpanelEigenschaft);

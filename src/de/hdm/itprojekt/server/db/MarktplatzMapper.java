@@ -182,9 +182,15 @@ public class MarktplatzMapper {
 
 			// SQL Statment, welches das Updaten von Projekte erlaubt
 
-			stmt.executeUpdate("UPDATE marktplatz " + "SET bezeichnung='" + pm.getBezeichnung() + "', '"
-					+ "geschaeftsgebiet='" + pm.getGeschaeftsgebiet() + "', '" 
-					+ " WHERE idMarktplatz= '" + pm.getId());
+			stmt.executeUpdate("UPDATE marktplatz " + "SET bezeichnung='" 
+					+ pm.getBezeichnung() + "', geschaeftsgebiet='"
+					+ pm.getGeschaeftsgebiet() 
+					+ "' WHERE idMarktplatz= " + pm.getId());
+			
+			
+			
+
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();

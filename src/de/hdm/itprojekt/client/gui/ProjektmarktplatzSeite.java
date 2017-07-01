@@ -13,10 +13,12 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -41,9 +43,10 @@ public class ProjektmarktplatzSeite extends Showcase{
 
 	final SingleSelectionModel<Marktplatz> ssmalleprojektmarktplaetze = new SingleSelectionModel<Marktplatz>();
 	
-	Button anlegenbutton = new Button("Neuen Markplatz anlegen");
-	Button auswaehlenMarktplatz = new Button("Projektmarktplatz anzeigen");
-	Button deleteMarktplatz = new Button("Marktplatz L�schen");
+	private Button anlegenbutton = new Button("Neuen Markplatz anlegen");
+	private Button auswaehlenMarktplatz = new Button("Projektmarktplatz anzeigen");
+	private Button deleteMarktplatz = new Button("Marktplatz L�schen");
+	private Button updateMarktplatz = new Button("Marktplatz bearbeiten");
 	private RoleManagement rm = null;
 	private Navigator navi = null;
 	
@@ -68,11 +71,14 @@ public class ProjektmarktplatzSeite extends Showcase{
 		marktplatztabelle.setWidth("100%", true);
 		marktplatztabelle.setStylePrimaryName("celltable");
 		vpanelMarktplatz.add(marktplatztabelle);
-		hpanelMarktplatz.add(anlegenbutton);
 		hpanelMarktplatz.add(auswaehlenMarktplatz);
+		hpanelMarktplatz.add(anlegenbutton);
+		hpanelMarktplatz.add(updateMarktplatz);
 		hpanelMarktplatz.add(deleteMarktplatz);
 		this.add(hpanelMarktplatz);
 		this.add(vpanelMarktplatz);
+		
+		
 		
 		marktplatztabelle.setSelectionModel(ssmalleprojektmarktplaetze);
 		
@@ -137,6 +143,19 @@ public class ProjektmarktplatzSeite extends Showcase{
 			public void onClick(ClickEvent event) {
 				DialogBox dialogbox = new DialogBoxProjektmarktplatzAnlegen(rm, navi);
 				dialogbox.center();
+			}
+		});
+		
+		updateMarktplatz.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				DialogBox dialogbox = new DialogBoxMarktplatzBearbeiten(m1, rm, navi);
+				dialogbox.center();
+				
+				
+				
 			}
 		});
 		
