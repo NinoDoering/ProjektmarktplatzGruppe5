@@ -231,7 +231,7 @@ public class BeteiligungMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE * FROM beteiligung " 
+			stmt.executeUpdate("DELETE FROM beteiligung " 
 								+ " WHERE idBeteiligung= " + beteiligung.getId());
 
 		} catch (SQLException e2) {

@@ -23,6 +23,7 @@ import de.hdm.itprojekt.client.Showcase;
 
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
+import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
@@ -38,6 +39,7 @@ public class EigeneProjekte extends Showcase {
 
 	private Organisationseinheit o = new Organisationseinheit();
 	final SingleSelectionModel<Projekt> ssmallEigeneProjekte = new SingleSelectionModel<Projekt>();
+	private Ausschreibung ausschr1 = new Ausschreibung();
 	private Projekt p1 = new Projekt();
 	private Person pers1 = new Person();
 	private RoleManagement rm = null;
@@ -49,7 +51,7 @@ public class EigeneProjekte extends Showcase {
 
 	private Button bearbeitenProjekt = new Button("Gewähltes Projekt bearbeiten");
 	
-	private Button anzeigenProjekt = new Button("Gewähltes Projekt anzeigen");
+	private Button anzeigenAusschreibung = new Button("Meine Ausschreibungen anzeigen");
 	
 	private Button loeschenProjekt = new Button("Gewähltes Projekt löschen");
 	
@@ -121,7 +123,7 @@ public class EigeneProjekte extends Showcase {
 		vpanelEigeneProjekte.add(eigeneprojektetabelle);
 	
 				//CRUD Buttons den Panel adden
-				hpanelEigeneProjekte.add(anzeigenProjekt);
+				hpanelEigeneProjekte.add(anzeigenAusschreibung);
 				hpanelEigeneProjekte.add(bearbeitenProjekt);
 				hpanelEigeneProjekte.add(loeschenProjekt);
 		
@@ -146,11 +148,11 @@ public class EigeneProjekte extends Showcase {
 		
 		
 		// Anzeige Button um Ausschreibungen anzuzeigen
-		anzeigenProjekt.addClickHandler(new ClickHandler() {
+		anzeigenAusschreibung.addClickHandler(new ClickHandler() {
 					
 					@Override
 					public void onClick(ClickEvent event) {
-						Showcase showcase = new AusschreibungSeite(p1, pers1);
+						Showcase showcase = new EigeneAusschreibungen(markt1, rm, navi, p1, ausschr1);
 						RootPanel.get("Anzeige").clear();
 						RootPanel.get("Anzeige").add(showcase);
 					}
