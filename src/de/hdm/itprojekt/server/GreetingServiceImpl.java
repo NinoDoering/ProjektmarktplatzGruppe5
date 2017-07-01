@@ -686,7 +686,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		this.teamMapper.deleteTeam(t);
 
 	}
-
+	
+	// loeschenTeamInteger
+	public void loeschenTeamInteger(Integer t) throws IllegalArgumentException {
+		this.teamMapper.deleteTeamInteger(t);
+	}
+	
 	// getPartnerprofilByOrganisationseinheit
 	public Partnerprofil getPartnerprofilByOrganisationseinheit(Organisationseinheit o)
 			throws IllegalArgumentException {

@@ -152,5 +152,25 @@ public class OrganisationseinheitMapper {
 		return id;
 		
 	}
-
+	
+	public int updateOrganisationseinheitVonTeam (Organisationseinheit o){
+		Connection con = DBConnection.connection();
+		int id = 0;
+		try {
+			id = o.getId();
+			
+			Statement stmt = con.createStatement();
+				if(o.getIdPartnerprofil() != null){
+			stmt.executeUpdate("UPDATE organisationseinheit "
+							+ "SET adresse='" + o.getAdresse() + "'," 
+							+ "standort='" + o.getStandort() + "'" 						
+							+ "WHERE idOrganisationseinheit= "+ o.getId());
+				}
+				
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		return id;
+		
+	}
 }
