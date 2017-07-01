@@ -24,6 +24,7 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
+import de.hdm.itprojekt.shared.bo.Unternehmen;
 public class TeamSeite extends Showcase {
 
 	
@@ -85,7 +86,40 @@ public class TeamSeite extends Showcase {
 		
 		
 	};
+	
+	TextColumn<Team> standort = new TextColumn<Team>() {
 
+		@Override
+		public String getValue(Team object) {
+			// TODO Auto-generated method stub
+			return object.getStandort();
+		}
+			
+	
+	};
+	
+	
+	TextColumn<Team> adresse = new TextColumn<Team>() {
+
+		@Override
+		public String getValue(Team object) {
+			// TODO Auto-generated method stub
+			return object.getAdresse();
+		}
+			
+	
+	};
+	teamBearbeiten.addClickHandler( new ClickHandler(){
+
+		@Override
+		public void onClick(ClickEvent event) {
+//			Window.alert("idteam" + t1.getTeamName()+ "rm: "+ rm.getUser()+ "navi: " + navi.getTitle());
+			DialogBox dialogbox = new DialogBoxTeamBearbeiten(rm, navi, t1);
+			dialogbox.center();
+			
+		}
+		
+	});
 	teamBeitreten.addClickHandler(new ClickHandler(){
 
 		@Override
@@ -128,6 +162,8 @@ public class TeamSeite extends Showcase {
 		
 	});
 		teamtabelle.addColumn(teamName, "Team-Name");
+		teamtabelle.addColumn(standort, "Standort");
+		teamtabelle.addColumn(adresse, "Adresse");
 		gwtproxy.getAllTeams(new getAlleTeamsausDB());
 }
 		

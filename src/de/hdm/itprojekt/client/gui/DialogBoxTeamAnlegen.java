@@ -204,7 +204,6 @@ private class getAllUnternehmen implements AsyncCallback<Vector<Unternehmen>>{
 
 	@Override
 	public void onSuccess(Vector<Unternehmen> result) {
-		Window.alert("Alle Unternehmen gegettet");
 		for (Unternehmen unternehmen : result) {
 			lb.addItem(unternehmen.getFirmenName());
 			
