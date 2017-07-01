@@ -11,7 +11,7 @@ import de.hdm.itprojekt.shared.bo.Beteiligung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Bewertung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
-import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+//import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
@@ -117,7 +117,7 @@ public interface GreetingServiceAsync {
 		// Bewerbung Asynch
 		
 		void anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext, Date erstellDatum,
-				BewerbungsStatus bewerbungsStatus, AsyncCallback<Bewerbung> callback);
+				String bewerbungsStatus, AsyncCallback<Bewerbung> callback);
 
 		void loeschenBewerbung(Bewerbung b, AsyncCallback<Void> callback);
 

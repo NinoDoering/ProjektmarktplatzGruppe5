@@ -11,7 +11,7 @@ import java.util.Vector;
 
 import de.hdm.itprojekt.shared.bo.*;
 import de.hdm.itprojekt.server.db.*;
-import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+//import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 
 
 public class BewerbungMapper {
@@ -72,7 +72,9 @@ public class BewerbungMapper {
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
-				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
+
+				b.setStatus(rs.getString("bewerbungsstatus"));
+				
 
 				return b;
 			}
@@ -103,7 +105,7 @@ public class BewerbungMapper {
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
-				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsStatus")));
+				b.setStatus(rs.getString("bewerbungsStatus"));
 				
 				result.addElement(b);
 			}
@@ -141,7 +143,7 @@ public class BewerbungMapper {
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungsText"));
 				b.setErstellDatum(rs.getDate("erstellDatum"));
-				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsStatus")));
+				b.setStatus(rs.getString("bewerbungsStatus"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 
@@ -178,7 +180,9 @@ public class BewerbungMapper {
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
-				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
+
+				b.setStatus(rs.getString("bewerbungsstatus"));
+				
 
 				result.addElement(b);
 			}
@@ -210,12 +214,17 @@ public class BewerbungMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate(
-						"INSERT INTO bewerbung (idBewerbung, bewerbungstext, erstellDatum, idOrganisationseinheit, idAusschreibung, bewerbungsStatus) "
-								+ "VALUES (" + b.getId() + ",'" + b.getBewerbungsText() + "','"
-								+ format.format(b.getErstellDatum()) + "','" + b.getIdOrganisationseinheit() + "','"
-								+ b.getIdAusschreibung() + "','" + b.getBewerbungsStatus() + "')");
 
+				stmt.executeUpdate("INSERT INTO bewerbung (idBewerbung, bewerbungstext, erstellDatum, idOrganisationseinheit, idAusschreibung, bewerbungsStatus) " 
+									+ "VALUES ("
+									+ b.getId() + ",'" 
+									+ b.getBewerbungsText() + "','" 
+									+ format.format(b.getErstellDatum()) + "','"
+									+ b.getIdOrganisationseinheit() + "','" 
+									+ b.getIdAusschreibung() + "','" 
+									+ b.getStatus() + "')");
+			
+									
 			}
 
 		} catch (SQLException e) {
@@ -239,7 +248,7 @@ public class BewerbungMapper {
 					+ "idAusschreibung='" + b.getIdAusschreibung() + "' ,'" 
 					+ "bewerbungsText='" + b.getBewerbungsText() + "' ,'" 
 					+ "erstellDatum='" + b.getErstellDatum() + "' ,'" 
-					+ "bewerbungsstatus='" + b.getBewerbungsStatus() + "' ,'" 
+					+ "bewerbungsstatus='" + b.getStatus() + "' ,'" 
 					+ " WHERE idBewerbung= '"+ b.getId());
 			
 		} catch (SQLException e) {

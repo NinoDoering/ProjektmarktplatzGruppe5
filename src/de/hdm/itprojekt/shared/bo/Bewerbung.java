@@ -43,24 +43,24 @@ public class Bewerbung extends BusinessObject {
 		this.status = status;
 	}
 
-	public enum BewerbungsStatus {
-		
-		eingereicht, zusage, absage;
-		
-		public String toString2(){
-		switch(this) {
-	      case eingereicht: return "eingereicht";
-	      case zusage: return "zusage";
-	      case absage: return "absage";
-	      
-	      default: throw new IllegalArgumentException();
-	}	
-	} }
+//	public enum BewerbungsStatus {
+//		
+//		eingereicht, zusage, absage;
+//		
+//		public String toString2(){
+//		switch(this) {
+//	      case eingereicht: return "eingereicht";
+//	      case zusage: return "zusage";
+//	      case absage: return "absage";
+//	      
+//	      default: throw new IllegalArgumentException();
+//	}	
+//	} }
 	
 	/**
 	 * Bewerbungsstatus wird im Voraus auf "eingereicht" gesetzt
 	 */
-	private BewerbungsStatus bewerbungsStatus = BewerbungsStatus.eingereicht;
+//	private BewerbungsStatus bewerbungsStatus = BewerbungsStatus.eingereicht;
 	
 	/**
 	 * Ausgabe der Organisationseinheits-ID
@@ -130,17 +130,17 @@ public class Bewerbung extends BusinessObject {
 	 * Ausgabe des Bewerbungsstatus
 	 * @return bewerbungsStatus 
 	 */
-	public BewerbungsStatus getBewerbungsStatus() {
-		return bewerbungsStatus;
-	}
-	
-	/**
-	 * Festlegen des Bewerbungsstatus
-	 * @param bewerbungsStatus
-	 */
-	public void setBewerbungsStatus(BewerbungsStatus bewerbungsStatus) {
-		this.bewerbungsStatus = bewerbungsStatus;
-	}
+//	public BewerbungsStatus getBewerbungsStatus() {
+//		return bewerbungsStatus;
+//	}
+//	
+//	/**
+//	 * Festlegen des Bewerbungsstatus
+//	 * @param bewerbungsStatus
+//	 */
+//	public void setBewerbungsStatus(BewerbungsStatus bewerbungsStatus) {
+//		this.bewerbungsStatus = bewerbungsStatus;
+//	}
 	
 	/**
 	 * Erzeugen einer textuellen Darstellung einer Bewerbung
@@ -149,7 +149,7 @@ public class Bewerbung extends BusinessObject {
 	public String toString() {
 		return "Bewerbung [idOrganisationseinheit=" + idOrganisationseinheit + ", bewerbungsText=" + bewerbungsText
 				+ ", erstellDatum=" + erstellDatum + ", idAusschreibung=" + idAusschreibung + ", bewerbungsstatus="
-				+ bewerbungsStatus + "]";
+				+ status + "]";
 	}
 	
 }
