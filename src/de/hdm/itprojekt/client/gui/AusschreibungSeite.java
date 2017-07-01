@@ -26,6 +26,7 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
+import de.hdm.itprojekt.shared.bo.Ausschreibung.Status;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
@@ -328,11 +329,17 @@ public class AusschreibungSeite extends Showcase {
 			public void onClick(ClickEvent event) {
 				Ausschreibung a1 = ssmalleausschreibung.getSelectedObject();
 				if (a1 != null){
-//				Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
+					if (a1.getAusschreibungsstatus()== Status.laufend){
+//						Dieser Teil ist für den Button BEWERBUNG FÜR DIESE AUSSCHREIBEN ERSTELLEN
 				DialogBox db1 = new DialogBoxBewerbungAnlegen(a1, rm, navi, mp, selectedprojekt);
 //				db1.setWidth("100%");
 //				RootPanel.get("Anzeige").add(db1);
 				db1.center();
+					} else {
+						Window.alert("Auf diese Stelle kann man sich nicht mehr bewerben!");
+					}
+					
+//				
 				}}
 		});
 		
