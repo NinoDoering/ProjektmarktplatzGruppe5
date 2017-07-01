@@ -15,14 +15,29 @@ import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 
 
 public class BewerbungMapper {
-//neuerVersuch
+
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
+	/**
+	 * Variable "bewerbungMapper"ist aufgrund des Bezeichners "static" nur einmal für die Instanzen dieser Klasse
+	 * verfügbar. Sie speichert die die einzige Instanz dieser Klasse.
+	 * @author Thies
+	 */
 	private static BewerbungMapper bewerbungMapper = null;
 
+	/**
+	 * Konstruktor, der verhindert, dass dass man neue Instanzen dieser Klasse erstellen kann
+	 * Sie speichert die einzige Instanz dieser Klasse
+	 * @author Thies
+	 */
 	protected BewerbungMapper() {
 	}
 
+	/**
+	 * Diese Methode stellt die Singleton-Eigenschaft der "BewerbungMapper"-Klasse sicher,
+	 * sodass nur eine  Instanz von <code>BewerbungMapper</code> existieren kann.
+	 * @return bewerbungMapper
+	 */
 	public static BewerbungMapper bewerbungmapper() {
 		if (bewerbungMapper == null) {
 			bewerbungMapper = new BewerbungMapper();
@@ -31,21 +46,25 @@ public class BewerbungMapper {
 		return bewerbungMapper;
 	}
 	
+	/*##########################################################
+	*################### METHODE ERKLAEREN #############################
+	*######################################################## 
+	*/
+	
 	//Objet Bewerbung ausgabe
-	 public Bewerbung findByBewerbung(Bewerbung b) {
+	public Bewerbung findByBewerbung(Bewerbung b) {
 
-	    	return this.findBewerbungByKey(b.getId());
-	    }
+		return this.findBewerbungByKey(b.getId());
+	}
 
-	public Bewerbung findBewerbungByKey (int idBewerbung) {
+	public Bewerbung findBewerbungByKey(int idBewerbung) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			// SQL STATEMENT
-			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung " 
-											+ " WHERE idBewerbung= " + idBewerbung 
-											+ " ORDER BY idBewerbung");
-			
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM bewerbung " + " WHERE idBewerbung= " + idBewerbung + " ORDER BY idBewerbung");
+
 			if (rs.next()) {
 				Bewerbung b = new Bewerbung();
 				b.setId(rs.getInt("idBewerbung"));
@@ -54,7 +73,7 @@ public class BewerbungMapper {
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
 				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
-				
+
 				return b;
 			}
 		} catch (SQLException e) {
@@ -65,7 +84,10 @@ public class BewerbungMapper {
 		return null;
 	}
 
-	//Alle Bewerbungen ausgeben
+	/**
+	 * Suchen aller Bewerbungen
+	 * @return alle Bewerbungsobjekte
+	 */
 	public Vector<Bewerbung> findAllBewerbungen () {
 		Connection con = DBConnection.connection();
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -91,56 +113,64 @@ public class BewerbungMapper {
 		return result;
 	}
 
-	//Bewerbung mit der zugehörigen Ausschreibung ausgeben
-	public Vector <Bewerbung> findBewerbungByAusschreibung(int idAusschreibung){
+	/**
+	 * Suchen einer Bewerbung über den Fremdschlüssel "idAusschreibung" der zugehoerigen Ausschreibung
+	 * @param idAusschreibung
+	 * @return Bewerbung die dem übergebenem Fremdschlüssel der Ausschreibung entspricht oder null bei nicht vorhandenem Datensatz
+	 */
+	public Vector<Bewerbung> findBewerbungByAusschreibung(int idAusschreibung) {
 		Connection con = DBConnection.connection();
-		Vector <Bewerbung> vector = new Vector();
-		
-		try{
+		Vector<Bewerbung> vector = new Vector();
+
+		try {
 			Statement stmt = con.createStatement();
-			
-			
-			//Hole alle Bewerbungen, deren Ids nicht bereits bei der Tabelle Bewertungen in der Spalte idBewerbung sind.
-			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung WHERE idAusschreibung= " + idAusschreibung 
-					+  " having idBewerbung not in (select idBewerbung from bewertung)");
-			
-			
-			//DAS ALTE STATEMENT
-//			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung "
-//					+ " WHERE idAusschreibung= " + idAusschreibung);
-			
-			while (rs.next()){
-				
+
+			// Hole alle Bewerbungen, deren Ids nicht bereits bei der Tabelle
+			// Bewertungen in der Spalte idBewerbung sind.
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung WHERE idAusschreibung= " + idAusschreibung
+					+ " having idBewerbung not in (select idBewerbung from bewertung)");
+
+			// DAS ALTE STATEMENT
+			// ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung "
+			// + " WHERE idAusschreibung= " + idAusschreibung);
+
+			while (rs.next()) {
+
 				Bewerbung b = new Bewerbung();
-				
+
 				b.setId(rs.getInt("idBewerbung"));
 				b.setBewerbungsText(rs.getString("bewerbungsText"));
 				b.setErstellDatum(rs.getDate("erstellDatum"));
 				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsStatus")));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
-				
+
 				vector.addElement(b);
 			}
-		}
-		catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return vector;
 	}
 	
-	//Bewerbung nach Bewerber ausgeben						//ist eigt idOrga
-	public Vector<Bewerbung> findBewerbungByBewerber (int idBewerbung) {
+	
+	
+	/**
+	 * Der Bewerber wird über die Bewerbung gefunden
+	 * Suchen des Bewerbers über den Fremdschlüssel "idBewerbung" der zugehoerigen Bewerbung
+	 * @param idBewerbung
+	 * @return Bewerber der dem übergebenem Fremdschlüssel der Bewerbung entspricht oder null bei nicht vorhandenem Datensatz
+	 */
+	public Vector<Bewerbung> findBewerbungByBewerber(int idBewerbung) {
 		Connection con = DBConnection.connection();
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung " 			//ist eigt idOrga
-											+ " WHERE idOrganisationseinheit = " + idBewerbung 
-											+ " ORDER BY idBewerbung");
-			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bewerbung " + " WHERE idOrganisationseinheit = "
+					+ idBewerbung + " ORDER BY idBewerbung");
+
 			while (rs.next()) {
 				Bewerbung b = new Bewerbung();
 				b.setId(rs.getInt("idBewerbung"));
@@ -149,7 +179,7 @@ public class BewerbungMapper {
 				b.setIdAusschreibung(rs.getInt("idAusschreibung"));
 				b.setIdOrganisationseinheit(rs.getInt("idOrganisationseinheit"));
 				b.setBewerbungsStatus(BewerbungsStatus.valueOf(rs.getString("bewerbungsstatus")));
-				
+
 				result.addElement(b);
 			}
 		} catch (SQLException e) {
@@ -159,8 +189,15 @@ public class BewerbungMapper {
 		return result;
 	}
 
-	//insert
-	public Bewerbung insertBewerbung (Bewerbung b) {
+	/**
+	 * Einfuegen eines <code>Bewerbung</code>-Objekts in die Datenbank. Dabei
+	 * wird auch der Primaerschlüssel des uebergebenen Objekts geprueft und
+	 * ggf. berichtigt. @author Thies
+	 * 
+	 * @param b
+	 * @return Bewerbungsobjekt wird in die Datenbank eingefuegt
+	 */
+	public Bewerbung insertBewerbung(Bewerbung b) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -173,27 +210,25 @@ public class BewerbungMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO bewerbung (idBewerbung, bewerbungstext, erstellDatum, idOrganisationseinheit, idAusschreibung, bewerbungsStatus) " 
-									+ "VALUES ("
-									+ b.getId() + ",'" 
-									+ b.getBewerbungsText() + "','" 
-									+ format.format(b.getErstellDatum()) + "','"
-									+ b.getIdOrganisationseinheit() + "','" 
-									+ b.getIdAusschreibung() + "','" 
-									+ b.getBewerbungsStatus() + "')");
-			
-									
+				stmt.executeUpdate(
+						"INSERT INTO bewerbung (idBewerbung, bewerbungstext, erstellDatum, idOrganisationseinheit, idAusschreibung, bewerbungsStatus) "
+								+ "VALUES (" + b.getId() + ",'" + b.getBewerbungsText() + "','"
+								+ format.format(b.getErstellDatum()) + "','" + b.getIdOrganisationseinheit() + "','"
+								+ b.getIdAusschreibung() + "','" + b.getBewerbungsStatus() + "')");
+
 			}
-			
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return b;
 	}
 
-	//update
+	/**
+	 * Update des übergebenen Bewerbungsobjekts
+	 * @param b
+	 * @return Das übergebene Bewerbungsobjekt
+	 */
 	public Bewerbung updateBewerbung (Bewerbung b) {
 		Connection con = DBConnection.connection();
 		try {
@@ -213,19 +248,21 @@ public class BewerbungMapper {
 		return b;
 	}
 
-	//delete
-	public void deleteBewerbung (Bewerbung b) {
+	/**
+	 * Loeschen des uebergebenen Bewerbungsobjekts
+	 * @param b das uebergebene Bewerbungsobjekt
+	 */
+	public void deleteBewerbung(Bewerbung b) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM bewerbung" 
-								+ " WHERE idBewerbung= " + b.getId());
+			stmt.executeUpdate("DELETE FROM bewerbung" + " WHERE idBewerbung= " + b.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

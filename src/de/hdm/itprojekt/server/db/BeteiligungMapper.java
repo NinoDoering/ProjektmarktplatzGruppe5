@@ -14,13 +14,28 @@ import de.hdm.itprojekt.server.db.*;
 
 public class BeteiligungMapper {
 	
+	/**
+	 * Variable "beteiligungMapper"ist aufgrund des Bezeichners "static" nur einmal für die Instanzen dieser Klasse
+	 * verfügbar. Sie speichert die die einzige Instanz dieser Klasse.
+	 * @author Thies
+	 */
 	private static BeteiligungMapper beteiligungMapper = null;
 
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	
+	/**
+	 * Konstruktor, der verhindert, dass dass man neue Instanzen dieser Klasse erstellen kann
+	 * Sie speichert die einzige Instanz dieser Klasse
+	 * @author Thies
+	 */
 	protected BeteiligungMapper() {
 	}
 
+	/**
+	 * Diese Methode stellt die Singleton-Eigenschaft der "BeteiligungMapper"-Klasse sicher,
+	 * sodass nur eine  Instanz von <code>BeteiligungMapper</code> existieren kann.
+	 * @return beteiligungMapper
+	 */
 	public static BeteiligungMapper beteiligungMapper() {
 		if (beteiligungMapper == null) {
 			beteiligungMapper = new BeteiligungMapper();
@@ -29,7 +44,11 @@ public class BeteiligungMapper {
 		return beteiligungMapper;
 	}
 
-	//Beteiligungen nach ID ausgegeben
+	/**
+	 * Suchen einer Beteiligung über die übergebene Beteiligungsnummer
+	 * @param idBeteiligung
+	 * @return Ausschreibungsobjekt, das der übergebenen Beteiligungsnummer entspricht oder null bei nicht vorhandenem Datensatz
+	 */
 	public Beteiligung findBeteiligungByKey(int idBeteiligung) {
 		Connection con = DBConnection.connection();
 		try {
@@ -58,7 +77,10 @@ public class BeteiligungMapper {
 		return null;
 	}
 
-	//alle beteiligungen
+	/**
+	 * Suchen aller Beteiligungen
+	 * @return alle Beteiligungsobjekte
+	 */
 	public Vector<Beteiligung> findAllBeteiligungen() {
 		Connection con = DBConnection.connection();
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
@@ -83,7 +105,11 @@ public class BeteiligungMapper {
 		return result;
 	}
 	
-	//Beteiligung nach Projekt
+	/**
+	 * Suchen von Beteiligungen über den Fremdschlüssel (idProjekt) der zugehoerigen Projekte
+	 * @param idProjekt
+	 * @return Vector mit Beteiligungsobjekten, die zum Projekt mit übergebenem Fremdschlüssel gehören
+	 */
 	public Vector<Beteiligung> findBeteiligungByProjekt(int idProjekt){
 		  
 		    Connection con = DBConnection.connection();
@@ -114,7 +140,11 @@ public class BeteiligungMapper {
 	  }
 
 
-	//Beteiligung nach Bewertung ausgeben
+	/**
+	 * Suchen von Beteiligungen über den Fremdschlüssel (idBewertung) der zugehoerigen Bewertungen
+	 * @param idBewertung
+	 * @return Vector mit Beteiligungssobjekten, die zur Bewertung mit übergebenem Fremdschlüssel gehören
+	 */
 	public Beteiligung findBeteiligungByBewertung(int idBewertung){
 		  
 	    Connection con = DBConnection.connection();
@@ -145,38 +175,47 @@ public class BeteiligungMapper {
 	  return null;
   }
 
-	//Beteiligung nach Beteiligter
-	public Vector<Beteiligung> findBeteiligungByBeteiligter(int idBeteiligter){
-		  
-	    Connection con = DBConnection.connection();
-	    Vector<Beteiligung> result = new Vector<Beteiligung>();
+	/**
+	 * Suchen von Beteiligungen über den Fremdschlüssel (idBeteiligter) des Beteiligten
+	 * @param idBeteiligter
+	 * @return Vector mit Beteiligungssobjekten, die zum Beteiligten mit übergebenem Fremdschlüssel gehören
+	 */
+	public Vector<Beteiligung> findBeteiligungByBeteiligter(int idBeteiligter) {
 
-	    try {
-	      Statement stmt = con.createStatement();
+		Connection con = DBConnection.connection();
+		Vector<Beteiligung> result = new Vector<Beteiligung>();
 
-	      ResultSet rs = stmt.executeQuery("SELECT * FROM beteiligung "
-	          + " WHERE idBeteiligter= " + idBeteiligter);
+		try {
+			Statement stmt = con.createStatement();
 
-	     
-	      while (rs.next()) {
-	        Beteiligung beteiligung = new Beteiligung();
-	        beteiligung.setId(rs.getInt("idBeteiligung"));
-	        beteiligung.setIdProjekt(rs.getInt("idProjekt"));
-	        beteiligung.setIdBewertung(rs.getInt("idBewertung"));
-	        beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
-	        beteiligung.setBeteiligungszeit(rs.getInt("beteiligungszeit"));
-	        
-	        result.add(beteiligung);
-	      }
-	    }
-	    catch (SQLException e2) {
-	      e2.printStackTrace();
-	    } 
-	  return result;
-  }
+			ResultSet rs = stmt.executeQuery("SELECT * FROM beteiligung " + " WHERE idBeteiligter= " + idBeteiligter);
+
+			while (rs.next()) {
+				Beteiligung beteiligung = new Beteiligung();
+				beteiligung.setId(rs.getInt("idBeteiligung"));
+				beteiligung.setIdProjekt(rs.getInt("idProjekt"));
+				beteiligung.setIdBewertung(rs.getInt("idBewertung"));
+				beteiligung.setIdBeteiligter(rs.getInt("idBeteiligter"));
+				beteiligung.setBeteiligungszeit(rs.getInt("beteiligungszeit"));
+
+				result.add(beteiligung);
+			}
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		return result;
+	}
 	
-	//insert
-	public Beteiligung insertBeteiligung (Beteiligung beteiligung) {
+	/**
+	 **
+	 * Einfuegen eines <code>Beteiligung</code>-Objekts in die Datenbank. Dabei
+	 * wird auch der Primaerschluessel des uebergebenen Objekts geprueft und
+	 * ggf. berichtigt. @author Thies
+	 * 
+	 * @param beteiligung
+	 * @return Beteiligungsobjekt wird in die Datenbank eingefuegt
+	 */
+	public Beteiligung insertBeteiligung(Beteiligung beteiligung) {
 		Connection con = DBConnection.connection();
 
 		try {
@@ -189,56 +228,56 @@ public class BeteiligungMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO beteiligung (idBeteiligung, idBewertung, idProjekt, beteiligungszeit, idBeteiligter) " 
-									+ "VALUES (" 
-									+ beteiligung.getId() + " ,'"
-									+ beteiligung.getIdBewertung() + "','"
-									+ beteiligung.getIdProjekt() + "','" 
-									+ beteiligung.getBeteiligungszeit() + "','" 
-									+ beteiligung.getIdBeteiligter() + "')");
+				stmt.executeUpdate(
+						"INSERT INTO beteiligung (idBeteiligung, idBewertung, idProjekt, beteiligungszeit, idBeteiligter) "
+								+ "VALUES (" + beteiligung.getId() + " ,'" + beteiligung.getIdBewertung() + "','"
+								+ beteiligung.getIdProjekt() + "','" + beteiligung.getBeteiligungszeit() + "','"
+								+ beteiligung.getIdBeteiligter() + "')");
 			}
-			
+
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
 		return beteiligung;
 	}
 
-	//update
-	public Beteiligung updateBeteiligung (Beteiligung beteiligung) {
+	/**
+	 * Update des übergebenen Beteiligungsobjekts
+	 * @param beteiligung
+	 * @return Das übergebene Beteiligungsobjekt
+	 */
+	public Beteiligung updateBeteiligung(Beteiligung beteiligung) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
 			/// owner ?
-			stmt.executeUpdate("UPDATE beteiligung " 
-					+ "SET idBeteiligung='" + beteiligung.getId() + "' ,'" 
-					+ "idBeteiligter='" + beteiligung.getIdBeteiligter() + "' ,'" 
-					+ "idProjekt='" + beteiligung.getIdProjekt() + "' ,'" 
-					+ "idBewertung'" + beteiligung.getIdBewertung() + "' ,'"
-					+ "Beteiligungszeit'" + beteiligung.getBeteiligungszeit() + "' ,'" 
-					+ " WHERE idBeteiligung= '"+ beteiligung.getId());
-			
+			stmt.executeUpdate("UPDATE beteiligung " + "SET idBeteiligung='" + beteiligung.getId() + "' ,'"
+					+ "idBeteiligter='" + beteiligung.getIdBeteiligter() + "' ,'" + "idProjekt='"
+					+ beteiligung.getIdProjekt() + "' ,'" + "idBewertung'" + beteiligung.getIdBewertung() + "' ,'"
+					+ "Beteiligungszeit'" + beteiligung.getBeteiligungszeit() + "' ,'" + " WHERE idBeteiligung= '"
+					+ beteiligung.getId());
+
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
 		return beteiligung;
 	}
 
-	//delete
-	public void deleteBeteiligung (Beteiligung beteiligung) {
+	/**
+	 * Loeschen des uebergebenen Beteiligungsobjekts
+	 * @param beteiligung das uebergebene Beteiligungsobjekt
+	 */
+	public void deleteBeteiligung(Beteiligung beteiligung) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
 
-			stmt.executeUpdate("DELETE FROM beteiligung " 
-								+ " WHERE idBeteiligung= " + beteiligung.getId());
+			stmt.executeUpdate("DELETE FROM beteiligung " + " WHERE idBeteiligung= " + beteiligung.getId());
 
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 		}
 	}
-	
-	
 
 }
