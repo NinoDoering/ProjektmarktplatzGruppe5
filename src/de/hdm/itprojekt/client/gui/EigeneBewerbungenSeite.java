@@ -236,6 +236,14 @@ RootPanel.get("Anzeige").setWidth("100%");
 	}
 	
 	
+	private class BewerbungAusschreibungHybrid{
+		
+		private int idBewerbung;
+		private String bewerbungstext;
+		private String bewerbungsStatus;
+		
+	}
+	
 	
 	}
 	
