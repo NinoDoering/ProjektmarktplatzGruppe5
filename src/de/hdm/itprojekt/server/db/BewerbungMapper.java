@@ -265,4 +265,21 @@ public class BewerbungMapper {
 		}
 	}
 
+	/**
+	 * Update des übergebenen Bewerbungsobjekts
+	 * @param b
+	 * @return Das übergebene Bewerbungsobjekt
+	 */
+	public Bewerbung updateBewerbungsstatus(Bewerbung b){
+		Connection con = DBConnection.connection();
+		
+		try{
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate("UPDATE bewerbung " + "SET bewerbungsStatus= " + "'" + b.getStatus() + "'" 
+			+  "WHERE idBewerbung = " +b.getId());
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return b;
+}
 }
