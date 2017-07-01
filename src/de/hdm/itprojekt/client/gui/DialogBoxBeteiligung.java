@@ -25,6 +25,7 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Beteiligung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
+import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 import de.hdm.itprojekt.shared.bo.Bewertung;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
@@ -59,6 +60,7 @@ public class DialogBoxBeteiligung extends DialogBox {
 	
 	
 	private Beteiligung beteiligung = new Beteiligung();
+	private Bewerbung b = new Bewerbung();
 
 	private Bewertung bewertung;
 	private Person person;
@@ -112,7 +114,8 @@ public class DialogBoxBeteiligung extends DialogBox {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
+				bewerbung.setStatus("absage");
+				gwtproxy.bewerbungsStatusAktualisierne(bewerbung, new BewerbungAbgelehnt());
 				hide();
 			}
 		});
@@ -124,8 +127,20 @@ public class DialogBoxBeteiligung extends DialogBox {
 				// TODO Auto-generated method stub
 				Window.alert(""+bewertungsID);
 			
-				gwtproxy.anlegenBeteiligung(Integer.parseInt(beteiligungsZeitTxta.getText()), bewerbung.getIdOrganisationseinheit(), ausschreibung1.getIdProjekt(), bewertungsID, new insertBeteiligungInDB());
+//				gwtproxy.anlegenBeteiligung(Integer.parseInt(beteiligungsZeitTxta.getText()), bewerbung.getIdOrganisationseinheit(), ausschreibung1.getIdProjekt(), bewertungsID, new insertBeteiligungInDB());
 				
+				Beteiligung b = new Beteiligung();
+				
+				b.setId(1);	
+				b.setBeteiligungszeit(Integer.parseInt(beteiligungsZeitTxta.getText()));
+				b.setIdBeteiligter(bewerbung.getIdOrganisationseinheit());
+				b.setIdProjekt(ausschreibung1.getIdProjekt());
+				b.setIdBewertung(bewertungsID);			
+				bewerbung.setStatus("zusage");
+				Window.alert(" " + bewerbung.getId());
+				
+				gwtproxy.anlegenBeteiligung(b, new insertBeteiligungInDB());
+				gwtproxy.bewerbungsStatusAktualisierne(bewerbung, new Callback());
 			}
 		});
 		
@@ -195,8 +210,39 @@ public class DialogBoxBeteiligung extends DialogBox {
 			Window.alert("Hallo 2mal nino da");
 			hide();
 		
-		}}
-	
+		}
+		
+	}
+	public class Callback implements AsyncCallback<Bewerbung>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Bewerbung result) {
+			Window.alert(bewerbung.getStatus());
+			Window.alert(" Der Status der Bewerbung ist auf 'Zusage' geändert");			
+		}
+		
+	}
+	public class BewerbungAbgelehnt implements AsyncCallback<Bewerbung>{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(Bewerbung result) {
+			Window.alert(bewerbung.getStatus());
+			Window.alert(" Der Status der Bewerbung ist auf 'Absage' geändert");			
+		}
+		
+	}
 }
 	
 

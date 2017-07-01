@@ -171,10 +171,10 @@ public interface GreetingServiceAsync {
 		
 		
 		// Beteiligung Asynch
+		void anlegenBeteiligung(Beteiligung beteiligung, AsyncCallback<Beteiligung> callback);
 		
-		
-		void anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung,
-				AsyncCallback<Beteiligung> callback);
+//		void anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt, int idBewertung,
+//				AsyncCallback<Beteiligung> callback);
 
 		void loeschenBeteiligung(Beteiligung beteiligung, AsyncCallback<Void> callback);
 
@@ -263,7 +263,8 @@ public interface GreetingServiceAsync {
 
 		void getAllAusschreibungen(AsyncCallback<Vector<Ausschreibung>> callback);
 
-
+		void bewerbungsStatusAktualisierne(Bewerbung b, AsyncCallback<Bewerbung> callback);
+		
 		void getProjektByBeteiligung(Beteiligung b, AsyncCallback<Projekt> callback);
 
 	}

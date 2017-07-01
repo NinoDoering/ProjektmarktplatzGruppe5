@@ -7,7 +7,8 @@ public class Bewerbung extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	/**
+
+/*
 	 * Beziehung zu Organisationseinheit ueber Fremdschl�ssel
 	 */
 	private int idOrganisationseinheit;
@@ -30,12 +31,28 @@ public class Bewerbung extends BusinessObject {
 	/**
 	 * Status der Bewerbung. Dieser kann "eingereicht", "zusage" oder "absage" annehmen.
 	 */
-	public enum BewerbungsStatus {eingereicht, zusage, absage;
+	
+	private String status;
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public enum BewerbungsStatus {
+		
+		eingereicht, zusage, absage;
+		
 		public String toString2(){
 		switch(this) {
 	      case eingereicht: return "eingereicht";
 	      case zusage: return "zusage";
 	      case absage: return "absage";
+	      
 	      default: throw new IllegalArgumentException();
 	}	
 	} }
