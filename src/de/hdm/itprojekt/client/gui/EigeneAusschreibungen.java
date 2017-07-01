@@ -88,6 +88,16 @@ public class EigeneAusschreibungen extends Showcase {
 		 this.ausschr1=ausschreibung;
 	 }
 	 
+	 //anzeigen Ausschreibung button, dafür den Konstruktor erstellt
+	 public EigeneAusschreibungen(final Marktplatz mp2, final RoleManagement rm, final Navigator navi, final Projekt projekt, final Ausschreibung ausschr1){
+		 this.markt1=mp2;
+		 this.rm=rm;
+		 this.navi=navi;
+		 this.p1=projekt;
+		 this.ausschr1=ausschr1;
+	
+	 }
+	 
 	 public EigeneAusschreibungen(final Ausschreibung ausschr1, final Eigenschaft eig, final RoleManagement rm, final Navigator navi, final Projekt p1, final Marktplatz markt1){
 		 this.ausschr1=ausschr1;
 		 this.eig=eig;
