@@ -92,7 +92,8 @@ public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 
 		@Override
 		public void onSuccess(Marktplatz result) {
-			Window.alert("Neuer Marktplatz wurde angelegt");
+			
+			Window.alert("Neuer Marktplatz wurde angelegt" + result.getBezeichnung());
 			hide();
 			Showcase showcase = new ProjektmarktplatzSeite(person);
 			RootPanel.get("Anzeige").clear();

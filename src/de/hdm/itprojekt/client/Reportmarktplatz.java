@@ -74,7 +74,6 @@ public class Reportmarktplatz implements EntryPoint {
 		loginService = ClientSideSettings.getLoginService();
 		reportGenerator = ClientSideSettings.getReportGenerator();
 		
-		LoginServiceAsync loginService = GWT.create(LoginService.class); 
 		
 		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
 			

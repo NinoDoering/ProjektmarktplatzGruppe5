@@ -419,6 +419,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	// getAllPersons
 	 public Vector<Person> getAllPersons() throws IllegalArgumentException {
 	 return this.persMapper.findAllPerson();
+	 
 	 }
 	 
 	//

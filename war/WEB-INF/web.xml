@@ -14,17 +14,17 @@
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/projektmarktplatz/greet</url-pattern>
+    <url-pattern>/projektmarktplatzgruppe5/greet</url-pattern>
   </servlet-mapping>
 
-  <servlet>
+  	<servlet>
     <servlet-name>LoginService</servlet-name>
     <servlet-class>de.hdm.itprojekt.server.LoginServiceImpl</servlet-class>
     </servlet>
     
     <servlet-mapping>
     <servlet-name>LoginService</servlet-name>
-    <url-pattern>/projektmarktplatz/login</url-pattern>
+    <url-pattern>/projektmarktplatzgruppe5/login</url-pattern>
     </servlet-mapping>  
    
     <servlet-mapping>
@@ -37,15 +37,17 @@
     <welcome-file>Projektmarktplatz.html</welcome-file>
      <welcome-file>ProjektmarktplatzReports.html</welcome-file>
   </welcome-file-list>
-
-<servlet>
-      <servlet-name>ReportGenerator</servlet-name>
-      <servlet-class>de.hdm.itprojekt.server.report.ReportGeneratorImpl</servlet-class>
-  </servlet>
+  
+ <servlet>
+<servlet-name>ReportGenerator</servlet-name>
+<servlet-class>de.hdm.itprojekt.server.report.ReportGeneratorImpl</servlet-class>
+  </servlet> 
+  
+  
 
   <servlet-mapping>
       <servlet-name>ReportGenerator</servlet-name>
-      <url-pattern>/reportgenerator/reportgenerator</url-pattern>
+      <url-pattern>/projektmarktplatzgruppe5/reportgenerator</url-pattern>
   </servlet-mapping>
 
 </web-app>

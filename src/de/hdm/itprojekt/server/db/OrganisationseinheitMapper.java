@@ -46,7 +46,7 @@ public class OrganisationseinheitMapper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return id;
+		return 666; //id;
 	}
 
 	//Organisationseinheit nach ID ausgeben

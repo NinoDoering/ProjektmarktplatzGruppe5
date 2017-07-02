@@ -48,7 +48,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class Projektmarktplatz implements EntryPoint {
 
 	
-	private GreetingServiceAsync gwtproxy2;
+	private GreetingServiceAsync gwtproxy;
 	private LoginServiceAsync loginService;
 	
 	/**
@@ -59,6 +59,7 @@ public class Projektmarktplatz implements EntryPoint {
 	private VerticalPanel loginPanel = new VerticalPanel();
 	final Button Logout = new Button("Logout");
 	private Button loginButton = new Button("Login");
+	private Anchor goToGoogle = new Anchor ("Google Sign In: ");
 	private LoginInfo loginInfo = null;
 	private Label WillkommenLabel = new Label("Herzlich Willkommen");
 	private Label AnmeldenLabel = new Label("Bitte melde dich mit deinem Google Account an.");
@@ -68,7 +69,7 @@ public class Projektmarktplatz implements EntryPoint {
 	public void onModuleLoad() {
 	
 		
-		gwtproxy2 = ClientSideSettings.getMarktplatzVerwaltung();
+		gwtproxy = ClientSideSettings.getMarktplatzVerwaltung();
 		loginService = ClientSideSettings.getLoginService();
 		
 		LoginServiceAsync loginService = GWT.create(LoginService.class); 
@@ -80,7 +81,7 @@ public class Projektmarktplatz implements EntryPoint {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Fehler: " + caught.toString());
+//				Window.alert("Fehler: " + caught.toString());
 				
 			}
 
@@ -89,17 +90,29 @@ public class Projektmarktplatz implements EntryPoint {
 				loginInfo = result;
 				if(loginInfo.isLoggedIn()){
 					
-					gwtproxy2.getAllPersons(new AsyncCallback<Vector<Person>>(){
+					gwtproxy.getAllPersons(new AsyncCallback<Vector<Person>>(){
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert("Kein Login moeglich!");
+							Window.alert("Kein Login moeglich! " + caught.toString());
 							
 						}
 
 						@Override
 						public void onSuccess(Vector<Person> result) {
 							boolean isUserRegistered = false;
+						
+							
+							if(result.isEmpty()){
+								
+							}else{
+							
+							}
+							
+							/*for (Person person : result){
+								Window.alert("Works");
+								Window.alert(person.getNachname());
+							}*/
 							
 							for (Person person : result){
 								if(person.getEmailAddresse()==loginInfo.getEmailAddress()){
@@ -140,7 +153,10 @@ public class Projektmarktplatz implements EntryPoint {
 			loginPanel.add(WillkommenLabel);
 			loginPanel.add(AnmeldenLabel);
 			loginPanel.add(loginButton);
+			loginPanel.add(goToGoogle);
 			signInLink.setHref(loginInfo.getLoginUrl());
+			
+			goToGoogle.setHref("https://accounts.google.com/SignUp?hl=de");
 			
 			RootPanel.get("Navigator").add(loginPanel);
 			RootPanel.get("Navigator").add(loginButton);
@@ -159,37 +175,43 @@ public class Projektmarktplatz implements EntryPoint {
 		
 
 		private void itprojektload(Person person){
+			
 			RootPanel.get("Anzeige").clear();
 			RootPanel.get("Navigator").clear();
 			
-			signOutLink.setHref(loginInfo.getLogoutUrl());
-//			Button LogOUT = new Button("Ausloggen");
 			HorizontalPanel addPanel = new HorizontalPanel();
-			VerticalPanel mainPanel = new VerticalPanel();
-			
-//			HorizontalPanel rechtsOben = new HorizontalPanel();
-			Showcase showcase = new Startseite();
+			VerticalPanel mainPanel = new VerticalPanel();//
+			signOutLink.setHref(loginInfo.getLogoutUrl());  //
+			Button LogOUT = new Button("Ausloggen");
 			TopBar topbar = new TopBar();
+			Navigator navi = new Navigator(person);  
+			RoleManagement rm = new RoleManagement(person, navi); //
+			navi.setIdRole(rm); //
+			mainPanel.add(addPanel);
+			Showcase showcase = new Startseite();
+			RootPanel.get("Anzeige").add(mainPanel);
+			RootPanel.get("TopBar").add(new TopBar(person, rm, navi)); //
+			RootPanel.get("TopBar").add(navi.getIdRole()); //
+			RootPanel.get("Navigator").add(navi);
+			//signOutLink.setHref(loginInfo.getLogoutUrl());
+			mainPanel.add(showcase);
+//			HorizontalPanel rechtsOben = new HorizontalPanel();
+			
 //			Button meinProfil = new Button("Mein Profil");
 //			Button manageRole = new Button("Identität verwalten");
 //			rechtsOben.add(meinProfil);
 //			rechtsOben.add(manageRole);
 //			rechtsOben.add(LogOUT);
-			Navigator navi = new Navigator(person);
-			RoleManagement rm = new RoleManagement(person, navi);
-			navi.setIdRole(rm);
+			
 //			topbar.setIdRole(rm);
-			mainPanel.add(addPanel);
-			mainPanel.add(showcase);
+			
 //			RootPanel.get("RechtsOben").add(rechtsOben);
-			RootPanel.get("Anzeige").add(mainPanel);
+			
 //			RootPanel.get("Navigator").add(new Navigator(person));
 			
-			RootPanel.get("TopBar").add(new TopBar(person, rm, navi));//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
+			//TONY PART : RootPanel.get("Navigator").add(new Navigator(person));	
 //			RootPanel.get("TopBar").add(LogOUT);
-			RootPanel.get("TopBar").add(navi.getIdRole());
-			RootPanel.get("Navigator").add(navi);
-			signOutLink.setHref(loginInfo.getLogoutUrl());
+			
 //			LogOUT.setWidth("150px");
 //			LogOUT.setStylePrimaryName("loginbutton");
 //
@@ -350,9 +372,9 @@ public class Projektmarktplatz implements EntryPoint {
 					public void onClick(ClickEvent event) {
 						try {
 							vNameEing.getText();
-							gwtproxy2.anlegenPartnerprofil(new NeuePersonAnlegen());
+							gwtproxy.anlegenPartnerprofil(new NeuePersonAnlegen());
 						} catch (Exception e) {
-							Window.alert("Z 299!");
+//							Window.alert("Z 299!");
 						}
 					
 					}

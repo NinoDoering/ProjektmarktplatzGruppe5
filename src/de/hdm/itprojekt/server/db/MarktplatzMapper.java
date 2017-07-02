@@ -45,9 +45,12 @@ public class MarktplatzMapper {
 				
 			}
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
+			
 
 		}
+		
 		return pm;
 	}
 
