@@ -35,6 +35,11 @@ import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse regelt den Ablauf, der Bearbeitung einer Ausschreibung.
+ * Sie wird benötigt, sobald ein Nutzer seine Ausschreibung bearbeiten möchte.
+ * Sie enthält GUI-Elemente, die zur Darstellung benötigt wird.
+ */
 public class DialogBoxAusschreibungBearbeiten extends DialogBox {
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 

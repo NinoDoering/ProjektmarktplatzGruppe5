@@ -23,6 +23,12 @@ import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 
+/**
+ * Diese Klasse regelt den Ablauf, der Bearbeitung einer Eigenschaft.
+ * Sie wird benötigt, sobald ein Nutzer seine Eigenschaften bearbeiten möchte.
+ * Die Eigenschafts-Klasse enthält mehrere Eigenschaften, die eine Person annehmen kann, wie z.B. die Sprachkenntnisse
+ * Die Klasse enthält GUI-Elemente, die zur Darstellung benötigt wird.
+ */
 public class DialogBoxPersonEigenschaftenBearbeiten extends DialogBox{
 
 GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

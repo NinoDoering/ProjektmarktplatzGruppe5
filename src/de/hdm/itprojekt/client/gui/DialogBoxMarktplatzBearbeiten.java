@@ -23,6 +23,13 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 
+/**
+ * Diese Klasse regelt den Ablauf, der Bearbeitung eines Marktplatzes. Sie wird
+ * benötigt, sobald ein Nutzer einen Marktplatz bearbeiten möchte. Ein
+ * Marktplatz kann von jeder Person bearbeitet werden, auch wenn diese den
+ * Marktplatz nicht selbst erstellt hat. Sie enthält GUI-Elemente, die zur
+ * Darstellung benötigt wird.
+ */
 public class DialogBoxMarktplatzBearbeiten extends DialogBox {
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 

@@ -25,6 +25,13 @@ import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 
+/**
+ * Diese Klasse ist dafür zustaendig, dass sich eine Person einem Unternehmen
+ * zuordnen kann. Eine Person kann sich einem Unternehmen hinzufügen, sobald
+ * diese auf die Funktion "Mein Profil" klickt und die Funktion "Unternehmen
+ * hinzufügen" auswählt. Die Unternehmen stehen der Person dann zur Auswahl. Das
+ * Untenehmen kann von einer Person jederzeit gewechselt werden.
+ */
 public class DialogBoxFirmaAnlegen extends DialogBox {
 
 	//ES FOLGEN NOCH ÄNDERUNGEN bzw. FEHLERBEHEBUNG-> morgen

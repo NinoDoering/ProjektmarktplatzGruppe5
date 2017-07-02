@@ -34,6 +34,12 @@ import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse stellt die Ausschreibungsseite dar. Auf dieser können alle Ausschreibungen
+ * Sie enthält GUI-Elemente, die zur Darstellung benötigt wird.
+ * @author Thomas
+ *
+ */
 public class AusschreibungSeite extends Showcase {
 
 	

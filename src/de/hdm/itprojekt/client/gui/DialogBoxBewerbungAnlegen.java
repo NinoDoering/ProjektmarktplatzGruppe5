@@ -34,6 +34,14 @@ import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse ist dafür zustaendig, eine Bewerbung zu einer Ausschreibung
+ * erstellen zu könnnen. Eine Bewerbung kann vom Nutzer erstellt werden, sobald
+ * dieser die Funktion "Auf diese Ausschreibung bewerben" geklickt hat.
+ * 
+ * @author Thomas
+ *
+ */
 public class DialogBoxBewerbungAnlegen extends DialogBox {
 	
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

@@ -29,6 +29,12 @@ import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse ist dafür zustaendig, dass eine Organisationseinheit (Person,
+ * Team, Unternehmen) ein Projekt erstellen kann. Eine Organisationseinheit kann
+ * ein Projekt erstellen, sobald diese auf die Funktion "Projekt erstellen"
+ * klickt. Erstellt die Organisationseinheit ein Projekt, so ist diese automatisch der Projektleiter. 
+ */
 public class DialogBoxProjektAnlegen extends DialogBox{
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
