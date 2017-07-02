@@ -481,10 +481,10 @@ public interface GreetingService extends RemoteService {
 	 */
 	public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException;
 
-	/**
-	 * @see  de.hdm.itprojekt.server.GreetingServiceImpl#loeschenUnternehmenInteger(Integer);
-	 */
-	public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException;
+//	/**
+//	 * @see  de.hdm.itprojekt.server.GreetingServiceImpl#loeschenUnternehmenInteger(Integer);
+//	 */
+//	public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException;
 
 	/**
 	 * @see  de.hdm.itprojekt.server.GreetingServiceImpl#getUnternehmenById(int);

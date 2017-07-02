@@ -461,10 +461,10 @@ public interface GreetingServiceAsync {
 	 */
 	void loeschenUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
 
-	/**
-	 * @see  de.hdm.itprojekt.server.GreetingServiceImpl#loeschenUnternehmenInteger(Integer);
-	 */
-	void loeschenUnternehmenInteger(Integer u, AsyncCallback<Void> callback);
+//	/**
+//	 * @see  de.hdm.itprojekt.server.GreetingServiceImpl#loeschenUnternehmenInteger(Integer);
+//	 */
+//	void loeschenUnternehmenInteger(Integer u, AsyncCallback<Void> callback);
 
 	/**
 	 * @see  de.hdm.itprojekt.server.GreetingServiceImpl#getUnternehmenById(int);
