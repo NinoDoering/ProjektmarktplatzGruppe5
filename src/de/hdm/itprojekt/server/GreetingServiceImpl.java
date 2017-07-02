@@ -785,10 +785,10 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		this.unternehmenMapper.deleteUnternehmen(u);
 	}
 	
-	// loeschenUnternehmenByInteger
-	public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException {
-		this.unternehmenMapper.deleteUnternehmenInteger(u);
-	}
+//	// loeschenUnternehmenByInteger
+//	public void loeschenUnternehmenInteger(Unternehmen u) throws IllegalArgumentException {
+//		this.unternehmenMapper.deleteUnternehmen(u);
+//	}
 
 	// getUnternehmenById
 	@Override
@@ -1223,6 +1223,8 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		Projekt p = this.getProjektbyId(b.getIdProjekt());
 		return p;
 	}
+
+
 
 
 

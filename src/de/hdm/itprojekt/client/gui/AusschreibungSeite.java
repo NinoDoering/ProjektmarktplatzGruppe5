@@ -210,17 +210,7 @@ public class AusschreibungSeite extends Showcase {
 		
 		
 	};
-		TextColumn<Ausschreibung> ppId = new TextColumn<Ausschreibung>(){
-			
-			@Override
-			public String getValue(Ausschreibung object) {
-				// TODO Auto-generated method stub
-				return object.getIdPartnerprofil()+"";
-			}
 		
-		
-	};
-		ausschreibungtabelle.addColumn(ppId, "Id des Partnerprofil");
 		ausschreibungtabelle.addColumn(ausschrBez, "Bezeichnung");
 		ausschreibungtabelle.addColumn(ausschrBeschr, "Beschreibung");
 		ausschreibungtabelle.addColumn(ausschrBefrist,"Bewerbungsfrist");

@@ -68,10 +68,13 @@ public class EigeneAusschreibungen extends Showcase {
 	private Button bearbeitenAusschreibung = new Button("Gewähltes Ausschreibung bearbeiten");
 	private Button anzeigenAusschreibung = new Button("Gewähltes Ausschreibung anzeigen");
 	private Button loeschenAusschreibung = new Button("Gewählte Ausschreibung löschen");
-	private Button bewerbungenAnsehen = new Button("Eingeganngene Bewerbungen einsehen"); 
+	private Button bewerbungenAnsehen = new Button("Eingegangene Bewerbungen einsehen"); 
 	//Panels 
 	private HorizontalPanel  hpanelEigeneAusschreibung = new HorizontalPanel();
 	private VerticalPanel vpanelEigeneAusschreibung = new VerticalPanel();
+	
+
+	 
 	
 	// Konstruktoren
 	
@@ -194,6 +197,32 @@ public class EigeneAusschreibungen extends Showcase {
 					Showcase showcase = new EingegangeneBewerbungenSeite(rm, navi, ausschr1, bewerbung1);
 					RootPanel.get("Anzeige").clear();
 					RootPanel.get("Anzeige").add(showcase);
+				}
+			});
+			
+			
+			loeschenAusschreibung.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					// TODO Auto-generated method stub
+					gwtproxy.loeschenAusschreibung(ausschr1, new AsyncCallback<Void>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							Window.alert("Fehler beim Löschen der Ausschreibung");
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// TODO Auto-generated method stub
+							Window.alert("Ausschreibung erfolgreich gelöscht");
+							Showcase showcase = new EigeneAusschreibungen(rm, navi,p1, ausschr1);
+							RootPanel.get("Anzeige").clear();
+							RootPanel.get("Anzeige").add(showcase);
+						}
+					});
 				}
 			});
 		

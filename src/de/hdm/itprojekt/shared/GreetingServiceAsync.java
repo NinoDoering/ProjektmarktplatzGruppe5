@@ -233,7 +233,7 @@ public interface GreetingServiceAsync {
 
 		void loeschenUnternehmen(Unternehmen u, AsyncCallback<Void> callback);
 		
-		void loeschenUnternehmenInteger(Integer u, AsyncCallback<Void> callback);
+	//	void loeschenUnternehmenInteger(Integer u, AsyncCallback<Void> callback);
 		
 		void getUnternehmenById(int idUnternehmen, AsyncCallback<Unternehmen> callback);
 

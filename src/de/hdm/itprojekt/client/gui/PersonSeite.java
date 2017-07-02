@@ -373,37 +373,8 @@ public class PersonSeite extends Showcase{
 		});
 	
 	
-//		eigeneMarktplaetze.addClickHandler(new ClickHandler() {
-//
-//				@Override
-//				public void onClick(ClickEvent event) {
-//					// TODO Auto-generated method stub
-//			
-//					gwtproxy.getMarktplaetzeByPerson(rm.getUser(), new AsyncCallback<Vector<Marktplatz>>() {
-//
-//						@Override
-//						public void onFailure(Throwable caught) {
-//							// TODO Auto-generated method stub
-//							Window.alert("projektebyPerson geht NICHT");
-//						}
-//
-//						public void onSuccess(Vector<Marktplatz> result) {
-//							// TODO Auto-generated method stub
-//					
-//							Showcase showcase = new EigeneMarktplaetze(m1, rm, navi);
-//						
-//							RootPanel.get("Anzeige").clear();
-//							RootPanel.get("Anzeige").add(showcase);
-//						}
-//					});
-//				}
-//			
-//			});
-//			
+
 	
-		
-		
-		
 		// eigene Projekte anzeigen lassen
 		
 		eigeneProjekte.addClickHandler(new ClickHandler() {
@@ -530,7 +501,7 @@ public class PersonSeite extends Showcase{
 	@Override
 	public void onClick(ClickEvent event) {
 		
-		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxPersonEigenschaftenBearbeiten(p,pp,e);
+		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxPersonEigenschaftenBearbeiten(rm, navi, pp,e);
 		//RootPanel.get("Anzeige").clear();
 		//RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
 		dialogBoxEigenschaftenAendern.center();

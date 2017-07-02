@@ -235,7 +235,7 @@ public interface GreetingService extends RemoteService  {
 
 		public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException;
 		
-		public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException;
+//		public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException;
 
 		public Unternehmen getUnternehmenById (int idUnternehmen) throws IllegalArgumentException;;
 		
