@@ -10,7 +10,10 @@ import de.hdm.itprojekt.shared.report.AllBewerbungenByAusschreibungReport;
 //import de.hdm.itprojekt.shared.report.AllBewerbungenToOneAusschreibungReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
-// EIGENTLICH IST DAS EIGENE BEWERBUNGEN
+/**
+ * Diese Klasse ist dafuer zustaendig, alle Bewerbungen auf eine Ausschreibung
+ * ausgeben lassen zu koennen.
+ */
 
 public class AlleBewerbungenByAusschreibungShowcase extends Showcase{
 

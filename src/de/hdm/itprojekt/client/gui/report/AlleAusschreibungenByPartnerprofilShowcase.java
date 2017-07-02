@@ -9,6 +9,9 @@ import de.hdm.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm.itprojekt.shared.report.AllAusschreibungenByPartnerprofilReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, alle Ausschreibungen, passend zum Partnerprofil auszugeben.
+ */
 public class AlleAusschreibungenByPartnerprofilShowcase extends Showcase {
 	
 	private RoleManagementReport rolemanagementReport = null;

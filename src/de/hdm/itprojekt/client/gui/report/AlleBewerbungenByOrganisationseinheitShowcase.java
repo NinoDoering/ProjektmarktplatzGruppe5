@@ -12,11 +12,11 @@ import de.hdm.itprojekt.shared.report.AllBewerbungenByOrganisationseinheitReport
 import de.hdm.itprojekt.shared.report.AllBewerbungenWithAusschreibungenReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, alle Bewerbungen einer
+ * Organisationseinheit ausgeben lassen zu koennen
+ */
 public class AlleBewerbungenByOrganisationseinheitShowcase extends Showcase {
-
-	// !!!! 	EIGENTLICH IST DAS bEWERBUNGEN BY AUSSCHREIBUNGEN 
-	
-	
 	
 	private RoleManagementReport rolemanagementReport = null;
 
