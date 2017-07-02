@@ -48,6 +48,10 @@ import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, dass eine Organisationseinheit die
+ * eigenen Ausschreibungen sehen kann.
+ */
 public class EigeneAusschreibungen extends Showcase {
 
 	

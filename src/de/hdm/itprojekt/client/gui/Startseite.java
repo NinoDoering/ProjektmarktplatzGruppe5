@@ -4,6 +4,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.Showcase;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, die Startseite von MeetProjects anzeigen zu lassen.
+ */
 public class Startseite extends Showcase{
 
 	@Override

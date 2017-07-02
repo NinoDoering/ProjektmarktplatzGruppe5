@@ -33,6 +33,12 @@ import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.client.gui.*;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, dass eine Organisationseinheit die
+ * eingegangenen Bewerbungen auf eigene Ausschreibungen sehen kann. Im Anschluss
+ * kann diese Bewerbung vom Projektleiter bewertet und möglicherweise eine
+ * Beteiligung angelegt werden.
+ */
 public class EingegangeneBewerbungenSeite extends Showcase{
 	
 	

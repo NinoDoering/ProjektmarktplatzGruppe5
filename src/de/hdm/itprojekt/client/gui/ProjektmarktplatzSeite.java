@@ -30,6 +30,11 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 
+/**
+ * Diese Seite ist dafuer zustaendig, Marktplaetze anzeigen zu lassen. Ebenso
+ * kann man auf der Seite Marktplaetze anlegen oder loeschen. Erreichbar ist
+ * diese Seite ueber den Navigator und ueber den Button "Projektmarktplaetze"
+ */
 public class ProjektmarktplatzSeite extends Showcase{
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

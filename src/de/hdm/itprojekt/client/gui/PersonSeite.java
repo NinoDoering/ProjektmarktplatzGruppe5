@@ -39,6 +39,12 @@ import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 import de.hdm.itprojekt.shared.report.Column;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, dass eine Organisationseinheit (Person,
+ * Team, Unternehmen) ihr eigenes Profil sehen udn bearbeiten kann. Auf dieser
+ * Seite finden sich verschiedene Funktionen, um sich bspw. einem Team
+ * hinzufuegen zu können oder die eigenen Eigenschaften zu bearbeiten.
+ */
 public class PersonSeite extends Showcase{
 
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

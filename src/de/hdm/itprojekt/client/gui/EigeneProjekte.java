@@ -30,6 +30,10 @@ import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, dass eine Organisationseinheit die
+ * eigenen Projekte sehen kann.
+ */
 public class EigeneProjekte extends Showcase {
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

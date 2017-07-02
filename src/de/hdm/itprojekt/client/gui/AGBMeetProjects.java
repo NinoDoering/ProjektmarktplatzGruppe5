@@ -7,6 +7,9 @@ import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
 
+/**
+ * Klasse zur Anzeige der AGB's von MeetProjects
+ */
 public class AGBMeetProjects extends Showcase {
 
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
