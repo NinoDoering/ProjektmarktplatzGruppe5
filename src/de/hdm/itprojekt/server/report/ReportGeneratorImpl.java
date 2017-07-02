@@ -9,6 +9,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm.itprojekt.server.GreetingServiceImpl;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.ReportGenerator;
+//import de.hdm.itprojekt.shared.Zusammen;
 import de.hdm.itprojekt.shared.bo.Ausschreibung;
 import de.hdm.itprojekt.shared.bo.Beteiligung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
@@ -19,7 +20,7 @@ import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
-import de.hdm.itprojekt.shared.bo.Zusammen;
+//import de.hdm.itprojekt.shared.bo.Zusammen;
 import de.hdm.itprojekt.shared.report.AllAusschreibungenByPartnerprofilReport;
 import de.hdm.itprojekt.shared.report.AllAusschreibungenReport;
 import de.hdm.itprojekt.shared.report.AllBeteiligungenToProjectReport;
@@ -411,16 +412,16 @@ throws IllegalArgumentException {
 	return result;
 	}
 
-	public Zusammen getAllSimples(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		Zusammen result = new Zusammen();
-		if (this.getGreetingService()== null){
-			return null;
-		}
-		result.vectorsp.add(this.createAllBeteiligungenToProjectReport(id));
-		result.vectorsp.add(this.createAllBewerbungenByOrganisationseinheitReport(id));
-		return result;
-	}
+//	public Zusammen getAllSimples(int id) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		Zusammen result = new Zusammen();
+//		if (this.getGreetingService()== null){
+//			return null;
+//		}
+//		result.vectorsp.add(this.createAllBeteiligungenToProjectReport(id));
+//		result.vectorsp.add(this.createAllBewerbungenByOrganisationseinheitReport(id));
+//		return result;
+//	}
 
 	@Override
 	public FanIn createFanInAnalyse() throws IllegalArgumentException {
@@ -724,6 +725,12 @@ public Vector<Person> getAllPersonen() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+//@Override
+//public Zusammen getAllSimples(int id) throws IllegalArgumentException {
+//	// TODO Auto-generated method stub
+//	return null;
+//}
 
 
 

@@ -53,6 +53,6 @@ public interface ReportGenerator extends RemoteService {
 
 	public Vector<Person> getAllPersonen() throws IllegalArgumentException;
 	
-	public Zusammen getAllSimples(int id) throws IllegalArgumentException;
+//	public Zusammen getAllSimples(int id) throws IllegalArgumentException;
 	
 }
