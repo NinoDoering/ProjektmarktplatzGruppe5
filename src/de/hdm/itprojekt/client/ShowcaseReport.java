@@ -13,10 +13,10 @@ public abstract class ShowcaseReport extends VerticalPanel{
 	 * @version 1.0
 	 * 
 	 */
-	  /**
-	   * Jedes GWT Widget muss diese Methode implementieren. Sie gibt an, was
-	   * geschehen soll, wenn eine Widget-Instanz zur Anzeige gebracht wird.
-	   */
+	/**
+	 * Jedes GWT Widget muss diese Methode implementieren. Sie gibt an, was
+	 * geschehen soll, wenn eine Widget-Instanz zur Anzeige gebracht wird.
+	 */
 	  @Override
 	public void onLoad() {
 	    /*

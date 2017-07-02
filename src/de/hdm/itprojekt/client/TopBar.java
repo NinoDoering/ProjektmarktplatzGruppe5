@@ -71,54 +71,52 @@ import de.hdm.itprojekt.client.LoginInfo;
 //				
 //			});
 			
-			meinProfil.addClickHandler(new ClickHandler() {
-				
-				@Override
-				public void onClick(ClickEvent event) {
-					RootPanel.get("Anzeige").clear();
-					Showcase sh = new PersonSeite(rm, navi);
-					RootPanel.get("Anzeige").add(sh);
-				
-				}
-			});
-			
-			
-			
-		}
-			public ClickHandler getCurrentClickHandler() {
-				return currentClickHandler;
-			}
+		meinProfil.addClickHandler(new ClickHandler() {
 
-			public ClickEvent getCurrentClickEvent() {
-				return currentClickEvent;
-			}
+			@Override
+			public void onClick(ClickEvent event) {
+				RootPanel.get("Anzeige").clear();
+				Showcase sh = new PersonSeite(rm, navi);
+				RootPanel.get("Anzeige").add(sh);
 
-			public void setCurrentClickHandler(ClickHandler a){
-				currentClickHandler = a;
 			}
-			public void setCurrentClickEvent(ClickEvent b){
-				currentClickEvent = b;
-			}
-			
-			public void reload(){
-				currentClickHandler.onClick(currentClickEvent);
-			}
-			
-//			public RoleManagement getIdRole() {
-//				return rm;
-//			}
-//
-//
-//			public void setIdRole(RoleManagement idRole) {
-//				this.rm = idRole;
-//			}
+		});
 			
 			
-			
-		public TopBar(){
-				
-			}	
-		}
+	}
 
+	public ClickHandler getCurrentClickHandler() {
+		return currentClickHandler;
+	}
+
+	public ClickEvent getCurrentClickEvent() {
+		return currentClickEvent;
+	}
+
+	public void setCurrentClickHandler(ClickHandler a) {
+		currentClickHandler = a;
+	}
+
+	public void setCurrentClickEvent(ClickEvent b) {
+		currentClickEvent = b;
+	}
+
+	public void reload() {
+		currentClickHandler.onClick(currentClickEvent);
+	}
+
+	// public RoleManagement getIdRole() {
+	// return rm;
+	// }
+	//
+	//
+	// public void setIdRole(RoleManagement idRole) {
+	// this.rm = idRole;
+	// }
+
+	public TopBar() {
+
+	}
+}
 
 

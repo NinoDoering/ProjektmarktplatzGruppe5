@@ -364,7 +364,6 @@ public class Projektmarktplatz implements EntryPoint {
 			private class NeuePersonAnlegen implements AsyncCallback<Partnerprofil>{
 				@Override
 				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
 					
 				}
 

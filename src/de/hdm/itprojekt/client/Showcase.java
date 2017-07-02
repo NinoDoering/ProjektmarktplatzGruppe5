@@ -51,7 +51,7 @@ public void onLoad() {
   protected HTML createHeadline(String text) {
     HTML content = new HTML(text);
     content.setStylePrimaryName("itproject-headline");
-   //content.setAutoHorizontalAlignment(ALIGN_CENTER); mit gruppe besprechen erst dann auskommentieren
+   //content.setAutoHorizontalAlignment(ALIGN_CENTER); mit Gruppe besprechen erst dann auskommentieren
     return content;
   }
 
