@@ -19,6 +19,7 @@ import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
+import de.hdm.itprojekt.shared.bo.Zusammen;
 import de.hdm.itprojekt.shared.report.AllAusschreibungenByPartnerprofilReport;
 import de.hdm.itprojekt.shared.report.AllAusschreibungenReport;
 import de.hdm.itprojekt.shared.report.AllBeteiligungenToProjectReport;
@@ -46,14 +47,17 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	public ReportGeneratorImpl() throws IllegalArgumentException{	
 	}
 	
-	// GreetingServiceImpl Instanz erzeugt um auf Methoden zugreifen zu k�nnen
+	// GreetingServiceImpl Instanz erzeugt um auf Methoden zugreifen zu k?nnen
 	public void init() throws IllegalArgumentException{
 		GreetingServiceImpl pm = new GreetingServiceImpl();
 		pm.init();
 		this.greetingservice = pm;
 	}
 	
-	//Auslesen der zugeh�rigen greetingservice
+	protected GreetingService getGreetingservice(){
+		return this.greetingservice;
+	}
+	//Auslesen der zugeh?rigen greetingservice
 	public GreetingService getGreetingService(){
 		 return this.greetingservice;
 	}
@@ -93,8 +97,8 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		for(Ausschreibung a: allAusschreibungen){
 			Row ausschreibungRow = new Row();
 			
-			/** Ausschreibender mit idOrganisationseinheit erh�lt zus�tzlich idAusschreibender
-			 *  Referenz zu idProjekt in Variable zugeh�rigesProjekt
+			/** Ausschreibender mit idOrganisationseinheit erh?lt zus?tzlich idAusschreibender
+			 *  Referenz zu idProjekt in Variable zugeh?rigesProjekt
 			 */
 			Organisationseinheit ausschreibender = greetingservice.getOrganisationseinheitById(a.getIdAusschreibender());
 			Projekt zugehoerigesProjekt = greetingservice.getProjektbyId(a.getIdProjekt());
@@ -110,7 +114,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 					ausschreibungRow.addColumn(new Column(((Unternehmen)ausschreibender).getFirmenName()));
 			}
 			
-			//Neue Spalte: Zugeh�rige Projektbezeichnung  
+			//Neue Spalte: Zugeh?rige Projektbezeichnung  
 			ausschreibungRow.addColumn(new Column(zugehoerigesProjekt.getBezeichnung()));
 			
 			//Ausschreibungbezeichnung
@@ -125,7 +129,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			//Status der Ausschreibung
 			ausschreibungRow.addColumn(new Column(a.getAusschreibungsstatus().toString()));
 			
-			//Hinzuf�gen der Zeile
+			//Hinzuf?gen der Zeile
 			result.addRow(ausschreibungRow);
 			}
 		return result;
@@ -143,7 +147,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		return null;
 	}
 		AllBewerbungenByAusschreibungReport  result = new AllBewerbungenByAusschreibungReport();
-		result.setTitel("Alle Bewerbungen auf eigenerstellte Ausschreibungen");
+		result.setTitel("Alle Bewerbungen auf eigene Ausschreibungen");
 		result.setErstelldatum(new Date());
 		
 		Vector<Ausschreibung> allAusschreibungen = greetingservice.getAllAusschreibungen();
@@ -168,13 +172,12 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	
 	AllBewerbungenByOrganisationseinheitReport result = new AllBewerbungenByOrganisationseinheitReport();
 	
-	result.setTitel("Alle Bewerbungen");
+	result.setTitel("Alle Bewerbungen einer Person");
 	result.setErstelldatum(new Date());
 	
 	Row headline = new Row();
 	headline.addColumn(new Column("Erstelldatum der Bewerbung"));
 	headline.addColumn(new Column("Anschreiben"));
-	headline.addColumn(new Column("Bewerbungsstatus"));
 	headline.addColumn(new Column("Zugehörige Ausschreibung"));
 	headline.addColumn(new Column("Bewerbungsstatus"));
 	
@@ -195,7 +198,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		
 		bewerbungRow.addColumn(new Column(zugehoerigeAusschreibung.getBezeichnung()));
 	
-		bewerbungRow.addColumn(new Column(b.getBewerbungsStatus().toString()));
+		bewerbungRow.addColumn(new Column(b.getStatus()));
 	
 			result.addRow(bewerbungRow);
 	}
@@ -240,7 +243,7 @@ public AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschrei
 		Organisationseinheit bewerber = greetingservice.getOrganisationseinheitById(b.getIdOrganisationseinheit());
 		
 		if(bewerber instanceof Person){
-			bewerbungRow.addColumn(new Column(((Person)bewerber).getVorname()+""+((Person)bewerber).getNachname()));
+			bewerbungRow.addColumn(new Column(((Person)bewerber).getVorname()+" "+((Person)bewerber).getNachname()));
 			
 			
 		} else if(bewerber instanceof Team){
@@ -254,7 +257,7 @@ public AllBewerbungenToOneAusschreibungReport createAllBewerbungenToOneAusschrei
 
 			bewerbungRow.addColumn(new Column(b.getBewerbungsText()));
 			
-			bewerbungRow.addColumn(new Column(b.getBewerbungsStatus().toString()));
+			bewerbungRow.addColumn(new Column(b.getStatus().toString()));
 			
 			result.addRow(bewerbungRow);
 		
@@ -312,7 +315,7 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 	
 	bewerbungRow.addColumn(new Column(a.getBeschreibung()));
 	
-	bewerbungRow.addColumn(new Column(b.getBewerbungsStatus().toString()));
+	bewerbungRow.addColumn(new Column(b.getStatus().toString()));
 	
 	bewerbungRow.addColumn(new Column(a.getEndDatum().toString()));
 	
@@ -322,10 +325,6 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 	
 	return result;
 }
-
-
-
-
 
 
 
@@ -353,21 +352,21 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 	@Override
 	public AllBeteiligungenToProjectReport createAllBeteiligungenToProjectReport(int id) throws IllegalArgumentException {
 		
-		if(this.getGreetingService()==null){
+	
+			
+			if(this.getGreetingService()==null){
 			return null;
 		}
 		
-		AllBeteiligungenToProjectReport result = new AllBeteiligungenToProjectReport();
+			AllBeteiligungenToProjectReport result = new AllBeteiligungenToProjectReport();
 		
 		result.setTitel("Alle Beteiligungen");
-		
 		result.setErstelldatum(new Date());
 		
 		Row headline = new Row();
-		
 		headline.addColumn(new Column("Projekt"));
-
 		headline.addColumn(new Column("Beteiligungszeit"));
+		
 		
 		result.addRow(headline);
 		
@@ -375,19 +374,21 @@ public AllBewerbungenWithAusschreibungenReport createAllBewerbungenWithAusschrei
 		
 		for(Beteiligung beteiligung : allBeteiligungen){
 			
+		
 			Projekt p = greetingservice.getProjektbyId(beteiligung.getIdProjekt());
-			
 			
 			Row beteiligungRow = new Row();
 			
+		
+			
 			beteiligungRow.addColumn(new Column(p.getBezeichnung()));
-			beteiligungRow.addColumn(new Column(beteiligung.getBeteiligungszeit()));
-			// beteiligungszeit ist nun int
 		
-			result.addRow(beteiligungRow);
+			beteiligungRow.addColumn(new Column("Tage der Beteiligung "+beteiligung.getBeteiligungszeit()));
+		 
+				result.addRow(beteiligungRow);
 		}
-		
 		return result;
+	
 	}
 	
 	
@@ -410,9 +411,16 @@ throws IllegalArgumentException {
 	return result;
 	}
 
-	
-	
-
+	public Zusammen getAllSimples(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		Zusammen result = new Zusammen();
+		if (this.getGreetingService()== null){
+			return null;
+		}
+		result.vectorsp.add(this.createAllBeteiligungenToProjectReport(id));
+		result.vectorsp.add(this.createAllBewerbungenByOrganisationseinheitReport(id));
+		return result;
+	}
 
 	@Override
 	public FanIn createFanInAnalyse() throws IllegalArgumentException {
@@ -426,19 +434,22 @@ throws IllegalArgumentException {
 		
 		result.setErstelldatum(new Date());
 		
+		
+		
 		Row headline = new Row();
 		headline.addColumn(new Column("ID"));
 		headline.addColumn(new Column("Organisationseinheit"));
-		headline.addColumn(new Column("angenommen"));
-		headline.addColumn(new Column("laufend"));
-		headline.addColumn(new Column("abgelehnt"));
-		
+		headline.addColumn(new Column("zusage"));
+		headline.addColumn(new Column("eingereicht"));
+		headline.addColumn(new Column("absage"));
 		result.addRow(headline);
 		/** alle Bewerbungen der Organisationseinheit
-		 * werden in einen Vector �bergeben
+		 * werden in einen Vector ?bergeben
 		 */
 		Vector<Organisationseinheit> allOrganisationseinheiten = greetingservice.getAllOrganisationseinheiten();
+
 		
+
 		for (Organisationseinheit o : allOrganisationseinheiten){
 			
 				Vector<Bewerbung> angenommeneBewerbungen = new Vector<Bewerbung>();
@@ -447,15 +458,23 @@ throws IllegalArgumentException {
 		
 		Vector<Bewerbung> allBewerbungen = greetingservice.getBewerbungByBewerber(o);
 		
+		
+		
 		for (Bewerbung b: allBewerbungen){
-			if(b.getBewerbungsStatus().toString().equals("angenommen")){
+	
+			if(b.getStatus().equals("zusage")){ 
 				angenommeneBewerbungen.add(b);
-			} else if (b.getBewerbungsStatus().toString().equals("laufend")){
+				
+			} else if (b.getStatus().equals("eingereicht")){
 				laufendeBewerbungen.add(b);
-			} else if (b.getBewerbungsStatus().toString().equals("abgelehnt")){
+				
+			} else if (b.getStatus().equals("absage")){
 				abgelehnteBewerbungen.add(b);
+				
 			}
 		}
+		
+		
 		Row anzahlRow = new Row();
 		
 		anzahlRow.addColumn(new Column(String.valueOf(o.getId())));
@@ -550,8 +569,8 @@ throws IllegalArgumentException {
 		result.setTitel("FanIn-/FanOut-Analyse");
 		result.setErstelldatum(new Date());
 		
-		result.addSubReport(this.createFanInAnalyse());
-		result.addSubReport(this.createFanOutAnalyse());
+		result.addSubReport(this.createFanInAnalyse()); // Fehler
+		result.addSubReport(this.createFanOutAnalyse()); // Fehler
 		
 		return result;
 		
@@ -637,7 +656,7 @@ throws IllegalArgumentException {
 		Person personOfProjekt = this.findPersonByKey(projektByAusschreibung.getIdPerson());
 		if(matchCounter==e.size()){
 			if(personOfProjekt.getIdPartnerprofil()!=pp.getId()){
-				System.out.println("Partnerprofil passt �berein");
+				System.out.println("Partnerprofil passt ?berein");
 				passendeAusschreibungen.add(a);
 			}
 		}
@@ -665,7 +684,7 @@ public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationsei
 		
 		/**
 		 * @param Organisationseinheit o
-		 * @return Vector mit allen Ausschreibung zu dem �bergebenen Organisationseinheit-Objekt
+		 * @return Vector mit allen Ausschreibung zu dem ?bergebenen Organisationseinheit-Objekt
 		 */
 		Vector<Ausschreibung> meineAusschreibungen = greetingservice.getAusschreibungByAusschreibender(o);
 		
@@ -673,7 +692,7 @@ public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationsei
 			
 			/**
 			 * @param id der Ausschreibung, welche aus dem Ausschreibung-Objekt gelesen wird
-			 * @return Vector mit allen Bewerbungen zur �bergebenen Ausschreibung 
+			 * @return Vector mit allen Bewerbungen zur ?bergebenen Ausschreibung 
 			 */
 			Vector<Bewerbung> bewerbungen =  greetingservice.getBewerbungByAusschreibungId(a.getId());
 			
@@ -700,12 +719,16 @@ public Vector<Organisationseinheit> getBewerberByAusschreibungen(Organisationsei
 		return bewerber;
 }
 
-
-
 @Override
 public Vector<Person> getAllPersonen() throws IllegalArgumentException {
 	// TODO Auto-generated method stub
-	return greetingservice.getAllPersons();
+	return null;
 }
+
+
+
+
+
+
 
 }
