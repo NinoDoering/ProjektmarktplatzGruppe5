@@ -22,7 +22,7 @@ import de.hdm.itprojekt.shared.bo.Beteiligung;
 import de.hdm.itprojekt.shared.bo.Bewerbung;
 import de.hdm.itprojekt.shared.bo.Bewertung;
 import de.hdm.itprojekt.shared.bo.Eigenschaft;
-import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
+//import de.hdm.itprojekt.shared.bo.Bewerbung.BewerbungsStatus;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
@@ -972,7 +972,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	// anlegenBewerbung
 	@Override
 	public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
-			Date erstellDatum, BewerbungsStatus bewerbungsStatus) throws IllegalArgumentException {
+			Date erstellDatum, String bewerbungsStatus) throws IllegalArgumentException {
 		Bewerbung b = new Bewerbung();
 
 		b.setId(1);
@@ -980,7 +980,7 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		b.setIdAusschreibung(idAusschreibung);
 		b.setBewerbungsText(bewerbungstext);
 		b.setErstellDatum(erstellDatum);
-		b.setBewerbungsStatus(bewerbungsStatus);
+		b.setStatus(bewerbungsStatus);
 
 		return this.bewerbungMapper.insertBewerbung(b);
 	}
@@ -1021,6 +1021,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		bewerbungMapper.updateBewerbung(b);
 
 	}
+	@Override
+	public Bewerbung bewerbungsStatusAktualisierne(Bewerbung b) {
+		// TODO Auto-generated method stub
+		return this.bewerbungMapper.updateBewerbungsstatus(b);
+	}
+
 
 	// getAllBewerbungen
 	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
@@ -1219,11 +1225,6 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 
-	@Override
-	public Bewerbung bewerbungsStatusAktualisierne(Bewerbung b) {
-		// TODO Auto-generated method stub
-		return this.bewerbungMapper.updateBewerbungsstatus(b);
-	}
 
 
 
