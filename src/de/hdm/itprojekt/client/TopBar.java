@@ -33,6 +33,7 @@ import de.hdm.itprojekt.client.LoginInfo;
 			private static ClickHandler currentClickHandler = null;
 			private static ClickEvent currentClickEvent = null;
 //			RoleManagement rm = new RoleManagement();
+			private Anchor reportlink = new Anchor();
 			
 			HorizontalPanel TopBarPanel = new HorizontalPanel();
 			Button LogOUT = new Button("Ausloggen");
@@ -55,7 +56,8 @@ import de.hdm.itprojekt.client.LoginInfo;
 
 				@Override
 				public void onClick(ClickEvent event) {
-//					Window.open(signOutLink.getHref(), "_self", "");;
+					reportlink.setHref(GWT.getHostPageBaseURL()+"Projektmarktplatz.html");
+					Window.open(reportlink.getHref(), "_self", "");;
 				}
 				
 			});
