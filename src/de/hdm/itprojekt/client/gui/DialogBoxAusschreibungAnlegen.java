@@ -383,8 +383,8 @@ public void Qualimethode(final Ausschreibung a, final Eigenschaft e,String artik
 
 			
 //			});
-			
-			gwtproxy.anlegenEigenschaft(partnerprofil, arbeitsgebietEigenschaften.getSelectedValue(), berufserfahrungsjahreEigenschaften.getSelectedValue(),sprachkenntnisseEigenschaften.getSelectedValue(),employmentstatusEigenschaften.getSelectedValue(), ausbildungEigenschaften.getSelectedValue(), abschlussEigenschaften.getSelectedValue(), new AsyncCallback<Eigenschaft>() {
+		//	gwtproxy.anlegenEigenschaft(idPartnerprofil, arbeitsgebiet, berufserfahrungsJahre, employmentStatus, ausbildung, abschluss, sprachkenntnisse, callback);
+			gwtproxy.anlegenEigenschaft(partnerprofil, arbeitsgebietEigenschaften.getSelectedValue(), berufserfahrungsjahreEigenschaften.getSelectedValue(), employmentstatusEigenschaften.getSelectedValue(), ausbildungEigenschaften.getSelectedValue(),  abschlussEigenschaften.getSelectedValue(),sprachkenntnisseEigenschaften.getSelectedValue(),  new AsyncCallback<Eigenschaft>() {
 
 				@Override
 				public void onFailure(Throwable caught) {

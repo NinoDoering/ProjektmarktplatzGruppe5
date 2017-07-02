@@ -26,6 +26,13 @@ import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
+
+/**
+ * Diese Klasse ist dafuer zustaendig, das Team verwalten zu koennen. Eine
+ * Person kann auf dieser Seite entweder einem Team beitreten, das Team
+ * bearbeiten, anlegen oder löschen. Die Seite ist ueber den Button "Team
+ * bearbeiten" auf der eigenen Profilseite zu erreichen.
+ */
 public class TeamSeite extends Showcase {
 
 	

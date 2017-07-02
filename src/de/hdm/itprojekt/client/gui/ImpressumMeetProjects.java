@@ -4,6 +4,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.itprojekt.client.Showcase;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, dass das Impressum von MeetProjects gelesen werden kann.
+ * Sobald auf den Button "Impressum" geklickt wird, kann der Nutzer unser Impressum lesen.
+ */
 public class ImpressumMeetProjects extends Showcase{
 
 	

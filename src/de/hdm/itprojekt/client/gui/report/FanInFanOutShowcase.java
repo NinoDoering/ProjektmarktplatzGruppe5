@@ -8,6 +8,10 @@ import de.hdm.itprojekt.shared.ReportGeneratorAsync;
 import de.hdm.itprojekt.shared.report.FanInFanOutReport;
 import de.hdm.itprojekt.shared.report.HTMLReportWriter;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, die Fan-in/Fan-out Analyse durchfuehren
+ * zu koennen und anzeigen zu lassen
+ */
 public class FanInFanOutShowcase extends Showcase {
 
 	

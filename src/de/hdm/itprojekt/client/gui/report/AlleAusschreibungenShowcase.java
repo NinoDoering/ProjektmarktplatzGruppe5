@@ -10,7 +10,9 @@ import de.hdm.itprojekt.shared.report.AllAusschreibungenReport;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.Window;
 
-
+/**
+ * Diese Klasse ist dafuer zustaendig, alle Ausschreibungen ausgeben lassen zu können.
+ */
 public class AlleAusschreibungenShowcase extends Showcase{
 
 	//Können die Überschrift der AnzeigeSeite auch ändern

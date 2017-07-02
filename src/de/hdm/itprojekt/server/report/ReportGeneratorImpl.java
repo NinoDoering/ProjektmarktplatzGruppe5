@@ -19,7 +19,7 @@ import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
-
+import de.hdm.itprojekt.shared.bo.Zusammen;
 import de.hdm.itprojekt.shared.report.AllAusschreibungenByPartnerprofilReport;
 import de.hdm.itprojekt.shared.report.AllAusschreibungenReport;
 import de.hdm.itprojekt.shared.report.AllBeteiligungenToProjectReport;
@@ -411,16 +411,16 @@ throws IllegalArgumentException {
 	return result;
 	}
 
-//	public Zusammen getAllSimples(int id) throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		Zusammen result = new Zusammen();
-//		if (this.getGreetingService()== null){
-//			return null;
-//		}
-//		result.vectorsp.add(this.createAllBeteiligungenToProjectReport(id));
-//		result.vectorsp.add(this.createAllBewerbungenByOrganisationseinheitReport(id));
-//		return result;
-//	}
+	public Zusammen getAllSimples(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		Zusammen result = new Zusammen();
+		if (this.getGreetingService()== null){
+			return null;
+		}
+		result.vectorsp.add(this.createAllBeteiligungenToProjectReport(id));
+		result.vectorsp.add(this.createAllBewerbungenByOrganisationseinheitReport(id));
+		return result;
+	}
 
 	@Override
 	public FanIn createFanInAnalyse() throws IllegalArgumentException {

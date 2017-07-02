@@ -28,6 +28,12 @@ import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse ist dafür zustaendig, Projekte anzuzeigen, zu erstellen,
+ * bearbeiten oder loeschen zu können. Zudem kann ein Projekt ausgewählt werden
+ * und die zugehoerigen Ausschreibungen angezeigt werden lassen. Die Seite ist
+ * erreichbar über die Funktion "Marktplatz auswaehlen".
+ */
 public class ProjekteSeite extends Showcase{
 
 	private static final String ssmalleprojektmarktplaetze = null;

@@ -15,7 +15,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.itprojekt.client.ClientSideSettings;
-import de.hdm.itprojekt.client.Navigator;
 import de.hdm.itprojekt.client.Showcase;
 import de.hdm.itprojekt.shared.GreetingService;
 import de.hdm.itprojekt.shared.GreetingServiceAsync;
@@ -24,6 +23,12 @@ import de.hdm.itprojekt.shared.bo.Eigenschaft;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 
+/**
+ * Diese Klasse regelt den Ablauf, der Bearbeitung einer Eigenschaft.
+ * Sie wird benötigt, sobald ein Nutzer seine Eigenschaften bearbeiten möchte.
+ * Die Eigenschafts-Klasse enthält mehrere Eigenschaften, die eine Person annehmen kann, wie z.B. die Sprachkenntnisse
+ * Die Klasse enthält GUI-Elemente, die zur Darstellung benötigt wird.
+ */
 public class DialogBoxPersonEigenschaftenBearbeiten extends DialogBox{
 
 GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
@@ -56,16 +61,11 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person pe = new Person();
 	private Partnerprofil pp = new Partnerprofil();
 	private Ausschreibung a = new Ausschreibung();
-	private RoleManagement rm = new RoleManagement();
-	private  Navigator navi = new Navigator();
 	
-//	public DialogBoxPersonEigenschaftenBearbeiten(final Person person, final Partnerprofil pp, final Eigenschaft eigenschaft){
-	
-	public DialogBoxPersonEigenschaftenBearbeiten(final RoleManagement rm, final Navigator navi, final Partnerprofil pp, final Eigenschaft eigenschaft){
+	public DialogBoxPersonEigenschaftenBearbeiten(final Person person, final Partnerprofil pp, final Eigenschaft eigenschaft){
 		this.setAnimationEnabled(false);
 		this.setGlassEnabled(true);
-		this.rm = rm;
-		this.navi= navi;
+		this.pe = person;
 		this.pp = pp;
 		this.setText("Eigenschaften ändern");
 		eigtAnlegen.setStylePrimaryName("profilButton");
@@ -125,11 +125,14 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-
-				
-				Window.alert("IDPP" + rm.getUser().getIdPartnerprofil() );
-			
-			    gwtproxy.anlegenEigenschaft(rm.getUser().getIdPartnerprofil(), arbeitsgebietEigenschaften.getSelectedValue(),
+				eigenschaft.setArbeitsgebiet(arbeitsgebietEigenschaften.getSelectedValue());
+				eigenschaft.setAusbildung(ausbildungEigenschaften.getSelectedValue());
+				eigenschaft.setBerufserfahrungsJahre(berufserfahrungsjahreEigenschaften.getSelectedValue());
+				eigenschaft.setSprachkenntnisse(sprachkenntnisseEigenschaften.getSelectedValue());
+				eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
+				eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
+				eigenschaft.setIdPartnerprofil(a.getIdPartnerprofil());
+			    gwtproxy.anlegenEigenschaft(pe.getIdPartnerprofil(), arbeitsgebietEigenschaften.getSelectedValue(),
 			    		berufserfahrungsjahreEigenschaften.getSelectedValue(),
 			    		employmentstatusEigenschaften.getSelectedValue(),
 			    		ausbildungEigenschaften.getSelectedValue(), abschlussEigenschaften.getSelectedValue(),
@@ -217,7 +220,6 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 				eigenschaft.setBerufserfahrungsJahre(berufserfahrungsjahreEigenschaften.getSelectedValue());
 				eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
 				eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
-				eigenschaft.setIdPartnerprofil(rm.getUser().getIdPartnerprofil());
 		
 				gwtproxy.saveEigenschaftnachPP(eigenschaft, new AsyncCallback<Void>() {
 
@@ -232,12 +234,7 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 						// TODO Auto-generated method stub
 						
 						
-//						eigenschaft.setArbeitsgebiet(arbeitsgebietEigenschaften.getSelectedValue());
-//						eigenschaft.setSprachkenntnisse(sprachkenntnisseEigenschaften.getSelectedValue());
-//						eigenschaft.setAusbildung(ausbildungEigenschaften.getSelectedValue());
-//						eigenschaft.setBerufserfahrungsJahre(berufserfahrungsjahreEigenschaften.getSelectedValue());
-//						eigenschaft.setEmploymentStatus(employmentstatusEigenschaften.getSelectedValue());
-//						eigenschaft.setAbschluss(abschlussEigenschaften.getSelectedValue());
+						
 						
 						arbeitsgebietEigenschaften.setVisible(false);
 						ausbildungEigenschaften.setVisible(false);
@@ -256,8 +253,6 @@ GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 						
 						eigtAngelegt.setVisible(true);
 						ok.setVisible(true);
-						Window.alert("Eigenschaft ändern anscheinen erfolgreich" + eigenschaft.getSprachkenntnisse() +eigenschaft.getAbschluss()+ eigenschaft.getArbeitsgebiet()
-						+eigenschaft.getAusbildung()+ eigenschaft.getBerufserfahrungsJahre()+ eigenschaft.getEmploymentStatus());
 					}
 				});
 			}

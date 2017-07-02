@@ -30,6 +30,14 @@ import de.hdm.itprojekt.shared.bo.Bewertung;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse ist dafür zustaendig, eine Beteiligung anlegen zu könnnen. Eine
+ * Beteiligung kann von dem Projektleiter angelegt werden, sobald dieser eine
+ * Bewertung zu einer eingegangenen Bewerbung erstellt hat.
+ * 
+ * @author Thomas
+ *
+ */
 public class DialogBoxBeteiligung extends DialogBox {
 	
 	

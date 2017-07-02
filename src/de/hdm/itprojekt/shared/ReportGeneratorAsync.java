@@ -60,7 +60,7 @@ public interface ReportGeneratorAsync {
 
 
 
-//	void getAllSimples(int id, AsyncCallback<Zusammen> callback);
+	void getAllSimples(int id, AsyncCallback<Zusammen> callback);
 
 
 

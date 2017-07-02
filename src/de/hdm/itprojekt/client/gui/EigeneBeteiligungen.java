@@ -25,7 +25,10 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Beteiligung;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
-// IN DIESER KLASSE WERDEN DIE EIGENEN BETEILIGUNGEN ANGEZEIGT
+/**
+ * Diese Klasse ist dafuer zustaendig, dass eine Organisationseinheit die
+ * eigenen Beteiligungen sehen kann.
+ */
 
 public class EigeneBeteiligungen extends Showcase {
 

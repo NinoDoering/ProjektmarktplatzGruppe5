@@ -44,6 +44,11 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, die Rollen der Organisationseinheiten zu
+ * managen. Eine Person kann entweder in der Rolle einer Person, eines Teams
+ * oder Unternehmens agieren. Die Rolle kann jederzeit geaendert werden.
+ */
 public class RoleManagement extends FlexTable {
 
 	

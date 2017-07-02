@@ -39,6 +39,12 @@ import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 import de.hdm.itprojekt.shared.report.Column;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, dass eine Organisationseinheit (Person,
+ * Team, Unternehmen) ihr eigenes Profil sehen udn bearbeiten kann. Auf dieser
+ * Seite finden sich verschiedene Funktionen, um sich bspw. einem Team
+ * hinzufuegen zu können oder die eigenen Eigenschaften zu bearbeiten.
+ */
 public class PersonSeite extends Showcase{
 
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
@@ -373,8 +379,37 @@ public class PersonSeite extends Showcase{
 		});
 	
 	
-
+//		eigeneMarktplaetze.addClickHandler(new ClickHandler() {
+//
+//				@Override
+//				public void onClick(ClickEvent event) {
+//					// TODO Auto-generated method stub
+//			
+//					gwtproxy.getMarktplaetzeByPerson(rm.getUser(), new AsyncCallback<Vector<Marktplatz>>() {
+//
+//						@Override
+//						public void onFailure(Throwable caught) {
+//							// TODO Auto-generated method stub
+//							Window.alert("projektebyPerson geht NICHT");
+//						}
+//
+//						public void onSuccess(Vector<Marktplatz> result) {
+//							// TODO Auto-generated method stub
+//					
+//							Showcase showcase = new EigeneMarktplaetze(m1, rm, navi);
+//						
+//							RootPanel.get("Anzeige").clear();
+//							RootPanel.get("Anzeige").add(showcase);
+//						}
+//					});
+//				}
+//			
+//			});
+//			
 	
+		
+		
+		
 		// eigene Projekte anzeigen lassen
 		
 		eigeneProjekte.addClickHandler(new ClickHandler() {
@@ -501,7 +536,7 @@ public class PersonSeite extends Showcase{
 	@Override
 	public void onClick(ClickEvent event) {
 		
-		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxPersonEigenschaftenBearbeiten(rm, navi, pp,e);
+		DialogBox dialogBoxEigenschaftenAendern = new DialogBoxPersonEigenschaftenBearbeiten(p,pp,e);
 		//RootPanel.get("Anzeige").clear();
 		//RootPanel.get("Anzeige").add(dialogBoxEigenschaftenAendern);
 		dialogBoxEigenschaftenAendern.center();

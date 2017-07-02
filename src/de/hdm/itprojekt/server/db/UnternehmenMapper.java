@@ -102,7 +102,6 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 
 	}
 	
-	
 	/**
 	 * Objekt Unternehmen ausgeben nach der ID
 	 * @param unternehmen
@@ -202,45 +201,26 @@ public class UnternehmenMapper extends OrganisationseinheitMapper {
 	 * Loeschen des uebergebenen Unternehmenobjekts
 	 * @param u das uebergebene Unternehmensobjekt
 	 */
-//	public void deleteUnternehmenInteger(Integer u) {
-//		Unternehmen u1 = new Unternehmen();
-//		u1.setId(u);
-//
-//		Connection con = DBConnection.connection();
-//
-//		try {
-//			Statement stmt = con.createStatement();
-//			stmt.executeUpdate("DELETE FROM `unternehmen` WHERE `idUnternehmen` =" + u1.getId());
-//			super.deleteOrganisationseinheit(u1);
-//		} catch (SQLException e3) {
-//			e3.printStackTrace();
-//		}
-//	}
+	public void deleteUnternehmenInteger(Integer u) {
+		Unternehmen u1 = new Unternehmen();
+		u1.setId(u);
+
+		Connection con = DBConnection.connection();
+
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate("DELETE FROM `unternehmen` WHERE `idUnternehmen` =" + u1.getId());
+			super.deleteOrganisationseinheit(u1);
+		} catch (SQLException e3) {
+			e3.printStackTrace();
+		}
+	}
 	/**
 	 * Loeschen des uebergebenen Unternehmenobjekts
 	 * @param u das uebergebene Unternehmensobjekt
 	 */
-//	public void deleteUnternehmen(Unternehmen u) {
-//		this.deleteUnternehmenInteger(u.getId());
-//	}
-
-	public void deleteUnternehmen(Unternehmen u){
-
-		Connection con = DBConnection.connection();
-		
-		try {
-			Statement stmt = con.createStatement();
-		
-			stmt.executeUpdate("UPDATE person SET idUnternehmen = 0 WHERE idUnternehmen= " +u.getId());
-			stmt.executeUpdate("UPDATE team SET idUnternehmen = 0 WHERE idUnternehmen= " +u.getId());
-			stmt.executeUpdate("DELETE FROM `unternehmen` WHERE `idUnternehmen` =" + u.getId());
-			super.deleteOrganisationseinheit(u);
-		} catch (SQLException e3) {
-			e3.printStackTrace();
-		}
-		
-		
+	public void deleteUnternehmen(Unternehmen u) {
+		this.deleteUnternehmenInteger(u.getId());
 	}
-	
-	
+
 }

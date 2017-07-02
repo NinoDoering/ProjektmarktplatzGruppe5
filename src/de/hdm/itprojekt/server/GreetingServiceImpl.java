@@ -36,86 +36,159 @@ import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-//Rueckgaengig
-//ZweiterVersuch
-
 
 /**
- * The server-side implementation of the RPC service.
+ * Implementierungsklasse des Interfaces GreetingService.
  */
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
-//TONY
-		
-		//this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird geloescht)
-	
+	// this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse wird
+	// geloescht)
+
+	/**
+	 * Referenz auf den EigenschaftMapper, der Eigenschaftobjekte mit der Datenbank abgleicht.
+	 */
 	private EigenschaftMapper eigMapper = null;
-	private OrganisationseinheitMapper orgaMapper = null; // Bleibt die Mapper bestehen?
-	private MarktplatzMapper mpMapper = null;
-	private PartnerprofilMapper ppMapper = null;
-	private PersonMapper persMapper = null;
-	private ProjektMapper prjktMapper = null;
-	private TeamMapper teamMapper = null;
-	private UnternehmenMapper unternehmenMapper = null;
-	private AusschreibungMapper ausschreibungMapper = null;
-	private BeteiligungMapper beteiligungMapper = null;
-	private BewerbungMapper bewerbungMapper = null;
-	private BewertungMapper bewertungMapper = null;
 	
+	/**
+	 * Referenz auf den OrganisationseinheitMapper, der Organisationsobjekte mit der Datenbank abgleicht.
+	 */
+	private OrganisationseinheitMapper orgaMapper = null;
+	
+	/**
+	 * Referenz auf den MarktplatzMapper, der Marktplatzobjekte mit der Datenbank abgleicht.
+	 */
+	private MarktplatzMapper mpMapper = null;
+	
+	/**
+	 * Referenz auf den PartnerprofilMapper, der Partnerprofilobjekte mit der Datenbank abgleicht.
+	 */
+	private PartnerprofilMapper ppMapper = null;
+	
+	/**
+	 * Referenz auf den PeronMapper, der Personobjekte mit der Datenbank abgleicht.
+	 */
+	private PersonMapper persMapper = null;
+	
+	/**
+	 * Referenz auf den ProjektMapper, der Projektobjekte mit der Datenbank abgleicht.
+	 */
+	private ProjektMapper prjktMapper = null;
+	
+	/**
+	 * Referenz auf den TeamMapper, der Teamobjekte mit der Datenbank abgleicht.
+	 */
+	private TeamMapper teamMapper = null;
+	
+	/**
+	 * Referenz auf den UnternehmenMapper, der Unternehmenobjekte mit der Datenbank abgleicht.
+	 */
+	private UnternehmenMapper unternehmenMapper = null;
+	
+	/**
+	 * Referenz auf den AusschreibungMapper, der Ausschreibungobjekte mit der Datenbank abgleicht.
+	 */
+	private AusschreibungMapper ausschreibungMapper = null;
+	
+	/**
+	 * Referenz auf den BeteiligungMapper, der Beteiligungsobjekte mit der Datenbank abgleicht.
+	 */
+	private BeteiligungMapper beteiligungMapper = null;
+	
+	/**
+	 * Referenz auf den BewerbungMapper, der Bewerbungsobjekte mit der Datenbank abgleicht.
+	 */
+	private BewerbungMapper bewerbungMapper = null;
+	
+	/**
+	 * Referenz auf den BewertungMapper, der Bewertungsobjekte mit der Datenbank abgleicht.
+	 */
+	private BewertungMapper bewertungMapper = null;
 
-public GreetingServiceImpl() throws IllegalArgumentException {
+	/**
+	   * <p>
+	   * Ein <code>RemoteServiceServlet</code> wird unter GWT mittels
+	   * <code>GWT.create(Klassenname.class)</code> Client-seitig erzeugt. Hierzu
+	   * ist ein solcher No-Argument-Konstruktor anzulegen. Ein Aufruf eines anderen
+	   * Konstruktors ist durch die Client-seitige Instantiierung durch
+	   * <code>GWT.create(Klassenname.class)</code> nach derzeitigem Stand nicht
+	   * mÃ¶glich.
+	   * </p>
+	   * <p>
+	   * Es bietet sich also an, eine separate Instanzenmethode zu erstellen, die
+	   * Client-seitig direkt nach <code>GWT.create(Klassenname.class)</code>
+	   * aufgerufen wird, um eine Initialisierung der Instanz vorzunehmen.
+	   * </p>
+	   * 
+	   * @see #init()
+	   * @author Thies
+	   */
+	public GreetingServiceImpl() throws IllegalArgumentException {
 
-}
-
-
-// Initialisierung
-public void init() throws IllegalArgumentException {
-
-	// this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse
-	// wird geloescht)
-	this.eigMapper = EigenschaftMapper.eigenschaftMapper();
-	this.orgaMapper = OrganisationseinheitMapper.organisationseinheitMapper(); // kommt noch raus?
-	this.mpMapper = MarktplatzMapper.marktplatzMapper();
-	this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
-	this.persMapper = PersonMapper.personMapper();
-	this.prjktMapper = ProjektMapper.projektMapper();
-	//this.pmpMapper = MarktplatzMapper.marktplatzMapper();
-	this.teamMapper = TeamMapper.teamMapper();
-	this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
-	this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper(); 
-	this.bewertungMapper = BewertungMapper.bewertungMapper();
-	this.bewerbungMapper = BewerbungMapper.bewerbungmapper();
-	this.beteiligungMapper = BeteiligungMapper.beteiligungMapper();
 	}
 
+	/**
+	 * Initialisierung des Objekts. Nach der Instantiierung muss diese Methode
+	 * aufgerufen werden.
+	 * 
+	 * @throws IllegalArgumentException
+	 */
+	public void init() throws IllegalArgumentException {
 
+		// this.boMapper = BusinessObjectMapper.businessObjectMapper(); (Klasse
+		// wird geloescht)
+		this.eigMapper = EigenschaftMapper.eigenschaftMapper();
+		this.orgaMapper = OrganisationseinheitMapper.organisationseinheitMapper();
+		this.mpMapper = MarktplatzMapper.marktplatzMapper();
+		this.ppMapper = PartnerprofilMapper.partnerprofilMapper();
+		this.persMapper = PersonMapper.personMapper();
+		this.prjktMapper = ProjektMapper.projektMapper();
+		// this.pmpMapper = MarktplatzMapper.marktplatzMapper();
+		this.teamMapper = TeamMapper.teamMapper();
+		this.unternehmenMapper = UnternehmenMapper.unternehmenMapper();
+		this.ausschreibungMapper = AusschreibungMapper.ausschreibungMapper();
+		this.bewertungMapper = BewertungMapper.bewertungMapper();
+		this.bewerbungMapper = BewerbungMapper.bewerbungmapper();
+		this.beteiligungMapper = BeteiligungMapper.beteiligungMapper();
+	}
 
-//test 
+	/**
+	 * Suchen einer Ausschreibung über ein Partnerprofilobjekt
+	 * @param p
+	 * @return Ausschreibung zum uebergebenen Partnerprofilobjekt
+	 */
+	public Ausschreibung getAusschreibungByPartnerprofilId(Partnerprofil p) throws IllegalArgumentException {
+		return this.ausschreibungMapper.findAusschreibungbyIdPartnerprofil(p.getId());
+	}
 
-
-		public Ausschreibung getAusschreibungByPartnerprofilId(Partnerprofil p) throws IllegalArgumentException {
-			return this.ausschreibungMapper.findAusschreibungbyIdPartnerprofil(p.getId());
-		}
-
-		
-		public Ausschreibung getpartnerprofilIdbyAusschreibung (Ausschreibung a) throws IllegalArgumentException{
-			return this.ausschreibungMapper.findpartnerprofilIdbyAusschreibung(a.getId());
-		}
+	/**
+	 * Suchen eines Partnerprofils über ein Ausschreibungsobjekt
+	 * @param a
+	 * @return Partnerprofilobjekt zum uebergebenen Ausschreibungsobjekt
+	 */
+	public Ausschreibung getpartnerprofilIdbyAusschreibung(Ausschreibung a) throws IllegalArgumentException {
+		return this.ausschreibungMapper.findpartnerprofilIdbyAusschreibung(a.getId());
+	}
 
 /*##########################################################
  * START EIGENSCHAFT
  #########################################################*/
 
-// createEigenschaft
-
+	/**
+	 * Anlegen einer Eigenschaft
+	 * 
+	 * @param idPartnerprofil,
+	 *            arbeitsgebiet, berufserfahrungsJahre, employmentStatus,
+	 *            ausbildung, abschluss, sprachkenntnisse
+	 * @return Eigenschaft in Datenbank anlegen
+	 */
 	@Override
 	public Eigenschaft anlegenEigenschaft(int idPartnerprofil, String arbeitsgebiet, String berufserfahrungsJahre,
 			String employmentStatus, String ausbildung, String abschluss, String sprachkenntnisse)
 			throws IllegalArgumentException {
 		Eigenschaft e = new Eigenschaft();
 
-		
 		e.setId(1);
 		e.setIdPartnerprofil(idPartnerprofil);
 		e.setArbeitsgebiet(arbeitsgebiet);
@@ -128,24 +201,44 @@ public void init() throws IllegalArgumentException {
 		return this.eigMapper.insertEigenschaft(e);
 	}
 
+	/**
+	 * Loeschen einer Eigenschaft
+	 * @param e
+	 * @return Eigenschaft wird aus Datenbank (DB) gelöscht
+	 */
 	@Override
 	public void loeschenEigenschaft(Eigenschaft e) throws IllegalArgumentException {
 		this.eigMapper.deleteEigenschaft(e);
 
 	}
 
+	/**
+	 * Speichern einer Eigenschaft
+	 * @param e
+	 * @return Eigenschaft wird in DB gespeichert
+	 */
 	@Override
 	public void saveEigenschaft(Eigenschaft e) throws IllegalArgumentException {
 		eigMapper.updateEigenschaft(e);
 
 	}
+	
+	/**
+	 * Speichern einer Eigenschaft
+	 * @param e
+	 * @return Eigenschaft wird in DB gespeichert
+	 */
 	@Override
 	public void saveEigenschaftnachPP(Eigenschaft e) throws IllegalArgumentException {
 		eigMapper.updateEigenschaftnachPP(e);
 
 	}
 	
-
+	/**
+	 * Ausgeben einer Eigenschaft nach der übergebenen ID
+	 * @param idEigenschaft
+	 * @return Eigenschaftsobjekt wird in DB angelegt
+	 */
 	public Eigenschaft getEigenschaftById(int idEigenschaft) throws IllegalArgumentException {
 		return this.eigMapper.findEigenschaftByKey(idEigenschaft);
 	}
@@ -163,82 +256,112 @@ public void init() throws IllegalArgumentException {
 
 // createPartnerprofil
 
-@Override
-public Partnerprofil anlegenPartnerprofil()
-		throws IllegalArgumentException {
-	
-	Partnerprofil pp = new Partnerprofil();
+	/**
+	 * Anlegen eines Partnerprofils
+	 * @return Partnerprofil wird in DB angelegt
+	 */
+	@Override
+	public Partnerprofil anlegenPartnerprofil() throws IllegalArgumentException {
 
-	return this.ppMapper.insert(pp);
-}
+		Partnerprofil pp = new Partnerprofil();
 
-// loeschenPartnerprofil
-@Override
-public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
-	
-	// Methode muss noch erstellt werden!!
-			Vector<Eigenschaft> e = this.getEigenschaftByPartnerprofil(pp);
-			
-			if(e != null){
-				for(Eigenschaft eigenschaft : e){
-					this.eigMapper.deleteEigenschaft(eigenschaft);
-				}
-				this.ppMapper.delete(pp);
-				// Datentyp ist Partnerprofil
-	
+		return this.ppMapper.insert(pp);
 	}
-} 
 
-// getEigenschaftByPartnerprofil()
-public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
+	/**
+	 * Loeschen eines Partnerprofils
+	 * @param pp
+	 * @return Partnerprofil wird aus DB geloescht
+	 */
+	@Override
+	public void loeschenPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 
-	Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+		// Methode muss noch erstellt werden!!
+		Vector<Eigenschaft> e = this.getEigenschaftByPartnerprofil(pp);
 
-	if (pp != null && this.eigMapper != null) {
-		Vector<Eigenschaft> eigenschaft = this.eigMapper.findEigenschaftByPartnerprofil(pp.getId());
+		if (e != null) {
+			for (Eigenschaft eigenschaft : e) {
+				this.eigMapper.deleteEigenschaft(eigenschaft);
+			}
+			this.ppMapper.delete(pp);
+			// Datentyp ist Partnerprofil
 
-		if (eigenschaft != null) {
-			result.addAll(eigenschaft);
 		}
 	}
-	return result;
 
-}
+	/**
+	 * Vector mit Eigenschaftsobjekten zu übergebenem Partnerprofil ausgeben
+	 * @param pp
+	 * @return Vector mit Eigenschaftsobjekten
+	 */
+	public Vector<Eigenschaft> getEigenschaftByPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 
-// getEigenschaftByPartnerprofil
-public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
-	
-	Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
 
-	if (this.eigMapper != null) {
-		Vector<Eigenschaft> eigenschaft = this.eigMapper.findEigenschaftByPartnerprofil(idPartnerprofil);
+		if (pp != null && this.eigMapper != null) {
+			Vector<Eigenschaft> eigenschaft = this.eigMapper.findEigenschaftByPartnerprofil(pp.getId());
 
-		if (eigenschaft != null) {
-			result.addAll(eigenschaft);
+			if (eigenschaft != null) {
+				result.addAll(eigenschaft);
+			}
 		}
-	}
-	return result;
-	
-}
+		return result;
 
-	// getPartnerprofilbyId
+	}
+
+	/**
+	 * Ausgabe von Eigenschaftsobjekten, die dem übergebenen Fremdschlüssel des Partnerprofils entsprechen
+	 * @param idPartnerprofil
+	 * @return Vector mit Eigenschaftsobjekten
+	 */
+	public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) throws IllegalArgumentException {
+
+		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+
+		if (this.eigMapper != null) {
+			Vector<Eigenschaft> eigenschaft = this.eigMapper.findEigenschaftByPartnerprofil(idPartnerprofil);
+
+			if (eigenschaft != null) {
+				result.addAll(eigenschaft);
+			}
+		}
+		return result;
+
+	}
+
+	/**
+	 * Ausgabe des Partnerprofils mit übergebener ID
+	 * @param idPartnerprofil
+	 * @return Parnerprofilobjekt
+	 */
 	@Override
 	public Partnerprofil getPartnerprofilbyId(int idPartnerprofil) throws IllegalArgumentException {
 		return this.ppMapper.findPartnerprofilByKey(idPartnerprofil);
 	}
 
-	// savePartnerprofil
+	/**
+	 * Speichern eines Partnerprofilobjekts
+	 * @param pp
+	 * @return Partnerprofilobjekt
+	 */
 	@Override
 	public void savePartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 		ppMapper.update(pp);
 	}
 
-	// getAllPartnerprofile
+	/**
+	 * Ausgabe aller Partnerprofile
+	 * @return alle Partnerprofile
+	 */
 	public Vector<Partnerprofil> getAllPartnerprofile() throws IllegalArgumentException {
 		return this.ppMapper.findAllPartnerprofil();
 	}
 	
-	// getPartnerprofilByAusschreibung
+	/**
+	 * Ausgabe von Partnerprofilen, die zum uebergebenen Ausschreibungsobjekt gehoeren
+	 * @param a
+	 * @return Partnerprofilobjekte
+	 */
 	public Partnerprofil getPartnerprofilByAusschreibung(Ausschreibung a) {
 
 		if (a != null && this.ppMapper != null) {
@@ -254,10 +377,17 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
  * START PERSON
  #########################################################*/
 
-	// anlegenPerson
+	/**
+	 * Anlegen einer Person in der Datenbank
+	 * 
+	 * @param idUnternehmen,
+	 *            idTeam, idPartnerprofil, vorname, nachname, titel,
+	 *            emailAddresse, standort, adresse
+	 * @return Person wird in Datenbank anlegen
+	 */
 	@Override
-	public Person anlegenPerson(int idUnternehmen, int idTeam, int idPartnerprofil, String vorname, String nachname, String titel, String emailAddresse, String standort, String adresse)
-			throws IllegalArgumentException {
+	public Person anlegenPerson(int idUnternehmen, int idTeam, int idPartnerprofil, String vorname, String nachname,
+			String titel, String emailAddresse, String standort, String adresse) throws IllegalArgumentException {
 		Person pe = new Person();
 
 		pe.setId(1);
@@ -274,20 +404,20 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.persMapper.insertPerson(pe);
 	}
 
-	// loeschenPerson
+	/**
+	 * Loeschen einer Person aus der Datenbank
+	 * @param pe
+	 * @return Person wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenPerson(Person pe) throws IllegalArgumentException {
 
 		Vector<Bewerbung> b = this.getBewerbungByBewerber(pe);
 		Vector<Beteiligung> beteiligung = this.getBeteiligungByBeteiligter(pe);
 		Vector<Projekt> p = this.getProjektByPerson(pe);
-		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(pe); // muss
-																			// noch
-																			// eingearbeitet
-																			// werden
-		// PP nicht vorhanden in Mapper
+		Partnerprofil pp = this.getPartnerprofilByOrganisationseinheit(pe); 
 
-		// Bewerbungen der Person l�schen
+		// Bewerbungen der Person loeschen
 		if (b != null) {
 			for (Bewerbung bewerbung : b) {
 				this.loeschenBewerbung(bewerbung);
@@ -318,7 +448,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 
-	// getProjektByPerson
+	/**
+	 * Alle Projekte ausgeben, die von einer bestimmten Person erstellt wurden
+	 * @param o
+	 * @return Vector mit Projektobjekten
+	 */
 	public Vector<Projekt> getProjektByPerson(Organisationseinheit o) throws IllegalArgumentException {
 
 		Vector<Projekt> result = new Vector<Projekt>();
@@ -346,7 +480,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 //	}
 	
 	
-	// getBeteiligungByBeteiligter
+	/**
+	 * Ausgabe von Beteiligungen des Beteiligten
+	 * @param o
+	 * @return Vector mit Beteiligungsobjekten
+	 */
 	public Vector<Beteiligung> getBeteiligungByBeteiligter(Organisationseinheit o) throws IllegalArgumentException {
 
 		Vector<Beteiligung> result = new Vector<Beteiligung>();
@@ -362,7 +500,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
-	// getBewerbungByBewerber(Person pe)
+	/**
+	 * Bewerbungen eines Bewerbers ausgeben
+	 * @param pe
+	 * @return Vector mit Bewerbungsobjekten
+	 */
 	public Vector<Bewerbung> getBewerbungByBewerber(Person pe) {
 
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -378,8 +520,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 	
-	// getBewerbungByBewerber(Organisationseinheit o)
-
+	/**
+	 * Bewerbungen eines Bewerbers ausgeben
+	 * @param o
+	 * @return Vector mit Bewerbungsobjekten
+	 */
 	public Vector<Bewerbung> getBewerbungByBewerber(Organisationseinheit o) throws IllegalArgumentException {
 
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -395,28 +540,40 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
-	// savePerson
+	/**
+	 * Speichern einer Person in der Datenbank
+	 * @param pe
+	 * @return Personenobjekt wird in Datenbank gespeichert
+	 */
 	@Override
 	public void savePerson(Person pe) throws IllegalArgumentException {
 		persMapper.updatePerson(pe);
 
 	}
 	
-	// savePerson
-	
+	/**
+	 * Speichern einer Person in der Datenbank
+	 * @param pe
+	 * @return Personenobjekt wird in Datenbank gespeichert
+	 */
 	public Person savePersonPers(Person pe) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
 		return this.persMapper.updatePerson(pe);}
 
-	// getPersonById
+	/**
+	 * Personenobjekt nach übergebener ID ausgeben
+	 * @param idPerson
+	 * @return Personenobjekt
+	 */
 	@Override
 	public Person getPersonById(int idPerson) throws IllegalArgumentException {
 		return this.persMapper.findPersonByKey(idPerson);
-		// String in PersonMapper
 	}
 
 	
-	// getAllPersons
+	/**
+	 * Ausgeben aller Personen
+	 * @return Vector mit allen Personenobjekten
+	 */
 	 public Vector<Person> getAllPersons() throws IllegalArgumentException {
 	 return this.persMapper.findAllPerson();
 	 }
@@ -435,7 +592,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
  #########################################################*/
 
 
-	// anlegenProjekt
+	/**
+	 * Anlegen eines Projektobjekts in der Datenbank
+	 * 
+	 * @param idPerson, idMarktplatz, beschreibung, bezeichnung, startDatum, endDatum
+	 */
 	@Override
 	public Projekt anlegenProjekt(int idPerson, int idMarktplatz, String beschreibung, String bezeichnung,
 			Date startDatum, Date endDatum) throws IllegalArgumentException {
@@ -453,21 +614,25 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.prjktMapper.insertProjekt(p);
 	}
 
-	// loeschenProjekt
+	/**
+	 * Loeschen eines Projektobjekts
+	 * @param p
+	 * @return Projektobjekt wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenProjekt(Projekt p) throws IllegalArgumentException {
 
 		Vector<Ausschreibung> a = this.getAusschreibungByProjekt(p);
 		Vector<Beteiligung> beteiligung = this.getBeteiligungByProjekt(p);
 
-		// zugeh�rige Ausschreibungen l�schen
+		// zugehoerige Ausschreibungen loeschen
 		if (a != null) {
 			for (Ausschreibung ausschreibung : a) {
 				this.loeschenAusschreibung(ausschreibung);
 			}
 		}
 
-		// zugeh�rige Beteiligungen l�schen
+		// zugehoerige Beteiligungen loeschen
 		if (beteiligung != null) {
 			for (Beteiligung b : beteiligung) {
 				this.loeschenBeteiligung(b);
@@ -478,7 +643,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 
-	// getAusschreibungByProjekt
+	/**
+	 * Ausschreibungen eines Projekts ausgeben
+	 * @param p
+	 * @return Vector mit Ausschreibungsobjekten, die zu einem Projekt gehoeren
+	 */
 	public Vector<Ausschreibung> getAusschreibungByProjekt(Projekt p) throws IllegalArgumentException {
 		Vector<Ausschreibung> result = new Vector<Ausschreibung>();
 
@@ -493,43 +662,63 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
-	// getProjektbyId
+	/**
+	 * Ausgeben eines Projekts, das der übergebenen ID entspricht
+	 * @param idProjekt
+	 * @return Projektobjekt, das der uebergebenen ID entspricht
+	 */
 	@Override
 	public Projekt getProjektbyId(int idProjekt) throws IllegalArgumentException {
 		return this.prjktMapper.findProjektByKey(idProjekt);
 	}
 
-	// saveProjekt
+	/**
+	 * Speichern eines Projektobjekts
+	 * @param p
+	 * @return Projektobjekt wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveProjekt(Projekt p) throws IllegalArgumentException {
 		prjktMapper.updateProjekt(p);
-
 	}
 
-	// getAllProjekte
+	/**
+	 * Ausgeben aller Projektobjekte
+	 * @return Vector mit allen Projektobjekten
+	 */
 	public Vector<Projekt> getAllProjekte() throws IllegalArgumentException {
 		return this.prjktMapper.findAllProjekt();
 	}
 
-	// getProjektByBezeichnung
+	/**
+	 * Ausgeben von Projektobjekten, die der uebergebenen Bezeichnung entsprechen
+	 * @param bezeichnung
+	 * @return Vector mit allen Projektobjekten, die der uebergebenen Bezeichnung entsprechen
+	 */
 	public Vector<Projekt> getProjektByBezeichnung(String bezeichnung) throws IllegalArgumentException {
 		return this.prjktMapper.findProjektByBezeichnung(bezeichnung);
 	}
 	
-	// getProjektByAusschreibung
+	/**
+	 * Ausgeben eines Projekts ueber die uebergebene Ausschreibung
+	 * @param a
+	 * @return Projektobjekt, das zur Ausschreibung gehoert
+	 */
 	public Projekt getProjektByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		Projekt projekt = this.getProjektbyId(a.getIdProjekt());
 		return projekt;
 	}
-
-	// SCHAUEN OB CREATE-METHODEN RICHTIG SIND
 
 /*##########################################################
  * START MARKTPLATZ
  #########################################################*/
 
 
-	// anlegenMarktplatz
+	/**
+	 * Anlegen eines Marktplatzes in der Datenbank
+	 * @param geschaeftsgebiet, bezeichnung
+	 * @return Marktplatz wird in Datenbank angelegt.
+	 */
 	@Override
 	public Marktplatz anlegenMarktplatz(String geschaeftsgebiet, String bezeichnung) throws IllegalArgumentException {
 		Marktplatz pm = new Marktplatz();
@@ -541,7 +730,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.mpMapper.insertMarktplatz(pm);
 	}
 
-	// loeschenMarktplatz
+	/**
+	 * Loeschen eines Marktplatzobjekts aus der Datenbank
+	 * @param pm
+	 * @return Marktplatzobjekt wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenMarktplatz(Marktplatz pm) throws IllegalArgumentException {
 
@@ -558,7 +751,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 
-	// getProjektbyMarktplatz
+	/**
+	 * Ausgabe von Projekten, die dem uebergebenen Marktplatzobjekt angehoeren
+	 * @param pm
+	 * @return Vector mit allen Projektobjekten, die dem Marktplatz angehoergen
+	 */
 	public Vector<Projekt> getProjektbyMarktplatz(Marktplatz pm) throws IllegalArgumentException {
 
 		Vector<Projekt> result = new Vector<Projekt>();
@@ -574,25 +771,40 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
-	// getMarktplatzById
+	/**
+	 * Ausgabe eines Marktplatzes, der der uebergebenen ID entspricht
+	 * @param idMarktplatz
+	 * @return Marktplatzobjekt
+	 */
 	@Override
 	public Marktplatz getMarktplatzById(int idMarktplatz) throws IllegalArgumentException {
 		return this.mpMapper.findMarktplatzByKey(idMarktplatz);
 	}
 
-	// saveMarktplatz
+	/**
+	 * Speichern eines Marktplatzes in der Datenbank
+	 * @param pm
+	 * @return Marktplatzobjekt wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveMarktplatz(Marktplatz pm) throws IllegalArgumentException {
 		mpMapper.updateMarktplatz(pm);
 
 	}
 
-	// getAllMarktplaetze
+	/**
+	 * Ausgabe aller Marktplatzobjekte
+	 * @return alle Marktplatzobjekte
+	 */
 	public Vector<Marktplatz> getAllMarktplaetze() throws IllegalArgumentException {
 		return this.mpMapper.findAllMarktplatz();
 	}
 	
-	// getMarktplaetzeByPerson
+	/**
+	 * Alle Marktplaetze einer Person ausgeben
+	 * @param o
+	 * @return Vector mit Marktplatzobjekten, die der Person angehoeren
+	 */
 	public Vector<Marktplatz> getMarktplaetzeByPerson(Organisationseinheit o) throws IllegalArgumentException {
 		Vector<Marktplatz> result = new Vector<Marktplatz>();
 		
@@ -631,7 +843,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
  ############################################################*/
 
 
-	// anlegenTeam
+	/**
+	 * Anlegen eines Teams in der Datenbank
+	 * @param idUnternehmen, idPartnerprofil, teamName, adresse, standort
+	 * @return Team wird in Datenbank angelegt
+	 */
 	@Override
 	public Team anlegenTeam(int idUnternehmen, int idPartnerprofil, String teamName, String adresse, String standort)
 			throws IllegalArgumentException {
@@ -648,7 +864,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.teamMapper.insertTeam(t);
 	}
 
-	// loeschenTeam
+	/**
+	 * Loeschen eines Teams aus der Datenbank
+	 * @param t
+	 * @return Team wird aus Datenkbank geloescht
+	 */
 	@Override
 	public void loeschenTeam(Team t) throws IllegalArgumentException {
 
@@ -687,12 +907,20 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 	
-	// loeschenTeamInteger
+	/**
+	 * Loeschen eines Teams aus der Datenbank
+	 * @param t
+	 * @return Team wird aus Datenbank geloescht
+	 */
 	public void loeschenTeamInteger(Integer t) throws IllegalArgumentException {
 		this.teamMapper.deleteTeamInteger(t);
 	}
 	
-	// getPartnerprofilByOrganisationseinheit
+	/**
+	 * Ausgabe eines Partnerprofils, das zur uebergebenen Organisationseinheit gehoert
+	 * @param o
+	 * @return Partnerprofilobjekt
+	 */
 	public Partnerprofil getPartnerprofilByOrganisationseinheit(Organisationseinheit o)
 			throws IllegalArgumentException {
 
@@ -710,25 +938,40 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 
-	// saveTeam
+	/**
+	 * Speichern eines Teams in der Datenbank
+	 * @param t
+	 * @return Team wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveTeam(Team t) throws IllegalArgumentException {
 		teamMapper.updateTeam(t);
 
 	}
 	
-	// saveTeamt
+	/**
+	 * Speichern eines Teams in der Datenbank
+	 * @param t
+	 * @return Team wird in Datenbank gespeichert
+	 */
 	public Team saveTeamt(Team t) throws IllegalArgumentException {
 		return this.teamMapper.updateTeam(t);
 	}
 
-	// getTeamById
+	/**
+	 * Ausgeben eines Teams, das der uebergebenen ID entspricht
+	 * @param idTeam
+	 * @return Teamobjekt
+	 */
 	@Override
 	public Team getTeamById(int idTeam) throws IllegalArgumentException {
 		return this.teamMapper.findTeamByKey(idTeam);
 	}
-	// ben�tigen wir nicht
-	//// getAllTeams
+
+	/**
+	 * Ausgabe aller Teams
+	 * @return Vector mit allen Teamobjekten 
+	 */
 	 public Vector<Team> getAllTeams() throws IllegalArgumentException {
 	 return this.teamMapper.findAllTeam();	 }
 	 
@@ -743,7 +986,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
  * START UNTERNEHMEN
  #########################################################*/
 
-	// anlegenUnternehmen
+	/**
+	 * Anlegen eines Unternehmens in der Datenbank
+	 * @param idPartnerprofil, firmenName, adresse, standort
+	 * @return Unternehmensobjekt
+	 */
 	@Override
 	public Unternehmen anlegenUnternehmen(int idPartnerprofil, String firmenName, String adresse, String standort) throws IllegalArgumentException {
 
@@ -758,7 +1005,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.unternehmenMapper.insertUnternehmen(u);
 	}
 
-	// loeschenUnternehmen ---------- gemeinsam durchgehen
+	/**
+	 * Loeschen eines Unternehmens aus der Datenbank
+	 * @param u
+	 * @return Unternehmen wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenUnternehmen(Unternehmen u) throws IllegalArgumentException {
 
@@ -785,32 +1036,50 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		this.unternehmenMapper.deleteUnternehmen(u);
 	}
 	
-//	// loeschenUnternehmenByInteger
-//	public void loeschenUnternehmenInteger(Unternehmen u) throws IllegalArgumentException {
-//		this.unternehmenMapper.deleteUnternehmen(u);
+//	/**
+//	 * Loeschen eines Unternehmenobjekts aus der Datenbank
+//	 * @param u
+//	 * @return Unternehmensobjekt wird aus Datenbank geloescht
+//	 */
+//	public void loeschenUnternehmenInteger(Integer u) throws IllegalArgumentException {
+//		this.unternehmenMapper.deleteUnternehmenInteger(u);
 //	}
 
-	// getUnternehmenById
+	/**
+	 * Ausgabe eines Unternehmensobjekts, das der uebergebenen ID entspricht
+	 * @param idUnternehmen
+	 * @return Unternehmensobjekt
+	 */
 	@Override
 	public Unternehmen getUnternehmenById(int idUnternehmen) throws IllegalArgumentException {
 		return this.unternehmenMapper.findUnternehmenByKey(idUnternehmen);
 	}
 
-	// saveUnternehmen
+	/**
+	 * Speichern eines Unternehmensobjekts in der Datenbank
+	 * @param u
+	 * @return Unternehmenobjekt wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveUnternehmen(Unternehmen u) throws IllegalArgumentException {
 		unternehmenMapper.updateUnternehmen(u);
 
 	}
 
-	// getUnternehmenByFirmenName
+	/**
+	 * Ausgabe eines Unternehmens, das dem uebergebenem Firmennamen entspricht
+	 * @param firmenName
+	 * @return Unternehmenobjekt
+	 */
 	public Unternehmen getUnternehmenByFirmenName(String firmenName) throws IllegalArgumentException {
 
 		return this.unternehmenMapper.findUnternehmenByFirmenName(firmenName);
 	}
 	
-	// alle Unternehmen 
-	
+	/**
+	 * Ausgabe aller Unternehmenobjekte
+	 * @return Vector mit allen Unternehmenobjekten
+	 */
 	public Vector<Unternehmen> getAllUnternehmen() throws IllegalArgumentException {
 		return unternehmenMapper.findAllUnternehmen();
 	}
@@ -820,14 +1089,25 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	 #########################################################*/
 	
 	
-	// anlegenBeteiligung
-	
+	/**
+	 * Anlegen einer Beteiligung in der Datenbank
+	 * @param beteiligung
+	 * @return Beteiligungsobjekt wird in Datenbank angelegt
+	 */
 	@Override
-	
 	public Beteiligung anlegenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {		
 		return this.beteiligungMapper.insertBeteiligung(beteiligung);
 	}
 	
+	/**
+	 * Anlegen einer Beteiligung
+	 * @param beteiligungszeit
+	 * @param idOrganisationseinheit
+	 * @param idProjekt
+	 * @param idBewertung
+	 * @return Beteiligungsobjekt wird in Datenbank angelegt
+	 * @throws IllegalArgumentException
+	 */
 	public Beteiligung anlegenBeteiligung(int beteiligungszeit, int idOrganisationseinheit, int idProjekt,
 			int idBewertung) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -842,34 +1122,50 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.beteiligungMapper.insertBeteiligung(b);
 	}
 
-	
-	
-
-	// loeschenBeteiligung
+	/**
+	 * Loeschen einer Beteiligung aus der Datenbank
+	 * @param beteiligung
+	 * @return Beteiligungsobjekt wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
 		this.beteiligungMapper.deleteBeteiligung(beteiligung);
 
 	}
 
-	// saveBeteiligung
+	/**
+	 * Speichern einer Beteiligung
+	 * @param beteiligung
+	 * @return Beteiligung wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveBeteiligung(Beteiligung beteiligung) throws IllegalArgumentException {
 		beteiligungMapper.updateBeteiligung(beteiligung);
 
 	}
 
-	// getBeteiligungById
+	/**
+	 * Beteiligung ausgeben, die der uebergebenen ID entspricht
+	 * @param idBeteiligung
+	 * @return Beteiligungsobjekt
+	 */
 	public Beteiligung getBeteiligungById(int idBeteiligung) throws IllegalArgumentException {
 		return this.beteiligungMapper.findBeteiligungByKey(idBeteiligung);
 	}
 
-	// getAllBeteiligungen
+	/**
+	 * Ausgabe aller Beteiligungen
+	 * @return Vector mit allen Beteiligungen
+	 */
 	public Vector<Beteiligung> getAllBeteiligungen() throws IllegalArgumentException {
 		return this.beteiligungMapper.findAllBeteiligungen();
 	}
 
-	// getBeteiligungByProjekt
+	/**
+	 * Beteiligungen zu uebergebenem Projekt ausgeben
+	 * @param p
+	 * @return Vector mit Beteiligungsobjekten
+	 */
 	public Vector<Beteiligung> getBeteiligungByProjekt(Projekt p) throws IllegalArgumentException {
 		return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
 	}
@@ -879,7 +1175,14 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
  * AUSSCHREIBUNG #########################################################
  */
 
-	// anlegenAusschreibung
+	/**
+	 * Anlegen einer Ausschreibung in der Datenbank
+	 * 
+	 * @param idAusschreibender,
+	 *            idProjekt, bezeichnung, beschreibung, endDatum,
+	 *            idPartnerprofil, ausschreibungsstatus
+	 * @return Ausschreibung wird in Datenbank angelegt
+	 */
 	@Override
 	public Ausschreibung anlegenAusschreibung(int idAusschreibender, int idProjekt, String bezeichnung,
 			String beschreibung, Date endDatum, int idPartnerprofil, Status ausschreibungsstatus)
@@ -898,7 +1201,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.ausschreibungMapper.insertAusschreibung(a);
 	}
 
-	// loeschenAusschreibung
+	/**
+	 * Loeschen der uebergebenen Ausschreibung
+	 * @param a
+	 * @return Ausschreibung wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 
@@ -916,7 +1223,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 
-	// getAllBewerbungenByAusschreibung
+	/**
+	 * Alle Bewerbungen auf uebergebene Ausschreibung ausgeben
+	 * @param a
+	 * @return Vector mit allen Bewerbungsobjekten, die zur uebergebenen Ausschreibung gehoeren
+	 */
 	public Vector<Bewerbung> getAllBewerbungenByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -932,19 +1243,31 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 
-	// getAusschreibungbyId
+	/**
+	 * Ausgabe einer Ausschreibung, die der uebergebenen ID entspricht
+	 * @param idAusschreibung
+	 * @return Ausschreibungsobjekt
+	 */
 	@Override
 	public Ausschreibung getAusschreibungbyId(int idAusschreibung) throws IllegalArgumentException {
 		return this.ausschreibungMapper.findAusschreibungByKey(idAusschreibung);
 	}
 
-	// saveAusschreibung
+	/**
+	 * Speichern der uebergebenen Ausschreibung
+	 * @param a
+	 * @return Ausschreibung wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 		ausschreibungMapper.updateAusschreibung(a);
 	}
 	
-	// getAusschreibungByAusschreibender
+	/**
+	 * Ausschreibungen des uebergebenen Ausschreibenden ausgeben
+	 * @param o
+	 * @return Vector mit Ausschreibungsobjekten, die der uebergebenen Organisationseinheit entsprechen
+	 */
 	@Override
 	public Vector<Ausschreibung> getAusschreibungByAusschreibender(Organisationseinheit o)
 			throws IllegalArgumentException {
@@ -959,7 +1282,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return result;
 	}
 	
-	// getAusschreibungByBewerbung
+	/**
+	 * Ausschreibung einer Bewerbung ausgeben
+	 * @param b
+	 * @return Ausschreibungsobjekt einer Bewerbung
+	 */
 	public Ausschreibung getAusschreibungByBewerbung(Bewerbung b) throws IllegalArgumentException {
 		Ausschreibung ausschreibung = this.getAusschreibungbyId(b.getIdAusschreibung());
 		return ausschreibung;		
@@ -969,7 +1296,14 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
  * START BEWERBUNG
  #########################################################*/
 
-	// anlegenBewerbung
+	/**
+	 * Anlegen einer Bewerbung in der Datenbank
+	 * 
+	 * @param idOrganisationseinheit,
+	 *            idAusschreibung, bewerbungstext, erstellDatum,
+	 *            bewerbungsStatus
+	 * @return Bewerbung wird in der Datenbank angelegt
+	 */
 	@Override
 	public Bewerbung anlegenBewerbung(int idOrganisationseinheit, int idAusschreibung, String bewerbungstext,
 			Date erstellDatum, String bewerbungsStatus) throws IllegalArgumentException {
@@ -985,7 +1319,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.bewerbungMapper.insertBewerbung(b);
 	}
 
-	// loeschenBewerbung
+	/**
+	 * Loeschen einer Bewerbung aus der Datenbank
+	 * @param b
+	 * @return Bewerbungsobjekt wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenBewerbung(Bewerbung b) throws IllegalArgumentException {
 
@@ -998,7 +1336,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		this.bewerbungMapper.deleteBewerbung(b);
 	}
 
-	// getBewertungByBewerbung
+	/**
+	 * Bewertung zur uebergebenen Bewerbung ausgeben
+	 * @param b
+	 * @return Bewertungsobjekt
+	 */
 	public Bewertung getBewertungByBewerbung(Bewerbung b) throws IllegalArgumentException {
 
 		if (b != null && this.bewertungMapper != null) {
@@ -1009,18 +1351,32 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return null;
 	}
 
-	// getBewerbungbyId
+	/**
+	 * Ausgeben einer Bewerbung, die der uebergebenen ID entspricht
+	 * @param idBewerbung
+	 * @return Bewerbungsobjekt
+	 */
 	@Override
 	public Bewerbung getBewerbungbyId(int idBewerbung) throws IllegalArgumentException {
 		return this.bewerbungMapper.findBewerbungByKey(idBewerbung);
 	}
 
-	// saveBewerbung
+	/**
+	 * Speichern einer Bewerbung in der Datenbank
+	 * @param b
+	 * @return Bewerbung wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveBewerbung(Bewerbung b) throws IllegalArgumentException {
 		bewerbungMapper.updateBewerbung(b);
 
 	}
+	
+	/**
+	 * Bewerbungsstatus aktualisieren
+	 * @param b
+	 * @return Bewerbunsstatus wird aktualisiert
+	 */
 	@Override
 	public Bewerbung bewerbungsStatusAktualisierne(Bewerbung b) {
 		// TODO Auto-generated method stub
@@ -1028,13 +1384,19 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	}
 
 
-	// getAllBewerbungen
+	/**
+	 * Ausgabe aller Bewerbungen
+	 * @return Vector mit allen Bewerbungen
+	 */
 	public Vector<Bewerbung> getAllBewerbungen() throws IllegalArgumentException {
 		return this.bewerbungMapper.findAllBewerbungen();
 	}
 	
-	
-	// getBewerbungByAusschreibungId
+	/**
+	 * Ausgabe einer Bewerbung, ueber uebergebene Ausschreibungs-ID
+	 * @param idAusschreibung
+	 * @return Vector mit Bewerbungsobjekten
+	 */
 	public Vector<Bewerbung> getBewerbungByAusschreibungId(int idAusschreibung) throws IllegalArgumentException {
 		Vector <Bewerbung> result = new Vector <Bewerbung>();
 			if(this.bewerbungMapper != null){
@@ -1052,7 +1414,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	 * START BEWERTUNG
 	 #########################################################*/
 
-	// anlegenBewertung
+	/**
+	 * Anlegen einer Bewertung in der Datenbank
+	 * @param idBewerbung, textuelleBewertung, fliessKommaBewertung
+	 * @return Bewertung wird in der Datenbank angelegt
+	 */
 	@Override
 	public Bewertung anlegenBewertung(int idBewerbung, String textuelleBewertung, float fliessKommaBewertung) throws IllegalArgumentException {
 		Bewertung bewertung = new Bewertung();
@@ -1065,7 +1431,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		return this.bewertungMapper.insertBewertung(bewertung);
 	}
 
-	// loeschenBewertung
+	/**
+	 * Loeschen einer Bewertung aus der Datenbank
+	 * @param bewertung
+	 * @return Bewertung wird aus Datenbank geloescht
+	 */
 	@Override
 	public void loeschenBewertung(Bewertung bewertung) throws IllegalArgumentException {
 
@@ -1079,18 +1449,30 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 
 	}
 
-	// getBeteiligungByBewertung
+	/**
+	 * Beteiligung einer Bewertung ausgeben
+	 * @param bewertung
+	 * @return Beteiligungsobjekt
+	 */
 	public Beteiligung getBeteiligungByBewertung(Bewertung bewertung) throws IllegalArgumentException {
 		return this.beteiligungMapper.findBeteiligungByBewertung(bewertung.getId());
 	}
 
-	// getBewertungById
+	/**
+	 * Ausgeben einer Bewertung, die der uebergebenen ID entspricht
+	 * @param idBewertung
+	 * @return Bewertungsobjekt
+	 */
 	@Override
 	public Bewertung getBewertungById(int idBewertung) throws IllegalArgumentException {
 		return this.bewertungMapper.findBewertungByKey(idBewertung);
 	}
 
-	// saveBewertung
+	/**
+	 * Speichern einer Bewertung in der Datenbanken
+	 * @param bewertung
+	 * @return Bewertung wird in Datenbank gespeichert
+	 */
 	@Override
 	public void saveBewertung(Bewertung bewertung) throws IllegalArgumentException {
 		bewertungMapper.updateBewertung(bewertung);
@@ -1101,7 +1483,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	 * START ORGANISATIONSEINHEIT
 	 #########################################################*/
 
-	// getOrganisationseinheitById
+	/**
+	 * Ausgabe der Organisationseinheit, die der uebergebenen ID entspricht
+	 * @param idOrganisationseinheit
+	 * @return Organisationseinheitsobjekt
+	 */
 	public Organisationseinheit getOrganisationseinheitById(int idOrganisationseinheit) throws IllegalArgumentException {
 
 		Person pe = persMapper.findPersonByKey(idOrganisationseinheit);
@@ -1120,7 +1506,10 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 			return null;
 	}
 
-	// getAllOrganisationseinheiten
+	/**
+	 * Ausgabe aller Organisationseinheiten
+	 * @return alle Organisationseinheitsobjekte
+	 */
 	public Vector<Organisationseinheit> getAllOrganisationseinheiten() throws IllegalArgumentException {
 
 		Vector<Organisationseinheit> orgaEinheiten = new Vector<Organisationseinheit>();
@@ -1139,19 +1528,32 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	// Anforderungen
 
 	// 3.Abfrage von allen Ausschreibungen
-	// getAllAusschreibungen
+	/**
+	 * Ausgabe aller Ausschreibungen
+	 * @return alle Ausschreibungsobjekte
+	 */
 	public Vector<Ausschreibung> getAllAusschreibungen() throws IllegalArgumentException {
 		return this.ausschreibungMapper.findAllAusschreibungen();
 	}
 
 	// 4. Abfrage aller Ausschreibungen, die auf Partnerprofil des Benutzers
 	// passen
+	/**
+	 * Ausgabe aller Ausschreibungen, die dem uebergebenen Partnerprofil entsprechen
+	 * @param pp
+	 * @return Vector mit allen Ausschreibungen, die zum uebergebenen Partnerprofil gehoeren
+	 */
 	public Vector<Ausschreibung> getAllAusschreibungByPartnerprofil(Partnerprofil pp) throws IllegalArgumentException {
 		return this.ausschreibungMapper.findAusschreibungByPartnerprofil(pp.getId());
 	}
 
 	// 6. Abfrage der eigenen Bewerbungen und den zugehoerigen Ausschreibungen
 	// des Benutzers
+	/**
+	 * Ausgabe von Bewerbungen auf eine Ausschreibung
+	 * @param a
+	 * @return Vector mit Bewerbungsobjekten, die zur uebergebenen Ausschreibung gehoeren
+	 */
 	public Vector<Bewerbung> getBewerbungByAusschreibung(Ausschreibung a) throws IllegalArgumentException {
 
 		Vector<Bewerbung> result = new Vector<Bewerbung>();
@@ -1178,6 +1580,12 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	//
 	//
 	// 5. Abfragen aller Bewerbungen auf Ausschreibungen des Benutzers
+	
+	/**
+	 * Ausgabe Aller Bewerbungen, die der uebergebenen Organisationseinheit entsprechen
+	 * @param o
+	 * @return Vector mit Bewertungsobjekten
+	 */
 	@Override
 	public Vector<Bewerbung> getAllBewerbungenByOrganisationseinheit(Organisationseinheit o)
 			throws IllegalArgumentException {
@@ -1201,7 +1609,11 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 	// return this.beteiligungMapper.findBeteiligungByProjekt(p);
 	// }
 
-	// getAllBeteiligungenToProjekt
+	/**
+	 * Ausgabe aller Beteiligungen zu einem Projekt
+	 * @param beteiligungen
+	 * @return Vector mit allen Beteiligungne zu allen Projekten
+	 */
 	public Vector<Projekt> getAllBeteiligungenToProjekt(Vector<Beteiligung> beteiligung) throws IllegalArgumentException {
 
 		Vector<Projekt> projects = new Vector<Projekt>();
@@ -1215,27 +1627,14 @@ public Vector<Eigenschaft> getEigenschaftByIdPartnerprofil(int idPartnerprofil) 
 		// return this.beteiligungMapper.findBeteiligungByProjekt(p.getId());
 	}
 
-
-
-
+	/**
+	 * Ausgabe eines Projekts ueber die uebergebene Beteiligung
+	 * @param b
+	 * @return Projektobjekt
+	 */
 	public Projekt getProjektByBeteiligung(Beteiligung b){
 		
 		Projekt p = this.getProjektbyId(b.getIdProjekt());
 		return p;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// AllMarktpl�tzeAnzeigenlassen
 }

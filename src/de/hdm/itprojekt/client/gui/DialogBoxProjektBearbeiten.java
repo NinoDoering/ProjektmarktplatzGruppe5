@@ -30,6 +30,11 @@ import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse regelt den Ablauf, der Bearbeitung eines Projekts.
+ * Sie wird benötigt, sobald ein Nutzer seine Projekte bearbeiten möchte.
+ * Die Klasse enthält GUI-Elemente, die zur Darstellung benötigt wird.
+ */
 public class DialogBoxProjektBearbeiten extends DialogBox {
 private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	

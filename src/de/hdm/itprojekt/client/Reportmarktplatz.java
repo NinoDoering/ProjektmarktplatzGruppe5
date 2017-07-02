@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 
 /**
- * Entry point Klasse des Projektmarktplatzes. Daf�r ben�tigen wir die Methode
+ * Entry point Klasse des Projektmarktplatzes. Dafuer benoetigen wir die Methode
  * <code>onModuleLoad()</code>.
  */
 public class Reportmarktplatz implements EntryPoint {

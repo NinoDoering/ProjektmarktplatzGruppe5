@@ -23,6 +23,13 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Marktplatz;
 import de.hdm.itprojekt.shared.bo.Person;
 
+/**
+ * Diese Klasse ist dafür zustaendig, Dass eine Orgnaisationseinheit (Person,
+ * Team, Unternehmen) einen Projektmarktplatz erstellen kann. Eine
+ * Organisationseinheit kann einen Projektmarktplatz erstellen, sobald diese auf
+ * die Funktion "Projektmarktplatz erstellen" klickt. Im Nachhinein kann jede
+ * Person diesen Marktplatz löschen und bearbeiten.
+ */
 public class DialogBoxProjektmarktplatzAnlegen extends DialogBox {
 		
 	private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

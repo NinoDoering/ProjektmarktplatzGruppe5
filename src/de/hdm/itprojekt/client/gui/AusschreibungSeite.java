@@ -34,6 +34,12 @@ import de.hdm.itprojekt.shared.bo.Partnerprofil;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse stellt die Ausschreibungsseite dar. Auf dieser können alle Ausschreibungen
+ * Sie enthält GUI-Elemente, die zur Darstellung benötigt wird.
+ * @author Thomas
+ *
+ */
 public class AusschreibungSeite extends Showcase {
 
 	
@@ -210,7 +216,17 @@ public class AusschreibungSeite extends Showcase {
 		
 		
 	};
+		TextColumn<Ausschreibung> ppId = new TextColumn<Ausschreibung>(){
+			
+			@Override
+			public String getValue(Ausschreibung object) {
+				// TODO Auto-generated method stub
+				return object.getIdPartnerprofil()+"";
+			}
 		
+		
+	};
+		ausschreibungtabelle.addColumn(ppId, "Id des Partnerprofil");
 		ausschreibungtabelle.addColumn(ausschrBez, "Bezeichnung");
 		ausschreibungtabelle.addColumn(ausschrBeschr, "Beschreibung");
 		ausschreibungtabelle.addColumn(ausschrBefrist,"Bewerbungsfrist");

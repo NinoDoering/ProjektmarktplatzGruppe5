@@ -33,6 +33,10 @@ import de.hdm.itprojekt.shared.bo.Bewertung;
 import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 
+/**
+ * Diese Klasse ist dafuer zustaendig, dass eine Organisationseinheit die
+ * eigenen Bewerbungen sehen kann.
+ */
 public class EigeneBewerbungenSeite extends Showcase{
 
 private  GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
