@@ -5,12 +5,15 @@ import java.sql.DriverManager;
 
 import java.*;		
 import javax.*;
+
+import com.google.appengine.api.utils.SystemProperty;
+
 import java.sql.*;
 //import com.google.appengine.api.utils.SystemProperty;
 
 public class DBConnection {
 
-/*
+
     private static Connection con = null;
 
   
@@ -42,7 +45,7 @@ public class DBConnection {
 
 }
 
-*/
+/*
 	private static Connection con = null; 
 	private static String url = "jdbc:mysql://127.0.0.1:3306/projektmarktplatzgruppe5?user=root&password=";
   
@@ -87,3 +90,4 @@ public class DBConnection {
     }
 }
 
+*/
