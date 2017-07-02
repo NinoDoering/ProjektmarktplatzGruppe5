@@ -20,8 +20,12 @@ import de.hdm.itprojekt.shared.GreetingServiceAsync;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 
-
-
+/**
+ * Diese Klasse ist dafür zustaendig, dass eine Person das Unternehmen, der es angehoert, wechseln kann.
+ * Eine Person kann das Unternehmen wechseln, sobald diese die Funktion "Team bearbeiten" auswählt.
+ * Daraufhin erscheint das Fenster, in dem sie die Unternehmen auswaehlen kann. Das
+ * Unternehmen kann von einer Person jederzeit gewechselt werden.
+ */
 public class DialogBoxUnternehmenBearbeiten extends DialogBox {
 
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

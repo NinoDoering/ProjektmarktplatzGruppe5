@@ -34,6 +34,16 @@ import de.hdm.itprojekt.shared.bo.Organisationseinheit;
 import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Projekt;
 
+/**
+ * Diese Klasse ist dafür zustaendig, ein Projekt bearbeiten zu könnnen. Ein
+ * Projekt kann erstellt werden, sobald der Nutzer die Funktion "Projekt
+ * erstellen" angeklickt hat. Hat diese Person das Projekt erstellt, so ist
+ * diese automatisch der Projektleiter des Projekts. Ein Projekt wird in einem
+ * Marktplatz erstellt.
+ * 
+ * @author Thomas
+ *
+ */
 public class DialogBoxEigeneProjekteBearbeiten extends DialogBox {
 private GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	

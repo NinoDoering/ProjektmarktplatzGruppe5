@@ -50,6 +50,12 @@ import de.hdm.itprojekt.shared.bo.Partnerprofil;
 //import de.hdm.itprojekt.shared.bo.Team;
 //import de.hdm.itprojekt.shared.bo.Unternehmen;
 
+/**
+ * Diese Klasse ist dafür zustaendig, dass eine Person das Team, der es angehoert, bearbeiten kann.
+ * Eine Person kann das Team bearbeiten, sobald diese die Funktion "Team bearbeiten" auswählt.
+ * Daraufhin erscheint das Fenster, in dem sie die Teams auswaehlen kann. Das
+ * Team kann von einer Person jederzeit gewechselt werden.
+ */
 public class DialogBoxTeamBearbeiten extends DialogBox {
 	
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);

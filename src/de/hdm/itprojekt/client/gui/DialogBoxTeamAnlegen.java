@@ -27,10 +27,15 @@ import de.hdm.itprojekt.shared.bo.Person;
 import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 import de.hdm.itprojekt.shared.bo.Partnerprofil;
+
+/**
+ * Diese Klasse ist dafür zustaendig, dass sich eine Person einem Team
+ * zuordnen kann. Eine Person kann sich einem Team hinzufuegen, sobald
+ * diese auf die Funktion "Mein Profil" klickt und die Funktion "Team
+ * hinzufügen" auswählt. Die Teams stehen der Person dann zur Auswahl. Das
+ * Team kann von einer Person jederzeit gewechselt werden.
+ */
 public class DialogBoxTeamAnlegen extends DialogBox {
-
-	//ES FOLGEN NOCH ÄNDERUNGEN bzw. FEHLERBEHEBUNG-> morgen
-
 	
 	GreetingServiceAsync gwtproxy = GWT.create(GreetingService.class);
 	private Person person = new Person ();
