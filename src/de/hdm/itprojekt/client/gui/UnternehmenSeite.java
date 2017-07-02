@@ -186,6 +186,7 @@ public class UnternehmenSeite extends Showcase {
 					public void onFailure(Throwable caught) {
 
 						Window.alert("Unternehmen löschen NICHT hat geklappt" + caught);
+						
 					}
 
 					@Override
