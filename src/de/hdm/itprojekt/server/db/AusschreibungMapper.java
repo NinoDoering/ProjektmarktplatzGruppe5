@@ -16,8 +16,8 @@ public class AusschreibungMapper {
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
-	 * Variable "ausschreibungMapper"ist aufgrund des Bezeichners "static" nur
-	 * einmal für die Instanzen dieser Klasse verfügbar. Sie speichert die die
+	 * Variable "ausschreibungMapper" ist aufgrund des Bezeichners "static" nur
+	 * einmal für die Instanzen dieser Klasse verfügbar. Sie speichert die
 	 * einzige Instanz dieser Klasse.
 	 * 
 	 * @author Thies
@@ -25,8 +25,8 @@ public class AusschreibungMapper {
 	private static AusschreibungMapper ausschreibungMapper = null;
 
 	/**
-	 * Konstruktor, der verhindert, dass dass man neue Instanzen dieser Klasse
-	 * erstellen kann Sie speichert die einzige Instanz dieser Klasse
+	 * Konstruktor, der verhindert, dass man neue Instanzen dieser Klasse
+	 * erstellen kann. Sie speichert die einzige Instanz dieser Klasse
 	 * 
 	 * @author Thies
 	 */

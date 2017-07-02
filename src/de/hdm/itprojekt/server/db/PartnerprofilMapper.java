@@ -6,12 +6,33 @@ import java.util.Vector;
 import de.hdm.itprojekt.shared.bo.*;
 
 public class PartnerprofilMapper {
-//Alle Mappermethoden in dieser Klasse funktionieren
+
+	/**
+	 * Variable "partnerprofilMapper" ist aufgrund des Bezeichners "static" nur
+	 * einmal für die Instanzen dieser Klasse verfügbar. Sie speichert die die
+	 * einzige Instanz dieser Klasse.
+	 * 
+	 * @author Thies
+	 */
 	private static PartnerprofilMapper partnerprofilMapper = null;
 
+	
+	/**
+	 * Konstruktor, der verhindert, dass dass man neue Instanzen dieser Klasse
+	 * erstellen kann Sie speichert die einzige Instanz dieser Klasse
+	 * 
+	 * @author Thies
+	 */
 	protected PartnerprofilMapper() {
 	}
 
+	/**
+	 * Diese Methode stellt die Singleton-Eigenschaft der
+	 * "PartnerprofilMapper"-Klasse sicher, sodass nur eine Instanz von
+	 * <code>PartnerprofilMapper</code> existieren kann.
+	 * 
+	 * @return partnerprofilMapper
+	 */
 	public static PartnerprofilMapper partnerprofilMapper() {
 		if (partnerprofilMapper == null) {
 			partnerprofilMapper = new PartnerprofilMapper();
@@ -20,7 +41,13 @@ public class PartnerprofilMapper {
 		return partnerprofilMapper;
 	}
 
-	// findByKey
+	/**
+	 * Suchen eines Partnerprofils über die übergebene Partnerprofilnummer
+	 * 
+	 * @param idPartnerprofil
+	 * @return Partnerprofilobjekt, das der übergebenen Partnerprofilnummer
+	 *         entspricht oder null bei nicht vorhandenem Datensatz
+	 */
 	public Partnerprofil findPartnerprofilByKey(int idPartnerprofil) {
 		Connection con = DBConnection.connection();
 
@@ -45,7 +72,10 @@ public class PartnerprofilMapper {
 		return null;
 	}
 
-	//Alle Partnerprofil ausgeben
+	/**
+	 * Suchen aller Partnerprofile
+	 * @return alle Partnerprofilobjekte
+	 */
 	public Vector<Partnerprofil> findAllPartnerprofil() {
 		Connection con = DBConnection.connection();
 
@@ -69,14 +99,25 @@ public class PartnerprofilMapper {
 		return result;
 	}
 	
-	//Objekt partnerprofil ausgeben
+	/**
+	 * Objekt Partnerprofil ausgeben nach der ID
+	 * @param pp
+	 * @return Partnerprofilobjekt, das der übergebenen ID entspricht
+	 */
 	public Partnerprofil findByPartnerprofil(Partnerprofil pp){
 		 return this.findPartnerprofilByKey(pp.getId());
 		 
 	  }
 
 
-	// INSERT INTO
+	/**
+	 * Einfuegen eines <code>Partnerprofil</code>-Objekts in die Datenbank. Dabei
+	 * wird auch der Primaerschlüssel des uebergebenen Objekts geprueft und
+	 * ggf. berichtigt. @author Thies
+	 * 
+	 * @param pp
+	 * @return Partnerprofilobjekt wird in die Datenbank eingefuegt
+	 */
 	public Partnerprofil insert(Partnerprofil pp) {
 		Connection con = DBConnection.connection();
 
@@ -91,8 +132,7 @@ public class PartnerprofilMapper {
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO partnerprofil (idPartnerprofil) " 
-				+ "VALUES (" + pp.getId() + ")");
+				stmt.executeUpdate("INSERT INTO partnerprofil (idPartnerprofil) " + "VALUES (" + pp.getId() + ")");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,7 +141,12 @@ public class PartnerprofilMapper {
 		return pp;
 	}
 
-	// UPDATE
+	/**
+	 * Update des übergebenen Partnerprofilobjekts
+	 * 
+	 * @param pp
+	 * @return Das übergebene Partnerprofilobjekt
+	 */
 	public Partnerprofil update(Partnerprofil pp) {
 		Connection con = DBConnection.connection();
 
@@ -119,7 +164,10 @@ public class PartnerprofilMapper {
 		return pp;
 	}
 
-	// DELETE
+	/**
+	 * Loeschen des uebergebenen Partnerprofilobjekts
+	 * @param pp das uebergebene Partnerprofilobjekt
+	 */
 	public void delete(Partnerprofil pp) {
 		Connection con = DBConnection.connection();
 

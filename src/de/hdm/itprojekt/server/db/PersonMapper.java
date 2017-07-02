@@ -9,12 +9,34 @@ import javax.*;
 import java.sql.*;
 
 public class PersonMapper extends OrganisationseinheitMapper{
-//Alle Mappermethoden in dieser Klasse funktionieren
+
+	
+	/**
+	 * Variable "personMapper" ist aufgrund des Bezeichners "static" nur
+	 * einmal für die Instanzen dieser Klasse verfügbar. Sie speichert die die
+	 * einzige Instanz dieser Klasse.
+	 * 
+	 * @author Thies
+	 */
 	private static PersonMapper personMapper = null;
 
+	
+	/**
+	 * Konstruktor, der verhindert, dass dass man neue Instanzen dieser Klasse
+	 * erstellen kann Sie speichert die einzige Instanz dieser Klasse
+	 * 
+	 * @author Thies
+	 */
 	protected PersonMapper() {
 	}
 
+	/**
+	 * Diese Methode stellt die Singleton-Eigenschaft der
+	 * "PersonMapper"-Klasse sicher, sodass nur eine Instanz von
+	 * <code>PersonMapper</code> existieren kann.
+	 * 
+	 * @return personMapper
+	 */
 	public static PersonMapper personMapper() {
 		if (personMapper == null) {
 			personMapper = new PersonMapper();
@@ -23,7 +45,13 @@ public class PersonMapper extends OrganisationseinheitMapper{
 		return personMapper;
 	}
 
-	// FindByKey
+	/**
+	 * Suchen einer Person über die übergebene Personennummer
+	 * 
+	 * @param id
+	 * @return Personobjekt, das der übergebenen Personennummer
+	 *         entspricht oder null bei nicht vorhandenem Datensatz
+	 */
 	public Person findPersonByKey(int id) {
 		Connection con = DBConnection.connection();
 
@@ -55,7 +83,10 @@ public class PersonMapper extends OrganisationseinheitMapper{
 		return null;
 	}
 
-	// FindAll
+	/**
+	 * Suchen aller Personen
+	 * @return alle Personenobjekte
+	 */
 	public Vector<Person> findAllPerson() {
 		Connection con = DBConnection.connection();
 		Vector<Person> result = new Vector<Person>();
@@ -89,19 +120,24 @@ public class PersonMapper extends OrganisationseinheitMapper{
 		return result;
 	}
 
-	//Team durch Personen ausgeben
-public Vector<Person> findPersonByTeam(int idTeam){
+	/**
+	 * Suchen von Personen über den Fremdschlüssel (idTeam) des
+	 * Teams, der die Person angehoert
+	 * 
+	 * @param idTeam
+	 * @return Vector mit Personenobjekten, die zum Team mit dem
+	 *         übergebenem Fremdschlüssel gehören
+	 */
+	public Vector<Person> findPersonByTeam(int idTeam) {
 		Connection con = DBConnection.connection();
 		Vector<Person> result = new Vector<Person>();
-		
-		try{
+
+		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
-			+ "WHERE idTeam= " + idTeam 
-			+ " ORDER BY idPerson ASC");
-			
-			
-			while (rs.next()){
+			ResultSet rs = stmt
+					.executeQuery("SELECT * FROM person " + "WHERE idTeam= " + idTeam + " ORDER BY idPerson ASC");
+
+			while (rs.next()) {
 				Person pe = new Person();
 				pe.setId(rs.getInt("idPerson"));
 				pe.setTitel(rs.getString("titel"));
@@ -111,58 +147,63 @@ public Vector<Person> findPersonByTeam(int idTeam){
 				pe.setIdTeam(rs.getInt("idTeam"));
 				pe.setAdresse(super.findOrganisationseinheitByKey(idTeam).getAdresse());
 				pe.setStandort(super.findOrganisationseinheitByKey(idTeam).getStandort());
-				pe.setIdPartnerprofil(super.findOrganisationseinheitByKey(idTeam).getIdPartnerprofil());	
+				pe.setIdPartnerprofil(super.findOrganisationseinheitByKey(idTeam).getIdPartnerprofil());
 
-			
 				result.addElement(pe);
-				}
-			}   
-		catch (SQLException e) {
-		e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return result;
-		
+
 	}
 	
-//Objekt Person ausgeben
-public Person findByPerson(Person p){
-	return this.findPersonByKey(p.getId());	
-}
+	/**
+	 * Objekt Person ausgeben nach der ID
+	 * @param p
+	 * @return Personenobjekt, das der übergebenen ID entspricht
+	 */
+	public Person findByPerson(Person p) {
+		return this.findPersonByKey(p.getId());
+	}
 
-//Personen die einem Unternehmen angeh�ren ausgeben
-public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
-	Connection con = DBConnection.connection();
-	Vector<Person> result = new Vector<Person>();
-	
-	try{
-		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM person " 
-		+ " WHERE idUnternehmen= " + idUnternehmen 
-		+ " ORDER BY nachname ASC");
-		
-		
-		while (rs.next()){
-			Person pe = new Person();
-			pe.setId(rs.getInt("idPerson"));
-			pe.setTitel(rs.getString("titel"));
-			pe.setVorname(rs.getString("vorname"));
-			pe.setNachname(rs.getString("nachname"));
-			pe.setIdUnternehmen(rs.getInt("idUnternehmen"));
-			pe.setIdTeam(rs.getInt("idTeam"));
-			pe.setAdresse(super.findOrganisationseinheitByKey(idUnternehmen).getAdresse());
-			pe.setStandort(super.findOrganisationseinheitByKey(idUnternehmen).getStandort());
-			pe.setIdPartnerprofil(super.findOrganisationseinheitByKey(idUnternehmen).getIdPartnerprofil());	
+	/**
+	 * Suchen von Personen über den Fremdschlüssel (idUnternehmen) des
+	 * Unternehmens, der die Personen angehören
+	 * 
+	 * @param idUnternehmen
+	 * @return Vector mit Personenobjekten, die dem Unternehmen mit
+	 *         übergebenem Fremdschlüssel angehören
+	 */
+	public Vector<Person> findPersonByUnternehmen(int idUnternehmen) {
+		Connection con = DBConnection.connection();
+		Vector<Person> result = new Vector<Person>();
 
-		
-			result.addElement(pe);
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM person " + " WHERE idUnternehmen= " + idUnternehmen + " ORDER BY nachname ASC");
+
+			while (rs.next()) {
+				Person pe = new Person();
+				pe.setId(rs.getInt("idPerson"));
+				pe.setTitel(rs.getString("titel"));
+				pe.setVorname(rs.getString("vorname"));
+				pe.setNachname(rs.getString("nachname"));
+				pe.setIdUnternehmen(rs.getInt("idUnternehmen"));
+				pe.setIdTeam(rs.getInt("idTeam"));
+				pe.setAdresse(super.findOrganisationseinheitByKey(idUnternehmen).getAdresse());
+				pe.setStandort(super.findOrganisationseinheitByKey(idUnternehmen).getStandort());
+				pe.setIdPartnerprofil(super.findOrganisationseinheitByKey(idUnternehmen).getIdPartnerprofil());
+
+				result.addElement(pe);
 			}
-		}   
-	catch (SQLException e) {
-	e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+
 	}
-	return result;
-	
-}
 
 /*
 	
@@ -192,7 +233,14 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 	}
 */
 
-	// INSERT
+	/**
+	 * Einfuegen eines <code>Person</code>-Objekts in die Datenbank.
+	 * Dabei wird auch der Primaerschlüssel des uebergebenen Objekts geprueft
+	 * und ggf. berichtigt. @author Thies
+	 * 
+	 * @param pe
+	 * @return Personenobjekt wird in die Datenbank eingefuegt
+	 */
 	public Person insertPerson(Person pe) {
 		Connection con = DBConnection.connection();
 		//int id=0;
@@ -234,7 +282,11 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 		return pe;
 	}
 
-	// UPDATE
+	/**
+	 * Update des übergebenen Personenobjekts
+	 * @param pe
+	 * @return Das übergebene Personenobjekt
+	 */
 	public Person updatePerson(Person pe) {
 		Connection con = DBConnection.connection();
 		try {
@@ -287,7 +339,10 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 		return pe;
 	}
 
-	// DELETE
+	/**
+	 * Loeschen des uebergebenen Personenobjekts
+	 * @param pe das uebergebene Personenobjekt
+	 */
 	public void deletePerson(Person pe) {
 		Connection con = DBConnection.connection();
 		try {
@@ -299,7 +354,12 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 		}
 	}
 	
-	public void deletePersonfromUnternehmen(Integer i){
+	
+	/**
+	 * Loeschen des uebergebenen Personenobjekts
+	 * @param i das uebergebene Personenobjekt
+	 */
+	public void deletePersonfromUnternehmen(Integer i) {
 		Connection con = DBConnection.connection();
 		try {
 			Statement stmt = con.createStatement();
@@ -308,7 +368,7 @@ public Vector<Person> findPersonByUnternehmen(int idUnternehmen){
 		} catch (SQLException e6) {
 			e6.printStackTrace();
 		}
-		
+
 	}
 
 }

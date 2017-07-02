@@ -8,12 +8,32 @@ import de.hdm.itprojekt.shared.bo.Team;
 import de.hdm.itprojekt.shared.bo.Unternehmen;
 
 public class TeamMapper extends OrganisationseinheitMapper{
-//Alle Mappermethoden in dieser Klasse funktionieren
+	
+	/**
+	 * Variable "teamMapper" ist aufgrund des Bezeichners "static" nur
+	 * einmal für die Instanzen dieser Klasse verfügbar. Sie speichert die
+	 * einzige Instanz dieser Klasse.
+	 * 
+	 * @author Thies
+	 */
 	private static TeamMapper teamMapper = null;
 
+	/**
+	 * Konstruktor, der verhindert, dass man neue Instanzen dieser Klasse
+	 * erstellen kann. Sie speichert die einzige Instanz dieser Klasse
+	 * 
+	 * @author Thies
+	 */
 	protected TeamMapper() {
 	};
 
+	/**
+	 * Diese Methode stellt die Singleton-Eigenschaft der
+	 * "TeamMapper"-Klasse sicher, sodass nur eine Instanz von
+	 * <code>TeamMapper</code> existieren kann.
+	 * 
+	 * @return teamMapper
+	 */
 	public static TeamMapper teamMapper() {
 		if (teamMapper == null) {
 			teamMapper = new TeamMapper();
@@ -21,23 +41,30 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return teamMapper;
 	}
 
-	//insert
+	/**
+	 * Einfuegen eines <code>Team</code>-Objekts in die Datenbank.
+	 * Dabei wird auch der Primaerschlüssel des uebergebenen Objekts geprueft
+	 * und ggf. berichtigt. @author Thies
+	 * 
+	 * @param t
+	 * @return Teamobjekt wird in die Datenbank eingefuegt
+	 */
 	public Team insertTeam(Team t) {
 		Connection con = DBConnection.connection();
-		
+
 		try {
 			Statement stmt = con.createStatement();
 			t.setId(super.insertOrganisationseinheit(t));
 			ResultSet rs = stmt.executeQuery("SELECT MAX(idTeam) AS maxid " + "FROM team");
-			
+
 			if (rs.next()) {
 
-//				t.setId(rs.getInt("maxid") + 1);
+				// t.setId(rs.getInt("maxid") + 1);
 
 				stmt = con.createStatement();
 
-				stmt.executeUpdate("INSERT INTO team (idTeam, teamName, idUnternehmen) " 
-				+ "VALUES (" + t.getId() + ",'" + t.getTeamName() + "',"  + t.getIdUnternehmen() +")");
+				stmt.executeUpdate("INSERT INTO team (idTeam, teamName, idUnternehmen) " + "VALUES (" + t.getId() + ",'"
+						+ t.getTeamName() + "'," + t.getIdUnternehmen() + ")");
 			}
 		}
 
@@ -48,15 +75,20 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return t;
 	}
 
-	//Team nach ID ausgeben
+	/**
+	 * Suchen einer Team über die übergebene Teamnummer
+	 * 
+	 * @param id
+	 * @return Teamobjekt, das der übergebenen Teamnummer
+	 *         entspricht oder null bei nicht vorhandenem Datensatz
+	 */
 	public Team findTeamByKey(int id) {
 		Connection con = DBConnection.connection();
 
 		try {
 			Statement stmt = con.createStatement();
-			// Teams sollen alphabetisch nach Team-Namen ausgegeben
-			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM  team" + " WHERE idTeam= " + id );
+
+			ResultSet rs = stmt.executeQuery("SELECT * FROM  team" + " WHERE idTeam= " + id);
 
 			if (rs.next()) {
 				Team t = new Team();
@@ -77,7 +109,10 @@ public class TeamMapper extends OrganisationseinheitMapper{
 
 	}
 
-	//alle Teams ausgeben
+	/**
+	 * Suchen aller Teams
+	 * @return alle Teamobjekte
+	 */
 	public Vector<Team> findAllTeam() {
 		Connection con = DBConnection.connection();
 		Vector<Team> result = new Vector<Team>();
@@ -86,8 +121,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt
-					.executeQuery("SELECT idTeam, teamName, idUnternehmen FROM team " 
-			+ " ORDER BY teamName");
+					.executeQuery("SELECT idTeam, teamName, idUnternehmen FROM team " + " ORDER BY teamName");
 
 			while (rs.next()) {
 				Team t = new Team();
@@ -108,12 +142,21 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return result;
 	}
 
-	//Objekt Team
+	/**
+	 * Objekt Team ausgeben nach der ID
+	 * @param t
+	 * @return Teamobjekt, das der übergebenen ID entspricht
+	 */
 	public Team findByTeam(Team t){
 			return this.findTeamByKey(t.getId());
 			  
 		  }
 	
+	/**
+	 * Suchen des Teams nach dem Namen des Teams
+	 * @param teamName
+	 * @return Vector mit Team-Objekten, die dem übergebenen Teamnamen entsprechen
+	 */
 	public Vector<Team> findByTeamName(String teamName) {
 		Connection con = DBConnection.connection();
 		Vector<Team> result = new Vector<Team>();
@@ -121,8 +164,8 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName,  idUnternehmen FROM team "
-					+ " WHERE teamName= '" + teamName + "' ORDER BY teamName ");
+			ResultSet rs = stmt.executeQuery("SELECT idTeam, teamName,  idUnternehmen FROM team " + " WHERE teamName= '"
+					+ teamName + "' ORDER BY teamName ");
 
 			while (rs.next()) {
 				Team t = new Team();
@@ -131,7 +174,7 @@ public class TeamMapper extends OrganisationseinheitMapper{
 				t.setAdresse(super.findByOrganisationseinheit(t).getAdresse());
 				t.setStandort(super.findByOrganisationseinheit(t).getStandort());
 				t.setIdPartnerprofil(super.findByOrganisationseinheit(t).getIdPartnerprofil());
-				
+
 				result.addElement(t);
 
 			}
@@ -142,7 +185,11 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return result;
 	}
 
-	//update
+	/**
+	 * Update des übergebenen Teamobjekts
+	 * @param t
+	 * @return Das übergebene Teamobjekt
+	 */
 	public Team updateTeam(Team t) {
 		Connection con = DBConnection.connection();
 
@@ -162,7 +209,10 @@ public class TeamMapper extends OrganisationseinheitMapper{
 		return t;
 	}
 
-	//delete
+	/**
+	 * Loeschen des uebergebenen Teamobjekts
+	 * @param t das uebergebene Teamobjekt
+	 */
 	public void deleteTeamInteger(Integer t) {
 		Team t1 = new Team();	
 		t1.setId(t);
